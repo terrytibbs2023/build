@@ -1420,11 +1420,10 @@ updated language files
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.6.03" provider-name="Team Kodi">
+</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.6.04" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
-<import addon="repository.thecrew" />
-<import addon="repository.Magnetic" />
+
 		<import addon="script.module.promisescrapers" />
 
 <import addon="pvr.iptvsimple" />
@@ -1432,7 +1431,7 @@ updated language files
 
 <import addon="plugin.video.thepromise" />
 <import addon="repository.thecrew" />
-<import addon="repository.Magnetic" />
+
 
 
 
