@@ -178,7 +178,7 @@
 						
 						<item id="5">
 							<label>Install Addons</label>
-							<onclick>RunPlugin(plugin://plugin.program.terrywiz)</onclick>
+							<onclick>RunPlugin(plugin://service.tt.versioncheck)</onclick>
 							
 							
 							
