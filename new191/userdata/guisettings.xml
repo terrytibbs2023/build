@@ -201,10 +201,10 @@
     <setting id="pvrmanager.usebackendchannelnumbers" default="true">false</setting>
     <setting id="pvrmanager.startgroupchannelnumbersfromone" default="true">false</setting>
     <setting id="pvrmenu.iconpath" default="true" />
-    <setting id="epg.pastdaystodisplay" default="true">1</setting>
+    <setting id="epg.pastdaystodisplay">0</setting>
     <setting id="epg.futuredaystodisplay" default="true">3</setting>
-    <setting id="epg.selectaction" default="true">2</setting>
-    <setting id="epg.hidenoinfoavailable" default="true">true</setting>
+    <setting id="epg.selectaction">1</setting>
+    <setting id="epg.hidenoinfoavailable">false</setting>
     <setting id="epg.epgupdate" default="true">120</setting>
     <setting id="epg.preventupdateswhileplayingtv" default="true">false</setting>
     <setting id="pvrplayback.switchtofullscreenchanneltypes" default="true">3</setting>
@@ -367,7 +367,7 @@
     <setting id="general.addonbrokenfilter" default="true">true</setting>
     <resolutions />
     <general>
-        <systemtotaluptime>141</systemtotaluptime>
+        <systemtotaluptime>152</systemtotaluptime>
         <settinglevel>3</settinglevel>
         <eventlog>
             <level>0</level>
