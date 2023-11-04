@@ -31,8 +31,6 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-42.
 #EXTINF:-1 tvg-id="Racing Tv UK" tvg-logo="", Racing Tv UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-555.php
 
-#EXTINF:-1 tvg-id="Reelz Channel" tvg-logo="", Reelz Channel
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-293.php
 
 #EXTINF:-1 tvg-id="Sky Sports Football UK" tvg-logo="", Sky Sports Football UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-35.php
