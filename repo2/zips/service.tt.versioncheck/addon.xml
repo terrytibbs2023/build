@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="service.tt.versioncheck" name="Version Check" version="0.5.28+matrix.1" provider-name="Team Kodi">
+<addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.5.29" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
-  </requires>
-  <extension point="xbmc.service" library="resources/lib/runner.py"/>
-  <extension point="xbmc.addon.metadata">
 
-	
 		<import addon="script.module.promisescrapers" />
 
 <import addon="pvr.iptvsimple" />
@@ -14,6 +10,11 @@
 
 <import addon="plugin.video.thepromise" />
 
+  </requires>
+  <extension point="xbmc.service" library="resources/lib/runner.py"/>
+  <extension point="xbmc.addon.metadata">
+
+	
 
     <news>
 - add Kodi 20.1 release
