@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="script.module.promisescrapers"
        name="PromiseScrapers Module"
-       version="22.6.30"
+       version="22.6.31"
        provider-name="[COLORpurple]• [COLORorchid]Sh[COLORdarkorchid]in[COLORplum]ks[COLORpurple]•[/COLOR]">
     <requires>
         <!--<import addon="xbmc.python" version="2.20.0" />-->
@@ -10,7 +10,7 @@
         <import addon="script.module.six" />
         <import addon="script.module.kodi-six" />
         <import addon="script.module.simplejson" />
-        <import addon="script.module.orion" optional="true" />
+        
     </requires>
     <extension point="xbmc.python.module" library="lib" />
     <extension point="xbmc.python.pluginsource" library="lib/default.py">

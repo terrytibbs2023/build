@@ -1268,7 +1268,7 @@ updated language files
     <news>0.1.3:
 - Fix non-UTF-8 byte string decoding in Python 2.</news>
   </extension>
-</addon><addon id="script.module.promisescrapers" name="PromiseScrapers Module" version="22.6.30" provider-name="[COLORpurple]• [COLORorchid]Sh[COLORdarkorchid]in[COLORplum]ks[COLORpurple]•[/COLOR]">
+</addon><addon id="script.module.promisescrapers" name="PromiseScrapers Module" version="22.6.31" provider-name="[COLORpurple]• [COLORorchid]Sh[COLORdarkorchid]in[COLORplum]ks[COLORpurple]•[/COLOR]">
     <requires>
         
         <import addon="script.module.beautifulsoup4" />
@@ -1276,7 +1276,7 @@ updated language files
         <import addon="script.module.six" />
         <import addon="script.module.kodi-six" />
         <import addon="script.module.simplejson" />
-        <import addon="script.module.orion" optional="true" />
+        
     </requires>
     <extension point="xbmc.python.module" library="lib" />
     <extension point="xbmc.python.pluginsource" library="lib/default.py">
