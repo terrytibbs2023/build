@@ -178,12 +178,7 @@
 						
 						<item id="5">
 							<label>Install Addons</label>
-							<onclick>RunPlugin(plugin://plugin.video.magicdragon)</onclick>
-							<onclick>RunPlugin(plugin://plugin.video.dailymotion_com)</onclick>
-							<onclick>RunPlugin(plugin://plugin.audio.mp3streams)</onclick>
-							<onclick>RunPlugin(plugin://plugin.audio.radio_de)</onclick>
-							<onclick>RunPlugin(plugin://plugin.video.thepromise)</onclick>
-							
+							<onclick>RunPlugin(plugin://plugin.program.terrywiz)</onclick>
 							
 							
 							
@@ -193,14 +188,7 @@
 							<property name="menu_id">$NUMBER[500]</property>
 						</item>
 						
-						<item id="6">
-							<label>Install Sports Addons</label>
-							<onclick>RunPlugin(plugin://plugin.video.the-loop)</onclick>
-							<thumb>icons/sidemenu/download.png</thumb>
-							<property name="id">video</property>
-							<property name="path">addons://sources/video/</property>
-							<property name="menu_id">$NUMBER[500]</property>
-						</item>
+						
 					</content>
 				</control>
 			</control>
