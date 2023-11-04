@@ -4,6 +4,10 @@
     <setting id="gamesgeneral.enableautosave" default="true">true</setting>
     <setting id="gamesgeneral.enablerewind" default="true">true</setting>
     <setting id="gamesgeneral.rewindtime" default="true">60</setting>
+    <setting id="gamesachievements.username" default="true" />
+    <setting id="gamesachievements.password" default="true" />
+    <setting id="gamesachievements.token" default="true" />
+    <setting id="gamesachievements.loggedin" default="true">false</setting>
     <setting id="lookandfeel.skin">skin.estuary1</setting>
     <setting id="lookandfeel.skintheme" default="true">SKINDEFAULT</setting>
     <setting id="lookandfeel.skincolors" default="true">SKINDEFAULT</setting>
@@ -35,6 +39,8 @@
     <setting id="lookandfeel.startupwindow" default="true">10000</setting>
     <setting id="window.width" default="true">720</setting>
     <setting id="window.height" default="true">480</setting>
+    <setting id="window.top" default="true">0</setting>
+    <setting id="window.left" default="true">0</setting>
     <setting id="videolibrary.updateonstartup" default="true">false</setting>
     <setting id="videolibrary.backgroundupdate" default="true">false</setting>
     <setting id="musiclibrary.updateonstartup" default="true">false</setting>
@@ -157,18 +163,31 @@
     <setting id="locale.audiolanguage">default</setting>
     <setting id="videoplayer.preferdefaultflag">false</setting>
     <setting id="locale.subtitlelanguage">default</setting>
-    <setting id="subtitles.parsecaptions" default="true">false</setting>
-    <setting id="subtitles.align" default="true">0</setting>
-    <setting id="subtitles.stereoscopicdepth" default="true">0</setting>
-    <setting id="subtitles.font" default="true">arial.ttf</setting>
-    <setting id="subtitles.charset" default="true">DEFAULT</setting>
-    <setting id="subtitles.height" default="true">28</setting>
-    <setting id="subtitles.style" default="true">1</setting>
-    <setting id="subtitles.color" default="true">1</setting>
+    <setting id="accessibility.audiovisual" default="true">false</setting>
+    <setting id="accessibility.audiohearing" default="true">false</setting>
+    <setting id="accessibility.subhearing" default="true">false</setting>
+    <setting id="subtitles.align" default="true">2</setting>
+    <setting id="subtitles.fontname" default="true">DEFAULT</setting>
+    <setting id="subtitles.fontsize" default="true">42</setting>
+    <setting id="subtitles.style" default="true">0</setting>
+    <setting id="subtitles.colorpick" default="true">FFFFFFFF</setting>
     <setting id="subtitles.opacity" default="true">100</setting>
-    <setting id="subtitles.bgcolor" default="true">0</setting>
-    <setting id="subtitles.bgopacity" default="true">0</setting>
-    <setting id="subtitles.overrideassfonts" default="true">false</setting>
+    <setting id="subtitles.bordersize" default="true">25</setting>
+    <setting id="subtitles.bordercolorpick" default="true">FF000000</setting>
+    <setting id="subtitles.blur" default="true">0</setting>
+    <setting id="subtitles.backgroundtype" default="true">0</setting>
+    <setting id="subtitles.bgcolorpick" default="true">FF000000</setting>
+    <setting id="subtitles.bgopacity" default="true">80</setting>
+    <setting id="subtitles.shadowcolor" default="true">FF000000</setting>
+    <setting id="subtitles.shadowopacity" default="true">100</setting>
+    <setting id="subtitles.shadowsize" default="true">15</setting>
+    <setting id="subtitles.marginvertical" default="true">4.95</setting>
+    <setting id="subtitles.overridefonts" default="true">false</setting>
+    <setting id="subtitles.overridestyles" default="true">0</setting>
+    <setting id="subtitles.stereoscopicdepth" default="true">0</setting>
+    <setting id="subtitles.charset" default="true">DEFAULT</setting>
+    <setting id="subtitles.parsecaptions" default="true">false</setting>
+    <setting id="subtitles.captionsalign" default="true">0</setting>
     <setting id="subtitles.languages" default="true">English</setting>
     <setting id="subtitles.storagemode" default="true">0</setting>
     <setting id="subtitles.custompath" default="true" />
@@ -176,17 +195,11 @@
     <setting id="subtitles.downloadfirst" default="true">false</setting>
     <setting id="subtitles.tv" default="true" />
     <setting id="subtitles.movie" default="true" />
-    <setting id="accessibility.audiovisual" default="true">false</setting>
-    <setting id="accessibility.audiohearing" default="true">false</setting>
-    <setting id="accessibility.subhearing" default="true">false</setting>
-    <setting id="pvrmanager.preselectplayingchannel" default="true">false</setting>
     <setting id="pvrmanager.syncchannelgroups" default="true">true</setting>
     <setting id="pvrmanager.backendchannelorder" default="true">true</setting>
     <setting id="pvrmanager.usebackendchannelnumbersalways" default="true">false</setting>
     <setting id="pvrmanager.usebackendchannelnumbers" default="true">false</setting>
     <setting id="pvrmanager.startgroupchannelnumbersfromone" default="true">false</setting>
-    <setting id="pvrmenu.displaychannelinfo" default="true">5</setting>
-    <setting id="pvrmenu.closechannelosdonswitch" default="true">true</setting>
     <setting id="pvrmenu.iconpath" default="true" />
     <setting id="epg.pastdaystodisplay" default="true">1</setting>
     <setting id="epg.futuredaystodisplay" default="true">3</setting>
@@ -195,10 +208,13 @@
     <setting id="epg.epgupdate" default="true">120</setting>
     <setting id="epg.preventupdateswhileplayingtv" default="true">false</setting>
     <setting id="pvrplayback.switchtofullscreenchanneltypes" default="true">3</setting>
-    <setting id="pvrplayback.signalquality" default="true">true</setting>
+    <setting id="pvrmanager.preselectplayingchannel" default="true">false</setting>
+    <setting id="pvrmenu.displaychannelinfo" default="true">5</setting>
+    <setting id="pvrmenu.closechannelosdonswitch" default="true">true</setting>
     <setting id="pvrplayback.confirmchannelswitch" default="true">true</setting>
     <setting id="pvrplayback.channelentrytimeout" default="true">0</setting>
     <setting id="pvrplayback.delaymarklastwatched" default="true">0</setting>
+    <setting id="pvrplayback.signalquality" default="true">true</setting>
     <setting id="pvrplayback.fps" default="true">0</setting>
     <setting id="pvrplayback.enableradiords" default="true">true</setting>
     <setting id="pvrplayback.trafficadvisory" default="true">false</setting>
@@ -223,7 +239,7 @@
     <setting id="pvrparental.duration" default="true">300</setting>
     <setting id="pvrtimers.hidedisabledtimers" default="true">false</setting>
     <setting id="services.devicename" default="true">Kodi</setting>
-    <setting id="services.zeroconf" default="true">true</setting>
+    <setting id="services.zeroconf" default="true">false</setting>
     <setting id="services.deviceuuid">853d9424-dcf0-410f-9007-880af5869674</setting>
     <setting id="services.webserver" default="true">false</setting>
     <setting id="services.webserverport" default="true">8080</setting>
@@ -247,23 +263,27 @@
     <setting id="services.upnprenderer" default="true">false</setting>
     <setting id="services.airplay" default="true">false</setting>
     <setting id="services.airplayvolumecontrol" default="true">true</setting>
+    <setting id="services.airplayvideosupport" default="true">false</setting>
     <setting id="services.useairplaypassword" default="true">false</setting>
     <setting id="services.airplaypassword" default="true" />
-    <setting id="services.airplayvideosupport" default="true">false</setting>
     <setting id="smb.workgroup" default="true">WORKGROUP</setting>
     <setting id="smb.winsserver" default="true">0.0.0.0</setting>
     <setting id="smb.minprotocol" default="true">0</setting>
     <setting id="smb.maxprotocol" default="true">3</setting>
     <setting id="smb.legacysecurity" default="true">false</setting>
+    <setting id="services.wsdiscovery" default="true">true</setting>
+    <setting id="nfs.version" default="true">3</setting>
     <setting id="weather.currentlocation" default="true">1</setting>
     <setting id="weather.addon" default="true" />
     <setting id="videoscreen.monitor" default="true">Default</setting>
     <setting id="videoscreen.screen" default="true">0</setting>
-    <setting id="videoscreen.resolution">41</setting>
+    <setting id="videoscreen.resolution">96</setting>
     <setting id="videoscreen.screenmode" default="true">DESKTOP</setting>
     <setting id="videoscreen.fakefullscreen" default="true">true</setting>
     <setting id="videoscreen.blankdisplays" default="true">false</setting>
     <setting id="videoscreen.delayrefreshchange" default="true">0</setting>
+    <setting id="videoscreen.guisdrpeakluminance" default="true">60</setting>
+    <setting id="videoscreen.10bitsurfaces" default="true">0</setting>
     <setting id="videoscreen.dither" default="true">false</setting>
     <setting id="videoscreen.ditherdepth" default="true">8</setting>
     <setting id="videoscreen.cmsenabled" default="true">false</setting>
@@ -275,14 +295,14 @@
     <setting id="videoscreen.cmsgammamode" default="true">0</setting>
     <setting id="videoscreen.cmsgamma" default="true">220</setting>
     <setting id="videoscreen.cmslutsize" default="true">6</setting>
-    <setting id="videoscreen.limitgui" default="true">0</setting>
+    <setting id="videoscreen.limitedrange" default="true">false</setting>
     <setting id="videoscreen.whitelist" default="true" />
     <setting id="videoscreen.whitelistpulldown" default="true">false</setting>
     <setting id="videoscreen.whitelistdoublerefreshrate" default="true">false</setting>
     <setting id="videoscreen.stereoscopicmode" default="true">0</setting>
     <setting id="videoscreen.preferedstereoscopicmode" default="true">100</setting>
     <setting id="videoscreen.noofbuffers" default="true">3</setting>
-    <setting id="audiooutput.audiodevice" default="true">Default</setting>
+    <setting id="audiooutput.audiodevice" default="true">DIRECTSOUND:default</setting>
     <setting id="audiooutput.channels" default="true">1</setting>
     <setting id="audiooutput.config" default="true">2</setting>
     <setting id="audiooutput.volumesteps" default="true">90</setting>
@@ -293,16 +313,18 @@
     <setting id="audiooutput.samplerate" default="true">48000</setting>
     <setting id="audiooutput.streamsilence" default="true">1</setting>
     <setting id="audiooutput.streamnoise" default="true">true</setting>
-    <setting id="audiooutput.guisoundmode" default="true">0</setting>
+    <setting id="audiooutput.guisoundmode" default="true">1</setting>
+    <setting id="audiooutput.guisoundvolume" default="true">100</setting>
     <setting id="lookandfeel.soundskin" />
     <setting id="audiooutput.passthrough" default="true">false</setting>
-    <setting id="audiooutput.passthroughdevice" default="true">Default</setting>
+    <setting id="audiooutput.passthroughdevice" default="true">DIRECTSOUND:default</setting>
     <setting id="audiooutput.ac3passthrough" default="true">true</setting>
     <setting id="audiooutput.ac3transcode" default="true">false</setting>
     <setting id="audiooutput.eac3passthrough" default="true">false</setting>
     <setting id="audiooutput.dtspassthrough" default="true">false</setting>
     <setting id="audiooutput.truehdpassthrough" default="true">false</setting>
     <setting id="audiooutput.dtshdpassthrough" default="true">false</setting>
+    <setting id="audiooutput.dtshdcorefallback" default="true">true</setting>
     <setting id="input.enablemouse">false</setting>
     <setting id="input.enablejoystick" default="true">true</setting>
     <setting id="input.asknewcontrollers" default="true">true</setting>
@@ -322,7 +344,8 @@
     <setting id="powermanagement.wakeonaccess" default="true">false</setting>
     <setting id="general.addonupdates" default="true">0</setting>
     <setting id="general.addonnotifications" default="true">false</setting>
-    <setting id="addons.updatemode" default="true">1</setting>
+    <setting id="addons.unknownsources">true</setting>
+    <setting id="addons.updatemode">1</setting>
     <setting id="debug.showloginfo" default="true">false</setting>
     <setting id="debug.extralogging" default="true">false</setting>
     <setting id="debug.setextraloglevel" default="true" />
@@ -342,6 +365,62 @@
     <setting id="system.playlistspath">special://profile/playlists/</setting>
     <setting id="general.addonforeignfilter" default="true">false</setting>
     <setting id="general.addonbrokenfilter" default="true">true</setting>
+    <resolutions />
+    <general>
+        <systemtotaluptime>141</systemtotaluptime>
+        <settinglevel>3</settinglevel>
+        <eventlog>
+            <level>0</level>
+            <showhigherlevels>true</showhigherlevels>
+        </eventlog>
+    </general>
+    <defaultvideosettings>
+        <interlacemethod>1</interlacemethod>
+        <scalingmethod>1</scalingmethod>
+        <noisereduction>0.000000</noisereduction>
+        <postprocess>false</postprocess>
+        <sharpness>0.000000</sharpness>
+        <viewmode>0</viewmode>
+        <zoomamount>1.000000</zoomamount>
+        <pixelratio>1.000000</pixelratio>
+        <verticalshift>0.000000</verticalshift>
+        <volumeamplification>0.000000</volumeamplification>
+        <showsubtitles>false</showsubtitles>
+        <brightness>50.000000</brightness>
+        <contrast>50.000000</contrast>
+        <gamma>20.000000</gamma>
+        <audiodelay>0.000000</audiodelay>
+        <subtitledelay>0.000000</subtitledelay>
+        <nonlinstretch>false</nonlinstretch>
+        <stereomode>0</stereomode>
+        <centermixlevel>0</centermixlevel>
+        <tonemapmethod>1</tonemapmethod>
+        <tonemapparam>1.000000</tonemapparam>
+    </defaultvideosettings>
+    <defaultaudiosettings />
+    <defaultgamesettings>
+        <videofilter></videofilter>
+        <stretchmode>normal</stretchmode>
+        <rotation>0</rotation>
+    </defaultgamesettings>
+    <mymusic>
+        <playlist>
+            <repeat>false</repeat>
+            <shuffle>false</shuffle>
+        </playlist>
+        <needsupdate>0</needsupdate>
+    </mymusic>
+    <myvideos>
+        <watchmodemovies>0</watchmodemovies>
+        <watchmodetvshows>0</watchmodetvshows>
+        <watchmodemusicvideos>0</watchmodemusicvideos>
+        <watchmoderecordings>0</watchmoderecordings>
+        <playlist>
+            <repeat>false</repeat>
+            <shuffle>false</shuffle>
+        </playlist>
+        <needsupdate>0</needsupdate>
+    </myvideos>
     <viewstates>
         <games>
             <viewmode>720896</viewmode>
@@ -446,62 +525,6 @@
             <sortattributes>0</sortattributes>
         </videonavyears>
     </viewstates>
-    <general>
-        <settinglevel>3</settinglevel>
-        <eventlog>
-            <level>0</level>
-            <showhigherlevels>true</showhigherlevels>
-        </eventlog>
-        <systemtotaluptime>141</systemtotaluptime>
-    </general>
-    <resolutions />
-    <defaultvideosettings>
-        <interlacemethod>1</interlacemethod>
-        <scalingmethod>1</scalingmethod>
-        <noisereduction>0.000000</noisereduction>
-        <postprocess>false</postprocess>
-        <sharpness>0.000000</sharpness>
-        <viewmode>0</viewmode>
-        <zoomamount>1.000000</zoomamount>
-        <pixelratio>1.000000</pixelratio>
-        <verticalshift>0.000000</verticalshift>
-        <volumeamplification>0.000000</volumeamplification>
-        <showsubtitles>false</showsubtitles>
-        <brightness>50.000000</brightness>
-        <contrast>50.000000</contrast>
-        <gamma>20.000000</gamma>
-        <audiodelay>0.000000</audiodelay>
-        <subtitledelay>0.000000</subtitledelay>
-        <nonlinstretch>false</nonlinstretch>
-        <stereomode>0</stereomode>
-        <centermixlevel>0</centermixlevel>
-        <tonemapmethod>1</tonemapmethod>
-        <tonemapparam>1.000000</tonemapparam>
-    </defaultvideosettings>
-    <defaultaudiosettings />
-    <defaultgamesettings>
-        <videofilter></videofilter>
-        <stretchmode>normal</stretchmode>
-        <rotation>0</rotation>
-    </defaultgamesettings>
-    <mymusic>
-        <playlist>
-            <repeat>false</repeat>
-            <shuffle>false</shuffle>
-        </playlist>
-        <needsupdate>0</needsupdate>
-    </mymusic>
-    <myvideos>
-        <watchmodemovies>0</watchmodemovies>
-        <watchmodetvshows>0</watchmodetvshows>
-        <watchmodemusicvideos>0</watchmodemusicvideos>
-        <watchmoderecordings>0</watchmoderecordings>
-        <playlist>
-            <repeat>false</repeat>
-            <shuffle>false</shuffle>
-        </playlist>
-        <needsupdate>0</needsupdate>
-    </myvideos>
     <audio>
         <mute>false</mute>
         <fvolumelevel>1.000000</fvolumelevel>
