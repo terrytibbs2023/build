@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.6.08" provider-name="Team Kodi">
+<addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.6.05" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
- <import addon="script.module.requests" />
-        <import addon="script.module.inputstreamhelper" />
-        <import addon="script.module.six"/>
+
 		<import addon="script.module.promisescrapers" />
 
 <import addon="pvr.iptvsimple" />
 <import addon="script.thepromise.artwork" />
 
 <import addon="plugin.video.thepromise" />
-<import addon="skin.estuary1" />
+<import addon="plugin.video.daddylive" />
 
 
 
 
 
 
- 
+  </requires>
+  <extension point="xbmc.service" library="resources/lib/runner.py"/>
+  <extension point="xbmc.addon.metadata">
+
+	
+
     <news>
 - add Kodi 20.1 release
 - Update translations from Weblate
