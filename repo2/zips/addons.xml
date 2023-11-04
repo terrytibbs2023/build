@@ -1033,7 +1033,7 @@ updated language files
 				<screenshot />
 		</assets>
 	</extension>
-</addon><addon id="plugin.video.thepromise" name="ThePromise" version="23.0.00" provider-name="[COLORpurple]• [COLORorchid]Tech [COLORdarkorchid]E [COLORplum]Coyote [COLORpurple]•[/COLOR]">
+</addon><addon id="plugin.video.thepromise" name="ThePromise" version="23.1.00" provider-name="[COLORpurple]• [COLORorchid]Tech [COLORdarkorchid]E [COLORplum]Coyote [COLORpurple]•[/COLOR]">
     <requires>
         <import addon="script.thepromise.artwork" />
         <import addon="script.module.resolveurl" />
@@ -1042,12 +1042,7 @@ updated language files
         <import addon="script.module.six" />
         <import addon="script.module.kodi-six" />
         <import addon="script.module.simplejson" />
-        <import addon="plugin.video.usgotv" optional="true" />
-        <import addon="plugin.video.swifttv" optional="true" />
-        <import addon="plugin.video.taptv" optional="true" />
-        <import addon="plugin.video.lntv" optional="true" />
-        <import addon="plugin.video.rbtv" optional="true" />
-        <import addon="plugin.video.youtube" optional="true" />
+     
     </requires>
     <extension library="thepromise.py" point="xbmc.python.pluginsource">
         <provides>video</provides>
@@ -1425,10 +1420,11 @@ updated language files
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.6.01" provider-name="Team Kodi">
+</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.6.02" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
-
+<import addon="repository.thecrew" />
+<import addon="repository.Magnetic" />
 		<import addon="script.module.promisescrapers" />
 
 <import addon="pvr.iptvsimple" />
