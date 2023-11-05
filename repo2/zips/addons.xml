@@ -1519,6 +1519,33 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 <forum>https://github.com/dobbelina/repository.dobbelina/issues</forum>
         <platform>all</platform>
     </extension>
+</addon><addon id="repository.nixgates" name="Nixgates Repo" version="2.2.0" provider-name="Nixgates">
+	<extension point="xbmc.addon.repository" name="Nixgates Repo">
+		<dir minversion="18.0">
+			<info compressed="false">https://raw.githubusercontent.com/nixgates/nixgates/master/repo/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/nixgates/nixgates/master/repo/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/nixgates/nixgates/master/repo/zips/</datadir>
+		</dir>
+		<dir minversion="18.0" maxversion="18.9.0">
+			<info compressed="false">https://raw.githubusercontent.com/nixgates/nixgates/master/leia/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/nixgates/nixgates/master/leia/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/nixgates/nixgates/master/leia/zips/</datadir>
+		</dir>
+		<dir minversion="18.9.0">
+			<info compressed="false">https://raw.githubusercontent.com/nixgates/nixgates/master/matrix/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/nixgates/nixgates/master/matrix/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/nixgates/nixgates/master/matrix/zips/</datadir>
+		</dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Nixgates</summary>
+		<description>Nixgates Repository</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.png</fanart>
+		</assets>
+	</extension>
 </addon><addon id="repository.openscrapers" name="OpenScrapers Repository" version="1.0" provider-name="A4K">
 	<extension point="xbmc.addon.repository" name="OpenScrapers Repository">
 		<dir>
@@ -2309,7 +2336,7 @@ v0.5.9 (2022-03-22)
     <disclaimer lang="zh_CN">可放心使用此脚本，更多信息访问 kodi.tv</disclaimer>
     <disclaimer lang="zh_TW">歡迎使用本腳本，相關資訊請參閱kodi.tv</disclaimer>
   </extension>
-</addon><addon id="skin.estuary1" version="8.9.8" name="Estuary1" provider-name="Terry Tibs,phil65, Ichabod Fletchman">
+</addon><addon id="skin.estuary1" version="9.0.8" name="Estuary1" provider-name="Terry Tibs,phil65, Ichabod Fletchman">
 	<requires>
 		<import addon="xbmc.gui" version="5.15.0" />
 	
