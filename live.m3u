@@ -38,37 +38,33 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-35.
 #EXTINF:-1 tvg-id="SkySp.Arena.uk" tvg-logo="", SkySports Arena
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-36.php
 
-#EXTINF:-1 tvg-id="Sky Sports Action UK" tvg-logo="", Sky Sports Action UK
+#EXTINF:-1 tvg-id="SkySp.Action.uk" tvg-logo="", SkySports Action
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-37.php
 
-#EXTINF:-1 tvg-id="SkySpMainEv.uk" tvg-logo="", Sky Sports Main Event
+#EXTINF:-1 tvg-id="SkySpMainEv.uk" tvg-logo="", SkySports Main Event
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-38.php
 
-#EXTINF:-1 tvg-id="Sky sports Premier League" tvg-logo="", Sky sports Premier League
+#EXTINF:-1 tvg-id="SkySp.PL.uk" tvg-logo="", SkySports PL
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-130.php
 
-#EXTINF:-1 tvg-id="Sky Sports F1 UK" tvg-logo="", Sky Sports F1 UK
+#EXTINF:-1 tvg-id="SkySp.F1.uk" tvg-logo="", SkySports F1
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-60.php
 
-#EXTINF:-1 tvg-id="Sky Sports Cricket" tvg-logo="", Sky Sports Cricket
+#EXTINF:-1 tvg-id="SkySp.Cricket.uk" tvg-logo="", SkySports Cricket
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-65.php
 
-#EXTINF:-1 tvg-id="Sky Sports Golf UK" tvg-logo="", Sky Sports Golf UK
+#EXTINF:-1 tvg-id="SkySp.Golf.uk" tvg-logo="", SkySports Golf
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-70.php
 
 
-#EXTINF:-1 tvg-id="Sky Sports News UK" tvg-logo="", Sky Sports News UK
+#EXTINF:-1 tvg-id="SkySp.News.HD.uk" tvg-logo="", SkySports News
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-366.php
 
-#EXTINF:-1 tvg-id="Sky Sports MIX UK" tvg-logo="", Sky Sports MIX UK
+#EXTINF:-1 tvg-id="SkySp.Mix.HD.uk" tvg-logo="", SkySports MIX
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-449.php
 
 
-#EXTINF:-1 tvg-id="SportsNet New York (SNY)" tvg-logo="", SportsNet New York (SNY)
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-759.php
-
-
-#EXTINF:-1 tvg-id="Sky Sports Racing UK" tvg-logo="", Sky Sports Racing UK
+#EXTINF:-1 tvg-id="SkySp.Racing.uk" tvg-logo="", SkySports Racing
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-554.php
 
 
