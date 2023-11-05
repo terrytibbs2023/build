@@ -32,10 +32,10 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-42.
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-555.php
 
 
-#EXTINF:-1 tvg-id="Sky Sports Football UK" tvg-logo="", Sky Sports Football UK
+#EXTINF:-1 tvg-id="SkySp.Fball.uk" tvg-logo="", SkySports Football
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-35.php
 
-#EXTINF:-1 tvg-id="Sky Sports Arena UK" tvg-logo="", Sky Sports Arena UK
+#EXTINF:-1 tvg-id="SkySp.Arena.uk" tvg-logo="", SkySports Arena
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-36.php
 
 #EXTINF:-1 tvg-id="Sky Sports Action UK" tvg-logo="", Sky Sports Action UK
