@@ -112,7 +112,7 @@
     <setting id="preem.movieres">1</setting>
     <setting id="preem.tvres">3</setting>
     <setting id="preem.limit">1</setting>
-    <setting id="preem.type">2</setting>
+    <setting id="preem.type" default="true">0</setting>
     <setting id="preem.waitfor.cloudfiles">true</setting>
     <setting id="preem.cloudfiles" default="true">true</setting>
     <setting id="preem.adaptiveSources" default="true">true</setting>
