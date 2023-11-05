@@ -44,6 +44,9 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-37.
 #EXTINF:-1 tvg-id="SkySpMainEv.uk" tvg-logo="", SkySports Main Event
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-38.php
 
+#EXTINF:-1 tvg-id="SkySpMainEv.uk" tvg-logo="", AceStream Main Event
+http://127.0.0.1:6878/ace/getstream?id=eab7aeef0218ce8b0752e596e4792b69eda4df5e
+
 #EXTINF:-1 tvg-id="SkySp.PL.uk" tvg-logo="", SkySports PL
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-130.php
 
@@ -74,6 +77,3 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-554
 #EXTINF:-1 tvg-id="SkySp.Racing.uk" tvg-logo="", 3pm Football
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-16.php
 
-
-#EXTINF:-1 tvg-id="SkySp.Racing.uk" tvg-logo="", 3pm Football
-plugin://plugin.video.daddylive/?mode=play&amp;url=https%3A%2F%2Fdaddylivehd.sx%2Fstream%2Fstream-16.php
