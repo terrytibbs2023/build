@@ -69,3 +69,7 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-449
 
 #EXTINF:-1 tvg-id="SkySp.Racing.uk" tvg-logo="", SkySports Racing
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-554.php
+
+
+#EXTINF:-1 tvg-id="SkySp.Racing.uk" tvg-logo="", 3pm Football
+plugin://plugin.video.daddylive/?mode=play&amp;url=https%3A%2F%2Fdaddylivehd.sx%2Fstream%2Fstream-16.php
