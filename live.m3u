@@ -20,15 +20,15 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-355
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-687.php
 
 
-#EXTINF:-1 tvg-id="EuroSport 1 UK" tvg-logo="", EuroSport 1 UK
+#EXTINF:-1 tvg-id="Eurosport.1.HD.uk" tvg-logo="", EuroSport 1 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-41.php
 
-#EXTINF:-1 tvg-id="EuroSport 2 UK" tvg-logo="", EuroSport 2 UK
+#EXTINF:-1 tvg-id="Eurosport.2.HD.uk" tvg-logo="", EuroSport 2 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-42.php
 
 
 
-#EXTINF:-1 tvg-id="Racing Tv UK" tvg-logo="", Racing Tv UK
+#EXTINF:-1 tvg-id="Racing.TV.uk" tvg-logo="", Racing Tv UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-555.php
 
 
