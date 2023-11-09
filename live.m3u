@@ -19,6 +19,14 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-355
 #EXTINF:-1 tvg-id="GOLD.HD.uk" tvg-logo="", UK Gold
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-687.php
 
+#EXTINF:-1 tvg-id="ITV2.uk" tvg-logo="", ITV 2 UK
+plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-351.php
+
+#EXTINF:-1 tvg-id="ITV3.uk" tvg-logo="", ITV 3 UK
+plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-352.php
+
+#EXTINF:-1 tvg-id="ITV4.uk" tvg-logo="", ITV 4 UK
+plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-353.php
 
 #EXTINF:-1 tvg-id="Eurosport.1.HD.uk" tvg-logo="", EuroSport 1 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-41.php
