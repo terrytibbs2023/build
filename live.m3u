@@ -77,7 +77,7 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-449
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-554.php
 
 
-#EXTINF:-1 tvg-id="BT.Sport.1.uk" tvg-logo="", TNT Sports 1 UK
+#EXTINF:-1 tvg-id="BT.Sport.1.HD.uk" tvg-logo="", TNT Sports 1 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-31.php
 
 #EXTINF:-1 tvg-id="BT.Sport.2.uk" tvg-logo="", TNT Sports 2 UK
