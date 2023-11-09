@@ -28,6 +28,12 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-352
 #EXTINF:-1 tvg-id="ITV4.uk" tvg-logo="", ITV 4 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-353.php
 
+#EXTINF:-1 tvg-id="E4.HD.uk" tvg-logo="", E4 Channel
+plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-363.php
+
+#EXTINF:-1 tvg-id="MTV.HD.uk" tvg-logo="", MTV UK
+plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-367.php
+
 #EXTINF:-1 tvg-id="Eurosport.1.HD.uk" tvg-logo="", EuroSport 1 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-41.php
 
@@ -64,9 +70,6 @@ http://127.0.0.1:6878/ace/getstream?id=ec5eabe0144ccfffc337e1d6708e2afb81d0638e
 #EXTINF:-1 tvg-id="SkySp.F1.uk" tvg-logo="", SkySports F1
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-60.php
 
-#EXTINF:-1 tvg-id="SkySp.F1.uk" tvg-logo="", AceStream F1
-http://127.0.0.1:6878/ace/getstream?id=8afb62049f30ba4fb4a74c0c4165313d40b20ccb
-
 #EXTINF:-1 tvg-id="SkySp.Cricket.uk" tvg-logo="", SkySports Cricket
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-65.php
 
@@ -96,3 +99,6 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-33.
 
 #EXTINF:-1 tvg-id="TNT.Sports.4.uk" tvg-logo="", TNT Sports 4 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-34.php
+
+#EXTINF:-1 tvg-id="MUTV.HD.uk" tvg-logo="", MUTV UK
+plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-377.php
