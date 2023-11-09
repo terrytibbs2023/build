@@ -76,16 +76,15 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-449
 #EXTINF:-1 tvg-id="SkySp.Racing.uk" tvg-logo="", SkySports Racing
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-554.php
 
-#EXTINF:-1 tvg-id="TNT Sports 1 UK" tvg-logo="", TNT Sports 1 UK
+
+#EXTINF:-1 tvg-id="BT.Sport.1.uk" tvg-logo="", TNT Sports 1 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-31.php
 
-#EXTINF:-1 tvg-id="TNT Sports 2 UK" tvg-logo="", TNT Sports 2 UK
+#EXTINF:-1 tvg-id="BT.Sport.2.uk" tvg-logo="", TNT Sports 2 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-32.php
 
-#EXTINF:-1 tvg-id="TNT Sports 3 UK" tvg-logo="", TNT Sports 3 UK
+#EXTINF:-1 tvg-id="BT.Sport.3.uk" tvg-logo="", TNT Sports 3 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-33.php
 
-#EXTINF:-1 tvg-id="TNT Sports 4 UK" tvg-logo="", TNT Sports 4 UK
+#EXTINF:-1 tvg-id="BT.Sport.4.uk" tvg-logo="", TNT Sports 4 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-34.php
-
-
