@@ -961,7 +961,7 @@
 					</include>
 					<include content="IconButton">
 						<param name="control_id" value="801" />
-						<param name="onclick" value="ActivateWindow(10025,&quot;plugin://plugin.video.thepromise/?action=searchNavigator&quot;,return)" />
+						<param name="onclick" value="ActivateWindow(10025,&quot;plugin://plugin.video.coalition/?iconImage=search.png&amp;mode=navigator.search&amp;name=32450&quot;,return)" />
 						<param name="icon" value="icons/search.png" />
 						<param name="label" value="$LOCALIZE[137]" />
 					</include>
