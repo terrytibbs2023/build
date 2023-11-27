@@ -2080,16 +2080,13 @@ v0.5.9 (2022-03-22)
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.6.11" provider-name="Team Kodi">
+</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.6.12" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
 
-		<import addon="script.module.promisescrapers" />
+		
 
 <import addon="pvr.iptvsimple" />
-<import addon="script.thepromise.artwork" />
-
-<import addon="plugin.video.thepromise" />
 <import addon="plugin.video.daddylive" />
 <import addon="plugin.audio.mp3streams" />
 <import addon="plugin.audio.radio_de" />
