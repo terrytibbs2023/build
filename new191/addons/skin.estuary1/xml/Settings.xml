@@ -100,7 +100,7 @@
 						<label>Trakt</label>
     
       
-    <onclick>PlayMedia(&quot;plugin://plugin.video.thepromise/?action=authTrakt&quot;)</onclick>
+    <onclick>RunPlugin(plugin://plugin.video.coalition/?mode=trakt.trakt_auth)</onclick>
       
    
   
@@ -113,7 +113,7 @@
 					
 						
 						
-						<onclick>RunPlugin(plugin://script.module.resolveurl/?mode=auth_rd)</onclick>
+						<onclick>RunPlugin(plugin://plugin.video.coalition/?mode=real_debrid.rd_auth)</onclick>
 						<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
