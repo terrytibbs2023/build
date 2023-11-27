@@ -2,8 +2,8 @@
     <setting id="auto_start_coalition" default="true">false</setting>
     <setting id="widget_hide_watched" default="true">false</setting>
     <setting id="kodi_menu_cache">true</setting>
-    <setting id="trakt_indicators_active" default="true">false</setting>
-    <setting id="watched_indicators" default="true">0</setting>
+    <setting id="trakt_indicators_active">true</setting>
+    <setting id="watched_indicators">1</setting>
     <setting id="amble.indicators" default="true" />
     <setting id="sync_kodi_library_watchstatus" default="true">false</setting>
     <setting id="movie_download_directory" default="true">special://profile/addon_data/plugin.video.coalition/Movies Downloads/</setting>
@@ -11,13 +11,13 @@
     <setting id="premium_download_directory" default="true">special://profile/addon_data/plugin.video.coalition/Premium Downloads/</setting>
     <setting id="image_download_directory" default="true">special://profile/addon_data/plugin.video.coalition/Image Downloads/</setting>
     <setting id="datetime.offset" default="true">0</setting>
-    <setting id="trakt.refresh" default="true" />
-    <setting id="trakt.expires" default="true" />
-    <setting id="rd.refresh" default="true" />
-    <setting id="rd.client_id" default="true" />
-    <setting id="rd.secret" default="true" />
+    <setting id="trakt.refresh">db94f83574b31abed74a3555a6f4a6887e0977cae5e86c4f27e52726095feec9</setting>
+    <setting id="trakt.expires">1708733091.3138578</setting>
+    <setting id="rd.refresh">YEGN45N2MDB6BWQMVRCNJT574GBRC27ZFWOMYOSH7K7YHK42SX7A</setting>
+    <setting id="rd.client_id">C44MQKTORPME6</setting>
+    <setting id="rd.secret">b3650e9e636ebb3a5605706ce515cdb0d3fc0c70</setting>
     <setting id="results.sort_order" default="true">1</setting>
-    <setting id="database.maintenance.due">1701383890</setting>
+    <setting id="database.maintenance.due">1701199689</setting>
     <setting id="reuse_language_invoker" default="true">true</setting>
     <setting id="folder1.display_name" default="true">Folder 1</setting>
     <setting id="folder1.movies_directory" default="true">None</setting>
@@ -53,7 +53,7 @@
     <setting id="tmdb_api" default="true">74f3ce931d65ebda1f77ef24eac2625f</setting>
     <setting id="meta_language_display" default="true">English</setting>
     <setting id="meta_language" default="true">en</setting>
-    <setting id="include_year_in_title" default="true">0</setting>
+    <setting id="include_year_in_title">3</setting>
     <setting id="default_all_episodes">1</setting>
     <setting id="single_ep_display" default="true">0</setting>
     <setting id="single_ep_format">2</setting>
@@ -62,27 +62,27 @@
     <setting id="nav_jump" default="true">0</setting>
     <setting id="show_specials" default="true">false</setting>
     <setting id="use_season_title" default="true">false</setting>
-    <setting id="show_unaired">true</setting>
+    <setting id="show_unaired">false</setting>
     <setting id="thumb_fanart" default="true">false</setting>
     <setting id="sort.progress" default="true">0</setting>
     <setting id="sort.watched" default="true">0</setting>
     <setting id="sort.collection" default="true">0</setting>
     <setting id="sort.watchlist" default="true">0</setting>
     <setting id="ignore_articles">true</setting>
-    <setting id="auto_play_movie" default="true">false</setting>
-    <setting id="autoplay_quality_movie" default="true">720p, 1080p, 4K</setting>
+    <setting id="auto_play_movie">true</setting>
+    <setting id="autoplay_quality_movie">720p, 1080p</setting>
     <setting id="results_quality_movie" default="true">720p, 1080p, 4K</setting>
     <setting id="auto_resume_movie" default="true">0</setting>
-    <setting id="auto_play_episode" default="true">false</setting>
-    <setting id="autoplay_quality_episode" default="true">720p, 1080p, 4K</setting>
-    <setting id="autoplay_next_episode" default="true">false</setting>
+    <setting id="auto_play_episode">true</setting>
+    <setting id="autoplay_quality_episode">720p, 1080p</setting>
+    <setting id="autoplay_next_episode">true</setting>
     <setting id="autoplay_next_show_window">true</setting>
     <setting id="autoplay_next_window_timer_method" default="true">0</setting>
-    <setting id="autoplay_next_window_time">20</setting>
+    <setting id="autoplay_next_window_time">30</setting>
     <setting id="autoplay_next_window_percentage">95</setting>
     <setting id="autoplay_next_check_threshold">3</setting>
     <setting id="results_quality_episode" default="true">SD, 720p, 1080p, 4K</setting>
-    <setting id="auto_resume_episode" default="true">0</setting>
+    <setting id="auto_resume_episode">2</setting>
     <setting id="volumecheck.enabled" default="true">false</setting>
     <setting id="volumecheck.percent">50</setting>
     <setting id="subtitles.subs_action">2</setting>
@@ -90,8 +90,8 @@
     <setting id="subtitles.auto_enable">true</setting>
     <setting id="scrapers.timeout.1">10</setting>
     <setting id="results.xml_style" default="true">List Default</setting>
-    <setting id="search.enable.yearcheck" default="true">false</setting>
-    <setting id="search.finish.early" default="true">false</setting>
+    <setting id="search.enable.yearcheck">true</setting>
+    <setting id="search.finish.early">true</setting>
     <setting id="results.sort_order_display" default="true">$ADDON[plugin.video.coalition 32582]</setting>
     <setting id="results.size_filter" default="true">0</setting>
     <setting id="results.size.speed">20</setting>
@@ -99,9 +99,9 @@
     <setting id="results.include.unknown.size">true</setting>
     <setting id="include_prerelease_results" default="true">false</setting>
     <setting id="include_3d_results" default="true">false</setting>
-    <setting id="filter_hevc" default="true">0</setting>
-    <setting id="filter_hdr" default="true">0</setting>
-    <setting id="filter_dv" default="true">0</setting>
+    <setting id="filter_hevc">1</setting>
+    <setting id="filter_hdr">1</setting>
+    <setting id="filter_dv">1</setting>
     <setting id="torrent.display.uncached" default="true">false</setting>
     <setting id="ignore_results_filter">true</setting>
     <setting id="highlight.type">1</setting>
@@ -120,8 +120,7 @@
     <setting id="scraper_SD_highlight" default="true">whitesmoke</setting>
     <setting id="int_dialog_highlight" default="true">whitesmoke</setting>
     <setting id="ext_dialog_highlight" default="true">whitesmoke</setting>
-    <setting id="trakt.token" default="true" />
-    <setting id="trakt_user" default="true" />
+   
     <setting id="trakt.calendar_focus_today">true</setting>
     <setting id="trakt.calendar_sort_order" default="true">0</setting>
     <setting id="trakt.calendar_previous_days">7</setting>
@@ -131,17 +130,17 @@
     <setting id="imdb_user" default="true" />
     <setting id="imdb_lists.sort_type" default="true">0</setting>
     <setting id="imdb_lists.sort_direction" default="true">0</setting>
-    <setting id="rd.token" default="true" />
+    
     <setting id="rd.enabled">true</setting>
-    <setting id="rd.username" default="true" />
+    
     <setting id="rd.torrent.enabled">true</setting>
     <setting id="rd.hoster.enabled" default="true">false</setting>
-    <setting id="store_torrent.real-debrid" default="true">false</setting>
-    <setting id="provider.rd_cloud" default="true">false</setting>
+    <setting id="store_torrent.real-debrid">true</setting>
+    <setting id="provider.rd_cloud">true</setting>
     <setting id="rd_cloud.title_filter" default="true">false</setting>
     <setting id="check.rd_cloud" default="true">false</setting>
     <setting id="results.sort_rdcloud_first">true</setting>
-    <setting id="rd.priority">10</setting>
+    <setting id="rd.priority">1</setting>
     <setting id="pm.token" default="true" />
     <setting id="pm.enabled">true</setting>
     <setting id="pm.account_id" default="true" />
