@@ -9,7 +9,7 @@
     <setting id="autoscroll" type="bool">false</setting>
     <setting id="homemenunogamesbutton" type="bool">false</setting>
     <setting id="hide_mediaflags" type="bool">false</setting>
-    <setting id="no_fanart" type="bool">true</setting>
+    <setting id="no_fanart" type="bool">false</setting>
     <setting id="no_slide_animations" type="bool">false</setting>
     <setting id="homemenunoweatherbutton" type="bool">false</setting>
     <setting id="homemenunomusicbutton" type="bool">false</setting>
