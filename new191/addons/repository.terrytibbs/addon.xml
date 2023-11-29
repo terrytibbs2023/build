@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.terrytibbs" name="Terrys 20 repo" version="1" provider-name="Terry Tibbs">
+<addon id="repository.terrytibbs" name="Terrys 20 repo" version="0.1" provider-name="Terry Tibbs">
     <extension point="xbmc.addon.repository" name="Terrys 20 Repository">
         <dir>
             <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repo2/zips/addons.xml</info>
