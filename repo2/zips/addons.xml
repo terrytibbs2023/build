@@ -1293,13 +1293,13 @@ updated language files
 - See Changelog on Tools menu
         </news>
     </extension>
-</addon><addon id="plugin.video.youtube" name="YouTube" version="8.0.2.2+unofficial.1" provider-name="anxdpanic, bromix">
+</addon><addon id="plugin.video.youtube" name="YouTube" version="8.0" provider-name="anxdpanic, bromix">
   <requires>
-    <import addon="xbmc.python" version="3.0.1" />
-    <import addon="script.module.requests" version="2.12.4" />
+    <import addon="xbmc.python" />
+    <import addon="script.module.requests" />
     <import addon="inputstream.adaptive" />
-    <import addon="script.module.inputstreamhelper" version="0.2.2" optional="true" />
-    <import addon="script.module.infotagger" version="0.0.5" />
+    <import addon="script.module.inputstreamhelper" optional="true" />
+    <import addon="script.module.infotagger" />
   </requires>
   <extension point="xbmc.python.pluginsource" library="resources/lib/default.py">
     <provides>video</provides>
