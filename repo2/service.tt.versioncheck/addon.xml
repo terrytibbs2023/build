@@ -3,8 +3,7 @@
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
 
-<import addon="plugin.video.youtube" />		
-
+	
 <import addon="pvr.iptvsimple" />
 <import addon="plugin.video.daddylive" />
 <import addon="plugin.audio.mp3streams" />
