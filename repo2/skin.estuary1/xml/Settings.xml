@@ -55,10 +55,14 @@
 						<icon>icons/settings/sysinfo.png</icon>
 					</item>
 					<item>
-						<label>Reset System</label>
-						<onclick>PlayMedia(&quot;plugin://plugin.program.terrywiz/?url=&amp;mode=4&amp;name=Fresh+Start&amp;icon=%2Fhome%2Fdave%2F.kodi%2Faddons%2Fplugin.program.terrywiz%2Fresources%2Ficon.png&amp;fanart=%2Fhome%2Fdave%2F.kodi%2Faddons%2Fplugin.program.terrywiz%2Fresources%2Ffanart.jpg&amp;description=Clear+all+the+data+in+your+current+setup+except+items+in+your+save+list.&amp;name2=&amp;version=&quot;)
-</onclick>
-						<icon>icons/settings/system.png</icon>
+						<label>Real-Debrid Info</label>
+
+
+<onclick>PlayMedia(&quot;plugin://plugin.video.coalition/?mode=real_debrid.rd_account_info)</onclick>
+
+
+
+							<icon>icons/settings/system.png</icon>
 					</item>
 				</content>
 			</control>
