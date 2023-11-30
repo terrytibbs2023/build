@@ -58,8 +58,6 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-37.
 #EXTINF:-1 tvg-id="SkySpMainEv.uk" tvg-logo="", SkySports Main Event
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-38.php
 
-#EXTINF:-1 tvg-id="SkySpMainEv.uk" tvg-logo="", AceStream Main Event
-http://127.0.0.1:6878/ace/getstream?id=eab7aeef0218ce8b0752e596e4792b69eda4df5e
 
 #EXTINF:-1 tvg-id="SkySp.PL.uk" tvg-logo="", SkySports PL
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-130.php
@@ -100,5 +98,12 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-33.
 #EXTINF:-1 tvg-id="TNT.Sports.4.uk" tvg-logo="", TNT Sports 4 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-34.php
 
-#EXTINF:-1 tvg-id="MUTV.HD.uk" tvg-logo="", MUTV UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-377.php
+
+#EXTINF:-1 tvg-id="SkySpMainEv.uk" tvg-logo="", AceStream Main Event
+http://127.0.0.1:6878/ace/getstream?id=eab7aeef0218ce8b0752e596e4792b69eda4df5e
+
+#EXTINF:-1 tvg-id="SkySp.PL.uk" tvg-logo="", AceStream PL
+http://127.0.0.1:6878/ace/getstream?id=ec5eabe0144ccfffc337e1d6708e2afb81d0638e
+
+#EXTINF:-1 tvg-id="SkySp.Fball.uk" tvg-logo="", AceStream Football
+http://127.0.0.1:6878/ace/getstream?id=8dbe2d515e9131fa311353537736f8c94be9b26d
