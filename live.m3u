@@ -119,6 +119,7 @@ plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-90.
 #EXTINF:-1 tvg-id="premier.Sports.1.uk" tvg-logo="", Premier Sports 1 UK
 plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-143.php
 
-
+#EXTINF:-1 tvg-id="premier.Sports.1.uk" tvg-logo="", Premier Sports 1 UK
+plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-143.php
 #EXTINF
 
