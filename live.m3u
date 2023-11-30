@@ -107,3 +107,10 @@ http://127.0.0.1:6878/ace/getstream?id=ec5eabe0144ccfffc337e1d6708e2afb81d0638e
 
 #EXTINF:-1 tvg-id="SkySp.Fball.uk" tvg-logo="", AceStream Football
 http://127.0.0.1:6878/ace/getstream?id=8dbe2d515e9131fa311353537736f8c94be9b26d
+
+
+#EXTINF:-1 tvg-id="TNT.Sports.1.uk" tvg-logo="", TNT Acestream 1 UK
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b
+
+#EXTINF
+
