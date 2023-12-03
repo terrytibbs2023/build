@@ -1434,35 +1434,6 @@ updated language files
             <screenshot>resources/images/screenshot-03.jpg</screenshot>
         </assets>
     </extension>
-</addon><addon id="plugin.video.looptv" name="Loop TV" version="26+matrix.1" provider-name="Munkee - RACC">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0" />
-    <import addon="script.module.pycryptodome" />
-    <import addon="script.module.requests" />
-    <import addon="script.module.kodi-six" />
-    <import addon="script.module.future" />
-    <import addon="script.module.routing" />
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="addon.py">
-    <provides>all</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <reuselanguageinvoker>true</reuselanguageinvoker>
-    <summary lang="en_gb">tvOne</summary>
-    <description lang="en_gb">tvOne</description>
-    <disclaimer lang="en_gb" />
-    <language />
-    <platform>all</platform>
-    <license>GPL-3.0</license>
-    <forum />
-    <website />
-    <email />
-    <source />
-    <assets>
-		<icon>icon.png</icon>
-		<fanart>fanart.jpg</fanart>
-    </assets>
-  </extension>
 </addon><addon id="plugin.video.smr_link_tester" version="1.1.10" name="SMR Link Tester" provider-name="gujal">
     <requires>
         
@@ -1508,70 +1479,6 @@ updated language files
       <fanart>fanart.jpg</fanart>
     </assets>
   </extension>
-</addon><addon id="plugin.video.the-loop" name="The Loop" version="4.3" provider-name="Munkee">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0" />
-    <import addon="script.module.requests" />
-    <import addon="script.module.routing" />
-    <import addon="script.module.unidecode" />
-    <import addon="script.module.tzlocal" />
-    <import addon="script.module.jetextractors" />
-    <import addon="script.module.inputstreamhelper" />
-    <import addon="script.module.resolveurl" />
-    <import addon="script.module.pyamf" />
-    <import addon="script.module.pycryptodome" optional="true" />
-    <import addon="script.module.microjenscrapers" optional="true" />
-    
-    <import addon="plugin.video.looptv" />
-    <import addon="plugin.video.dailymotion_com" />    
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.service" library="service.py" />
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en_GB">The Loop rewritten on a smaller MicroJen Codebase. A Massive thanks to all The Jen Crew for their valuable contributions in bringing this project together. Stay In The Loop</summary>
-    <platform>all</platform>
-    <language>en</language>
-    <license>GPL-2.0-or-later</license>
-	<assets>
-		<icon>icon.png</icon>
-		<fanart>fanart.jpg</fanart>
-  </assets>
-  </extension>
-</addon><addon id="plugin.video.thepromise" name="ThePromise" version="23.1.00" provider-name="[COLORpurple]• [COLORorchid]Tech [COLORdarkorchid]E [COLORplum]Coyote [COLORpurple]•[/COLOR]">
-    <requires>
-        <import addon="script.thepromise.artwork" />
-        <import addon="script.module.resolveurl" />
-        <import addon="script.module.requests" />
-        <import addon="script.module.promisescrapers" />
-        <import addon="script.module.six" />
-        <import addon="script.module.kodi-six" />
-        <import addon="script.module.simplejson" />
-     
-    </requires>
-    <extension library="thepromise.py" point="xbmc.python.pluginsource">
-        <provides>video</provides>
-    </extension>
-    <extension library="service.py" point="xbmc.service" start="startup" />
-    <extension point="xbmc.addon.metadata">
-        <reuselanguageinvoker>false</reuselanguageinvoker>
-        <summary lang="en_GB">ThePromise</summary>
-        <description lang="en_GB">Multi-source add-on</description>
-        <platform>all</platform>
-        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
-        <forum />
-        <website />
-        <source />
-        <disclaimer lang="en_GB">The author of this add-on does not host any of the content which is found and has no affiliation with any of the content providers. This add-on simply searches websites for content. Use at your own risk![CR]This project uses the TMDb, Trakt, Fanart.tv APIs, but is not affiliated nor endorsed by any of their respective ogranisations.[CR]Please support these ogranisations however you can.</disclaimer>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-        <news>
-- See Changelog on Tools menu
-        </news>
-    </extension>
 </addon><addon id="plugin.video.youtube" name="YouTube" version="8.1" provider-name="anxdpanic, bromix">
   <requires>
    
@@ -2883,9 +2790,14 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
 <import addon="plugin.audio.mp3streams" />
 <import addon="plugin.audio.radio_de" />
 <import addon="visualization.spectrum" />
+
+<import addon="repository.loop" />
 <import addon="plugin.video.youtube" />
 <import addon="plugin.video.coalition" />
 <import addon="plugin.video.Rising.Tides" />
+
+
+
 <import addon="plugin.video.the-loop" />
 
 
