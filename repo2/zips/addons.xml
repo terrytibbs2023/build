@@ -1463,6 +1463,25 @@ updated language files
 		<fanart>fanart.jpg</fanart>
     </assets>
   </extension>
+</addon><addon id="plugin.video.smr_link_tester" version="1.1.10" name="SMR Link Tester" provider-name="gujal">
+    <requires>
+        
+        <import addon="script.module.resolveurl" />
+        <import addon="script.module.resolveurl.xxx" />
+        <import addon="script.module.six" version="0.0.1" />
+        <import addon="script.module.kodi-six" version="0.0.1" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>SMR Link Tester Addon</summary>
+        <description />
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+	</extension>
 </addon><addon id="plugin.video.sporthdme" name="SportHD" version="0.1.36" provider-name="Bugatsinho">
   <requires>
     
@@ -2374,7 +2393,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 			<icon>icon.png</icon>
 		</assets>
 	</extension>
-</addon><addon id="script.module.future" name="future" version="0.18.2+matrix.1" provider-name="Ed Schofield">
+</addon><addon id="script.module.future" name="future" version="0.18.3+matrix.1" provider-name="Ed Schofield">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
   </requires>
@@ -2382,12 +2401,12 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
   <extension point="xbmc.addon.metadata">
     <summary lang="en_GB">Clean single-source support for Python 3 and 2</summary>
     <description lang="en_GB">future is the missing compatibility layer between Python 2 and Python 3. It allows you to use a single, clean Python 3.x-compatible codebase to support both Python 2 and Python 3 with minimal overhead.</description>
-    <platform>all</platform>
     <license>MIT</license>
+    <platform>all</platform>
+    <website>https://python-future.org</website>
     <source>https://github.com/PythonCharmers/python-future</source>
-    <website>http://python-future.org</website>
     <assets>
-      <icon>icon.png</icon>
+      <icon>resources/icon.png</icon>
     </assets>
   </extension>
 </addon><addon id="script.module.httplib2" name="httplib2" provider-name="Joe Gregorio" version="0.17.0+matrix.2">
@@ -2650,7 +2669,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
       <icon>resources/icon.png</icon>
     </assets>
   </extension>
-</addon><addon id="script.module.resolveurl" name="ResolveURL" version="5.1.96" provider-name="gujal">
+</addon><addon id="script.module.resolveurl" name="ResolveURL" version="5.1.117" provider-name="gujal">
     <requires>
         
         <import addon="script.module.six" />
@@ -2672,6 +2691,21 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
         <description lang="hr_HR">Prilagodi najčešće URL-ove video izvora kako bi radili u XBMC/Kodiju, pojednostavnjuje razvoj priključaka za video dodatke koji zahtjevaju višestruke video izvore.</description>
         <disclaimer lang="en_GB">This script only resolves video content from legitimate file lockers without prejudice. If this script is being used by 3rd parties to resolve content that you feel infringes upon your Intellectual Property then please take your complaints to the actual website or developer linking to such content and not here. This script in no way searches for any content whatsoever.</disclaimer>
         <disclaimer lang="el_GR">Το ανωτέρο σενάριο το μόνο που κάνει είναι να επιλύει οπτικοακουστικό περιεχόμενο από νόμιμες πηγές χωρίς προκατάληψη. Εάν το ανωτέρο σενάριο χρησιμοποιηθεί από τρίτους ώστε να επιλύσει περιεχόμενο το οποίο σας προκαλεί αντίδραση ότι παραβιάζει την πνευματική σας ιδιοκτησία παρακαλώ μεταφέρετε τα παραπονά σας στον ιστότοπο τον οποίο βρίσκεται το εν λόγω περιεχόμενο η τον δημιουργό ο οποίος πραγματοποιεί την σύνδεση και όχι εδω. Το σενάριο αυτό ουδεμία περίπτωση πραγματοποιεί αναζήτηση περιεχομένου.</disclaimer>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon><addon id="script.module.resolveurl.xxx" version="2.1.40" name="Adult Resolver SMR Extension" provider-name="gujal">
+    <requires>
+        
+        <import addon="script.module.resolveurl" version="5.1.0" />
+    </requires>
+    <extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Resolve adult video host URL's to be playable in XBMC/Kodi.</summary>
+        <description lang="en_GB">Resolve adult video host URL's to be playable in XBMC/Kodi.</description>
+        <platform>all</platform>
         <assets>
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
@@ -2709,20 +2743,20 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
       <icon>resources/icon.png</icon>
     </assets>
   </extension>
-</addon><addon id="script.module.six" name="six" version="1.15.0+matrix.1" provider-name="gutworth">
+</addon><addon id="script.module.six" name="six" version="1.16.0+matrix.1" provider-name="Benjamin Peterson">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
   </requires>
   <extension point="xbmc.python.module" library="lib" />
   <extension point="xbmc.addon.metadata">
-    <summary lang="en_GB">Python 2 and 3 compatibility utilities.</summary>
-    <description lang="en_GB">Six is a Python 2 and 3 compatibility library. It provides utility functions for smoothing over the differences between the Python versions with the goal of writing Python code that is compatible on both Python versions. See the documentation for more information on what is provided.</description>
-    <platform>all</platform>
+    <summary lang="en_GB">Python 2 and 3 compatibility utilities</summary>
+    <description lang="en_GB">Python 2 and 3 compatibility utilities</description>
     <license>MIT</license>
+    <platform>all</platform>
+    <website>https://github.com/benjaminp/six</website>
     <source>https://github.com/benjaminp/six</source>
-    <website>https://pypi.org/project/six/</website>
     <assets>
-      <icon>icon.png</icon>
+      <icon>resources/icon.png</icon>
     </assets>
   </extension>
 </addon><addon id="script.module.soupsieve" name="soupsieve" version="2.4.1" provider-name="Isaac Muse">
@@ -2791,7 +2825,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
       <icon>resources/icon.png</icon>
     </assets>
   </extension>
-</addon><addon id="script.module.urllib3" name="urllib3" version="1.26.16+matrix.1" provider-name="urllib3">
+</addon><addon id="script.module.urllib3" name="urllib3" version="2.1.0" provider-name="urllib3">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
   </requires>
@@ -2837,7 +2871,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.8.2" provider-name="Team Kodi">
+</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.8.5" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
 
@@ -2850,7 +2884,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
 <import addon="plugin.video.youtube" />
 <import addon="plugin.video.coalition" />
 <import addon="plugin.video.Rising.Tides" />
-<import addon="plugin.video.looptv" />
+<import addon="plugin.video.the-loop" />
 
 
 
@@ -3003,19 +3037,9 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <disclaimer lang="zh_CN">可放心使用此脚本，更多信息访问 kodi.tv</disclaimer>
     <disclaimer lang="zh_TW">歡迎使用本腳本，相關資訊請參閱kodi.tv</disclaimer>
   </extension>
-</addon><addon id="service.xbmc.versioncheck" name="Version Check" version="0.5.55+matrix.1" provider-name="Team Kodi">
+</addon><addon id="service.xbmc.versioncheck" name="Version Check" version="0.5.28+matrix.1" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
-
-
-
-<import addon="pvr.iptvsimple" />
-<import addon="plugin.video.daddylive" />
-<import addon="plugin.audio.mp3streams" />
-<import addon="plugin.audio.radio_de" />
-<import addon="visualization.spectrum" />
-
-
   </requires>
   <extension point="xbmc.service" library="resources/lib/runner.py" />
   <extension point="xbmc.addon.metadata">

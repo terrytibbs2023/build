@@ -16,10 +16,11 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
+import base64
 import re
-import xbmcgui
-from resolveurl.lib import jsunpack
 import six
+import xbmcgui
+from resolveurl.lib import jsunpack, unjuice, unjuice2
 from six.moves import urllib_parse, urllib_request, urllib_error
 from resolveurl import common
 from resolveurl.resolver import ResolverError
@@ -83,11 +84,37 @@ def append_headers(headers):
 
 def get_packed_data(html):
     packed_data = ''
-    for match in re.finditer(r'(eval\s*\(function.*?)</script>', html, re.DOTALL | re.I):
-        if jsunpack.detect(match.group(1)):
-            packed_data += jsunpack.unpack(match.group(1))
-
+    for match in re.finditer(r'''(eval\s*\(function\(p,a,c,k,e,.*?)</script>''', html, re.DOTALL | re.I):
+        r = match.group(1)
+        t = re.findall(r'(eval\s*\(function\(p,a,c,k,e,)', r, re.DOTALL | re.IGNORECASE)
+        if len(t) == 1:
+            if jsunpack.detect(r):
+                packed_data += jsunpack.unpack(r)
+        else:
+            t = r.split('eval')
+            t = ['eval' + x for x in t if x]
+            for r in t:
+                if jsunpack.detect(r):
+                    packed_data += jsunpack.unpack(r)
     return packed_data
+
+
+def get_juiced_data(html):
+    juiced_data = ''
+    for match in re.finditer(r'(JuicyCodes\.Run.+?[;\n<])', html, re.DOTALL | re.I):
+        if unjuice.test(match.group(1)):
+            juiced_data += unjuice.run(match.group(1))
+
+    return juiced_data
+
+
+def get_juiced2_data(html):
+    juiced_data = ''
+    for match in re.finditer(r'(_juicycodes\(.+?[;\n<])', html, re.DOTALL | re.I):
+        if unjuice2.test(match.group(1)):
+            juiced_data += unjuice2.run(match.group(1))
+
+    return juiced_data
 
 
 def sort_sources_list(sources):
@@ -208,11 +235,9 @@ def get_media_url(url, result_blacklist=None, patterns=None, generic_patterns=Tr
     if cookie:
         headers.update({'Cookie': cookie})
     html = response.content
-    if not referer:
-        headers.update({'Referer': rurl})
+    headers.update({'Referer': rurl, 'Origin': rurl[:-1]})
     if not verifypeer:
         headers.update({'verifypeer': 'false'})
-    headers.update({'Origin': rurl[:-1]})
     source_list = scrape_sources(html, result_blacklist, scheme, patterns, generic_patterns)
     source = pick_source(source_list)
     return source + append_headers(headers)
@@ -699,3 +724,22 @@ def base164(e):
         if a != 64:
             n += chr(c)
     return n
+
+
+def Tdecode(vidurl):
+    import base64
+    replacemap = {'M': r'\u041c', 'A': r'\u0410', 'B': r'\u0412', 'C': r'\u0421', 'E': r'\u0415', '=': '~', '+': '.', '/': ','}
+
+    for key in replacemap:
+        vidurl = vidurl.replace(replacemap[key], key)
+    vidurl = base64.b64decode(vidurl)
+    return vidurl.decode('utf-8')
+
+
+def b64decode(t, binary=False):
+    r = base64.b64decode(t)
+    return r if binary else six.ensure_str(r)
+
+
+def b64encode(b):
+    return six.ensure_str(base64.b64encode(six.ensure_binary(b)))

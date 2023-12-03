@@ -18,7 +18,6 @@
 """
 
 import re
-import base64
 from resolveurl import common
 from resolveurl.lib import helpers, aadecode
 from resolveurl.resolver import ResolveUrl, ResolverError
@@ -26,8 +25,9 @@ from resolveurl.resolver import ResolveUrl, ResolverError
 
 class UpVidResolver(ResolveUrl):
     name = 'UpVid'
-    domains = ['upvid.co', 'opvid.org', 'upvid.pro', 'upvid.live', 'upvid.host', 'upvid.biz', 'upvid.cloud']
-    pattern = r'(?://|\.)((?:up|op)vid\.(?:co|org|pro|live|host|biz|cloud))/(?:embed-)?([0-9a-zA-Z]+)'
+    domains = ['upvid.co', 'upvid.pro', 'upvid.live', 'upvid.host', 'upvid.biz', 'upvid.cloud',
+               'opvid.org', 'opvid.online']
+    pattern = r'(?://|\.)((?:up|op)vid\.(?:co|org|pro|live|host|biz|cloud|online))/(?:embed-)?([0-9a-zA-Z]+)'
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
@@ -62,7 +62,7 @@ class UpVidResolver(ResolveUrl):
         return self._default_get_url(host, media_id, template='https://{host}/embed-{media_id}.html')
 
     def dec(self, o, r):
-        o = base64.b64decode(o)
+        o = helpers.b64decode(o, binary=True)
         n = 0
         a = ''
         e = list(range(256))
