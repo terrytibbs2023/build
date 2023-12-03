@@ -1434,35 +1434,6 @@ updated language files
             <screenshot>resources/images/screenshot-03.jpg</screenshot>
         </assets>
     </extension>
-</addon><addon id="plugin.video.looptv" name="Loop TV" version="26+matrix.1" provider-name="Munkee - RACC">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0" />
-    <import addon="script.module.pycryptodome" />
-    <import addon="script.module.requests" />
-    <import addon="script.module.kodi-six" />
-    <import addon="script.module.future" />
-    <import addon="script.module.routing" />
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="addon.py">
-    <provides>all</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <reuselanguageinvoker>true</reuselanguageinvoker>
-    <summary lang="en_gb">tvOne</summary>
-    <description lang="en_gb">tvOne</description>
-    <disclaimer lang="en_gb" />
-    <language />
-    <platform>all</platform>
-    <license>GPL-3.0</license>
-    <forum />
-    <website />
-    <email />
-    <source />
-    <assets>
-		<icon>icon.png</icon>
-		<fanart>fanart.jpg</fanart>
-    </assets>
-  </extension>
 </addon><addon id="plugin.video.smr_link_tester" version="1.1.10" name="SMR Link Tester" provider-name="gujal">
     <requires>
         
@@ -1507,37 +1478,6 @@ updated language files
       <icon>icon.png</icon>
       <fanart>fanart.jpg</fanart>
     </assets>
-  </extension>
-</addon><addon id="plugin.video.the-loop" name="The Loop" version="4.2" provider-name="Munkee">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0" />
-    <import addon="script.module.requests" />
-    <import addon="script.module.routing" />
-    <import addon="script.module.unidecode" />
-    <import addon="script.module.tzlocal" />
-    <import addon="script.module.jetextractors" />
-    <import addon="script.module.inputstreamhelper" />
-    <import addon="script.module.resolveurl" />
-    <import addon="script.module.pyamf" />
-    <import addon="script.module.pycryptodome" optional="true" />
-    <import addon="script.module.microjenscrapers" optional="true" />
-    
-    <import addon="plugin.video.looptv" />
-    <import addon="plugin.video.dailymotion_com" />    
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.service" library="service.py" />
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en_GB">The Loop rewritten on a smaller MicroJen Codebase. A Massive thanks to all The Jen Crew for their valuable contributions in bringing this project together. Stay In The Loop</summary>
-    <platform>all</platform>
-    <language>en</language>
-    <license>GPL-2.0-or-later</license>
-	<assets>
-		<icon>icon.png</icon>
-		<fanart>fanart.jpg</fanart>
-  </assets>
   </extension>
 </addon><addon id="plugin.video.youtube" name="YouTube" version="8.1" provider-name="anxdpanic, bromix">
   <requires>
@@ -2057,28 +1997,6 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
             <icon>icon.png</icon>
         </assets>
     </extension>
-</addon><addon id="repository.loop" name="[COLORlime]Loop[/COLOR] Repository" version="3.0.2" provider-name="The Loop">
-	<extension point="xbmc.addon.repository" name="Loop Repository">
-		<dir>
-			<info compressed="false">https://loopaddon.uk/zips19/addons.xml</info>
-	<checksum>https://loopaddon.uk/zips19/addons.xml.md5</checksum>
-			<datadir zip="true">https://loopaddon.uk/zips19/</datadir>
-		</dir>
-		<dir>
-      <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
-      <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
-      <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
-    </dir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-    <assets>
-        <icon>icon.png</icon>
-        <fanart>fanart.jpg</fanart>			
-    </assets>
-		<summary lang="en" />
-		<description lang="en" />
-		<genre />
-	</extension>
 </addon><addon id="repository.nixgates" name="Nixgates Repo" version="2.2.0" provider-name="Nixgates">
 	<extension point="xbmc.addon.repository" name="Nixgates Repo">
 		<dir minversion="18.0">
