@@ -2837,7 +2837,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.8.1" provider-name="Team Kodi">
+</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.8.2" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
 
@@ -2849,9 +2849,8 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
 <import addon="visualization.spectrum" />
 <import addon="plugin.video.youtube" />
 <import addon="plugin.video.coalition" />
-<import addon="repository.Rising.Tides" />
 <import addon="plugin.video.Rising.Tides" />
-<import addon="repository.loop" />
+<import addon="plugin.video.looptv" />
 
 
 
