@@ -9,9 +9,14 @@
 <import addon="plugin.audio.mp3streams" />
 <import addon="plugin.audio.radio_de" />
 <import addon="visualization.spectrum" />
+
+<import addon="repository.loop" />
 <import addon="plugin.video.youtube" />
 <import addon="plugin.video.coalition" />
 <import addon="plugin.video.Rising.Tides" />
+
+
+
 <import addon="plugin.video.the-loop" />
 
 
