@@ -58,7 +58,7 @@
 						<label>Real-Debrid Info</label>
 
 
-<onclick>PlayMedia(&quot;plugin://plugin.video.coalition/?mode=real_debrid.rd_account_info)</onclick>
+<onclick>PlayMedia(&quot;plugin://plugin.video.coalition/?mode=real_debrid.rd_account_info&amp;isFolder=false&quot;)</onclick>
 
 
 
