@@ -1,0 +1,9 @@
+{
+    "items": [
+        "inputstream.adaptive",
+        "pvr.iptvsimple",
+        "inputstream.rtmp",
+        "inputstream.ffmpegdirect",
+        "visualization.spectrum"
+    ]
+}
