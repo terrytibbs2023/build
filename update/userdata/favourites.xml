@@ -10,4 +10,5 @@
     <favourite name="New Movies" thumb="https://githubraw.com/terrytibbs2023/build/main/film.png">ActivateWindow(10025,&quot;plugin://plugin.video.homelander/?action=directory&amp;content=0&amp;url=https%3a%2f%2fthechains24.com%2fGREENHAT%2fnewm.NEW.xml&quot;,return)</favourite>
     <favourite name="Pluto TV" thumb="https://githubraw.com/terrytibbs2023/build/main/ptv.png">ActivateWindow(10025,&quot;plugin://plugin.video.ghosttv/?mode=1&amp;url=https%3a%2f%2fi.mjh.nz%2fPlutoTV%2fgb.m3u8&quot;,return)</favourite>
     <favourite name="Samsung TV" thumb="https://githubraw.com/terrytibbs2023/build/main/samtv.png">ActivateWindow(10025,&quot;plugin://plugin.video.ghosttv/?mode=1&amp;url=https%3a%2f%2fi.mjh.nz%2fSamsungTVPlus%2fgb.m3u8&quot;,return)</favourite>
+    <favourite name="Premier League" thumb="https://www.thesportsdb.com/images/media/league/badge/pdd43f1610891709.png">ActivateWindow(10025,&quot;plugin://plugin.video.the-loop/get_list/https://loopaddon.uk/files/k19/xmls/ScoreZone/EPL.json&quot;,return)</favourite>
 </favourites>
