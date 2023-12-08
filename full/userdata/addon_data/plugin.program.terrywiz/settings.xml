@@ -1,14 +1,14 @@
 <settings version="2">
-    <setting id="buildname">Update 08/12/2023</setting>
+    <setting id="buildname" default="true">No Build Installed</setting>
     <setting id="buildversion" default="true">0</setting>
     <setting id="firstrun">true</setting>
     <setting id="firstrunNotify" default="true">false</setting>
     <setting id="notifyversion" default="true">0</setting>
     <setting id="autoclearpackages" default="true">false</setting>
     <setting id="update_passed" default="true">false</setting>
-    <setting id="backupfolder">/storage/0E0F-5F4A/</setting>
+    <setting id="backupfolder">/storage/emulated/0/Downloader/</setting>
     <setting id="savefavs" default="true">false</setting>
     <setting id="savedebrid">false</setting>
     <setting id="savesources" default="true">false</setting>
-    <setting id="saveadvanced" default="true">true</setting>
+    <setting id="saveadvanced">true</setting>
 </settings>
