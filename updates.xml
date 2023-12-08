@@ -1,7 +1,8 @@
 <builds>
 
   <build>
-	<name>Update 08/12/2023</name>
+	<name>Update</name>
+<version>08/12/2023</version>
 	
 	<url>https://githubraw.com/terrytibbs2023/build/main/update.zip</url>
 	<icon>https://githubraw.com/terrytibbs2004/builds/main/icon.png</icon>
