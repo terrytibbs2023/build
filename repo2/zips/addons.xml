@@ -993,7 +993,7 @@ updated language files
             <screenshot>resources/screenshot-03.jpg</screenshot>
         </assets>
     </extension>
-</addon><addon id="plugin.program.terrywiz" name="Terry Tibbs Toolbox" version="0.0.26" provider-name="Magnetic,Slam, BYB">
+</addon><addon id="plugin.program.terrywiz" name="Terry Tibbs Toolbox" version="0.0.27" provider-name="Magnetic,Slam, BYB">
 	<requires>
 		<import addon="xbmc.python" version="3.0.0" />
 		<import addon="script.module.requests" optional="true" />
