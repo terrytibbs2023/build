@@ -2,8 +2,7 @@
     <setting id="kodi_addon_instance_name">Migrated Add-on Config</setting>
     <setting id="kodi_addon_instance_enabled" default="true">true</setting>
     <setting id="m3uPathType" default="true">1</setting>
-    <setting id="m3uPath">D:\daddylive.m3u</setting>
-    <setting id="m3uUrl">https://githubraw.com/terrytibbs2023/build/main/live.m3u</setting>
+    <setting id="m3uUrl">https://cutt.ly/nwwh3GmJ</setting>
     <setting id="m3uCache">false</setting>
     <setting id="startNum" default="true">1</setting>
     <setting id="numberByOrder">true</setting>
