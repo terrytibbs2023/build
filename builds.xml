@@ -1,15 +1,15 @@
 <builds>
 
   <build>
-	<name>Setup Kodi 20</name>
+	<name>Setup Kodi 21</name>
 	<version>1.0</version>
-	<url>https://githubraw.com/terrytibbs2023/build/main/new191.zip</url>
+	<url>https://githubraw.com/terrytibbs2023/build/main/kodi21.zip</url>
 	<icon>https://githubraw.com/terrytibbs2004/builds/main/icon.png</icon>
 	<fanart>https://githubraw.com/terrytibbs2004/builds/main/fanart.jpg</fanart>
 	<description>Terry Tibbs Kodi 19+</description>
   </build>
     <build>
-	<name>full Kodi 20</name>
+	<name>Setup Kodi 20</name>
 	<version>1.0</version>
 	<url>https://githubraw.com/terrytibbs2023/build/main/full.zip</url>
 	<icon>https://githubraw.com/terrytibbs2004/builds/main/icon.png</icon>
