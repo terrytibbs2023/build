@@ -1,0 +1,7 @@
+{
+    "items": [
+        "inputstream.rtmp",
+        "inputstream.ffmpegdirect",
+        "inputstream.adaptive"
+    ]
+}

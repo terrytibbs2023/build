@@ -1,0 +1,18 @@
+Version 5.1.133 (May 6, 2024)
+- Code Base Changes:
+    - None
+
+- Resolvers Added:
+    - None
+
+- Resolvers Fixed/Updated:
+    - filelions
+    - streamwish
+    - veev
+    - voe
+
+- Resolvers Removed
+    - None
+
+- Languages Added/Updated
+    - None

@@ -1,0 +1,8 @@
+- [COLORteal]Some minor fixes done and some fine tuning[/COLOR]
+- [COLORteal]Fater Loading Times Added[/COLOR]
+- [COLORteal]Art Updated[/COLOR]
+- [COLORteal]Trakt Lists Added[/COLOR]
+- [COLOR teal]Newest Features[/COLOR]
+- [COLORteal]Debrid Service Must Be Authorised Inside Addon For It To Work[/COLOR]
+- [COLORteal]Dead Scrapers Removed[/COLOR]
+- [COLORteal]Credits to tiki Venom And kodifitzwell[/COLOR]

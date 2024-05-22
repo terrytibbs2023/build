@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+<!-- General-0 -->
+    <category label="General">
+        <setting id="package.folder" label="Choose Module Scraper" type="action" option="close" action="RunPlugin(plugin://script.module.homelanderscrapers/?action=ScraperChoice)" default="homelanderscrapers" />
+        <setting type="sep" />
+        <setting label="Enable All Providers (for current Module Scraper)" type="action" action="RunPlugin(plugin://script.module.homelanderscrapers/?action=ToggleProviderAll&amp;setting=true&amp;query=0.2)" option="close"/>
+        <setting type="sep" />
+        <setting label="Disable All Providers" type="action" action="RunPlugin(plugin://script.module.homelanderscrapers/?action=toggleAll&amp;setting=false&amp;query=0.4)" option="close"/>
+        <setting label="Enable All Providers" type="action" action="RunPlugin(plugin://script.module.homelanderscrapers/?action=toggleAll&amp;setting=true&amp;query=0.5)" option="close"/>
+        <setting label="Disable All Hosters" type="action" action="RunPlugin(plugin://script.module.homelanderscrapers/?action=toggleAllHosters&amp;setting=false&amp;query=0.6)" option="close" />
+        <setting label="Enable All Hosters" type="action" action="RunPlugin(plugin://script.module.homelanderscrapers/?action=toggleAllHosters&amp;setting=true&amp;query=0.7)" option="close" />
+        <setting label="Disable All Torrent Providers" type="action" option="close" action="RunPlugin(plugin://script.module.homelanderscrapers/?action=toggleAllTorrent&amp;setting=false&amp;query=0.10)"/>
+        <setting label="Enable All Torrent Providers" type="action" option="close" action="RunPlugin(plugin://script.module.homelanderscrapers/?action=toggleAllTorrent&amp;setting=true&amp;query=0.11)"/>
+        <setting id="write.settings" type="text" label="write settings" default="" visible="false" enable="false" />
+    </category>
+
+<!-- Providers/Debrid-1 -->
+    <category label="Premium Hosters">
+        <setting id="provider.furk" type="bool" label="FURK" default="false" />
+		<setting id="provider.scenerls" type="bool" label="SCENERLS    [COLOR yellow][I]https://scene-rls.com[/I][/COLOR]" default="true" />
+        <setting id="url.scenerls" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+    </category>
+
+<!-- Torrents-3 -->
+    <category label="Torrent">
+        <setting id="provider.1337x" type="bool" label="1337X    [COLOR cyan][I]https://1337xxx.to[/I][/COLOR]" default="true" />
+        <setting id="url.1337x" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+        <setting id="provider.bitlord" type="bool" label="BITLORD    [COLOR cyan][I]http://www.bitlordsearch.com[/I][/COLOR]" default="true" />
+        <setting id="url.bitlord" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+        <setting id="provider.glodls" type="bool" label="GLODLS    [COLOR cyan][I]https://glodls.to[/I][/COLOR]" default="true" />
+        <setting id="url.glodls" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+        <setting id="provider.kickass2" type="bool" label="KICKASS2    [COLOR cyan][I]multi[/I][/COLOR]" default="true" />
+        <setting id="url.kickass2" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+        <setting id="provider.limetorrents" type="bool" label="LIMETORRENTS    [COLOR cyan][I]https://www.limetorrents.lol[/I][/COLOR]" default="true" />
+        <setting id="url.limetorrents" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+        <setting id="provider.magnetdl" type="bool" label="MAGNETDL    [COLOR cyan][I]https://www.magnetdl.com[/I][/COLOR]" default="true" />
+        <setting id="url.magnetdl" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+        <setting id="provider.nyaa" type="bool" label="NYAA    [COLOR cyan][I]https://nyaa.si[/I][/COLOR]" default="false" />
+        <setting id="url.nyaa" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+        <setting id="provider.piratebay" type="bool" label="PIRATEBAY    [COLOR cyan][I]multi[/I][/COLOR]" default="true" />
+        <setting id="url.piratebay" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+		<setting id="provider.tordl" type="bool" label="TORDL    [COLOR cyan][I]https://www.torrentdownload.info[/I][/COLOR]" default="true" />
+        <setting id="url.tordl" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+        <setting id="provider.torrentdownloads" type="bool" label="TORRENTDOWNLOADS    [COLOR cyan][I]https://www.torrentdownloads.pro[/I][/COLOR]" default="true" />
+        <setting id="url.torrentdownloads" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+        <setting id="provider.yourbt" type="bool" label="YOURBT    [COLOR cyan][I]https://yourbittorrent.com[/I][/COLOR]" default="true" />
+        <setting id="url.yourbt" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+        <setting id="provider.yts" type="bool" label="YTS    [COLOR cyan][I]multi[/I][/COLOR]" default="true" />
+        <setting id="url.yts" type="text" label="Custom Domain:" default="" visible="eq(-1,true)" subsetting="true" />
+    </category>
+
+<!-- Accounts-4 -->
+    <category label="Scraper Accounts">
+        <setting type="lsep" label="Easynews" />
+        <setting id="provider.easynews" type="bool" label="EASYNEWS" default="false" />
+        <setting id="easynews.user" type="text" subsetting="true" label="Username" default="" visible="eq(-1,true)" />
+        <setting id="easynews.pass" type="text" subsetting="true" label="Password" default="" visible="eq(-2,true)" />
+        <setting id="easynews.title.chk" type="bool" subsetting="true" label="Title filter" default="true" visible="eq(-3,true)" />
+        <setting type="lsep" label="Orion" />
+        <setting id="provider.orionoid" type="bool" label="ORIONOID" default="false" />
+        <setting id="install.orion" subsetting="true" type="action" label="To use this you must install and configure an add-on: Orion.[CR]    Account required." option="close" action="InstallAddon(script.module.orion)" enable="!System.HasAddon(script.module.orion)" visible="eq(-1,true)"/>
+        <setting id="provider.orionoid.settings" subsetting="true" type="action" label="Open Orion module settings" option="close" action="RunPlugin(plugin://script.module.orion?action=dialogSettings)" enable="System.HasAddon(script.module.orion)" visible="eq(-2,true)" />
+        <setting id="orionoid.streamtype" subsetting="true" type="enum" label="Stream Type:" values="Hosters|Torrents|All" default="0" enable="System.HasAddon(script.module.orion)" visible="eq(-3,true)" />
+        <setting id="orion.extra.info" subsetting="true" type="bool" label="Extra stream info (popularity, age)" default="true" enable="System.HasAddon(script.module.orion)" visible="eq(-4,true)" />
+        <setting id="orion.info.filename" subsetting="true" type="bool" label="Extra stream info (filename)" default="false" enable="System.HasAddon(script.module.orion)" visible="eq(-5,true)" />
+        <setting type="lsep" label="Filepursuit" />
+        <setting id="provider.filepursuit" type="bool" label="FILEPURSUIT" default="false" />
+        <setting id="filepursuit.text" type="text" subsetting="true" label="Get your free key from: rapidapi.com/azharxes/api/filepursuit" enable="false" visible="eq(-1,true)" />
+        <setting id="filepursuit.api" type="text" subsetting="true" label="Filepursuit API key" default="" visible="eq(-2,true)" />
+        <setting type="lsep" label="Ororo.tv" />
+        <setting id="provider.ororo" type="bool" label="ORORO" default="false" />
+        <setting id="ororo.user" type="text" subsetting="true" label="E-mail" default="" visible="eq(-1,true)" />
+        <setting id="ororo.pass" type="text" subsetting="true" label="Password" default="" visible="eq(-2,true)" />
+    </category>
+
+<!--    <category label="Debug">\-->
+<!--        <setting id="addon_debug" type="bool" label="Enable Debug" default="false" />-->
+<!--    </category>-->
+</settings>
