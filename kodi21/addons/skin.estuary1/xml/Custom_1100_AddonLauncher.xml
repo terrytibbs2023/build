@@ -181,7 +181,7 @@
 							<onclick>RunPlugin(plugin://repository.bugatsinho)</onclick>
 							
 							<onclick>RunPlugin(plugin://repository.loop)</onclick>
-							<onclick>RunPlugin(plugin.video.daddylive)</onclick>
+							<onclick>RunPlugin(plugin://plugin.video.daddylive)</onclick>
 							<onclick>RunPlugin(plugin://plugin.video.the-loop)</onclick>
 <onclick>RunPlugin(plugin://plugin.video.sporthdme)</onclick>
 <onclick>RunPlugin(plugin://plugin.video.Rising.Tides)</onclick>

@@ -909,6 +909,17 @@
 							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
 						
 </item>
+<item>
+
+<label>Next Episodes</label>
+							
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.coalition/?iconImage=next_episodes.png&amp;mode=build_next_episode&amp;name=32483",return)</onclick>
+							<property name="menu_id">$NUMBER[14000]</property>
+						
+							<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						
+</item>
 
 
 
