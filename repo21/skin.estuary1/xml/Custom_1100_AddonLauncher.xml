@@ -178,15 +178,15 @@
 						
 						<item id="5">
 							<label>Install Sport Addons</label>
+							<onclick>RunPlugin(plugin://repository.bugatsinho)</onclick>
+							
 							<onclick>RunPlugin(plugin://repository.loop)</onclick>
 							<onclick>RunPlugin(plugin.video.daddylive)</onclick>
-							
-							
 							<onclick>RunPlugin(plugin://plugin.video.the-loop)</onclick>
 <onclick>RunPlugin(plugin://plugin.video.sporthdme)</onclick>
 <onclick>RunPlugin(plugin://plugin.video.Rising.Tides)</onclick>
-							repository.bugatsinho
-							<onclick>RunPlugin(plugin://repository.bugatsinho)</onclick>
+						
+							
 							<thumb>icons/sidemenu/download.png</thumb>
 							<property name="id">video</property>
 							<property name="path">addons://sources/video/</property>
