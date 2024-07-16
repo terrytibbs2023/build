@@ -90,7 +90,7 @@
     <setting id="subtitles.auto_enable">true</setting>
     <setting id="scrapers.timeout.1">10</setting>
     <setting id="results.xml_style" default="true">List Default</setting>
-    <setting id="search.enable.yearcheck">true</setting>
+    <setting id="search.enable.yearcheck">false</setting>
     <setting id="search.finish.early">true</setting>
     <setting id="results.sort_order_display" default="true">$ADDON[plugin.video.coalition 32582]</setting>
     <setting id="results.size_filter" default="true">0</setting>
