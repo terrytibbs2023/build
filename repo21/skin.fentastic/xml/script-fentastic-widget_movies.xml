@@ -13,7 +13,7 @@
             <param name="widget_target" value="videos"/>
             <param name="list_id" value="19012"/>
         </include>
-        <include content="WidgetListPoster">
+        <include content="WidgetListBigEpisodes">
             <param name="content_path" value="plugin://plugin.video.coalition/?mode=build_movie_list&amp;action=trakt_collection&amp;iconImage=%2Fhome%2Fecr%2F.var%2Fapp%2Ftv.kodi.Kodi%2Fdata%2Faddons%2Fplugin.video.coalition%2Fresources%2Fmedia%2Ftrakt.png"/>
             <param name="widget_header" value="My Movies"/>
             <param name="widget_target" value="videos"/>
