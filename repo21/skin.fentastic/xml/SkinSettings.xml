@@ -220,14 +220,7 @@
 				<pagecontrol>60</pagecontrol>
 				<ondown>637</ondown>
 				<visible>Container(9000).HasFocus(2)</visible>
-				<!-- POWER BUTTON BEHAVIOR -->
-				<control type="button" id="63701">
-					<label>Default power button behavior</label>
-					<label2>$VAR[OneClickCloseVar]</label2>
-					<include>DefaultSettingButton</include>
-					<onclick>Skin.ToggleSetting(OneClickClose)</onclick>
-					<selected>Skin.HasSetting(OneClickClose)</selected>
-				</control>
+			
 				<!-- ALTERNATE INFOPANEL -->
 				<control type="radiobutton" id="63702">
 					<label>Enable alternate InfoPanel</label>
@@ -235,13 +228,7 @@
 					<selected>Skin.HasSetting(Enable.AlternateInfo)</selected>
 					<onclick>Skin.ToggleSetting(Enable.AlternateInfo)</onclick>
 				</control>
-				<!-- RAINDROP BACKGROUND -->
-				<control type="radiobutton" id="63703">
-					<label>Show raindrop background</label>
-					<include>DefaultSettingButton</include>
-					<onclick>Skin.ToggleSetting(HideRainDrops)</onclick>
-					<selected>Skin.HasSetting(HideRainDrops)</selected>
-				</control>
+				
 				<!-- STACKED WIDGET DELAY -->
 				<control type="button" id="63704">
 					<label>Set stacked widget load delay in milliseconds (1000ms = 1 second)</label>

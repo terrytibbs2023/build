@@ -45,14 +45,14 @@
 						<icon>icons/settings/filemanager.png</icon>
 					</item>
 					<item>
-						<label>$LOCALIZE[24001]</label>
+						<label>Addon Tool</label>
 						<onclick>ActivateWindow(addonbrowser)</onclick>
 						<icon>icons/settings/addons.png</icon>
 					</item>
 					<item>
-						<label>$LOCALIZE[138]</label>
-						<onclick>ActivateWindow(systeminfo)</onclick>
-						<icon>icons/settings/sysinfo.png</icon>
+						<label>Kodi Addons</label>
+						<onclick>ActivateWindow(1100)</onclick>
+						<icon>icons/settings/addons.png</icon>
 					</item>
 					<item>
 						<label>Real-Debrid Info</label>
