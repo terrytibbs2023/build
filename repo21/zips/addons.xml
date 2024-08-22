@@ -410,7 +410,7 @@
 			<screenshot>resources/screenshot-08.jpg</screenshot>
 		</assets>
 	</extension>
-</addon><addon id="skin.fentastic" version="11.1.31" name="FENtastic" provider-name="Terry Tibbs">
+</addon><addon id="skin.fentastic" version="11.1.32" name="FENtastic" provider-name="Terry Tibbs">
 	<requires>
 		<import addon="xbmc.gui" version="5.17.0" />
 		<import addon="script.fentastic.helper" />

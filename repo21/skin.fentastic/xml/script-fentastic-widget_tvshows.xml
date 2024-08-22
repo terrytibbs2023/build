@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <includes>
     <include name="TVShowWidgets">
-        <include content="WidgetListCategory">
+        <include content="WidgetListCategoryStacked">
             <param name="content_path" value="plugin://plugin.video.coalition/?name=32470&amp;iconImage=genres.png&amp;mode=navigator.genres&amp;menu_type=tvshow"/>
             <param name="widget_header" value="TV Categories"/>
             <param name="widget_target" value="videos"/>
             <param name="list_id" value="22011"/>
+        </include>
+        <include content="WidgetListBigEpisodesStacked">
+            <param name="content_path" value="$INFO[Window(Home).Property(fentastic.22011.path)]"/>
+            <param name="widget_header" value="$INFO[Window(Home).Property(fentastic.22011.label)]"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="220111"/>
         </include>
         <include content="WidgetListBigEpisodes">
             <param name="content_path" value="plugin://plugin.video.coalition/?mode=trakt.list.build_trakt_list&amp;user=garycrawfordgc&amp;slug=latest-tv-shows&amp;list_type=user_lists"/>
