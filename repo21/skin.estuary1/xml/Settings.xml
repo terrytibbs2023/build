@@ -55,10 +55,10 @@
 						<icon>icons/settings/sysinfo.png</icon>
 					</item>
 					<item>
-						<label>Real-Debrid Info</label>
+						<label>All-Debrid Info</label>
 
 
-<onclick>PlayMedia(&quot;plugin://plugin.video.coalition/?mode=real_debrid.rd_account_info&amp;isFolder=false&quot;)</onclick>
+<onclick>PlayMedia(&quot;plugin://plugin.video.coalition/?mode=alldebrid.ad_account_info&amp;isFolder=false&quot;)</onclick>
 
 
 
@@ -112,12 +112,15 @@
 						<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
-						<label>Real-Debrid</label>
+						<label>All-Debrid</label>
 						
 					
 						
 						
-						<onclick>RunPlugin(plugin://plugin.video.coalition/?mode=real_debrid.rd_auth)</onclick>
+						<onclick>RunPlugin(plugin://plugin.video.coalition/?mode=alldebrid.ad_auth)</onclick>
+
+action="RunPlugin
+
 						<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
