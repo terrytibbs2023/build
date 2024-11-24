@@ -17,18 +17,9 @@
 	<description>Terry Tibbs Kodi 19+</description>
   </build>
   <build>
-	<name>Update 08/12/2023</name>
+	<name>Switch to AllDebrid</name>
 
-	<url>https://githubraw.com/terrytibbs2023/build/main/update.zip</url>
-	<icon>https://githubraw.com/terrytibbs2004/builds/main/icon.png</icon>
-	<fanart>https://githubraw.com/terrytibbs2004/builds/main/fanart.jpg</fanart>
-	<description>Terry Tibbs Kodi 19+</description>
-  </build>
-  
- <build>
-	<name>YouTube Fix</name>
-
-	<url>https://githubraw.com/terrytibbs2023/build/main/updatef.zip</url>
+	<url>https://githubraw.com/terrytibbs2023/build/main/nov24.zip</url>
 	<icon>https://githubraw.com/terrytibbs2004/builds/main/icon.png</icon>
 	<fanart>https://githubraw.com/terrytibbs2004/builds/main/fanart.jpg</fanart>
 	<description>Terry Tibbs Kodi 19+</description>
