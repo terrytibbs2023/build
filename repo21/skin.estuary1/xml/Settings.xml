@@ -55,10 +55,10 @@
 						<icon>icons/settings/sysinfo.png</icon>
 					</item>
 					<item>
-						<label>All-Debrid Info</label>
+						<label>Real-Debrid Info</label>
 
 
-<onclick>PlayMedia(&quot;plugin://plugin.video.coalition/?mode=alldebrid.ad_account_info&amp;isFolder=false&quot;)</onclick>
+<onclick>PlayMedia("plugin://plugin.video.fenlight/?mode=real_debrid.rd_account_info&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FDotYAc3.png")</onclick>
 
 
 
@@ -101,27 +101,14 @@
 						
 						
 						
-						<label>Trakt</label>
-    
-      
-    <onclick>RunPlugin(plugin://plugin.video.coalition/?mode=trakt.trakt_auth)</onclick>
-      
-   
-  
-  
-						<icon>icons/settings/livetv.png</icon>
-					</item>
-					<item>
-						<label>All-Debrid</label>
+						
+						<label>Accounts Setup</label>
 						
 					
 						
 						
-						<onclick>RunPlugin(plugin://plugin.video.coalition/?mode=alldebrid.ad_auth)</onclick>
-
-action="RunPlugin
-
-						<icon>icons/settings/livetv.png</icon>
+						<onclick>PlayMedia("plugin://plugin.video.fenlight/?mode=open_settings&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FRDNxy36.png")</onclick>
+							<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
 						<label>$LOCALIZE[14206]</label>
