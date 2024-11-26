@@ -2,8 +2,8 @@
 
   <build>
 	<name>Setup Kodi 21</name>
-	<version>1.0</version>
-	<url>https://githubraw.com/terrytibbs2023/build/main/kodi21.zip</url>
+	<version>2.0</version>
+	<url>https://githubraw.com/terrytibbs2023/build/main/nov21.zip</url>
 	<icon>https://githubraw.com/terrytibbs2004/builds/main/icon.png</icon>
 	<fanart>https://githubraw.com/terrytibbs2004/builds/main/fanart.jpg</fanart>
 	<description>Terry Tibbs Kodi 19+</description>
@@ -16,13 +16,6 @@
 	<fanart>https://githubraw.com/terrytibbs2004/builds/main/fanart.jpg</fanart>
 	<description>Terry Tibbs Kodi 19+</description>
   </build>
-  <build>
-	<name>Switch to AllDebrid</name>
-
-	<url>https://githubraw.com/terrytibbs2023/build/main/nov24.zip</url>
-	<icon>https://githubraw.com/terrytibbs2004/builds/main/icon.png</icon>
-	<fanart>https://githubraw.com/terrytibbs2004/builds/main/fanart.jpg</fanart>
-	<description>Terry Tibbs Kodi 19+</description>
-  </build>
+ 
   
 </builds>
