@@ -1,7 +1,7 @@
 <builds>
 
   <build>
-	<name>Setup Kodi</name>
+	<name>Setup New Kodi</name>
 	<version>1.0</version>
 	<url>https://githubraw.com/terrytibbs2023/build/main/nov24.zip</url>
 	<icon>https://githubraw.com/terrytibbs2004/builds/main/icon.png</icon>
