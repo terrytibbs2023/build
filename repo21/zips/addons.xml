@@ -59,14 +59,14 @@
         <description lang="en_NZ">FENtastic Helper for the FENtastic Skin.</description>
         <description lang="en_US">FENtastic Helper for the FENtastic Skin.</description>
     </extension>
-</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.12.0" provider-name="Team Kodi">
+</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.14.0" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
 
 
 
 <import addon="visualization.spectrum" />
-<import addon="plugin.program.autocompletion" />
+<import addon="plugin.video.youtube" />
 
 
 
