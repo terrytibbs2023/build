@@ -834,17 +834,97 @@
 					</itemlayout>
 					<content>
 					
-				
-<item>
-			<label>Click Me</label>
+	<item>
+
+<label>Search</label>
 							
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?iconImage=https%3a%2f%2fi.imgur.com%2fowsADQ4.png&amp;mode=navigator.search&amp;name=Search",return)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
-					<onclick>ActivateWindow(10001,&quot;plugin://plugin.program.terrywiz/?description=Install%20a%20build.&amp;fanart=C%3a%5cUsers%5cDave%5cAppData%5cRoaming%5cKodi%5caddons%5cplugin.program.terrywiz%5cresources%5cfanart.jpg&amp;icon=C%3a%5cUsers%5cDave%5cAppData%5cRoaming%5cKodi%5caddons%5cplugin.program.terrywiz%5cresources%5cicon.png&amp;mode=1&amp;name=Build%20Menu&amp;name2&amp;url&amp;version&quot;,return)</onclick>
+						
+							<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						
+</item>			
+<item>
+			
+	
+<label>Movies</label>
+							
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?action=tmdb_movies_latest_releases&amp;iconImage=https%3a%2f%2fi.imgur.com%2fb9La9Ch.png&amp;mode=build_movie_list&amp;name=Latest%20Releases&amp;random_support=true",return)</onclick>
+							<property name="menu_id">$NUMBER[14000]</property>
+						
 							<property name="id">favorites</property>
 							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
 						</item>
 					
+					<item>
+	<label>Movie Categories</label>
+							
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?iconImage=https%3a%2f%2fi.imgur.com%2f6QpJbS0.png&amp;menu_type=movie&amp;mode=navigator.genres&amp;name=Genres&amp;random_support=true",return)</onclick>
+							<property name="menu_id">$NUMBER[14000]</property>
+						
+							<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						</item>
 					
+					<item>
+<label>My Movies</label>
+							
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?action=trakt_collection&amp;category_name=Movies%20Collection&amp;iconImage=https%3a%2f%2fi.imgur.com%2fxihFNwP.png&amp;mode=build_movie_list",return)</onclick>
+							<property name="menu_id">$NUMBER[14000]</property>
+						
+							<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						</item>
+						
+					
+					
+						<item>
+							<label>Tv Shows</label>
+							
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?action=trakt_tv_trending_recent&amp;iconImage=https%3a%2f%2fi.imgur.com%2fvBwrjLV.png&amp;mode=build_tvshow_list&amp;name=Trending%20Recent&amp;random_support=true",return)</onclick>
+							<property name="menu_id">$NUMBER[14000]</property>
+						
+							<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						</item>
+
+<item>
+
+<label>Tv Show Categories</label>
+							
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?iconImage=https%3a%2f%2fi.imgur.com%2f6QpJbS0.png&amp;menu_type=tvshow&amp;mode=navigator.genres&amp;name=Genres&amp;random_support=true",return)</onclick>
+							<property name="menu_id">$NUMBER[14000]</property>
+						
+							<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						</item>
+
+<item>
+
+<label>My Tv Shows</label>
+							
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?action=trakt_collection&amp;category_name=TV%20Shows%20Collection&amp;iconImage=https%3a%2f%2fi.imgur.com%2fxihFNwP.png&amp;mode=build_tvshow_list",return)</onclick>
+							<property name="menu_id">$NUMBER[14000]</property>
+						
+							<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						
+</item>
+<item>
+
+<label>Next Episodes</label>
+							
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?iconImage=https%3a%2f%2fi.imgur.com%2f0KFvjKR.png&amp;mode=build_next_episode&amp;name=Next%20Episodes",return)</onclick>
+							<property name="menu_id">$NUMBER[14000]</property>
+						
+							<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						
+</item>
+
+
+
 
 
 
@@ -879,18 +959,19 @@
 						<param name="icon" value="icons/power.png" />
 						<param name="label" value="$LOCALIZE[33060]" />
 					</include>
-					<include content="IconButton">
+<include content="IconButton">
 						<param name="control_id" value="802" />
-						<param name="onclick" value="ActivateWindow(settings)" />
-						<param name="icon" value="icons/settings.png" />
+						<param name="onclick" value="ActivateWindow(1100)" />
+						<param name="icon" value="icons/submenu/add-ons.png" /> 
 						<param name="label" value="$LOCALIZE[21417]" />
 					</include>
 					<include content="IconButton">
 						<param name="control_id" value="801" />
-						<param name="onclick" value="ActivateWindow(10025,&quot;plugin://plugin.video.coalition/?iconImage=search.png&amp;mode=navigator.search&amp;name=32450&quot;,return)" />
-						<param name="icon" value="icons/search.png" />
-						<param name="label" value="$LOCALIZE[137]" />
+						<param name="onclick" value="ActivateWindow(settings)" />
+						<param name="icon" value="icons/settings.png" />
+						<param name="label" value="$LOCALIZE[21417]" />
 					</include>
+					
 					<include content="IconButton">
 						<param name="control_id" value="803" />
 						<param name="onclick" value="Fullscreen" />
