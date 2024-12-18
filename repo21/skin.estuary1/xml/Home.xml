@@ -850,7 +850,7 @@
 	
 <label>Movies</label>
 							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?action=tmdb_movies_latest_releases&amp;iconImage=https%3a%2f%2fi.imgur.com%2fb9La9Ch.png&amp;mode=build_movie_list&amp;name=Latest%20Releases&amp;random_support=true",return)</onclick>
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?list_name=Latest%20releases&amp;list_type=user_lists&amp;mode=trakt.list.build_trakt_list&amp;slug=latest-releases&amp;user=garycrawfordgc",return)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
 						
 							<property name="id">favorites</property>
@@ -882,7 +882,7 @@
 						<item>
 							<label>Tv Shows</label>
 							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?action=trakt_tv_trending_recent&amp;iconImage=https%3a%2f%2fi.imgur.com%2fvBwrjLV.png&amp;mode=build_tvshow_list&amp;name=Trending%20Recent&amp;random_support=true",return)</onclick>
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?list_name=Latest%20TV%20Shows&amp;list_type=user_lists&amp;mode=trakt.list.build_trakt_list&amp;slug=latest-tv-shows&amp;user=garycrawfordgc",return)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
 						
 							<property name="id">favorites</property>
