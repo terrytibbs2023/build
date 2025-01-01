@@ -29,7 +29,7 @@
 				<screenshot />
 		</assets>
 	</extension>
-</addon><addon id="repository.terrytibbsFree" name="Terrys Free repo" version="1.4" provider-name="Terry Tibbs">
+</addon><addon id="repository.terrytibbsFree" name="Terrys Free repo" version="1.6" provider-name="Terry Tibbs">
     <extension point="xbmc.addon.repository" name="Terrys 20 Repository">
         <dir>
             <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repofree/zips/addons.xml</info>
