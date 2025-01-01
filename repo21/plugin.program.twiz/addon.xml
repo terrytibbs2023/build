@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.program.twiz" name="Terry Tibbs Free Toolbox" version="0.0.26" provider-name="Magnetic, Slam, Sarge, Funsterbe, BYB">
+<addon id="plugin.program.twiz" name="Terry Tibbs Free Toolbox" version="0.0.28" provider-name="Magnetic, Terry">
 	<requires>
 		<import addon="xbmc.python" version="3.0.0"/>
 		<import addon="script.module.requests" optional="true" />
