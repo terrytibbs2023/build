@@ -580,7 +580,7 @@ fix for inability to scrape IMDB ratings
 				<screenshot />
 		</assets>
 	</extension>
-</addon><addon id="plugin.program.twiz" name="Terry Tibbs Toolbox" version="0.0.25" provider-name="Magnetic, Slam, Sarge, Funsterbe, BYB">
+</addon><addon id="plugin.program.twiz" name="Terry Tibbs Free Toolbox" version="0.0.26" provider-name="Magnetic, Slam, Sarge, Funsterbe, BYB">
 	<requires>
 		<import addon="xbmc.python" version="3.0.0" />
 		<import addon="script.module.requests" optional="true" />
