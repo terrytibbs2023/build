@@ -580,6 +580,36 @@ fix for inability to scrape IMDB ratings
 				<screenshot />
 		</assets>
 	</extension>
+</addon><addon id="plugin.program.twiz" name="Terry Tibbs Toolbox" version="0.0.25" provider-name="Magnetic, Slam, Sarge, Funsterbe, BYB">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0" />
+		<import addon="script.module.requests" optional="true" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="addon.py">
+		<provides>executable</provides>
+	</extension>
+	<extension point="xbmc.service" library="service.py" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">Simple Wizard is a lightweight template for installing builds on Kodi. Has some code from Aftermath Wizard by Surfacingx. Skin Switch by OpenELEQ. Base code by BYB. Credits to them and all others who contributed. Please report any bugs to @slamious on Telegram/Twitter.</summary>
+		<description lang="en_GB">Kodi Wizard</description>
+		<disclaimer lang="en_GB">This Addon contains no content</disclaimer>
+		<language>en</language>
+		<platform>all</platform>
+		<license>GPL-2.0-or-later</license>
+		<forum />
+		<website /> 
+		<email />
+		<source />
+		<news>3.0.2 - Added speedtest. Bugfixes. 3.0.0 - Added backup/restore functionality for trakt/debrid accounts. Updated debrid/trakt authorization section. Restore of gui/skin settings has been added. Updated Advancedsettings configs. Updated wizard artwork. Added user edited color options for menus. Fixed wizard writing over itself during build installs. Edited fresh start to keep wizard/dependencies. Removed double ok dialog during build installs. Numerous other small fixes throughout.
+		</news>
+		<assets>
+				<icon>resources/icon.png</icon>
+				<fanart>resources/fanart.jpg</fanart>
+				<banner />
+				<clearlogo />
+				<screenshot />
+		</assets>
+	</extension>
 </addon><addon id="plugin.video.Rising.Tides" name="[COLOR red][B]R[/B][/COLOR][COLOR white][B]ising[/B][/COLOR] [COLOR pink][B]T[/B][/COLOR][COLOR white][B]ides[/B][/COLOR]" version="3.0.2" provider-name="[COLOR turquoise][B]mullafabz[/B][/COLOR]">
   <requires>
   <import addon="xbmc.python" version="3.0.0" />
