@@ -844,20 +844,8 @@
 							<property name="id">favorites</property>
 							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
 						
-</item>			
-<item>
-			
-	
-<label>Movies</label>
-							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.free/get_list/https://mfirepo.github.io/hal/thx.xml",return)</onclick>
-					
-						<property name="menu_id">$NUMBER[14000]</property>
-					<property name="id">favorites</property>
-							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
-						
-						</item>
-						<item>
+		
+
 						
 
 						
