@@ -51,7 +51,7 @@
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="skin.estuaryf" version="1.0.1" name="Estuaryf" provider-name="Terry Tibs,phil65, Ichabod Fletchman">
+</addon><addon id="skin.estuaryf" version="1.0.2" name="Estuaryf" provider-name="Terry Tibs,phil65, Ichabod Fletchman">
 	<requires>
 		<import addon="xbmc.gui" version="5.17.0" />
 	

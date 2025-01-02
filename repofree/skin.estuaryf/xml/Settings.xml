@@ -55,14 +55,9 @@
 						<icon>icons/settings/sysinfo.png</icon>
 					</item>
 					<item>
-						<label>Real-Debrid Info</label>
-
-
-<onclick>PlayMedia("plugin://plugin.video.fenlight/?mode=real_debrid.rd_account_info&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FDotYAc3.png")</onclick>
-
-
-
-							<icon>icons/settings/system.png</icon>
+						<label>$LOCALIZE[31067]</label>
+						<onclick>ActivateWindow(eventlog)</onclick>
+						<icon>icons/settings/eventlog.png</icon>
 					</item>
 				</content>
 			</control>
@@ -81,55 +76,35 @@
 						<icon>icons/settings/player.png</icon>
 					</item>
 					<item>
-						
-						<label>Enable Adult</label>
-    
-      
-    <onclick condition="System.HasAddon(plugin.video.cumination)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
-    <onclick condition="!System.HasAddon(plugin.video.cumination)">RunPlugin(plugin://plugin.video.cumination)</onclick>
-      
-    
-    
-  <onclick condition="System.HasAddon(plugin.video.videodevil)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
-    <onclick condition="!System.HasAddon(plugin.video.videodevil)">RunPlugin(plugin://plugin.video.videodevil)</onclick>
-  
-  
+						<label>$LOCALIZE[14211]</label>
+						<onclick>ActivateWindow(MediaSettings)</onclick>
+						<icon>icons/settings/media.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[14204]</label>
+						<onclick>ActivateWindow(PVRSettings)</onclick>
 						<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
-						
-						
-						
-						
-						
-						<label>Accounts Setup</label>
-						
-					
-						
-						
-						<onclick>PlayMedia("plugin://plugin.video.fenlight/?mode=open_settings&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FRDNxy36.png")</onclick>
-							<icon>icons/settings/livetv.png</icon>
+						<label>$LOCALIZE[14036]</label>
+						<onclick>ActivateWindow(ServiceSettings)</onclick>
+						<icon>icons/settings/network.png</icon>
 					</item>
 					<item>
-					<label>Clear Cache</label>
-						
-					
-						
-						
-						<onclick>PlayMedia("plugin://plugin.video.fenlight/?mode=clear_cache&amp;cache=trakt&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FRDNxy36.png")</onclick>
-							<icon>icons/settings/livetv.png</icon>
+						<label>$LOCALIZE[15016]</label>
+						<visible>System.GetBool(gamesgeneral.enable)</visible>
+						<onclick>ActivateWindow(GameSettings)</onclick>
+						<icon>icons/settings/games.png</icon>
 					</item>
 					<item>
-						
-					
 						<label>$LOCALIZE[14206]</label>
 						<onclick>ActivateWindow(InterfaceSettings)</onclick>
 						<icon>icons/settings/interface.png</icon>
 					</item>
 					<item>
-						<label>$LOCALIZE[14211]</label>
-						<onclick>ActivateWindow(MediaSettings)</onclick>
-						<icon>icons/settings/media.png</icon>
+						<label>$LOCALIZE[13200]</label>
+						<onclick>ActivateWindow(Profiles)</onclick>
+						<icon>icons/settings/profiles.png</icon>
 					</item>
 					<item>
 						<label>$LOCALIZE[13000]</label>
