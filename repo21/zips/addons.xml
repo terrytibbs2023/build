@@ -2057,7 +2057,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
 <import addon="visualization.spectrum" />
 <import addon="plugin.video.youtube" />
 
-
+<import addon="pvr.iptvsimple" />
 
 
 

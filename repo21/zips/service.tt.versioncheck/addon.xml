@@ -8,7 +8,7 @@
 <import addon="visualization.spectrum" />
 <import addon="plugin.video.youtube" />
 
-
+<import addon="pvr.iptvsimple" />
 
 
 
