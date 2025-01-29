@@ -111,6 +111,17 @@
 							<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
+					<label>Clear Cache</label>
+						
+					
+						
+						
+						<onclick>PlayMedia("plugin://plugin.video.fenlight/?mode=clear_cache&amp;cache=trakt&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FRDNxy36.png")</onclick>
+							<icon>icons/settings/livetv.png</icon>
+					</item>
+					<item>
+						
+					
 						<label>$LOCALIZE[14206]</label>
 						<onclick>ActivateWindow(InterfaceSettings)</onclick>
 						<icon>icons/settings/interface.png</icon>
