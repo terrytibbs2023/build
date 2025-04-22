@@ -55,27 +55,7 @@
 						<icon>icons/settings/sysinfo.png</icon>
 					</item>
 					<item>
-						<label>Real-Debrid Info</label>
-
-
-<onclick>PlayMedia("plugin://plugin.video.fenlight/?mode=real_debrid.rd_account_info&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FDotYAc3.png")</onclick>
-
-
-
-							<icon>icons/settings/system.png</icon>
-					</item>
-				</content>
-			</control>
-			<control type="panel" id="9001">
-				<left>0</left>
-				<right>0</right>
-				<top>470</top>
-				<bottom>0</bottom>
-				<onup>Control.SetFocus(9000,$INFO[Container(9001).Position],absolute)</onup>
-				<ondown>noop</ondown>
-				<include>SettingsPanel</include>
-				<content>
-					<item>
+						
 						<label>$LOCALIZE[14200]</label>
 						<onclick>ActivateWindow(PlayerSettings)</onclick>
 						<icon>icons/settings/player.png</icon>
@@ -102,21 +82,21 @@
 						
 						
 						
-						<label>Accounts Setup</label>
+						<label>Trakt Setup</label>
 						
 					
 						
 						
-						<onclick>PlayMedia("plugin://plugin.video.fenlight/?mode=open_settings&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FRDNxy36.png")</onclick>
+						<onclick>PlayMedia("plugin://plugin.video.fen/?mode=auth_accounts_choice&amp;service=trakt&amp;active=False&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FWQO1410.png")</onclick>
 							<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
-					<label>Clear Cache</label>
+					<label>RealDebrid Setup</label>
 						
 					
 						
 						
-						<onclick>PlayMedia("plugin://plugin.video.fenlight/?mode=clear_cache&amp;cache=trakt&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FRDNxy36.png")</onclick>
+						<onclick>PlayMedia("plugin://plugin.video.fen/?mode=auth_accounts_choice&amp;service=realdebrid&amp;active=False&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FhlHDYca.png")</onclick>
 							<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>

@@ -838,7 +838,7 @@
 
 <label>Search</label>
 							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?iconImage=https%3a%2f%2fi.imgur.com%2fowsADQ4.png&amp;mode=navigator.search&amp;name=Search",return)</onclick>
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?iconImage=search&amp;mode=navigator.search&amp;name=32450",return)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
 						
 							<property name="id">favorites</property>
@@ -846,11 +846,20 @@
 						
 </item>			
 <item>
-			
+			<label>Live Tv</label>
+							
+							<onclick>ActivateWindow(10702,"pvr://channels/tv/All%20channels@-1/",return)</onclick>
+							<property name="menu_id">$NUMBER[14000]</property>
+						
+							<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						
+</item>			
+<item>
 	
 <label>Movies</label>
 							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?list_name=Latest%20releases&amp;list_type=user_lists&amp;mode=trakt.list.build_trakt_list&amp;slug=latest-releases&amp;user=garycrawfordgc",return)</onclick>
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?list_name=Latest%20Releases&amp;list_type=user_lists&amp;mode=trakt.list.build_trakt_list&amp;slug=latest-releases&amp;user=giladg",return)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
 						
 							<property name="id">favorites</property>
@@ -860,7 +869,7 @@
 					<item>
 	<label>Movie Categories</label>
 							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?iconImage=https%3a%2f%2fi.imgur.com%2f6QpJbS0.png&amp;menu_type=movie&amp;mode=navigator.genres&amp;name=Genres&amp;random_support=true",return)</onclick>
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?iconImage=genres&amp;menu_type=movie&amp;mode=navigator.genres&amp;name=32470",return)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
 						
 							<property name="id">favorites</property>
@@ -870,7 +879,7 @@
 					<item>
 <label>My Movies</label>
 							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?action=trakt_collection&amp;category_name=Movies%20Collection&amp;iconImage=https%3a%2f%2fi.imgur.com%2fxihFNwP.png&amp;mode=build_movie_list",return)</onclick>
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?action=trakt_collection&amp;category_name=Movies%20Collection&amp;iconImage=https%3a%2f%2fi.imgur.com%2fxihFNwP.png&amp;mode=build_movie_list",return)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
 						
 							<property name="id">favorites</property>
@@ -882,7 +891,7 @@
 						<item>
 							<label>Tv Shows</label>
 							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?list_name=Latest%20TV%20Shows&amp;list_type=user_lists&amp;mode=trakt.list.build_trakt_list&amp;slug=latest-tv-shows&amp;user=garycrawfordgc",return)</onclick>
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?list_name=Latest%20TV%20Shows&amp;list_type=user_lists&amp;mode=trakt.list.build_trakt_list&amp;slug=latest-tv-shows&amp;user=garycrawfordgc",return)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
 						
 							<property name="id">favorites</property>
@@ -891,20 +900,10 @@
 
 <item>
 
-<label>Tv Show Categories</label>
-							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?iconImage=https%3a%2f%2fi.imgur.com%2f6QpJbS0.png&amp;menu_type=tvshow&amp;mode=navigator.genres&amp;name=Genres&amp;random_support=true",return)</onclick>
-							<property name="menu_id">$NUMBER[14000]</property>
-						
-							<property name="id">favorites</property>
-							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
-						</item>
-
-<item>
 
 <label>My Tv Shows</label>
 							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?action=trakt_collection&amp;category_name=TV%20Shows%20Collection&amp;iconImage=https%3a%2f%2fi.imgur.com%2fxihFNwP.png&amp;mode=build_tvshow_list",return)</onclick>
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?action=trakt_collection&amp;category_name=TV%20Shows%20Collection&amp;iconImage=https%3a%2f%2fi.imgur.com%2fxihFNwP.png&amp;mode=build_tvshow_list",return)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
 						
 							<property name="id">favorites</property>
@@ -915,15 +914,14 @@
 
 <label>Next Episodes</label>
 							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?iconImage=https%3a%2f%2fi.imgur.com%2f0KFvjKR.png&amp;mode=build_next_episode&amp;name=Next%20Episodes",return)</onclick>
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?iconImage=next_episodes&amp;mode=build_next_episode&amp;name=32483",return)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
 						
 							<property name="id">favorites</property>
 							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
 						
-</item>
 
-
+						</item>
 
 
 
