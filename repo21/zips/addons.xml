@@ -2106,7 +2106,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
         <description lang="zh_CN">皮肤加载项，提供简单的用户快捷方式管理和列表（需要皮肤支持）</description>
         <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
     </extension>
-</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.18.0" provider-name="Team Kodi">
+</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.20.0" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
 
@@ -2119,7 +2119,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
 
 
 
-<import addon="repository.bingie" />
+
 
 
 

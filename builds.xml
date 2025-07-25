@@ -1,9 +1,9 @@
 <builds>
 
   <build>
-	<name>Setup New Kodi</name>
+	<name>Test</name>
 	<version>1.0</version>
-	<url>https://githubraw.com/terrytibbs2023/build/main/nov24.zip</url>
+	<url>https://githubraw.com/terrytibbs2023/build/main/test1.zip</url>
 	<icon>https://githubraw.com/terrytibbs2004/builds/main/icon.png</icon>
 	<fanart>https://githubraw.com/terrytibbs2004/builds/main/fanart.jpg</fanart>
 	<description>Terry Tibbs Kodi 19+</description>
