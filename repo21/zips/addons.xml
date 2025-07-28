@@ -3122,7 +3122,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <disclaimer lang="ru_RU">Игры, управление мышью и сенсорным экраном не поддерживаются. Устанавливая данную обложку Вы даёте согласие, что не будете её использовать для каких-либо коммерческих целей без моего согласия. Я не связан ни с какой-либо доступной сборкой Kodi, и я никогда не добавлю какой-либо поддержки запрещённым или незаконным дополнениям от третьих лиц.</disclaimer>
     <disclaimer lang="zh_CN">不支持使用鼠标、游戏和触摸屏。安装此皮肤表示您同意，未经我事先同意，您不得以任何方式将其用于商业目的。我与任何可用的 Kodi 发行版都没有关联，我不会对列入黑名单、被禁止或非法的第三方插件提供任何支持。</disclaimer>
   </extension>
-</addon><addon id="skin.bingie" version="11.0.9" name="Bingie" provider-name="matke">
+</addon><addon id="skin.bingie" version="11.0.10" name="Bingie" provider-name="matke">
 	<requires>
 		<import version="5.17.0" addon="xbmc.gui" />
 		<import addon="script.bingie.helper" version="1.1.2" />

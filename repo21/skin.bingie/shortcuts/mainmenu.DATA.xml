@@ -19,14 +19,7 @@
 		<action>ActivateWindow(home,return)</action>
 	</shortcut>
 
-	<!-- New/Popular Hub -->
-	<shortcut>
-		<label>31625</label>
-		<label2>31625</label2>
-		<icon>shortcuts/new.png</icon>
-		<thumb />
-		<action>ActivateWindow(1112,return)</action>
-	</shortcut>
+	
 	
 	<!-- TV hub -->
 	<shortcut>
@@ -35,7 +28,7 @@
 		<defaultID>shows</defaultID>
 		<icon>shortcuts/tv.png</icon>
         <thumb />
-		<action>ActivateWindow(1110,return)</action>
+		<action>ActivateWindow(10025,"plugin://plugin.video.fen/?action=trakt_tv_most_watched&amp;iconImage=most_watched&amp;mode=build_tvshow_list&amp;name=32043",return)</action>
 	</shortcut>
 
 	<!-- Movies hub -->
@@ -48,22 +41,6 @@
 		<action>ActivateWindow(1111,return)</action>
 	</shortcut>
 	
-	<!-- Category hub -->
-	<shortcut>
-		<label>31025</label>
-		<label2>31025</label2>
-		<icon>shortcuts/categories.png</icon>
-        <thumb />
-		<action>ActivateWindow(1119,return)</action>
-	</shortcut>
 
-	<!-- My List Hub -->
-    <shortcut>
-        <label>31534</label>
-        <label2>31534</label2>
-        <icon>shortcuts/mylist.png</icon>
-        <thumb />
-        <action>ActivateWindow(1114,return)</action>
-    </shortcut>
 
 </shortcuts>
