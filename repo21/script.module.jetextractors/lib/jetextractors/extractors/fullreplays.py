@@ -53,12 +53,16 @@ class FullReplays(JetExtractor):
         links = []
         response = self.session.get(url.address).text
         soup = bs(response, 'html.parser')
-        sources = soup.find_all(class_='frc-sources-wrap')
-        for source in sources:
-            host = source.find(class_='frc-vid-label').text.lower()
-            for button in source.find_all(class_='vlog-button'):
-                title = f'{button.text.strip()} - {host.capitalize()}'
-                link = button.get('data-sc')
+        for source in soup.find_all(class_='frc-vid-sources-list'):
+            buttons = source.find_all(class_='vlog-button')
+            for button in buttons:
+                if button.get('data-sc') is not None:
+                    link = button['data-sc']
+                else:
+                    print(button.text)
+                    link = button['href']
+                host = urlparse(link).netloc
+                title = f'{button.text.strip()} - {host}'
                 links.append(JetLink(link, name=title, resolveurl=True))
         return links
         

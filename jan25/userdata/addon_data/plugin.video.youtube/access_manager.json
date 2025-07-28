@@ -1,0 +1,19 @@
+{
+    "access_manager": {
+        "current_user": 0,
+        "developers": {},
+        "last_origin": "plugin.video.youtube",
+        "users": {
+            "0": {
+                "access_token": "ya29.a0AZYkNZiLpzuq4Jk8JoeOje1cm0sOP1stV5ap9U0d3WP65hgbEgYF8lmn1O3wL4AvGrju0aY2eKB0nfBkpI34gs8lMomZGZqDriXYu0w1gRC8fdpfY8APju35Fxx4vJpPsruOQh5pOD5smMvSZh_ZCZgJ4nqy7DBCWSfx8vhWnA9iVZ86j08DaCgYKAfESARMSFQHGX2MiRhbo8l2yjMQxi3Z-SJwYwA0187|ya29.a0AZYkNZjsomW3dm_Fi39iN-isrjII2yde0Vpfm0p85ntYFrUXcRW611eDyOEuP5rj7zhp4A_NBlk9PUZuQLbSMRtqcay104BLKKKpW88IcEMiQQ5xrZtpnK2WDmuGnTYM3lWhTmXUhHNDMlEC9rBYtz2ZpSscWrKk_9VbekoJQwaCgYKAckSARMSFQHGX2MijlWuAc7EVtvXmRXcn-SKuw0177",
+                "id": "df750c19676842909c6de8806a266e50",
+                "last_key_hash": "47ed6f78edcfe3d718d32b91c3096fec",
+                "name": "Default",
+                "refresh_token": "1//03sjDiRq1ze3YCgYIARAAGAMSNwF-L9Ir5foQVE-tFWbrE0JzhDfFttkkzLPI5EY2bCoQFaEfjU6qQOtH9tLLuhbyuIy-6EzlVDY|1//03hzWwft1Lc-rCgYIARAAGAMSNwF-L9IrV69PXPVtUE5s9yReoFHXtioByCkaykiL9sRBvwfyI1yBSqiGgNmJKWazSheJzAMv4IU",
+                "token_expires": 1745330466.8161428,
+                "watch_history": "HL",
+                "watch_later": "WL"
+            }
+        }
+    }
+}

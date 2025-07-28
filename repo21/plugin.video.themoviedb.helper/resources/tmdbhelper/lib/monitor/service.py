@@ -6,7 +6,8 @@ from tmdbhelper.lib.monitor.player import PlayerMonitor
 from tmdbhelper.lib.monitor.update import UpdateMonitor
 from tmdbhelper.lib.monitor.imgmon import ImagesMonitor
 from tmdbhelper.lib.monitor.poller import Poller, POLL_MIN_INCREMENT, POLL_MID_INCREMENT
-from threading import Thread, Lock
+from tmdbhelper.lib.addon.thread import SafeThread
+from threading import Lock
 
 
 class ServiceMonitor(Poller):
@@ -44,7 +45,8 @@ class ServiceMonitor(Poller):
 
     def _on_player(self):
         if self.player_monitor.isPlayingVideo():
-            self.player_monitor.current_time = self.player_monitor.getTime()
+            self.player_monitor.update_time()
+            self.player_monitor.update_artwork()
 
     def _on_context(self):
         self.listitem_funcs.on_context_listitem()
@@ -61,17 +63,14 @@ class ServiceMonitor(Poller):
 
     def _on_exit(self):
         self.cron_job.exit = True
+        self.images_monitor.exit = True
         if not self.update_monitor.abortRequested():
             get_property('ServiceStarted', clear_property=True)
             get_property('ServiceStop', clear_property=True)
-        del self.images_monitor
-        del self.player_monitor
-        del self.update_monitor
-        del self.listitem_funcs
 
 
 def restart_service_monitor():
     if get_property('ServiceStarted') == 'True':
         wait_for_property('ServiceStop', value='True', set_property=True)  # Stop service
     wait_for_property('ServiceStop', value=None)  # Wait until Service clears property
-    Thread(target=ServiceMonitor().run).start()
+    SafeThread(target=ServiceMonitor().run).start()

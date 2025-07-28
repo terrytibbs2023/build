@@ -28,10 +28,12 @@ class FileMoonResolver(ResolveUrl):
     name = 'FileMoon'
     domains = ['filemoon.sx', 'filemoon.to', 'filemoon.in', 'filemoon.link', 'filemoon.nl',
                'filemoon.wf', 'cinegrab.com', 'filemoon.eu', 'filemoon.art', 'moonmov.pro',
-               'kerapoxy.cc', 'furher.in', '1azayf9w.xyz', '81u6xl9d.xyz', 'smdfs40r.skin']
+               'kerapoxy.cc', 'furher.in', '1azayf9w.xyz', '81u6xl9d.xyz', 'smdfs40r.skin',
+               'bf0skv.org', 'z1ekv717.fun', 'l1afav.net', '222i8x.lol', '8mhlloqo.fun', '96ar.com',
+               'xcoic.com', 'f51rm.com', 'c1z39.com']
     pattern = r'(?://|\.)((?:filemoon|cinegrab|moonmov|kerapoxy|furher|1azayf9w|81u6xl9d|' \
-              r'smdfs40r)' \
-              r'\.(?:sx|to|s?k?in|link|nl|wf|com|eu|art|pro|cc|xyz))' \
+              r'smdfs40r|bf0skv|z1ekv717|l1afav|222i8x|8mhlloqo|96ar|xcoic|f51rm|c1z39)' \
+              r'\.(?:sx|to|s?k?in|link|nl|wf|com|eu|art|pro|cc|xyz|org|fun|net|lol))' \
               r'/(?:e|d|download)/([0-9a-zA-Z$:/._-]+)'
 
     def get_media_url(self, host, media_id):
@@ -80,11 +82,13 @@ class FileMoonResolver(ResolveUrl):
             surl = helpers.tear_decode(edata.get('file'), edata.get('seed'))
             if surl:
                 headers.pop('X-Requested-With')
+                headers.pop('Cookie')
                 headers["verifypeer"] = "false"
                 return surl + helpers.append_headers(headers)
         else:
             r = re.search(r'sources:\s*\[{\s*file:\s*"([^"]+)', html, re.DOTALL)
             if r:
+                headers.pop('Cookie')
                 headers.update({
                     'Referer': web_url,
                     'Origin': urllib_parse.urljoin(web_url, '/')[:-1],

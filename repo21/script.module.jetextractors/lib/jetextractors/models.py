@@ -392,6 +392,19 @@ class JetItem:
         self.extractor = extractor
         self.params = params
 
+    @staticmethod
+    def from_dict(d: dict) -> "JetItem":
+        return JetItem(
+            title=d["title"],
+            links=[JetLink.from_dict(link) for link in d["links"]],
+            starttime=datetime.fromtimestamp(d["starttime"]) if "starttime" in d else None,
+            status=d.get("status"),
+            league=d.get("league"),
+            icon=d.get("icon"),
+            extractor=d.get("extractor"),
+            params=d.get("params")
+        )
+
 
 class JetExtractorProgress:
     items: Optional[List[JetLink]]

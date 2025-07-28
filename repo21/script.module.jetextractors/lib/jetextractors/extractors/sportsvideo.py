@@ -4,7 +4,7 @@ from ..models import *
 
 
 class SportsVideo(JetExtractor):
-    domains = ["nfl-video.com", "mlblive.net", "rugby24.net", "fullfightreplays.com", "basketball-video.com"]
+    domains = ["nfl-replays.com", "mlblive.net", "rugby24.net", "fullfightreplays.com"]
     name = "SportsVideo"
 
     def get_items(self, params: Optional[dict] = None, progress: Optional[JetExtractorProgress] = None) -> List[JetItem]:
@@ -16,8 +16,7 @@ class SportsVideo(JetExtractor):
             items.append(JetItem(title="NFL", links=[], params={"league": "0"}))
             items.append(JetItem(title="MLB", links=[], params={"league": "1"}))
             items.append(JetItem(title="Rugby", links=[], params={"league": "2"}))
-            items.append(JetItem(title="MMA", links=[], params={"league": "3"}))
-            items.append(JetItem(title="NBA", links=[], params={"league": "4"}))
+            items.append(JetItem(title="MMA", links=[], params={"league": "3"}))            
         else:
             league = int(params["league"])
             domain = self.domains[league]

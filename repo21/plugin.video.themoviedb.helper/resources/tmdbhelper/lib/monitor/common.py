@@ -4,7 +4,7 @@ from tmdbhelper.lib.addon.logger import kodi_try_except, kodi_log
 from tmdbhelper.lib.files.futils import validate_join
 from tmdbhelper.lib.api.kodi.rpc import get_person_stats
 from tmdbhelper.lib.api.contains import CommonContainerAPIs
-from tmdbhelper.lib.monitor.propertysetter import PropertySetter
+from jurialmunkey.window import WindowPropertySetter
 from jurialmunkey.parser import try_int
 import xbmcvfs
 import json
@@ -12,8 +12,10 @@ import json
 
 SETMAIN = {
     'label', 'tmdb_id', 'imdb_id', 'folderpath', 'filenameandpath'}
+SETMAIN_ALTERED = {
+    'cropimage', 'cropimage.original', 'blurimage', 'blurimage.original',
+    'desaturateimage', 'desaturateimage.original', 'colorsimage', 'colorsimage.original'}
 SETMAIN_ARTWORK = {
-    'cropimage', 'cropimage.original', 'blurimage', 'blurimage.original', 'desaturateimage', 'desaturateimage.original', 'colorsimage', 'colorsimage.original',
     'icon', 'poster', 'thumb', 'fanart', 'discart', 'clearart', 'clearlogo', 'landscape', 'banner', 'keyart',
     'season.poster', 'season.thumb', 'season.fanart', 'season.discart', 'season.clearart', 'season.clearlogo', 'season.landscape', 'season.banner', 'season.keyart',
     'tvshow.poster', 'tvshow.thumb', 'tvshow.fanart', 'tvshow.discart', 'tvshow.clearart', 'tvshow.clearlogo', 'tvshow.landscape', 'tvshow.banner', 'tvshow.keyart'}
@@ -37,7 +39,7 @@ SETPROP_RATINGS = {
     'mtv_awards_won', 'criticschoice_awards_won', 'emmy_awards_won', 'sag_awards_won', 'bafta_awards_won',
     'total_awards_nominated', 'awards_nominated', 'awards_nominated_cr', 'academy_awards_nominated',
     'goldenglobe_awards_nominated', 'mtv_awards_nominated', 'criticschoice_awards_nominated',
-    'emmy_awards_nominated', 'sag_awards_nominated', 'bafta_awards_nominated', 'status', 'episode_type',
+    'emmy_awards_nominated', 'sag_awards_nominated', 'bafta_awards_nominated', 'status',
     'next_aired', 'next_aired.long', 'next_aired.short', 'next_aired.day', 'next_aired.day_short', 'next_aired.year', 'next_aired.episode',
     'next_aired.name', 'next_aired.tmdb_id', 'next_aired.plot', 'next_aired.season', 'next_aired.rating', 'next_aired.votes', 'next_aired.thumb',
     'next_aired.original', 'next_aired.days_from_aired', 'next_aired.days_until_aired', 'next_aired.original', 'next_aired.custom',
@@ -102,18 +104,6 @@ class CommonMonitorDetails(CommonContainerAPIs):
     def get_tmdb_id_parent(self, tmdb_id, trakt_type, season_episode_check=None):
         return self.trakt_api.get_id(tmdb_id, 'tmdb', trakt_type, output_type='tmdb', output_trakt_type='show', season_episode_check=season_episode_check)
 
-    def get_trakt_episode_type(self, item, season=None, episode=None):
-        from contextlib import suppress
-        with suppress(KeyError, TypeError):
-            trakt_id = None
-            trakt_id = item['unique_ids'].get('tvshow.trakt') \
-                or item['unique_ids'].get('tvshow.slug') \
-                or item['unique_ids'].get('tvshow.imdb')
-        episode_type = self.trakt_api.get_episode_type(trakt_id, season, episode)
-        if episode_type:
-            item['infoproperties']['episode_type'] = episode_type
-        return item
-
     def get_trakt_ratings(self, item, trakt_type, season=None, episode=None):
         from contextlib import suppress
         with suppress(KeyError, TypeError):
@@ -159,7 +149,7 @@ class CommonMonitorDetails(CommonContainerAPIs):
     def get_mdblist_ratings(self, item, trakt_type, tmdb_id):
         if not self.mdblist_api:
             return item
-        ratings = self.mdblist_api.get_ratings(trakt_type, tmdb_id=tmdb_id) or {}
+        ratings = self.mdblist_api.get_ratings(trakt_type, tmdb_id) or {}
 
         # Pop some ratings we already retrieve from other services
         for i in ('trakt_rating', 'trakt_votes', 'tmdb_rating', 'tmdb_votes'):
@@ -200,7 +190,6 @@ class CommonMonitorDetails(CommonContainerAPIs):
         item = self.get_omdb_ratings(item)
         item = self.get_imdb_top250_rank(item, trakt_type=trakt_type)
         item = self.get_trakt_ratings(item, trakt_type, season=season, episode=episode)
-        item = self.get_trakt_episode_type(item, season=season, episode=episode)
         item = self.get_tvdb_awards(item, tmdb_type, tmdb_id)
         item = self.get_mdblist_ratings(item, trakt_type, tmdb_id)
         item = self.get_nextaired(item, tmdb_type, tmdb_id)
@@ -228,7 +217,7 @@ class CommonMonitorDetails(CommonContainerAPIs):
         return item
 
 
-class CommonMonitorFunctions(PropertySetter, CommonMonitorDetails):
+class CommonMonitorFunctions(WindowPropertySetter, CommonMonitorDetails):
     def __init__(self):
         self.properties = set()
         self.index_properties = set()
@@ -283,7 +272,8 @@ class CommonMonitorFunctions(PropertySetter, CommonMonitorDetails):
                 k for k in list(dictionary)
                 if k not in self.properties
                 and k not in SETPROP_RATINGS
-                and k not in SETMAIN_ARTWORK)
+                and k not in SETMAIN_ARTWORK
+                and k not in SETMAIN_ALTERED)
 
             for k in keys:
                 if k not in dictionary:

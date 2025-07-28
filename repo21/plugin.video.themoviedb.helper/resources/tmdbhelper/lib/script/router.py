@@ -12,6 +12,37 @@ REGEX_WINPROP_FINDALL = r'\$WINPROP\[(.*?)\]'  # $WINPROP[key] = Window(10000).g
 REGEX_WINPROP_SUB = r'\$WINPROP\[{}\]'
 
 
+def test_func():
+    from tmdbhelper.lib.api.tmdb.api import TMDb
+    tmdb_api = TMDb()
+
+    # data = tmdb_api.get_request_sc('tv', '1399', 'season', '1', append_to_response=tmdb_api.append_to_response)
+    # from tmdbhelper.lib.files.futils import dumps_to_file
+    # dumps_to_file(data, 'log_data', 'sync_data_season.json', join_addon_data=True)
+    # data = tmdb_api.get_request_sc('tv', '1399', 'season', '1', 'episode', '1', append_to_response=tmdb_api.append_to_response)
+    # from tmdbhelper.lib.files.futils import dumps_to_file
+    # dumps_to_file(data, 'log_data', 'sync_data_episode.json', join_addon_data=True)
+    # return
+    # from tmdbhelper.lib.addon.logger import CProfiler
+
+    from tmdbhelper.lib.items.database.tmdbdata import ItemDetailsDataBaseCacheFactory
+    sync = ItemDetailsDataBaseCacheFactory('episode')
+    # sync.tmdb_id = 348
+    sync.tmdb_id = 1399
+    sync.season = 2
+    sync.episode = 3
+    sync.tmdb_api = tmdb_api
+    sync.cache_refresh = 'force'
+    sync.cache.del_database_init()
+
+    # with CProfiler():
+    with sync.cache.get_database() as sync.connection:
+        data = sync.data
+
+    import xbmcgui
+    xbmcgui.Dialog().textviewer('TEST', f'{data}')
+
+
 class Script(object):
     def __init__(self, *args):
         self.params = {}
@@ -30,6 +61,9 @@ class Script(object):
         self.params = reconfigure_legacy_params(**self.params)
 
     routing_table = {
+        'test_func':
+            lambda **kwargs: test_func(),
+
         # Node Maker
         'make_node':
             lambda **kwargs: importmodule('tmdbhelper.lib.script.method.make_node', 'make_node')(**kwargs),
@@ -52,6 +86,10 @@ class Script(object):
         'related_lists':
             lambda **kwargs: importmodule('tmdbhelper.lib.script.method.context_menu', 'related_lists')(**kwargs),
 
+        # TMDb Utils
+        'sync_tmdb':
+            lambda **kwargs: importmodule('tmdbhelper.lib.script.method.tmdb', 'sync_tmdb')(**kwargs),
+
         # Trakt Utils
         'like_list':
             lambda **kwargs: importmodule('tmdbhelper.lib.script.method.trakt', 'like_list')(**kwargs),
@@ -63,6 +101,8 @@ class Script(object):
             lambda **kwargs: importmodule('tmdbhelper.lib.script.method.trakt', 'sync_trakt')(**kwargs),
         'sort_list':
             lambda **kwargs: importmodule('tmdbhelper.lib.script.method.trakt', 'sort_list')(**kwargs),
+        'refresh_trakt_sync':
+            lambda **kwargs: importmodule('tmdbhelper.lib.script.method.trakt', 'refresh_trakt_sync')(**kwargs),
         'get_trakt_stats':
             lambda **kwargs: importmodule('tmdbhelper.lib.script.method.trakt', 'get_stats')(**kwargs),
         'authenticate_trakt':

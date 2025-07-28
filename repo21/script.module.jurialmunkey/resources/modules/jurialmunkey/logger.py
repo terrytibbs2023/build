@@ -2,13 +2,13 @@ import xbmc
 from timeit import default_timer as timer
 
 
-def kodi_try_except_internal_traceback(log_msg, exception_type=Exception):
+def kodi_try_except_internal_traceback(log_msg):
     """ Decorator to catch exceptions and notify error for uninterruptable services """
     def decorator(func):
         def wrapper(self, *args, **kwargs):
             try:
                 return func(self, *args, **kwargs)
-            except exception_type as exc:
+            except Exception as exc:
                 self.kodi_traceback(exc, log_msg)
         return wrapper
     return decorator
@@ -33,7 +33,10 @@ class Logger():
             if isinstance(value, bytes):
                 value = value.decode('utf-8')
             logvalue = f'{self._addon_logname}{value}'
-            if level == 2 and self._debug_logging:
+            if level == 3 and self._debug_logging:
+                import traceback
+                xbmc.log(f'{logvalue}\n{traceback.print_stack()}', level=xbmc.LOGINFO)
+            elif level == 2 and self._debug_logging:
                 xbmc.log(logvalue, level=xbmc.LOGINFO)
             elif level == 1:
                 xbmc.log(logvalue, level=xbmc.LOGINFO)
@@ -42,31 +45,31 @@ class Logger():
         except Exception as exc:
             xbmc.log(f'Logging Error: {exc}', level=xbmc.LOGINFO)
 
-    def kodi_traceback(self, exception, log_msg=None, log_level=1, notification=True):
-        """ Method for logging caught exceptions and notifying user """
+    def kodi_traceback(self, exception_object, log_msg=None, log_level=1, notification=True):
+        """ Method for logging caught exception_objects and notifying user """
         if notification:
             from xbmcgui import Dialog
             Dialog().notification(self._notification_head, self._notification_text)
-        msg = f'Error Type: {type(exception).__name__}\nError Contents: {exception.args!r}'
+        msg = f'Error Type: {type(exception_object).__name__}\nError Contents: {exception_object.args!r}'
         msg = [log_msg, '\n', msg, '\n'] if log_msg else [msg, '\n']
         try:
             import traceback
-            self.kodi_log(msg + traceback.format_tb(exception.__traceback__), log_level)
+            self.kodi_log(msg + traceback.format_tb(exception_object.__traceback__), log_level)
         except Exception as exc:
             self.kodi_log(f'ERROR WITH TRACEBACK!\n{exc}\n{msg}', log_level)
 
-    def kodi_try_except(self, log_msg, exception_type=Exception):
+    def kodi_try_except(self, log_msg):
         """ Decorator to catch exceptions and notify error for uninterruptable services """
         def decorator(func):
             def wrapper(*args, **kwargs):
                 try:
                     return func(*args, **kwargs)
-                except exception_type as exc:
+                except Exception as exc:
                     self.kodi_traceback(exc, log_msg)
             return wrapper
         return decorator
 
-    def log_timer_report(self, timer_lists, paramstring):
+    def log_timer_report(self, timer_lists, paramstring, logging=True):
         _threaded = [
             'item_api', 'item_tmdb', 'item_ftv', 'item_map', 'item_cache',
             'item_set', 'item_get', 'item_getx', 'item_non', 'item_nonx', 'item_art',
@@ -75,7 +78,9 @@ class Logger():
         timer_log = ['DIRECTORY TIMER REPORT\n', paramstring, '\n']
         timer_log.append('------------------------------\n')
         for k, v in timer_lists.items():
-            if k in _threaded:
+            if k[:4] == 'name':
+                continue
+            elif k in _threaded:
                 avg_time = f'{sum(v) / len(v):7.3f} sec avg | {max(v):7.3f} sec max | {len(v):3}' if v else '  None'
                 timer_log.append(f' - {k:12s}: {avg_time}\n')
             elif k[:4] == 'item':
@@ -87,35 +92,32 @@ class Logger():
         timer_log.append('------------------------------\n')
         tot_time = f'{sum(total_log) / len(total_log):7.3f} sec' if total_log else '  None'
         timer_log.append(f'{"Total":15s}: {tot_time}\n')
+
+        def get_timer_name(k, x):
+            try:
+                name = timer_lists[f'name_{k}'][x]
+                diff = timer_lists[k][x] - timer_lists[k][x - 1] if x > 0 else 0
+                name = f's = {name:<12}[{diff:^9.3f}]\n'
+                return name
+            except(AttributeError, NameError, IndexError, KeyError, TypeError):
+                return ''
+
         for k, v in timer_lists.items():
+            if k[:4] == 'name':
+                continue
             if v and k in _threaded:
-                timer_log.append(f'\n{k}:\n{" ".join([f"{i:.3f} " for i in v])}\n')
-        self.kodi_log(timer_log, 1)
-
-
-class TryExceptLog():
-    def __init__(self, exc_types=[Exception], log_msg=None, log_level=1, kodi_log=None):
-        """ ContextManager to allow exception passing and log """
-        self.log_msg = log_msg
-        self.exc_types = exc_types
-        self.log_level = log_level
-        self.kodi_log = kodi_log or Logger().kodi_log
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_value, exc_traceback):
-        if exc_type and exc_type not in self.exc_types:
-            return
-        if self.log_level:
-            self.kodi_log(f'{self.log_msg or "ERROR PASSED"}: {exc_type}', self.log_level)
-        return True
+                timer_log.append(f'\n{k}:\n{"".join([f"  {i:.3f}{get_timer_name(k, x)}" for x, i in enumerate(v)])}\n')
+        if logging:
+            self.kodi_log(timer_log, 1)
+        return timer_log
 
 
 class TimerList():
-    def __init__(self, dict_obj, list_name, log_threshold=0.001, logging=True):
+    def __init__(self, dict_obj, list_name, log_threshold=0.001, logging=True, item_name=None):
         """ ContextManager for timing code blocks and storing in a list """
         self.list_obj = dict_obj.setdefault(list_name, [])
+        self.name_obj = dict_obj.setdefault(f'name_{list_name}', []) if item_name else None
+        self.item_name = item_name
         self.log_threshold = log_threshold
         self.timer_a = timer() if logging else None
 
@@ -135,6 +137,7 @@ class TimerList():
             return
         if self.total_time > self.log_threshold:
             self.list_obj.append(self.total_time)
+            self.name_obj.append(self.item_name) if self.item_name else None
 
 
 class TimerFunc():

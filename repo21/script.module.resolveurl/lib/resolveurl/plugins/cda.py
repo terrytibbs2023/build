@@ -31,7 +31,7 @@ class CdaResolver(ResolveUrl):
 
     def get_media_url(self, host, media_id):
         web_url = self.get_url(host, media_id)
-        headers = {'Referer': web_url, 'User-Agent': common.RAND_UA}
+        headers = {'Referer': web_url, 'User-Agent': common.FF_USER_AGENT}
 
         html = self.net.http_GET(web_url, headers=headers).content
         match = re.search(r'''player_data=['"](.*?)['"]\s*tabindex''', html)
@@ -41,17 +41,22 @@ class CdaResolver(ResolveUrl):
             if len(sources) > 1:
                 html = self.net.http_GET(web_url + helpers.pick_source(helpers.sort_sources_list(sources)), headers=headers).content
                 match = re.search(r'''player_data=['"](.*?)['"]\s*tabindex''', html)
-            src = json.loads(match.group(1).replace('&quot;', '"')).get('video').get('file')
+            vdata = json.loads(match.group(1).replace('&quot;', '"')).get('video')
+            src = vdata.get('file')
             if len(src) < 1:
-                raise ResolverError('DRM protected Video Link')
-            return self.cda_decode(src) + helpers.append_headers(headers)
+                src = vdata.get('manifest_apple')
+            if src:
+                if not src.startswith('http'):
+                    src = self.cda_decode(src)
+                return src + helpers.append_headers(headers)
 
         raise ResolverError('Video Link Not Found')
 
     def get_url(self, host, media_id):
         return self._default_get_url(host, media_id, template='https://ebd.cda.pl/647x500/{media_id}/vfilm')
 
-    def cda_decode(self, a):
+    @staticmethod
+    def cda_decode(a):
         a = a.replace("_XDDD", "")
         a = a.replace("_CDA", "")
         a = a.replace("_ADC", "")

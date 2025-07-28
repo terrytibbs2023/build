@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 from ..models import *
 
 class NflVideo(JetExtractor):
-    domains = ["nfl-video.com"]
+    domains = ["nfl-replays.com"]
     name = "NflVideo"
 
     def get_items(self, params: Optional[dict] = None, progress: Optional[JetExtractorProgress] = None) -> List[JetItem]:

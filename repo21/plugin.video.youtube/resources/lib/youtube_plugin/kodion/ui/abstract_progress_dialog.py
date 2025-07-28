@@ -14,24 +14,14 @@ from ..compatibility import string_type
 
 
 class AbstractProgressDialog(object):
-    def __init__(self,
-                 dialog,
-                 heading,
-                 message='',
-                 total=None,
-                 message_template=None):
+    def __init__(self, dialog, heading, text, total=100):
         self._dialog = dialog()
-        self._dialog.create(heading, message)
-
-        self._position = None
-        self._total = int(total) if total else 100
-
-        self._message = message
-        self._message_template = message_template
-        self._template_params = {}
+        self._dialog.create(heading, text)
 
         # simple reset because KODI won't do it :(
-        self.update(position=0)
+        self._total = int(total)
+        self._position = 1
+        self.update(steps=-1)
 
     def __enter__(self):
         return self
@@ -53,43 +43,20 @@ class AbstractProgressDialog(object):
     def set_total(self, total):
         self._total = int(total)
 
-    def reset_total(self, new_total, **kwargs):
-        self._total = int(new_total)
-        self.update(position=0, **kwargs)
+    def update(self, steps=1, text=None):
+        self._position += steps
 
-    def update_total(self, new_total, **kwargs):
-        self._total = int(new_total)
-        self.update(steps=0, **kwargs)
-
-    def grow_total(self, new_total):
-        total = int(new_total)
-        if total > self._total:
-            self._total = total
-        return self._total
-
-    def update(self, steps=1, position=None, message=None, **template_params):
-        if position is None:
-            self._position += steps
-
-            if not self._total:
-                position = 0
-            elif self._position >= self._total:
-                position = 100
-            else:
-                position = int(100 * self._position / self._total)
+        if not self._total:
+            position = 0
+        elif self._position >= self._total:
+            position = 100
         else:
-            self._position = position
+            position = int(100 * self._position / self._total)
 
-        if isinstance(message, string_type):
-            self._message = message
-        elif template_params and self._message_template:
-            self._template_params.update(template_params)
-            message = self._message_template.format(**self._template_params)
-            self._message = message
-
-        # Kodi 18 renamed XbmcProgressDialog.update argument line1 to message.
-        # Only use positional arguments to maintain compatibility
-        self._dialog.update(position, self._message)
+        if isinstance(text, string_type):
+            self._dialog.update(percent=position, message=text)
+        else:
+            self._dialog.update(percent=position)
 
     def is_aborted(self):
         raise NotImplementedError()

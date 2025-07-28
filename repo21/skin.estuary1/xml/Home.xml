@@ -846,7 +846,16 @@
 						
 </item>			
 <item>
-			
+			<label>Live Tv</label>
+							
+							<onclick>ActivateWindow(10702,"pvr://channels/tv/All%20channels@-1/",return)</onclick>
+							<property name="menu_id">$NUMBER[14000]</property>
+						
+							<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						
+</item>			
+<item>
 	
 <label>Movies</label>
 							
@@ -891,16 +900,6 @@
 
 <item>
 
-<label>Tv Show Categories</label>
-							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fenlight/?iconImage=https%3a%2f%2fi.imgur.com%2f6QpJbS0.png&amp;menu_type=tvshow&amp;mode=navigator.genres&amp;name=Genres&amp;random_support=true",return)</onclick>
-							<property name="menu_id">$NUMBER[14000]</property>
-						
-							<property name="id">favorites</property>
-							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
-						</item>
-
-<item>
 
 <label>My Tv Shows</label>
 							
@@ -923,7 +922,16 @@
 						
 </item>
 
+<item>
 
+<label>Clear Cache</label>
+
+							<onclick>PlayMedia("plugin://plugin.video.fenlight/?mode=clear_cache&amp;cache=trakt&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FRDNxy36.png")</onclick>
+							<property name="menu_id">$NUMBER[14000]</property>
+
+							<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						</item>
 
 
 

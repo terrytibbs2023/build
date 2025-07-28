@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <addon id="repository.cMaNWizard" name="cMaN's Wizard Repository" version="2.1" provider-name="cMaN">
+    <addon id="repository.cMaNWizard" name="cMaN's Wizard Repository" version="2.8" provider-name="cMaN">
         <extension point="xbmc.addon.repository" name="cMaN's Wizard Repository">
 		<dir>		
-            <info compressed="false">https://cmanbuilds.com/cman/repo/addons.xml</info>
-            <checksum>https://cmanbuilds.com/cman/repo/addonsmd5.txt</checksum>
-            <datadir zip="true">https://cmanbuilds.com/cman/repo/</datadir>
+            <info compressed="false">https://cmanbuildsxyz.com/cman/repo/addons.xml</info>
+            <checksum>https://cmanbuildsxyz.com/cman/repo/addonsmd5.txt</checksum>
+            <datadir zip="true">https://cmanbuildsxyz.com/cman/repo/</datadir>
 		</dir>
 		<dir>
-        <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
-        <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
-        <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+			<info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
         </dir>
-
         <dir>
 			<info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
 			<checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
 			<datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
+		</dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/not-coco-joe/repository.cocoscrapers/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/not-coco-joe/repository.cocoscrapers/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/not-coco-joe/repository.cocoscrapers/master/zips/</datadir>
 		</dir>
         </extension>
         <extension point="xbmc.addon.metadata">

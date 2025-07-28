@@ -31,6 +31,14 @@ def start_info_actions(infos, params):
         if info == 'autocomplete':
             listitems = AutoCompletion.get_autocomplete_items(params["id"], params.get("limit", 10))
         elif info == 'selectautocomplete':
+            if params.get("handle"):
+                xbmcplugin.setResolvedUrl(handle=int(params.get("handle")),
+                                          succeeded=False,
+                                          listitem=xbmcgui.ListItem())
+            try:
+                window = xbmcgui.Window(10103)
+            except Exception:
+                return None
             xbmc.executebuiltin('Dialog.Close(busydialog)')
             xbmc.sleep(500)
             get_kodi_json(

@@ -22,14 +22,16 @@ from resolveurl.lib import helpers
 
 class BigWarpResolver(ResolveGeneric):
     name = 'BigWarp'
-    domains = ['bigwarp.io']
-    pattern = r'(?://|\.)(bigwarp\.io)/(?:e/)?([0-9a-zA-Z=]+)'
+    domains = ['bigwarp.io', 'bgwp.cc', 'bigwarp.art']
+    pattern = r'(?://|\.)((?:bigwarp|bgwp)\.(?:io|cc|art))/(?:e/|embed-)?([0-9a-zA-Z=]+)'
 
-    def get_media_url(self, host, media_id):
+    def get_media_url(self, host, media_id, subs=False):
         return helpers.get_media_url(
             self.get_url(host, media_id),
-            patterns=[r'''file\s*:\s*['"](?P<url>[^'"]+)['"],\s*label\s*:\s*['"](?P<label>\d+p?)''']
+            patterns=[r'''file\s*:\s*['"](?P<url>[^'"]+)['"],\s*label\s*:\s*['"](?P<label>\d+p?)'''],
+            subs=subs,
+            referer=False
         )
 
     def get_url(self, host, media_id):
-        return self._default_get_url(host, media_id, template='https://{host}/{media_id}')
+        return self._default_get_url(host, media_id, template='https://bigwarp.art/embed-{media_id}.html')
