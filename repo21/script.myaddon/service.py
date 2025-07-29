@@ -10,7 +10,7 @@ import sys
 addon = xbmcaddon.Addon()
 addon_name = addon.getAddonInfo('name')
 addon_path = xbmcvfs.translatePath(addon.getAddonInfo('path'))
-zip_path = os.path.join(addon_path, 'myfile.zip')
+zip_path = os.path.join(addon_path, 'myfile')
 
 # NEW: Extract to Kodi home directory
 home_path = xbmcvfs.translatePath('special://home')
