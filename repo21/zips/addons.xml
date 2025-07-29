@@ -2693,7 +2693,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <fanart>fanart.jpg</fanart>
   </assets>
 </extension>
-</addon><addon id="service.myaddon" name="My ZIP Updater" version="1.0.1" provider-name="David">
+</addon><addon id="service.myaddon" name="My ZIP Updater" version="1.0.6" provider-name="David">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary>ZIP updater on boot</summary>
