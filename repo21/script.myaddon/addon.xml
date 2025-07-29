@@ -1,4 +1,4 @@
-<addon id="service.myaddon" name="My ZIP Updater" version="1.0.0" provider-name="David">
+<addon id="service.myaddon" name="My ZIP Updater" version="1.0.1" provider-name="David">
     <extension point="xbmc.service" library="service.py"/>
     <extension point="xbmc.addon.metadata">
         <summary>ZIP updater on boot</summary>
