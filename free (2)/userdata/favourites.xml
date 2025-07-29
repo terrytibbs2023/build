@@ -1,0 +1,6 @@
+<favourites>
+    <favourite name="The Loop" thumb="/storage/emulated/0/Android/data/org.xbmc.kodi/files/.kodi/addons/plugin.video.the-loop/icon.png">ActivateWindow(10025,"plugin://plugin.video.the-loop",return)</favourite>
+    <favourite name="[COLORred][I]Free[/I][/COLOR]" thumb="/storage/emulated/0/Android/data/org.xbmc.kodi/files/.kodi/addons/plugin.video.free/icon.png">ActivateWindow(10025,"plugin://plugin.video.free",return)</favourite>
+    <favourite name="[COLOR red][B]R[/B][/COLOR][COLOR white][B]ising[/B][/COLOR] [COLOR pink][B]T[/B][/COLOR][COLOR white][B]ides[/B][/COLOR]" thumb="/storage/emulated/0/Android/data/org.xbmc.kodi/files/.kodi/addons/plugin.video.Rising.Tides/icon.png">ActivateWindow(10025,"plugin://plugin.video.Rising.Tides",return)</favourite>
+    <favourite name="YouTube" thumb="/storage/emulated/0/Android/data/org.xbmc.kodi/files/.kodi/addons/plugin.video.youtube/resources/media/icon.png">ActivateWindow(10025,"plugin://plugin.video.youtube",return)</favourite>
+</favourites>
