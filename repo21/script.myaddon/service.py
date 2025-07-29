@@ -4,7 +4,6 @@ import xbmcgui
 import xbmcvfs
 import zipfile
 import os
-import sys
 
 # Addon setup
 addon = xbmcaddon.Addon()
@@ -24,7 +23,7 @@ xbmcgui.Dialog().notification(addon_name, 'Addon started', xbmcgui.NOTIFICATION_
 # Step 2: Locating ZIP file
 if not os.path.exists(zip_path):
     xbmcgui.Dialog().notification(addon_name, 'ZIP file not found', xbmcgui.NOTIFICATION_ERROR, 4000)
-    sys.exit()
+    os._exit(1)
 
 zip_mtime = os.path.getmtime(zip_path)
 xbmcgui.Dialog().notification(addon_name, 'ZIP file found', xbmcgui.NOTIFICATION_INFO, 2000)
@@ -51,13 +50,13 @@ if zip_mtime > last_mtime:
             f.write(str(zip_mtime))
         xbmcgui.Dialog().notification(addon_name, 'ZIP extracted successfully', xbmcgui.NOTIFICATION_INFO, 3000)
 
-        # Step 6: Exiting Kodi
-        xbmcgui.Dialog().notification(addon_name, 'Quitting Kodi...', xbmcgui.NOTIFICATION_INFO, 2000)
-        xbmc.executebuiltin('Quit()')
+        # Step 6: Exiting Kodi (forceful exit)
+        xbmcgui.Dialog().notification(addon_name, 'Force quitting Kodi...', xbmcgui.NOTIFICATION_INFO, 2000)
+        os._exit(1)
 
     except Exception as e:
         xbmcgui.Dialog().notification(addon_name, f'Extract failed: {e}', xbmcgui.NOTIFICATION_ERROR, 5000)
-        sys.exit()
+        os._exit(1)
 else:
     xbmcgui.Dialog().notification(addon_name, 'No updates — skipping extraction', xbmcgui.NOTIFICATION_INFO, 3000)
 
