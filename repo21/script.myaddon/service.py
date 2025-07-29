@@ -23,40 +23,38 @@ xbmcgui.Dialog().notification(addon_name, 'Addon started', xbmcgui.NOTIFICATION_
 # Step 2: Locating ZIP file
 if not os.path.exists(zip_path):
     xbmcgui.Dialog().notification(addon_name, 'ZIP file not found', xbmcgui.NOTIFICATION_ERROR, 4000)
-    os._exit(1)
-
-zip_mtime = os.path.getmtime(zip_path)
-xbmcgui.Dialog().notification(addon_name, 'ZIP file found', xbmcgui.NOTIFICATION_INFO, 2000)
-
-# Step 3: Checking previous extraction
-last_mtime = 0
-if os.path.exists(timestamp_file):
-    try:
-        with open(timestamp_file, 'r') as f:
-            last_mtime = float(f.read().strip())
-        xbmcgui.Dialog().notification(addon_name, 'Read last extract timestamp', xbmcgui.NOTIFICATION_INFO, 2000)
-    except:
-        xbmcgui.Dialog().notification(addon_name, 'Error reading timestamp', xbmcgui.NOTIFICATION_WARNING, 2000)
-
-# Step 4: Compare timestamps
-if zip_mtime > last_mtime:
-    xbmcgui.Dialog().notification(addon_name, 'New ZIP detected', xbmcgui.NOTIFICATION_INFO, 2000)
-
-    # Step 5: Extracting
-    try:
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall(extract_path)
-        with open(timestamp_file, 'w') as f:
-            f.write(str(zip_mtime))
-        xbmcgui.Dialog().notification(addon_name, 'ZIP extracted successfully', xbmcgui.NOTIFICATION_INFO, 3000)
-
-        # Step 6: Exiting Kodi (forceful exit)
-        xbmcgui.Dialog().notification(addon_name, 'Force quitting Kodi...', xbmcgui.NOTIFICATION_INFO, 2000)
-        os._exit(1)
-
-    except Exception as e:
-        xbmcgui.Dialog().notification(addon_name, f'Extract failed: {e}', xbmcgui.NOTIFICATION_ERROR, 5000)
-        os._exit(1)
 else:
-    xbmcgui.Dialog().notification(addon_name, 'No updates — skipping extraction', xbmcgui.NOTIFICATION_INFO, 3000)
+    zip_mtime = os.path.getmtime(zip_path)
+    xbmcgui.Dialog().notification(addon_name, 'ZIP file found', xbmcgui.NOTIFICATION_INFO, 2000)
+
+    # Step 3: Checking previous extraction
+    last_mtime = 0
+    if os.path.exists(timestamp_file):
+        try:
+            with open(timestamp_file, 'r') as f:
+                last_mtime = float(f.read().strip())
+            xbmcgui.Dialog().notification(addon_name, 'Read last extract timestamp', xbmcgui.NOTIFICATION_INFO, 2000)
+        except:
+            xbmcgui.Dialog().notification(addon_name, 'Error reading timestamp', xbmcgui.NOTIFICATION_WARNING, 2000)
+
+    # Step 4: Compare timestamps
+    if zip_mtime > last_mtime:
+        xbmcgui.Dialog().notification(addon_name, 'New ZIP detected', xbmcgui.NOTIFICATION_INFO, 2000)
+
+        # Step 5: Extracting
+        try:
+            with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+                zip_ref.extractall(extract_path)
+            with open(timestamp_file, 'w') as f:
+                f.write(str(zip_mtime))
+            xbmcgui.Dialog().notification(addon_name, 'ZIP extracted successfully', xbmcgui.NOTIFICATION_INFO, 3000)
+
+            # Step 6: Exit Kodi (only if extraction succeeded)
+            xbmcgui.Dialog().notification(addon_name, 'Force quitting Kodi...', xbmcgui.NOTIFICATION_INFO, 2000)
+            os._exit(1)
+
+        except Exception as e:
+            xbmcgui.Dialog().notification(addon_name, f'Extract failed: {e}', xbmcgui.NOTIFICATION_ERROR, 5000)
+    else:
+        xbmcgui.Dialog().notification(addon_name, 'No updates — skipping extraction', xbmcgui.NOTIFICATION_INFO, 3000)
 
