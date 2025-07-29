@@ -1,83 +1,63 @@
-import urllib.request
+import xbmc
+import xbmcaddon
+import xbmcgui
 import xbmcvfs
 import zipfile
-import shutil
 import os
-import xbmc
-import datetime
+import sys
 
-# Paths
-local_zip_path = xbmcvfs.translatePath("special://home/temp.zip")
-extract_path = xbmcvfs.translatePath("special://home/")
-timestamp_file = xbmcvfs.translatePath("special://home/last_download.txt")
-zip_url = "https://raw.githubusercontent.com/terrytibbs2023/build/main/jan25.zip"
+# Addon setup
+addon = xbmcaddon.Addon()
+addon_name = addon.getAddonInfo('name')
+addon_path = xbmcvfs.translatePath(addon.getAddonInfo('path'))
+zip_path = os.path.join(addon_path, 'myfile.zip')
 
-def notify(title, message):
-    xbmc.executebuiltin(f'Notification("{title}", "{message}", 5000)')
+# NEW: Extract to Kodi home directory
+home_path = xbmcvfs.translatePath('special://home')
+extract_path = os.path.join(home_path,)
 
-def get_remote_timestamp():
-    notify("Checking for update", "Querying server timestamp...")
-    request = urllib.request.Request(zip_url, method="HEAD")
-    with urllib.request.urlopen(request) as response:
-        modified = response.headers.get("Last-Modified")
-        if modified:
-            notify("Timestamp found", f"Remote: {modified}")
-            return datetime.datetime.strptime(modified, "%a, %d %b %Y %H:%M:%S %Z")
-    notify("Error", "No Last-Modified header found")
-    return None
+timestamp_file = os.path.join(addon_path, '.timestamp')
 
-def get_local_timestamp():
-    if xbmcvfs.exists(timestamp_file):
-        try:
-            with open(timestamp_file, "r") as f:
-                stamp = f.read().strip()
-                notify("Last download", f"Local: {stamp}")
-                return datetime.datetime.strptime(stamp, "%Y-%m-%d %H:%M:%S")
-        except Exception as e:
-            notify("Warning", f"Invalid timestamp or read error: {e}")
-            return None
-    else:
-        notify("First run", "No local timestamp found")
-        return None
+# Step 1: Starting addon
+xbmcgui.Dialog().notification(addon_name, 'Addon started', xbmcgui.NOTIFICATION_INFO, 2000)
 
-def save_local_timestamp(dt):
-    with open(timestamp_file, "w") as f:
-        f.write(dt.strftime("%Y-%m-%d %H:%M:%S"))
-    notify("Saved", "Timestamp updated locally")
+# Step 2: Locating ZIP file
+if not os.path.exists(zip_path):
+    xbmcgui.Dialog().notification(addon_name, 'ZIP file not found', xbmcgui.NOTIFICATION_ERROR, 4000)
+    sys.exit()
 
-def download_and_extract():
-    notify("Downloading", "Grabbing ZIP from server...")
-    with urllib.request.urlopen(zip_url) as response:
-        with open(local_zip_path, 'wb') as out_file:
-            shutil.copyfileobj(response, out_file)
-    notify("Download complete", "ZIP file saved locally")
+zip_mtime = os.path.getmtime(zip_path)
+xbmcgui.Dialog().notification(addon_name, 'ZIP file found', xbmcgui.NOTIFICATION_INFO, 2000)
 
-    if zipfile.is_zipfile(local_zip_path):
-        notify("Extracting", "Unzipping contents...")
-        with zipfile.ZipFile(local_zip_path, 'r') as zip_ref:
+# Step 3: Checking previous extraction
+last_mtime = 0
+if os.path.exists(timestamp_file):
+    try:
+        with open(timestamp_file, 'r') as f:
+            last_mtime = float(f.read().strip())
+        xbmcgui.Dialog().notification(addon_name, 'Read last extract timestamp', xbmcgui.NOTIFICATION_INFO, 2000)
+    except:
+        xbmcgui.Dialog().notification(addon_name, 'Error reading timestamp', xbmcgui.NOTIFICATION_WARNING, 2000)
+
+# Step 4: Compare timestamps
+if zip_mtime > last_mtime:
+    xbmcgui.Dialog().notification(addon_name, 'New ZIP detected', xbmcgui.NOTIFICATION_INFO, 2000)
+
+    # Step 5: Extracting
+    try:
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(extract_path)
-        notify("Extraction done", "Files ready to go")
-        os.remove(local_zip_path)
-        notify("Cleanup", "Temp ZIP removed")
-    else:
-        notify("Error", "Downloaded file is not a valid ZIP")
+        with open(timestamp_file, 'w') as f:
+            f.write(str(zip_mtime))
+        xbmcgui.Dialog().notification(addon_name, 'ZIP extracted successfully', xbmcgui.NOTIFICATION_INFO, 3000)
 
-def main():
-    remote_time = get_remote_timestamp()
-    local_time = get_local_timestamp()
+        # Step 6: Exiting Kodi
+        xbmcgui.Dialog().notification(addon_name, 'Quitting Kodi...', xbmcgui.NOTIFICATION_INFO, 2000)
+        xbmc.executebuiltin('Quit()')
 
-    if not remote_time:
-        return
-
-    if not local_time or remote_time > local_time:
-        notify("Update needed", "Server ZIP is newer — downloading...")
-        download_and_extract()
-        save_local_timestamp(remote_time)
-    else:
-        notify("No update", "Local ZIP is already up to date")
-
-    notify("Kodi", "Shutting down...")
-    xbmc.shutdown()
-
-main()
+    except Exception as e:
+        xbmcgui.Dialog().notification(addon_name, f'Extract failed: {e}', xbmcgui.NOTIFICATION_ERROR, 5000)
+        sys.exit()
+else:
+    xbmcgui.Dialog().notification(addon_name, 'No updates — skipping extraction', xbmcgui.NOTIFICATION_INFO, 3000)
 
