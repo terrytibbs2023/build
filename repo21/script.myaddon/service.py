@@ -11,9 +11,9 @@ addon_name = addon.getAddonInfo('name')
 addon_path = xbmcvfs.translatePath(addon.getAddonInfo('path'))
 zip_path = os.path.join(addon_path, 'myfile')
 
-# NEW: Extract to Kodi home directory
+# Fixed: Extract to Kodi home directory
 home_path = xbmcvfs.translatePath('special://home')
-extract_path = os.path.join(home_path,)
+extract_path = os.path.join(home_path)  # Removed comma to prevent tuple
 
 timestamp_file = os.path.join(addon_path, '.timestamp')
 
@@ -48,6 +48,13 @@ else:
             with open(timestamp_file, 'w') as f:
                 f.write(str(zip_mtime))
             xbmcgui.Dialog().notification(addon_name, 'ZIP extracted successfully', xbmcgui.NOTIFICATION_INFO, 3000)
+
+            # NEW: Delete the ZIP file after successful extraction
+            try:
+                os.remove(zip_path)
+                xbmcgui.Dialog().notification(addon_name, 'ZIP file deleted', xbmcgui.NOTIFICATION_INFO, 2000)
+            except Exception as e:
+                xbmcgui.Dialog().notification(addon_name, f'Failed to delete ZIP: {e}', xbmcgui.NOTIFICATION_WARNING, 3000)
 
             # Step 6: Exit Kodi (only if extraction succeeded)
             xbmcgui.Dialog().notification(addon_name, 'Force quitting Kodi...', xbmcgui.NOTIFICATION_INFO, 2000)
