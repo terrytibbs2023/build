@@ -2693,12 +2693,6 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <fanart>fanart.jpg</fanart>
   </assets>
 </extension>
-</addon><addon id="service.myaddon" name="My ZIP Updater" version="1.0.20" provider-name="David">
-    <extension point="xbmc.service" library="service.py" />
-    <extension point="xbmc.addon.metadata">
-        <summary>ZIP updater on boot</summary>
-        <description>Checks and downloads updated ZIP from server.</description>
-    </extension>
 </addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.20.0" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
@@ -2863,7 +2857,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <disclaimer lang="zh_CN">可放心使用此脚本，更多信息访问 kodi.tv</disclaimer>
     <disclaimer lang="zh_TW">歡迎使用本腳本，相關資訊請參閱kodi.tv</disclaimer>
   </extension>
-</addon><addon id="service.ttquick" name="Terry Tibbs Quick Installer" version="1.0.26" provider-name="Terry Tibbs">
+</addon><addon id="service.ttquick" name="Terry Tibbs Quick Installer" version="1.0.22" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary>Installs 7 Updates Terrys Bingie Build</summary>
