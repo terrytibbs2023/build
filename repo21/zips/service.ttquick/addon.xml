@@ -1,4 +1,4 @@
-<addon id="service.ttquick" name="Terry Tibbs Quick Installer" version="1.0.32" provider-name="Terry Tibbs">
+<addon id="service.ttquick" name="Terry Tibbs Quick Installer" version="1.0.34" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py"/>
     <extension point="xbmc.addon.metadata">
         <summary>Installs Terrys Bingie Build</summary>

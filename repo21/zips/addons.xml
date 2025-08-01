@@ -2693,7 +2693,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <fanart>fanart.jpg</fanart>
   </assets>
 </extension>
-</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.20.8" provider-name="Team Kodi">
+</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.22.0" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
 
@@ -2707,7 +2707,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
 		<import addon="script.wikipedia" version="0.0.6" />
 		<import addon="plugin.program.autocompletion" version="2.1.3" />
 		
-		<import addon="plugin.video.fen" version="2.1.3" />
+		<import addon="resource.images.studios.coloured" version="2.1.3" />
 		<import addon="plugin.video.youtube" version="2.1.3" />
 
 <import addon="repository.bingie" />
@@ -2867,7 +2867,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <disclaimer lang="zh_CN">可放心使用此脚本，更多信息访问 kodi.tv</disclaimer>
     <disclaimer lang="zh_TW">歡迎使用本腳本，相關資訊請參閱kodi.tv</disclaimer>
   </extension>
-</addon><addon id="service.ttquick" name="Terry Tibbs Quick Installer" version="1.0.32" provider-name="Terry Tibbs">
+</addon><addon id="service.ttquick" name="Terry Tibbs Quick Installer" version="1.0.34" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary>Installs Terrys Bingie Build</summary>
