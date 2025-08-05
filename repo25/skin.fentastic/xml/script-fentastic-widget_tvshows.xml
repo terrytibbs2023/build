@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+    <include name="TVShowWidgets">
+        <include content="WidgetListBigEpisodes">
+            <param name="content_path" value="plugin://plugin.video.coalition/?mode=trakt.list.build_trakt_list&amp;user=garycrawfordgc&amp;slug=latest-tv-shows&amp;list_type=user_lists"/>
+            <param name="widget_header" value="New TV Shows"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22011"/>
+        </include>
+        <include content="WidgetListBigEpisodes">
+            <param name="content_path" value="plugin://plugin.video.coalition/?mode=build_tvshow_list&amp;action=trakt_collection&amp;iconImage=%2Fhome%2Fecr%2F.var%2Fapp%2Ftv.kodi.Kodi%2Fdata%2Faddons%2Fplugin.video.coalition%2Fresources%2Fmedia%2Ftrakt.png"/>
+            <param name="widget_header" value="My TV Shows"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22012"/>
+        </include>
+        <include content="WidgetListBigEpisodes">
+            <param name="content_path" value="plugin://plugin.video.coalition/?name=32483&amp;iconImage=next_episodes.png&amp;mode=build_next_episode"/>
+            <param name="widget_header" value="Next Episodes"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22013"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.coalition/?mode=trakt.list.build_trakt_list&amp;user=garycrawfordgc&amp;slug=netflix-shows&amp;list_type=user_lists"/>
+            <param name="widget_header" value="Netflix Shows"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22014"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.coalition/?mode=trakt.list.build_trakt_list&amp;user=garycrawfordgc&amp;slug=disney-shows&amp;list_type=user_lists"/>
+            <param name="widget_header" value="Disney+ Shows"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22015"/>
+        </include>
+        <include content="WidgetListBigPoster">
+            <param name="content_path" value="plugin://plugin.video.coalition/?mode=trakt.list.build_trakt_list&amp;user=majeed_pk&amp;slug=documentaries&amp;list_type=user_lists"/>
+            <param name="widget_header" value="Documentaries"/>
+            <param name="widget_target" value="videos"/>
+            <param name="list_id" value="22016"/>
+        </include>
+    </include>
+</includes>
