@@ -1,4 +1,4 @@
-<addon id="program.ttquick" name="Terry Tibbs Quick Installer" version="0.0.9" provider-name="Terry Tibbs">
+<addon id="program.ttquick" name="Terry Tibbs Quick Installer" version="0.0.10" provider-name="Terry Tibbs">
     <extension point="xbmc.python.program" library="default.py">
         <provides>executable</provides>
     </extension>
