@@ -771,70 +771,6 @@ fix to properly get English videos as fallback
             <screenshot>resources/screenshot-03.jpg</screenshot>
         </assets>
     </extension>
-</addon><addon id="plugin.program.terrywiz" name="Terry Tibbs Toolbox" version="0.0.25" provider-name="Magnetic,Slam, BYB">
-	<requires>
-		<import addon="xbmc.python" version="3.0.0" />
-		<import addon="script.module.requests" optional="true" />
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>executable</provides>
-	</extension>
-	<extension point="xbmc.service" library="service.py" />
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en_GB" />
-		<description lang="en_GB">Terrys tools to help you keep kodi running</description>
-		<disclaimer lang="en_GB">This Addon contains no content</disclaimer>
-		<language>en</language>
-		<platform>all</platform>
-		<license>GPL-2.0-or-later</license>
-		<forum />
-		<website /> 
-		<email />
-		<source />
-		<news>2.1.7 - Fixed issue with binary installs failing. Updated Advancedsettings configs. Added notification at start of backups. 2.1.6.1 - Fix permissions error on Windows devices. Added keeping binaries list when installs fail. 2.1.6 - Added binary addon installation to build install. Fix for Dropbox zips not showing the file length. Fixed error on startup when buildfile or notify urls are invalid. 2.1.5 - Added option to cancel prompts for build update and no build. 2.1.4 - Small fix to Whitelist 2.1.3 - Added prompt that opens the Build Menu when there's an update or now build installed. Added Force Close shortcut. Restructured addon a bit. There is now a uservar py in root of addon for user variables. 2.1.1 - Added Custom Backups Path 2.1.0 - Added Backup/Restore 2.0.7 - Added Whitelist, Fixes to Dropbox urls. 2.0.5 - Added Authorize Debrid, Added language strings to most labels, code cleanup 2.0.3 - Added video preview 2.0.2 - Fixed issue with backup restore  2.0.0 Major changes to the framework of the addon. Allocated most of the code to modules. Added some new modules. Added support for Dropbox links. Fixed cancel download. 1.1.3 - Fix to save items when items not selected 1.1.2 - Remade service.py, small Bugfixes. 1.1.1 - Fixed an issue with update checker. 1.1.0 - Fixed Resolveurl path in save data. 1.0.9 - Added settings to main menu. 1.0.8 - Fixed percentage during build download, 1.0.7 - Added option to link to another xml or json file. This is good for teams or community wizards as each builder can have their own xml. Also changed format of the builds xml. Please refer to builds_newformat.xml located in the resources folder. The old format will still work but if the user is running an older version of the wizard, they'll only see the version number as the name. They'll want to update to fix that. 1.0.6 - Added Notifications Dialog. Special thanks to Blue for art and helping with the design. 1.0.5 - Bugfixes. 1.0.3 - Added download progress to build install. 1.0.2 - Added option to encode the buildfile variable to a base64 string. 1.0.1 - Added the option to use json for build file. 1.0.0 - Basic clean up. Ready for official release. 0.0.9 - Added Save Menu, 0.0.8 - Bug fixes, 0.0.7 - Added Advanced Settings presets to Maintenance. 0.0.6 - Added Clear Packages, the first of the Maintenance section.
-0.0.5 - Bug fixes
-0.0.4 - Added enabling of disabled addons on build first run. Added update repos on build first run. 
-0.0.3 - Added prompt notifying when new version of installed build is available.
-0.0.2 - Initial Release
-		</news>
-		<assets>
-				<icon>resources/icon.png</icon>
-				<fanart>resources/fanart.jpg</fanart>
-				<banner />
-				<clearlogo />
-				<screenshot />
-		</assets>
-	</extension>
-</addon><addon id="plugin.program.twiz" name="Terry Tibbs Free Toolbox" version="0.0.28" provider-name="Magnetic, Terry">
-	<requires>
-		<import addon="xbmc.python" version="3.0.0" />
-		<import addon="script.module.requests" optional="true" />
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>executable</provides>
-	</extension>
-	<extension point="xbmc.service" library="service.py" />
-	<extension point="xbmc.addon.metadata">
-		<summary lang="en_GB">Simple Wizard is a lightweight template for installing builds on Kodi. Has some code from Aftermath Wizard by Surfacingx. Skin Switch by OpenELEQ. Base code by BYB. Credits to them and all others who contributed. Please report any bugs to @slamious on Telegram/Twitter.</summary>
-		<description lang="en_GB">Kodi Wizard</description>
-		<disclaimer lang="en_GB">This Addon contains no content</disclaimer>
-		<language>en</language>
-		<platform>all</platform>
-		<license>GPL-2.0-or-later</license>
-		<forum />
-		<website /> 
-		<email />
-		<source />
-		<news>3.0.2 - Added speedtest. Bugfixes. 3.0.0 - Added backup/restore functionality for trakt/debrid accounts. Updated debrid/trakt authorization section. Restore of gui/skin settings has been added. Updated Advancedsettings configs. Updated wizard artwork. Added user edited color options for menus. Fixed wizard writing over itself during build installs. Edited fresh start to keep wizard/dependencies. Removed double ok dialog during build installs. Numerous other small fixes throughout.
-		</news>
-		<assets>
-				<icon>resources/icon.png</icon>
-				<fanart>resources/fanart.jpg</fanart>
-				<banner />
-				<clearlogo />
-				<screenshot />
-		</assets>
-	</extension>
 </addon><addon id="plugin.video.Rising.Tides" name="[COLOR red][B]R[/B][/COLOR][COLOR white][B]ising[/B][/COLOR] [COLOR pink][B]T[/B][/COLOR][COLOR white][B]ides[/B][/COLOR]" version="3.0.2" provider-name="[COLOR turquoise][B]mullafabz[/B][/COLOR]">
   <requires>
   <import addon="xbmc.python" version="3.0.0" />
@@ -976,32 +912,6 @@ fix to properly get English videos as fallback
         </assets>
         <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
     </extension>
-</addon><addon id="plugin.video.free" name="[COLORred][I]Free[/I][/COLOR]" version="19.06.24" provider-name="">
-  <requires>
-    <import addon="xbmc.python" version="3.0.0" />
-    <import addon="script.module.requests" />
-    <import addon="script.module.routing" />
-    <import addon="script.module.unidecode" />
-    <import addon="script.module.inputstreamhelper" />
-    <import addon="script.module.resolveurl" />
-    <import addon="script.module.microjenscrapers" />
-	<import addon="plugin.video.youtube" />
-	<import addon="plugin.video.dailymotion_com" />
-    
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-    <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en" />
-    <platform>all</platform>
-    <language>en</language>
-    <license>GPL-2.0-or-later</license>
-	<assets>
-		<icon>icon.png</icon>
-		<fanart>fanart.jpg</fanart>
-  </assets>
-  </extension>
 </addon><addon id="plugin.video.looptv" name="Loop TV" version="26+matrix.2" provider-name="Munkee - RACC">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
@@ -1208,14 +1118,6 @@ fix to properly get English videos as fallback
         <disclaimer lang="vi_VN">Plugin này không được xác nhận bởi Google</disclaimer>
         <disclaimer lang="zh_CN">此插件未被谷歌认可</disclaimer>
         <disclaimer lang="zh_TW">此附加元件未由Google支持</disclaimer>
-    </extension>
-</addon><addon id="program.ttquick" name="Terry Tibbs Quick Installer" version="0.0.10" provider-name="Terry Tibbs">
-    <extension point="xbmc.python.program" library="default.py">
-        <provides>executable</provides>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Installs Terry's Bingie Build</summary>
-        <description>Install your Bingie Kodi</description>
     </extension>
 </addon><addon id="pvr.iptvsimple" version="21.10.1" name="IPTV Simple Client" provider-name="nightik and Ross Nicholson">
   <requires>
@@ -1671,28 +1573,6 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 
 <checksum>https://githubraw.com/terrytibbs2023/build/main/repo25/zips/addons.xml.md5</checksum>
             <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/repo25/zips/</datadir>
-        </dir>
-
-
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Terry Tibbs Repo</summary>
-        <description />
-        <disclaimer />
-        <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon><addon id="repository.terrytibbsFree" name="Terrys Free repo" version="1.6" provider-name="Terry Tibbs">
-    <extension point="xbmc.addon.repository" name="Terrys 20 Repository">
-        <dir>
-            <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repofree/zips/addons.xml</info>
-          
-
-<checksum>https://githubraw.com/terrytibbs2023/build/main/repofree/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/repo21/zips/</datadir>
         </dir>
 
 
@@ -2899,7 +2779,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <disclaimer lang="zh_CN">可放心使用此脚本，更多信息访问 kodi.tv</disclaimer>
     <disclaimer lang="zh_TW">歡迎使用本腳本，相關資訊請參閱kodi.tv</disclaimer>
   </extension>
-</addon><addon id="service.ttquick" name="Terry Tibbs Quick Installer" version="1.0.56" provider-name="Terry Tibbs">
+</addon><addon id="service.ttquick" name="Terry Tibbs Quick Installer" version="1.0.62" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary>Installs Terrys Bingie Build</summary>
