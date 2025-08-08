@@ -1209,6 +1209,14 @@ fix to properly get English videos as fallback
         <disclaimer lang="zh_CN">此插件未被谷歌认可</disclaimer>
         <disclaimer lang="zh_TW">此附加元件未由Google支持</disclaimer>
     </extension>
+</addon><addon id="program.ttquick" name="Terry Tibbs Quick Installer" version="0.0.9" provider-name="Terry Tibbs">
+    <extension point="xbmc.python.program" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Installs Terry's Bingie Build</summary>
+        <description>Install your Bingie Kodi</description>
+    </extension>
 </addon><addon id="pvr.iptvsimple" version="21.10.1" name="IPTV Simple Client" provider-name="nightik and Ross Nicholson">
   <requires>
 <import addon="kodi.binary.global.main" minversion="2.0.0" version="2.0.2" />

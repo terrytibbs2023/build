@@ -1,0 +1,10 @@
+<addon id="program.ttquick" name="Terry Tibbs Quick Installer" version="0.0.9" provider-name="Terry Tibbs">
+    <extension point="xbmc.python.program" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Installs Terry's Bingie Build</summary>
+        <description>Install your Bingie Kodi</description>
+    </extension>
+</addon>
+
