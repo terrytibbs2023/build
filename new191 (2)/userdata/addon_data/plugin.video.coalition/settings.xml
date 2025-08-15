@@ -1,0 +1,184 @@
+<settings version="2">
+    <setting id="auto_start_coalition" default="true">false</setting>
+    <setting id="widget_hide_watched" default="true">false</setting>
+    <setting id="kodi_menu_cache">true</setting>
+    <setting id="trakt_indicators_active">true</setting>
+    <setting id="watched_indicators">1</setting>
+    <setting id="amble.indicators" default="true" />
+    <setting id="sync_kodi_library_watchstatus" default="true">false</setting>
+    <setting id="movie_download_directory" default="true">special://profile/addon_data/plugin.video.coalition/Movies Downloads/</setting>
+    <setting id="tvshow_download_directory" default="true">special://profile/addon_data/plugin.video.coalition/TV Show Downloads/</setting>
+    <setting id="premium_download_directory" default="true">special://profile/addon_data/plugin.video.coalition/Premium Downloads/</setting>
+    <setting id="image_download_directory" default="true">special://profile/addon_data/plugin.video.coalition/Image Downloads/</setting>
+    <setting id="datetime.offset" default="true">0</setting>
+   
+    <setting id="results.sort_order" default="true">1</setting>
+    <setting id="database.maintenance.due">1701199689</setting>
+    <setting id="reuse_language_invoker" default="true">true</setting>
+    <setting id="folder1.display_name" default="true">Folder 1</setting>
+    <setting id="folder1.movies_directory" default="true">None</setting>
+    <setting id="folder1.tv_shows_directory" default="true">None</setting>
+    <setting id="folder2.display_name" default="true">Folder 2</setting>
+    <setting id="folder2.movies_directory" default="true">None</setting>
+    <setting id="folder2.tv_shows_directory" default="true">None</setting>
+    <setting id="folder3.display_name" default="true">Folder 3</setting>
+    <setting id="folder3.movies_directory" default="true">None</setting>
+    <setting id="folder3.tv_shows_directory" default="true">None</setting>
+    <setting id="folder4.display_name" default="true">Folder 4</setting>
+    <setting id="folder4.movies_directory" default="true">None</setting>
+    <setting id="folder4.tv_shows_directory" default="true">None</setting>
+    <setting id="folder5.display_name" default="true">Folder 5</setting>
+    <setting id="folder5.movies_directory" default="true">None</setting>
+    <setting id="folder5.tv_shows_directory" default="true">None</setting>
+    <setting id="extras.enabled_menus" default="true">2050,2051,2052,2053,2054,2055,2056,2057,2058,2059,2060,2061,2062</setting>
+    <setting id="nextep.sort_type" default="true">0</setting>
+    <setting id="nextep.sort_order" default="true">0</setting>
+    <setting id="nextep.sort_airing_today_to_top" default="true">false</setting>
+    <setting id="nextep.include_airdate">true</setting>
+    <setting id="nextep.include_unaired">true</setting>
+    <setting id="nextep.include_unwatched" default="true">false</setting>
+    <setting id="extras.open_action" default="true">0</setting>
+    <setting id="extras.manage" default="true">$ADDON[plugin.video.coalition 32652]</setting>
+    <setting id="extras.enable_scrollbars" default="true">false</setting>
+    <setting id="extras.exclude_non_acting_roles">true</setting>
+    <setting id="get_fanart_data" default="true">false</setting>
+    <setting id="fanarttv.default" default="true">false</setting>
+    <setting id="fanart_amble1" default="true" />
+    <setting id="fanart_client_key" default="true">598515b970d81280063107d49d0e2558</setting>
+    <setting id="image_resolutions">2</setting>
+    <setting id="tmdb_api" default="true">74f3ce931d65ebda1f77ef24eac2625f</setting>
+    <setting id="meta_language_display" default="true">English</setting>
+    <setting id="meta_language" default="true">en</setting>
+    <setting id="include_year_in_title">3</setting>
+    <setting id="default_all_episodes">1</setting>
+    <setting id="single_ep_display" default="true">0</setting>
+    <setting id="single_ep_format">2</setting>
+    <setting id="paginate.lists" default="true">false</setting>
+    <setting id="page_limit">40</setting>
+    <setting id="nav_jump" default="true">0</setting>
+    <setting id="show_specials" default="true">false</setting>
+    <setting id="use_season_title" default="true">false</setting>
+    <setting id="show_unaired">false</setting>
+    <setting id="thumb_fanart" default="true">false</setting>
+    <setting id="sort.progress" default="true">0</setting>
+    <setting id="sort.watched" default="true">0</setting>
+    <setting id="sort.collection" default="true">0</setting>
+    <setting id="sort.watchlist" default="true">0</setting>
+    <setting id="ignore_articles">true</setting>
+    <setting id="auto_play_movie">true</setting>
+    <setting id="autoplay_quality_movie">720p, 1080p</setting>
+    <setting id="results_quality_movie" default="true">720p, 1080p, 4K</setting>
+    <setting id="auto_resume_movie" default="true">0</setting>
+    <setting id="auto_play_episode">true</setting>
+    <setting id="autoplay_quality_episode">720p, 1080p</setting>
+    <setting id="autoplay_next_episode">true</setting>
+    <setting id="autoplay_next_show_window">true</setting>
+    <setting id="autoplay_next_window_timer_method" default="true">0</setting>
+    <setting id="autoplay_next_window_time">30</setting>
+    <setting id="autoplay_next_window_percentage">95</setting>
+    <setting id="autoplay_next_check_threshold">3</setting>
+    <setting id="results_quality_episode" default="true">SD, 720p, 1080p, 4K</setting>
+    <setting id="auto_resume_episode">2</setting>
+    <setting id="volumecheck.enabled" default="true">false</setting>
+    <setting id="volumecheck.percent">50</setting>
+    <setting id="subtitles.subs_action">2</setting>
+    <setting id="subtitles.language" default="true">English</setting>
+    <setting id="subtitles.auto_enable">true</setting>
+    <setting id="scrapers.timeout.1">10</setting>
+    <setting id="results.xml_style" default="true">List Default</setting>
+    <setting id="search.enable.yearcheck">true</setting>
+    <setting id="search.finish.early">true</setting>
+    <setting id="results.sort_order_display" default="true">$ADDON[plugin.video.coalition 32582]</setting>
+    <setting id="results.size_filter" default="true">0</setting>
+    <setting id="results.size.speed">20</setting>
+    <setting id="results.size.file">10000</setting>
+    <setting id="results.include.unknown.size">true</setting>
+    <setting id="include_prerelease_results" default="true">false</setting>
+    <setting id="include_3d_results" default="true">false</setting>
+    <setting id="filter_hevc">1</setting>
+    <setting id="filter_hdr">1</setting>
+    <setting id="filter_dv">1</setting>
+    <setting id="torrent.display.uncached" default="true">false</setting>
+    <setting id="ignore_results_filter">true</setting>
+    <setting id="highlight.type">1</setting>
+    <setting id="hoster.identify" default="true">whitesmoke</setting>
+    <setting id="torrent.identify" default="true">whitesmoke</setting>
+    <setting id="provider.rd_colour" default="true">whitesmoke</setting>
+    <setting id="provider.pm_colour" default="true">whitesmoke</setting>
+    <setting id="provider.ad_colour" default="true">whitesmoke</setting>
+    <setting id="provider.furk_colour" default="true">whitesmoke</setting>
+    <setting id="provider.easynews_colour" default="true">whitesmoke</setting>
+    <setting id="provider.debrid_cloud_colour" default="true">whitesmoke</setting>
+    <setting id="provider.folders_colour" default="true">whitesmoke</setting>
+    <setting id="scraper_4k_highlight" default="true">whitesmoke</setting>
+    <setting id="scraper_1080p_highlight" default="true">whitesmoke</setting>
+    <setting id="scraper_720p_highlight" default="true">whitesmoke</setting>
+    <setting id="scraper_SD_highlight" default="true">whitesmoke</setting>
+    <setting id="int_dialog_highlight" default="true">whitesmoke</setting>
+    <setting id="ext_dialog_highlight" default="true">whitesmoke</setting>
+    
+    <setting id="imdb_user" default="true" />
+    <setting id="imdb_lists.sort_type" default="true">0</setting>
+    <setting id="imdb_lists.sort_direction" default="true">0</setting>
+   
+    <setting id="rd.priority">1</setting>
+    <setting id="pm.token" default="true" />
+    <setting id="pm.enabled">true</setting>
+    <setting id="pm.account_id" default="true" />
+    <setting id="pm.torrent.enabled">true</setting>
+    <setting id="pm.hoster.enabled" default="true">false</setting>
+    <setting id="store_torrent.premiumize.me" default="true">false</setting>
+    <setting id="provider.pm_cloud" default="true">false</setting>
+    <setting id="pm_cloud.title_filter" default="true">false</setting>
+    <setting id="check.pm_cloud" default="true">false</setting>
+    <setting id="results.sort_pmcloud_first">true</setting>
+    <setting id="pm.priority">8</setting>
+    <setting id="ad.token" default="true" />
+    <setting id="ad.enabled">true</setting>
+    <setting id="ad.account_id" default="true" />
+    <setting id="ad.torrent.enabled">true</setting>
+    <setting id="ad.hoster.enabled" default="true">false</setting>
+    <setting id="store_torrent.alldebrid" default="true">false</setting>
+    <setting id="provider.ad_cloud" default="true">false</setting>
+    <setting id="ad_cloud.title_filter" default="true">false</setting>
+    <setting id="check.ad_cloud" default="true">false</setting>
+    <setting id="results.sort_adcloud_first">true</setting>
+    <setting id="ad.priority">9</setting>
+    <setting id="provider.easynews" default="true">false</setting>
+    <setting id="easynews_user" default="true" />
+    <setting id="easynews_password" default="true" />
+    <setting id="easynews.title_filter" default="true">false</setting>
+    <setting id="easynews.filter_lang" default="true">false</setting>
+    <setting id="easynews.lang_filters" default="true">eng</setting>
+    <setting id="easynews_moderation">true</setting>
+    <setting id="check.easynews" default="true">false</setting>
+    <setting id="en.priority">7</setting>
+    <setting id="provider.furk" default="true">false</setting>
+    <setting id="furk_login" default="true" />
+    <setting id="furk_password" default="true" />
+    <setting id="furk_api_key" default="true" />
+    <setting id="furk.mod.level" default="true">0</setting>
+    <setting id="furk.title_filter" default="true">false</setting>
+    <setting id="check.furk" default="true">false</setting>
+    <setting id="fu.priority">6</setting>
+    <setting id="provider.folders" default="true">false</setting>
+    <setting id="folders.manage" default="true">$ADDON[plugin.video.coalition 32652]</setting>
+    <setting id="folders.title_filter" default="true">false</setting>
+    <setting id="check.folders" default="true">false</setting>
+    <setting id="results.sort_folders_first">true</setting>
+    <setting id="provider.external">true</setting>
+    <setting id="filter.foreign.single.audio">true</setting>
+    <setting id="filter.undesirables">true</setting>
+    <setting id="debug.enabled" default="true">false</setting>
+    <setting id="debug.location">1</setting>
+    <setting id="provider.bitlord" default="true">false</setting>
+    <setting id="provider.bitsearch">true</setting>
+    <setting id="provider.eztv" default="true">false</setting>
+    <setting id="provider.glodls" default="true">false</setting>
+    <setting id="provider.magnetdl">true</setting>
+    <setting id="provider.nyaa" default="true">false</setting>
+    <setting id="provider.piratebay" default="true">false</setting>
+    <setting id="provider.torrentdownload" default="true">false</setting>
+    <setting id="provider.torrentio">true</setting>
+    <setting id="provider.library" default="true">false</setting>
+</settings>
