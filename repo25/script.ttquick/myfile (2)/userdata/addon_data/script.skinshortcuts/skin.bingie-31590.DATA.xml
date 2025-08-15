@@ -1,0 +1,47 @@
+<shortcuts>
+	<shortcut>
+		<defaultID>369</defaultID>
+		<label>$SKIN[31051|skin.bingie|None]</label>
+		<label2>Shows</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,videodb://tvshows/titles/,return)</action>
+		<visible>Library.HasContent(Movies) | Library.HasContent(TVShows)</visible>
+		</shortcut>
+	<shortcut>
+		<defaultID>369</defaultID>
+		<label>$SKIN[31101|skin.bingie|None]</label>
+		<label2>Shows</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,/storage/emulated/0/Android/data/org.xbmc.kodi/files/.kodi/addons/skin.bingie/extras/widgetplaylists/recentlyaddedtvshows.xsp,return)</action>
+		<visible>Library.HasContent(Movies) | Library.HasContent(TVShows)</visible>
+		</shortcut>
+	<shortcut>
+		<defaultID>20387</defaultID>
+		<label>20387</label>
+		<label2>Shows</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,videodb://recentlyaddedepisodes/,return)</action>
+		<visible>Library.HasContent(Movies) | Library.HasContent(TVShows)</visible>
+		</shortcut>
+	<shortcut>
+		<defaultID>626</defaultID>
+		<label>626</label>
+		<label2>Shows</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,videodb://inprogresstvshows/,return)</action>
+		<visible>Library.HasContent(Movies) | Library.HasContent(TVShows)</visible>
+		</shortcut>
+	<shortcut>
+		<defaultID>135</defaultID>
+		<label>135</label>
+		<label2>Shows</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb />
+		<action>ActivateWindow(Videos,videodb://tvshows/genres/,return)</action>
+		<visible>Library.HasContent(Movies) | Library.HasContent(TVShows)</visible>
+		</shortcut>
+	</shortcuts>
