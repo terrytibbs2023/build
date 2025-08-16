@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- BINGIE -->
+<shortcuts>
+	<!-- Search -->
+	<shortcut>
+		<label>137</label>
+		<label2>137</label2>
+		<icon>shortcuts/search.png</icon>
+		<thumb />
+		<action>ActivateWindow(1111,return)</action>
+	</shortcut>
+
+	<!-- Home -->
+	<shortcut>
+		<label>10000</label>
+		<label2>10000</label2>
+		<icon>shortcuts/home.png</icon>
+		<thumb />
+		<action>ActivateWindow(home,return)</action>
+	</shortcut>
+
+	
+	
+	<!-- TV hub -->
+	<shortcut>
+		<label>31590</label>
+		<label2>31590</label2>
+		<defaultID>shows</defaultID>
+		<icon>shortcuts/tv.png</icon>
+        <thumb />
+		<action>ActivateWindow(10025,"plugin://plugin.video.fen/?action=trakt_tv_most_watched&amp;iconImage=most_watched&amp;mode=build_tvshow_list&amp;name=32043",return)</action>
+	</shortcut>
+
+	<!-- Movies hub -->
+	<shortcut>
+		<label>342</label>
+		<label2>342</label2>
+		<defaultID>movies</defaultID>
+		<icon>shortcuts/clapperboard.png</icon>
+		<thumb />
+		<action>ActivateWindow(1111,return)</action>
+	</shortcut>
+	
+
+
+</shortcuts>
