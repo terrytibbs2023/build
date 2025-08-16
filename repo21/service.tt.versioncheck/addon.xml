@@ -4,8 +4,7 @@
     <import addon="xbmc.python" version="3.0.0"/>
 
 
-<import addon="repository.bingie"/>
-<import addon="skin.bingie"/>
+
 <import addon="script.terrysautoinstall"/>
   </requires>
   <extension point="xbmc.service" library="resources/lib/runner.py"/>
