@@ -1,4 +1,4 @@
-<addon id="plugin.video.fenlight" name="FenLightAM" provider-name="Tikipeter/AnonyMouse" version="6.1.31">
+<addon id="plugin.video.fenlight" name="FenLight" provider-name="Tikipeter/AnonyMouse" version="7.1.31">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="script.module.pil" version="1.1.7"/>
@@ -17,7 +17,7 @@
 		<disclaimer lang="en">The author of this addon does not host any of the content which is found and has no affiliation with any of the content providers.</disclaimer>
         <license/>
         <assets>
-            <icon>resources/media/addon_icons/fenlight_icon_01.png</icon>
+            <icon>resources/media/addon_icons/fenlightam_icon_01.png</icon>
             <fanart>resources/media/fenlight_fanart_01.jpg</fanart>
         </assets>
         <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
