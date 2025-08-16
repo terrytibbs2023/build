@@ -14,7 +14,6 @@
 
 import platform
 import sys
-import json
 
 import xbmc  # pylint: disable=import-error
 import xbmcgui  # pylint: disable=import-error
@@ -41,9 +40,12 @@ if sys.platform.startswith('linux'):
     if sys.version_info[0] == 3 and sys.version_info[1] >= 8:
         try:
             from .distro import distro
+
             DISTRIBUTION = distro.linux_distribution(full_distribution_name=False)[0].lower()
+
         except (AttributeError, ImportError):
             DISTRIBUTION = ''
+
     else:
         DISTRIBUTION = platform.linux_distribution(full_distribution_name=0)[0].lower()  # pylint: disable=no-member
 
@@ -57,8 +59,11 @@ def _version_check():
     :return: old, current, available, and stable versions
     :rtype: bool / 'stable', dict, dict, dict
     """
+    # retrieve version_lists from supplied version file
     version_list = get_version_file_list()
+    # retrieve version installed
     version_installed = get_installed_version()
+    # compare installed and available
     old_version, version_installed, version_available, version_stable = \
         compare_version(version_installed, version_list)
     return old_version, version_installed, version_available, version_stable
@@ -72,9 +77,14 @@ def _version_check_linux(packages):
     """
     if DISTRIBUTION in ['ubuntu', 'debian', 'linuxmint']:
         try:
+            # try aptdaemon first
+            # pylint: disable=import-outside-toplevel
             from .apt_daemon_handler import AptDaemonHandler
             handler = AptDaemonHandler()
-        except:
+        except:  # pylint: disable=bare-except
+            # fallback to shell
+            # since we need the user password, ask to check for new version first
+            # pylint: disable=import-outside-toplevel
             from .shell_handler_apt import ShellHandlerApt
             handler = ShellHandlerApt(use_sudo=True)
             if dialog_yes_no(32015):
@@ -97,6 +107,7 @@ def _version_check_linux(packages):
                     else:
                         log('Error during upgrade')
                     return
+
             log('No upgrade available')
             return
 
@@ -108,11 +119,19 @@ def _version_check_linux(packages):
 
 
 def _check_cryptography():
-    """ Check for cryptography package, and version """
+    """ Check for cryptography package, and version
+
+    Python cryptography < 1.7 (still shipped with Ubuntu 16.04) has issues with
+    pyOpenSSL integration, leading to all sorts of weird bugs - check here to save
+    on some troubleshooting. This check may be removed in the future (when switching
+    to Python3?)
+    See https://github.com/pyca/pyopenssl/issues/542
+    """
     try:
         import cryptography  # pylint: disable=import-outside-toplevel
         ver = cryptography.__version__
     except ImportError:
+        # If the module is not found - no problem
         return
 
     ver_parts = list(map(int, ver.split('.')))
@@ -124,38 +143,9 @@ def _check_cryptography():
         )
 
 
-def force_update_addons():
-    """Force Kodi to refresh repositories and install available addon updates."""
-    log('Starting forced repository update and addon upgrade')
-
-    xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Addons.RefreshRepositories","id":1}')
-    log('Repositories refreshed')
-
-    xbmc.sleep(5000)
-
-    response = xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Addons.GetAddons","params":{"properties":["enabled","version","update"],"enabled":true},"id":1}')
-    try:
-        addons = json.loads(response)
-        if 'result' in addons and 'addons' in addons['result']:
-            for addon in addons['result']['addons']:
-                if addon.get('update', False):
-                    addon_id = addon['addonid']
-                    log(f'Updating addon: {addon_id}')
-                    xbmc.executeJSONRPC(json.dumps({
-                        "jsonrpc": "2.0",
-                        "method": "Addons.UpdateAddon",
-                        "params": {"addonid": addon_id},
-                        "id": 1
-                    }))
-            log('Addon updates triggered')
-        else:
-            log('No addons require updates')
-    except Exception as e:
-        log(f'Error parsing addon update response: {e}')
-
-
 def run():
-    """ Service entry-point """
+    """ Service entry-point
+    """
     _check_cryptography()
 
     if ADDON.getSetting('versioncheck_enable') == 'false':
@@ -173,6 +163,3 @@ def run():
             old_version, version_installed, version_available, version_stable = _version_check()
             if old_version:
                 upgrade_message2(version_installed, version_available, version_stable, old_version)
-
-        force_update_addons()
-
