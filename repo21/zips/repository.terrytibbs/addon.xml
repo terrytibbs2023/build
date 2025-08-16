@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.terrytibbs" name="Terrys 25 repo" version="2.8" provider-name="Terry Tibbs">
-    <extension point="xbmc.addon.repository" name="Terrys 25 Repository">
+<addon id="repository.terrytibbs" name="Terrys 21 repo" version="2.0" provider-name="Terry Tibbs">
+    <extension point="xbmc.addon.repository" name="Terrys 20 Repository">
         <dir>
-            <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repo25/zips/addons.xml</info>
+            <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repo21/zips/addons.xml</info>
           
 
-<checksum>https://githubraw.com/terrytibbs2023/build/main/repo25/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/repo25/zips/</datadir>
+<checksum>https://githubraw.com/terrytibbs2023/build/main/repo21/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/repo21/zips/</datadir>
         </dir>
 
 
