@@ -1,0 +1,17 @@
+<addon id="script.terrysautoinstall"
+       name="AutoSetup"
+       version="1.0.18"
+       provider-name="Terry Tibbs 2025">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.python.script" library="resources/lib/default.py"/>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Automated Setup Wizard</summary>
+        <description lang="en">Downloads and extracts setup files on first run.</description>
+        <platform>all</platform>
+        <icon>icon.png</icon>
+        <fanart>fanart.jpg</fanart>
+    </extension>
+</addon>
+
