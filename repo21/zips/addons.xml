@@ -912,7 +912,7 @@ fix to properly get English videos as fallback
         </assets>
         <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
     </extension>
-</addon><addon id="plugin.video.fenlight" name="FenLightAM" provider-name="Tikipeter/AnonyMouse" version="2.1.31">
+</addon><addon id="plugin.video.fenlight" name="FenLightAM" provider-name="Tikipeter/AnonyMouse" version="6.1.31">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="script.module.pil" version="1.1.7" />
