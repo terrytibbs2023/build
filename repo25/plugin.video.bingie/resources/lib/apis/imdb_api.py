@@ -10,8 +10,23 @@ from modules.kodi_utils import sleep
 from modules.utils import remove_accents, replace_html_codes, normalize
 # from modules.kodi_utils import logger
 
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edge/101.0.1210.53',
+			'Accept-Language':'en-us,en;q=0.5'}
+base_url = 'https://www.imdb.com/%s'
+more_like_this_url = 'title/%s'
+reviews_url = 'title/%s/reviews/?sort=num_votes,desc'
+trivia_url = 'title/%s/trivia'
+blunders_url = 'title/%s/goofs'
+parentsguide_url = 'title/%s/parentalguide'
+images_url = 'title/%s/mediaindex?page=%s'
+people_images_url = 'name/%s/mediaindex?page=%s'
+people_trivia_url = 'name/%s/trivia'
+people_search_url_backup = 'search/name/?name=%s'
+people_search_url = 'https://sg.media-imdb.com/suggests/%s/%s.json'
+timeout = 20.0
+
 def imdb_more_like_this(imdb_id):
-	url = 'https://www.imdb.com/title/%s' % imdb_id
+	url = base_url % more_like_this_url % imdb_id
 	string = 'imdb_more_like_this_%s' % imdb_id
 	params = {'url': url, 'action': 'imdb_more_like_this', 'imdb_id': imdb_id}
 	return cache_object(get_imdb, string, params, False, 168)[0]
@@ -19,43 +34,41 @@ def imdb_more_like_this(imdb_id):
 def imdb_people_id(actor_name):
 	name = actor_name.lower()
 	string = 'imdb_people_id_%s' % name
-	url, url_backup = 'https://sg.media-imdb.com/suggests/%s/%s.json' % (name[0], name.replace(' ', '%20')), 'https://www.imdb.com/search/name/?name=%s' % name
+	url, url_backup = people_search_url % (name[0], name.replace(' ', '%20')), base_url % people_search_url_backup % name
 	params = {'url': url, 'action': 'imdb_people_id', 'name': name, 'url_backup': url_backup}
 	return cache_object(get_imdb, string, params, False, 8736)[0]
 
 def imdb_reviews(imdb_id):
-	url = 'https://www.imdb.com/title/%s/reviews/?sort=num_votes,desc' % imdb_id
+	url = base_url % reviews_url % imdb_id
 	string = 'imdb_reviews_%s' % imdb_id
 	params = {'url': url, 'action': 'imdb_reviews'}
 	return cache_object(get_imdb, string, params, False, 168)[0]
 
 def imdb_parentsguide(imdb_id):
-	url = 'https://www.imdb.com/title/%s/parentalguide' % imdb_id
+	url = base_url % parentsguide_url % imdb_id
 	string = 'imdb_parentsguide_%s' % imdb_id
 	params = {'url': url, 'action': 'imdb_parentsguide'}
 	return cache_object(get_imdb, string, params, False, 168)[0]
 
 def imdb_trivia(imdb_id):
-	url = 'https://www.imdb.com/title/%s/trivia' % imdb_id
+	url = base_url % trivia_url % imdb_id
 	string = 'imdb_trivia_%s' % imdb_id
 	params = {'url': url, 'action': 'imdb_trivia'}
 	return cache_object(get_imdb, string, params, False, 168)[0]
 
 def imdb_blunders(imdb_id):
-	url = 'https://www.imdb.com/title/%s/goofs' % imdb_id
+	url = base_url % blunders_url % imdb_id
 	string = 'imdb_blunders_%s' % imdb_id
 	params = {'url': url, 'action': 'imdb_blunders'}
 	return cache_object(get_imdb, string, params, False, 168)[0]
 
 def imdb_people_trivia(imdb_id):
-	url = 'https://www.imdb.com/name/%s/trivia' % imdb_id
+	url = base_url % people_trivia_url % imdb_id
 	string = 'imdb_people_trivia_%s' % imdb_id
 	params = {'url': url, 'action': 'imdb_people_trivia'}
 	return cache_object(get_imdb, string, params, False, 168)[0]
 
 def get_imdb(params):
-	headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.64 Safari/537.36 Edge/101.0.1210.53',
-				'Accept-Language':'en-us,en;q=0.5'}
 	imdb_list = []
 	action = params.get('action')
 	url = params.get('url')
@@ -68,7 +81,7 @@ def get_imdb(params):
 					if _id.replace('tt','').isnumeric(): yield (_id)
 				except: pass
 		try:
-			result = requests.get(url, timeout=20, headers=headers).text
+			result = requests.get(url, timeout=timeout, headers=headers).text
 			result = result.split('<span>Storyline</span>')[0].split('<span>More like this</span>')[1]
 			items = str(result).split('poster-card__title--clickable" aria-label="')
 		except: items = []
@@ -86,7 +99,7 @@ def get_imdb(params):
 				except: pass
 		if action == 'imdb_trivia': _str = 'TRIVIA'
 		else: _str =  'BLUNDERS'
-		result = requests.get(url, timeout=20, headers=headers)
+		result = requests.get(url, timeout=timeout, headers=headers)
 		result = remove_accents(result.text)
 		result = result.replace('\n', ' ')
 		items = parseDOM(result, 'div', attrs={'class': 'ipc-html-content-inner-div'})
@@ -102,7 +115,7 @@ def get_imdb(params):
 					yield content
 				except: pass
 		trivia_str = 'TRIVIA'
-		result = requests.get(url, timeout=20, headers=headers)
+		result = requests.get(url, timeout=timeout, headers=headers)
 		result = remove_accents(result.text)
 		result = result.replace('\n', ' ')
 		items = parseDOM(result, 'div', attrs={'class': 'ipc-html-content-inner-div'})
@@ -135,7 +148,7 @@ def get_imdb(params):
 					yield review
 				except: pass
 		spoiler_str = 'CONTAINS SPOILERS'
-		result = requests.get(url, timeout=20, headers=headers)
+		result = requests.get(url, timeout=timeout, headers=headers)
 		result = remove_accents(result.text)
 		result = result.replace('\n', ' ')
 		body = re.findall(r'{"node":{"id":(.*)"__typename":"ReviewEdge"', result)[0]
@@ -144,13 +157,13 @@ def get_imdb(params):
 	elif action == 'imdb_people_id':
 		try:
 			name = params['name']
-			result = requests.get(url, timeout=20)
+			result = requests.get(url, timeout=timeout)
 			results = json.loads(re.sub(r'imdb\$(.+?)\(', '', result.text)[:-1])['d']
 			imdb_list = [i['id'] for i in results if i['id'].startswith('nm') and i['l'].lower() == name][0]
 		except: imdb_list = []
 		if not imdb_list:
 			try:
-				result = requests.get(params['url_backup'], timeout=20)
+				result = requests.get(params['url_backup'], timeout=timeout)
 				result = remove_accents(result.text)
 				result = result.replace('\n', ' ')
 				result = parseDOM(result, 'div', attrs={'class': 'lister-item-image'})[0]
@@ -159,7 +172,7 @@ def get_imdb(params):
 	elif action == 'imdb_parentsguide':
 		imdb_list = []
 		imdb_append = imdb_list.append
-		result = requests.get(url, timeout=20, headers=headers)
+		result = requests.get(url, timeout=timeout, headers=headers)
 		result = remove_accents(result.text)
 		result = result.replace('\n', ' ')
 		results = parseDOM(result, 'section', attrs={'class': 'ipc-page-section ipc-page-section--base'})
@@ -191,8 +204,7 @@ def clear_imdb_cache(silent=False):
 	from modules.kodi_utils import clear_property
 	try:
 		dbcon = connect_database('maincache_db')
-		results = dbcon.execute("SELECT id FROM maincache WHERE id LIKE ?", ('imdb_%',)).fetchall()
-		imdb_results = [str(i[0]) for i in results]
+		imdb_results = [str(i[0]) for i in dbcon.execute("SELECT id FROM maincache WHERE id LIKE ?", ('imdb_%',)).fetchall()]
 		if not imdb_results: return True
 		dbcon.execute("DELETE FROM maincache WHERE id LIKE ?", ('imdb_%',))
 		for i in imdb_results: clear_property(i)
@@ -206,8 +218,7 @@ def refresh_imdb_meta_data(imdb_id):
 		insert1, insert2 = '%%_%s' % imdb_id, '%%_%s_%%' % imdb_id
 		dbcon = connect_database('maincache_db')
 		for item in (insert1, insert2):
-			results = dbcon.execute("SELECT id FROM maincache WHERE id LIKE ?", (item,)).fetchall()
-			imdb_results += [str(i[0]) for i in results]
+			imdb_results += [str(i[0]) for i in dbcon.execute("SELECT id FROM maincache WHERE id LIKE ?", (item,)).fetchall()]
 		if not imdb_results: return True
 		dbcon.execute("DELETE FROM maincache WHERE id LIKE ?", (insert1,))
 		dbcon.execute("DELETE FROM maincache WHERE id LIKE ?", (insert2,))

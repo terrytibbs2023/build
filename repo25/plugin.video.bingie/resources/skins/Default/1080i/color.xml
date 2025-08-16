@@ -43,7 +43,7 @@
                     <left>5</left>
                     <width max="1650">auto</width>
                     <height>20</height>
-                    <font>font14</font> <!-- BINGIE_33 -->
+                    <font>font14</font> <!-- FENLIGHT_33 -->
                     <textcolor>FFCCCCCC</textcolor>
                     <align>center</align>
                     <aligny>center</aligny>
@@ -101,7 +101,7 @@
                     <onleft>2000</onleft>
                     <onright>2000</onright>
                     <label>OK</label>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- FENLIGHT_26 -->
                     <textcolor>FFCCCCCC</textcolor>
                     <focusedcolor>FF1F2020</focusedcolor>
                     <texturefocus colordiffuse="FFCCCCCC" border="30">bingie_common/circle.png</texturefocus>
@@ -119,7 +119,7 @@
                     <onleft>2000</onleft>
                     <onright>2000</onright>
                     <label>Cancel</label>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- FENLIGHT_26 -->
                     <textcolor>FFCCCCCC</textcolor>
                     <focusedcolor>FF1F2020</focusedcolor>
                     <texturefocus colordiffuse="FFCCCCCC" border="30">bingie_common/circle.png</texturefocus>
@@ -135,7 +135,7 @@
                     <aligny>bottom</aligny>
                     <textcolor>white</textcolor>
                     <shadowcolor>black</shadowcolor>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- FENLIGHT_26 -->
                     <label>[B]Enter Value[/B]</label>
                 </control>
                 <control type="button" id="12">
@@ -148,7 +148,7 @@
                     <onleft>2000</onleft>
                     <onright>2000</onright>
                     <label>$INFO[Container(2000).ListItem.Property(highlight)]</label>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- FENLIGHT_26 -->
                     <textcolor>FFCCCCCC</textcolor>
                     <focusedcolor>FF1F2020</focusedcolor>
                     <texturefocus colordiffuse="FFCCCCCC" border="30">bingie_common/circle.png</texturefocus>

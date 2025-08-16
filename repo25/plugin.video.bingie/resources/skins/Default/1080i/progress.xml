@@ -43,7 +43,7 @@
                     <left>0</left>
                     <width>1035</width>
                     <height>5</height>
-                    <font>font10</font> <!-- BINGIE_21 -->
+                    <font>font10</font> <!-- FENLIGHT_21 -->
                     <align>left</align>
                     <aligny>bottom</aligny>
                     <textcolor>B3CCCCCC</textcolor>
@@ -62,15 +62,15 @@
                     <left>5</left>
                     <height>20</height>
                     <align>center</align>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- FENLIGHT_26 -->
                     <textcolor>FFCCCCCC</textcolor>
                 </control>
                 <control type="textbox" id="2001">
                     <top>100</top>
                     <left>20</left>
-                    <width>580</width>
+                    <width>600</width>
                     <height>250</height>
-                    <font>font13</font> <!-- BINGIE_30 -->
+                    <font>font13</font> <!-- FENLIGHT_30 -->
                     <align>center</align>
                     <aligny>center</aligny>
                     <textcolor>FFCCCCCC</textcolor>

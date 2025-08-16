@@ -792,10 +792,9 @@ fix to properly get English videos as fallback
       <fanart>fanart.jpg</fanart>
     </assets>
   </extension>
-</addon><addon id="plugin.video.bingie" name="Bingie" provider-name="Tikipeter/AnonyMouse/TerryTibbs" version="1.0.11">
+</addon><addon id="plugin.video.bingie" name="Bingie Player" provider-name="Tikipeter/TerryTibbs" version="2.0.10">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
-        <import addon="script.module.pil" version="1.1.7" />
         <import addon="script.module.requests" version="2.19.1" />
     </requires>
     <extension point="xbmc.python.pluginsource" library="resources/lib/bingie.py">
@@ -811,8 +810,8 @@ fix to properly get English videos as fallback
 		<disclaimer lang="en">The author of this addon does not host any of the content which is found and has no affiliation with any of the content providers.</disclaimer>
         <license />
         <assets>
-            <icon>resources/media/addon_icons/bingie_icon.png</icon>
-            <fanart>resources/media/bingie_fanart_01.jpg</fanart>
+            <icon>resources/media/bingie_icon.png</icon>
+            <fanart>resources/media/bingie_fanart2.jpg</fanart>
         </assets>
         <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
     </extension>

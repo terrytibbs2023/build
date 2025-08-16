@@ -425,33 +425,24 @@
                           <property name="setting_label">Autostart FenLight When Kodi Starts</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.auto_start_bingie)]</property>
-                          <property name="setting_description">Enable this and Fen Light will autostart after running its services upon Kodi start</property>
+                          <property name="setting_description">Enable this and Bingie will autostart after running its services upon Kodi start</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=auto_start_bingie)</onclick>
                       </item>
                       <item>
                           <visible>Container(2000).HasFocus(10)</visible>
-                          <property name="setting_label">Assign Addon Icon Image</property>
-                          <property name="setting_type">action</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.addon_icon_choice_name)]</property>
-                          <property name="setting_description">Choose from assigned custom icons to use with Fen Light</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=addon_icon_choice)</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(10)</visible>
-                          <visible>String.EndsWith(Window(10000).Property(bingie.default_addon_fanart),Window(10000).Property(bingie.addon_fanart))</visible>
                           <property name="setting_label">Assign Addon Background Image</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.default_addon_fanart)]</property>
-                          <property name="setting_description">Choose any custom background you would like to use within Fen Light</property>
+                          <property name="setting_description">Choose any custom background you would like to use within Bingie</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_path&amp;setting_id=default_addon_fanart)</onclick>
                       </item>
                       <item>
                           <visible>Container(2000).HasFocus(10)</visible>
-                          <visible>!String.EndsWith(Window(10000).Property(bingie.default_addon_fanart),Window(10000).Property(bingie.addon_fanart))</visible>
-                          <property name="setting_label">Restore Default Background Image</property>
+                          <visible>!String.EndsWith(Window(10000).Property(bingie.default_addon_fanart),bingie_fanart2.jpg)</visible>
+                          <property name="setting_label">    - Restore Default Background Image</property>
                           <property name="setting_type">action</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.default_addon_fanart)]</property>
-                          <property name="setting_description">Restore default Fen Light background</property>
+                          <property name="setting_value">...</property>
+                          <property name="setting_description">Restore default Bingie background</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.restore_setting_default&amp;setting_id=default_addon_fanart)</onclick>
                       </item>
                       <item>
@@ -459,7 +450,7 @@
                           <property name="setting_label">Limit Concurrent Threads</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.limit_concurrent_threads)]</property>
-                          <property name="setting_description">Enable this and Fen Light will limit the threads enacted simultaneously. Best to leave this disabled unless you are having issues with your device not supporting high numbers of concurrent threads in python</property>
+                          <property name="setting_description">Enable this and Bingie will limit the threads enacted simultaneously. Best to leave this disabled unless you are having issues with your device not supporting high numbers of concurrent threads in python</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=limit_concurrent_threads)</onclick>
                       </item>
                       <item>
@@ -468,7 +459,7 @@
                           <property name="setting_label">    - Maximum Active Threads</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.max_threads)]</property>
-                          <property name="setting_description">Choose the maximum active concurrent threads Fen Light will be limited to</property>
+                          <property name="setting_description">Choose the maximum active concurrent threads Bingie will be limited to</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=max_threads)</onclick>
                       </item>
         <!-- Manage Addon Updates -->
@@ -483,7 +474,7 @@
                           <property name="setting_label">Update Action</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.update.action_name)]</property>
-                          <property name="setting_description">Choose the manner in which Fen Light handles updates</property>
+                          <property name="setting_description">Choose the manner in which Bingie handles updates</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=update.action)</onclick>
                       </item>
                       <item>
@@ -492,7 +483,7 @@
                           <property name="setting_label">    - Delay Before Running (secs)</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.update.delay)]</property>
-                          <property name="setting_description">Choose the delay time before Fen Light checks for updates after Kodi start</property>
+                          <property name="setting_description">Choose the delay time before Bingie checks for updates after Kodi start</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=update.delay)</onclick>
                       </item>
                       <item>
@@ -501,7 +492,7 @@
                           <property name="setting_label">    - Github Username</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.update.username)]</property>
-                          <property name="setting_description">Leave this setting as default unless you wsh to update Fen Light through a different user repository. If you do, enter the Github Username of the new github location</property>
+                          <property name="setting_description">Leave this setting as default unless you wsh to update Bingie through a different user repository. If you do, enter the Github Username of the new github location</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_string&amp;setting_id=update.username)</onclick>
                       </item>
                       <item>
@@ -510,7 +501,7 @@
                           <property name="setting_label">    - Github Repo Address</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.update.location)]</property>
-                          <property name="setting_description">Leave this setting as default unless you wsh to update Fen Light through a different user repository. If you do, enter the Github Repo Address of the new github location</property>
+                          <property name="setting_description">Leave this setting as default unless you wsh to update Bingie through a different user repository. If you do, enter the Github Repo Address of the new github location</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_string&amp;setting_id=update.location)</onclick>
                       </item>
         <!-- Watched Indicators -->
@@ -526,7 +517,7 @@
                           <property name="setting_label">Watched Status Provider</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.watched_indicators_name)]</property>
-                          <property name="setting_description">Choose the provider that keeps track of the Movies and Episodes you have watched within Fen Light. Options are the built in method of Fen Light or your Trakt account</property>
+                          <property name="setting_description">Choose the provider that keeps track of the Movies and Episodes you have watched within Bingie. Options are the built in method of Bingie or your Trakt account</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=watched_indicators)</onclick>
                       </item>
         <!-- Trakt Cache -->
@@ -542,7 +533,7 @@
                           <property name="setting_label">Resync Interval (mins)</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.trakt.sync_interval)]</property>
-                          <property name="setting_description">Choose how often Fen Light polls your Trakt service for any changes</property>
+                          <property name="setting_description">Choose how often Bingie polls your Trakt service for any changes</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=trakt.sync_interval)</onclick>
                       </item>
                       <item>
@@ -551,7 +542,7 @@
                           <property name="setting_label">Refresh Widgets After Trakt Sync</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.trakt.refresh_widgets)]</property>
-                          <property name="setting_description">Enable this and Fen Light will refresh widgets after performing a Trakt Sync if there were any changes</property>
+                          <property name="setting_description">Enable this and Bingie will refresh widgets after performing a Trakt Sync if there were any changes</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=trakt.refresh_widgets)</onclick>
                       </item>
         <!-- UTC Time Offset -->
@@ -661,7 +652,7 @@
                           <property name="setting_label">Movies</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.media_open_action_movie_name)]</property>
-                          <property name="setting_description">Choose the Open Action when a Movie is selected in Fen Light. Choices Are None, Open Extras, Open Movie Set, Both. "Both" will open the Movie Set if available or open Extras</property>
+                          <property name="setting_description">Choose the Open Action when a Movie is selected in Bingie. Choices Are None, Open Extras, Open Movie Set, Both. "Both" will open the Movie Set if available or open Extras</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=media_open_action_movie)</onclick>
                       </item>
                       <item>
@@ -669,7 +660,7 @@
                           <property name="setting_label">TV Shows</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.media_open_action_tvshow_name)]</property>
-                          <property name="setting_description">Choose the Open Action when a TV Show is selected in Fen Light. Choices Are None or Open Extras</property>
+                          <property name="setting_description">Choose the Open Action when a TV Show is selected in Bingie. Choices Are None or Open Extras</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=media_open_action_tvshow)</onclick>
                       </item>
 <!-- CONTENT 30 -->
@@ -726,7 +717,7 @@
                           <property name="setting_label">Refresh Widgets on Timer</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.widget_refresh_timer_name)]</property>
-                          <property name="setting_description">Choose whether Fen Light refreshes widgets based on a set timer. You should set a value here if you are using random widgets from Fen Light, and wish for their contents to update between Kodi starts</property>
+                          <property name="setting_description">Choose whether Bingie refreshes widgets based on a set timer. You should set a value here if you are using random widgets from Bingie, and wish for their contents to update between Kodi starts</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=widget_refresh_timer_choice)</onclick>
                       </item>
                       <item>
@@ -735,7 +726,7 @@
                           <property name="setting_label">    - Show Notification after Refresh</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.widget_refresh_notification)]</property>
-                          <property name="setting_description">Enable this and Fen Light will show a notification whenever widgets are refreshed by the timer</property>
+                          <property name="setting_description">Enable this and Bingie will show a notification whenever widgets are refreshed by the timer</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=widget_refresh_notification)</onclick>
                       </item>
                       <item>
@@ -743,7 +734,7 @@
                           <property name="setting_label">Hide Watched Items in Widgets</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.widget_hide_watched)]</property>
-                          <property name="setting_description">Enable this and watched items will be hidden in Fen Light widgets</property>
+                          <property name="setting_description">Enable this and watched items will be hidden in Bingie widgets</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=widget_hide_watched)</onclick>
                       </item>
                       <item>
@@ -751,48 +742,8 @@
                           <property name="setting_label">Hide Next Page Item in Widgets</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.widget_hide_next_page)]</property>
-                          <property name="setting_description">Enable this and the "Next Page" item will be hidden in Fen Light widgets</property>
+                          <property name="setting_description">Enable this and the "Next Page" item will be hidden in Bingie widgets</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=widget_hide_next_page)</onclick>
-                      </item>
-        <!-- RPDb Ratings Posters -->
-                      <item>
-                          <visible>Container(2000).HasFocus(30)</visible>
-                          <visible>!String.IsEqual(Window(10000).Property(bingie.rpdb_api),empty_setting)</visible>
-                          <property name="setting_label">Ratings Posters</property>
-                          <property name="setting_type">separator</property>
-                          <onclick>noop</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(30)</visible>
-                          <visible>!String.IsEqual(Window(10000).Property(bingie.rpdb_api),empty_setting)</visible>
-                          <property name="setting_label">Use RPDb Ratings Posters For...</property>
-                          <property name="setting_type">action</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.rpdb_enabled_name)]</property>
-                          <property name="setting_description">Choose which media types utilize that Rated Posters provided by RPDb. Choices are None, Movies, TV Shows or Both</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=rpdb_enabled)</onclick>
-                      </item>
-        <!-- Context Menu -->
-                      <item>
-                          <visible>Container(2000).HasFocus(30)</visible>
-                          <property name="setting_label">Context Menu</property>
-                          <property name="setting_type">separator</property>
-                          <onclick>noop</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(30)</visible>
-                          <property name="setting_label">Context Menu Order</property>
-                          <property name="setting_type">action</property>
-                          <property name="setting_value">...</property>
-                          <property name="setting_description">Choose the order in which Context Menu items appear for Fen Light media items</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=context_menu_order_choice)</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(30)</visible>
-                          <property name="setting_label">Reset Context Menu to Default</property>
-                          <property name="setting_type">action</property>
-                          <property name="setting_value">...</property>
-                          <property name="setting_description">Return the Context Menu do default items</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=context_menu_default_choice)</onclick>
                       </item>
         <!-- General -->
                       <item>
@@ -806,7 +757,7 @@
                           <property name="setting_label">Paginate Lists When Available</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.paginate.lists_name)]</property>
-                          <property name="setting_description">Enable this and Fen Light will attempt to paginate lists when possible. This is mainly applicable to personal lists</property>
+                          <property name="setting_description">Enable this and Bingie will attempt to paginate lists when possible. This is mainly applicable to personal lists</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=paginate.lists)</onclick>
                       </item>
                       <item>
@@ -815,7 +766,7 @@
                           <property name="setting_label">    - Addon Item Limit</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.paginate.limit_addon)]</property>
-                          <property name="setting_description">Choose the limit of pagination when within Fen Light</property>
+                          <property name="setting_description">Choose the limit of pagination when within Bingie</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=paginate.limit_addon)</onclick>
                       </item>
                       <item>
@@ -824,7 +775,7 @@
                           <property name="setting_label">    - Widgets Item Limit</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.paginate.limit_widgets)]</property>
-                          <property name="setting_description">Choose the limit of pagination for Fen Light widgets</property>
+                          <property name="setting_description">Choose the limit of pagination for Bingie widgets</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=paginate.limit_widgets)</onclick>
                       </item>
                       <item>
@@ -847,7 +798,7 @@
                           <visible>Container(2000).HasFocus(30)</visible>
                           <property name="setting_label">Set MPAA Region</property>
                           <property name="setting_type">action</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.mpaa_display_region_name)]</property>
+                          <property name="setting_value">$INFO[Window(10000).Property(bingie.mpaa_region_display_name)]</property>
                           <property name="setting_description">Choose the region from which the MPAA advisories will be displayed</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=mpaa_region_choice)</onclick>
                       </item>
@@ -864,7 +815,7 @@
                           <property name="setting_label">Show Special Episodes When Available</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.show_specials)]</property>
-                          <property name="setting_description">Enable this and Fen Light will show TV Show Special Episodes</property>
+                          <property name="setting_description">Enable this and Bingie will show TV Show Special Episodes</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=show_specials)</onclick>
                       </item>
                       <item>
@@ -872,7 +823,7 @@
                           <property name="setting_label">Flatten TV Show Seasons</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.default_all_episodes_name)]</property>
-                          <property name="setting_description">Choose the times when Fen Light will load all episodes of a TV Show when browsed into</property>
+                          <property name="setting_description">Choose the times when Bingie will load all episodes of a TV Show when browsed into</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=default_all_episodes)</onclick>
                       </item>
                       <item>
@@ -880,7 +831,7 @@
                           <property name="setting_label">Include Unaired Media in Trakt Watchlists</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.show_unaired_watchlist)]</property>
-                          <property name="setting_description">Enable this and Fen Light will display any unaired media in your Trakt Movie/TV Show Watchlists. Disable this and any unaired Media will be hidden</property>
+                          <property name="setting_description">Enable this and Bingie will display any unaired media in your Trakt Movie/TV Show Watchlists. Disable this and any unaired Media will be hidden</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=show_unaired_watchlist)</onclick>
                       </item>
                       <item>
@@ -888,7 +839,7 @@
                           <property name="setting_label">Include Adult Results from Media Searches</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.meta_filter)]</property>
-                          <property name="setting_description">Enable this and Fen Light will attempt to filter out adult content from Movie, TV Show and People searches. Success is based purely on the accuracy of TMDbs database. Expect that some adult results may come through and plan accordingly</property>
+                          <property name="setting_description">Enable this and Bingie will attempt to filter out adult content from Movie, TV Show and People searches. Success is based purely on the accuracy of TMDbs database. Expect that some adult results may come through and plan accordingly</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=meta_filter)</onclick>
                       </item>
                       <item>
@@ -896,7 +847,7 @@
                           <property name="setting_label">Control Viewtypes within Addon</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.use_viewtypes)]</property>
-                          <property name="setting_description">Enable this and Fen Light will control view types used within the addon. This can be disabled if the skin you are using has a helper that provides a "lock view" type function. If enabled, views can be set in Tools->Set Views within the addon</property>
+                          <property name="setting_description">Enable this and Bingie will control view types used within the addon. This can be disabled if the skin you are using has a helper that provides a "lock view" type function. If enabled, views can be set in Tools->Set Views within the addon</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=use_viewtypes)</onclick>
                       </item>
                       <item>
@@ -984,7 +935,7 @@
                           <property name="setting_label">Single Episode Display Format - Within Addon</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.single_ep_display_name)]</property>
-                          <property name="setting_description">Choose the display format Fen Light uses when naming single episodes within the addon. Applicable for lists like Next Episodes, In Progress Episodes etc</property>
+                          <property name="setting_description">Choose the display format Bingie uses when naming single episodes within the addon. Applicable for lists like Next Episodes, In Progress Episodes etc</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=single_ep_display)</onclick>
                       </item>
                       <item>
@@ -992,7 +943,7 @@
                           <property name="setting_label">Single Episode Display Format - Widgets</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.single_ep_display_widget_name)]</property>
-                          <property name="setting_description">Choose the display format Fen Light uses when naming single episodes for widgets. Applicable for lists like Next Episodes, In Progress Episodes etc</property>
+                          <property name="setting_description">Choose the display format Bingie uses when naming single episodes for widgets. Applicable for lists like Next Episodes, In Progress Episodes etc</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=single_ep_display_widget)</onclick>
                       </item>
                       <item>
@@ -1053,10 +1004,10 @@
                       </item>
                       <item>
                           <visible>Container(2000).HasFocus(40)</visible>
-                          <property name="setting_label">Include Trakt Watchlist/Fen Light Favorites</property>
+                          <property name="setting_label">Include Trakt Watchlist/Bingie Favorites</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.nextep.include_unwatched_name)]</property>
-                          <property name="setting_description">Choose which lists are included within Fen Lights Next Episodes. You can include your Trakt Watchlist, your Fen Light Favorites, or both. They will show with a DARKGOLDENROD highlight</property>
+                          <property name="setting_description">Choose which lists are included within Bingies Next Episodes. You can include your Trakt Watchlist, your Bingie Favorites, or both. They will show with a DARKGOLDENROD highlight</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=nextep.include_unwatched)</onclick>
                       </item>
                       <item>
@@ -1123,51 +1074,6 @@
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=trakt.calendar_future_days)</onclick>
                       </item>
 <!-- ACCOUNTS 50 -->
-        <!-- External Scrapers -->
-                      <item>
-                          <visible>Container(2000).HasFocus(50)</visible>
-                          <property name="setting_label">External Scrapers</property>
-                          <property name="setting_type">separator</property>
-                          <onclick>noop</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(50)</visible>
-                          <property name="setting_label">Enable</property>
-                          <property name="setting_type">boolean</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.provider.external)]</property>
-                          <property name="setting_description">Enable this to use external scrapers. No support is provided when you choose to use external scrapers within Fen Light</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=provider.external)</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(50)</visible>
-                          <visible>String.IsEqual(Window(10000).Property(bingie.provider.external),true)</visible>
-                          <property name="setting_label">Choose External Scrapers Module</property>
-                          <property name="setting_type">action</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.external_scraper.name)]</property>
-                          <property name="setting_description">Choose the external scraper module to use within Fen Light. No support is provided when you choose to use external scrapers within Fen Light</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=external_scraper_choice)</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(50)</visible>
-                          <visible>!String.IsEqual(Window(10000).Property(bingie.rd.token),empty_setting)|!String.IsEqual(Window(10000).Property(bingie.ad.token),empty_setting)</visible>
-                          <visible>String.IsEqual(Window(10000).Property(bingie.rd.enabled),true)|String.IsEqual(Window(10000).Property(bingie.ad.enabled),true)</visible>
-                          <property name="setting_label">Check for cached status of Results (RD &amp; AD)</property>
-                          <property name="setting_type">boolean</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.external.cache_check)]</property>
-                          <property name="setting_description">Enable this to get the cached status for Real Debrid and All Debrid results. This will lead to less results overall, but the results displayed SHOULD be cached on their servers. There will also be results filtered out that are cached. Use this knowing that you will get less results</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=external.cache_check)</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(50)</visible>
-                          <visible>String.IsEqual(Window(10000).Property(bingie.provider.external),true)</visible>
-                          <visible>!String.IsEqual(Window(10000).Property(bingie.external_scraper.name),empty_setting)</visible>
-                          <property name="setting_label">Open External Scraper Settings</property>
-                          <property name="setting_type">action</property>
-                          <property name="setting_value">...</property>
-                          <property name="setting_description">Open the External Scraper settings. The settings of the module chosen above will be opened</property>
-                          <onclick>back</onclick>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=open_external_scraper_settings)</onclick>
-                      </item>
         <!-- Trakt -->
                       <item>
                           <visible>Container(2000).HasFocus(50)</visible>
@@ -1181,12 +1087,11 @@
                           <property name="setting_label">Authorize</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">...</property>
-                          <property name="setting_description">Authorize your Trakt account and use it within Fen Light</property>
+                          <property name="setting_description">Authorize your Trakt account and use it within Bingie</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=trakt.trakt_authenticate)</onclick>
                       </item>
                       <item>
                           <visible>Container(2000).HasFocus(50)</visible>
-                          <visible>!String.IsEqual(Window(10000).Property(bingie.trakt.user),empty_setting)</visible>
                           <property name="setting_label">Revoke Authorization</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">...</property>
@@ -1228,10 +1133,10 @@
                           <property name="setting_description">Restore default Trakt Client Secret Key</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.restore_setting_default&amp;setting_id=trakt.secret)</onclick>
                       </item>
-        <!-- TMDb API -->
+        <!-- TMDb -->
                       <item>
                           <visible>Container(2000).HasFocus(50)</visible>
-                          <property name="setting_label">TMDb API</property>
+                          <property name="setting_label">TMDb</property>
                           <property name="setting_type">separator</property>
                           <onclick>noop</onclick>
                       </item>
@@ -1260,39 +1165,6 @@
                           <property name="setting_description">Test if your TMDb API is activated and working</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=tmdb_api_check_choice)</onclick>
                       </item>
-        <!-- TMDb Lists -->
-                      <item>
-                          <visible>Container(2000).HasFocus(50)</visible>
-                          <property name="setting_label">TMDb Lists</property>
-                          <property name="setting_type">separator</property>
-                          <onclick>noop</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(50)</visible>
-                          <visible>String.IsEqual(Window(10000).Property(bingie.tmdb.token),empty_setting)</visible>
-                          <property name="setting_label">Authorize Account</property>
-                          <property name="setting_type">action</property>
-                          <property name="setting_value">...</property>
-                          <property name="setting_description">Authorize your TMDb account and use it within Fen Light for Lists</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=tmdblist_api.authenticate)</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(50)</visible>
-                          <visible>!String.IsEqual(Window(10000).Property(bingie.tmdb.token),empty_setting)</visible>
-                          <property name="setting_label">Revoke Account Authorization</property>
-                          <property name="setting_type">action</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.tmdb.account_id)]</property>
-                          <property name="setting_description">Revoke authorization of your TMDb account</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=tmdblist_api.revoke_authentication)</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(50)</visible>
-                          <property name="setting_label">Lists Display Sort Order</property>
-                          <property name="setting_type">action</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.tmdblist.list_sort_name)]</property>
-                          <property name="setting_description">Choose the order in which your TMDb lists are presented. This is not for the contents of the lists, but rather the lists themselves</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=tmdb_list_order_choice)</onclick>
-                      </item>
         <!-- OMDb -->
                       <item>
                           <visible>Container(2000).HasFocus(50)</visible>
@@ -1305,23 +1177,43 @@
                           <property name="setting_label">API Key</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.omdb_api)]</property>
-                          <property name="setting_description">Enter here your OMDb API key. This will allow you to utilize extra ratings information in Fen Lights Extras window</property>
+                          <property name="setting_description">Enter here your OMDb API key. This will allow you to utilize extra ratings information in Bingies Extras window</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_string&amp;setting_id=omdb_api)</onclick>
                       </item>
-        <!-- RPDb -->
+        <!-- External Scrapers -->
                       <item>
                           <visible>Container(2000).HasFocus(50)</visible>
-                          <property name="setting_label">RPDb (Ratings Posters)</property>
+                          <property name="setting_label">External Scrapers</property>
                           <property name="setting_type">separator</property>
                           <onclick>noop</onclick>
                       </item>
                       <item>
                           <visible>Container(2000).HasFocus(50)</visible>
-                          <property name="setting_label">API Key</property>
-                          <property name="setting_type">numeric</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.rpdb_api)]</property>
-                          <property name="setting_description">Enter here your RPDb API key. This will allow you to utilize posters that include built in ratings information when available</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_string&amp;setting_id=rpdb_api)</onclick>
+                          <property name="setting_label">Enable</property>
+                          <property name="setting_type">boolean</property>
+                          <property name="setting_value">$INFO[Window(10000).Property(bingie.provider.external)]</property>
+                          <property name="setting_description">Enable this to use external scrapers. No support is provided when you choose to use external scrapers within Bingie</property>
+                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=provider.external)</onclick>
+                      </item>
+                      <item>
+                          <visible>Container(2000).HasFocus(50)</visible>
+                          <visible>String.IsEqual(Window(10000).Property(bingie.provider.external),true)</visible>
+                          <property name="setting_label">Choose External Scrapers Module</property>
+                          <property name="setting_type">action</property>
+                          <property name="setting_value">$INFO[Window(10000).Property(bingie.external_scraper.name)]</property>
+                          <property name="setting_description">Choose the external scraper module to use within Bingie. No support is provided when you choose to use external scrapers within Bingie</property>
+                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=external_scraper_choice)</onclick>
+                      </item>
+                      <item>
+                          <visible>Container(2000).HasFocus(50)</visible>
+                          <visible>String.IsEqual(Window(10000).Property(bingie.provider.external),true)</visible>
+                          <visible>!String.IsEqual(Window(10000).Property(bingie.external_scraper.name),empty_setting)</visible>
+                          <property name="setting_label">Open External Scraper Settings</property>
+                          <property name="setting_type">action</property>
+                          <property name="setting_value">...</property>
+                          <property name="setting_description">Open the External Scraper settings. The settings of the module chosen above will be opened</property>
+                          <onclick>back</onclick>
+                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=open_external_scraper_settings)</onclick>
                       </item>
         <!-- Real Debrid -->
                       <item>
@@ -1336,7 +1228,7 @@
                           <property name="setting_label">Authorize</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">...</property>
-                          <property name="setting_description">Authorize your Real Debrid account and use it within Fen Light</property>
+                          <property name="setting_description">Authorize your Real Debrid account and use it within Bingie</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=real_debrid.authenticate)</onclick>
                       </item>
                       <item>
@@ -1375,7 +1267,7 @@
                           <property name="setting_label">Search Cloud Storage</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.provider.rd_cloud)]</property>
-                          <property name="setting_description">Enable this and Fen Light will search your Real Debrid Cloud for media</property>
+                          <property name="setting_description">Enable this and Bingie will search your Real Debrid Cloud for media</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=provider.rd_cloud)</onclick>
                       </item>
                       <item>
@@ -1386,7 +1278,7 @@
                           <property name="setting_label">    - Filter Results by Name</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.rd_cloud.title_filter)]</property>
-                          <property name="setting_description">Enable this and Fen Light will perform extra name matching functions on your Real Debrid Cloud results. Will help to limit incorrect results, but may also filter some relevant results</property>
+                          <property name="setting_description">Enable this and Bingie will perform extra name matching functions on your Real Debrid Cloud results. Will help to limit incorrect results, but may also filter some relevant results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=rd_cloud.title_filter)</onclick>
                       </item>
                       <item>
@@ -1397,7 +1289,7 @@
                           <property name="setting_label">    - Check Before Full Search</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.check.rd_cloud)]</property>
-                          <property name="setting_description">Enable this and Fen Light will search for results in your Real Debrid Cloud before checking other enabled scrapers</property>
+                          <property name="setting_description">Enable this and Bingie will search for results in your Real Debrid Cloud before checking other enabled scrapers</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=check.rd_cloud)</onclick>
                       </item>
                       <item>
@@ -1408,7 +1300,7 @@
                           <property name="setting_label">    - Show Results at Top</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.results.sort_rdcloud_first)]</property>
-                          <property name="setting_description">Enable this and Fen Light will sort the results from your Real Debrid Cloud to the top of all results</property>
+                          <property name="setting_description">Enable this and Bingie will sort the results from your Real Debrid Cloud to the top of all results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=results.sort_rdcloud_first)</onclick>
                       </item>
                       <item>
@@ -1434,7 +1326,7 @@
                           <property name="setting_label">Authorize</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">...</property>
-                          <property name="setting_description">Authorize your Premiumize account and use it within Fen Light</property>
+                          <property name="setting_description">Authorize your Premiumize account and use it within Bingie</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=premiumize.authenticate)</onclick>
                       </item>
                       <item>
@@ -1473,7 +1365,7 @@
                           <property name="setting_label">Search Cloud Storage</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.provider.pm_cloud)]</property>
-                          <property name="setting_description">Enable this and Fen Light will search your Premiumize Cloud for media</property>
+                          <property name="setting_description">Enable this and Bingie will search your Premiumize Cloud for media</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=provider.pm_cloud)</onclick>
                       </item>
                       <item>
@@ -1484,7 +1376,7 @@
                           <property name="setting_label">    - Filter Results by Name</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.pm_cloud.title_filter)]</property>
-                          <property name="setting_description">Enable this and Fen Light will perform extra name matching functions on your Premiumize Cloud results. Will help to limit incorrect results, but may also filter some relevant results</property>
+                          <property name="setting_description">Enable this and Bingie will perform extra name matching functions on your Premiumize Cloud results. Will help to limit incorrect results, but may also filter some relevant results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=pm_cloud.title_filter)</onclick>
                       </item>
                       <item>
@@ -1495,7 +1387,7 @@
                           <property name="setting_label">    - Check Before Full Search</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.check.pm_cloud)]</property>
-                          <property name="setting_description">Enable this and Fen Light will search for results in your Premiumize Cloud before checking other enabled scrapers</property>
+                          <property name="setting_description">Enable this and Bingie will search for results in your Premiumize Cloud before checking other enabled scrapers</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=check.pm_cloud)</onclick>
                       </item>
                       <item>
@@ -1506,7 +1398,7 @@
                           <property name="setting_label">    - Show Results at Top</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.results.sort_pmcloud_first)]</property>
-                          <property name="setting_description">Enable this and Fen Light will sort the results from your Premiumize Cloud to the top of all results</property>
+                          <property name="setting_description">Enable this and Bingie will sort the results from your Premiumize Cloud to the top of all results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=results.sort_pmcloud_first)</onclick>
                       </item>
                       <item>
@@ -1516,7 +1408,7 @@
                          <property name="setting_label">Priority (Lower Number Equals Higher Priority)</property>
                          <property name="setting_type">numeric</property>
                          <property name="setting_value">$INFO[Window(10000).Property(bingie.pm.priority)]</property>
-                         <property name="setting_description">Choose the order in which Premiumize results appear in relation to any other active accounts. The lower the number, the higher the sort order</property>
+                         <property name="setting_description">Choose the order in which Real Debrid results appear in relation to any other active accounts. The lower the number, the higher the sort order</property>
                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=pm.priority)</onclick>
                      </item>
         <!-- All Debrid -->
@@ -1532,7 +1424,7 @@
                           <property name="setting_label">Authorize</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">...</property>
-                          <property name="setting_description">Authorize your All Debrid account and use it within Fen Light</property>
+                          <property name="setting_description">Authorize your All Debrid account and use it within Bingie</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=alldebrid.authenticate)</onclick>
                       </item>
                       <item>
@@ -1571,7 +1463,7 @@
                           <property name="setting_label">Search Cloud Storage</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.provider.ad_cloud)]</property>
-                          <property name="setting_description">Enable this and Fen Light will search your All Debrid Cloud for media</property>
+                          <property name="setting_description">Enable this and Bingie will search your All Debrid Cloud for media</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=provider.ad_cloud)</onclick>
                       </item>
                       <item>
@@ -1582,7 +1474,7 @@
                           <property name="setting_label">    - Filter Results by Name</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.ad_cloud.title_filter)]</property>
-                          <property name="setting_description">Enable this and Fen Light will perform extra name matching functions on your All Debrid Cloud results. Will help to limit incorrect results, but may also filter some relevant results</property>
+                          <property name="setting_description">Enable this and Bingie will perform extra name matching functions on your All Debrid Cloud results. Will help to limit incorrect results, but may also filter some relevant results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=ad_cloud.title_filter)</onclick>
                       </item>
                       <item>
@@ -1593,7 +1485,7 @@
                           <property name="setting_label">    - Check Before Full Search</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.check.ad_cloud)]</property>
-                          <property name="setting_description">Enable this and Fen Light will search for results in your All Debrid Cloud before checking other enabled scrapers</property>
+                          <property name="setting_description">Enable this and Bingie will search for results in your All Debrid Cloud before checking other enabled scrapers</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=check.ad_cloud)</onclick>
                       </item>
                       <item>
@@ -1604,7 +1496,7 @@
                           <property name="setting_label">    - Show Results at Top</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.results.sort_adcloud_first)]</property>
-                          <property name="setting_description">Enable this and Fen Light will sort the results from your All Debrid Cloud to the top of all results</property>
+                          <property name="setting_description">Enable this and Bingie will sort the results from your All Debrid Cloud to the top of all results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=results.sort_adcloud_first)</onclick>
                       </item>
                       <item>
@@ -1630,7 +1522,7 @@
                           <property name="setting_label">Authorize</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">...</property>
-                          <property name="setting_description">Authorize your Off Cloud account and use it within Fen Light</property>
+                          <property name="setting_description">Authorize your Off Cloud account and use it within Bingie</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=offcloud.authenticate)</onclick>
                       </item>
                       <item>
@@ -1669,7 +1561,7 @@
                           <property name="setting_label">Search Cloud Storage</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.provider.oc_cloud)]</property>
-                          <property name="setting_description">Enable this and Fen Light will search your Off Cloud Cloud for media</property>
+                          <property name="setting_description">Enable this and Bingie will search your Off Cloud Cloud for media</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=provider.oc_cloud)</onclick>
                       </item>
                       <item>
@@ -1680,7 +1572,7 @@
                           <property name="setting_label">    - Filter Results by Name</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.oc_cloud.title_filter)]</property>
-                          <property name="setting_description">Enable this and Fen Light will perform extra name matching functions on your Off Cloud Cloud results. Will help to limit incorrect results, but may also filter some relevant results</property>
+                          <property name="setting_description">Enable this and Bingie will perform extra name matching functions on your Off Cloud Cloud results. Will help to limit incorrect results, but may also filter some relevant results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=oc_cloud.title_filter)</onclick>
                       </item>
                       <item>
@@ -1691,7 +1583,7 @@
                           <property name="setting_label">    - Check Before Full Search</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.check.oc_cloud)]</property>
-                          <property name="setting_description">Enable this and Fen Light will search for results in your Off Cloud Cloud before checking other enabled scrapers</property>
+                          <property name="setting_description">Enable this and Bingie will search for results in your Off Cloud Cloud before checking other enabled scrapers</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=check.oc_cloud)</onclick>
                       </item>
                       <item>
@@ -1702,7 +1594,7 @@
                           <property name="setting_label">    - Show Results at Top</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.results.sort_occloud_first)]</property>
-                          <property name="setting_description">Enable this and Fen Light will sort the results from your Off Cloud Cloud to the top of all results</property>
+                          <property name="setting_description">Enable this and Bingie will sort the results from your Off Cloud Cloud to the top of all results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=results.sort_occloud_first)</onclick>
                       </item>
                       <item>
@@ -1728,7 +1620,7 @@
                           <property name="setting_label">Authorize</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">...</property>
-                          <property name="setting_description">Authorize your Easy Debrid account and use it within Fen Light</property>
+                          <property name="setting_description">Authorize your Easy Debrid account and use it within Bingie</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=easydebrid.authenticate)</onclick>
                       </item>
                       <item>
@@ -1773,7 +1665,7 @@
                           <property name="setting_label">Authorize</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">...</property>
-                          <property name="setting_description">Authorize your TorBox account and use it within Fen Light</property>
+                          <property name="setting_description">Authorize your TorBox account and use it within Bingie</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=torbox.authenticate)</onclick>
                       </item>
                       <item>
@@ -1812,7 +1704,7 @@
                           <property name="setting_label">Search Cloud Storage</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.provider.tb_cloud)]</property>
-                          <property name="setting_description">Enable this and Fen Light will search your TorBox Cloud for media</property>
+                          <property name="setting_description">Enable this and Bingie will search your TorBox Cloud for media</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=provider.tb_cloud)</onclick>
                       </item>
                       <item>
@@ -1823,7 +1715,7 @@
                           <property name="setting_label">    - Filter Results by Name</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.tb_cloud.title_filter)]</property>
-                          <property name="setting_description">Enable this and Fen Light will perform extra name matching functions on your TorBox Cloud results. Will help to limit incorrect results, but may also filter some relevant results</property>
+                          <property name="setting_description">Enable this and Bingie will perform extra name matching functions on your TorBox Cloud results. Will help to limit incorrect results, but may also filter some relevant results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=tb_cloud.title_filter)</onclick>
                       </item>
                       <item>
@@ -1834,7 +1726,7 @@
                           <property name="setting_label">    - Check Before Full Search</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.check.tb_cloud)]</property>
-                          <property name="setting_description">Enable this and Fen Light will search for results in your TorBox Cloud before checking other enabled scrapers</property>
+                          <property name="setting_description">Enable this and Bingie will search for results in your TorBox Cloud before checking other enabled scrapers</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=check.tb_cloud)</onclick>
                       </item>
                       <item>
@@ -1845,7 +1737,7 @@
                           <property name="setting_label">    - Show Results at Top</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.results.sort_tbcloud_first)]</property>
-                          <property name="setting_description">Enable this and Fen Light will sort the results from your TorBox Cloud to the top of all results</property>
+                          <property name="setting_description">Enable this and Bingie will sort the results from your TorBox Cloud to the top of all results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=results.sort_tbcloud_first)</onclick>
                       </item>
                       <item>
@@ -1898,7 +1790,7 @@
                           <property name="setting_label">Filter Results by Name</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.easynews.title_filter)]</property>
-                          <property name="setting_description">Enable this and Fen Light will perform extra name matching functions on your Easynews results. Will help to limit incorrect results, but may also filter some relevant results</property>
+                          <property name="setting_description">Enable this and Bingie will perform extra name matching functions on your Easynews results. Will help to limit incorrect results, but may also filter some relevant results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=easynews.title_filter)</onclick>
                       </item>
                       <item>
@@ -1908,7 +1800,7 @@
                           <property name="setting_label">Filter Languages</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.easynews.filter_lang)]</property>
-                          <property name="setting_description">Enable this and Fen Light will perform extra language filtering on your Easynews results. Will help to limit incorrect results, but may also filter some relevant results</property>
+                          <property name="setting_description">Enable this and Bingie will perform extra language filtering on your Easynews results. Will help to limit incorrect results, but may also filter some relevant results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=easynews.filter_lang)</onclick>
                       </item>
                       <item>
@@ -1929,7 +1821,7 @@
                           <property name="setting_label">Check Before Full Search</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.check.easynews)]</property>
-                          <property name="setting_description">Enable this and Fen Light will search for results from your Easynews service before checking other enabled scrapers</property>
+                          <property name="setting_description">Enable this and Bingie will search for results from your Easynews service before checking other enabled scrapers</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=check.easynews)</onclick>
                       </item>
                       <item>
@@ -1939,7 +1831,7 @@
                           <property name="setting_label">Priority (Lower Number Equals Higher Priority)</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.en.priority)]</property>
-                          <property name="setting_description">Choose the order in which Easynews results appear in relation to any other active accounts. The lower the number, the higher the sort order</property>
+                          <property name="setting_description">Choose the order in which Real Debrid results appear in relation to any other active accounts. The lower the number, the higher the sort order</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=en.priority)</onclick>
                       </item>
         <!-- Local Media Folders -->
@@ -1972,7 +1864,7 @@
                           <property name="setting_label">Filter Results by Name</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.folders.title_filter)]</property>
-                          <property name="setting_description">Enable this and Fen Light will perform extra name matching functions on your local media folders results. Will help to limit incorrect results, but may also filter some relevant results</property>
+                          <property name="setting_description">Enable this and Bingie will perform extra name matching functions on your local media folders results. Will help to limit incorrect results, but may also filter some relevant results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=folders.title_filter)</onclick>
                       </item>
                       <item>
@@ -1981,7 +1873,7 @@
                           <property name="setting_label">Check Before Full Search</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.check.folders)]</property>
-                          <property name="setting_description">Enable this and Fen Light will search for results from your local media folders before checking other enabled scrapers</property>
+                          <property name="setting_description">Enable this and Bingie will search for results from your local media folders before checking other enabled scrapers</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=check.folders)</onclick>
                       </item>
                       <item>
@@ -1990,7 +1882,7 @@
                           <property name="setting_label">Show Results at Top</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.results.sort_folders_first)]</property>
-                          <property name="setting_description">Enable this and Fen Light will sort the results from your local media folders to the top of all results</property>
+                          <property name="setting_description">Enable this and Bingie will sort the results from your local media folders to the top of all results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=results.sort_folders_first)</onclick>
                       </item>
                       <item>
@@ -1999,17 +1891,8 @@
                           <property name="setting_label">Ignore Quality and Size Filters</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.results.folders_ignore_filters)]</property>
-                          <property name="setting_description">Enable this and Fen Light will ignore any Quality or Size filters when processing local media folders results</property>
+                          <property name="setting_description">Enable this and Bingie will ignore any Quality or Size filters when processing local media folders results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=results.folders_ignore_filters)</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(50)</visible>
-                          <visible>String.IsEqual(Window(10000).Property(bingie.provider.folders),true)</visible>
-                          <property name="setting_label">Priority (Lower Number Equals Higher Priority)</property>
-                          <property name="setting_type">numeric</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.folders.priority)]</property>
-                          <property name="setting_description">Choose the order in which Media Folders results appear in relation to any other active accounts. The lower the number, the higher the sort order</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=folders.priority)</onclick>
                       </item>
 <!-- RESULTS 60 -->
         <!-- Display -->
@@ -2024,7 +1907,7 @@
                           <property name="setting_label">Scraper Timeout</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.results.timeout)]</property>
-                          <property name="setting_description">Choose the amount of time Fen Light will allow all scrapers to search for results</property>
+                          <property name="setting_description">Choose the amount of time Bingie will allow all scrapers to search for results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=results.timeout)</onclick>
                       </item>
                       <item>
@@ -2032,7 +1915,7 @@
                           <property name="setting_label">Results Display Format</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.results.list_format)]</property>
-                          <property name="setting_description">Choose the format in which Fen Light will display the results of a source search. Lists, Rows and WideList are provided</property>
+                          <property name="setting_description">Choose the format in which Bingie will display the results of a source search. Lists, Rows and WideList are provided</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=results_format_choice)</onclick>
                       </item>
         <!-- General -->
@@ -2041,14 +1924,6 @@
                           <property name="setting_label">General</property>
                           <property name="setting_type">separator</property>
                           <onclick>noop</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(60)</visible>
-                          <property name="setting_label">Retry With Cache Check Ignored When No Results</property>
-                          <property name="setting_type">action</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.results.auto_rescrape_cache_ignored_name)]</property>
-                          <property name="setting_description">Choose whether to rescrape with the external cache check ignored when there are no results. Choices are Off, Auto or Prompt</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=results.auto_rescrape_cache_ignored)</onclick>
                       </item>
                       <item>
                           <visible>Container(2000).HasFocus(60)</visible>
@@ -2086,7 +1961,7 @@
                           <property name="setting_label">Results Sorting</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.results.sort_order_display)]</property>
-                          <property name="setting_description">Choose the priority ordering performed by Fen Light before displaying source results</property>
+                          <property name="setting_description">Choose the priority ordering performed by Bingie before displaying source results</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=results_sorting_choice)</onclick>
                       </item>
                       <item>
@@ -2111,7 +1986,7 @@
                           <property name="setting_label">    - Internet Speed (Mbit/s)</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.results.line_speed)]</property>
-                          <property name="setting_description">Enter here your internet line speed. It is a good idea to choose a value slightly below your true internet speed, although Fen Light will still reduce this value by 10% before filtering results by size</property>
+                          <property name="setting_description">Enter here your internet line speed. It is a good idea to choose a value slightly below your true internet speed, although Bingie will still reduce this value by 10% before filtering results by size</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=results.line_speed)</onclick>
                       </item>
                       <item>
@@ -2156,7 +2031,7 @@
                           <property name="setting_label">    - Include Results with Unknown Size</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.results.size_unknown)]</property>
-                          <property name="setting_description">Enable this and Fen Light will include results where the size of the file is unknown</property>
+                          <property name="setting_description">Enable this and Bingie will include results where the size of the file is unknown</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=results.size_unknown)</onclick>
                       </item>
                       <item>
@@ -2235,20 +2110,11 @@
                       </item>
                       <item>
                           <visible>Container(2000).HasFocus(60)</visible>
-                          <property name="setting_label">Custom Sort To Top</property>
+                          <property name="setting_label">Custom Autoplay Sort To Top</property>
                           <property name="setting_type">action</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.filter.sort_to_top_name)]</property>
-                          <property name="setting_description">Choose the method used to provide highlight colors to source results. The options are DISABLED, SOURCE SELECT, AUTOPLAY or BOTH</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=filter.sort_to_top)</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(60)</visible>
-                          <visible>!String.IsEqual(Window(10000).Property(bingie.filter.sort_to_top),0)</visible>
-                          <property name="setting_label">    - Set Filters for Sort to Top</property>
-                          <property name="setting_type">action</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.filter.preferred_filters)]</property>
-                          <property name="setting_description">Choose video and audio properties that will be sorted to the top of the sources list. Choose up to 5 different parameters to be used, in order of importance. "Sort to Top" settings involving Debrid Cache and Folder Scraper results will take priority over these 5 params</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=preferred_filters_choice)</onclick>
+                          <property name="setting_value">$INFO[Window(10000).Property(bingie.preferred_autoplay)]</property>
+                          <property name="setting_description">Choose video and audio properties that will be sorted to the top of the sources list when using Autoplay. Choose up to 5 different parameters to be used, in order of importance. "Sort to Top" settings involving Debrid Cache and Folder Scraper results will take priority over these 5 params</property>
+                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=preferred_autoplay_choice)</onclick>
                       </item>
                       <item>
                           <visible>Container(2000).HasFocus(60)</visible>
@@ -2438,7 +2304,7 @@
                           <property name="setting_label">Automatically Resume Playback</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.auto_resume_movie_name)]</property>
-                          <property name="setting_description">Choose when Fen Light will automatically resume playback of an in-progress Movie</property>
+                          <property name="setting_description">Choose when Bingie will automatically resume playback of an in-progress Movie</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=auto_resume_movie)</onclick>
                       </item>
         <!-- Playback Episodes -->
@@ -2480,8 +2346,17 @@
                           <property name="setting_label">Autoplay Next Episode</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.autoplay_next_episode)]</property>
-                          <property name="setting_description">Enable this and Fen Light will automatically search for sources for the next episode of a TV Show towards the end of the episode currently being watched</property>
+                          <property name="setting_description">Enable this and Bingie will automatically search for sources for the next episode of a TV Show towards the end of the episode currently being watched</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=autoplay_next_episode)</onclick>
+                      </item>
+                      <item>
+                          <visible>Container(2000).HasFocus(70)</visible>
+                          <visible>String.IsEqual(Window(10000).Property(bingie.auto_play_episode),true) + String.IsEqual(Window(10000).Property(bingie.autoplay_next_episode),true)</visible>
+                          <property name="setting_label">    - When No Interaction with Window</property>
+                          <property name="setting_type">action</property>
+                          <property name="setting_value">$INFO[Window(10000).Property(bingie.autoplay_default_action_name)]</property>
+                          <property name="setting_description">Choose the action performed when you fail to interact with the Next Episode alert</property>
+                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=autoplay_default_action)</onclick>
                       </item>
                       <item>
                           <visible>Container(2000).HasFocus(70)</visible>
@@ -2495,20 +2370,10 @@
                       <item>
                           <visible>Container(2000).HasFocus(70)</visible>
                           <visible>String.IsEqual(Window(10000).Property(bingie.auto_play_episode),true) + String.IsEqual(Window(10000).Property(bingie.autoplay_next_episode),true)</visible>
-                          <visible>String.IsEqual(Window(10000).Property(bingie.autoplay_alert_method),0)</visible>
-                          <property name="setting_label">    - When No Interaction with Window</property>
-                          <property name="setting_type">action</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(bingie.autoplay_default_action_name)]</property>
-                          <property name="setting_description">Choose the action performed when you fail to interact with the Next Episode alert</property>
-                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=autoplay_default_action)</onclick>
-                      </item>
-                      <item>
-                          <visible>Container(2000).HasFocus(70)</visible>
-                          <visible>String.IsEqual(Window(10000).Property(bingie.auto_play_episode),true) + String.IsEqual(Window(10000).Property(bingie.autoplay_next_episode),true)</visible>
                           <property name="setting_label">    - Show Alert After (%) Playback</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.autoplay_next_window_percentage)]</property>
-                          <property name="setting_description">Choose when Fen Light will show the Next Episode Alert</property>
+                          <property name="setting_description">Choose when Bingie will show the Next Episode Alert</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=autoplay_next_window_percentage)</onclick>
                       </item>
                       <item>
@@ -2517,7 +2382,7 @@
                           <property name="setting_label">    - Use Chapter Info For Alert When Available</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.autoplay_use_chapters)]</property>
-                          <property name="setting_description">Enable this and Fen Light will attempt to use video file Chapter information to ascertain when to show the Next Episode alert. If unsuccessful, then the percentage of playback value will be used instead</property>
+                          <property name="setting_description">Enable this and Bingie will attempt to use video file Chapter information to ascertain when to show the Next Episode alert. If unsuccessful, then the percentage of playback value will be used instead</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=autoplay_use_chapters)</onclick>
                       </item>
                       <item>
@@ -2526,7 +2391,7 @@
                           <property name="setting_label">Autoscrape Next Episode</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.autoscrape_next_episode)]</property>
-                          <property name="setting_description">Enable this and Fen Light will automatically search for sources for the next episode of a TV Show towards the end of the episode currently being watched</property>
+                          <property name="setting_description">Enable this and Bingie will automatically search for sources for the next episode of a TV Show towards the end of the episode currently being watched</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=autoscrape_next_episode)</onclick>
                       </item>
                       <item>
@@ -2535,7 +2400,7 @@
                           <property name="setting_label">    - Show Notification After (%) Playback</property>
                           <property name="setting_type">numeric</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.autoscrape_next_window_percentage)]</property>
-                          <property name="setting_description">Choose when Fen Light will show the Next Episode Alert</property>
+                          <property name="setting_description">Choose when Bingie will show the Next Episode Alert</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_numeric&amp;setting_id=autoscrape_next_window_percentage)</onclick>
                       </item>
                       <item>
@@ -2544,7 +2409,7 @@
                           <property name="setting_label">    - Use Chapter Info For Alert When Available</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.autoscrape_use_chapters)]</property>
-                          <property name="setting_description">Enable this and Fen Light will attempt to use video file Chapter information to ascertain when to show the Next Episode alert. If unsuccessful, then the percentage of playback value will be used instead</property>
+                          <property name="setting_description">Enable this and Bingie will attempt to use video file Chapter information to ascertain when to show the Next Episode alert. If unsuccessful, then the percentage of playback value will be used instead</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=autoscrape_use_chapters)</onclick>
                       </item>
                       <item>
@@ -2552,7 +2417,7 @@
                           <property name="setting_label">Automatically Resume Playback</property>
                           <property name="setting_type">action</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.auto_resume_episode_name)]</property>
-                          <property name="setting_description">Choose when Fen Light will automatically resume playback of an in-progress Episode</property>
+                          <property name="setting_description">Choose when Bingie will automatically resume playback of an in-progress Episode</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_from_list&amp;setting_id=auto_resume_episode)</onclick>
                       </item>
         <!-- Playback Utilities -->
@@ -2567,7 +2432,7 @@
                           <property name="setting_label">Limit Resolve Attempts to Selected Result</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.playback.limit_resolve)]</property>
-                          <property name="setting_description">Enable this and Fen Light will limit the playback attempts to only the source result chosen. If disabled, Fen Light will potentially try 15 results of similar properties to your chosen source result until it is able to successfully resolve and playback</property>
+                          <property name="setting_description">Enable this and Bingie will limit the playback attempts to only the source result chosen. If disabled, Bingie will potentially try 15 results of similar properties to your chosen source result until it is able to successfully resolve and playback</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=playback.limit_resolve)</onclick>
                       </item>
                       <item>
@@ -2575,7 +2440,7 @@
                           <property name="setting_label">Check Volume Before Start of Playback</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.playback.volumecheck_enabled)]</property>
-                          <property name="setting_description">Enable this and Fen Light will attempt to check the current level of volume within Kodi, and adjust it downwards if it is exceeding a set level</property>
+                          <property name="setting_description">Enable this and Bingie will attempt to check the current level of volume within Kodi, and adjust it downwards if it is exceeding a set level</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=playback.volumecheck_enabled)</onclick>
                       </item>
                       <item>
