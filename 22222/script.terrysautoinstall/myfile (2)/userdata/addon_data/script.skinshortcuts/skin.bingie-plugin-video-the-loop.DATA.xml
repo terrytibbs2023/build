@@ -1,0 +1,34 @@
+<shortcuts>
+	<shortcut>
+		<defaultID>plugin.video.daddylive</defaultID>
+		<label>Daddylive</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>thumb</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.daddylive",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID>plugin.video.the-loop</defaultID>
+		<label>The Loop</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>thumb</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.the-loop",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID>plugin.video.Rising.Tides</defaultID>
+		<label>RisingTides</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>thumb</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.Rising.Tides",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID>plugin.video.blsport</defaultID>
+		<label>BL Sport</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>thumb</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.blsport",return)</action>
+		</shortcut>
+	</shortcuts>

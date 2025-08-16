@@ -1,0 +1,7 @@
+<settings>   
+    <category label="Settings">
+        <setting id="adult_pw" type="text" label="Adult Channels Password" default="Enter Here!" />
+    </category>
+    
+    
+</settings>
