@@ -82,8 +82,8 @@ def oc_delete(folder_id):
 def resolve_oc(params):
 	url = params['url']
 	if params.get('play', 'false') != 'true' : return url
-	from modules.player import FenLightPlayer
-	FenLightPlayer().run(url, 'video')
+	from modules.player import BingiePlayer
+	BingiePlayer().run(url, 'video')
 
 def oc_account_info():
 	try:

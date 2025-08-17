@@ -31,7 +31,7 @@
                     <top>22</top>
                     <width max="1160">auto</width>
                     <height>20</height>
-                    <font>font10</font> <!-- BINGIE_21 -->
+                    <font>font10</font> <!-- Bingie_21 -->
                     <textcolor>FFFFFFFF</textcolor>
                     <align>left</align>
                     <aligny>center</aligny>
@@ -43,7 +43,7 @@
                     <top>22</top>
                     <width max="1160">auto</width>
                     <height>20</height>
-                    <font>font10</font> <!-- BINGIE_21 -->
+                    <font>font10</font> <!-- Bingie_21 -->
                     <textcolor>FFFFFFFF</textcolor>
                     <align>left</align>
                     <aligny>center</aligny>
@@ -68,7 +68,7 @@
                     <top>400</top>
                     <width>1920</width>
                     <height>30</height>
-                    <font>font60</font> <!-- BINGIE_60_BOLD -->
+                    <font>font60</font> <!-- Bingie_60_BOLD -->
                     <textcolor>FFCCCCCC</textcolor>
                     <align>center</align>
                     <aligny>bottom</aligny>
@@ -79,7 +79,7 @@
                     <top>480</top>
                     <width>1920</width>
                     <height>25</height>
-                    <font>font14</font> <!-- BINGIE_33 -->
+                    <font>font14</font> <!-- Bingie_33 -->
                     <textcolor>FFCCCCCC</textcolor>
                     <align>center</align>
                     <aligny>bottom</aligny>
@@ -417,7 +417,7 @@
                             <height>0</height>
                             <align>center</align>
                             <aligny>center</aligny>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <label>[COLOR FF7C7C7C][B]4K[/B][/COLOR]</label>
                         </control>
                         <control type="label">
@@ -427,7 +427,7 @@
                             <height>0</height>
                             <align>center</align>
                             <aligny>center</aligny>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <label>[COLOR FFFFFFFF][B]$INFO[Window.Property(results_4k)][/B][/COLOR]</label>
                         </control>
                     </control>
@@ -440,7 +440,7 @@
                             <height>0</height>
                             <align>center</align>
                             <aligny>center</aligny>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <label>[COLOR FF7C7C7C][B]1080[/B][/COLOR]</label>
                         </control>
                         <control type="label">
@@ -450,7 +450,7 @@
                             <height>0</height>
                             <align>center</align>
                             <aligny>center</aligny>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <label>[COLOR FFFFFFFF][B]$INFO[Window.Property(results_1080p)][/B][/COLOR]</label>
                         </control>
                     </control>
@@ -463,7 +463,7 @@
                             <height>0</height>
                             <align>center</align>
                             <aligny>center</aligny>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <label>[COLOR FF7C7C7C][B]720[/B][/COLOR]</label>
                         </control>
                         <control type="label">
@@ -473,7 +473,7 @@
                             <height>0</height>
                             <align>center</align>
                             <aligny>center</aligny>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <label>[COLOR FFFFFFFF][B]$INFO[Window.Property(results_720p)][/B][/COLOR]</label>
                         </control>
                     </control>
@@ -486,7 +486,7 @@
                             <height>0</height>
                             <align>center</align>
                             <aligny>center</aligny>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <label>[COLOR FF7C7C7C][B]SD[/B][/COLOR]</label>
                         </control>
                         <control type="label">
@@ -496,7 +496,7 @@
                             <height>0</height>
                             <align>center</align>
                             <aligny>center</aligny>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <label>[COLOR FFFFFFFF][B]$INFO[Window.Property(results_sd)][/B][/COLOR]</label>
                         </control>
                     </control>
@@ -509,7 +509,7 @@
                             <height>0</height>
                             <align>center</align>
                             <aligny>center</aligny>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <label>[COLOR FF7C7C7C][B]TOTAL[/B][/COLOR]</label>
                         </control>
                         <control type="label">
@@ -519,7 +519,7 @@
                             <height>0</height>
                             <align>center</align>
                             <aligny>center</aligny>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <label>[COLOR FFFFFFFF][B]$INFO[Window.Property(results_total)][/B][/COLOR]</label>
                         </control>
                     </control>
@@ -531,7 +531,7 @@
                     <height>310</height>
                     <align>center</align>
                     <aligny>bottom</aligny>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- Bingie_26 -->
                     <textcolor>FFFFFFFF</textcolor>
                 </control>
             </control>
@@ -543,7 +543,7 @@
                     <top>600</top>
                     <width>820</width>
                     <height>310</height>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- Bingie_26 -->
                     <align>center</align>
                     <aligny>bottom</aligny>
                     <textcolor>FFB7B4BB</textcolor>
@@ -554,7 +554,7 @@
                     <left>360</left>
                     <width>1200</width>
                     <height>100</height>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- Bingie_26 -->
                     <align>center</align>
                     <aligny>bottom</aligny>
                     <textcolor>FFB7B4BB</textcolor>
@@ -574,7 +574,7 @@
                     <onleft>12</onleft>
                     <onright>11</onright>
                     <label>Resume $INFO[Window.Property(resume_percent)]%</label>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- Bingie_26 -->
                     <textcolor>FFCCCCCC</textcolor>
                     <focusedcolor>FF1F2020</focusedcolor>
                     <texturefocus colordiffuse="FFCCCCCC" border="30">bingie_common/circle.png</texturefocus>
@@ -589,7 +589,7 @@
                     <onleft>10</onleft>
                     <onright>12</onright>
                     <label>Start Over</label>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- Bingie_26 -->
                     <textcolor>FFCCCCCC</textcolor>
                     <focusedcolor>FF1F2020</focusedcolor>
                     <texturefocus colordiffuse="FFCCCCCC" border="30">bingie_common/circle.png</texturefocus>
@@ -604,7 +604,7 @@
                     <onleft>11</onleft>
                     <onright>10</onright>
                     <label>Cancel</label>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- Bingie_26 -->
                     <textcolor>FFCCCCCC</textcolor>
                     <focusedcolor>FF1F2020</focusedcolor>
                     <texturefocus colordiffuse="FFCCCCCC" border="30">bingie_common/circle.png</texturefocus>

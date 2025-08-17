@@ -194,15 +194,15 @@ def default_settings():
 #===============================================================================#
 #==================== General
 {'setting_id': 'auto_start_bingie', 'setting_type': 'boolean', 'setting_default': 'false'},
-{'setting_id': 'addon_icon_choice', 'setting_type': 'string', 'setting_default': 'resources/media/addon_icons/bingieam_icon_01.png'},
+{'setting_id': 'addon_icon_choice', 'setting_type': 'string', 'setting_default': 'resources/media/addon_resources/media/addon_resources/media/addon_icons/icon.png'},
 {'setting_id': 'default_addon_fanart', 'setting_type': 'path', 'setting_default': kodi_utils.addon_fanart(), 'browse_mode': '2'},
 {'setting_id': 'limit_concurrent_threads', 'setting_type': 'boolean', 'setting_default': 'false'},
 {'setting_id': 'max_threads', 'setting_type': 'action', 'setting_default': '60', 'min_value': '10', 'max_value': '250'},
 #==================== Manage Updates
 {'setting_id': 'update.action', 'setting_type': 'action', 'setting_default': '0', 'settings_options': {'0': 'Prompt', '1': 'Automatic', '2': 'Notification', '3': 'Off'}},
 {'setting_id': 'update.delay', 'setting_type': 'action', 'setting_default': '10', 'min_value': '10', 'max_value': '300'},
-{'setting_id': 'update.username', 'setting_type': 'string', 'setting_default': 'BingieAnonyMouse'},
-{'setting_id': 'update.location', 'setting_type': 'string', 'setting_default': 'BingieAnonyMouse.github.io'},
+{'setting_id': 'update.username', 'setting_type': 'string', 'setting_default': 'FenlightAnonyMouse'},
+{'setting_id': 'update.location', 'setting_type': 'string', 'setting_default': 'FenlightAnonyMouse.github.io'},
 #==================== Watched Indicators
 {'setting_id': 'watched_indicators', 'setting_type': 'action', 'setting_default': '0', 'settings_options': {'0': 'Bingie', '1': 'Trakt'}},
 #======+============= Trakt Cache

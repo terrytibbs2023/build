@@ -41,7 +41,7 @@
                 <top>10</top>
                 <left>110</left>
                 <height>20</height>
-                <font>font12</font> <!-- BINGIE_26 -->
+                <font>font12</font> <!-- Bingie_26 -->
                 <textcolor>FFCCCCCC</textcolor>
                 <align>center</align>
                 <label>[UPPERCASE][B]$INFO[Window.Property(heading)][/B][/UPPERCASE]</label>
@@ -51,7 +51,7 @@
                 <top>60</top>
                 <width>720</width>
                 <height>280</height>
-                <font>font13</font> <!-- BINGIE_30 -->
+                <font>font13</font> <!-- Bingie_30 -->
                 <textcolor>FFCCCCCC</textcolor>
                 <align>center</align>
                 <aligny>center</aligny>
@@ -66,7 +66,7 @@
                 <onleft>11</onleft>
                 <onright>11</onright>
                 <label>$INFO[Window.Property(ok_label)]</label>
-                <font>font12</font> <!-- BINGIE_26 -->
+                <font>font12</font> <!-- Bingie_26 -->
                 <textcolor>FFCCCCCC</textcolor>
                 <focusedcolor>FF1F2020</focusedcolor>
                 <texturefocus colordiffuse="FFCCCCCC" border="30">bingie_common/circle.png</texturefocus>

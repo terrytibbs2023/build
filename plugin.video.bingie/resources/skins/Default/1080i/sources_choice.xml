@@ -50,7 +50,7 @@
                 <top>10</top>
                 <left>60</left>
                 <height>20</height>
-                <font>font12</font> <!-- BINGIE_26 -->
+                <font>font12</font> <!-- Bingie_26 -->
                 <textcolor>FFCCCCCC</textcolor>
                 <shadowcolor>FF000000</shadowcolor>
                 <align>center</align>
@@ -74,7 +74,7 @@
                         <left>70</left>
                         <width max="440">auto</width>
                         <height>90</height>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FFCCCCCC</textcolor>
                         <align>left</align>
                         <aligny>center</aligny>
@@ -94,7 +94,7 @@
                         <left>70</left>
                         <width max="440">auto</width>
                         <height>90</height>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FF1F2020</textcolor>
                         <align>left</align>
                         <aligny>center</aligny>

@@ -32,8 +32,8 @@ def routing(sys):
 			from modules.sources import Sources
 			Sources().playback_prep(params)
 		elif mode == 'playback.video':
-			from modules.player import FenLightPlayer
-			FenLightPlayer().run(_get('url', None), _get('obj', None))
+			from modules.player import BingiePlayer
+			BingiePlayer().run(_get('url', None), _get('obj', None))
 	elif 'choice' in mode:
 		from indexers import dialogs
 		exec('dialogs.%s(params)' % mode)

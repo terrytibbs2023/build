@@ -79,8 +79,8 @@ def resolve_tb(params):
 	if media_type == 'torrent': resolved_link = TorBox.unrestrict_link(file_id)
 	else: resolved_link = TorBox.unrestrict_usenet(file_id)
 	if params.get('play', 'false') != 'true': return resolved_link
-	from modules.player import FenLightPlayer
-	FenLightPlayer().run(resolved_link, 'video')
+	from modules.player import BingiePlayer
+	BingiePlayer().run(resolved_link, 'video')
 
 def tb_account_info():
 	try:

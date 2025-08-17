@@ -44,7 +44,7 @@
                     <top>30</top>
                     <left>110</left>
                     <height>20</height>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- Bingie_26 -->
                     <textcolor>FFCCCCCC</textcolor>
                     <shadowcolor>FF000000</shadowcolor>
                     <align>center</align>
@@ -56,7 +56,7 @@
                     <top>70</top>
                     <left>110</left>
                     <height>20</height>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- Bingie_26 -->
                     <textcolor>FFCCCCCC</textcolor>
                     <shadowcolor>FF000000</shadowcolor>
                     <align>center</align>
@@ -80,7 +80,7 @@
                         <width max="820">auto</width>
                         <top>25</top>
                         <height>5</height>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FFCCCCCC</textcolor>
                         <aligny>center</aligny>
                         <scroll>false</scroll>
@@ -91,7 +91,7 @@
                         <top>60</top>
                         <width>60</width>
                         <height>5</height>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FFB40025</textcolor>
                         <aligny>center</aligny>
                         <label>[B]$INFO[ListItem.Property(percent),,%][/B]</label>
@@ -102,7 +102,7 @@
                         <top>60</top>
                         <width max="820">auto</width>
                         <height>5</height>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FFB40025</textcolor>
                         <aligny>center</aligny>
                         <align>left</align>
@@ -114,7 +114,7 @@
                         <top>60</top>
                         <width max="820">auto</width>
                         <height>5</height>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FFB40025</textcolor>
                         <aligny>center</aligny>
                         <align>left</align>
@@ -437,7 +437,7 @@
                         <left>35</left>
                         <top>25</top>
                         <height>5</height>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FF1F2020</textcolor>
                         <aligny>center</aligny>
                         <scroll>false</scroll>
@@ -448,7 +448,7 @@
                         <top>60</top>
                         <width>60</width>
                         <height>5</height>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FFB40025</textcolor>
                         <aligny>center</aligny>
                         <label>[B]$INFO[ListItem.Property(percent),,%][/B]</label>
@@ -459,7 +459,7 @@
                         <top>60</top>
                         <width max="820">auto</width>
                         <height>5</height>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FFB40025</textcolor>
                         <aligny>center</aligny>
                         <align>left</align>
@@ -471,7 +471,7 @@
                         <top>60</top>
                         <width max="820">auto</width>
                         <height>5</height>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FFB40025</textcolor>
                         <aligny>center</aligny>
                         <align>left</align>

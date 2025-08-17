@@ -76,8 +76,8 @@ def resolve_ad(params):
 	url = params['url']
 	resolved_link = AllDebrid.unrestrict_link(url)
 	if params.get('play', 'false') != 'true' : return resolved_link
-	from modules.player import FenLightPlayer
-	FenLightPlayer().run(resolved_link, 'video')
+	from modules.player import BingiePlayer
+	BingiePlayer().run(resolved_link, 'video')
 
 def ad_delete(file_id):
 	if not kodi_utils.show_text(): return

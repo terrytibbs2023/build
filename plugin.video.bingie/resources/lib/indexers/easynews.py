@@ -62,8 +62,8 @@ def easynews_file_browser(files, handle):
 def resolve_easynews(params):
 	resolved_link = EasyNews.resolve_easynews(params['url_dl'])
 	if params.get('play', 'false') != 'true': return resolved_link
-	from modules.player import FenLightPlayer
-	FenLightPlayer().run(resolved_link, 'video')
+	from modules.player import BingiePlayer
+	BingiePlayer().run(resolved_link, 'video')
 
 def account_info(params):
 	try:

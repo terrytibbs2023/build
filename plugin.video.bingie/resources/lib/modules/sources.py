@@ -7,7 +7,7 @@ from caches.episode_groups_cache import episode_groups_cache
 from caches.settings_cache import get_setting
 from scrapers import external, folders
 from modules import debrid, kodi_utils, settings, metadata, watched_status
-from modules.player import FenLightPlayer
+from modules.player import BingiePlayer
 from modules.source_utils import get_cache_expiry, make_alias_dict, include_exclude_filters
 from modules.utils import clean_file_name, string_to_float, safe_string, remove_accents, get_datetime, append_module_to_syspath, manual_function_import
 # logger = kodi_utils.logger
@@ -560,7 +560,7 @@ class Sources():
 		link = self.resolve_internal(debrid_info, chosen_result['link'], '')
 		name = chosen_result['filename']
 		self._kill_progress_dialog()
-		return FenLightPlayer().run(link, 'video')
+		return BingiePlayer().run(link, 'video')
 
 	def play_file(self, results, source={}):
 		self.playback_successful, self.cancel_all_playback = None, False
@@ -616,7 +616,7 @@ class Sources():
 					url, self.playback_successful, self.cancel_all_playback = None, None, False
 					self.playing_filename = item['name']
 					self.playing_item = item
-					player = FenLightPlayer()
+					player = BingiePlayer()
 					try:
 						if self.progress_dialog.iscanceled() or monitor.abortRequested(): break
 						url = self.resolve_sources(item)

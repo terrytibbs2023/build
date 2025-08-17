@@ -44,11 +44,11 @@
                     <top>22</top>
                     <left>0</left>
                     <height>20</height>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- Bingie_26 -->
                     <textcolor>FFCCCCCC</textcolor>
                     <align>center</align>
                     <aligny>center</aligny>
-                    <label>[UPPERCASE][B]BINGIE - SETTINGS[/B][/UPPERCASE]</label>
+                    <label>[UPPERCASE][B]Bingie - SETTINGS[/B][/UPPERCASE]</label>
                 </control>
             </control>
             <control type="fixedlist" id="2000">
@@ -74,7 +74,7 @@
                         <width>390</width>
                         <height>85</height>
                         <label>[UPPERCASE]$INFO[ListItem.Property(setting_label)][/UPPERCASE]</label>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FFCCCCCC</textcolor>
                         <aligny>center</aligny>
                     </control>
@@ -91,7 +91,7 @@
                         <width>390</width>
                         <height>85</height>
                         <label>[UPPERCASE]$INFO[ListItem.Property(setting_label)][/UPPERCASE]</label>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FF1F2020</textcolor>
                         <aligny>center</aligny>
                         <scroll>Control.HasFocus(2000)</scroll>
@@ -147,7 +147,7 @@
                             <width>630</width>
                             <height>85</height>
                             <label>[UPPERCASE]$INFO[ListItem.Property(setting_label)][/UPPERCASE]</label>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <textcolor>FFCCCCCC</textcolor>
                             <aligny>center</aligny>
                             <align>center</align>
@@ -176,7 +176,7 @@
                         <width>630</width>
                         <height>85</height>
                         <label>[UPPERCASE]$INFO[ListItem.Property(setting_label)][/UPPERCASE]</label>
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <textcolor>FFCCCCCC</textcolor>
                         <aligny>center</aligny>
                         <scroll>false</scroll>
@@ -215,7 +215,7 @@
                             <width>425</width>
                             <height>85</height>
                             <label>[B]...[/B]</label>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <textcolor>FFCCCCCC</textcolor>
                             <align>right</align>
                             <aligny>center</aligny>
@@ -228,7 +228,7 @@
                             <width>425</width>
                             <height>85</height>
                             <label>[UPPERCASE][B]$INFO[ListItem.Property(setting_value)][/B][/UPPERCASE]</label>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <textcolor>FFCCCCCC</textcolor>
                             <align>right</align>
                             <aligny>center</aligny>
@@ -252,7 +252,7 @@
                             <width>630</width>
                             <height>85</height>
                             <label>[UPPERCASE]$INFO[ListItem.Property(setting_label)][/UPPERCASE]</label>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <textcolor>FFCCCCCC</textcolor>
                             <aligny>center</aligny>
                             <align>center</align>
@@ -283,7 +283,7 @@
                             <width>630</width>
                             <height>85</height>
                             <label>[UPPERCASE]$INFO[ListItem.Property(setting_label)][/UPPERCASE]</label>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <textcolor>FF1F2020</textcolor>
                             <aligny>center</aligny>
                             <scroll>Control.HasFocus(2100)</scroll>
@@ -294,7 +294,7 @@
                             <width>630</width>
                             <height>85</height>
                             <label>[UPPERCASE]$INFO[ListItem.Property(setting_label)][/UPPERCASE]</label>
-                            <font>font12</font> <!-- BINGIE_26 -->
+                            <font>font12</font> <!-- Bingie_26 -->
                             <textcolor>FFCCCCCC</textcolor>
                             <aligny>center</aligny>
                             <scroll>false</scroll>
@@ -362,7 +362,7 @@
                                 <width>425</width>
                                 <height>85</height>
                                 <label>[B]...[/B]</label>
-                                <font>font12</font> <!-- BINGIE_26 -->
+                                <font>font12</font> <!-- Bingie_26 -->
                                 <textcolor>FF1F2020</textcolor>
                                 <align>right</align>
                                 <aligny>center</aligny>
@@ -374,7 +374,7 @@
                                 <width>425</width>
                                 <height>85</height>
                                 <label>[B]...[/B]</label>
-                                <font>font12</font> <!-- BINGIE_26 -->
+                                <font>font12</font> <!-- Bingie_26 -->
                                 <textcolor>FFCCCCCC</textcolor>
                                 <align>right</align>
                                 <aligny>center</aligny>
@@ -390,7 +390,7 @@
                                 <width>425</width>
                                 <height>85</height>
                                 <label>[UPPERCASE][B]$INFO[ListItem.Property(setting_value)][/B][/UPPERCASE]</label>
-                                <font>font12</font> <!-- BINGIE_26 -->
+                                <font>font12</font> <!-- Bingie_26 -->
                                 <textcolor>FF1F2020</textcolor>
                                 <align>right</align>
                                 <aligny>center</aligny>
@@ -402,7 +402,7 @@
                                 <width>425</width>
                                 <height>85</height>
                                 <label>[UPPERCASE][B]$INFO[ListItem.Property(setting_value)][/B][/UPPERCASE]</label>
-                                <font>font12</font> <!-- BINGIE_26 -->
+                                <font>font12</font> <!-- Bingie_26 -->
                                 <textcolor>FFCCCCCC</textcolor>
                                 <align>right</align>
                                 <aligny>center</aligny>
@@ -422,7 +422,7 @@
                      </item>
                       <item>
                           <visible>Container(2000).HasFocus(10)</visible>
-                          <property name="setting_label">Autostart FenLight When Kodi Starts</property>
+                          <property name="setting_label">Autostart Bingie When Kodi Starts</property>
                           <property name="setting_type">boolean</property>
                           <property name="setting_value">$INFO[Window(10000).Property(bingie.auto_start_bingie)]</property>
                           <property name="setting_description">Enable this and Bingie will autostart after running its services upon Kodi start</property>
@@ -1130,13 +1130,20 @@
                           <property name="setting_type">separator</property>
                           <onclick>noop</onclick>
                       </item>
-                     
+                      <item>
+                          <visible>Container(2000).HasFocus(50)</visible>
+                          <property name="setting_label">Enable</property>
+                          <property name="setting_type">boolean</property>
+                          <property name="setting_value">$INFO[Window(10000).Property(bingie.provider.external)]</property>
+                          <property name="setting_description">Enable this to use external scrapers. No support is provided when you choose to use external scrapers within Bingie</property>
+                          <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=settings_manager.set_boolean&amp;setting_id=provider.external)</onclick>
+                      </item>
                       <item>
                           <visible>Container(2000).HasFocus(50)</visible>
                           <visible>String.IsEqual(Window(10000).Property(bingie.provider.external),true)</visible>
                           <property name="setting_label">Choose External Scrapers Module</property>
                           <property name="setting_type">action</property>
-                          <property name="setting_value">$INFO[Window(10000).Property(script.module.cocoscrapers)]</property>
+                          <property name="setting_value">$INFO[Window(10000).Property(bingie.external_scraper.name)]</property>
                           <property name="setting_description">Choose the external scraper module to use within Bingie. No support is provided when you choose to use external scrapers within Bingie</property>
                           <onclick>RunPlugin(plugin://plugin.video.bingie/?mode=external_scraper_choice)</onclick>
                       </item>
@@ -2602,7 +2609,7 @@
                     <left>30</left>
                     <width>200</width>
                     <height>20</height>
-                    <font>font12</font> <!-- BINGIE_26 -->
+                    <font>font12</font> <!-- Bingie_26 -->
                     <textcolor>FFCCCCCC</textcolor>
                     <label>[UPPERCASE][B]INFO: [/B][/UPPERCASE]</label>
                     <align>left</align>
@@ -2614,7 +2621,7 @@
                     <width>1530</width>
                     <height>70</height>
                     <control type="textbox">
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <align>left</align>
                         <aligny>center</aligny>
                         <textcolor>FFCCCCCC</textcolor>
@@ -2623,7 +2630,7 @@
                         <visible>Control.HasFocus(2100)</visible>
                     </control>
                     <control type="textbox">
-                        <font>font12</font> <!-- BINGIE_26 -->
+                        <font>font12</font> <!-- Bingie_26 -->
                         <align>left</align>
                         <aligny>center</aligny>
                         <textcolor>FFCCCCCC</textcolor>
