@@ -49,7 +49,7 @@ def _process_rate_video(provider,
         client = provider.get_client(context)
         json_data = client.get_video_rating(video_id)
         if not json_data:
-            return False, {provider.RESULT_FALLBACK: False}
+            return False, {provider.FALLBACK: False}
 
         items = json_data.get('items', [])
         if items:
@@ -73,7 +73,7 @@ def _process_rate_video(provider,
 
         if response:
             # this will be set if we are in the 'Liked Video' playlist
-            if context.get_param('refresh', 0) > 0:
+            if context.refresh_requested():
                 context.get_ui().refresh_container()
 
             if result == 'none':

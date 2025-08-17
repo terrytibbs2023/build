@@ -10,8 +10,6 @@
 
 from __future__ import absolute_import, division, unicode_literals
 
-from traceback import format_stack
-
 from ..abstract_plugin import AbstractPlugin
 from ...compatibility import string_type, xbmc, xbmcgui, xbmcplugin
 from ...constants import (
@@ -46,7 +44,7 @@ from ...items import (
     playback_item,
     uri_listitem,
 )
-from ...utils import parse_and_redact_uri
+from ...utils import format_stack, parse_and_redact_uri
 
 
 class XbmcPlugin(AbstractPlugin):
@@ -177,8 +175,9 @@ class XbmcPlugin(AbstractPlugin):
             context.reload_access_manager()
 
         settings = context.get_settings()
-        if settings.setup_wizard_enabled():
-            provider.run_wizard(context)
+        setup_wizard_required = settings.setup_wizard_enabled()
+        if setup_wizard_required:
+            provider.run_wizard(context, last_run=setup_wizard_required)
         show_fanart = settings.fanart_selection()
 
         try:
@@ -200,7 +199,7 @@ class XbmcPlugin(AbstractPlugin):
                        '\n\tException: {exc!r}'
                        '\n\tStack trace (most recent call last):\n{stack}'
                        .format(exc=exc,
-                               stack=''.join(format_stack())))
+                               stack=format_stack()))
                 context.log_error(msg)
                 ui.on_ok('Error in ContentProvider', exc.__str__())
 
@@ -218,7 +217,7 @@ class XbmcPlugin(AbstractPlugin):
                     )
                 ]
 
-            force_resolve = provider.RESULT_FORCE_RESOLVE
+            force_resolve = provider.FORCE_RESOLVE
             if not options.pop(force_resolve, False):
                 force_resolve = False
 
@@ -238,7 +237,7 @@ class XbmcPlugin(AbstractPlugin):
                 result = options.get(force_resolve)
 
         if result and result.__class__.__name__ in self._PLAY_ITEM_MAP:
-            if options.get(provider.RESULT_FORCE_PLAY) or not result.playable:
+            if options.get(provider.FORCE_PLAY) or not result.playable:
                 result, post_run_action = self.uri_action(
                     context,
                     result.get_uri()
@@ -258,8 +257,12 @@ class XbmcPlugin(AbstractPlugin):
             succeeded = xbmcplugin.addDirectoryItems(
                 handle, items, item_count
             )
-            cache_to_disc = options.get(provider.RESULT_CACHE_TO_DISC, True)
-            update_listing = options.get(provider.RESULT_UPDATE_LISTING, False)
+            cache_to_disc = options.get(provider.CACHE_TO_DISC, True)
+            update_listing = options.get(provider.UPDATE_LISTING, False)
+
+            fallback = options.get(provider.FALLBACK)
+            if not fallback or fallback != ui.get_property(provider.FALLBACK):
+                ui.clear_property(provider.FALLBACK)
         else:
             succeeded = bool(result)
             if not succeeded:
@@ -269,7 +272,7 @@ class XbmcPlugin(AbstractPlugin):
                     ui.clear_property(param)
 
                 uri = context.get_uri()
-                fallback = options.get(provider.RESULT_FALLBACK, True)
+                fallback = options.get(provider.FALLBACK, True)
                 if isinstance(fallback, string_type) and fallback != uri:
                     context.parse_uri(fallback, update=True)
                     return self.run(provider, context, forced=forced)
@@ -319,8 +322,8 @@ class XbmcPlugin(AbstractPlugin):
                     else:
                         post_run_action = _post_run_action
 
-            cache_to_disc = options.get(provider.RESULT_CACHE_TO_DISC, False)
-            update_listing = options.get(provider.RESULT_UPDATE_LISTING, True)
+            cache_to_disc = options.get(provider.CACHE_TO_DISC, False)
+            update_listing = options.get(provider.UPDATE_LISTING, True)
 
         if ui.pop_property(PLAY_FORCED):
             context.set_path(PATHS.PLAY)

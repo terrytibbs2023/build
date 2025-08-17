@@ -12,7 +12,6 @@ from __future__ import absolute_import, division, unicode_literals
 
 import json
 import random
-from traceback import format_stack
 
 from ..helper import utils, v3
 from ..youtube_exceptions import YouTubeException
@@ -34,7 +33,12 @@ from ...kodion.constants import (
 )
 from ...kodion.items import AudioItem, UriItem, VideoItem
 from ...kodion.network import get_connect_address
-from ...kodion.utils import datetime_parser, find_video_id, select_stream
+from ...kodion.utils import (
+    datetime_parser,
+    find_video_id,
+    format_stack,
+    select_stream,
+)
 
 
 def _play_stream(provider, context):
@@ -85,7 +89,7 @@ def _play_stream(provider, context):
                    '\n\tException: {exc!r}'
                    '\n\tStack trace (most recent call last):\n{stack}'
                    .format(exc=exc,
-                           stack=''.join(format_stack())))
+                           stack=format_stack()))
             context.log_error(msg)
             ui.show_notification(message=exc.get_message())
             return False
@@ -237,9 +241,9 @@ def _play_playlist(provider, context):
         return (
             process_items_for_playlist(context, video_items, action=action),
             {
-                provider.RESULT_CACHE_TO_DISC: action == 'list',
-                provider.RESULT_FORCE_RESOLVE: action != 'list',
-                provider.RESULT_UPDATE_LISTING: action != 'list',
+                provider.CACHE_TO_DISC: action == 'list',
+                provider.FORCE_RESOLVE: action != 'list',
+                provider.UPDATE_LISTING: action != 'list',
             },
         )
 
@@ -270,9 +274,9 @@ def _play_channel_live(provider, context):
             play_from=context.get_param('live', 1),
         ),
         {
-            provider.RESULT_CACHE_TO_DISC: False,
-            provider.RESULT_FORCE_RESOLVE: True,
-            provider.RESULT_UPDATE_LISTING: True,
+            provider.CACHE_TO_DISC: False,
+            provider.FORCE_RESOLVE: True,
+            provider.UPDATE_LISTING: True,
         },
     )
 
