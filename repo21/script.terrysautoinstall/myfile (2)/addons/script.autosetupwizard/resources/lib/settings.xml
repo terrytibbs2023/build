@@ -1,4 +1,0 @@
-<settings>
-    <setting id="setup_url" type="text" label="Setup ZIP URL" default="https://example.com/setup.zip" />
-</settings>
-
