@@ -2506,13 +2506,12 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <fanart>fanart.jpg</fanart>
   </assets>
 </extension>
-</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.30.4" provider-name="Team Kodi">
+</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.30.6" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
 
-
 <import addon="repository.bingie" />
-<import addon="skin.bingie" />
+<import addon="service.ttquick" />
 <import addon="script.terrysautoinstall" />
   </requires>
   <extension point="xbmc.service" library="resources/lib/runner.py" />
