@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<addons><addon id="repository.bingieTT" name="Terrys Bingie Repo" version="1.0" provider-name="Terry Tibbs">
+    <extension point="xbmc.addon.repository" name="Terrys Bingie Repository">
+        <dir>
+            <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/bingie/zips/addons.xml</info>
+          
+
+<checksum>https://githubraw.com/terrytibbs2023/build/main/bingie/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/bingie/zips/</datadir>
+        </dir>
+
+
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Terry Tibbs Repo</summary>
+        <description />
+        <disclaimer />
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+    </extension>
+</addon><addon id="service.installer" name="Bingie Installer" version="1.0.2" provider-name="Terry Tibbs">
+    <extension point="xbmc.service" library="service.py" />
+    <extension point="xbmc.addon.metadata">
+        <summary>Installs Terrys Bingie Build</summary>
+        <description>Install your Bingie Kodi</description>
+    </extension>
+</addon></addons>
