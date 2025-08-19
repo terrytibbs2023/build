@@ -54,6 +54,12 @@
         <summary>Installs Terrys Bingie Build</summary>
         <description>Install your Bingie Kodi</description>
     </extension>
+</addon><addon id="service.ttquick" name="Terry Tibbs Quick Installer" version="1.2.2" provider-name="Terry Tibbs">
+    <extension point="xbmc.service" library="service.py" />
+    <extension point="xbmc.addon.metadata">
+        <summary>Installs Terrys Bingie Build</summary>
+        <description>Install your Bingie Kodi</description>
+    </extension>
 </addon><addon id="service.xbmc,versioncheck" name="Bingie Installer" version="1.0.4" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
