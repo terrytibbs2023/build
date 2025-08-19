@@ -89,17 +89,14 @@ def CATEGORIES():
     addDir('Artists','http://musicmp3.ru/artists.html',21,art + 'artists.jpg','')
     addDir('Top Albums','http://musicmp3.ru/genres.html',12,art + 'topalbums.jpg','')
     addDir('New Albums','http://musicmp3.ru/new_albums.html',12,art + 'newalbums.jpg','')
-    addDir('Compilations','url',400,art + 'compilations.jpg','')
-    addDir('Billboard Charts','url',101,art + 'billboardcharts.jpg','')
+
     addDir('Search Artists','url',24,art + 'searchartists.jpg','')
     addDir('Search Albums','url',24,art + 'searchalbums.jpg','')
     addDir('Search Songs','url',24,art + 'searchsongs.jpg','')
     addDir('Favourite Artists','url',63,art + 'favouriteartists.jpg','')
     addDir('Favourite Albums','url',66,art + 'favouritealbums.jpg','')
     addDir('Favourite Songs','url',69,art + 'favouritesongs.jpg','')
-    addDirAudio('Instant Mix Favourite Songs (Shuffle and Play)','url',99,art + 'mixfavouritesongs.jpg','','','','','')
-    addDirAudio('Instant Mix Favourite Albums (Shuffle and Play)','url',89,art + 'mixfavouritealbums.jpg','','','','','')
-    addDirAudio('Clear Playlist','url',100,art + 'clearplaylist.jpg','','','','','')
+   
     #addDirAudio('Add ID3 Tags','url',300,art + 'addid3tags.jpg','','','','','')
     #addDir('Browse Alternate Source','url',700,artgenre + 'alternate.jpg','')
 
