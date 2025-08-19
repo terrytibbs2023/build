@@ -92,10 +92,10 @@ def CATEGORIES():
 
     addDir('Search Artists','url',24,art + 'searchartists.jpg','')
     addDir('Search Albums','url',24,art + 'searchalbums.jpg','')
-    addDir('Search Songs','url',24,art + 'searchsongs.jpg','')
+   
     addDir('Favourite Artists','url',63,art + 'favouriteartists.jpg','')
     addDir('Favourite Albums','url',66,art + 'favouritealbums.jpg','')
-    addDir('Favourite Songs','url',69,art + 'favouritesongs.jpg','')
+   
    
     #addDirAudio('Add ID3 Tags','url',300,art + 'addid3tags.jpg','','','','','')
     #addDir('Browse Alternate Source','url',700,artgenre + 'alternate.jpg','')
