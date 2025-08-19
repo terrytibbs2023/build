@@ -403,7 +403,7 @@
         <summary>Installs Terrys Bingie Build</summary>
         <description>Install your Bingie Kodi</description>
     </extension>
-</addon><addon id="service.xbmc.versioncheck" name="Version Check" version="0.5.28+matrix.1" provider-name="Team Kodi">
+</addon><addon id="service.xbmc.versioncheck" name="Version Check" version="0.5.32+matrix.1" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
     <import addon="script.terrysautoinstall" />
