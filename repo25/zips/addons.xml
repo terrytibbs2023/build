@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<addons><addon id="plugin.audio.mp3streams" name="MP3 Streams" version="2022.0.5" provider-name="Jon Bovi">
+<addons><addon id="plugin.audio.mp3streams" name="MP3 Streams" version="2022.0.8" provider-name="Jon Bovi">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="script.module.future" />
