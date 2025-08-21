@@ -2,7 +2,7 @@
 """
 
     Copyright (C) 2014-2016 bromix (plugin.video.youtube)
-    Copyright (C) 2016-2018 plugin.video.youtube
+    Copyright (C) 2016-2025 plugin.video.youtube
 
     SPDX-License-Identifier: GPL-2.0-only
     See LICENSES/GPL-2.0-only for more information.
@@ -17,13 +17,21 @@ from ...kodion.items import UriItem
 
 
 def _process_list(provider, context, client):
-    context.set_content(CONTENT.LIST_CONTENT)
     json_data = client.get_subscription(
         'mine', page_token=context.get_param('page_token', '')
     )
     if not json_data:
         return []
-    return v3.response_to_items(provider, context, json_data)
+
+    result = v3.response_to_items(provider, context, json_data)
+    options = {
+        provider.CONTENT_TYPE: {
+            'content_type': CONTENT.LIST_CONTENT,
+            'sub_type': None,
+            'category_label': None,
+        },
+    }
+    return result, options
 
 
 def _process_add(_provider, context, client):
@@ -86,7 +94,7 @@ def process(provider, context, re_match):
 
     # we need a login
     client = provider.get_client(context)
-    if not provider.is_logged_in():
+    if not client.logged_in:
         return UriItem(context.create_uri(('sign', 'in')))
 
     if command == 'list':

@@ -2,7 +2,7 @@
 """
 
     Copyright (C) 2014-2016 bromix (plugin.video.youtube)
-    Copyright (C) 2016-2018 plugin.video.youtube
+    Copyright (C) 2016-2025 plugin.video.youtube
 
     SPDX-License-Identifier: GPL-2.0-only
     See LICENSES/GPL-2.0-only for more information.
@@ -12,13 +12,16 @@ from __future__ import absolute_import, division, unicode_literals
 
 from weakref import proxy
 
-from ..abstract_context_ui import AbstractContextUI, AbstractProgressDialog
-from ...compatibility import xbmc, xbmcgui
-from ...constants import ADDON_ID, REFRESH_CONTAINER
-from ...utils import to_unicode
+from ..abstract_context_ui import AbstractContextUI
+from ... import logging
+from ...compatibility import string_type, xbmc, xbmcgui
+from ...constants import ADDON_ID, BOOL_FROM_STR, REFRESH_CONTAINER
+from ...utils.convert_format import to_unicode
 
 
 class XbmcContextUI(AbstractContextUI):
+    log = logging.getLogger(__name__)
+
     def __init__(self, context):
         super(XbmcContextUI, self).__init__()
         self._context = context
@@ -29,11 +32,12 @@ class XbmcContextUI(AbstractContextUI):
                                total=None,
                                background=False,
                                message_template=None,
-                               template_params=None):
-        if not message_template:
+                               template_params=None,
+                               hide_progress=None):
+        if not message_template and background:
             message_template = '{_message} {_current}/{_total}'
 
-        return AbstractProgressDialog(
+        return XbmcProgressDialog(
             ui=proxy(self),
             dialog=(xbmcgui.DialogProgressBG
                     if background else
@@ -44,6 +48,11 @@ class XbmcContextUI(AbstractContextUI):
             total=int(total) if total is not None else 0,
             message_template=message_template,
             template_params=template_params,
+            hide=(
+                self._context.get_param('hide_progress')
+                if hide_progress is None else
+                hide_progress
+            ),
         )
 
     def on_keyboard_input(self, title, default='', hidden=False):
@@ -77,19 +86,19 @@ class XbmcContextUI(AbstractContextUI):
     def on_remove_content(self, name):
         return self.on_yes_no_input(
             self._context.localize('content.remove'),
-            self._context.localize('content.remove.check') % to_unicode(name),
+            self._context.localize('content.remove.check.x', to_unicode(name)),
         )
 
     def on_delete_content(self, name):
         return self.on_yes_no_input(
             self._context.localize('content.delete'),
-            self._context.localize('content.delete.check') % to_unicode(name),
+            self._context.localize('content.delete.check.x', to_unicode(name)),
         )
 
     def on_clear_content(self, name):
         return self.on_yes_no_input(
             self._context.localize('content.clear'),
-            self._context.localize('content.clear.check') % to_unicode(name),
+            self._context.localize('content.clear.check.x', to_unicode(name)),
         )
 
     def on_select(self, title, items=None, preselect=-1, use_details=False):
@@ -154,36 +163,88 @@ class XbmcContextUI(AbstractContextUI):
                                       time_ms,
                                       audible)
 
+    def on_busy(self):
+        return XbmcBusyDialog()
+
     def refresh_container(self):
         self._context.send_notification(REFRESH_CONTAINER)
 
-    def set_property(self, property_id, value='true'):
-        self._context.log_debug('Set property |{id}|: {value!r}'
-                                .format(id=property_id, value=value))
-        _property_id = '-'.join((ADDON_ID, property_id))
+    def set_property(self,
+                     property_id,
+                     value='true',
+                     stacklevel=2,
+                     process=None,
+                     log_value=None,
+                     log_process=None,
+                     raw=False):
+        if log_value is None:
+            log_value = value
+        if log_process:
+            log_value = log_process(log_value)
+        self.log.debug_trace('Set property {property_id!r}: {value!r}',
+                             property_id=property_id,
+                             value=log_value,
+                             stacklevel=stacklevel)
+        _property_id = property_id if raw else '-'.join((ADDON_ID, property_id))
+        if process:
+            value = process(value)
         xbmcgui.Window(10000).setProperty(_property_id, value)
         return value
 
-    def get_property(self, property_id):
-        _property_id = '-'.join((ADDON_ID, property_id))
+    def get_property(self,
+                     property_id,
+                     stacklevel=2,
+                     process=None,
+                     log_value=None,
+                     log_process=None,
+                     raw=False,
+                     as_bool=False,
+                     default=False):
+        _property_id = property_id if raw else '-'.join((ADDON_ID, property_id))
         value = xbmcgui.Window(10000).getProperty(_property_id)
-        self._context.log_debug('Get property |{id}|: {value!r}'
-                                .format(id=property_id, value=value))
-        return value
+        if log_value is None:
+            log_value = value
+        if log_process:
+            log_value = log_process(log_value)
+        self.log.debug_trace('Get property {property_id!r}: {value!r}',
+                             property_id=property_id,
+                             value=log_value,
+                             stacklevel=stacklevel)
+        if process:
+            value = process(value)
+        return BOOL_FROM_STR.get(value, default) if as_bool else value
 
-    def pop_property(self, property_id):
-        _property_id = '-'.join((ADDON_ID, property_id))
+    def pop_property(self,
+                     property_id,
+                     stacklevel=2,
+                     process=None,
+                     log_value=None,
+                     log_process=None,
+                     raw=False,
+                     as_bool=False,
+                     default=False):
+        _property_id = property_id if raw else '-'.join((ADDON_ID, property_id))
         window = xbmcgui.Window(10000)
         value = window.getProperty(_property_id)
         if value:
             window.clearProperty(_property_id)
-        self._context.log_debug('Pop property |{id}|: {value!r}'
-                                .format(id=property_id, value=value))
-        return value
+            if process:
+                value = process(value)
+        if log_value is None:
+            log_value = value
+        if log_value and log_process:
+            log_value = log_process(log_value)
+        self.log.debug_trace('Pop property {property_id!r}: {value!r}',
+                             property_id=property_id,
+                             value=log_value,
+                             stacklevel=stacklevel)
+        return BOOL_FROM_STR.get(value, default) if as_bool else value
 
-    def clear_property(self, property_id):
-        self._context.log_debug('Clear property |{id}|'.format(id=property_id))
-        _property_id = '-'.join((ADDON_ID, property_id))
+    def clear_property(self, property_id, stacklevel=2, raw=False):
+        self.log.debug_trace('Clear property {property_id!r}',
+                             property_id=property_id,
+                             stacklevel=stacklevel)
+        _property_id = property_id if raw else '-'.join((ADDON_ID, property_id))
         xbmcgui.Window(10000).clearProperty(_property_id)
         return None
 
@@ -261,7 +322,7 @@ class XbmcContextUI(AbstractContextUI):
         )
 
     @staticmethod
-    def busy_dialog_active(dialog_ids=frozenset((
+    def busy_dialog_active(all_modals=False, dialog_ids=frozenset((
             10100,  # WINDOW_DIALOG_YES_NO
             10101,  # WINDOW_DIALOG_PROGRESS
             10103,  # WINDOW_DIALOG_KEYBOARD
@@ -272,7 +333,177 @@ class XbmcContextUI(AbstractContextUI):
             12000,  # WINDOW_DIALOG_SELECT
             12002,  # WINDOW_DIALOG_OK
     ))):
+        if all_modals and xbmc.getCondVisibility('System.HasActiveModalDialog'):
+            return True
         dialog_id = xbmcgui.getCurrentWindowDialogId()
         if dialog_id in dialog_ids:
             return dialog_id
         return False
+
+
+class XbmcProgressDialog(object):
+    def __init__(self,
+                 ui,
+                 dialog,
+                 background,
+                 heading,
+                 message='',
+                 total=0,
+                 message_template=None,
+                 template_params=None,
+                 hide=False):
+        if hide:
+            self._dialog = None
+            self._created = False
+            return
+
+        self._ui = ui
+        if ui.busy_dialog_active(all_modals=True):
+            self._dialog = dialog()
+            self._dialog.create(heading, message)
+            self._created = True
+        else:
+            self._dialog = dialog()
+            self._created = False
+
+        self._background = background
+
+        self._position = None
+        self._total = total
+
+        self._heading = heading
+        self._message = message
+        if message_template:
+            self._message_template = message_template
+            self._template_params = {
+                '_message': message,
+                '_progress': (0, self._total),
+                '_current': 0,
+                '_total': self._total,
+            }
+            if template_params:
+                self._template_params.update(template_params)
+        else:
+            self._message_template = None
+            self._template_params = None
+
+        # simple reset because KODI won't do it :(
+        self.update(position=0)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type=None, exc_val=None, exc_tb=None):
+        self.close()
+
+    def get_total(self):
+        if not self._dialog:
+            return None
+        return self._total
+
+    def get_position(self):
+        if not self._dialog:
+            return None
+        return self._position
+
+    def close(self):
+        if self._dialog and self._created:
+            self._dialog.close()
+            self._dialog = None
+            self._created = False
+
+    def is_aborted(self):
+        if self._dialog and self._created:
+            return getattr(self._dialog, 'iscanceled', bool)()
+        return False
+
+    def set_total(self, total):
+        if not self._dialog:
+            return
+        self._total = int(total)
+
+    def reset_total(self, new_total, **kwargs):
+        if not self._dialog:
+            return
+        self._total = int(new_total)
+        self.update(position=0, **kwargs)
+
+    def update_total(self, new_total, **kwargs):
+        if not self._dialog:
+            return
+        self._total = int(new_total)
+        self.update(steps=0, **kwargs)
+
+    def grow_total(self, new_total=None, delta=None):
+        if not self._dialog:
+            return None
+        if delta:
+            delta = int(delta)
+            self._total += delta
+        elif new_total:
+            total = int(new_total)
+            if total > self._total:
+                self._total = total
+        return self._total
+
+    def update(self, steps=1, position=None, message=None, **template_params):
+        if not self._dialog:
+            return
+
+        if position is None:
+            self._position += steps
+        else:
+            self._position = position
+
+        if not self._total:
+            percent = 0
+        elif self._position >= self._total:
+            percent = 100
+            self._total = self._position
+        else:
+            percent = int(100 * self._position / self._total)
+
+        if isinstance(message, string_type):
+            self._message = message
+        elif self._message_template:
+            if template_params:
+                self._template_params.update(template_params)
+            template_params = self._template_params
+            progress = (self._position, self._total)
+            template_params['_progress'] = progress
+            template_params['_current'], template_params['_total'] = progress
+            message = self._message_template.format(
+                *template_params['_progress'],
+                **template_params
+            )
+            self._message = message
+
+        if not self._created:
+            if self._ui.busy_dialog_active(all_modals=True):
+                return
+            self._dialog.create(self._heading, self._message)
+            self._created = True
+
+        # Kodi 18 renamed XbmcProgressDialog.update argument line1 to message.
+        # Only use positional arguments to maintain compatibility
+        if self._background:
+            self._dialog.update(percent, self._heading, self._message)
+        else:
+            self._dialog.update(percent, self._message)
+
+
+class XbmcBusyDialog(object):
+    def __enter__(self):
+        xbmc.executebuiltin('ActivateWindow(BusyDialogNoCancel)')
+        return self
+
+    def __exit__(self, exc_type=None, exc_val=None, exc_tb=None):
+        self.close()
+        if exc_val:
+            logging.exception('Error',
+                              exc_info=(exc_type, exc_val, exc_tb),
+                              stacklevel=2)
+
+    @staticmethod
+    def close():
+        xbmc.executebuiltin('Dialog.Close(BusyDialogNoCancel)')

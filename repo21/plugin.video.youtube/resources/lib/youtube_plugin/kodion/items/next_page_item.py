@@ -2,7 +2,7 @@
 """
 
     Copyright (C) 2014-2016 bromix (plugin.video.youtube)
-    Copyright (C) 2016-2018 plugin.video.youtube
+    Copyright (C) 2016-2025 plugin.video.youtube
 
     SPDX-License-Identifier: GPL-2.0-only
     See LICENSES/GPL-2.0-only for more information.
@@ -21,19 +21,28 @@ class NextPageItem(DirectoryItem):
             del params['refresh']
 
         path = context.get_path()
-        page = params.get('page', 2)
-        items_per_page = params.get('items_per_page', 50)
+        page = params.get('page') or 2
+        items_per_page = params.get('items_per_page') or 50
         can_jump = ('next_page_token' not in params
                     and not path.startswith(('/channel',
                                              PATHS.RECOMMENDATIONS,
-                                             PATHS.RELATED_VIDEOS)))
+                                             PATHS.RELATED_VIDEOS,
+                                             PATHS.VIRTUAL_PLAYLIST)))
         can_search = not path.startswith(PATHS.SEARCH)
         if 'page_token' not in params and can_jump:
             params['page_token'] = self.create_page_token(page, items_per_page)
 
-        name = context.localize('page.next') % page
-        if page != context.get_param('page', 1) + 1:
-            name = ''.join((name, ' (', context.localize('filtered'), ')'))
+        name = context.localize('page.next', page)
+        filtered = params.get('filtered')
+        if filtered:
+            name = ''.join((
+                name,
+                ' (',
+                str(filtered),
+                ' ',
+                context.localize('filtered'),
+                ')',
+            ))
 
         super(NextPageItem, self).__init__(
             name,
@@ -47,7 +56,7 @@ class NextPageItem(DirectoryItem):
         self.items_per_page = items_per_page
 
         context_menu = [
-            menu_items.refresh(context),
+            menu_items.refresh_listing(context),
             menu_items.goto_page(context, params) if can_jump else None,
             menu_items.goto_home(context),
             menu_items.goto_quick_search(context) if can_search else None,

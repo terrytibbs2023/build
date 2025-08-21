@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 
-    Copyright (C) 2017-2019 plugin.video.youtube
+    Copyright (C) 2017-2025 plugin.video.youtube
 
     SPDX-License-Identifier: GPL-2.0-only
     See LICENSES/GPL-2.0-only for more information.
@@ -197,6 +197,7 @@ def get_channel_id(identifier,
     json_data = client.get_channel_by_identifier(identifier=identifier,
                                                  mine=mine,
                                                  handle=handle,
+                                                 as_json=True,
                                                  notify=False,
                                                  pass_data=True,
                                                  raise_exc=False)
