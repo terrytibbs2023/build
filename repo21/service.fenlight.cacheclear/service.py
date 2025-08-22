@@ -1,11 +1,15 @@
+# -*- coding: utf-8 -*-
 import os
 import xbmc
 import xbmcgui
 
-db_path = '/home/ecr/.var/app/tv.kodi.Kodi/data/userdata/addon_data/plugin.video.fenlight/databases/traktcache.db'
+# Resolve traktcache.db using Kodi's special://profile path
+db_path = xbmc.translatePath('special://profile/addon_data/plugin.video.fenlight/databases/traktcache.db')
 
+# Notify start
 xbmcgui.Dialog().notification("Fenlight Cache", "Checking traktcache.db...", xbmcgui.NOTIFICATION_INFO, 3000)
 
+# Delete if it exists
 if os.path.exists(db_path):
     try:
         os.remove(db_path)
