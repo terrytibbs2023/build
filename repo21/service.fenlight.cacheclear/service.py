@@ -1,14 +1,17 @@
 import os
 import xbmc
+import xbmcgui
 
-# Path to traktcache.db
-db_path = xbmc.translatePath('special://profile/addon_data/plugin.video.fenlight/databases/traktcache.db')
+db_path = '/home/ecr/.var/app/tv.kodi.Kodi/data/userdata/addon_data/plugin.video.fenlight/databases/traktcache.db'
 
-# Delete if exists
+xbmcgui.Dialog().notification("Fenlight Cache", "Checking traktcache.db...", xbmcgui.NOTIFICATION_INFO, 3000)
+
 if os.path.exists(db_path):
     try:
         os.remove(db_path)
-        xbmc.log("Fenlight traktcache.db deleted on startup", xbmc.LOGINFO)
+        xbmcgui.Dialog().notification("Fenlight Cache", "traktcache.db deleted", xbmcgui.NOTIFICATION_INFO, 3000)
     except Exception as e:
-        xbmc.log(f"Failed to delete traktcache.db: {e}", xbmc.LOGERROR)
+        xbmcgui.Dialog().notification("Fenlight Cache", f"Delete failed: {str(e)}", xbmcgui.NOTIFICATION_ERROR, 5000)
+else:
+    xbmcgui.Dialog().notification("Fenlight Cache", "traktcache.db not found", xbmcgui.NOTIFICATION_WARNING, 3000)
 
