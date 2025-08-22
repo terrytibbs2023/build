@@ -707,7 +707,7 @@ fix to properly get English videos as fallback
     <description lang="tr_TR">Bu kitaplık, oyun çubuğu sürücüleri ve düğme haritaları sağlar. DirectX, XInput, SDL ve Linux Oyun Çubuğu API dahil olmak üzere çoklu oyun çubuğu API'leri desteklenir.</description>
     <description lang="zh_CN">此库提供游戏杆驱动程序和按钮图。支持多个游戏杆 API，包括 DirectX、XInput、SDL 和 Linux 游戏杆 API。</description>
   </extension>
-</addon><addon id="plugin.audio.mp3streams" name="MP3 Streams" version="2022.0.2" provider-name="Jon Bovi">
+</addon><addon id="plugin.audio.mp3streams" name="MP3 Streams" version="2022.0.20" provider-name="Jon Bovi">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="script.module.future" />
@@ -725,7 +725,7 @@ fix to properly get English videos as fallback
         <news>2022.0.2 - Fix errors loading pages. 2022.0.1 - Small fix, Kodi 20 ready. 2021.0.6 - Fixed issue with hanging  when skipping tracks. 2021.0.4 - Fixed Settings, 2021.0.3 - Bugfixes. Enjoy!</news>
         <assets>
             <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
+            <fanart>splash.png</fanart>
         </assets>
     </extension>
 </addon><addon id="plugin.audio.radio_de_light" name="Radio.de light" provider-name="Publish3r" version="1.0.2">
