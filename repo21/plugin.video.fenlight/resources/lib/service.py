@@ -16,16 +16,20 @@ def logger(heading, function):
 class SetAddonConstants:
 	def run(self):
 		logger('Fen Light', 'SetAddonConstants Service Starting')
-		import xbmcaddon, xbmcvfs
-		window = xbmcgui.Window(10000)
-		_info = xbmcaddon.Addon('plugin.video.fenlight').getAddonInfo
+		import xbmcgui, xbmcaddon, xbmcvfs
+		addon_object = xbmcaddon.Addon('plugin.video.fenlight')
+		self.window = xbmcgui.Window(10000)
+		_info = addon_object.getAddonInfo
 		addon_items = [('fenlight.addon_version', _info('version')),
 					('fenlight.addon_path', _info('path')),
 					('fenlight.addon_profile', xbmcvfs.translatePath(_info('profile'))),
 					('fenlight.addon_icon', xbmcvfs.translatePath(_info('icon'))),
 					('fenlight.addon_fanart', xbmcvfs.translatePath(_info('fanart')))]
-		for item in addon_items: window.setProperty(*item)
+		for item in addon_items: self.set_property(*item)
 		return logger('Fen Light', 'SetAddonConstants Service Finished')
+
+	def set_property(self, prop, value):
+		self.window.setProperty(prop, value)
 
 class DatabaseMaintenance:
 	def run(self):
@@ -51,7 +55,9 @@ class CustomFonts:
 		font_utils = FontUtils()
 		while not monitor.abortRequested():
 			font_utils.execute_custom_fonts()
-			wait_for_abort(20)
+			if window.getProperty(pause_services_prop) == 'true' or is_playing(): sleep = 20
+			else: sleep = 10
+			wait_for_abort(sleep)
 		try: del monitor
 		except: pass
 		try: del player
@@ -115,24 +121,27 @@ class WidgetRefresher:
 		logger('Fen Light', 'WidgetRefresher Service Starting')
 		from time import time
 		from caches.settings_cache import get_setting
-		from indexers.random_lists import refresh_widgets
-		from modules.kodi_utils import home
+		from modules.kodi_utils import home, run_plugin
 		monitor, player = xbmc.Monitor(), xbmc.Player()
 		wait_for_abort, self.is_playing = monitor.waitForAbort, player.isPlayingVideo
-		self.window, self.get_setting, self.home = xbmcgui.Window(10000), get_setting, home
-		wait_for_abort(10)
+		self.window = xbmcgui.Window(10000)
+		self.get_setting = get_setting
+		self.home = home
+		self.window.setProperty('fenlight.refresh_widgets', 'true')
 		self.set_next_refresh(time())
+		wait_for_abort(20)
 		while not monitor.abortRequested():
 			try:
 				wait_for_abort(10)
+				self.window.clearProperty('fenlight.refresh_widgets')
 				offset = int(self.get_setting('fenlight.widget_refresh_timer', '60'))
 				if offset != self.offset:
 					self.set_next_refresh(time())
 					continue
 				if self.condition_check(): continue
 				if self.next_refresh < time():
+					run_plugin({'mode': 'refresh_widgets', 'show_notification': self.get_setting('fenlight.widget_refresh_notification', 'false')}, block=True)
 					logger('Fen Light', 'WidgetRefresher Service - Widgets Refreshed')
-					refresh_widgets(show_notification='true')
 					self.set_next_refresh(time())
 			except: pass
 		try: del monitor
@@ -165,42 +174,6 @@ class AutoStart:
 			run_addon()
 		return logger('Fen Light', 'AutoStart Service Finished')
 
-class AddonXMLCheck:
-	def run(self):
-		logger('Fen Light', 'AddonXMLCheck Service Starting')
-		import xbmcvfs
-		from xml.dom.minidom import parse as mdParse
-		from modules.kodi_utils import list_dirs, translate_path
-		self.addon_xml = xbmcvfs.translatePath('special://home/addons/plugin.video.fenlight/addon.xml')
-		self.root = mdParse(self.addon_xml)
-		self.change_file = False
-		self.check_property('reuse_language_invoker', 'reuselanguageinvoker')
-		self.check_property('addon_icon_choice', 'icon')
-		self.change_xml_file()
-		return logger('Fen Light', 'AddonXMLCheck Service Finished')
-
-	def check_property(self, setting, tag_name):
-		from caches.settings_cache import get_setting
-		current_addon_setting = get_setting('fenlight.%s' % setting, None)
-		if current_addon_setting is None: return
-		tag_instance = self.root.getElementsByTagName(tag_name)[0].firstChild
-		current_property = tag_instance.data
-		if current_property != current_addon_setting:
-			tag_instance.data = current_addon_setting
-			self.change_file = True
-
-	def change_xml_file(self):
-		if not self.change_file: return
-		from modules.kodi_utils import update_local_addons, disable_enable_addon, notification
-		notification('Refreshing Addon XML After Update. Restarting Addons')
-		new_xml = str(self.root.toxml()).replace('<?xml version="1.0" ?>', '')
-		with open(self.addon_xml, 'w') as f: f.write(new_xml)
-		logger('Fen Light', 'AddonXMLCheck Service - Change Detected. Restarting Addons')
-		xbmc.executebuiltin('ActivateWindow(Home)', True)
-		update_local_addons()
-		disable_enable_addon()
-
-
 class FenLightMonitor(xbmc.Monitor):
 	def __init__ (self):
 		xbmc.Monitor.__init__(self)
@@ -210,7 +183,6 @@ class FenLightMonitor(xbmc.Monitor):
 		SetAddonConstants().run()
 		DatabaseMaintenance().run()
 		SyncSettings().run()
-		AddonXMLCheck().run()
 		Thread(target=CustomFonts().run).start()
 		Thread(target=TraktMonitor().run).start()
 		Thread(target=UpdateCheck().run).start()
