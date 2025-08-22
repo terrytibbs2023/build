@@ -65,8 +65,6 @@ class Navigator:
 		if authorized_debrid_check('rd'): self.add({'mode': 'navigator.real_debrid'}, 'Real Debrid', 'realdebrid')
 		if authorized_debrid_check('pm'): self.add({'mode': 'navigator.premiumize'}, 'Premiumize', 'premiumize')
 		if authorized_debrid_check('ad'): self.add({'mode': 'navigator.alldebrid'}, 'All Debrid', 'alldebrid')
-		if authorized_debrid_check('oc'): self.add({'mode': 'navigator.offcloud'}, 'Off Cloud', 'offcloud')
-		if authorized_debrid_check('tb'): self.add({'mode': 'navigator.torbox'}, 'TorBox', 'torbox')
 		if easynews_authorized(): self.add({'mode': 'navigator.easynews'}, 'Easynews', 'easynews')
 		self.end_directory()
 
@@ -91,16 +89,6 @@ class Navigator:
 	def alldebrid(self):
 		self.add({'mode': 'alldebrid.ad_cloud'}, 'Cloud Storage', 'alldebrid')
 		self.add({'mode': 'alldebrid.ad_account_info', 'isFolder': 'false'}, 'Account Info', 'alldebrid')
-		self.end_directory()
-
-	def offcloud(self):
-		self.add({'mode': 'offcloud.oc_cloud'}, 'Cloud Storage', 'offcloud')
-		self.add({'mode': 'offcloud.oc_account_info', 'isFolder': 'false'}, 'Account Info', 'offcloud')
-		self.end_directory()
-
-	def torbox(self):
-		self.add({'mode': 'torbox.tb_cloud'}, 'Cloud Storage', 'torbox')
-		self.add({'mode': 'torbox.tb_account_info', 'isFolder': 'false'}, 'Account Info', 'torbox')
 		self.end_directory()
 
 	def favorites(self):
@@ -197,7 +185,7 @@ class Navigator:
 		self.add({'mode': 'build_next_episode_manager'}, 'TV Shows Progress Manager', 'settings2')
 		self.add({'mode': 'navigator.shortcut_folders'}, 'Shortcut Folders Manager', 'settings2')
 		self.add({'mode': 'navigator.maintenance'}, 'Database & Cache Maintenance', 'settings2')
-		self.add({'mode': 'navigator.update_utils'}, 'Update Utilities', 'settings2')
+		# self.add({'mode': 'navigator.update_utils'}, 'Update Utilities', 'settings2')
 		self.add({'mode': 'toggle_language_invoker', 'isFolder': 'false'}, 'Toggle Language Invoker (ADVANCED!!)', 'settings2')
 		self.end_directory()
 
@@ -218,9 +206,6 @@ class Navigator:
 		self.add({'mode': 'clear_cache', 'cache': 'rd_cloud', 'isFolder': 'false'}, 'Clear Real Debrid Cache', 'settings')
 		self.add({'mode': 'clear_cache', 'cache': 'pm_cloud', 'isFolder': 'false'}, 'Clear Premiumize Cache', 'settings')
 		self.add({'mode': 'clear_cache', 'cache': 'ad_cloud', 'isFolder': 'false'}, 'Clear All Debrid Cache', 'settings')
-		self.add({'mode': 'clear_cache', 'cache': 'oc_cloud', 'isFolder': 'false'}, 'Clear Off Cloud Cache', 'settings')
-		self.add({'mode': 'clear_cache', 'cache': 'ed_cloud', 'isFolder': 'false'}, 'Clear Easy Debrid Cache', 'settings')
-		self.add({'mode': 'clear_cache', 'cache': 'tb_cloud', 'isFolder': 'false'}, 'Clear TorBox Cache', 'settings')
 		self.end_directory()
 
 	def set_view_modes(self):
@@ -235,7 +220,7 @@ class Navigator:
 
 	def update_utils(self):
 		self.add({'mode': 'updater.update_check', 'isFolder': 'false'}, 'Check For Updates', 'github')
-		# self.add({'mode': 'updater.rollback_check', 'isFolder': 'false'}, 'Rollback to a Previous Version', 'github')
+		self.add({'mode': 'updater.rollback_check', 'isFolder': 'false'}, 'Rollback to a Previous Version', 'github')
 		self.add({'mode': 'updater.get_changes', 'isFolder': 'false'}, 'Check Online Version Changelog', 'github')
 		self.end_directory()
 

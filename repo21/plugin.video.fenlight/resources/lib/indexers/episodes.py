@@ -139,10 +139,8 @@ def build_episode_list(params):
 
 def build_single_episode(list_type, params={}):
 	def _get_category_name():
-		try:
-			cat_name = category_name_dict[list_type]
-			if isinstance(cat_name, dict): cat_name = cat_name[params.get('recently_aired')]
-		except: cat_name = 'Episodes'
+		cat_name = category_name_dict[list_type]
+		if isinstance(cat_name, dict): cat_name = cat_name[params.get('recently_aired')]
 		return cat_name
 	def _process(_position, ep_data):
 		try:
@@ -156,7 +154,6 @@ def build_single_episode(list_type, params={}):
 			set_properties = listitem.setProperties
 			orig_season, orig_episode = ep_data_get('season'), ep_data_get('episode')
 			unwatched = ep_data_get('unwatched', False)
-			_position = ep_data_get('custom_order', _position)
 			tmdb_id, tvdb_id, imdb_id, title, show_year = meta_get('tmdb_id'), meta_get('tvdb_id'), meta_get('imdb_id'), meta_get('title'), meta_get('year') or '2050'
 			season_data = meta_get('season_data')
 			watched_info = watched_info_episode(meta_get('tmdb_id'), watched_db)
@@ -200,6 +197,9 @@ def build_single_episode(list_type, params={}):
 			else: seas_ep = ''
 			bookmarks = get_bookmarks_episode(tmdb_id, season, watched_db)
 			progress = get_progress_status_episode(bookmarks, episode)
+			if unwatched_info:
+				total_unwatched = get_watched_status_tvshow(watched_info_tvshow(watched_db).get(string(tmdb_id), None), meta_get('total_aired_eps'))[2]
+				set_properties({'watchedepisodes': '1', 'unwatchedepisodes': string(total_unwatched)})
 			if not list_type_starts_with('next_'): playcount = get_watched_status_episode(watched_info, (season, episode))
 			if list_type_starts_with('next_'):
 				if include_airdate:
@@ -229,18 +229,9 @@ def build_single_episode(list_type, params={}):
 												'tmdb_id': tmdb_id, 'tvdb_id': tvdb_id, 'season': season, 'episode': episode,  'title': title})))
 				else: cm_append(('[B]Mark Watched %s[/B]' % watched_title, run_plugin % build_url({'mode': 'watched_status.mark_episode', 'action': 'mark_as_watched',
 												'tmdb_id': tmdb_id, 'tvdb_id': tvdb_id, 'season': season, 'episode': episode,  'title': title})))
-				if progress:
-					cm_append(('[B]Clear Progress[/B]', run_plugin % build_url({'mode': 'watched_status.erase_bookmark', 'media_type': 'episode', 'tmdb_id': tmdb_id,
+				if progress: cm_append(('[B]Clear Progress[/B]', run_plugin % build_url({'mode': 'watched_status.erase_bookmark', 'media_type': 'episode', 'tmdb_id': tmdb_id,
 												'season': season, 'episode': episode, 'refresh': 'true'})))
-				if unwatched_info:
-					total_aired_eps = meta_get('total_aired_eps')
-					total_unwatched = get_watched_status_tvshow(watched_info_tvshow(watched_db).get(string(tmdb_id), None), total_aired_eps)[2]
-					if total_aired_eps != total_unwatched: set_properties({'watchedepisodes': '1', 'unwatchedepisodes': string(total_unwatched)})
-			if all_episodes:
-				if all_episodes == 1 and meta_get('total_seasons') > 1: browse_params = {'mode': 'build_season_list', 'tmdb_id': tmdb_id}
-				else: browse_params = {'mode': 'build_episode_list', 'tmdb_id': tmdb_id, 'season': 'all'}
-			else: browse_params = {'mode': 'build_season_list', 'tmdb_id': tmdb_id}
-			cm_append(('[B]Browse[/B]', window_command % build_url(browse_params)))
+			cm_append(('[B]Browse[/B]', window_command % build_url({'mode': 'build_season_list', 'tmdb_id': tmdb_id})))
 			if is_external:
 				cm_append(('[B]Refresh Widgets[/B]', run_plugin % build_url({'mode': 'refresh_widgets'})))
 				cm_append(('[B]Reload Widgets[/B]', run_plugin % build_url({'mode': 'kodi_refresh'})))
@@ -262,10 +253,10 @@ def build_single_episode(list_type, params={}):
 							'season.poster': season_poster, 'tvshow.poster': show_poster, 'tvshow.clearlogo': show_clearlogo})
 			set_properties({'fenlight.extras_params': extras_params, 'fenlight.options_params': options_params, 'episode_type': episode_type})
 			item_list_append({'list_items': (url_params, listitem, False), 'first_aired': premiered, 'name': '%s - %sx%s' % (title, str_season_zfill2, str_episode_zfill2),
-							'unaired': unaired, 'last_played': ep_data_get('last_played', resinsert), 'sort_order': _position, 'unwatched': ep_data_get('unwatched')})
+							'unaired': unaired, 'last_played': ep_data_get('last_played', resinsert), 'sort_order': string(_position), 'unwatched': ep_data_get('unwatched')})
 		except: pass
 	handle, is_external, is_home, category_name = int(sys.argv[1]), external(), home(), 'Episodes'
-	item_list, airing_today, unwatched, return_results = [], [], [], False
+	item_list, airing_today, unwatched = [], [], []
 	resinsert = ''
 	item_list_append = item_list.append
 	window_command = 'ActivateWindow(Videos,%s,return)' if is_external else 'Container.Update(%s)'
@@ -274,6 +265,7 @@ def build_single_episode(list_type, params={}):
 	api_key, mpaa_region_value = tmdb_api_key(), mpaa_region()
 	watched_db = get_database(watched_indicators)
 	watched_title = 'Trakt' if watched_indicators == 1 else 'Fen Light'
+	show_all_episodes = all_episodes in (1, 2)
 	category_name = _get_category_name()
 	if list_type == 'episode.next':
 		include_unwatched, include_unaired, nextep_content = nextep_include_unwatched(), nextep_include_unaired(), nextep_method()
@@ -298,7 +290,7 @@ def build_single_episode(list_type, params={}):
 			data += unwatched
 	elif list_type == 'episode.progress': data = get_in_progress_episodes()
 	elif list_type == 'episode.recently_watched': data = get_recently_watched('episode')
-	elif list_type == 'episode.trakt':
+	else:#episode.trakt
 		recently_aired = params.get('recently_aired', None)
 		data = trakt_get_my_calendar(recently_aired, get_datetime())
 		list_type = 'episode.trakt_recently_aired' if recently_aired else 'episode.trakt_calendar'
@@ -311,13 +303,10 @@ def build_single_episode(list_type, params={}):
 		else:
 			try: data = sorted(data, key=lambda i: (i['sort_title'], i.get('first_aired', '2100-12-31')), reverse=True)
 			except: data = sorted(data, key=lambda i: i['sort_title'], reverse=True)
-	else: data, return_results = sorted(params, key=lambda i: i['custom_order']), True
 	list_type_compare = list_type.split('episode.')[1]
 	list_type_starts_with = list_type_compare.startswith
 	threads = list(make_thread_list_enumerate(_process, data))
 	[i.join() for i in threads]
-	if return_results:
-		return [(i['list_items'], i['sort_order']) for i in item_list]
 	if list_type_starts_with('next_'):
 		def func(function):
 			if sort_key == 'name': return title_key(function)
