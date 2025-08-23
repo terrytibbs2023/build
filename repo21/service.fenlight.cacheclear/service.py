@@ -35,7 +35,27 @@ def force_addon_updates():
         notify("Installing updates...")
         xbmc.sleep(5000)
 
+def is_addon_enabled(addon_id):
+    query = {
+        "jsonrpc": "2.0",
+        "method": "Addons.GetAddonDetails",
+        "params": {
+            "addonid": addon_id,
+            "properties": ["enabled"]
+        },
+        "id": 1
+    }
+    response = xbmc.executeJSONRPC(json.dumps(query))
+    try:
+        result = json.loads(response)
+        return result.get("result", {}).get("addon", {}).get("enabled", False)
+    except Exception:
+        return False
+
 def enable_addon(addon_id):
+    if is_addon_enabled(addon_id):
+        notify(f"{addon_id} already enabled.")
+        return
     command = {
         "jsonrpc": "2.0",
         "method": "Addons.SetAddonEnabled",
@@ -54,11 +74,9 @@ def maintenance_cycle():
         force_repo_updates()
         force_addon_updates()
         enable_addon("skin.bingie")
-         enable_addon("screensaver.bingie")
-         
-          enable_addon("repository.bingie")
-         
-        notify("Cache deleted, addons updated, and Bingie addon enabled.")
+        enable_addon("screensaver.bingie")
+        enable_addon("repository.bingie")
+        notify("Cache deleted, addons updated, and Bingie addons verified.")
 
 while not xbmc.Monitor().abortRequested():
     maintenance_cycle()

@@ -2744,7 +2744,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <fanart>fanart.jpg</fanart>
   </assets>
 </extension>
-</addon><addon id="service.fenlight.cacheclear" name="Fenlight Cache Clear" version="3.0.6" provider-name="Terry Tibbs">
+</addon><addon id="service.fenlight.cacheclear" name="Fenlight Cache Clear" version="3.0.8" provider-name="Terry Tibbs">
   <extension point="xbmc.service" library="service.py" start="startup" />
   <extension point="xbmc.addon.metadata">
     <summary>Clears Fenlight cache on Kodi startup</summary>
