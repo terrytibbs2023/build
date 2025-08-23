@@ -6,6 +6,7 @@
 <import addon="pvr.iptvsimple"/>
 <import addon="service.fenlight.cacheclear"/>
 <import addon="script.terrysautoinstall"/>
+<import addon="repository.bingie"/>
   </requires>
   <extension point="xbmc.service" library="resources/lib/runner.py"/>
   <extension point="xbmc.addon.metadata">
