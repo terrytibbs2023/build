@@ -2,9 +2,15 @@
 import os
 import xbmc
 import xbmcgui
+import time
 
-# Resolve traktcache.db using Kodi's special://profile path
-db_path = xbmc.translatePath('special://profile/addon_data/plugin.video.fenlight/databases/traktcache.db')
+# Wait for Kodi to fully initialize
+while not xbmc.getCondVisibility('Window.IsVisible(home)'):
+    time.sleep(1)
+
+# Resolve path and strip URI prefix if needed
+raw_path = xbmc.translatePath('special://profile/addon_data/plugin.video.fenlight/databases/traktcache.db')
+db_path = raw_path.replace('file://', '') if raw_path.startswith('file://') else raw_path
 
 # Notify start
 xbmcgui.Dialog().notification("Fenlight Cache", "Checking traktcache.db...", xbmcgui.NOTIFICATION_INFO, 3000)
