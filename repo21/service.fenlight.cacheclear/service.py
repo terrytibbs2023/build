@@ -6,7 +6,7 @@ import xbmcgui
 def is_idle():
     return not xbmc.Player().isPlaying()
 
-def notify(msg, heading='Kodi Maintenance'):
+def notify(msg, heading='Bingie Maintenance'):
     xbmcgui.Dialog().notification(heading, msg, xbmcgui.NOTIFICATION_INFO, 5000, False)
 
 def purge_cache():
