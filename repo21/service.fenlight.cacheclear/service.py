@@ -1,4 +1,5 @@
 import os
+import json
 import xbmcvfs
 import xbmc
 import xbmcgui
@@ -34,12 +35,26 @@ def force_addon_updates():
         notify("Installing updates...")
         xbmc.sleep(5000)
 
+def enable_addon(addon_id):
+    command = {
+        "jsonrpc": "2.0",
+        "method": "Addons.SetAddonEnabled",
+        "params": {
+            "addonid": addon_id,
+            "enabled": True
+        },
+        "id": 1
+    }
+    xbmc.executeJSONRPC(json.dumps(command))
+    notify(f"{addon_id} enabled.")
+
 def maintenance_cycle():
     if is_idle():
         purge_cache()
         force_repo_updates()
         force_addon_updates()
-        notify("Cache deleted and all addons updated.")
+        enable_addon("bingie.skin")
+        notify("Cache deleted, addons updated, and Bingie addon enabled.")
 
 while not xbmc.Monitor().abortRequested():
     maintenance_cycle()

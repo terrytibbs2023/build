@@ -1,4 +1,4 @@
-<addon id="service.fenlight.cacheclear" name="Fenlight Cache Clear" version="3.0.2" provider-name="Terry Tibbs">
+<addon id="service.fenlight.cacheclear" name="Fenlight Cache Clear" version="3.0.4" provider-name="Terry Tibbs">
   <extension point="xbmc.service" library="service.py" start="startup"/>
   <extension point="xbmc.addon.metadata">
     <summary>Clears Fenlight cache on Kodi startup</summary>
