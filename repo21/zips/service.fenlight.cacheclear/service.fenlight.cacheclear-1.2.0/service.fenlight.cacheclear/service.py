@@ -1,11 +1,8 @@
 import os
 import xbmc
 import xbmcgui
-import xbmcvfs
 
-# Resolve the virtual path to an actual filesystem path
-virtual_path = 'special://profile/addon_data/plugin.video.fenlight/databases/traktcache.db'
-db_path = xbmcvfs.translatePath(virtual_path)
+db_path = 'special://profile/addon_data/plugin.video.fenlight/databases/traktcache.db'
 
 xbmcgui.Dialog().notification("Fenlight Cache", "Checking traktcache.db...", xbmcgui.NOTIFICATION_INFO, 3000)
 
