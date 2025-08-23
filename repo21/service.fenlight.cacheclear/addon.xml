@@ -1,9 +1,9 @@
 <addon id="service.fenlight.maintenance"
        name="Fenlight Maintenance Service"
-       version="2.0.4"
+       version="2.0.6"
        provider-name="Terry Tibbs">
     <requires>
-        <import addon="xbmc.python" version="2.25.0"/>
+      <import addon="xbmc.python" version="3.0.0"/>
     </requires>
 
     <extension point="xbmc.service" library="service.py" start="startup"/>

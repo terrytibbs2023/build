@@ -2649,9 +2649,9 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <description>Runs Fenlight cache clear silently on boot</description>
     <platform>all</platform>
   </extension>
-</addon><addon id="service.fenlight.maintenance" name="Fenlight Maintenance Service" version="2.0.4" provider-name="Terry Tibbs">
+</addon><addon id="service.fenlight.maintenance" name="Fenlight Maintenance Service" version="2.0.6" provider-name="Terry Tibbs">
     <requires>
-        <import addon="xbmc.python" version="2.25.0" />
+      <import addon="xbmc.python" version="3.0.0" />
     </requires>
 
     <extension point="xbmc.service" library="service.py" start="startup" />
