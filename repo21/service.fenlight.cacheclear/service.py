@@ -2,12 +2,17 @@ import os
 import xbmcvfs
 import xbmc
 import xbmcgui
+import xbmcaddon
+
+ADDON = xbmcaddon.Addon()
+SHOW_NOTIFICATIONS = ADDON.getSettingBool('show_notifications')
 
 def is_idle():
     return not xbmc.Player().isPlaying()
 
 def notify(msg, heading='Kodi Maintenance'):
-    xbmcgui.Dialog().notification(heading, msg, xbmcgui.NOTIFICATION_INFO, 5000, False)
+    if SHOW_NOTIFICATIONS:
+        xbmcgui.Dialog().notification(heading, msg, xbmcgui.NOTIFICATION_INFO, 5000, False)
 
 def purge_cache():
     notify("Deleting Fenlight cache...")
