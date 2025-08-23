@@ -1,0 +1,4 @@
+<settings>
+    <setting id="show_notifications" type="bool" label="Show maintenance notifications" default="true" />
+</settings>
+
