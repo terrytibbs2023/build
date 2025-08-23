@@ -55,6 +55,9 @@ def maintenance_cycle():
         force_addon_updates()
         enable_addon("skin.bingie")
          enable_addon("screensaver.bingie")
+         
+          enable_addon("repository.bingie")
+         
         notify("Cache deleted, addons updated, and Bingie addon enabled.")
 
 while not xbmc.Monitor().abortRequested():
