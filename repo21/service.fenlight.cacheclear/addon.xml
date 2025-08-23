@@ -1,25 +1,9 @@
-<addon id="service.fenlight.maintenance"
-       name="Fenlight Maintenance Service"
-       version="2.0.6"
-       provider-name="Terry Tibbs">
-    <requires>
-      <import addon="xbmc.python" version="3.0.0"/>
-    </requires>
-
-    <extension point="xbmc.service" library="service.py" start="startup"/>
-
-    <extension point="xbmc.addon.metadata">
-        <summary lang="en_gb">Automated cache purge and addon updater for Fenlight</summary>
-        <description lang="en_gb">
-            Runs every 6 hours when Kodi is idle. Deletes Fenlight trakt cache, forces repo and addon updates, and optionally displays progress notifications.
-        </description>
-        <platform>all</platform>
-        <license>MIT</license>
-        <language>en_gb</language>
-        <assets>
-            <icon>icon.png</icon>
-            <settings>settings.xml</settings>
-        </assets>
-    </extension>
+<addon id="service.fenlight.cacheclear" name="Fenlight Cache Clear" version="2.9.0" provider-name="David">
+  <extension point="xbmc.service" library="service.py" start="startup"/>
+  <extension point="xbmc.addon.metadata">
+    <summary>Clears Fenlight cache on Kodi startup</summary>
+    <description>Runs Fenlight cache clear silently on boot</description>
+    <platform>all</platform>
+  </extension>
 </addon>
 
