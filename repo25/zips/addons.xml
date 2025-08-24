@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<addons><addon id="plugin.audio.mp3streams" name="MP3 Streams" version="2022.0.10" provider-name="Jon Bovi">
+<addons><addon id="plugin.audio.mp3streams" name="MP3 Streams" version="2022.0.20" provider-name="Jon Bovi">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="script.module.future" />
@@ -544,7 +544,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
         <icon>icon.png</icon>
         <fanart>fanart.jpg</fanart>
     </extension>
-</addon><addon id="service.installer" name="Bingie Installer" version="1.0.4" provider-name="Terry Tibbs">
+</addon><addon id="service.installer" name="Bingie Installer" version="1.0.8" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary>Installs Terrys Bingie Build</summary>
