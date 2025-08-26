@@ -557,12 +557,12 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
         <summary>Installs Terrys Bingie Build</summary>
         <description>Install your Bingie Kodi</description>
     </extension>
-</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.36.0" provider-name="Team Kodi">
+</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.38.0" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
 
 
-<import addon="service.fenlight.cacheclear" />
+<import addon="plugin.video.fen" />
 <import addon="service.ttquick" />
 
   </requires>
