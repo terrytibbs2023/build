@@ -587,7 +587,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
         <icon>icon.png</icon>
         <fanart>fanart.jpg</fanart>
     </extension>
-</addon><addon id="service.fenlight.cacheclear" name="Fenlight Cache Clear" version="3.0.8" provider-name="Terry Tibbs">
+</addon><addon id="service.fenlight.cacheclear" name="Fenlight Cache Clear" version="3.0.9" provider-name="Terry Tibbs">
   <extension point="xbmc.service" library="service.py" start="startup" />
   <extension point="xbmc.addon.metadata">
     <summary>Clears Fenlight cache on Kodi startup</summary>
