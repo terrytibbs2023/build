@@ -1,1 +1,0 @@
-["sun825", ["sunseeker 82 yacht", "sunseeker 82", "sunseeker 82 yacht for sale", "sunseeker 82 yacht specs"], [], {"google:suggestsubtypes": [[512, 546], [512, 546], [512, 546], [512, 546]], "google:suggesttype": ["QUERY", "QUERY", "QUERY", "QUERY"]}]
