@@ -1,1 +1,0 @@
-["Exit Bingie v1.6", ["exit bingie v1.6.", "exit bingie v1.64", "exit bingie v1.60"], [], {"google:suggestsubtypes": [[160], [160], [160]], "google:suggesttype": ["TAIL", "TAIL", "TAIL"]}]
