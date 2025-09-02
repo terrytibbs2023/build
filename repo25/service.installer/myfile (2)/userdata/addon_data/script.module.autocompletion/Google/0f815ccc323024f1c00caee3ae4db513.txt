@@ -1,0 +1,1 @@
+["gbi", ["gbis", "gbis scheme", "gbif", "gbi cars", "gbi police", "gbics", "gbip", "gbis scheme eligibility", "gbile akanni", "gbis guidance"], [], {"google:suggestsubtypes": [[512, 433], [512], [512, 433, 131], [512], [512], [512], [512], [512], [512], [512]], "google:suggesttype": ["QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY"]}]
