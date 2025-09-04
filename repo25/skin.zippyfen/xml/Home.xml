@@ -3,7 +3,21 @@
 	<defaultcontrol>9000</defaultcontrol>
 	<backgroundcolor>background</backgroundcolor>
 	<controls>
-	
+		<control type="button" id="20000">
+			<include>HiddenObject</include>
+			<animation effect="fade" time="300" start="100" end="0">Focus</animation>
+			<onfocus>SetFocus(2000)</onfocus>
+			<onclick>noop</onclick>
+			<visible allowhiddenfocus="true">Control.HasFocus(20000)</visible>
+		</control>
+		<control type="button" id="20001">
+			<include>HiddenObject</include>
+			<animation effect="fade" time="300" start="100" end="0">Focus</animation>
+			<onfocus>SetFocus(2000)</onfocus>
+			<onclick>noop</onclick>
+			<visible allowhiddenfocus="true">Control.HasFocus(20001)</visible>
+		</control>
+		<include>DefaultBackground</include>
 		<control type="multiimage">
 			<depth>DepthBackground</depth>
 			<include>FullScreenDimensions</include>
@@ -852,16 +866,6 @@
 						</item>
 					
 					<item>
-	<label>Movie Categories</label>
-							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?iconImage=genres&amp;menu_type=movie&amp;mode=navigator.genres&amp;name=32470",return)</onclick>
-							<property name="menu_id">$NUMBER[14000]</property>
-						
-							<property name="id">favorites</property>
-							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
-						</item>
-					
-					<item>
 <label>Movies</label>
 							
 							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?list_name=Latest%20Releases&amp;list_type=user_lists&amp;mode=trakt.list.build_trakt_list&amp;slug=latest-releases&amp;user=giladg",return)</onclick>
@@ -934,11 +938,9 @@
 
 
 				
-
 					
 						
 							
-</control>
 							
 								
 
@@ -947,23 +949,23 @@
 						
 					</content>
 				</control>
-				control type="grouplist" id="700">
-    <orientation>horizontal</orientation>
-    <itemgap>0</itemgap>
-    <left>center</left> <!-- This centers the control horizontally -->
-    <width>0</width>
-    <height>110</height>
-    <top>5</top> <!-- Keeps it near the top -->
-    <onup>SetFocus(9000,99,absolute)</onup>
-    <ondown>SetFocus(9000,0,absolute)</ondown>
-    <onright>2000</onright>
-    <align>center</align>
-    <include content="IconButton">
-        <param name="control_id" value="804" />
-        <param name="onclick" value="ActivateWindow(shutdownmenu)" />
-        <param name="icon" value="icons/power.png" />
-        <param name="label" value="$LOCALIZE[33060]" />
-    </include>
+				<control type="grouplist" id="700">
+					<orientation>horizontal</orientation>
+					<itemgap>0</itemgap>
+					<left>-8</left>
+					<width>480</width>
+					<height>110</height>
+					<top>10</top>
+					<onup>SetFocus(9000,99,absolute)</onup>
+					<ondown>SetFocus(9000,0,absolute)</ondown>
+					<onright>2000</onright>
+					<align>justify</align>
+					<include content="IconButton">
+						<param name="control_id" value="804" />
+						<param name="onclick" value="ActivateWindow(shutdownmenu)" />
+						<param name="icon" value="icons/power.png" />
+						<param name="label" value="$LOCALIZE[33060]" />
+					</include>
 <include content="IconButton">
 						<param name="control_id" value="802" />
 						<param name="onclick" value="ActivateWindow(1100)" />
@@ -984,9 +986,55 @@
 						<param name="label" value="$LOCALIZE[31000]" />
 						<param name="visible" value="Player.HasMedia" />
 					</include>
-				
-			
-			
+				</control>
+			</control>
+			<include>BottomBar</include>
+			<control type="group">
+				<depth>DepthBars</depth>
+				<bottom>0</bottom>
+				<height>70</height>
+				<animation effect="fade" start="0" end="100" time="300" delay="300">WindowOpen</animation>
+				<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+				<include condition="!Skin.HasSetting(hide_mediaflags)" content="MediaFlags">
+					<param name="infolabel_prefix" value="Container." />
+					<param name="resolution_var" value="$VAR[ContainerResolutionFlagVar]" />
+				</include>
+				<control type="rss">
+					<animation effect="slide" end="0,90" time="300" tween="sine" easing="inout" condition="$EXP[infodialog_active]">conditional</animation>
+					<left>480</left>
+					<bottom>1100</bottom>
+					<height>39</height>
+					<width>65%</width>
+					<font>font12</font>
+					<urlset>1</urlset>
+					<hitrect x="-100" y="0" w="1" h="1" />
+					<titlecolor>button_focus</titlecolor>
+					<textcolor>button_focus</textcolor>
+					<shadowcolor>text_shadow</shadowcolor>
+					<headlinecolor>FFC0C0C0</headlinecolor>
+					<visible>Skin.HasSetting(hide_mediaflags) | !ControlGroup(2000).HasFocus</visible>
+					<animation effect="fade" time="300">VisibleChange</animation>
+				</control>
+			</control>
+			<include content="TopBar">
+				<param name="breadcrumbs_label" value="" />
+			</include>
+			<control type="group">
+				<depth>DepthBars</depth>
+				<animation effect="slide" end="0,-90" time="300" tween="sine" easing="inout" condition="$EXP[infodialog_active]">conditional</animation>
+				<animation effect="fade" start="0" end="100" time="300">WindowOpen</animation>
+				<animation effect="fade" start="100" end="0" time="200">WindowClose</animation>
+				<top>00</top>
+				<left>90</left>
+				<control type="image">
+					<left>40</left>
+					<top>10</top>
+					<aspectratio>keep</aspectratio>
+					<width>192</width>
+					<height>36</height>
+					<texture>icons/log</texture>
+				</control>
+			</control>
 		</control>
 	</controls>
 </window>
