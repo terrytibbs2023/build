@@ -844,7 +844,7 @@
 <item>
 	<label>Sport</label>
 							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.sport",return)</onclick>
+							<onclick>ActivateWindow(10025,"plugin://plugin.video.dlv2",return)</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
 						
 							<property name="id">favorites</property>

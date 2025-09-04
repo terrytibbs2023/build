@@ -321,23 +321,23 @@
 			</include>
 			<control type="panel" id="$PARAM[list_id]">
 				<left>0</left>
-				<top>110</top>
+				<top>10</top>
 				<right>0</right>
-				<height>290</height>
+				<height>20</height>
 				<include content="WidgetListCommon">
 					<param name="list_id" value="$PARAM[list_id]"/>
 				</include>
 				<visible>$PARAM[visible]</visible>
 				<visible>Integer.IsGreater(Container($PARAM[list_id]).NumItems,0) | Container($PARAM[list_id]).IsUpdating</visible>
-				<itemlayout width="310" height="340">
+				<itemlayout width="30" height="30">
 					<control type="group">
-						<left>70</left>
+						<left>7</left>
 						<control type="image">
-							<width>316</width>
-							<height>200</height>
+							<width>16</width>
+							<height>20</height>
 							<texture>dialogs/dialog-bg-nobo.png</texture>
 							<bordertexture border="21">overlays/shadow.png</bordertexture>
-							<bordersize>20</bordersize>
+							<bordersize>0</bordersize>
 						</control>
 						<control type="image">
 							<centertop>74</centertop>
@@ -347,20 +347,11 @@
 							<texture fallback="DefaultFolder.png">$PARAM[icon]</texture>
 							<aspectratio>keep</aspectratio>
 						</control>
-						<control type="textbox">
-							<left>38</left>
-							<top>106</top>
-							<width>240</width>
-							<height>70</height>
-							<label>$INFO[ListItem.Label]</label>
-							<font>font25_narrow</font>
-							<shadowcolor>text_shadow</shadowcolor>
-							<align>center</align>
-							<aligny>center</aligny>
-						</control>
-					</control>
-				</itemlayout>
-				<focusedlayout width="310" height="340">
+						
+						
+						
+						
+						
 					<control type="group">
 						<depth>DepthContentPopout</depth>
 						<left>70</left>
@@ -377,13 +368,7 @@
 							<bordertexture border="21">overlays/shadow.png</bordertexture>
 							<bordersize>20</bordersize>
 						</control>
-						<control type="image">
-							<width>316</width>
-							<height>200</height>
-							<texture colordiffuse="button_focus">colors/grey.png</texture>
-							<bordersize>20</bordersize>
-							<include>Animation_FocusTextureFade</include>
-						</control>
+						
 						<control type="image">
 							<centertop>74</centertop>
 							<left>58</left>

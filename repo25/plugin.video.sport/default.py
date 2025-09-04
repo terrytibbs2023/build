@@ -20,7 +20,7 @@ if not args:
         'fanart': "https://archive.org/download/iconlarge/iconlarge.png"
     })
     list_item.setInfo('video', {
-        'title': "Latest Movies",
+        'title': "Best Sports Addon",
         'plot': "A curated list of the latest Netflix releases.",
         'genre': "Drama, Action",
         'year': "2025",
@@ -30,7 +30,7 @@ if not args:
     })
     list_item.setProperty("IsPlayable", "false")
 
-    url = "plugin://plugin.video.fen/?list_name=Netflix%20Movies&list_type=user_lists&mode=trakt.list.build_trakt_list&slug=netflix-movies&user=garycrawfordgc"
+    url = "plugin://plugin://plugin.video.dlv2"
     xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=list_item, isFolder=True)
 
     xbmcplugin.endOfDirectory(addon_handle)
