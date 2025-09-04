@@ -1,0 +1,1 @@
+["meet marr", ["meet married women", "meet married women near me", "meet marry", "meet married men near me", "meet married men"], [], {"google:suggestsubtypes": [[512], [512], [512], [512], [512]], "google:suggesttype": ["QUERY", "QUERY", "QUERY", "QUERY", "QUERY"]}]

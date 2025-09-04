@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<buttonmap>
+	<device name="Xbox Wireless Controller" provider="udev" vid="045e" pid="028e" buttoncount="11" axiscount="8">
+		<controller id="game.controller.default">
+			<feature name="b" button="1"/>
+			<feature name="a" button="0"/>
+			<feature axis="+7" name="down"/>
+			<feature name="guide" button="8"/>
+			<feature axis="+2" name="lefttrigger"/>
+			<feature axis="-6" name="left"/>
+			<feature name="rightbumper" button="5"/>
+			<feature name="leftbumper" button="4"/>
+			<feature axis="+5" name="righttrigger"/>
+			<feature axis="+6" name="right"/>
+			<feature name="back" button="6"/>
+			<feature name="start" button="7"/>
+			<feature axis="-7" name="up"/>
+			<feature name="y" button="3"/>
+			<feature name="x" button="2"/>
+			<feature name="leftstick">
+				<left axis="-0"/>
+				<right axis="+0"/>
+				<up axis="-1"/>
+				<down axis="+1"/>
+			</feature>
+			<feature name="rightstick">
+				<left axis="-3"/>
+				<right axis="+3"/>
+				<up axis="-4"/>
+				<down axis="+4"/>
+			</feature>
+		</controller>
+	</device>
+</buttonmap>
