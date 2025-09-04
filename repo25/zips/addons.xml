@@ -915,18 +915,18 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
     <description>Runs Fenlight cache clear silently on boot</description>
     <platform>all</platform>
   </extension>
-</addon><addon id="service.installer" name="Bingie Installer" version="1.2.0" provider-name="Terry Tibbs">
+</addon><addon id="service.installer" name="2026 Installer" version="1.2.1" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
-        <summary>Installs Terrys Bingie Build</summary>
-        <description>Install your Bingie Kodi</description>
+        <summary>Installs Terrys 2026 Build</summary>
+        <description>Install your Kodi</description>
     </extension>
-</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.46.0" provider-name="Team Kodi">
+</addon><addon id="service.tt.versioncheck" name="Terry Tibbs Auto Installer" version="0.47.0" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
 
 <import addon="pvr.iptvsimple" />
-<import addon="plugin.video.neo_flix" />
+
 <import addon="plugin.video.dlv2" />
 <import addon="service.ttquick" />
 
