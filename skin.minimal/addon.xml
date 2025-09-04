@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="skin.minimalskin" name="MinimalSkin" version="1.0.0" provider-name="User">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+    <extension point="xbmc.gui.skin" defaultresolution="1080i">
+        <settings/>
+        <assets>
+            <media zip="false">media</media>
+        </assets>
+        <views>
+            <view name="Home"/>
+        </views>
+    </extension>
+</addon>

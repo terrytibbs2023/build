@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window>
+    <controls>
+        <!-- Power Button -->
+        <image pos="10,10" size="64,64" texture="power.png"/>
+        <!-- Addon Buttons -->
+        <image pos="100,10" size="64,64" texture="addon.png"/>
+        <image pos="170,10" size="64,64" texture="addon.png"/>
+        <!-- Favourites -->
+        <image pos="240,10" size="64,64" texture="favourites.png"/>
+    </controls>
+</window>
