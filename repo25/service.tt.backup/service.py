@@ -3,13 +3,15 @@ import xbmcvfs
 import xml.etree.ElementTree as ET
 import os
 
+# Define paths
 ADDON_ID = "plugin.video.fen"
 ADDON_DATA = xbmcvfs.translatePath(f"special://profile/addon_data/" + ADDON_ID)
 SETTINGS_FILE = os.path.join(ADDON_DATA, "settings.xml")
 BACKUP_FILE = "/storage/emulated/0/Download/kodi_cred_backup.txt"
 
-RD_KEYS = ["rd.token", "rd.refresh", "rd.account_id", "rd.client_id", "rd.secret"]
-TRAKT_KEYS = ["trakt.token", "trakt.refresh", "trakt.expires"]
+# Keys to track
+RD_KEYS = ["rd.token", "rd.refresh", "rd.account_id", "rd.client_id", "rd.secret", "rd.enabled"]
+TRAKT_KEYS = ["trakt.token", "trakt.refresh", "trakt.expires", "trakt.enabled"]
 
 def get_setting_value(root, key):
     for setting in root.findall("setting"):
@@ -53,8 +55,6 @@ def restore_credentials(tree, root):
                     set_setting_value(root, key, val)
                     xbmc.log(f"[CredBackup] Restored {key}", xbmc.LOGINFO)
 
-        set_setting_value(root, "rd.enabled", "true")
-        set_setting_value(root, "trakt.enabled", "true")
         tree.write(SETTINGS_FILE)
         xbmc.log("[CredBackup] Credentials restored and services enabled", xbmc.LOGINFO)
         return True
