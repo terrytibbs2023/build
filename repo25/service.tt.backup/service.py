@@ -62,13 +62,15 @@ def restore_credentials(tree, root):
                     set_setting_value(root, key, val)
                     xbmc.log(f"[CredBackup] Restored {key}", xbmc.LOGINFO)
 
+        # Force-enable indicators so Next Episodes works
+        set_setting_value(root, "trakt.indicators_active", "true")
+        xbmc.log("[CredBackup] Forced trakt.indicators_active = true", xbmc.LOGINFO)
+
         tree.write(SETTINGS_FILE)
         xbmc.log("[CredBackup] Credentials restored", xbmc.LOGINFO)
 
         # Trigger Fen Trakt sync to refresh Next Episodes
-        xbmc.executebuiltin(
-            'RunPlugin("plugin://plugin.video.fen/?action=traktSyncActivities")'
-        )
+        xbmc.executebuiltin('RunPlugin("plugin://plugin.video.fen/?action=traktSyncActivities")')
         xbmc.log("[CredBackup] Forced Trakt sync triggered", xbmc.LOGINFO)
 
         return True
