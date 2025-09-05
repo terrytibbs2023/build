@@ -3,15 +3,22 @@ import xbmcvfs
 import xml.etree.ElementTree as ET
 import os
 
-# Define paths
+# Addon details
 ADDON_ID = "plugin.video.fen"
-ADDON_DATA = xbmcvfs.translatePath(f"special://profile/addon_data/" + ADDON_ID)
+ADDON_DATA = xbmcvfs.translatePath(f"special://profile/addon_data/{ADDON_ID}")
 SETTINGS_FILE = os.path.join(ADDON_DATA, "settings.xml")
 BACKUP_FILE = "/storage/emulated/0/Download/kodi_cred_backup.txt"
 
 # Keys to track
-RD_KEYS = ["rd.token", "rd.refresh", "rd.account_id", "rd.client_id", "rd.secret", "rd.enabled"]
-TRAKT_KEYS = ["trakt.token", "trakt.refresh", "trakt.expires", "trakt.enabled"]
+RD_KEYS = [
+    "rd.token", "rd.refresh", "rd.account_id",
+    "rd.client_id", "rd.secret", "rd.enabled"
+]
+
+TRAKT_KEYS = [
+    "trakt.token", "trakt.refresh", "trakt.expires",
+    "trakt.user", "trakt.indicators_active", "trakt.sync_refresh_widgets"
+]
 
 def get_setting_value(root, key):
     for setting in root.findall("setting"):
@@ -38,7 +45,7 @@ def backup_credentials(root):
         with open(BACKUP_FILE, "w") as f:
             for k, v in creds.items():
                 f.write(f"{k}={v}\n")
-        xbmc.log("[CredBackup] Trakt + RD credentials backed up to /Download", xbmc.LOGINFO)
+        xbmc.log("[CredBackup] Credentials backed up to /Download", xbmc.LOGINFO)
     except Exception as e:
         xbmc.log(f"[CredBackup] Backup failed: {str(e)}", xbmc.LOGERROR)
 
@@ -56,7 +63,14 @@ def restore_credentials(tree, root):
                     xbmc.log(f"[CredBackup] Restored {key}", xbmc.LOGINFO)
 
         tree.write(SETTINGS_FILE)
-        xbmc.log("[CredBackup] Credentials restored and services enabled", xbmc.LOGINFO)
+        xbmc.log("[CredBackup] Credentials restored", xbmc.LOGINFO)
+
+        # Trigger Fen Trakt sync to refresh Next Episodes
+        xbmc.executebuiltin(
+            'RunPlugin("plugin://plugin.video.fen/?action=traktSyncActivities")'
+        )
+        xbmc.log("[CredBackup] Forced Trakt sync triggered", xbmc.LOGINFO)
+
         return True
     except Exception as e:
         xbmc.log(f"[CredBackup] Restore failed: {str(e)}", xbmc.LOGERROR)
