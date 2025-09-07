@@ -20,9 +20,6 @@ TRAKT_KEYS = [
     "trakt.user", "trakt.indicators_active", "trakt.sync_refresh_widgets"
 ]
 
-# Tokens we skip restoring (short-lived access tokens)
-SKIP_KEYS = ["rd.token", "trakt.token"]
-
 def get_setting_value(root, key):
     for setting in root.findall("setting"):
         if setting.get("id") == key:
@@ -62,11 +59,6 @@ def restore_credentials(tree, root):
             for line in f:
                 if "=" in line:
                     key, val = line.strip().split("=", 1)
-
-                    if key in SKIP_KEYS:
-                        xbmc.log(f"[CredBackup] Skipping restore of {key} (will auto-refresh)", xbmc.LOGINFO)
-                        continue
-
                     set_setting_value(root, key, val)
                     xbmc.log(f"[CredBackup] Restored {key}", xbmc.LOGINFO)
 
