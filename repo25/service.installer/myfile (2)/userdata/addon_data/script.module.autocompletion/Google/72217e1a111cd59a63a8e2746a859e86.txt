@@ -1,1 +1,0 @@
-["hq", ["hq", "hq dental", "hq airsoft", "hqa534bb3b", "hqip", "hqa534bs3b", "hq barbers", "hqa574bb3b", "hqa574bs3b", "hqn"], [], {"google:suggestsubtypes": [[512, 433, 131], [512], [512], [512], [512], [512], [512], [512], [512], [512]], "google:suggesttype": ["QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY"]}]
