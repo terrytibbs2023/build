@@ -921,7 +921,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
         <summary>Installs Terrys 2026 Build</summary>
         <description>Install your Kodi</description>
     </extension>
-</addon><addon id="service.tt.backup" name="Terry Tibbs Backup" version="0.47.0" provider-name="Team Kodi">
+</addon><addon id="service.tt.backup" name="Terry Tibbs Backup" version="0.48.0" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
   </requires>

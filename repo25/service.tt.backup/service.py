@@ -2,6 +2,7 @@ import xbmc
 import xbmcvfs
 import xml.etree.ElementTree as ET
 import os
+import time
 
 # Addon details
 ADDON_ID = "plugin.video.fen"
@@ -34,6 +35,13 @@ def set_setting_value(root, key, value):
     ET.SubElement(root, "setting", id=key, default="true").text = value
     return True
 
+def is_trakt_token_expired(root):
+    expires = get_setting_value(root, "trakt.expires")
+    try:
+        return int(expires) < int(time.time())
+    except:
+        return True  # Treat missing or invalid expiry as expired
+
 def backup_credentials(root):
     creds = {}
     for key in RD_KEYS + TRAKT_KEYS:
@@ -43,6 +51,7 @@ def backup_credentials(root):
 
     try:
         with open(BACKUP_FILE, "w") as f:
+            f.write(f"#timestamp:{int(time.time())}\n")
             for k, v in creds.items():
                 f.write(f"{k}={v}\n")
         xbmc.log("[CredBackup] Credentials backed up to /Download", xbmc.LOGINFO)
@@ -57,54 +66,22 @@ def restore_credentials(tree, root):
     try:
         with open(BACKUP_FILE, "r") as f:
             for line in f:
-                if "=" in line:
+                if "=" in line and not line.startswith("#"):
                     key, val = line.strip().split("=", 1)
                     set_setting_value(root, key, val)
                     xbmc.log(f"[CredBackup] Restored {key}", xbmc.LOGINFO)
 
-        # Force-enable indicators so Next Episodes works
+        # Force-enable indicators and widget refresh
         set_setting_value(root, "trakt.indicators_active", "true")
-        xbmc.log("[CredBackup] Forced trakt.indicators_active = true", xbmc.LOGINFO)
+        set_setting_value(root, "trakt.sync_refresh_widgets", "true")
+        xbmc.log("[CredBackup] Forced trakt.indicators_active and sync_refresh_widgets = true", xbmc.LOGINFO)
 
         tree.write(SETTINGS_FILE)
         xbmc.log("[CredBackup] Credentials restored", xbmc.LOGINFO)
 
-        # Trigger Fen Trakt sync to refresh Next Episodes
         xbmc.executebuiltin('RunPlugin("plugin://plugin.video.fen/?action=traktSyncActivities")')
         xbmc.log("[CredBackup] Forced Trakt sync triggered", xbmc.LOGINFO)
 
         return True
     except Exception as e:
-        xbmc.log(f"[CredBackup] Restore failed: {str(e)}", xbmc.LOGERROR)
-        return False
-
-def main():
-    if not os.path.exists(SETTINGS_FILE):
-        xbmc.log("[CredBackup] settings.xml not found", xbmc.LOGWARNING)
-        return
-
-    try:
-        tree = ET.parse(SETTINGS_FILE)
-        root = tree.getroot()
-
-        rd_enabled = get_setting_value(root, "rd.enabled").strip().lower()
-        xbmc.log(f"[CredBackup] rd.enabled = {rd_enabled}", xbmc.LOGINFO)
-
-        if rd_enabled == "true":
-            backup_credentials(root)
-        elif rd_enabled == "false":
-            if restore_credentials(tree, root):
-                xbmc.log("[CredBackup] Forcing Kodi shutdown after restore", xbmc.LOGINFO)
-                xbmc.executebuiltin("Quit()")
-        else:
-            xbmc.log("[CredBackup] rd.enabled value unclear—no action taken", xbmc.LOGWARNING)
-
-    except Exception as e:
-        xbmc.log(f"[CredBackup] Error: {str(e)}", xbmc.LOGERROR)
-
-main()
-
-if hasattr(xbmc, "abortRequested"):
-    while not xbmc.abortRequested:
-        xbmc.sleep(10000)
-
+        xbmc.log(f"[CredBackup] Restore
