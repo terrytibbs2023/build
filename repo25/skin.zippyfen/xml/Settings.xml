@@ -50,19 +50,7 @@
 						<icon>icons/settings/addons.png</icon>
 					</item>
 					<item>
-						<label>$LOCALIZE[138]</label>
-						<onclick>ActivateWindow(systeminfo)</onclick>
-						<icon>icons/settings/sysinfo.png</icon>
-					</item>
-					<item>
-						
-						<label>$LOCALIZE[14200]</label>
-						<onclick>ActivateWindow(PlayerSettings)</onclick>
-						<icon>icons/settings/player.png</icon>
-					</item>
-					<item>
-						
-						<label>Enable Adult</label>
+					<label>Enable Adult</label>
     
       
     <onclick condition="System.HasAddon(plugin.video.cumination)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
@@ -82,6 +70,37 @@
 						
 						
 						
+						<label>$LOCALIZE[31067]</label>
+						<onclick>ActivateWindow(eventlog)</onclick>
+						<icon>icons/settings/eventlog.png</icon>
+					</item>
+				</content>
+			</control>
+			<control type="panel" id="9001">
+				<left>0</left>
+				<right>0</right>
+				<top>470</top>
+				<bottom>0</bottom>
+				<onup>Control.SetFocus(9000,$INFO[Container(9001).Position],absolute)</onup>
+				<ondown>noop</ondown>
+				<include>SettingsPanel</include>
+				<content>
+					<item>
+						<label>$LOCALIZE[14200]</label>
+						<onclick>ActivateWindow(PlayerSettings)</onclick>
+						<icon>icons/settings/player.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[14211]</label>
+						<onclick>ActivateWindow(MediaSettings)</onclick>
+						<icon>icons/settings/media.png</icon>
+					</item>
+					<item>
+						<label>$LOCALIZE[14204]</label>
+						<onclick>ActivateWindow(PVRSettings)</onclick>
+						<icon>icons/settings/livetv.png</icon>
+					</item>
+					<item>
 						<label>Trakt Setup</label>
 						
 					
@@ -91,7 +110,7 @@
 							<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
-					<label>RealDebrid Setup</label>
+								<label>RealDebrid Setup</label>
 						
 					
 						
@@ -101,15 +120,14 @@
 					</item>
 					<item>
 						
-					
 						<label>$LOCALIZE[14206]</label>
 						<onclick>ActivateWindow(InterfaceSettings)</onclick>
 						<icon>icons/settings/interface.png</icon>
 					</item>
 					<item>
-						<label>$LOCALIZE[14211]</label>
-						<onclick>ActivateWindow(MediaSettings)</onclick>
-						<icon>icons/settings/media.png</icon>
+						<label>$LOCALIZE[13200]</label>
+						<onclick>ActivateWindow(Profiles)</onclick>
+						<icon>icons/settings/profiles.png</icon>
 					</item>
 					<item>
 						<label>$LOCALIZE[13000]</label>
