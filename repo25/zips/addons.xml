@@ -768,7 +768,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 		<description lang="en" />
 		<genre />
 	</extension>
-</addon><addon id="repository.terrytibbs" name="Terrys 25 repo" version="2.8" provider-name="Terry Tibbs">
+</addon><addon id="repository.terrytibbs" name="Terrys 25 repo" version="5.8" provider-name="Terry Tibbs">
     <extension point="xbmc.addon.repository" name="Terrys 25 Repository">
         <dir>
             <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repo25/zips/addons.xml</info>
@@ -854,6 +854,12 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
             <icon>icon.png</icon>
             <fanart>fanart.jpg</fanart>
         </assets>
+    </extension>
+</addon><addon id="script.2026" name="2026 fixes" version="1.0.0" provider-name="Terry Tibbs">
+    <extension point="xbmc.service" library="service.py" />
+    <extension point="xbmc.addon.metadata">
+        <summary>Service to apply small fixes</summary>
+        <description>Keep kodi working</description>
     </extension>
 </addon><addon id="script.fentastic.helper" name="FENtastic Helper" version="0.6.20a" provider-name="Tikipeter, Ivar Brandt">
     <requires>
