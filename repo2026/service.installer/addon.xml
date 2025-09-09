@@ -1,4 +1,4 @@
-<addon id="service.installer" name="2026 Installer" version="1.2.6" provider-name="Terry Tibbs">
+<addon id="service.installer" name="2026 Installer" version="1.2.8" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py"/>
     <extension point="xbmc.addon.metadata">
         <summary>Installs Terrys 2026 Build</summary>
