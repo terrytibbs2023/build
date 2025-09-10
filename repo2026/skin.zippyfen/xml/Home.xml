@@ -33,7 +33,7 @@
 		<control type="group">
 			<animation effect="fade" start="100" end="0" time="200" tween="sine" condition="$EXP[infodialog_active]">Conditional</animation>
 			<control type="group" id="2000">
-				<left>462</left>
+				<left>160</left>
 				<animation type="Conditional" condition="Control.IsVisible(20000)" reversible="false">
 					<effect type="slide" end="0,20" time="60" tween="sine" />
 					<effect type="slide" end="0,-20" time="180" tween="sine" delay="80" />
@@ -753,14 +753,14 @@
 				<depth>DepthContentPanel</depth>
 				<include>OpenClose_Left</include>
 				<include content="ContentPanel">
-					<param name="width" value="522" />
+					<param name="width" value="0" /> .................................................. black bar
 				</include>
-				<control type="fixedlist" id="9000">
+	<control type="fixedlist" id="9000">
 					<left>0</left>
-					<top>140</top>
-					<width>462</width>
+					<top>240</top>
+					<width>90</width>
 					<bottom>-10</bottom>
-					<movement>8</movement>
+					<movement>7</movement>
 					<focusposition>0</focusposition>
 					<onfocus>ClearProperty(listposition,home)</onfocus>
 					<onright>SetFocus($INFO[Container(9000).ListItem.Property(menu_id)])</onright>
@@ -791,19 +791,19 @@
 								<top>0</top>
 								<width>95</width>
 								<height>95</height>
-								
+								<texture colordiffuse="51FFFFFF">colors/black.png</texture>
 								<animation effect="fade" start="100" end="0" time="0" condition="[!Control.HasFocus(9000) + !ControlGroup(700).HasFocus] | System.HasActiveModalDialog">Conditional</animation>
 							</control>
 						</control>
 						<control type="image">
 							<left>-3</left>
 							<top>1</top>
-							<width>195</width>
-							<height>195</height>
+							<width>95</width>
+							<height>95</height>
 							<texture>$INFO[ListItem.Art(thumb)]</texture>
 						</control>
 						<control type="label">
-							<left>70</left>
+							<left>104</left>
 							<top>0</top>
 							<height>95</height>
 							<width>560</width>
@@ -817,12 +817,12 @@
 						<control type="image">
 							<left>-3</left>
 							<top>1</top>
-							<width>195</width>
-							<height>195</height>
+							<width>95</width>
+							<height>95</height>
 							<texture colordiffuse="44FFFFFF">$INFO[ListItem.Art(thumb)]</texture>
 						</control>
 						<control type="label">
-							<left>70</left>
+							<left>104</left>
 							<top>0</top>
 							<height>95</height>
 							<width>560</width>
@@ -833,160 +833,60 @@
 						</control>
 					</itemlayout>
 					<content>
-					
-	<item>
-
-<label>Search</label>
-							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?iconImage=search&amp;mode=navigator.search&amp;name=32450",return)</onclick>
-							<property name="menu_id">$NUMBER[14000]</property>
-						
-							<property name="id">favorites</property>
-							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
-						
-</item>			
-<item>
-			<label>Live Tv</label>
-							
-							<onclick>ActivateWindow(10702,"pvr://channels/tv/All%20channels@-1/",return)</onclick>
-							<property name="menu_id">$NUMBER[14000]</property>
-						
-							<property name="id">favorites</property>
-							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
-						
-</item>			
-<item>
-	<label>Sports</label>
-							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.dlv2",return)</onclick>
-							<property name="menu_id">$NUMBER[14000]</property>
-						
-							<property name="id">favorites</property>
-							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
-						</item>
-					
-					<item>
-<label>Movies</label>
-							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?list_name=Latest%20Releases&amp;list_type=user_lists&amp;mode=trakt.list.build_trakt_list&amp;slug=latest-releases&amp;user=giladg",return)</onclick>
-							<property name="menu_id">$NUMBER[14000]</property>
-						
-							<property name="id">favorites</property>
-							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
-						</item>
-					
-					<item>
-	<label>Movie Categories</label>
-							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?iconImage=genres&amp;menu_type=movie&amp;mode=navigator.genres&amp;name=32470",return)</onclick>
-							<property name="menu_id">$NUMBER[14000]</property>
-						
-							<property name="id">favorites</property>
-							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
-						</item>
-					
-					<item>
-<label>My Movies</label>
-							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?action=trakt_collection&amp;category_name=Movies%20Collection&amp;iconImage=https%3a%2f%2fi.imgur.com%2fxihFNwP.png&amp;mode=build_movie_list",return)</onclick>
-							<property name="menu_id">$NUMBER[14000]</property>
-						
-							<property name="id">favorites</property>
-							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
-						</item>
-						
-					
-					
 						<item>
-							<label>Tv Shows</label>
-							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?list_name=Latest%20TV%20Shows&amp;list_type=user_lists&amp;mode=trakt.list.build_trakt_list&amp;slug=latest-tv-shows&amp;user=garycrawfordgc",return)</onclick>
-							<property name="menu_id">$NUMBER[14000]</property>
-						
+							<label>$LOCALIZE[2]</label>
+							<onclick>ActivateWindow(Music,root,return)</onclick>
+								<property name="menu_id">$NUMBER[14000]</property>
+							<thumb>icons/sidemenu/movies.png</thumb>
 							<property name="id">favorites</property>
 							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
 						</item>
-
-<item>
-
-
-<label>My Tv Shows</label>
-							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?action=trakt_collection&amp;category_name=TV%20Shows%20Collection&amp;iconImage=https%3a%2f%2fi.imgur.com%2fxihFNwP.png&amp;mode=build_tvshow_list",return)</onclick>
+						<item>
+							<label>$LOCALIZE[427]</label>
+							<onclick>PlayDisc</onclick>
 							<property name="menu_id">$NUMBER[14000]</property>
-						
-							<property name="id">favorites</property>
+							<thumb>icons/submenu/tv-search.png</thumb>
+								<property name="id">favorites</property>
 							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
-						
-</item>
-<item>
-
-<label>Next Episodes</label>
-							
-							<onclick>ActivateWindow(10025,"plugin://plugin.video.fen/?iconImage=next_episodes&amp;mode=build_next_episode&amp;name=32483",return)</onclick>
-							<property name="menu_id">$NUMBER[14000]</property>
-						
-							<property name="id">favorites</property>
-							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
-						
-
 						</item>
-
-
-
-
-
-
-				
+						<item>
+							<label>$LOCALIZE[20389]</label>
+							<property name="menu_id">$NUMBER[14000]</property>
+							<onclick>ActivateWindow(Videos,musicvideos,return)</onclick>
+							<thumb>icons/submenu/tv-search.png</thumb>
+									<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						</item>
+						<item>
+							<label>$LOCALIZE[19020]</label>
+						<property name="menu_id">$NUMBER[14000]</property>
+							<onclick>ActivateWindow(TVChannels)</onclick>
+							<thumb>icons/sidemenu/livetv.png</thumb>
+				<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						</item>
+						<item>
+						
+							<label>$LOCALIZE[24001]</label>
+							<property name="menu_id">$NUMBER[14000]</property>
+									<property name="menu_id">$NUMBER[14000]</property>
+							<thumb>icons/sidemenu/addons.png</thumb>
+								<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						</item>
+						<item>
 					
-						
-							
-							
-								
-
-
-	
-						
+							<label>$LOCALIZE[3]</label>
+							<onclick>ActivateWindow(Videos,root)</onclick>
+							<property name="menu_id">$NUMBER[14000]</property>
+							<thumb>icons/settings.png</thumb>
+								<property name="id">favorites</property>
+							<visible>!Skin.HasSetting(HomeMenuNoFavButton)</visible>
+						</item>
+					
 					</content>
 				</control>
-				<control type="grouplist" id="700">
-					<orientation>horizontal</orientation>
-					<itemgap>0</itemgap>
-					<left>-8</left>
-					<width>480</width>
-					<height>110</height>
-					<top>10</top>
-					<onup>SetFocus(9000,99,absolute)</onup>
-					<ondown>SetFocus(9000,0,absolute)</ondown>
-					<onright>2000</onright>
-					<align>justify</align>
-					<include content="IconButton">
-						<param name="control_id" value="804" />
-						<param name="onclick" value="ActivateWindow(shutdownmenu)" />
-						<param name="icon" value="icons/power.png" />
-						<param name="label" value="$LOCALIZE[33060]" />
-					</include>
-<include content="IconButton">
-						<param name="control_id" value="802" />
-						<param name="onclick" value="ActivateWindow(1100)" />
-						<param name="icon" value="icons/submenu/add-ons.png" /> 
-						<param name="label" value="$LOCALIZE[21417]" />
-					</include>
-					<include content="IconButton">
-						<param name="control_id" value="801" />
-						<param name="onclick" value="ActivateWindow(settings)" />
-						<param name="icon" value="icons/settings.png" />
-						<param name="label" value="$LOCALIZE[21417]" />
-					</include>
-					
-					<include content="IconButton">
-						<param name="control_id" value="803" />
-						<param name="onclick" value="Fullscreen" />
-						<param name="icon" value="icons/now-playing/fullscreen.png" />
-						<param name="label" value="$LOCALIZE[31000]" />
-						<param name="visible" value="Player.HasMedia" />
-					</include>
-				</control>
+				
 			</control>
 			<include>BottomBar</include>
 			<control type="group">
