@@ -11,7 +11,7 @@
 			<include content="DialogBackgroundCommons">
 				<param name="width" value="600" />
 				<param name="height" value="80" />
-				<param name="header_label" value="$LOCALIZE[31072]" />
+				<param name="header_label" value="Menu" />
 				<param name="header_id" value="2" />
 			</include>
 			<control type="panel" id="9000">
@@ -19,13 +19,14 @@
 				<content>
 					<item>
 						<label>$LOCALIZE[13012]</label>
-						<onclick>Quit()</onclick>
+					<onclick>ActivateWindow(Settings)</onclick>
 						<visible>System.ShowExitButton</visible>
 					</item>
 					<item>
-						<label>$LOCALIZE[13016]</label>
-						<onclick>Powerdown()</onclick>
-						<visible>System.CanPowerDown</visible>
+						<label>Settings</label>
+					<onclick>ActivateWindow(Settings)</onclick>
+
+						
 					</item>
 					<item>
 						<label>$LOCALIZE[20150]</label>
@@ -71,9 +72,9 @@
 						<visible>System.HasShutdown +!System.IsInhibit</visible>
 					</item>
 					<item>
-						<label>$LOCALIZE[13018]</label>
-						<onclick>InhibitIdleShutdown(false)</onclick>
-						<visible>System.HasShutdown + System.IsInhibit</visible>
+							<label>$LOCALIZE[13012]</label>
+						<onclick>Quit()</onclick>
+						<visible>System.ShowExitButton</visible>
 					</item>
 				</content>
 			</control>

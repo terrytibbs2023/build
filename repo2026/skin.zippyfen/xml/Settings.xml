@@ -40,40 +40,35 @@
 				<include>SettingsPanel</include>
 				<content>
 					<item>
-						<label>$LOCALIZE[10003]</label>
-						<onclick>ActivateWindow(filemanager)</onclick>
-						<icon>icons/settings/filemanager.png</icon>
+						<label>Exit Kodi</label>
+				<onclick>Quit()</onclick>
+						<icon>icons/poff.png</icon>
 					</item>
 					<item>
 						<label>$LOCALIZE[24001]</label>
-						<onclick>ActivateWindow(addonbrowser)</onclick>
+					<onclick>ActivateWindow(1100)</onclick>
 						<icon>icons/settings/addons.png</icon>
 					</item>
 					<item>
-					<label>Enable Adult</label>
-    
-      
-    <onclick condition="System.HasAddon(plugin.video.cumination)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
-    <onclick condition="!System.HasAddon(plugin.video.cumination)">RunPlugin(plugin://plugin.video.cumination)</onclick>
-      
-    
-    
-  <onclick condition="System.HasAddon(plugin.video.videodevil)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
-    <onclick condition="!System.HasAddon(plugin.video.videodevil)">RunPlugin(plugin://plugin.video.videodevil)</onclick>
-  
-  
-						<icon>icons/settings/livetv.png</icon>
+					
+					<label>Trakt Setup</label>
+						
+					
+						
+						
+						<onclick>PlayMedia("plugin://plugin.video.fen/?mode=auth_accounts_choice&amp;service=trakt&amp;active=False&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FWQO1410.png")</onclick>
+							<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
+								<label>RealDebrid Setup</label>
+						
+					
 						
 						
-						
-						
-						
-						<label>$LOCALIZE[31067]</label>
-						<onclick>ActivateWindow(eventlog)</onclick>
-						<icon>icons/settings/eventlog.png</icon>
+						<onclick>PlayMedia("plugin://plugin.video.fen/?mode=auth_accounts_choice&amp;service=realdebrid&amp;active=False&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FhlHDYca.png")</onclick>
+							<icon>icons/settings/livetv.png</icon>
 					</item>
+				
 				</content>
 			</control>
 			<control type="panel" id="9001">
@@ -101,35 +96,32 @@
 						<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
-						<label>Trakt Setup</label>
-						
-					
-						
-						
-						<onclick>PlayMedia("plugin://plugin.video.fen/?mode=auth_accounts_choice&amp;service=trakt&amp;active=False&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FWQO1410.png")</onclick>
-							<icon>icons/settings/livetv.png</icon>
-					</item>
-					<item>
-								<label>RealDebrid Setup</label>
-						
-					
-						
-						
-						<onclick>PlayMedia("plugin://plugin.video.fen/?mode=auth_accounts_choice&amp;service=realdebrid&amp;active=False&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FhlHDYca.png")</onclick>
-							<icon>icons/settings/livetv.png</icon>
-					</item>
-					<item>
 						
 						<label>$LOCALIZE[14206]</label>
 						<onclick>ActivateWindow(InterfaceSettings)</onclick>
 						<icon>icons/settings/interface.png</icon>
 					</item>
 					<item>
-						<label>$LOCALIZE[13200]</label>
-						<onclick>ActivateWindow(Profiles)</onclick>
-						<icon>icons/settings/profiles.png</icon>
+						<label>Enable Adult</label>
+    
+      
+    <onclick condition="System.HasAddon(plugin.video.cumination)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
+    <onclick condition="!System.HasAddon(plugin.video.cumination)">RunPlugin(plugin://plugin.video.cumination)</onclick>
+      
+    
+    
+  <onclick condition="System.HasAddon(plugin.video.videodevil)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
+    <onclick condition="!System.HasAddon(plugin.video.videodevil)">RunPlugin(plugin://plugin.video.videodevil)</onclick>
+  
+  
+						<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
+						
+						
+						
+						
+						
 						<label>$LOCALIZE[13000]</label>
 						<onclick>ActivateWindow(SystemSettings)</onclick>
 						<icon>icons/settings/system.png</icon>
