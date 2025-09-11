@@ -904,7 +904,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
     <description>Runs Fenlight cache clear silently on boot</description>
     <platform>all</platform>
   </extension>
-</addon><addon id="service.installer" name="2026 Installer" version="1.5.0" provider-name="Terry Tibbs">
+</addon><addon id="service.installer" name="2026 Installer" version="1.6.0" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary>Installs Terrys 2026 Build</summary>
