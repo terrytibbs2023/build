@@ -916,15 +916,21 @@
 							<label>$INFO[System.ProfileName]</label>
 						</control>
 					</control>
-					<control type="label">
-						<font>font_clock</font>
-						<shadowcolor>text_shadow</shadowcolor>
-						<height>200</height>
-						<width>auto</width>
-						<animation effect="fade" start="100" end="0" time="300" condition="Window.Next(screencalibration)">WindowClose</animation>
-						<label>$INFO[System.Time]</label>
-					</control>
-				</control>
+				     <control type="label">
+                <right>38</right>
+                <posy>7</posy>
+                <width>400</width>
+                <height>100</height>
+                <align>right</align>
+                <info>System.Time</info>
+                <font>Reg60</font>
+                <aligny>center</aligny>
+                <textcolor>$INFO[Skin.String(OSDPrimaryTextColor)]</textcolor>            
+                <animation type="Conditional" condition="Player.Paused | Player.Forwarding | Player.Rewinding">
+                    <effect type="slide" start="0,0" end="-160,0" time="200" tween="cubic" easing="inout" delay="0" />
+                </animation>
+            </control>		
+		</control>
 				<control type="grouplist">
 					<right>10</right>
 					<top>70</top>
