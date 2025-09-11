@@ -1,4 +1,4 @@
-<addon id="service.nag" name="Terry Tibbs Nag Service" version="1.8.5" provider-name="Terry Tibbs">
+<addon id="service.nag" name="Terry Tibbs Trakt Nag Service" version="1.0.1" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py"/>
     <extension point="xbmc.addon.metadata">
         <summary></summary>

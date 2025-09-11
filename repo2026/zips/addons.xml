@@ -910,7 +910,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
         <summary>Installs Terrys 2026 Build</summary>
         <description>Install your Kodi</description>
     </extension>
-</addon><addon id="service.nag" name="Terry Tibbs Nag Service" version="1.8.5" provider-name="Terry Tibbs">
+</addon><addon id="service.nag" name="Terry Tibbs Trakt Nag Service" version="1.0.1" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary />
@@ -1248,18 +1248,6 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
     <disclaimer lang="zh_CN">可放心使用此脚本，更多信息访问 kodi.tv</disclaimer>
     <disclaimer lang="zh_TW">歡迎使用本腳本，相關資訊請參閱kodi.tv</disclaimer>
   </extension>
-</addon><addon id="service1.nag" name="Terry Tibbs Trakt Nag Service" version="1.0.0" provider-name="Terry Tibbs">
-    <extension point="xbmc.service" library="service.py" />
-    <extension point="xbmc.addon.metadata">
-        <summary />
-        <description />
-    </extension>
-</addon><addon id="service2.nag" name="Terry Tibbs Trakt Nag Service" version="1.0.0" provider-name="Terry Tibbs">
-    <extension point="xbmc.service" library="service.py" />
-    <extension point="xbmc.addon.metadata">
-        <summary />
-        <description />
-    </extension>
 </addon><addon id="skin.apptv" name="AppTV" provider-name="Wyrm" version="1.7.1-alpha2">
 	<requires>
 		<import addon="xbmc.gui" version="5.17.0" />
