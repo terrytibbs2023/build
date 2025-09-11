@@ -1392,7 +1392,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 		<description lang="en_NZ">FENtastic is a modified version of the default Estuary skin for Kodi Nexus. It is intended for use only with FEN.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 		<description lang="en_US">FENtastic is a modified version of the default Estuary skin for Kodi Nexus. It is intended for use only with FEN.[CR][CR]See [B]CHANGELOG[/B] located in Skin settings » Extra info for latest changes.</description>
 	</extension>
-</addon><addon id="skin.zippyfen" version="10.1.20" name="ZippyFen" provider-name="Terry Tibs,phil65, Ichabod Fletchman">
+</addon><addon id="skin.zippyfen" version="10.1.40" name="ZippyFen" provider-name="Terry Tibs,phil65, Ichabod Fletchman">
 	<requires>
 		<import addon="xbmc.gui" version="5.17.0" />
 	

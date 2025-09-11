@@ -92,7 +92,7 @@
 		<texturefocus />
 		<texturenofocus />
 		<label></label>
-		<font></font>
+		<font>clock</font>
 	</include>
 	<include name="RatingCircle">
 		<param name="animation">False</param>
