@@ -7,17 +7,12 @@ import os
 ADDON_ID = "plugin.video.fen"
 ADDON_DATA = xbmcvfs.translatePath(f"special://profile/addon_data/{ADDON_ID}")
 SETTINGS_FILE = os.path.join(ADDON_DATA, "settings.xml")
-BACKUP_FILE = "/storage/emulated/0/Download/kodi_cred_backup.txt"
+BACKUP_FILE = "/storage/emulated/0/Download/rd_full_backup.txt"
 
-# Keys to track
+# Full RD credential set
 RD_KEYS = [
     "rd.token", "rd.refresh", "rd.account_id",
     "rd.client_id", "rd.secret", "rd.enabled"
-]
-
-TRAKT_KEYS = [
-    "trakt.token", "trakt.refresh", "trakt.expires",
-    "trakt.user", "trakt.indicators_active", "trakt.sync_refresh_widgets"
 ]
 
 def get_setting_value(root, key):
@@ -34,24 +29,28 @@ def set_setting_value(root, key, value):
     ET.SubElement(root, "setting", id=key, default="true").text = value
     return True
 
-def backup_credentials(root):
+def backup_rd_credentials(root):
     creds = {}
-    for key in RD_KEYS + TRAKT_KEYS:
+    for key in RD_KEYS:
         val = get_setting_value(root, key)
         if val:
             creds[key] = val
+
+    if not creds:
+        xbmc.log("[RDBACKUP] No RD credentials found—skipping backup", xbmc.LOGWARNING)
+        return
 
     try:
         with open(BACKUP_FILE, "w") as f:
             for k, v in creds.items():
                 f.write(f"{k}={v}\n")
-        xbmc.log("[CredBackup] Credentials backed up to /Download", xbmc.LOGINFO)
+        xbmc.log("[RDBACKUP] RD credentials backed up", xbmc.LOGINFO)
     except Exception as e:
-        xbmc.log(f"[CredBackup] Backup failed: {str(e)}", xbmc.LOGERROR)
+        xbmc.log(f"[RDBACKUP] Backup failed: {str(e)}", xbmc.LOGERROR)
 
 def restore_rd_credentials(tree, root):
     if not os.path.exists(BACKUP_FILE):
-        xbmc.log("[CredBackup] No backup file found—cannot restore", xbmc.LOGWARNING)
+        xbmc.log("[RDBACKUP] No backup file found—cannot restore", xbmc.LOGWARNING)
         return False
 
     try:
@@ -61,18 +60,18 @@ def restore_rd_credentials(tree, root):
                     key, val = line.strip().split("=", 1)
                     if key in RD_KEYS:
                         set_setting_value(root, key, val)
-                        xbmc.log(f"[CredBackup] Restored {key}", xbmc.LOGINFO)
+                        xbmc.log(f"[RDBACKUP] Restored {key}", xbmc.LOGINFO)
 
         tree.write(SETTINGS_FILE)
-        xbmc.log("[CredBackup] RD credentials restored", xbmc.LOGINFO)
+        xbmc.log("[RDBACKUP] RD credentials restored", xbmc.LOGINFO)
         return True
     except Exception as e:
-        xbmc.log(f"[CredBackup] Restore failed: {str(e)}", xbmc.LOGERROR)
+        xbmc.log(f"[RDBACKUP] Restore failed: {str(e)}", xbmc.LOGERROR)
         return False
 
 def main():
     if not os.path.exists(SETTINGS_FILE):
-        xbmc.log("[CredBackup] settings.xml not found", xbmc.LOGWARNING)
+        xbmc.log("[RDBACKUP] settings.xml not found", xbmc.LOGWARNING)
         return
 
     try:
@@ -80,19 +79,19 @@ def main():
         root = tree.getroot()
 
         rd_enabled = get_setting_value(root, "rd.enabled").strip().lower()
-        xbmc.log(f"[CredBackup] rd.enabled = {rd_enabled}", xbmc.LOGINFO)
+        xbmc.log(f"[RDBACKUP] rd.enabled = {rd_enabled}", xbmc.LOGINFO)
 
         if rd_enabled == "true":
-            backup_credentials(root)
+            backup_rd_credentials(root)
         elif rd_enabled == "false":
             if restore_rd_credentials(tree, root):
-                xbmc.log("[CredBackup] Forcing Kodi shutdown after restore", xbmc.LOGINFO)
+                xbmc.log("[RDBACKUP] Forcing Kodi shutdown after restore", xbmc.LOGINFO)
                 xbmc.executebuiltin("Quit()")
         else:
-            xbmc.log("[CredBackup] rd.enabled value unclear—no action taken", xbmc.LOGWARNING)
+            xbmc.log("[RDBACKUP] rd.enabled value unclear—no action taken", xbmc.LOGWARNING)
 
     except Exception as e:
-        xbmc.log(f"[CredBackup] Error: {str(e)}", xbmc.LOGERROR)
+        xbmc.log(f"[RDBACKUP] Error: {str(e)}", xbmc.LOGERROR)
 
 main()
 
