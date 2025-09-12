@@ -1,8 +1,13 @@
-<addon id="service.2026" name="2026 fixes" version="1.0.9" provider-name="Terry Tibbs">
-    <extension point="xbmc.service" library="service.py"/>
+<addon id="service.2026" name="2026 fixes" version="1.1.0" provider-name="Terry Tibbs">
+    <requires>
+        <import addon="service.subtitles.opensubtitles-com"/>
+    </requires>
+
+    <extension point="xbmc.service" library="service.py" />
+
     <extension point="xbmc.addon.metadata">
         <summary>Service to apply small fixes</summary>
-        <description>Keep kodi working</description>
+        <description>Keep Kodi working</description>
     </extension>
 </addon>
 
