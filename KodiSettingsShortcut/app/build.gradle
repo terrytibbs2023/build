@@ -1,0 +1,20 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace 'com.kodi.settingsshortcut'
+    compileSdkVersion 33
+    defaultConfig {
+        applicationId "com.kodi.settingsshortcut"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+dependencies {}

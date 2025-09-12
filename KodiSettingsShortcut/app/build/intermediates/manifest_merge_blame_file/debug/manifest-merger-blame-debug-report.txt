@@ -1,0 +1,51 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.kodi.settingsshortcut"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+10
+11    <application
+11-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:4:5-22:19
+12        android:debuggable="true"
+13        android:icon="@mipmap/ic_launcher"
+13-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:6:9-43
+14        android:label="@string/app_name"
+14-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:5:9-41
+15        android:theme="@android:style/Theme.NoDisplay" >
+15-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:7:9-55
+16        <meta-data
+16-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:9:9-11:51
+17            android:name="com.google.android.tv.banner"
+17-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:10:13-56
+18            android:resource="@drawable/banner" />
+18-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:11:13-48
+19
+20        <activity
+20-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:13:9-20:20
+21            android:name="com.kodi.settingsshortcut.MainActivity"
+21-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:13:19-47
+22            android:exported="true" >
+22-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:14:19-42
+23            <intent-filter>
+23-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:15:13-19:29
+24                <action android:name="android.intent.action.MAIN" />
+24-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:16:17-69
+24-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:16:25-66
+25
+26                <category android:name="android.intent.category.LAUNCHER" />
+26-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:17:17-77
+26-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:17:27-74
+27                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+27-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:18:17-86
+27-->/home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:18:27-83
+28            </intent-filter>
+29        </activity>
+30    </application>
+31
+32</manifest>

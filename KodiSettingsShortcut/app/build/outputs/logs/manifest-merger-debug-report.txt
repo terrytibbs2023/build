@@ -1,0 +1,71 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:1:1-24:12
+INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:1:1-24:12
+INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:1:1-24:12
+INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:1:1-24:12
+INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:1:1-24:12
+INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:1:1-24:12
+INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:1:1-24:12
+	package
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:2:5-40
+		INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+		INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:1:1-24:12
+		INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:1:1-24:12
+		INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:1:11-69
+application
+ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:4:5-22:19
+	android:label
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:5:9-41
+	android:icon
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:6:9-43
+	android:theme
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:7:9-55
+meta-data#com.google.android.tv.banner
+ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:9:9-11:51
+	android:resource
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:11:13-48
+	android:name
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:10:13-56
+activity#com.kodi.settingsshortcut.MainActivity
+ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:13:9-20:20
+	android:exported
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:14:19-42
+	android:name
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:13:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER+category:name:android.intent.category.LEANBACK_LAUNCHER
+ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:15:13-19:29
+action#android.intent.action.MAIN
+ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:16:17-69
+	android:name
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:16:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:17:17-77
+	android:name
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:17:27-74
+category#android.intent.category.LEANBACK_LAUNCHER
+ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:18:17-86
+	android:name
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml:18:27-83
+uses-sdk
+INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+		INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+		ADDED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
+		INJECTED from /home/ecr/Documents/GitHub/build/KodiSettingsShortcut/app/src/main/AndroidManifest.xml
