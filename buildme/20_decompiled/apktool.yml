@@ -1,0 +1,31 @@
+!!brut.androlib.meta.MetaInfo
+apkFileName: 20.apk
+compressionType: false
+doNotCompress:
+- resources.arsc
+- META-INF/androidx.core_core.version
+- META-INF/androidx.lifecycle_lifecycle-runtime.version
+- META-INF/androidx.tvprovider_tvprovider.version
+- META-INF/androidx.versionedparcelable_versionedparcelable.version
+- png
+- wav
+- jpg
+- gif
+isFrameworkApk: false
+packageInfo:
+  forcedPackageId: '127'
+  renameManifestPackage: null
+sdkInfo:
+  minSdkVersion: '21'
+  targetSdkVersion: '34'
+sharedLibrary: false
+sparseResources: false
+unknownFiles: {}
+usesFramework:
+  ids:
+  - 1
+  tag: null
+version: 2.7.0-dirty
+versionInfo:
+  versionCode: '2102000'
+  versionName: '21.2'

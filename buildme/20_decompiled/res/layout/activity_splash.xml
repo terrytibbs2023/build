@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="@android:color/black" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/imageView1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/applaunch_screen" android:scaleType="centerCrop" android:adjustViewBounds="true" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" />
+    <RelativeLayout android:layout_gravity="bottom|center" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ProgressBar android:id="@id/progressBar1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="10.0dip" android:layout_marginRight="20.0dip" android:progress="50" android:progressDrawable="@drawable/progresscolor" android:layout_alignParentLeft="true" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" style="?android:progressBarStyleHorizontal" />
+        <TextView android:textSize="16.0dip" android:textColor="@android:color/white" android:id="@id/textView1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="" android:layout_above="@id/progressBar1" android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</FrameLayout>
