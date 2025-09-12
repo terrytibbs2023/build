@@ -81,9 +81,9 @@
 				<include>SettingsPanel</include>
 				<content>
 					<item>
-						<label>$LOCALIZE[14200]</label>
-						<onclick>ActivateWindow(PlayerSettings)</onclick>
-						<icon>icons/settings/player.png</icon>
+							<label>$LOCALIZE[10003]</label>
+						<onclick>ActivateWindow(filemanager)</onclick>
+						<icon>icons/settings/filemanager.png</icon>
 					</item>
 					<item>
 						<label>$LOCALIZE[14211]</label>

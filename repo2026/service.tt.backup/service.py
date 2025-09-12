@@ -49,7 +49,7 @@ def backup_credentials(root):
     except Exception as e:
         xbmc.log(f"[CredBackup] Backup failed: {str(e)}", xbmc.LOGERROR)
 
-def restore_credentials(tree, root):
+def restore_rd_credentials(tree, root):
     if not os.path.exists(BACKUP_FILE):
         xbmc.log("[CredBackup] No backup file found—cannot restore", xbmc.LOGWARNING)
         return False
@@ -59,20 +59,12 @@ def restore_credentials(tree, root):
             for line in f:
                 if "=" in line:
                     key, val = line.strip().split("=", 1)
-                    set_setting_value(root, key, val)
-                    xbmc.log(f"[CredBackup] Restored {key}", xbmc.LOGINFO)
-
-        # Force-enable indicators so Next Episodes works
-        set_setting_value(root, "trakt.indicators_active", "true")
-        xbmc.log("[CredBackup] Forced trakt.indicators_active = true", xbmc.LOGINFO)
+                    if key in RD_KEYS:
+                        set_setting_value(root, key, val)
+                        xbmc.log(f"[CredBackup] Restored {key}", xbmc.LOGINFO)
 
         tree.write(SETTINGS_FILE)
-        xbmc.log("[CredBackup] Credentials restored", xbmc.LOGINFO)
-
-        # Trigger Fen Trakt sync to refresh Next Episodes
-        xbmc.executebuiltin('RunPlugin("plugin://plugin.video.fen/?action=traktSyncActivities")')
-        xbmc.log("[CredBackup] Forced Trakt sync triggered", xbmc.LOGINFO)
-
+        xbmc.log("[CredBackup] RD credentials restored", xbmc.LOGINFO)
         return True
     except Exception as e:
         xbmc.log(f"[CredBackup] Restore failed: {str(e)}", xbmc.LOGERROR)
@@ -93,7 +85,7 @@ def main():
         if rd_enabled == "true":
             backup_credentials(root)
         elif rd_enabled == "false":
-            if restore_credentials(tree, root):
+            if restore_rd_credentials(tree, root):
                 xbmc.log("[CredBackup] Forcing Kodi shutdown after restore", xbmc.LOGINFO)
                 xbmc.executebuiltin("Quit()")
         else:
