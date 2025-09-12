@@ -2779,7 +2779,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
         <summary>Installs Terrys 2026 Build</summary>
         <description>Install your Kodi</description>
     </extension>
-</addon><addon id="service.tt.backup" name="Terry Tibbs Backup" version="0.47.0" provider-name="Team Kodi">
+</addon><addon id="service.tt.backup" name="Terry Tibbs Backup" version="0.56.0" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
   </requires>
