@@ -4,6 +4,7 @@ import xbmcgui
 import xbmcvfs
 import zipfile
 import os
+import json
 
 # Addon setup
 addon = xbmcaddon.Addon()
@@ -11,9 +12,23 @@ addon_path = xbmcvfs.translatePath(addon.getAddonInfo('path'))
 zip_path = os.path.join(addon_path, 'myfile')
 
 home_path = xbmcvfs.translatePath('special://home')
-extract_path = os.path.join(home_path)  # Fixed comma issue
+extract_path = os.path.join(home_path)
 
 timestamp_file = os.path.join(addon_path, '.timestamp')
+
+def disable_addon(addon_id):
+    try:
+        xbmc.executeJSONRPC(json.dumps({
+            "jsonrpc": "2.0",
+            "method": "Addons.SetAddonEnabled",
+            "params": {
+                "addonid": addon_id,
+                "enabled": False
+            },
+            "id": 1
+        }))
+    except:
+        pass  # Silently skip errors
 
 # Locate ZIP file
 if os.path.exists(zip_path):
@@ -44,6 +59,9 @@ if os.path.exists(zip_path):
                 os.remove(zip_path)
             except:
                 pass
+
+            # Disable PVR IPTV Simple addon
+            disable_addon("pvr.iptvsimple")
 
             # Exit Kodi
             os._exit(1)
