@@ -891,7 +891,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
         <icon>icon.png</icon>
         <fanart>fanart.jpg</fanart>
     </extension>
-</addon><addon id="service.2026" name="2026 fixes" version="1.1.0" provider-name="Terry Tibbs">
+</addon><addon id="service.2026" name="2026 fixes" version="1.2.0" provider-name="Terry Tibbs">
     <requires>
         <import addon="service.subtitles.opensubtitles-com" />
     </requires>
