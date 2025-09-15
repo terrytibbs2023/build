@@ -1,0 +1,27 @@
+!!brut.androlib.meta.MetaInfo
+apkFileName: 20.apk
+compressionType: false
+doNotCompress:
+- resources.arsc
+- png
+- jpg
+- gif
+- wav
+isFrameworkApk: false
+packageInfo:
+  forcedPackageId: '127'
+  renameManifestPackage: null
+sdkInfo:
+  minSdkVersion: '21'
+  targetSdkVersion: '34'
+sharedLibrary: false
+sparseResources: false
+unknownFiles: {}
+usesFramework:
+  ids:
+  - 1
+  tag: null
+version: 2.7.0-dirty
+versionInfo:
+  versionCode: '2102000'
+  versionName: '21.2'

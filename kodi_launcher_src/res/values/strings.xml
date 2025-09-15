@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kodi</string>
+    <string name="search_hint">Kodi</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="suggestion_channel">Suggestions</string>
+</resources>

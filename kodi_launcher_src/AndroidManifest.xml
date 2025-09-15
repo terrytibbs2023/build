@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="33" android:compileSdkVersionCodename="13.0.0" android:installLocation="auto" package="org.xbmc.kodi" platformBuildVersionCode="33" platformBuildVersionName="13.0.0">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
+    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
+    <uses-feature android:name="android.hardware.screen.landscape" android:required="true"/>
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+    <uses-feature android:name="android.hardware.touchscreen.multitouch" android:required="false"/>
+    <uses-feature android:name="android.hardware.type.television" android:required="false"/>
+    <uses-feature android:name="android.hardware.usb.host" android:required="false"/>
+    <uses-feature android:name="android.hardware.wifi" android:required="false"/>
+    <uses-feature android:name="android.software.leanback" android:required="false"/>
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN"/>
+        </intent>
+    </queries>
+    <uses-permission android:name="com.android.providers.tv.permission.WRITE_EPG_DATA"/>
+    <uses-permission android:name="com.android.providers.tv.permission.READ_EPG_DATA"/>
+    <application android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:banner="@drawable/banner" android:extractNativeLibs="true" android:hasCode="true" android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:logo="@drawable/banner" android:requestLegacyExternalStorage="true">
+        <activity android:configChanges="colorMode|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|touchscreen" android:exported="true" android:finishOnTaskLaunch="true" android:launchMode="singleInstance" android:name="org.xbmc.kodi.Splash" android:screenOrientation="sensorLandscape" android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:mimeType="video/*"/>
+                <data android:mimeType="audio/*"/>
+                <data android:mimeType="image/*"/>
+                <data android:scheme="file"/>
+                <data android:scheme="content"/>
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:scheme="ftp"/>
+                <data android:scheme="ftps"/>
+                <data android:scheme="rtp"/>
+                <data android:scheme="rtsp"/>
+                <data android:scheme="mms"/>
+                <data android:scheme="dav"/>
+                <data android:scheme="davs"/>
+                <data android:scheme="ssh"/>
+                <data android:scheme="sftp"/>
+                <data android:scheme="smb"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="colorMode|keyboard|keyboardHidden|navigation|orientation|screenLayout|screenSize|touchscreen" android:exported="true" android:finishOnTaskLaunch="true" android:launchMode="singleInstance" android:name="org.xbmc.kodi.Main" android:screenOrientation="sensorLandscape" android:theme="@style/AppTheme">
+            <meta-data android:name="android.app.lib_name" android:value="kodi"/>
+        </activity>
+        <receiver android:exported="true" android:name="org.xbmc.kodi.XBMCBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DREAMING_STOPPED"/>
+                <action android:name="android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED"/>
+                <action android:name="android.intent.action.MEDIA_BUTTON"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <provider android:authorities="org.xbmc.kodi.media" android:exported="true" android:name="org.xbmc.kodi.content.XBMCMediaContentProvider"/>
+        <provider android:authorities="org.xbmc.kodi.file" android:exported="true" android:name="org.xbmc.kodi.content.XBMCFileContentProvider"/>
+        <provider android:authorities="org.xbmc.kodi.ytdl" android:exported="true" android:name="org.xbmc.kodi.content.XBMCYTDLContentProvider"/>
+        <activity android:exported="true" android:name="org.xbmc.kodi.XBMCSearchableActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.gms.actions.SEARCH_ACTION"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable" android:resource="@xml/searchable"/>
+        </activity>
+        <service android:exported="false" android:name="org.xbmc.kodi.channels.SyncChannelJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:exported="false" android:name="org.xbmc.kodi.channels.SyncProgramsJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+    </application>
+</manifest>
