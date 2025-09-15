@@ -1,1 +1,0 @@
-["2026fu", ["2026 euro", "2026 european championships", "2026 wc predictions"], [], {"google:suggestsubtypes": [[512, 546], [512, 546], [512, 546]], "google:suggesttype": ["QUERY", "QUERY", "QUERY"]}]
