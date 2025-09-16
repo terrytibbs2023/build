@@ -3,7 +3,7 @@
 set -e
 
 APP_DIR="$HOME/Documents/GitHub/build/KodiSettingsShortcut"
-ICON_SRC="$HOME/Pictures/ic_launcher.png"
+ICON_SRC="$HOME/Pictures/Copilot_20250916_081648.png"
 ICON_NAME="ic_launcher.png"
 
 echo "[+] Injecting Kodi Tools icon and label"
