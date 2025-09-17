@@ -30,6 +30,20 @@ def disable_addon(addon_id):
     except:
         pass  # Silently skip errors
 
+def enable_addon(addon_id):
+    try:
+        xbmc.executeJSONRPC(json.dumps({
+            "jsonrpc": "2.0",
+            "method": "Addons.SetAddonEnabled",
+            "params": {
+                "addonid": addon_id,
+                "enabled": True
+            },
+            "id": 1
+        }))
+    except:
+        pass  # Silently skip errors
+
 # Locate ZIP file
 if os.path.exists(zip_path):
     zip_mtime = os.path.getmtime(zip_path)
@@ -62,6 +76,9 @@ if os.path.exists(zip_path):
 
             # Disable PVR IPTV Simple addon
             disable_addon("pvr.iptvsimple")
+
+            # Enable plugin.video.daddylive addon
+            enable_addon("plugin.video.daddylive")
 
             # Exit Kodi
             os._exit(1)
