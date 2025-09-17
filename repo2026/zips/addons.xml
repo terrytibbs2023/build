@@ -72,6 +72,34 @@
 				<screenshot />
 		</assets>
 	</extension>
+</addon><addon id="plugin.video.daddylive" name="Daddylive" version="4.43" provider-name="THE CREW">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.requests" />
+        <import addon="script.module.inputstreamhelper" />
+        <import addon="inputstream.ffmpegdirect" />
+        <import addon="script.module.six" />
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="addon.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <description lang="pl">1.2</description>
+        <disclaimer lang="pl">test
+        </disclaimer>
+        <summary lang="en">Live TV and Sports</summary>
+        <description lang="en">Live TV and Sports</description>
+        <disclaimer lang="en">test
+        </disclaimer>
+        <language>pl</language>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+        <website />
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
 </addon><addon id="plugin.video.dlv2" name="DaddyLive V2" version="0.1.7" provider-name="X">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
@@ -859,6 +887,24 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
         <description lang="en_NZ">FENtastic Helper for the FENtastic Skin.</description>
         <description lang="en_US">FENtastic Helper for the FENtastic Skin.</description>
     </extension>
+</addon><addon id="script.module.pysocks" name="PySocks" version="1.7.0+matrix.1" provider-name="anorov">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">A SOCKS proxy client and wrapper for Python</summary>
+    <description lang="en_GB">PySocks lets you send traffic through SOCKS and HTTP proxy servers. It is a modern fork of SocksiPy with bug fixes and extra features.</description>
+    <platform>all</platform>
+    <language />
+    <license>BSD</license>
+    <forum />
+    <website>https://github.com/Anorov/PySocks</website>
+    <source>https://github.com/Anorov/PySocks</source>
+    <assets>
+      <icon>icon.png</icon>
+    </assets>
+  </extension>
 </addon><addon id="script.module.requests" name="requests" version="2.31.0" provider-name="Python Software Foundation">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
