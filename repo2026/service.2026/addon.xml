@@ -1,7 +1,7 @@
-<addon id="service.2026" name="2026 fixes" version="1.2.6" provider-name="Terry Tibbs">
+<addon id="service.2026" name="2026 fixes" version="1.2.7" provider-name="Terry Tibbs">
     <requires>
         <import addon="service.subtitles.opensubtitles-com"/>
-          <import addon="plugin.video.daddylive"/>
+         
     </requires>
 
     <extension point="xbmc.service" library="service.py" />
