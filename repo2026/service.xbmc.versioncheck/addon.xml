@@ -2,7 +2,7 @@
 <addon id="service.xbmc.versioncheck" name="Version Check" version="0.5.32+matrix.1" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="3.0.0"/>
-    <import addon="script.terrysautoinstall"/>
+    <import addon="script.module.cocoscrapers"/>
   </requires>
   <extension point="xbmc.service" library="resources/lib/runner.py"/>
   <extension point="xbmc.addon.metadata">
