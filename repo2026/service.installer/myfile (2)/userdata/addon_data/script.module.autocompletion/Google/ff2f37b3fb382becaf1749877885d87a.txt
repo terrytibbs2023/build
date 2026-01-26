@@ -1,1 +1,0 @@
-["000009", ["000c29", "\u00a390000", "00rx913", "00e9912", "0009 country code"], [], {"google:suggestsubtypes": [[512, 546], [512, 546], [512, 546], [512, 546], [512, 546]], "google:suggesttype": ["QUERY", "QUERY", "QUERY", "QUERY", "QUERY"]}]
