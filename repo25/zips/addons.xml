@@ -591,6 +591,28 @@
             <fanart>fanart.jpg</fanart>
         </assets>
 	</extension>
+</addon><addon id="repository.bingieplus" name="Terrys Bingie Repo" version="1.0" provider-name="Terry Tibbs">
+    <extension point="xbmc.addon.repository" name="Terrys Bingie Repository">
+        <dir>
+            <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repo26/zips/addons.xml</info>
+          
+
+<checksum>https://githubraw.com/terrytibbs2023/build/main/repo26/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/repo26/zips/</datadir>
+        </dir>
+
+
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Terry Tibbs Repo</summary>
+        <description />
+        <disclaimer />
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
 </addon><addon id="repository.bugatsinho" name=" Bugatsinho repository" version="2.7" provider-name="Bugatsinho">
     <extension point="xbmc.addon.repository" name="Bugatsinho repository">
         <dir>
@@ -904,7 +926,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
     <description>Runs Fenlight cache clear silently on boot</description>
     <platform>all</platform>
   </extension>
-</addon><addon id="service.installer" name="2026 Installer" version="1.5.0" provider-name="Terry Tibbs">
+</addon><addon id="service.installer" name="2026 Installer" version="5.0.0" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary>Installs Terrys 2026 Build</summary>
