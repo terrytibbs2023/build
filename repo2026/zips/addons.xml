@@ -641,6 +641,28 @@
             <fanart>fanart.jpg</fanart>
         </assets>
 	</extension>
+</addon><addon id="repository.bingieplus" name="Terrys Bingie Repo" version="1.0" provider-name="Terry Tibbs">
+    <extension point="xbmc.addon.repository" name="Terrys Bingie Repository">
+        <dir>
+            <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repo26/zips/addons.xml</info>
+          
+
+<checksum>https://githubraw.com/terrytibbs2023/build/main/repo26/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/repo26/zips/</datadir>
+        </dir>
+
+
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Terry Tibbs Repo</summary>
+        <description />
+        <disclaimer />
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
 </addon><addon id="repository.bugatsinho" name=" Bugatsinho repository" version="2.7" provider-name="Bugatsinho">
     <extension point="xbmc.addon.repository" name="Bugatsinho repository">
         <dir>
