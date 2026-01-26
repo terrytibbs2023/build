@@ -16,22 +16,27 @@ from threading import Event, Lock, Thread
 from .. import logging
 from ..compatibility import urlsplit, xbmc, xbmcgui
 from ..constants import (
+    ACTION,
     ADDON_ID,
-    BOOL_FROM_STR,
-    BUSY_FLAG,
     CHECK_SETTINGS,
     CONTAINER_FOCUS,
+    CONTAINER_ID,
+    CONTAINER_POSITION,
+    CURRENT_ITEM,
     FILE_READ,
     FILE_WRITE,
+    HAS_PARENT,
     MARK_AS_LABEL,
     PATHS,
     PLAYBACK_STOPPED,
     PLAYER_VIDEO_ID,
     PLAY_CANCELLED,
+    PLAY_COUNT,
     PLAY_FORCED,
     PLUGIN_WAKEUP,
     REFRESH_CONTAINER,
     RELOAD_ACCESS_MANAGER,
+    RESUMABLE,
     SERVER_WAKEUP,
     SERVICE_IPC,
     SYNC_LISTITEM,
@@ -75,42 +80,6 @@ class ServiceMonitor(xbmc.Monitor):
         super(ServiceMonitor, self).__init__()
 
     @staticmethod
-    def busy_dialog_active(all_modals=False, dialog_ids=frozenset((
-            10100,  # WINDOW_DIALOG_YES_NO
-            10101,  # WINDOW_DIALOG_PROGRESS
-            10103,  # WINDOW_DIALOG_KEYBOARD
-            10109,  # WINDOW_DIALOG_NUMERIC
-            10138,  # WINDOW_DIALOG_BUSY
-            10151,  # WINDOW_DIALOG_EXT_PROGRESS
-            10160,  # WINDOW_DIALOG_BUSY_NOCANCEL
-            12000,  # WINDOW_DIALOG_SELECT
-            12002,  # WINDOW_DIALOG_OK
-    ))):
-        if all_modals and xbmc.getCondVisibility('System.HasActiveModalDialog'):
-            return True
-        dialog_id = xbmcgui.getCurrentWindowDialogId()
-        if dialog_id in dialog_ids:
-            return dialog_id
-        return False
-
-    @staticmethod
-    def is_plugin_container(url='plugin://{0}/'.format(ADDON_ID),
-                            check_all=False,
-                            _bool=xbmc.getCondVisibility,
-                            _busy=busy_dialog_active.__func__,
-                            _label=xbmc.getInfoLabel):
-        if check_all:
-            return (not _bool('Container.IsUpdating')
-                    and not _busy()
-                    and _label('Container.FolderPath').startswith(url))
-        is_plugin = _label('Container.FolderPath').startswith(url)
-        return {
-            'is_plugin': is_plugin,
-            'is_loaded': is_plugin and not _bool('Container.IsUpdating'),
-            'is_active': is_plugin and not _busy(),
-        }
-
-    @staticmethod
     def send_notification(method,
                           data=True,
                           sender='.'.join((ADDON_ID, 'service'))):
@@ -141,78 +110,12 @@ class ServiceMonitor(xbmc.Monitor):
         xbmcgui.Window(10000).setProperty(_property_id, value)
         return value
 
-    def get_property(self,
-                     property_id,
-                     stacklevel=2,
-                     process=None,
-                     log_value=None,
-                     log_process=None,
-                     raw=False,
-                     as_bool=False,
-                     default=False):
-        _property_id = property_id if raw else '-'.join((ADDON_ID, property_id))
-        value = xbmcgui.Window(10000).getProperty(_property_id)
-        if log_value is None:
-            log_value = value
-        if log_process:
-            log_value = log_process(log_value)
-        self.log.debug_trace('Get property {property_id!r}: {value!r}',
-                             property_id=property_id,
-                             value=log_value,
-                             stacklevel=stacklevel)
-        if process:
-            value = process(value)
-        return BOOL_FROM_STR.get(value, default) if as_bool else value
-
-    def pop_property(self,
-                     property_id,
-                     stacklevel=2,
-                     process=None,
-                     log_value=None,
-                     log_process=None,
-                     raw=False,
-                     as_bool=False,
-                     default=False):
-        _property_id = property_id if raw else '-'.join((ADDON_ID, property_id))
-        window = xbmcgui.Window(10000)
-        value = window.getProperty(_property_id)
-        if value:
-            window.clearProperty(_property_id)
-            if process:
-                value = process(value)
-        if log_value is None:
-            log_value = value
-        if log_value and log_process:
-            log_value = log_process(log_value)
-        self.log.debug_trace('Pop property {property_id!r}: {value!r}',
-                             property_id=property_id,
-                             value=log_value,
-                             stacklevel=stacklevel)
-        return BOOL_FROM_STR.get(value, default) if as_bool else value
-
-    def clear_property(self, property_id, stacklevel=2, raw=False):
-        self.log.debug_trace('Clear property {property_id!r}',
-                             property_id=property_id,
-                             stacklevel=stacklevel)
-        _property_id = property_id if raw else '-'.join((ADDON_ID, property_id))
-        xbmcgui.Window(10000).clearProperty(_property_id)
-        return None
-
-    def refresh_container(self, deferred=False):
-        if deferred:
+    def refresh_container(self, force=False):
+        if force:
             self.refresh = False
-            if self.get_property(REFRESH_CONTAINER) == BUSY_FLAG:
-                self.set_property(REFRESH_CONTAINER)
-                xbmc.executebuiltin('Container.Refresh')
-        else:
-            container = self.is_plugin_container()
-            if all(container.values()):
-                self.set_property(REFRESH_CONTAINER)
-                xbmc.executebuiltin('Container.Refresh')
-            elif container['is_loaded']:
-                self.set_property(REFRESH_CONTAINER, BUSY_FLAG)
-                self.log.debug('Plugin window not active - deferring refresh')
-                self.refresh = True
+        refreshed = self._context.get_ui().refresh_container(force=force)
+        if refreshed is None:
+            self.refresh = True
 
     def onNotification(self, sender, method, data):
         if sender == 'xbmc':
@@ -266,7 +169,7 @@ class ServiceMonitor(xbmc.Monitor):
                                          path=path,
                                          params=params)
                         self.set_property(PLAY_FORCED)
-                    elif params.get('action') == 'list':
+                    elif params.get(ACTION) == 'list':
                         playlist_player.stop()
                         playlist_player.clear()
                         self.log.warning(('Playlist.OnAdd item is a listing',
@@ -342,7 +245,7 @@ class ServiceMonitor(xbmc.Monitor):
                             response = False
                     else:
                         with write_access:
-                            content = self.pop_property(
+                            content = self._context.get_ui().pop_property(
                                 '-'.join((FILE_WRITE, filepath)),
                                 log_value='<redacted>',
                             )
@@ -372,9 +275,11 @@ class ServiceMonitor(xbmc.Monitor):
         elif event == CONTAINER_FOCUS:
             if data:
                 data = json.loads(data)
-            if not data or not self.is_plugin_container(check_all=True):
-                return
-            xbmc.executebuiltin('SetFocus({0},{1},absolute)'.format(*data))
+            if data:
+                self._context.get_ui().focus_container(
+                    container_id=data.get(CONTAINER_ID),
+                    position=data.get(CONTAINER_POSITION),
+                )
 
         elif event == RELOAD_ACCESS_MANAGER:
             self._context.reload_access_manager()
@@ -387,7 +292,7 @@ class ServiceMonitor(xbmc.Monitor):
                 return
 
             if data.get('play_data', {}).get('play_count'):
-                self.set_property(PLAYER_VIDEO_ID, data.get('video_id'))
+                self.set_property(PLAYER_VIDEO_ID, data.get(VIDEO_ID))
 
         elif event == SYNC_LISTITEM:
             video_ids = json.loads(data) if data else None
@@ -395,7 +300,8 @@ class ServiceMonitor(xbmc.Monitor):
                 return
 
             context = self._context
-            focused_video_id = context.get_listitem_property(VIDEO_ID)
+            ui = context.get_ui()
+            focused_video_id = ui.get_listitem_property(VIDEO_ID)
             if not focused_video_id:
                 return
 
@@ -404,8 +310,8 @@ class ServiceMonitor(xbmc.Monitor):
                 if not video_id or video_id != focused_video_id:
                     continue
 
-                play_count = context.get_listitem_info('PlayCount')
-                resumable = context.get_listitem_bool('IsResumable')
+                play_count = ui.get_listitem_info(PLAY_COUNT)
+                resumable = ui.get_listitem_bool(RESUMABLE)
 
                 self.set_property(MARK_AS_LABEL,
                                   context.localize('history.mark.unwatched')

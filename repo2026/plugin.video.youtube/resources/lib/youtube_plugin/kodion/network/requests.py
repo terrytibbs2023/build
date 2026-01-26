@@ -9,17 +9,25 @@
 
 from __future__ import absolute_import, division, unicode_literals
 
-import atexit
 import socket
-import time
+from atexit import register as atexit_register
+from collections import OrderedDict
 
-from requests import Request, Session
 from requests.adapters import HTTPAdapter, Retry
 from requests.exceptions import InvalidJSONError, RequestException, URLRequired
-from requests.utils import DEFAULT_CA_BUNDLE_PATH, extract_zipped_paths
+from requests.hooks import default_hooks
+from requests.models import DEFAULT_REDIRECT_LIMIT, Request
+from requests.sessions import Session
+from requests.utils import (
+    DEFAULT_CA_BUNDLE_PATH,
+    cookiejar_from_dict,
+    default_headers,
+    extract_zipped_paths,
+)
 from urllib3.util.ssl_ import create_urllib3_context
 
 from .. import logging
+from ..utils.datetime import imf_fixdate
 from ..utils.methods import generate_hash
 
 
@@ -64,22 +72,84 @@ class SSLHTTPAdapter(HTTPAdapter):
         return super(SSLHTTPAdapter, self).cert_verify(conn, url, verify, cert)
 
 
+class CustomSession(Session):
+    def __init__(self):
+        #: A case-insensitive dictionary of headers to be sent on each
+        #: :class:`Request <Request>` sent from this
+        #: :class:`Session <Session>`.
+        self.headers = default_headers()
+
+        #: Default Authentication tuple or object to attach to
+        #: :class:`Request <Request>`.
+        self.auth = None
+
+        #: Dictionary mapping protocol or protocol and host to the URL of the proxy
+        #: (e.g. {'http': 'foo.bar:3128', 'http://host.name': 'foo.bar:4012'}) to
+        #: be used on each :class:`Request <Request>`.
+        self.proxies = {}
+
+        #: Event-handling hooks.
+        self.hooks = default_hooks()
+
+        #: Dictionary of querystring data to attach to each
+        #: :class:`Request <Request>`. The dictionary values may be lists for
+        #: representing multivalued query parameters.
+        self.params = {}
+
+        #: Stream response content default.
+        self.stream = False
+
+        #: SSL Verification default.
+        #: Defaults to `True`, requiring requests to verify the TLS certificate at the
+        #: remote end.
+        #: If verify is set to `False`, requests will accept any TLS certificate
+        #: presented by the server, and will ignore hostname mismatches and/or
+        #: expired certificates, which will make your application vulnerable to
+        #: man-in-the-middle (MitM) attacks.
+        #: Only set this to `False` for testing.
+        self.verify = True
+
+        #: SSL client certificate default, if String, path to ssl client
+        #: cert file (.pem). If Tuple, ('cert', 'key') pair.
+        self.cert = None
+
+        #: Maximum number of redirects allowed. If the request exceeds this
+        #: limit, a :class:`TooManyRedirects` exception is raised.
+        #: This defaults to requests.models.DEFAULT_REDIRECT_LIMIT, which is
+        #: 30.
+        self.max_redirects = DEFAULT_REDIRECT_LIMIT
+
+        #: Trust environment settings for proxy configuration, default
+        #: authentication and similar.
+        #: CustomSession.trust_env is False
+        self.trust_env = False
+
+        #: A CookieJar containing all currently outstanding cookies set on this
+        #: session. By default it is a
+        #: :class:`RequestsCookieJar <requests.cookies.RequestsCookieJar>`, but
+        #: may be any other ``cookielib.CookieJar`` compatible object.
+        self.cookies = cookiejar_from_dict({})
+
+        # Default connection adapters.
+        self.adapters = OrderedDict()
+        self.mount('https://', SSLHTTPAdapter(
+            pool_maxsize=20,
+            pool_block=True,
+            max_retries=Retry(
+                total=3,
+                backoff_factor=0.1,
+                status_forcelist={500, 502, 503, 504},
+                allowed_methods=None,
+            )
+        ))
+        self.mount('http://', HTTPAdapter())
+
+
 class BaseRequestsClass(object):
     log = logging.getLogger(__name__)
 
-    _session = Session()
-    _session.trust_env = False
-    _session.mount('https://', SSLHTTPAdapter(
-        pool_maxsize=10,
-        pool_block=True,
-        max_retries=Retry(
-            total=3,
-            backoff_factor=0.1,
-            status_forcelist={500, 502, 503, 504},
-            allowed_methods=None,
-        )
-    ))
-    atexit.register(_session.close)
+    _session = CustomSession()
+    atexit_register(_session.close)
 
     _context = None
     _verify = True
@@ -143,31 +213,62 @@ class BaseRequestsClass(object):
         self._session.close()
 
     @staticmethod
-    def _response_hook_json(**kwargs):
-        with kwargs['response'] as response:
+    def _raise_exception(new_exception, *args, **kwargs):
+        if not new_exception:
+            return
+        if issubclass(new_exception, RequestException):
+            new_exception = new_exception(*args)
+            attrs = new_exception.__dict__
+            for attr, value in kwargs.items():
+                if attr not in attrs:
+                    setattr(new_exception, attr, value)
+            raise new_exception
+        else:
+            raise new_exception(*args, **kwargs)
+
+    def _response_hook_json(self, **kwargs):
+        response = kwargs['response']
+        if response is None:
+            return None, None
+        with response:
             try:
                 json_data = response.json()
                 if 'error' in json_data:
                     kwargs.setdefault('pass_data', True)
                     kwargs.setdefault('json_data', json_data)
                     json_data.setdefault('code', response.status_code)
-                    exception = kwargs.get('exception', RequestException)
-                    raise exception('"error" in response JSON data',
-                                    **kwargs)
+                    self._raise_exception(
+                        kwargs.get('exception', RequestException),
+                        '"error" in response JSON data',
+                        **kwargs
+                    )
             except ValueError as exc:
-                kwargs.setdefault('raise_exc', True)
-                raise InvalidJSONError(exc, **kwargs)
+                if kwargs.get('raise_exc') is None:
+                    kwargs['raise_exc'] = True
+                self._raise_exception(
+                    InvalidJSONError,
+                    exc,
+                    **kwargs
+                )
+
             response.raise_for_status()
+
         return json_data.get('etag'), json_data
 
-    @staticmethod
-    def _response_hook_text(**kwargs):
-        with kwargs['response'] as response:
+    def _response_hook_text(self, **kwargs):
+        response = kwargs['response']
+        if response is None:
+            return None, None
+        with response:
             response.raise_for_status()
             result = response and response.text
         if not result:
-            exception = kwargs.get('exception', RequestException)
-            raise exception('Empty response text', **kwargs)
+            self._raise_exception(
+                kwargs.get('exception', RequestException),
+                'Empty response text',
+                **kwargs
+            )
+
         return None, result
 
     def request(self, url=None, method='GET',
@@ -183,7 +284,7 @@ class BaseRequestsClass(object):
                 event_hook_kwargs=None,
                 error_title=None,
                 error_info=None,
-                raise_exc=False,
+                raise_exc=None,
                 cache=None,
                 **kwargs):
         if timeout is None:
@@ -246,10 +347,7 @@ class BaseRequestsClass(object):
                         # Etag is meant to be enclosed in double quotes, but the
                         # Google servers don't seem to support this
                         headers['If-None-Match'] = '"{0}", {0}'.format(etag)
-                    timestamp = time.strftime(
-                        '%a, %d %b %Y %H:%M:%S GMT',
-                        time.gmtime(cached_request['timestamp']),
-                    )
+                    timestamp = imf_fixdate(cached_request['timestamp'])
                     headers['If-Modified-Since'] = timestamp
                     self.log.debug(('Cached response',
                                     'Request ID: {request_id}',
@@ -285,6 +383,7 @@ class BaseRequestsClass(object):
                 timestamp = response.headers.get('Date')
                 if response_hook:
                     event_hook_kwargs['exception'] = self._default_exc[-1]
+                    event_hook_kwargs['raise_exc'] = raise_exc
                     event_hook_kwargs['response'] = response
                     etag, response = response_hook(**event_hook_kwargs)
                 else:
@@ -361,27 +460,28 @@ class BaseRequestsClass(object):
                     raise raise_exc
                 raise exc
 
-        if cache:
-            if cached_response is not None:
-                self.log.debug(('Using cached response',
-                                'Request ID: {request_id}',
-                                'Etag:       {etag}',
-                                'Modified:   {timestamp}'),
-                               request_id=request_id,
-                               etag=etag,
-                               timestamp=timestamp,
-                               stacklevel=stacklevel)
-                cache.set(request_id)
-                response = cached_response
-            else:
-                self.log.debug(('Saving response to cache',
-                                'Request ID: {request_id}',
-                                'Etag:       {etag}',
-                                'Modified:   {timestamp}'),
-                               request_id=request_id,
-                               etag=etag,
-                               timestamp=timestamp,
-                               stacklevel=stacklevel)
-                cache.set(request_id, response, etag)
+        if not cache:
+            pass
+        elif cached_response is not None:
+            self.log.debug(('Using cached response',
+                            'Request ID: {request_id}',
+                            'Etag:       {etag}',
+                            'Modified:   {timestamp}'),
+                           request_id=request_id,
+                           etag=etag,
+                           timestamp=timestamp,
+                           stacklevel=stacklevel)
+            cache.set(request_id)
+            response = cached_response
+        elif response is not None:
+            self.log.debug(('Saving response to cache',
+                            'Request ID: {request_id}',
+                            'Etag:       {etag}',
+                            'Modified:   {timestamp}'),
+                           request_id=request_id,
+                           etag=etag,
+                           timestamp=timestamp,
+                           stacklevel=stacklevel)
+            cache.set(request_id, response, etag)
 
         return response

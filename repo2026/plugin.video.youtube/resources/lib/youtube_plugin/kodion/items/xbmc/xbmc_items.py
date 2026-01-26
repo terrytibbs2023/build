@@ -22,12 +22,13 @@ from .. import (
 from ... import logging
 from ...compatibility import to_str, xbmc, xbmcgui
 from ...constants import (
+    ACTION,
     BOOKMARK_ID,
     CHANNEL_ID,
     PATHS,
     PLAYLIST_ITEM_ID,
     PLAYLIST_ID,
-    PLAY_COUNT,
+    PLAY_COUNT_PROP,
     PLAY_STRM,
     PLAY_TIMESHIFT,
     PLAY_USING,
@@ -35,7 +36,7 @@ from ...constants import (
     VALUE_TO_STR,
     VIDEO_ID,
 )
-from ...utils.datetime_parser import datetime_to_since, utc_to_local
+from ...utils.datetime import datetime_to_since, utc_to_local
 from ...utils.redact import redact_ip_in_uri
 from ...utils.system_version import current_system_version
 
@@ -91,7 +92,7 @@ def set_info(list_item, item, properties, set_play_count=True, resume=True):
             if value is not None:
                 if set_play_count:
                     info_labels['playcount'] = value
-                properties[PLAY_COUNT] = value
+                properties[PLAY_COUNT_PROP] = value
 
             value = item.get_rating()
             if value is not None:
@@ -280,7 +281,7 @@ def set_info(list_item, item, properties, set_play_count=True, resume=True):
                     info_tag.setPlaycount(value)
                 elif info_type == 'music':
                     info_tag.setPlayCount(value)
-            properties[PLAY_COUNT] = value
+            properties[PLAY_COUNT_PROP] = value
 
         # rating: float
         value = item.get_rating()
@@ -541,7 +542,7 @@ def directory_listitem(context, directory_item, show_fanart=None, **_kwargs):
     is_action = directory_item.is_action()
     if not is_action:
         path, params = context.parse_uri(uri)
-        if path.rstrip('/') == PATHS.PLAY and params.get('action') != 'list':
+        if path.rstrip('/') == PATHS.PLAY and params.get(ACTION) != 'list':
             is_action = True
     if is_action:
         logging.debug('Converting DirectoryItem action: %r', uri)
@@ -561,31 +562,38 @@ def directory_listitem(context, directory_item, show_fanart=None, **_kwargs):
     if directory_item.next_page:
         props['specialSort'] = 'bottom'
     else:
-        special_sort = directory_item.get_special_sort()
-        if special_sort is None:
+        _special_sort = directory_item.get_special_sort()
+        if _special_sort is None:
             special_sort = 'top'
-        elif special_sort is False:
+        elif _special_sort is False:
             special_sort = None
+        else:
+            special_sort = _special_sort
 
         prop_value = directory_item.subscription_id
         if prop_value:
-            special_sort = None
+            special_sort = _special_sort
             props[SUBSCRIPTION_ID] = prop_value
 
         prop_value = directory_item.channel_id
         if prop_value:
-            special_sort = None
+            special_sort = _special_sort
             props[CHANNEL_ID] = prop_value
 
         prop_value = directory_item.playlist_id
         if prop_value:
-            special_sort = None
+            special_sort = _special_sort
             props[PLAYLIST_ID] = prop_value
 
         prop_value = directory_item.bookmark_id
         if prop_value:
-            special_sort = None
+            special_sort = _special_sort
             props[BOOKMARK_ID] = prop_value
+
+        prop_value = is_action and getattr(directory_item, VIDEO_ID, None)
+        if prop_value:
+            special_sort = _special_sort
+            props[VIDEO_ID] = prop_value
 
         if special_sort:
             props['specialSort'] = special_sort

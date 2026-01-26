@@ -12,7 +12,7 @@ from __future__ import absolute_import, division, unicode_literals
 
 from . import menu_items
 from .directory_item import DirectoryItem
-from ..constants import PATHS
+from ..constants import CHANNEL_ID, INCOGNITO, PATHS
 
 
 class SearchItem(DirectoryItem):
@@ -94,7 +94,8 @@ class NewSearchItem(DirectoryItem):
                  incognito=False,
                  channel_id='',
                  addon_id='',
-                 location=False):
+                 location=False,
+                 **kwargs):
         if not name:
             name = context.get_ui().bold(
                 title or context.localize('search.new')
@@ -107,9 +108,9 @@ class NewSearchItem(DirectoryItem):
         if addon_id:
             params['addon_id'] = addon_id
         if incognito:
-            params['incognito'] = incognito
+            params[INCOGNITO] = incognito
         if channel_id:
-            params['channel_id'] = channel_id
+            params[CHANNEL_ID] = channel_id
         if location:
             params['location'] = location
 
@@ -119,7 +120,8 @@ class NewSearchItem(DirectoryItem):
                                                 params=params,
                                             ),
                                             image=image,
-                                            fanart=fanart)
+                                            fanart=fanart,
+                                            **kwargs)
 
         if context.is_plugin_path(context.get_uri(), ((PATHS.SEARCH, 'list'),)):
             context_menu = [

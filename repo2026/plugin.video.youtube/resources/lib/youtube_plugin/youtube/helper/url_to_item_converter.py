@@ -18,7 +18,22 @@ from re import (
 from . import utils
 from ...kodion import logging
 from ...kodion.compatibility import parse_qsl, urlsplit
-from ...kodion.constants import PATHS
+from ...kodion.constants import (
+    CHANNEL_ID,
+    CHANNEL_IDS,
+    CLIP,
+    END,
+    LIVE,
+    ORDER,
+    PATHS,
+    PLAYLIST_ID,
+    PLAYLIST_IDS,
+    SEEK,
+    START,
+    VIDEO_ID,
+    VIDEO_IDS,
+    YOUTUBE_HOSTNAMES,
+)
 from ...kodion.items import DirectoryItem, UriItem, VideoItem
 from ...kodion.utils.convert_format import duration_to_seconds
 
@@ -27,11 +42,6 @@ class UrlToItemConverter(object):
     log = logging.getLogger(__name__)
 
     RE_PATH_ID = re_compile(r'/[^/]*?[/@](?P<id>[^/?#]+)', IGNORECASE)
-    VALID_HOSTNAMES = {
-        'youtube.com',
-        'www.youtube.com',
-        'm.youtube.com',
-    }
 
     def __init__(self, flatten=True):
         self._flatten = flatten
@@ -53,7 +63,7 @@ class UrlToItemConverter(object):
     def add_url(self, url):
         parsed_url = urlsplit(url)
         if (not parsed_url.hostname
-                or parsed_url.hostname.lower() not in self.VALID_HOSTNAMES):
+                or parsed_url.hostname.lower() not in YOUTUBE_HOSTNAMES):
             self.log.debug('Unknown hostname "{hostname}" in url "{url}"',
                            hostname=parsed_url.hostname,
                            url=url)
@@ -63,14 +73,14 @@ class UrlToItemConverter(object):
         new_params = {
             new: process(url_params[old]) if process else url_params[old]
             for old, new, process in (
-                ('end', 'end', duration_to_seconds),
-                ('start', 'start', duration_to_seconds),
-                ('t', 'seek', duration_to_seconds),
-                ('list', 'playlist_id', False),
-                ('v', 'video_id', False),
-                ('live', 'live', False),
-                ('clip', 'clip', False),
-                ('video_ids', 'video_ids', False),
+                ('end', END, duration_to_seconds),
+                ('start', START, duration_to_seconds),
+                ('t', SEEK, duration_to_seconds),
+                ('list', PLAYLIST_ID, False),
+                ('v', VIDEO_ID, False),
+                ('live', LIVE, False),
+                ('clip', CLIP, False),
+                ('video_ids', VIDEO_IDS, False),
             )
             if old in url_params
         }
@@ -80,13 +90,13 @@ class UrlToItemConverter(object):
             pass
         elif path.startswith(('/c/', '/channel/', '/u/', '/user/', '/@')):
             re_match = self.RE_PATH_ID.match(parsed_url.path)
-            new_params['channel_id'] = re_match.group('id')
+            new_params[CHANNEL_ID] = re_match.group('id')
             if ('live' not in new_params
                     and path.endswith(('/live', '/streams'))):
                 new_params['live'] = 1
         elif path.startswith(('/clip/', '/embed/', '/live/', '/shorts/')):
             re_match = self.RE_PATH_ID.match(parsed_url.path)
-            new_params['video_id'] = re_match.group('id')
+            new_params[VIDEO_ID] = re_match.group('id')
         else:
             self.log.debug('Unknown path "{path}" in url "{url}"',
                            path=parsed_url.path,
@@ -100,12 +110,12 @@ class UrlToItemConverter(object):
         new_params = self._new_params
         item = None
 
-        if 'video_ids' in new_params:
+        if VIDEO_IDS in new_params:
             item_uri = context.create_uri(PATHS.PLAY, new_params)
             if as_uri:
                 return item_uri
 
-            for video_id in new_params['video_ids'].split(','):
+            for video_id in new_params[VIDEO_IDS].split(','):
                 item = VideoItem(
                     name='',
                     uri=context.create_uri(
@@ -117,12 +127,12 @@ class UrlToItemConverter(object):
                 items = self._video_id_dict.setdefault(video_id, [])
                 items.append(item)
 
-        elif 'video_id' in new_params:
+        elif VIDEO_ID in new_params:
             item_uri = context.create_uri(PATHS.PLAY, new_params)
             if as_uri:
                 return item_uri
 
-            video_id = new_params['video_id']
+            video_id = new_params[VIDEO_ID]
 
             item = VideoItem(
                 name='',
@@ -132,10 +142,13 @@ class UrlToItemConverter(object):
             items = self._video_id_dict.setdefault(video_id, [])
             items.append(item)
 
-        if 'playlist_id' in new_params:
-            playlist_id = new_params['playlist_id']
+        if PLAYLIST_ID in new_params:
+            playlist_id = new_params[PLAYLIST_ID]
 
-            item_uri = context.create_uri(('playlist', playlist_id), new_params)
+            item_uri = context.create_uri(
+                (PATHS.PLAYLIST, playlist_id),
+                new_params,
+            )
             if as_uri:
                 return item_uri
 
@@ -151,12 +164,12 @@ class UrlToItemConverter(object):
             items = self._playlist_id_dict.setdefault(playlist_id, [])
             items.append(item)
 
-        if 'channel_id' in new_params:
-            channel_id = new_params['channel_id']
+        if CHANNEL_ID in new_params:
+            channel_id = new_params[CHANNEL_ID]
             live = new_params.get('live')
 
             item_uri = context.create_uri(
-                PATHS.PLAY if live else ('channel', channel_id),
+                PATHS.PLAY if live else (PATHS.CHANNEL, channel_id),
                 new_params
             )
             if as_uri:
@@ -203,13 +216,13 @@ class UrlToItemConverter(object):
                 context.create_uri(
                     (PATHS.SEARCH, 'links',),
                     {
-                        'channel_ids': ','.join(self._channel_ids),
+                        CHANNEL_IDS: ','.join(self._channel_ids),
                         'q': query,
                     },
                 ) if query else context.create_uri(
                     (PATHS.DESCRIPTION_LINKS,),
                     {
-                        'channel_ids': ','.join(self._channel_ids),
+                        CHANNEL_IDS: ','.join(self._channel_ids),
                     },
                 ),
                 image='{media}/channels.png',
@@ -223,8 +236,8 @@ class UrlToItemConverter(object):
                     context.create_uri(
                         (PATHS.PLAY,),
                         {
-                            'playlist_ids': ','.join(self._playlist_ids),
-                            'order': 'normal',
+                            PLAYLIST_IDS: ','.join(self._playlist_ids),
+                            ORDER: 'normal',
                         },
                     ),
                     playable=True,
@@ -236,13 +249,13 @@ class UrlToItemConverter(object):
                     context.create_uri(
                         (PATHS.SEARCH, 'links',),
                         {
-                            'playlist_ids': ','.join(self._playlist_ids),
+                            PLAYLIST_IDS: ','.join(self._playlist_ids),
                             'q': query,
                         },
                     ) if query else context.create_uri(
                         (PATHS.DESCRIPTION_LINKS,),
                         {
-                            'playlist_ids': ','.join(self._playlist_ids),
+                            PLAYLIST_IDS: ','.join(self._playlist_ids),
                         },
                     ),
                     image='{media}/playlist.png',

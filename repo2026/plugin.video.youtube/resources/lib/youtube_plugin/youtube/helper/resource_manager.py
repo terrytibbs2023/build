@@ -14,6 +14,7 @@ from itertools import chain
 
 from .utils import get_thumbnail
 from ...kodion import logging
+from ...kodion.constants import CHANNEL_ID, FANART_TYPE, INCOGNITO
 
 
 class ResourceManager(object):
@@ -28,9 +29,9 @@ class ResourceManager(object):
         self.new_data = {}
 
         params = context.get_params()
-        self._incognito = params.get('incognito')
+        self._incognito = params.get(INCOGNITO)
 
-        fanart_type = params.get('fanart_type')
+        fanart_type = params.get(FANART_TYPE)
         settings = context.get_settings()
         if fanart_type is None:
             fanart_type = settings.fanart_selection()
@@ -99,13 +100,16 @@ class ResourceManager(object):
             result = data_cache.get_items(
                 ids,
                 None if forced_cache else data_cache.ONE_DAY,
-                memory_store=self.new_data,
             )
-        to_update = [id_ for id_ in ids
-                     if id_
-                     and (id_ not in result
-                          or not result[id_]
-                          or result[id_].get('_partial'))]
+        to_update = (
+            []
+            if forced_cache else
+            [id_ for id_ in ids
+             if id_
+             and (id_ not in result
+                  or not result[id_]
+                  or result[id_].get('_partial'))]
+        )
 
         if result:
             self.log.debugging and self.log.debug(
@@ -189,13 +193,16 @@ class ResourceManager(object):
             result.update(data_cache.get_items(
                 to_check,
                 None if forced_cache else data_cache.ONE_MONTH,
-                memory_store=self.new_data,
             ))
-        to_update = [id_ for id_ in ids
-                     if id_
-                     and (id_ not in result
-                          or not result[id_]
-                          or result[id_].get('_partial'))]
+        to_update = (
+            []
+            if forced_cache else
+            [id_ for id_ in ids
+             if id_
+             and (id_ not in result
+                  or not result[id_]
+                  or result[id_].get('_partial'))]
+        )
 
         if result:
             self.log.debugging and self.log.debug(
@@ -296,13 +303,16 @@ class ResourceManager(object):
             result = data_cache.get_items(
                 ids,
                 None if forced_cache else data_cache.ONE_DAY,
-                memory_store=self.new_data,
             )
-        to_update = [id_ for id_ in ids
-                     if id_
-                     and (id_ not in result
-                          or not result[id_]
-                          or result[id_].get('_partial'))]
+        to_update = (
+            []
+            if forced_cache else
+            [id_ for id_ in ids
+             if id_
+             and (id_ not in result
+                  or not result[id_]
+                  or result[id_].get('_partial'))]
+        )
 
         if result:
             self.log.debugging and self.log.debug(
@@ -375,7 +385,7 @@ class ResourceManager(object):
                     function_cache.ONE_MINUTE * 5,
                     _refresh=refresh,
                 )
-                or (context.get_param('channel_id') == 'mine'
+                or (context.get_param(CHANNEL_ID) == 'mine'
                     and not client.logged_in)
         )
         refresh = not forced_cache and refresh
@@ -409,11 +419,15 @@ class ResourceManager(object):
                         as_dict=True,
                     )
                 if not batch:
-                    to_update.append(batch_id)
+                    if not forced_cache:
+                        to_update.append(batch_id)
                     break
                 age = batch.get('age')
                 batch = batch.get('value')
-                if forced_cache:
+                if not batch:
+                    to_update.append(batch_id)
+                    break
+                elif forced_cache:
                     result[batch_id] = batch
                 elif page_token:
                     if age <= data_cache.ONE_DAY:
@@ -539,7 +553,7 @@ class ResourceManager(object):
                    live_details=False,
                    suppress_errors=False,
                    defer_cache=False,
-                   yt_items=None):
+                   yt_items_dict=None):
         ids = tuple(ids)
 
         context = self._context
@@ -561,13 +575,19 @@ class ResourceManager(object):
             result = data_cache.get_items(
                 ids,
                 None if forced_cache else data_cache.ONE_MONTH,
-                memory_store=self.new_data,
             )
-        to_update = [id_ for id_ in ids
-                     if id_
-                     and (id_ not in result
-                          or not result[id_]
-                          or result[id_].get('_partial'))]
+        to_update = (
+            []
+            if forced_cache else
+            [id_ for id_ in ids
+             if id_
+             and (id_ not in result
+                  or not result[id_]
+                  or result[id_].get('_partial')
+                  or (yt_items_dict
+                      and yt_items_dict.get(id_)
+                      and result[id_].get('_unavailable')))]
+        )
 
         if result:
             self.log.debugging and self.log.debug(
@@ -611,11 +631,8 @@ class ResourceManager(object):
             result.update(new_data)
             self.cache_data(new_data, defer=defer_cache)
 
-        if not result and not new_data and yt_items:
-            result = {
-                yt_item.get('id'): yt_item
-                for yt_item in yt_items
-            }
+        if not result and not new_data and yt_items_dict:
+            result = yt_items_dict
             self.cache_data(result, defer=defer_cache)
 
         # Re-sort result to match order of requested IDs
@@ -637,33 +654,25 @@ class ResourceManager(object):
         return result
 
     def cache_data(self, data=None, defer=False):
-        if defer:
-            if data:
-                self.new_data.update(data)
-            return
+        if not data:
+            return None
 
-        if self.new_data:
-            flush = True
-            if data:
-                self.new_data.update(data)
-            data = self.new_data
-        else:
-            flush = False
-        if data:
-            if self._incognito:
-                self.log.debugging and self.log.debug(
-                    ('Incognito mode active - discarded data for {num} item(s)',
-                     'IDs: {ids}'),
-                    num=len(data),
-                    ids=list(data),
-                )
-            else:
-                self.log.debugging and self.log.debug(
-                    ('Storing new data to cache for {num} item(s)',
-                     'IDs: {ids}'),
-                    num=len(data),
-                    ids=list(data),
-                )
-                self._context.get_data_cache().set_items(data)
-        if flush:
-            self.new_data = {}
+        incognito = self._incognito
+        if not defer and self.log.debugging:
+            self.log.debug(
+                (
+                    'Incognito mode active - discarded data for {num} item(s)',
+                    'IDs: {ids}'
+                ) if incognito else (
+                    'Storing new data to cache for {num} item(s)',
+                    'IDs: {ids}'
+                ),
+                num=len(data),
+                ids=list(data)
+            )
+
+        return self._context.get_data_cache().set_items(
+            data,
+            defer=defer,
+            flush=incognito,
+        )

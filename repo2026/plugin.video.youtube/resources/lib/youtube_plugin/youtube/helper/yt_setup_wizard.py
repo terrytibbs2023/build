@@ -17,7 +17,7 @@ from ...kodion.constants import ADDON_ID, DATA_PATH, WAIT_END_FLAG
 from ...kodion.network import get_listen_addresses, httpd_status
 from ...kodion.sql_store import PlaybackHistory, SearchHistory
 from ...kodion.utils.convert_format import to_unicode
-from ...kodion.utils.datetime_parser import since_epoch, strptime
+from ...kodion.utils.datetime import since_epoch, strptime
 
 
 def process_pre_run(context):
@@ -111,8 +111,9 @@ def process_default_settings(context, step, steps, **_kwargs):
                 background=False,
         ) as progress_dialog:
             progress_dialog.update()
-            if settings.httpd_listen() == '0.0.0.0':
-                settings.httpd_listen('127.0.0.1')
+            ip_address = settings.httpd_listen()
+            if ip_address == '0.0.0.0':
+                ip_address = settings.httpd_listen('127.0.0.1')
             if not httpd_status(context):
                 port = settings.httpd_port()
                 addresses = get_listen_addresses()
@@ -120,13 +121,17 @@ def process_default_settings(context, step, steps, **_kwargs):
                 for address in addresses:
                     progress_dialog.update()
                     if httpd_status(context, (address, port)):
-                        settings.httpd_listen(address)
+                        ip_address = settings.httpd_listen(address)
                         break
-                    context.sleep(5)
+                    context.sleep(3)
                 else:
                     ui.show_notification(localize('httpd.connect.failed'),
                                          header=localize('httpd'))
                     settings.httpd_listen('0.0.0.0')
+                    ip_address = None
+            if ip_address:
+                ui.on_ok(context.get_name(),
+                         context.localize('client.ip.is.x', ip_address))
     return step
 
 

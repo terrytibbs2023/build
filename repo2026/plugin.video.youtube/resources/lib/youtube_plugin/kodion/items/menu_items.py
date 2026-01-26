@@ -11,11 +11,13 @@
 from __future__ import absolute_import, division, unicode_literals
 
 from ..constants import (
-    ADDON_ID,
+    ARTIST,
     BOOKMARK_ID,
     CHANNEL_ID,
     CONTEXT_MENU,
+    INCOGNITO,
     MARK_AS_LABEL,
+    ORDER,
     PATHS,
     PLAYLIST_ITEM_ID,
     PLAYLIST_ID,
@@ -24,21 +26,24 @@ from ..constants import (
     PLAY_PROMPT_SUBTITLES,
     PLAY_TIMESHIFT,
     PLAY_USING,
+    PROPERTY_AS_LABEL,
     SUBSCRIPTION_ID,
+    TITLE,
+    URI,
     VIDEO_ID,
     WINDOW_RETURN,
 )
 
 
-ARTIST_INFOLABEL = '$INFO[ListItem.Artist]'
-BOOKMARK_ID_INFOLABEL = '$INFO[ListItem.Property(%s)]' % BOOKMARK_ID
-CHANNEL_ID_INFOLABEL = '$INFO[ListItem.Property(%s)]' % CHANNEL_ID
-PLAYLIST_ID_INFOLABEL = '$INFO[ListItem.Property(%s)]' % PLAYLIST_ID
-PLAYLIST_ITEM_ID_INFOLABEL = '$INFO[ListItem.Property(%s)]' % PLAYLIST_ITEM_ID
-SUBSCRIPTION_ID_INFOLABEL = '$INFO[ListItem.Property(%s)]' % SUBSCRIPTION_ID
-TITLE_INFOLABEL = '$INFO[ListItem.Title]'
-URI_INFOLABEL = '$INFO[ListItem.FileNameAndPath]'
-VIDEO_ID_INFOLABEL = '$INFO[ListItem.Property(%s)]' % VIDEO_ID
+ARTIST_INFOLABEL = PROPERTY_AS_LABEL % ARTIST
+BOOKMARK_ID_INFOLABEL = PROPERTY_AS_LABEL % BOOKMARK_ID
+CHANNEL_ID_INFOLABEL = PROPERTY_AS_LABEL % CHANNEL_ID
+PLAYLIST_ID_INFOLABEL = PROPERTY_AS_LABEL % PLAYLIST_ID
+PLAYLIST_ITEM_ID_INFOLABEL = PROPERTY_AS_LABEL % PLAYLIST_ITEM_ID
+SUBSCRIPTION_ID_INFOLABEL = PROPERTY_AS_LABEL % SUBSCRIPTION_ID
+TITLE_INFOLABEL = PROPERTY_AS_LABEL % TITLE
+URI_INFOLABEL = PROPERTY_AS_LABEL % URI
+VIDEO_ID_INFOLABEL = PROPERTY_AS_LABEL % VIDEO_ID
 
 
 def context_menu_uri(context, path, params=None):
@@ -72,7 +77,9 @@ def video_more_for(context,
     )
 
 
-def video_related(context, video_id=VIDEO_ID_INFOLABEL):
+def video_related(context,
+                  video_id=VIDEO_ID_INFOLABEL,
+                  video_name=TITLE_INFOLABEL):
     return (
         context.localize('video.related'),
         context_menu_uri(
@@ -80,6 +87,7 @@ def video_related(context, video_id=VIDEO_ID_INFOLABEL):
             (PATHS.ROUTE, PATHS.RELATED_VIDEOS,),
             {
                 VIDEO_ID: video_id,
+                'item_name': video_name,
             },
         ),
     )
@@ -101,7 +109,9 @@ def video_comments(context,
     )
 
 
-def video_description_links(context, video_id=VIDEO_ID_INFOLABEL):
+def video_description_links(context,
+                            video_id=VIDEO_ID_INFOLABEL,
+                            video_name=TITLE_INFOLABEL):
     return (
         context.localize('video.description_links'),
         context_menu_uri(
@@ -109,6 +119,7 @@ def video_description_links(context, video_id=VIDEO_ID_INFOLABEL):
             (PATHS.ROUTE, PATHS.DESCRIPTION_LINKS),
             {
                 VIDEO_ID: video_id,
+                'item_name': video_name,
             },
         )
     )
@@ -128,14 +139,26 @@ def media_play_using(context, video_id=VIDEO_ID_INFOLABEL):
     )
 
 
-def refresh_listing(context):
+def refresh_listing(context, path=None, params=None):
+    if path is None:
+        path = (PATHS.ROUTE, context.get_path(),)
+    elif isinstance(path, tuple):
+        path = (PATHS.ROUTE,) + path
+    else:
+        path = (PATHS.ROUTE, path,)
+    if params is None:
+        params = context.get_params()
     return (
         context.localize('refresh'),
         context_menu_uri(
             context,
-            (PATHS.ROUTE, context.get_path(),),
-            dict(context.get_params(),
-                 refresh=context.refresh_requested(force=True, on=True)),
+            path,
+            dict(params,
+                 refresh=context.refresh_requested(
+                     force=True,
+                     on=True,
+                     params=params,
+                 )),
         ),
     )
 
@@ -514,6 +537,9 @@ def channel_go_to(context,
         context_menu_uri(
             context,
             (PATHS.ROUTE, PATHS.CHANNEL, channel_id,),
+            {
+                'category_label': channel_name,
+            }
         ),
     )
 
@@ -643,10 +669,7 @@ def history_local_clear(context):
 
 def history_local_mark_as(context, video_id=VIDEO_ID_INFOLABEL):
     return (
-        '$INFO[Window(Home).Property({addon_id}-{label_property})]'.format(
-            addon_id=ADDON_ID,
-            label_property=MARK_AS_LABEL,
-        ),
+        PROPERTY_AS_LABEL % MARK_AS_LABEL,
         context_menu_uri(
             context,
             (PATHS.HISTORY, 'mark_as',),
@@ -810,7 +833,7 @@ def search_clear(context):
 
 
 def search_sort_by(context, params, order):
-    selected = params.get('order', 'relevance') == order
+    selected = params.get(ORDER, 'relevance') == order
     order_label = context.localize('search.sort.' + order)
     return (
         context.localize('search.sort').format(
@@ -818,7 +841,7 @@ def search_sort_by(context, params, order):
         ),
         context_menu_uri(
             context,
-            (PATHS.ROUTE, PATHS.SEARCH, 'query',),
+            (PATHS.ROUTE, context.get_path(),),
             params=dict(params,
                         order=order,
                         page=1,
@@ -854,9 +877,9 @@ def goto_quick_search(context, params=None, incognito=None):
     if params is None:
         params = {}
     if incognito is None:
-        incognito = params.get('incognito')
+        incognito = params.get(INCOGNITO)
     else:
-        params['incognito'] = incognito
+        params[INCOGNITO] = incognito
     return (
         context.localize('search.quick.incognito'
                          if incognito else

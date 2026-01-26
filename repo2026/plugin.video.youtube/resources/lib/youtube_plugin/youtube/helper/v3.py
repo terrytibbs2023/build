@@ -17,6 +17,7 @@ from re import compile as re_compile
 
 from .utils import (
     THUMB_TYPES,
+    THUMB_URL,
     filter_videos,
     get_thumbnail,
     make_comment_item,
@@ -26,12 +27,22 @@ from .utils import (
 )
 from ...kodion import KodionException, logging
 from ...kodion.constants import (
+    CHANNEL_ID,
+    FANART_TYPE,
+    FOLDER_URI,
+    HIDE_LIVE,
+    HIDE_MEMBERS,
+    HIDE_NEXT_PAGE,
+    HIDE_PLAYLISTS,
+    HIDE_SEARCH,
+    HIDE_SHORTS,
+    HIDE_VIDEOS,
+    INHERITED_PARAMS,
+    ITEM_FILTER,
+    PAGE,
     PATHS,
-    PLAY_FORCE_AUDIO,
-    PLAY_PROMPT_QUALITY,
-    PLAY_PROMPT_SUBTITLES,
-    PLAY_TIMESHIFT,
-    PLAY_USING,
+    PLAYLIST_ID,
+    VIDEO_ID,
 )
 from ...kodion.items import (
     BookmarkItem,
@@ -44,7 +55,7 @@ from ...kodion.items import (
     menu_items,
 )
 from ...kodion.utils.convert_format import strip_html_from_text
-from ...kodion.utils.datetime_parser import parse_to_dt, utc_to_local
+from ...kodion.utils.datetime import parse_to_dt, utc_to_local
 
 
 _log = logging.getLogger(__name__)
@@ -66,6 +77,7 @@ def _process_list_response(provider,
         log.warning('Items list is empty')
         return None
 
+    yt_items_dict = {}
     new_video_id_dict = {}
     new_playlist_id_dict = {}
     new_channel_id_dict = {}
@@ -74,27 +86,20 @@ def _process_list_response(provider,
     channel_items_dict = {}
 
     items = []
+    position = 0
     do_callbacks = False
 
     params = context.get_params()
     new_params = {
         param: params[param]
-        for param in (
-            'addon_id',
-            'incognito',
-            PLAY_FORCE_AUDIO,
-            PLAY_TIMESHIFT,
-            PLAY_PROMPT_QUALITY,
-            PLAY_PROMPT_SUBTITLES,
-            PLAY_USING,
-        )
+        for param in INHERITED_PARAMS
         if param in params
     }
 
     settings = context.get_settings()
-    thumb_re = re_compile(r'[^/._]+?(?=(?:_live)?\.(?:jpg|webp))')
+    thumb_re = re_compile(r'[^/._]+(?=[^/.]*?\.(?:jpg|webp))')
     thumb_size = settings.get_thumbnail_size()
-    fanart_type = params.get('fanart_type')
+    fanart_type = params.get(FANART_TYPE)
     if fanart_type is None:
         fanart_type = settings.fanart_selection()
     if fanart_type == settings.FANART_THUMBNAIL:
@@ -115,14 +120,14 @@ def _process_list_response(provider,
         item_params = yt_item.get('_params') or {}
         item_params.update(new_params)
 
+        item_id = yt_item.get('id')
+        snippet = yt_item.get('snippet', {})
+
         video_id = None
         playlist_id = None
         channel_id = None
 
         if is_youtube:
-            item_id = yt_item.get('id')
-            snippet = yt_item.get('snippet', {})
-
             localised_info = snippet.get('localized') or {}
             title = (localised_info.get('title')
                      or snippet.get('title')
@@ -138,9 +143,9 @@ def _process_list_response(provider,
                 _url = thumbnails[0].get('url')
                 thumbnails.extend([
                     {
-                        'url': (thumb_re.sub(thumb['filename'], _url, count=1)
+                        'url': (thumb_re.sub(thumb['name'], _url, count=1)
                                 if _url else
-                                thumb['url'].format(item_id, '')),
+                                THUMB_URL.format(item_id, thumb['name'], '')),
                         'size': thumb['size'],
                         'ratio': thumb['ratio'],
                         'unverified': True,
@@ -149,23 +154,24 @@ def _process_list_response(provider,
                 ])
             elif isinstance(thumbnails, dict):
                 _url = next(iter(thumbnails.values())).get('url')
-                for thumb_type, thumb in THUMB_TYPES.items():
-                    if thumb_type in thumbnails:
-                        continue
-                    thumbnails[thumb_type] = {
-                        'url': (thumb_re.sub(thumb['filename'], _url, count=1)
+                thumbnails.update({
+                    thumb_type: {
+                        'url': (thumb_re.sub(thumb['name'], _url, count=1)
                                 if _url else
-                                thumb['url'].format(item_id, '')),
+                                THUMB_URL.format(item_id, thumb['name'], '')),
                         'size': thumb['size'],
                         'ratio': thumb['ratio'],
                         'unverified': True,
                     }
+                    for thumb_type, thumb in THUMB_TYPES.items()
+                    if thumb_type not in thumbnails
+                })
             else:
                 thumbnails = None
             if not thumbnails:
                 thumbnails = {
                     thumb_type: {
-                        'url': thumb['url'].format(item_id, ''),
+                        'url': THUMB_URL.format(item_id, thumb['name'], ''),
                         'size': thumb['size'],
                         'ratio': thumb['ratio'],
                         'unverified': True,
@@ -203,11 +209,14 @@ def _process_list_response(provider,
                 log.debug('searchResult discarded: %r', kind)
                 continue
 
+        if item_id:
+            yt_items_dict[item_id] = yt_item
+
         if kind_type == 'video':
             video_id = item_id
             channel_id = (snippet.get('videoOwnerChannelId')
                           or snippet.get('channelId'))
-            item_params['video_id'] = video_id
+            item_params[VIDEO_ID] = video_id
             item_uri = context.create_uri(
                 (PATHS.PLAY,),
                 item_params,
@@ -217,8 +226,8 @@ def _process_list_response(provider,
                              image=image,
                              fanart=fanart,
                              plot=description,
-                             video_id=video_id,
-                             channel_id=channel_id)
+                             channel_id=channel_id,
+                             **item_params)
 
         elif kind_type == 'channel':
             channel_id = item_id
@@ -232,7 +241,8 @@ def _process_list_response(provider,
                                  fanart=fanart,
                                  plot=description,
                                  category_label=title,
-                                 channel_id=channel_id)
+                                 channel_id=channel_id,
+                                 **item_params)
 
         elif kind_type == 'guidecategory':
             item_params['guide_id'] = item_id
@@ -245,7 +255,8 @@ def _process_list_response(provider,
                                  image=image,
                                  fanart=fanart,
                                  plot=description,
-                                 category_label=title)
+                                 category_label=title,
+                                 **item_params)
 
         elif kind_type == 'subscription':
             subscription_id = item_id
@@ -263,16 +274,21 @@ def _process_list_response(provider,
                                  plot=description,
                                  category_label=title,
                                  channel_id=channel_id,
-                                 subscription_id=subscription_id)
+                                 subscription_id=subscription_id,
+                                 **item_params)
 
         elif kind_type == 'searchfolder':
-            channel_id = item_params['channel_id']
+            if item_filter and item_filter.get(HIDE_SEARCH):
+                continue
+            channel_id = item_params[CHANNEL_ID]
             item = NewSearchItem(context, **item_params)
             channel_items = channel_items_dict.setdefault(channel_id, [])
             channel_items.append(item)
 
-        elif kind_type == 'playlistfolder':
-            channel_id = item_params['channel_id']
+        elif kind_type == 'playlistsfolder':
+            if item_filter and item_filter.get(HIDE_PLAYLISTS):
+                continue
+            channel_id = item_params[CHANNEL_ID]
             item_params['uri'] = context.create_uri(
                 (PATHS.CHANNEL, channel_id, 'playlists',),
             )
@@ -281,7 +297,45 @@ def _process_list_response(provider,
             channel_items = channel_items_dict.setdefault(channel_id, [])
             channel_items.append(item)
 
-        elif kind_type == 'playlist':
+        elif kind_type in {'livefolder',
+                           'membersfolder',
+                           'shortsfolder',
+                           'videosfolder'}:
+            if (item_filter and (
+                    (
+                            kind_type == 'livefolder'
+                            and item_filter.get(HIDE_LIVE)
+                    ) or (
+                            kind_type == 'membersfolder'
+                            and item_filter.get(HIDE_MEMBERS)
+                    ) or (
+                            kind_type == 'shortsfolder'
+                            and item_filter.get(HIDE_SHORTS)
+                    ) or (
+                            kind_type == 'videosfolder'
+                            and item_filter.get(HIDE_VIDEOS)
+                    )
+            )):
+                continue
+            item = DirectoryItem(**item_params)
+
+        elif kind_type in {'playlist',
+                           'playlistlivefolder',
+                           'playlistmembersfolder',
+                           'playlistshortsfolder'}:
+            if (item_filter and (
+                    (
+                            kind_type == 'playlistlivefolder'
+                            and item_filter.get(HIDE_LIVE)
+                    ) or (
+                            kind_type == 'playlistmembersfolder'
+                            and item_filter.get(HIDE_MEMBERS)
+                    ) or (
+                            kind_type == 'playlistshortsfolder'
+                            and item_filter.get(HIDE_SHORTS)
+                    )
+            )):
+                continue
             playlist_id = item_id
             # set channel id to 'mine' if the path is for a playlist of our own
             channel_id = snippet.get('channelId')
@@ -297,7 +351,7 @@ def _process_list_response(provider,
             else:
                 video_id = snippet.get('resourceId', {}).get('videoId')
                 if video_id:
-                    item_params['video_id'] = video_id
+                    item_params[VIDEO_ID] = video_id
                 item_uri = context.create_uri(
                     (PATHS.PLAYLIST, playlist_id,),
                     item_params,
@@ -309,16 +363,21 @@ def _process_list_response(provider,
                                  plot=description,
                                  category_label=title,
                                  channel_id=channel_id,
-                                 playlist_id=playlist_id)
+                                 playlist_id=playlist_id,
+                                 **item_params)
             item.available = yt_item.get('_available', False)
 
         elif kind_type == 'playlistitem':
-            playlist_item_id = item_id
-            video_id = snippet['resourceId']['videoId']
+            video_id = snippet.get('resourceId', {}).get('videoId')
+            if video_id:
+                playlist_item_id = item_id
+            else:
+                video_id = item_id
+                playlist_item_id = None
             channel_id = (snippet.get('videoOwnerChannelId')
                           or snippet.get('channelId'))
             playlist_id = snippet.get('playlistId')
-            item_params['video_id'] = video_id
+            item_params[VIDEO_ID] = video_id
             item_uri = context.create_uri(
                 (PATHS.PLAY,),
                 item_params,
@@ -328,10 +387,10 @@ def _process_list_response(provider,
                              image=image,
                              fanart=fanart,
                              plot=description,
-                             video_id=video_id,
                              channel_id=channel_id,
                              playlist_id=playlist_id,
-                             playlist_item_id=playlist_item_id)
+                             playlist_item_id=playlist_item_id,
+                             **item_params)
 
             # date time
             published_at = snippet.get('publishedAt')
@@ -350,7 +409,7 @@ def _process_list_response(provider,
                 video_id = details['upload']['videoId']
             else:
                 continue
-            item_params['video_id'] = video_id
+            item_params[VIDEO_ID] = video_id
             item_uri = context.create_uri(
                 (PATHS.PLAY,),
                 item_params,
@@ -360,7 +419,7 @@ def _process_list_response(provider,
                              image=image,
                              fanart=fanart,
                              plot=description,
-                             video_id=video_id)
+                             **item_params)
 
         elif kind_type.startswith('comment'):
             if kind_type == 'commentthread':
@@ -380,8 +439,6 @@ def _process_list_response(provider,
                                      snippet,
                                      uri=item_uri,
                                      reply_count=reply_count)
-            position = snippet.get('position') or len(items)
-            item.set_track_number(position + 1)
 
         elif kind_type == 'bookmarkitem':
             item = BookmarkItem(**item_params)
@@ -395,14 +452,14 @@ def _process_list_response(provider,
         if not item:
             continue
 
-        if not video_id and 'video_id' in item_params:
-            video_id = item_params['video_id']
+        if not video_id and VIDEO_ID in item_params:
+            video_id = item_params[VIDEO_ID]
         if not playlist_id:
-            if 'playlist_id' in item_params:
-                playlist_id = item_params['playlist_id']
+            if PLAYLIST_ID in item_params:
+                playlist_id = item_params[PLAYLIST_ID]
             elif not video_id and not channel_id:
-                if 'channel_id' in item_params:
-                    channel_id = item_params['channel_id']
+                if CHANNEL_ID in item_params:
+                    channel_id = item_params[CHANNEL_ID]
 
         for item_id, new_dict, complete_dict, allow_types, allow_kinds in (
                 (
@@ -459,14 +516,11 @@ def _process_list_response(provider,
             item.callback = yt_item.pop('_callback')
             do_callbacks = True
 
-        if isinstance(item, MediaItem):
-            # Set track number from playlist, or set to current list length to
+        if not item.get_special_sort():
+            # Set track number from playlist, or set to current list position to
             # match "Default" (unsorted) sort order
-            if kind_type == 'playlistitem':
-                position = snippet.get('position') or len(items)
-            else:
-                position = len(items)
-            item.set_track_number(position + 1)
+            item.set_track_number(snippet.get('position', position) + 1)
+            position += 1
 
         items.append(item)
 
@@ -489,7 +543,7 @@ def _process_list_response(provider,
                 'live_details': True,
                 'suppress_errors': True,
                 'defer_cache': True,
-                'yt_items': yt_items,
+                'yt_items_dict': yt_items_dict,
             },
             'thread': None,
             'updater': update_video_items,
@@ -682,10 +736,11 @@ def response_to_items(provider,
                       log=_log):
     params = context.get_params()
     settings = context.get_settings()
+    ui = context.get_ui()
 
     items_per_page = settings.items_per_page()
-    item_filter_param = params.get('item_filter')
-    current_page = params.get('page') or 1
+    item_filter_param = params.get(ITEM_FILTER)
+    current_page = params.get(PAGE) or 1
     exclude_current = params.get('exclude')
     if exclude_current:
         exclude_current = exclude_current[:]
@@ -704,7 +759,7 @@ def response_to_items(provider,
     playlist_id_dict = {}
     subscription_id_dict = {}
 
-    with context.get_ui().create_progress_dialog(
+    with ui.create_progress_dialog(
             heading=context.localize('loading.directory'),
             message_template=context.localize('loading.directory.progress'),
             background=True,
@@ -741,6 +796,7 @@ def response_to_items(provider,
             _item_filter = settings.item_filter(
                 update=(item_filter or json_data.get('_item_filter')),
                 override=item_filter_param,
+                params=params,
                 exclude=exclude_current,
             )
             result = _process_list_response(
@@ -829,7 +885,7 @@ def response_to_items(provider,
             items.sort(key=sort, reverse=reverse)
 
     # no processing of next page item
-    if not json_data or not process_next_page or params.get('hide_next_page'):
+    if not json_data or not process_next_page or params.get(HIDE_NEXT_PAGE):
         return items
 
     # next page
@@ -870,10 +926,7 @@ def response_to_items(provider,
 
         if (next_page - 1) * yt_results_per_page < yt_total_results:
             new_params['items_per_page'] = yt_results_per_page
-        elif context.is_plugin_path(
-                context.get_infolabel('Container.FolderPath'),
-                partial=True,
-        ):
+        elif ui.get_container_info(FOLDER_URI):
             next_page = 1
             new_params['page'] = 1
         else:
@@ -886,13 +939,6 @@ def response_to_items(provider,
         yt_click_tracking = json_data.get('clickTracking')
         if yt_click_tracking:
             new_params['click_tracking'] = yt_click_tracking
-    else:
-        if 'exclude' in new_params:
-            del new_params['exclude']
-        if 'click_tracking' in new_params:
-            del new_params['click_tracking']
-        if 'visitor' in new_params:
-            del new_params['visitor']
 
     next_page_item = NextPageItem(context, new_params)
     items.append(next_page_item)

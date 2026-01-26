@@ -14,7 +14,21 @@ from functools import partial
 
 from . import UrlResolver, UrlToItemConverter, utils, v3
 from ...kodion import KodionException, logging
-from ...kodion.constants import CONTENT, PATHS
+from ...kodion.constants import (
+    CHANNEL_ID,
+    CHANNEL_IDS,
+    CONTENT,
+    HIDE_FOLDERS,
+    HIDE_LIVE,
+    HIDE_SHORTS,
+    HIDE_VIDEOS,
+    INCOGNITO,
+    PAGE,
+    PATHS,
+    PLAYLIST_ID,
+    PLAYLIST_IDS,
+    VIDEO_ID,
+)
 from ...kodion.items import DirectoryItem, UriItem
 from ...kodion.utils.convert_format import strip_html_from_text
 
@@ -24,7 +38,7 @@ def _process_related_videos(provider, context, client):
     refresh = context.refresh_requested()
     params = context.get_params()
 
-    video_id = params.get('video_id')
+    video_id = params.get(VIDEO_ID)
     if video_id:
         json_data = function_cache.run(
             client.get_related_videos,
@@ -45,6 +59,10 @@ def _process_related_videos(provider, context, client):
         )
         json_data['_pre_filler'] = filler
         json_data['_post_filler'] = filler
+        category_label = context.localize(
+            'video.related.to.x',
+            params.get('item_name') or context.localize('untitled'),
+        )
     else:
         json_data = function_cache.run(
             client.get_related_for_home,
@@ -53,6 +71,7 @@ def _process_related_videos(provider, context, client):
         )
         if not json_data:
             return False, None
+        category_label = None
 
     result = v3.response_to_items(
         provider,
@@ -64,7 +83,7 @@ def _process_related_videos(provider, context, client):
         provider.CONTENT_TYPE: {
             'content_type': CONTENT.VIDEO_CONTENT,
             'sub_type': None,
-            'category_label': None,
+            'category_label': category_label,
         },
     }
     return result, options
@@ -72,7 +91,7 @@ def _process_related_videos(provider, context, client):
 
 def _process_comments(provider, context, client):
     params = context.get_params()
-    video_id = params.get('video_id')
+    video_id = params.get(VIDEO_ID)
     parent_id = params.get('parent_id')
     if not video_id and not parent_id:
         return False, None
@@ -96,7 +115,7 @@ def _process_comments(provider, context, client):
     options = {
         provider.CONTENT_TYPE: {
             'content_type': CONTENT.LIST_CONTENT,
-            'sub_type': 'comments',
+            'sub_type': CONTENT.COMMENTS,
             'category_label': params.get('item_name', video_id),
         },
     }
@@ -109,10 +128,10 @@ def _process_recommendations(provider, context, client):
     params = context.get_params()
 
     browse_id = 'FEwhat_to_watch'
-    # browse_client = 'tv'
-    # browse_paths = client.JSON_PATHS['tv_shelf_horizontal']
-    browse_client = 'android_vr'
-    browse_paths = client.JSON_PATHS['vr_shelf']
+    browse_client = 'tv'
+    browse_paths = client.JSON_PATHS['tv_shelf_horizontal']
+    # browse_client = 'android_vr'
+    # browse_paths = client.JSON_PATHS['vr_shelf']
 
     json_data = function_cache.run(
         client.get_browse_items,
@@ -223,11 +242,13 @@ def _process_disliked_videos(provider, context, client):
 
 def _process_live_events(provider, context, client, event_type='live'):
     # TODO: cache result
+    params = context.get_params()
     json_data = client.get_live_events(
         event_type=event_type,
-        order='date' if event_type == 'upcoming' else 'viewCount',
-        page_token=context.get_param('page_token', ''),
-        location=context.get_param('location', False),
+        order=params.get('order',
+                         'date' if event_type == 'upcoming' else 'viewCount'),
+        page_token=params.get('page_token', ''),
+        location=params.get('location', False),
         after={'days': 3} if event_type == 'completed' else None,
     )
     if not json_data:
@@ -246,7 +267,7 @@ def _process_live_events(provider, context, client, event_type='live'):
 
 def _process_description_links(provider, context):
     params = context.get_params()
-    incognito = params.get('incognito', False)
+    incognito = params.get(INCOGNITO, False)
     addon_id = params.get('addon_id', '')
 
     def _extract_urls(video_id):
@@ -311,7 +332,7 @@ def _process_description_links(provider, context):
     def _display_channels(channel_ids):
         item_params = {}
         if incognito:
-            item_params['incognito'] = incognito
+            item_params[INCOGNITO] = incognito
         if addon_id:
             item_params['addon_id'] = addon_id
 
@@ -342,7 +363,10 @@ def _process_description_links(provider, context):
             provider.CONTENT_TYPE: {
                 'content_type': CONTENT.LIST_CONTENT,
                 'sub_type': None,
-                'category_label': None,
+                'category_label': context.localize(
+                    'video.description_links.from.x',
+                    params.get('item_name') or context.localize('untitled'),
+                ),
             },
         }
         return result, options
@@ -350,7 +374,7 @@ def _process_description_links(provider, context):
     def _display_playlists(playlist_ids):
         item_params = {}
         if incognito:
-            item_params['incognito'] = incognito
+            item_params[INCOGNITO] = incognito
         if addon_id:
             item_params['addon_id'] = addon_id
 
@@ -391,15 +415,15 @@ def _process_description_links(provider, context):
         }
         return result, options
 
-    video_id = params.get('video_id', '')
+    video_id = params.get(VIDEO_ID)
     if video_id:
         return _extract_urls(video_id)
 
-    channel_ids = params.get('channel_ids', [])
+    channel_ids = params.get(CHANNEL_IDS)
     if channel_ids:
         return _display_channels(channel_ids)
 
-    playlist_ids = params.get('playlist_ids', [])
+    playlist_ids = params.get(PLAYLIST_IDS)
     if playlist_ids:
         return _display_playlists(playlist_ids)
 
@@ -415,9 +439,14 @@ def _process_saved_playlists(provider, context, client):
     browse_client = 'tv'
     browse_paths = client.JSON_PATHS['tv_grid']
 
+    own_channel = client.channel_id
+    if own_channel:
+        own_channel = (own_channel,)
+
     json_data = client.get_browse_items(
         browse_id=browse_id,
         client=browse_client,
+        skip_ids=own_channel,
         response_type=browse_response_type,
         do_auth=True,
         page_token=params.get('page_token'),
@@ -432,6 +461,7 @@ def _process_saved_playlists(provider, context, client):
         client.get_browse_items,
         browse_id=browse_id,
         client=browse_client,
+        skip_ids=own_channel,
         response_type=browse_response_type,
         do_auth=True,
         json_path=browse_paths,
@@ -502,30 +532,50 @@ def _process_my_subscriptions(provider,
             my_subscriptions_path = PATHS.MY_SUBSCRIPTIONS
 
         params = context.get_params()
-        if params.get('page', 1) == 1 and not params.get('hide_folders'):
-            result = [
-                DirectoryItem(
-                    context.localize('my_subscriptions'),
-                    context.create_uri(my_subscriptions_path),
-                    image='{media}/new_uploads.png',
-                )
-                if feed_type != 'videos' and not params.get('hide_videos') else
-                None,
-                DirectoryItem(
-                    context.localize('shorts'),
-                    context.create_uri((my_subscriptions_path, 'shorts')),
-                    image='{media}/shorts.png',
-                )
-                if feed_type != 'shorts' and not params.get('hide_shorts') else
-                None,
-                DirectoryItem(
-                    context.localize('live'),
-                    context.create_uri((my_subscriptions_path, 'live')),
-                    image='{media}/live.png',
-                )
-                if feed_type != 'live' and not params.get('hide_live') else
-                None,
-            ]
+        if params.get(PAGE, 1) == 1 and not params.get(HIDE_FOLDERS):
+            v3_response = {
+                'kind': 'plugin#pluginListResponse',
+                'items': [
+                    None
+                    if feed_type == 'videos' or params.get(HIDE_VIDEOS) else
+                    {
+                        'kind': 'plugin#videosFolder',
+                        '_params': {
+                            'name': context.localize('my_subscriptions'),
+                            'uri': context.create_uri(my_subscriptions_path),
+                            'image': '{media}/new_uploads.png',
+                            'special_sort': 'top',
+                        },
+                    },
+                    None
+                    if feed_type == 'shorts' or params.get(HIDE_SHORTS) else
+                    {
+                        'kind': 'plugin#shortsFolder',
+                        '_params': {
+                            'name': context.localize('shorts'),
+                            'uri': context.create_uri(
+                                (my_subscriptions_path, 'shorts')
+                            ),
+                            'image': '{media}/shorts.png',
+                            'special_sort': 'top',
+                        },
+                    },
+                    None
+                    if feed_type == 'live' or params.get(HIDE_LIVE) else
+                    {
+                        'kind': 'plugin#liveFolder',
+                        '_params': {
+                            'name': context.localize('live'),
+                            'uri': context.create_uri(
+                                (my_subscriptions_path, 'live')
+                            ),
+                            'image': '{media}/live.png',
+                            'special_sort': 'top',
+                        },
+                    },
+                ],
+            }
+            result = v3.response_to_items(provider, context, v3_response)
         else:
             result = []
 
@@ -553,13 +603,13 @@ def _process_my_subscriptions(provider,
 def _process_virtual_list(provider, context, _client, playlist_id=None):
     params = context.get_params()
 
-    playlist_id = playlist_id or params.get('playlist_id')
+    playlist_id = playlist_id or params.get(PLAYLIST_ID)
     if not playlist_id:
         return False, None
     playlist_id = playlist_id.upper()
     context.parse_params({
-        'channel_id': 'mine',
-        'playlist_id': playlist_id,
+        CHANNEL_ID: 'mine',
+        PLAYLIST_ID: playlist_id,
     })
 
     resource_manager = provider.get_resource_manager(context)
@@ -586,7 +636,7 @@ def _process_virtual_list(provider, context, _client, playlist_id=None):
     options = {
         provider.CONTENT_TYPE: {
             'content_type': CONTENT.VIDEO_CONTENT,
-            'sub_type': None,
+            'sub_type': CONTENT.HISTORY if playlist_id == 'HL' else None,
             'category_label': None,
         },
     }

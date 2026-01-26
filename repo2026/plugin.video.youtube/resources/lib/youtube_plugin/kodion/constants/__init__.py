@@ -53,16 +53,49 @@ VALUE_TO_STR = {
     1: 'true',
 }
 
+YOUTUBE_HOSTNAMES = frozenset((
+    'youtube.com',
+    'www.youtube.com',
+    'm.youtube.com',
+    'www.youtubekids.com',
+    'music.youtube.com',
+))
+
 # Flags
 ABORT_FLAG = 'abort_requested'
 BUSY_FLAG = 'busy'
+SERVICE_RUNNING_FLAG = 'service_monitor_running'
 WAIT_END_FLAG = 'builtin_completed'
 TRAKT_PAUSE_FLAG = 'script.trakt.paused'
 
+# Container Info
+CURRENT_CONTAINER_INFO = 'Container.%s'
+PLUGIN_CONTAINER_INFO = 'Container(%s).%s'
+CURRENT_ITEM = 'CurrentItem'
+FOLDER_NAME = 'FolderName'
+FOLDER_URI = 'FolderPath'
+HAS_FILES = 'HasFiles'
+HAS_FOLDERS = 'HasFolders'
+HAS_PARENT = 'HasParent'
+SCROLLING = 'Scrolling'
+UPDATING = 'IsUpdating'
+
+# ListItem Info
+CONTAINER_LISTITEM_INFO = 'Container(%s).ListItem(0).%s'
+LISTITEM_INFO = 'ListItem.%s'
+ARTIST = 'Artist'
+LABEL = 'Label'
+PLAY_COUNT = 'PlayCount'
+RESUMABLE = 'IsResumable'
+TITLE = 'Title'
+URI = 'FileNameAndPath'
+
 # ListItem Properties
+CONTAINER_LISTITEM_PROP = 'Container(%s).ListItem(0).Property(%s)'
+LISTITEM_PROP = 'ListItem.Property(%s)'
 BOOKMARK_ID = 'bookmark_id'
 CHANNEL_ID = 'channel_id'
-PLAY_COUNT = 'video_play_count'
+PLAY_COUNT_PROP = 'video_play_count'
 PLAYLIST_ID = 'playlist_id'
 PLAYLIST_ITEM_ID = 'playlist_item_id'
 SUBSCRIPTION_ID = 'subscription_id'
@@ -106,6 +139,8 @@ FORCE_PLAY_PARAMS = frozenset((
 ))
 
 # Stored data
+PROPERTY = 'Window(home).Property(%s-%%s)' % ADDON_ID
+PROPERTY_AS_LABEL = '$INFO[Window(home).Property(%s-%%s)]' % ADDON_ID
 CONTAINER_ID = 'container_id'
 CONTAINER_FOCUS = 'container_focus'
 CONTAINER_POSITION = 'container_position'
@@ -125,6 +160,59 @@ WINDOW_FALLBACK = 'window_fallback'
 WINDOW_REPLACE = 'window_replace'
 WINDOW_RETURN = 'window_return'
 
+# Plugin url query parameters
+ACTION = 'action'
+ADDON_ID_PARAM = 'addon_id'
+CHANNEL_IDS = 'channel_ids'
+CLIP = 'clip'
+END = 'end'
+FANART_TYPE = 'fanart_type'
+HIDE_CHANNELS = 'hide_channels'
+HIDE_FOLDERS = 'hide_folders'
+HIDE_LIVE = 'hide_live'
+HIDE_MEMBERS = 'hide_members'
+HIDE_NEXT_PAGE = 'hide_next_page'
+HIDE_PLAYLISTS = 'hide_playlists'
+HIDE_PROGRESS = 'hide_progress'
+HIDE_SEARCH = 'hide_search'
+HIDE_SHORTS = 'hide_shorts'
+HIDE_VIDEOS = 'hide_videos'
+INCOGNITO = 'incognito'
+ITEM_FILTER = 'item_filter'
+ITEMS_PER_PAGE = 'items_per_page'
+LIVE = 'live'
+ORDER = 'order'
+PAGE = 'page'
+PLAYLIST_IDS = 'playlist_ids'
+SCREENSAVER = 'screensaver'
+SEEK = 'seek'
+START = 'start'
+VIDEO_IDS = 'video_ids'
+
+INHERITED_PARAMS = frozenset((
+    ADDON_ID_PARAM,
+    FANART_TYPE,
+    HIDE_CHANNELS,
+    HIDE_FOLDERS,
+    HIDE_LIVE,
+    HIDE_MEMBERS,
+    HIDE_NEXT_PAGE,
+    HIDE_PLAYLISTS,
+    HIDE_PROGRESS,
+    HIDE_SEARCH,
+    HIDE_SHORTS,
+    HIDE_VIDEOS,
+    INCOGNITO,
+    ITEM_FILTER,
+    ITEMS_PER_PAGE,
+    PLAY_FORCE_AUDIO,
+    PLAY_TIMESHIFT,
+    PLAY_PROMPT_QUALITY,
+    PLAY_PROMPT_SUBTITLES,
+    PLAY_USING,
+))
+
+
 __all__ = (
     # Addon paths
     'ADDON_ID',
@@ -137,17 +225,43 @@ __all__ = (
     # Const values
     'BOOL_FROM_STR',
     'VALUE_TO_STR',
+    'YOUTUBE_HOSTNAMES',
 
     # Flags
     'ABORT_FLAG',
     'BUSY_FLAG',
+    'SERVICE_RUNNING_FLAG',
     'TRAKT_PAUSE_FLAG',
     'WAIT_END_FLAG',
 
-    # ListItem properties
+    # Container Info
+    'CURRENT_CONTAINER_INFO',
+    'PLUGIN_CONTAINER_INFO',
+    'CURRENT_ITEM',
+    'FOLDER_NAME',
+    'FOLDER_URI',
+    'HAS_FILES',
+    'HAS_FOLDERS',
+    'HAS_PARENT',
+    'SCROLLING',
+    'UPDATING',
+
+    # ListItem Info
+    'CONTAINER_LISTITEM_INFO',
+    'LISTITEM_INFO',
+    'ARTIST',
+    'LABEL',
+    'PLAY_COUNT',
+    'RESUMABLE',
+    'TITLE',
+    'URI',
+
+    # ListItem Properties
+    'CONTAINER_LISTITEM_PROP',
+    'LISTITEM_PROP',
     'BOOKMARK_ID',
     'CHANNEL_ID',
-    'PLAY_COUNT',
+    'PLAY_COUNT_PROP',
     'PLAYLIST_ID',
     'PLAYLIST_ITEM_ID',
     'SUBSCRIPTION_ID',
@@ -185,6 +299,8 @@ __all__ = (
     'FORCE_PLAY_PARAMS',
 
     # Stored data
+    'PROPERTY',
+    'PROPERTY_AS_LABEL',
     'CONTAINER_ID',
     'CONTAINER_FOCUS',
     'CONTAINER_POSITION',
@@ -203,6 +319,37 @@ __all__ = (
     'WINDOW_FALLBACK',
     'WINDOW_REPLACE',
     'WINDOW_RETURN',
+
+    # Plugin url query parameters
+    'ACTION',
+    'ADDON_ID_PARAM',
+    'CHANNEL_IDS',
+    'CLIP',
+    'END',
+    'FANART_TYPE',
+    'HIDE_CHANNELS',
+    'HIDE_FOLDERS',
+    'HIDE_LIVE',
+    'HIDE_MEMBERS',
+    'HIDE_NEXT_PAGE',
+    'HIDE_PLAYLISTS',
+    'HIDE_PROGRESS',
+    'HIDE_SEARCH',
+    'HIDE_SHORTS',
+    'HIDE_VIDEOS',
+    'INCOGNITO',
+    'ITEM_FILTER',
+    'ITEMS_PER_PAGE',
+    'LIVE',
+    'ORDER',
+    'PAGE',
+    'PLAYLIST_IDS',
+    'SCREENSAVER',
+    'SEEK',
+    'START',
+    'VIDEO_IDS',
+
+    'INHERITED_PARAMS',
 
     # Other constants
     'CONTENT',

@@ -11,9 +11,8 @@
 from __future__ import absolute_import, division, unicode_literals
 
 from ...kodion import KodionException
-from ...kodion.constants import PATHS
+from ...kodion.constants import URI, VIDEO_ID
 from ...kodion.items import menu_items
-from ...kodion.utils.methods import parse_item_ids
 
 
 def _process_rate_video(provider,
@@ -22,9 +21,9 @@ def _process_rate_video(provider,
                         video_id=None,
                         current_rating=None,
                         _ratings=('like', 'dislike', 'none')):
-    listitem_path = context.get_listitem_info('FileNameAndPath')
-
     ui = context.get_ui()
+    li_path = ui.get_listitem_info(URI)
+
     localize = context.localize
 
     rating_param = context.get_param('rating', '')
@@ -34,15 +33,16 @@ def _process_rate_video(provider,
             rating_param = ''
 
     if video_id is None:
-        video_id = context.get_param('video_id')
+        video_id = context.get_param(VIDEO_ID)
     if not video_id:
         try:
-            video_id = re_match.group('video_id')
+            video_id = re_match.group(VIDEO_ID)
         except IndexError:
-            if context.is_plugin_path(listitem_path, PATHS.PLAY):
-                video_id = parse_item_ids(listitem_path).get('video_id')
-            if not video_id:
-                raise KodionException('video/rate/: missing video_id')
+            pass
+    if not video_id and li_path:
+        video_id = context.parse_item_ids(li_path).get(VIDEO_ID)
+    if not video_id:
+        raise KodionException('video/rate/: missing video_id')
 
     if current_rating is None:
         try:
@@ -70,16 +70,11 @@ def _process_rate_video(provider,
     else:
         result = -1
 
+    notify_message = None
+    response = None
     if result != -1:
-        notify_message = ''
-
         response = provider.get_client(context).rate_video(video_id, result)
-
         if response:
-            # this will be set if we are in the 'Liked Video' playlist
-            if context.refresh_requested():
-                ui.refresh_container()
-
             if result == 'none':
                 notify_message = localize(('removed.x', 'rating'))
             elif result == 'like':
@@ -89,33 +84,41 @@ def _process_rate_video(provider,
         else:
             notify_message = localize('failed')
 
-        if notify_message:
-            ui.show_notification(
-                message=notify_message,
-                time_ms=2500,
-                audible=False,
-            )
+    if notify_message:
+        ui.show_notification(
+            message=notify_message,
+            time_ms=2500,
+            audible=False,
+        )
 
-    return True
+    return (
+        True,
+        {
+            # this will be set if we are in the 'Liked Video' playlist
+            provider.FORCE_REFRESH: response and context.refresh_requested(),
+        },
+    )
 
 
 def _process_more_for_video(context):
     params = context.get_params()
 
-    video_id = params.get('video_id')
+    video_id = params.get(VIDEO_ID)
     if not video_id:
         raise KodionException('video/more/: missing video_id')
 
+    item_name = params.get('item_name')
+
     items = [
         menu_items.playlist_add_to_selected(context, video_id),
-        menu_items.video_related(context, video_id),
-        menu_items.video_comments(context, video_id, params.get('item_name')),
-        menu_items.video_description_links(context, video_id),
+        menu_items.video_related(context, video_id, item_name),
+        menu_items.video_comments(context, video_id, item_name),
+        menu_items.video_description_links(context, video_id, item_name),
         menu_items.video_rate(context, video_id),
     ] if params.get('logged_in') else [
-        menu_items.video_related(context, video_id),
-        menu_items.video_comments(context, video_id, params.get('item_name')),
-        menu_items.video_description_links(context, video_id),
+        menu_items.video_related(context, video_id, item_name),
+        menu_items.video_comments(context, video_id, item_name),
+        menu_items.video_description_links(context, video_id, item_name),
     ]
 
     result = context.get_ui().on_select(context.localize('video.more'), items)

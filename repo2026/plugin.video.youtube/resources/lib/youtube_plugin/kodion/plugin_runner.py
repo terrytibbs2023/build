@@ -11,8 +11,13 @@
 from __future__ import absolute_import, division, unicode_literals
 
 import gc
+
 from . import logging
-from .constants import CHECK_SETTINGS, PATHS
+from .constants import (
+    CHECK_SETTINGS,
+    FOLDER_URI,
+    PATHS,
+)
 from .context import XbmcContext
 from .debug import Profiler
 from .plugin import XbmcPlugin
@@ -36,9 +41,10 @@ def run(context=_context,
         plugin=_plugin,
         provider=_provider,
         profiler=_profiler):
-    gc.disable()
-    if context.get_ui().pop_property(CHECK_SETTINGS):
-        provider.reset_client()
+    ui = context.get_ui()
+
+    if ui.pop_property(CHECK_SETTINGS):
+        provider.reset_client(context=context)
         settings = context.get_settings(refresh=True)
     else:
         settings = context.get_settings()
@@ -59,39 +65,46 @@ def run(context=_context,
         log.verbose_logging = False
         profiler.disable()
 
+    old_path = context.get_path().rstrip('/')
+    old_uri = ui.get_container_info(FOLDER_URI, container_id=None)
+    old_handle = context.get_handle()
+    context.init()
     current_path = context.get_path().rstrip('/')
     current_params = context.get_original_params()
     current_handle = context.get_handle()
-    context.init()
-    new_path = context.get_path().rstrip('/')
-    new_params = context.get_original_params()
-    new_handle = context.get_handle()
-
-    forced = False
-    if new_handle != -1:
-        if current_path == PATHS.PLAY:
-            forced = True
-        elif current_path == new_path:
-            if current_path:
-                if current_params == new_params:
-                    forced = True
-        # The following conditions will be true in some forced refresh scenarios
-        # e.g. addon disabling/enabling, but will also be true for a number of
-        # non-forced refreshes such as when a new language invoker thread starts
-        # for a non-plugin context.
-        #     elif not current_params:
-        #         forced = True
-        # elif current_handle == -1 and not current_path and not current_params:
-        #     forced = True
 
     new_params = {}
+    new_kwargs = {}
+
+    params = context.get_params()
+    refresh = context.refresh_requested(params=params)
+    was_playing = old_path == PATHS.PLAY
+    is_same_path = current_path == old_path and old_handle != -1
+
+    if was_playing or is_same_path or refresh:
+        old_path, old_params = context.parse_uri(
+            old_uri,
+            parse_params=False,
+        )
+        old_path = old_path.rstrip('/')
+        is_same_path = current_path == old_path
+        if was_playing and current_handle != -1:
+            forced = True
+        elif is_same_path and current_params == old_params:
+            forced = True
+        else:
+            forced = False
+    else:
+        forced = False
+
     if forced:
-        refresh = context.refresh_requested(force=True, off=True)
+        refresh = context.refresh_requested(force=True, off=True, params=params)
         new_params['refresh'] = refresh if refresh else 0
+
     if new_params:
         context.set_params(**new_params)
 
-    log_params = context.get_params().copy()
+    log_params = params.copy()
     for key in ('api_key', 'client_id', 'client_secret'):
         if key in log_params:
             log_params[key] = '<redacted>'
@@ -101,20 +114,28 @@ def run(context=_context,
               'Kodi:   v{kodi}',
               'Python: v{python}',
               'Handle: {handle}',
-              'Path:   {path!r}',
+              'Path:   {path!r} ({path_link})',
               'Params: {params!r}',
               'Forced: {forced!r}'),
              version=context.get_version(),
              kodi=str(system_version),
              python=system_version.get_python_version(),
-             handle=new_handle,
-             path=new_path,
+             handle=current_handle,
+             path=current_path,
+             path_link='linked' if is_same_path else 'new',
              params=log_params,
              forced=forced)
 
-    plugin.run(provider, context, forced=forced)
-
-    if log_level:
-        profiler.print_stats()
-    gc.enable()
-    gc.collect()
+    gc_threshold = gc.get_threshold()
+    gc.set_threshold(0)
+    try:
+        plugin.run(provider,
+                   context,
+                   forced=forced,
+                   is_same_path=is_same_path,
+                   **new_kwargs)
+    finally:
+        if log_level:
+            profiler.print_stats()
+        gc.collect()
+        gc.set_threshold(*gc_threshold)

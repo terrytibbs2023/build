@@ -14,8 +14,8 @@ import os
 
 from .. import logging
 from ..compatibility import (
-    default_quote,
     parse_qsl,
+    quote,
     string_type,
     to_str,
     unquote,
@@ -23,21 +23,48 @@ from ..compatibility import (
     urlsplit,
 )
 from ..constants import (
+    ACTION,
+    ADDON_ID_PARAM,
     BOOL_FROM_STR,
     CHANNEL_ID,
+    CHANNEL_IDS,
+    CLIP,
     CONTEXT_MENU,
+    END,
+    FANART_TYPE,
+    HIDE_CHANNELS,
+    HIDE_FOLDERS,
+    HIDE_LIVE,
+    HIDE_MEMBERS,
+    HIDE_NEXT_PAGE,
+    HIDE_PLAYLISTS,
+    HIDE_PROGRESS,
+    HIDE_SEARCH,
+    HIDE_SHORTS,
+    HIDE_VIDEOS,
+    INCOGNITO,
+    ITEMS_PER_PAGE,
+    ITEM_FILTER,
     KEYMAP,
+    LIVE,
+    ORDER,
+    PAGE,
     PATHS,
-    PLAYLIST_ITEM_ID,
     PLAYLIST_ID,
+    PLAYLIST_IDS,
+    PLAYLIST_ITEM_ID,
     PLAY_FORCE_AUDIO,
     PLAY_PROMPT_QUALITY,
     PLAY_PROMPT_SUBTITLES,
     PLAY_STRM,
     PLAY_TIMESHIFT,
     PLAY_USING,
+    SCREENSAVER,
+    SEEK,
+    START,
     SUBSCRIPTION_ID,
     VIDEO_ID,
+    VIDEO_IDS,
     WINDOW_CACHE,
     WINDOW_FALLBACK,
     WINDOW_REPLACE,
@@ -73,55 +100,57 @@ class AbstractContext(object):
         PLAY_TIMESHIFT,
         PLAY_USING,
         'confirmed',
-        'clip',
+        CLIP,
         'enable',
-        'hide_folders',
-        'hide_live',
-        'hide_next_page',
-        'hide_playlists',
-        'hide_progress',
-        'hide_search',
-        'hide_shorts',
-        'hide_videos',
-        'incognito',
+        HIDE_CHANNELS,
+        HIDE_FOLDERS,
+        HIDE_LIVE,
+        HIDE_MEMBERS,
+        HIDE_NEXT_PAGE,
+        HIDE_PLAYLISTS,
+        HIDE_PROGRESS,
+        HIDE_SEARCH,
+        HIDE_SHORTS,
+        HIDE_VIDEOS,
+        INCOGNITO,
         'location',
         'logged_in',
         'resume',
-        'screensaver',
+        SCREENSAVER,
         WINDOW_CACHE,
         WINDOW_FALLBACK,
         WINDOW_REPLACE,
         WINDOW_RETURN,
     ))
     _INT_PARAMS = frozenset((
-        'fanart_type',
+        FANART_TYPE,
         'filtered',
-        'items_per_page',
-        'live',
+        ITEMS_PER_PAGE,
+        LIVE,
         'next_page_token',
-        'page',
+        PAGE,
         'refresh',
     ))
     _INT_BOOL_PARAMS = frozenset((
         'refresh',
     ))
     _FLOAT_PARAMS = frozenset((
-        'end',
+        END,
         'recent_days',
-        'seek',
-        'start',
+        SEEK,
+        START,
     ))
     _LIST_PARAMS = frozenset((
-        'channel_ids',
+        CHANNEL_IDS,
         'exclude',
-        'item_filter',
-        'playlist_ids',
-        'video_ids',
+        ITEM_FILTER,
+        PLAYLIST_IDS,
+        VIDEO_IDS,
     ))
     _STRING_PARAMS = frozenset((
         'api_key',
-        'action',
-        'addon_id',
+        ACTION,
+        ADDON_ID_PARAM,
         'category_label',
         CHANNEL_ID,
         'client_id',
@@ -131,7 +160,7 @@ class AbstractContext(object):
         'item',
         'item_id',
         'item_name',
-        'order',
+        ORDER,
         'page_token',
         'parent_id',
         'playlist',  # deprecated
@@ -148,6 +177,7 @@ class AbstractContext(object):
         'visitor',
     ))
     _STRING_BOOL_PARAMS = frozenset((
+        'logged_in',
         'reload_path',
     ))
     _STRING_INT_PARAMS = frozenset((
@@ -180,7 +210,7 @@ class AbstractContext(object):
             self.parse_params(params)
 
         self._uri = None
-        self._path = path
+        self._path = None
         self._path_parts = []
         self.set_path(path, force=True)
 
@@ -357,7 +387,7 @@ class AbstractContext(object):
                 params = urlencode([
                     (
                         ('%' + param,
-                         ','.join([default_quote(item) for item in value]))
+                         ','.join([quote(item) for item in value]))
                         if len(value) > 1 else
                         (param, value[0])
                     )
@@ -369,7 +399,14 @@ class AbstractContext(object):
 
         command = 'command://' if command else ''
         if run:
-            return ''.join((command, 'RunPlugin(', uri, ')'))
+            return ''.join((command,
+                            'RunAddon('
+                            if run == 'addon' else
+                            'RunScript('
+                            if run == 'script' else
+                            'RunPlugin(',
+                            uri,
+                            ')'))
         if play is not None:
             return ''.join((
                 command,
@@ -380,15 +417,32 @@ class AbstractContext(object):
         if window:
             if not isinstance(window, dict):
                 window = {}
-            window_replace = window.setdefault('replace', False)
-            window_return = window.setdefault('return', True)
+            if window.setdefault('refresh', False):
+                method = 'Container.Refresh('
+                if not window.setdefault('replace', False):
+                    uri = ''
+                history_replace = False
+                window_return = False
+            elif window.setdefault('update', False):
+                method = 'Container.Update('
+                history_replace = window.setdefault('replace', False)
+                window_return = False
+            else:
+                history_replace = False
+                window_name = window.setdefault('name', 'Videos')
+                if window.setdefault('replace', False):
+                    method = 'ReplaceWindow(%s,' % window_name
+                    window_return = window.setdefault('return', False)
+                else:
+                    method = 'ActivateWindow(%s,' % window_name
+                    window_return = window.setdefault('return', True)
             return ''.join((
                 command,
-                'ReplaceWindow(Videos,'
-                if window_replace else
-                'ActivateWindow(Videos,',
+                method,
                 uri,
-                ',return)' if window_return else ')',
+                ',return' if window_return else '',
+                ',replace' if history_replace else '',
+                ')'
             ))
         return uri
 
@@ -398,11 +452,16 @@ class AbstractContext(object):
     @staticmethod
     def create_path(*args, **kwargs):
         include_parts = kwargs.get('parts')
+        parser = kwargs.get('parser')
         parts = [
-            part for part in [
+            parser(part[6:-1])
+            if parser and part.startswith('$INFO[') else
+            part
+            for part in [
                 to_str(arg).strip('/').replace('\\', '/').replace('//', '/')
                 for arg in args
-            ] if part
+            ]
+            if part
         ]
         if parts:
             path = '/'.join(parts).join(('/', '/'))
@@ -412,13 +471,18 @@ class AbstractContext(object):
                 parts = []
             elif path.startswith(PATHS.GOTO_PAGE):
                 parts = parts[2:]
-                if parts and parts[0].isnumeric():
-                    parts = parts[1:]
+                if parts:
+                    try:
+                        int(parts[0])
+                    except (TypeError, ValueError):
+                        pass
+                    else:
+                        parts = parts[1:]
         else:
             return ('/', parts) if include_parts else '/'
 
         if kwargs.get('is_uri'):
-            path = default_quote(path)
+            path = quote(path)
         return (path, parts) if include_parts else path
 
     def get_path(self):
@@ -430,7 +494,11 @@ class AbstractContext(object):
             path = unquote(path[0])
             if parts is None:
                 path = path.split('/')
-                path, parts = self.create_path(*path, parts=True)
+                path, parts = self.create_path(
+                    *path,
+                    parts=True,
+                    parser=kwargs.get('parser')
+                )
         else:
             path, parts = self.create_path(*path, parts=True)
 
@@ -448,19 +516,25 @@ class AbstractContext(object):
     def get_param(self, name, default=None):
         return self._params.get(name, default)
 
-    def parse_uri(self, uri, update=False):
+    def pop_param(self, name, default=None):
+        return self._params.pop(name, default)
+
+    def parse_uri(self, uri, parse_params=True, update=False):
         uri = urlsplit(uri)
         path = uri.path
-        params = self.parse_params(
-            dict(parse_qsl(uri.query, keep_blank_values=True)),
-            update=False,
-        )
-        if update:
-            self._params = params
-            self.set_path(path)
+        if parse_params:
+            params = self.parse_params(
+                dict(parse_qsl(uri.query, keep_blank_values=True)),
+                update=False,
+            )
+            if update:
+                self._params = params
+                self.set_path(path)
+        else:
+            params = uri.query
         return path, params
 
-    def parse_params(self, params, update=True):
+    def parse_params(self, params, update=True, parser=None):
         to_delete = []
         output = self._params if update else {}
 
@@ -470,7 +544,12 @@ class AbstractContext(object):
                 value = unquote(value)
             try:
                 if param in self._BOOL_PARAMS:
-                    parsed_value = BOOL_FROM_STR.get(str(value), False)
+                    parsed_value = BOOL_FROM_STR.get(
+                        str(value),
+                        bool(value)
+                        if param in self._STRING_BOOL_PARAMS else
+                        False
+                    )
                 elif param in self._INT_PARAMS:
                     parsed_value = int(
                         (BOOL_FROM_STR.get(str(value), value) or 0)
@@ -486,16 +565,19 @@ class AbstractContext(object):
                         [unquote(val) for val in value.split(',') if val]
                     )
                 elif param in self._STRING_PARAMS:
-                    parsed_value = to_str(value)
-                    if parsed_value.startswith('$INFO['):
-                        parsed_value = self.get_infolabel(parsed_value)
+                    if parser and value.startswith('$INFO['):
+                        parsed_value = parser(value[6:-1])
+                    else:
+                        parsed_value = value
                     if param in self._STRING_BOOL_PARAMS:
                         parsed_value = BOOL_FROM_STR.get(
                             parsed_value, parsed_value
                         )
                     elif param in self._STRING_INT_PARAMS:
-                        if parsed_value.isdigit():
+                        try:
                             parsed_value = int(parsed_value)
+                        except (TypeError, ValueError):
+                            pass
                     # process and translate deprecated parameters
                     elif param == 'action':
                         if parsed_value in {'play_all', 'play_video'}:
@@ -504,27 +586,24 @@ class AbstractContext(object):
                             continue
                     elif param == 'videoid':
                         to_delete.append(param)
-                        param = 'video_id'
+                        param = VIDEO_ID
                     elif params == 'playlist':
                         to_delete.append(param)
-                        param = 'playlist_id'
+                        param = PLAYLIST_ID
                 elif param in self._NON_EMPTY_STRING_PARAMS:
-                    parsed_value = to_str(value)
-                    parsed_value = BOOL_FROM_STR.get(
-                        parsed_value, parsed_value
-                    )
+                    parsed_value = BOOL_FROM_STR.get(value, value)
                     if not parsed_value:
                         raise ValueError
                 else:
-                    self.log.debug('Unknown parameter - {param!r}: {value!r}',
+                    self.log.debug('Unknown parameter {param!r}: {value!r}',
                                    param=param,
                                    value=value)
                     to_delete.append(param)
                     continue
             except (TypeError, ValueError):
-                self.log.error('Invalid parameter value - {param!r}: {value!r}',
-                               param=param,
-                               value=value)
+                self.log.exception('Invalid value for {param!r}: {value!r}',
+                                   param=param,
+                                   value=value)
                 to_delete.append(param)
                 continue
 
@@ -602,37 +681,17 @@ class AbstractContext(object):
                 wait=False,
                 wait_for=None,
                 wait_for_set=True,
-                block_ui=False):
+                block_ui=None):
         raise NotImplementedError()
 
     @staticmethod
     def sleep(timeout=None):
         raise NotImplementedError()
 
-    @staticmethod
-    def get_infobool(name):
-        raise NotImplementedError()
-
-    @staticmethod
-    def get_infolabel(name):
-        raise NotImplementedError()
-
-    @staticmethod
-    def get_listitem_bool(detail_name):
-        raise NotImplementedError()
-
-    @staticmethod
-    def get_listitem_property(detail_name):
-        raise NotImplementedError()
-
-    @staticmethod
-    def get_listitem_info(detail_name):
-        raise NotImplementedError()
-
     def tear_down(self):
         pass
 
-    def ipc_exec(self, target, timeout=None, payload=None):
+    def ipc_exec(self, target, timeout=None, payload=None, raise_exc=False):
         raise NotImplementedError()
 
     @staticmethod
@@ -641,3 +700,8 @@ class AbstractContext(object):
 
     def refresh_requested(self, force=False, on=False, off=False, params=None):
         raise NotImplementedError
+
+    def parse_item_ids(self,
+                       uri=None,
+                       from_listitem=True):
+        raise NotImplementedError()

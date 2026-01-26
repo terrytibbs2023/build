@@ -15,7 +15,7 @@ from functools import partial
 from re import compile as re_compile
 from weakref import proxy
 
-from .client import YouTube
+from .client import YouTubePlayerClient
 from .helper import (
     ResourceManager,
     UrlResolver,
@@ -36,7 +36,20 @@ from ..kodion.constants import (
     ADDON_ID,
     CHANNEL_ID,
     CONTENT,
+    HIDE_CHANNELS,
+    HIDE_FOLDERS,
+    HIDE_LIVE,
+    HIDE_MEMBERS,
+    HIDE_PLAYLISTS,
+    HIDE_SEARCH,
+    HIDE_SHORTS,
+    HIDE_VIDEOS,
+    INCOGNITO,
+    PAGE,
     PATHS,
+    PLAYLIST_ID,
+    PLAY_COUNT,
+    VIDEO_ID,
 )
 from ..kodion.items import (
     BaseItem,
@@ -49,8 +62,7 @@ from ..kodion.items import (
     menu_items,
 )
 from ..kodion.utils.convert_format import strip_html_from_text, to_unicode
-from ..kodion.utils.datetime_parser import now, since_epoch
-from ..kodion.utils.methods import parse_item_ids
+from ..kodion.utils.datetime import now, since_epoch
 
 
 class Provider(AbstractProvider):
@@ -61,30 +73,35 @@ class Provider(AbstractProvider):
         self._resource_manager = None
         self._client = None
 
-        self.on_video_x = self.register_path(
-            '^/video/(?P<command>[^/]+)/?$',
-            yt_video.process,
-        )
+        self.on_video_x = self.register_path(r''.join((
+            '^',
+            PATHS.VIDEO,
+            '/(?P<command>[^/]+)/?$',
+        )), yt_video.process)
 
-        self.on_playlist_x = self.register_path(
-            '^/playlist/(?P<command>[^/]+)/(?P<category>[^/]+)/?$',
-            yt_playlist.process,
-        )
+        self.on_playlist_x = self.register_path(r''.join((
+            '^',
+            PATHS.PLAYLIST,
+            '/(?P<command>[^/]+)/(?P<category>[^/]+)/?$',
+        )), yt_playlist.process)
 
-        self.register_path(
-            '^/play/?$',
-            yt_play.process,
-        )
+        self.register_path(r''.join((
+            '^',
+            PATHS.PLAY,
+            '/?$',
+        )), yt_play.process)
 
-        self.on_specials_x = self.register_path(
-            '^/special/(?P<category>[^/]+)(?:/(?P<sub_category>[^/]+))?/?$',
-            yt_specials.process,
-        )
+        self.on_specials_x = self.register_path(r''.join((
+            '^',
+            PATHS.SPECIAL,
+            '/(?P<category>[^/]+)(?:/(?P<sub_category>[^/]+))?/?$',
+        )), yt_specials.process)
 
-        self.register_path(
-            '^/subscriptions/(?P<command>[^/]+)/?$',
-            yt_subscriptions.process,
-        )
+        self.register_path(r''.join((
+            '^',
+            PATHS.SUBSCRIPTIONS,
+            '/(?P<command>[^/]+)/?$',
+        )), yt_subscriptions.process)
 
         atexit_register(self.tear_down)
 
@@ -98,12 +115,27 @@ class Provider(AbstractProvider):
 
     def reset_client(self, **kwargs):
         if self._client:
-            kwargs.setdefault('configs', {})
-            kwargs.setdefault('access_token', '')
-            kwargs.setdefault('access_token_tv', '')
+            kwargs.setdefault(
+                'configs',
+                {
+                    'dev': {},
+                    'user': {},
+                    'tv': {},
+                    'vr': {},
+                }
+            )
+            kwargs.setdefault(
+                'access_tokens',
+                {
+                    'dev': None,
+                    'user': None,
+                    'tv': None,
+                    'vr': None,
+                }
+            )
             self._client.reinit(**kwargs)
 
-    def get_client(self, context):
+    def get_client(self, context, refresh=False):
         access_manager = context.get_access_manager()
         api_store = context.get_api_store()
         settings = context.get_settings()
@@ -129,7 +161,7 @@ class Provider(AbstractProvider):
                                 'Config:  {config!r}',
                                 'User #:  {user!r}',
                                 'Key set: {switch!r}'),
-                               config=configs['main']['system'],
+                               config=configs['user']['system'],
                                user=user,
                                switch=switch)
             else:
@@ -138,9 +170,9 @@ class Provider(AbstractProvider):
         else:
             dev_config = api_store.get_developer_config(dev_id)
             origin = dev_config.get('origin')
-            key_details = dev_config.get('main')
+            key_details = dev_config.get(origin)
             if key_details:
-                configs['main'] = key_details
+                configs[origin] = key_details
                 switch = 'developer'
                 self.log.debug(('Using developer provided API details',
                                 'Config:  {config!r}',
@@ -150,7 +182,7 @@ class Provider(AbstractProvider):
                                user=user,
                                switch=switch)
             else:
-                key_details = configs['main']
+                key_details = configs['dev']
                 switch = api_store.get_current_switch()
                 self.log.debug(('Using developer provided access tokens',
                                 'Config:  {config!r}',
@@ -161,11 +193,10 @@ class Provider(AbstractProvider):
                                switch=switch)
 
         if not client:
-            client = YouTube(
+            client = YouTubePlayerClient(
                 context=context,
                 language=settings.get_language(),
                 region=settings.get_region(),
-                items_per_page=settings.items_per_page(),
                 configs=configs,
             )
             self._client = client
@@ -197,7 +228,7 @@ class Provider(AbstractProvider):
                           old=api_last_origin,
                           new=origin)
             access_manager.set_last_origin(origin)
-            self.reset_client()
+            client.initialised = False
 
         if not client.initialised:
             self.reset_client(
@@ -208,17 +239,19 @@ class Provider(AbstractProvider):
                 configs=configs,
             )
 
-        num_access_tokens, expired = access_manager.access_token_status(dev_id)
-        if num_access_tokens:
-            if expired:
-                num_access_tokens = 0
-            elif client.logged_in:
-                self.log.debug('User is logged in')
-                return client
+        (
+            access_tokens,
+            num_access_tokens,
+            _,
+        ) = access_manager.get_access_tokens(dev_id)
+        (
+            refresh_tokens,
+            num_refresh_tokens,
+        ) = access_manager.get_refresh_tokens(dev_id)
 
-        refresh_tokens = access_manager.get_refresh_token(dev_id)
-        num_refresh_tokens = len([1 for token in refresh_tokens if token])
-
+        if num_access_tokens and client.logged_in:
+            self.log.debug('User is %s logged in', client.logged_in)
+            return client
         if num_access_tokens or num_refresh_tokens:
             self.log.debug(('# Access tokens:  %d',
                             '# Refresh tokens: %d'),
@@ -229,10 +262,17 @@ class Provider(AbstractProvider):
             access_manager.update_access_token(dev_id, access_token='')
             return client
 
+        # create new access tokens
         with client:
-            # create new access tokens
+            function_cache = context.get_function_cache()
+            if not function_cache.run(
+                    client.internet_available,
+                    function_cache.ONE_MINUTE * 5,
+                    _refresh=refresh or context.refresh_requested(),
+            ):
+                num_refresh_tokens = 0
             if num_refresh_tokens and num_access_tokens != num_refresh_tokens:
-                access_tokens = [None, None]
+                access_tokens = [None, None, None, None]
                 token_expiry = 0
                 try:
                     for token_type, value in enumerate(refresh_tokens):
@@ -273,18 +313,7 @@ class Provider(AbstractProvider):
                         access_token='',
                         refresh_token=refresh_token,
                     )
-
-                num_access_tokens = len([1 for token in access_tokens if token])
-            else:
-                access_tokens = access_manager.get_access_token()
-
-            if num_access_tokens and access_tokens[1]:
-                self.log.info('User is logged in')
-                client.set_access_token(*access_tokens)
-            else:
-                self.log.info('User is not logged in')
-                client.set_access_token(tv='', user='')
-
+            client.set_access_token(access_tokens)
         return client
 
     def get_resource_manager(self, context, progress_dialog=None):
@@ -329,8 +358,9 @@ class Provider(AbstractProvider):
                                                 context=context,
                                                 skip_title=skip_title)
         if items:
-            return (items if listing else items[0]), None
-
+            if listing:
+                return items, None
+            return items[0], {provider.FORCE_RESOLVE: True}
         return [], None
 
     @AbstractProvider.register_path(
@@ -345,9 +375,9 @@ class Provider(AbstractProvider):
 
         * CHANNEL_ID: YouTube Channel ID
         """
-        channel_id = re_match.group('channel_id')
+        channel_id = re_match.group(CHANNEL_ID)
         new_params = {
-            'channel_id': channel_id,
+            CHANNEL_ID: channel_id,
         }
         context.parse_params(new_params)
         params = context.get_params()
@@ -355,7 +385,7 @@ class Provider(AbstractProvider):
         resource_manager = provider.get_resource_manager(context)
         playlists = resource_manager.get_related_playlists(channel_id)
         uploads = playlists.get('uploads') if playlists else None
-        if (params.get('page', 1) == 1 and not params.get('hide_folders')
+        if (params.get(PAGE, 1) == 1 and not params.get(HIDE_FOLDERS)
                 and uploads and uploads.startswith('UU')):
             result = [
                 {
@@ -370,9 +400,12 @@ class Provider(AbstractProvider):
                     },
                     '_available': True,
                     '_partial': True,
+                    '_params': {
+                        'special_sort': 'top',
+                    },
                 },
                 {
-                    'kind': 'youtube#playlist',
+                    'kind': 'youtube#playlistShortsFolder',
                     'id': uploads.replace('UU', 'UUSH', 1),
                     'snippet': {
                         'channelId': channel_id,
@@ -382,9 +415,12 @@ class Provider(AbstractProvider):
                         }},
                     },
                     '_partial': True,
-                },
+                    '_params': {
+                        'special_sort': 'top',
+                    },
+                } if not params.get(HIDE_SHORTS) else None,
                 {
-                    'kind': 'youtube#playlist',
+                    'kind': 'youtube#playlistLiveFolder',
                     'id': uploads.replace('UU', 'UULV', 1),
                     'snippet': {
                         'channelId': channel_id,
@@ -394,7 +430,10 @@ class Provider(AbstractProvider):
                         }},
                     },
                     '_partial': True,
-                },
+                    '_params': {
+                        'special_sort': 'top',
+                    },
+                } if not params.get(HIDE_LIVE) else None,
             ]
         else:
             result = False
@@ -418,10 +457,14 @@ class Provider(AbstractProvider):
         }
         return result, options
 
-    @AbstractProvider.register_path(
-        r'^/channel/(?P<channel_id>[^/]+)'
-        r'/(?:live|playlist/(?P<playlist_id>UULV[^/]+))/?$'
-    )
+    @AbstractProvider.register_path(r''.join((
+            '^',
+            PATHS.CHANNEL,
+            '/(?P<', CHANNEL_ID, '>[^/]+)',
+            '(?:/live|',
+            PATHS.PLAYLIST,
+            '/(?P<', PLAYLIST_ID, '>UULV[^/]+))/?$',
+    )))
     @staticmethod
     def on_channel_live(provider,
                         context,
@@ -443,8 +486,8 @@ class Provider(AbstractProvider):
         resource_manager = provider.get_resource_manager(context)
 
         if re_match:
-            channel_id = re_match.group('channel_id')
-            playlist_id = re_match.group('playlist_id')
+            channel_id = re_match.group(CHANNEL_ID)
+            playlist_id = re_match.group(PLAYLIST_ID)
             if not playlist_id:
                 playlists = resource_manager.get_related_playlists(channel_id)
                 playlist_id = playlists.get('uploads') if playlists else None
@@ -454,8 +497,8 @@ class Provider(AbstractProvider):
             return False, None
 
         new_params = {
-            'channel_id': channel_id,
-            'playlist_id': playlist_id,
+            CHANNEL_ID: channel_id,
+            PLAYLIST_ID: playlist_id,
         }
         context.parse_params(new_params)
 
@@ -522,10 +565,14 @@ class Provider(AbstractProvider):
         }
         return result, options
 
-    @AbstractProvider.register_path(
-        r'^/channel/(?P<channel_id>[^/]+)'
-        r'/(?:shorts|playlist/(?P<playlist_id>UUSH[^/]+))/?$'
-    )
+    @AbstractProvider.register_path(r''.join((
+            '^',
+            PATHS.CHANNEL,
+            '/(?P<', CHANNEL_ID, '>[^/]+)',
+            '(?:/shorts|',
+            PATHS.PLAYLIST,
+            '/(?P<', PLAYLIST_ID, '>UUSH[^/]+))/?$',
+    )))
     @staticmethod
     def on_channel_shorts(provider,
                           context,
@@ -547,8 +594,8 @@ class Provider(AbstractProvider):
         resource_manager = provider.get_resource_manager(context)
 
         if re_match:
-            channel_id = re_match.group('channel_id')
-            playlist_id = re_match.group('playlist_id')
+            channel_id = re_match.group(CHANNEL_ID)
+            playlist_id = re_match.group(PLAYLIST_ID)
             if not playlist_id:
                 playlists = resource_manager.get_related_playlists(channel_id)
                 playlist_id = playlists.get('uploads') if playlists else None
@@ -558,8 +605,8 @@ class Provider(AbstractProvider):
             return False, None
 
         new_params = {
-            'channel_id': channel_id,
-            'playlist_id': playlist_id,
+            CHANNEL_ID: channel_id,
+            PLAYLIST_ID: playlist_id,
         }
         context.parse_params(new_params)
 
@@ -583,10 +630,13 @@ class Provider(AbstractProvider):
         }
         return result, options
 
-    @AbstractProvider.register_path(
-        r'^(?:/channel/(?P<channel_id>[^/]+))?'
-        r'/playlist/(?P<playlist_id>[^/]+)/?$'
-    )
+    @AbstractProvider.register_path(r''.join((
+            '^(?:',
+            PATHS.CHANNEL,
+            '/(?P<', CHANNEL_ID, '>[^/]+))?',
+            PATHS.PLAYLIST,
+            '/(?P<', PLAYLIST_ID, '>[^/]+)/?$',
+    )))
     @staticmethod
     def on_playlist(provider, context, re_match):
         """
@@ -601,13 +651,13 @@ class Provider(AbstractProvider):
         * CHANNEL_ID: ['mine'|YouTube Channel ID]
         * PLAYLIST_ID: YouTube Playlist ID
         """
-        playlist_id = re_match.group('playlist_id')
+        playlist_id = re_match.group(PLAYLIST_ID)
         new_params = {
-            'playlist_id': playlist_id,
+            PLAYLIST_ID: playlist_id,
         }
-        channel_id = re_match.group('channel_id')
+        channel_id = re_match.group(CHANNEL_ID)
         if channel_id:
-            new_params['channel_id'] = channel_id
+            new_params[CHANNEL_ID] = channel_id
         context.parse_params(new_params)
 
         resource_manager = provider.get_resource_manager(context)
@@ -621,7 +671,7 @@ class Provider(AbstractProvider):
         options = {
             provider.CONTENT_TYPE: {
                 'content_type': CONTENT.VIDEO_CONTENT,
-                'sub_type': None,
+                'sub_type': CONTENT.PLAYLIST,
                 'category_label': None,
             },
         }
@@ -640,7 +690,7 @@ class Provider(AbstractProvider):
         * ID_TYPE: channel|handle|user
         * ID: YouTube ID
         """
-        listitem_channel_id = context.get_listitem_property(CHANNEL_ID)
+        li_channel_id = context.get_ui().get_listitem_property(CHANNEL_ID)
 
         client = provider.get_client(context)
         create_uri = context.create_uri
@@ -652,11 +702,11 @@ class Provider(AbstractProvider):
         if (command == 'channel'
                 and identifier
                 and identifier.lower() == 'property'
-                and listitem_channel_id
-                and listitem_channel_id.lower().startswith(('mine', 'uc'))):
+                and li_channel_id
+                and li_channel_id.lower().startswith(('mine', 'uc'))):
             context.execute('ActivateWindow(Videos, {channel}, return)'.format(
                 channel=create_uri(
-                    (PATHS.CHANNEL, listitem_channel_id,),
+                    (PATHS.CHANNEL, li_channel_id,),
                 )
             ))
 
@@ -691,7 +741,7 @@ class Provider(AbstractProvider):
                 return False
 
         context.parse_params({
-            'channel_id': channel_id,
+            CHANNEL_ID: channel_id,
         })
 
         resource_manager = provider.get_resource_manager(context)
@@ -709,28 +759,30 @@ class Provider(AbstractProvider):
         if uploads and not uploads.startswith('UU'):
             uploads = None
 
-        if params.get('page', 1) == 1 and not params.get('hide_folders'):
+        if params.get(PAGE, 1) == 1 and not params.get(HIDE_FOLDERS):
             v3_response = {
                 'kind': 'plugin#pluginListResponse',
                 'items': [
                     {
-                        'kind': 'plugin#playlistFolder',
+                        'kind': 'plugin#playlistsFolder',
                         '_params': {
                             'title': context.localize('playlists'),
                             'image': '{media}/playlist.png',
-                            'channel_id': channel_id,
+                            CHANNEL_ID: channel_id,
+                            'special_sort': 'top',
                         },
-                    } if not params.get('hide_playlists') else None,
+                    } if not params.get(HIDE_PLAYLISTS) else None,
                     {
                         'kind': 'plugin#searchFolder',
                         '_params': {
                             'title': context.localize('search'),
                             'image': '{media}/search.png',
-                            'channel_id': channel_id,
+                            CHANNEL_ID: channel_id,
+                            'special_sort': 'top',
                         },
-                    } if not params.get('hide_search') else None,
+                    } if not params.get(HIDE_SEARCH) else None,
                     {
-                        'kind': 'youtube#playlist',
+                        'kind': 'youtube#playlistShortsFolder',
                         'id': uploads.replace('UU', 'UUSH', 1),
                         'snippet': {
                             'channelId': channel_id,
@@ -740,9 +792,12 @@ class Provider(AbstractProvider):
                             }},
                         },
                         '_partial': True,
-                    } if uploads and not params.get('hide_shorts') else None,
+                        '_params': {
+                            'special_sort': 'top',
+                        },
+                    } if uploads and not params.get(HIDE_SHORTS) else None,
                     {
-                        'kind': 'youtube#playlist',
+                        'kind': 'youtube#playlistLiveFolder',
                         'id': uploads.replace('UU', 'UULV', 1),
                         'snippet': {
                             'channelId': channel_id,
@@ -752,7 +807,25 @@ class Provider(AbstractProvider):
                             }},
                         },
                         '_partial': True,
-                    } if uploads and not params.get('hide_live') else None,
+                        '_params': {
+                            'special_sort': 'top',
+                        },
+                    } if uploads and not params.get(HIDE_LIVE) else None,
+                    {
+                        'kind': 'youtube#playlistMembersFolder',
+                        'id': uploads.replace('UU', 'UUMO', 1),
+                        'snippet': {
+                            'channelId': channel_id,
+                            'title': context.localize('members_only'),
+                            'thumbnails': {'default': {
+                                'url': '{media}/sign_in.png',
+                            }},
+                        },
+                        '_partial': True,
+                        '_params': {
+                            'special_sort': 'top',
+                        },
+                    } if uploads and not params.get(HIDE_MEMBERS) else None,
                 ],
             }
             result.extend(v3.response_to_items(provider, context, v3_response))
@@ -784,7 +857,7 @@ class Provider(AbstractProvider):
                 return result, options
 
             context.parse_params({
-                'playlist_id': filtered_uploads or uploads,
+                PLAYLIST_ID: filtered_uploads or uploads,
             })
 
             if not filtered_uploads:
@@ -880,28 +953,12 @@ class Provider(AbstractProvider):
     @AbstractProvider.register_path('^/sign/(?P<mode>[^/]+)/?$')
     @staticmethod
     def on_sign_x(provider, context, re_match):
-        confirmed = context.get_param('confirmed')
-        mode = re_match.group('mode')
-        client = provider.get_client(context)
-        if mode == yt_login.SIGN_IN:
-            if client.logged_in:
-                yt_login.process(yt_login.SIGN_OUT,
-                                 provider,
-                                 context,
-                                 client=client,
-                                 refresh=False)
-                client = None
-        elif mode == yt_login.SIGN_OUT:
-            if not confirmed and not context.get_ui().on_yes_no_input(
-                    context.localize('sign.out'),
-                    context.localize('are_you_sure')
-            ):
-                return False
-        else:
-            return False
-
-        yt_login.process(mode, provider, context, client=client)
-        return True
+        return yt_login.process(
+            re_match.group('mode'),
+            provider,
+            context,
+            client=provider.get_client(context, refresh=True),
+        )
 
     def _search_channel_or_playlist(self,
                                     context,
@@ -932,9 +989,9 @@ class Provider(AbstractProvider):
         if query.startswith(('https://', 'http://')):
             return self.on_uri2addon(provider=self, context=context, uri=query)
         if context.is_plugin_path(query):
-            return UriItem(query), {
+            return False, {
                 self.CACHE_TO_DISC: False,
-                self.FALLBACK: False,
+                self.FALLBACK: query,
             }
 
         result = self._search_channel_or_playlist(context, query)
@@ -950,7 +1007,7 @@ class Provider(AbstractProvider):
             }
         result = []
 
-        channel_id = params.get('channel_id') or params.get('channelId')
+        channel_id = params.get(CHANNEL_ID) or params.get('channelId')
         event_type = params.get('event_type') or params.get('eventType')
         location = params.get('location')
         page_token = params.get('page_token') or params.get('pageToken') or ''
@@ -969,8 +1026,9 @@ class Provider(AbstractProvider):
             },
         }
 
-        if params.get('page', 1) == 1 and not params.get('hide_folders'):
-            if event_type or search_type != 'video':
+        if params.get(PAGE, 1) == 1 and not params.get(HIDE_FOLDERS):
+            if ((event_type or search_type != 'video')
+                    and not params.get(HIDE_VIDEOS)):
                 video_params = dict(params,
                                     search_type='video',
                                     event_type='')
@@ -983,7 +1041,10 @@ class Provider(AbstractProvider):
                 )
                 result.append(video_item)
 
-            if not channel_id and not location and search_type != 'channel':
+            if (not channel_id
+                    and not location
+                    and search_type != 'channel'
+                    and not params.get(HIDE_CHANNELS)):
                 channel_params = dict(params,
                                       search_type='channel',
                                       event_type='')
@@ -996,7 +1057,9 @@ class Provider(AbstractProvider):
                 )
                 result.append(channel_item)
 
-            if not location and search_type != 'playlist':
+            if (not location
+                    and search_type != 'playlist'
+                    and not params.get(HIDE_PLAYLISTS)):
                 playlist_params = dict(params,
                                        search_type='playlist',
                                        event_type='')
@@ -1009,7 +1072,9 @@ class Provider(AbstractProvider):
                 )
                 result.append(playlist_item)
 
-            if not channel_id and event_type != 'live':
+            if (not channel_id
+                    and event_type != 'live'
+                    and not params.get(HIDE_LIVE)):
                 live_params = dict(params,
                                    search_type='video',
                                    event_type='live')
@@ -1022,7 +1087,9 @@ class Provider(AbstractProvider):
                 )
                 result.append(live_item)
 
-            if event_type and event_type != 'upcoming':
+            if (event_type
+                    and event_type != 'upcoming'
+                    and not params.get(HIDE_LIVE)):
                 upcoming_params = dict(params,
                                        search_type='video',
                                        event_type='upcoming')
@@ -1035,7 +1102,9 @@ class Provider(AbstractProvider):
                 )
                 result.append(upcoming_item)
 
-            if event_type and event_type != 'completed':
+            if (event_type
+                    and event_type != 'completed'
+                    and not params.get(HIDE_LIVE)):
                 completed_params = dict(params,
                                         search_type='video',
                                         event_type='completed')
@@ -1072,7 +1141,7 @@ class Provider(AbstractProvider):
             return False, None
 
         # Store current search query
-        if not params.get('incognito') and not params.get('channel_id'):
+        if not params.get(INCOGNITO) and not params.get(CHANNEL_ID):
             context.get_search_history().add_item(search_params)
 
         result.extend(v3.response_to_items(
@@ -1148,11 +1217,12 @@ class Provider(AbstractProvider):
                                                'my_subscriptions.filtered')))
         return True, None
 
-    @AbstractProvider.register_path(
-        r'^/maintenance'
-        r'/(?P<action>[^/]+)'
-        r'/(?P<target>[^/]+)/?$'
-    )
+    @AbstractProvider.register_path(r''.join((
+            '^',
+            PATHS.MAINTENANCE,
+            '/(?P<action>[^/]+)',
+            '/(?P<target>[^/]+)/?$',
+    )))
     @staticmethod
     def on_maintenance_actions(provider, context, re_match):
         target = re_match.group('target')
@@ -1172,10 +1242,9 @@ class Provider(AbstractProvider):
                 context.get_name(), localize('reset.access_manager.check')
         ):
             access_manager = context.get_access_manager()
-            success = (
-                    yt_login.process(yt_login.SIGN_OUT, provider, context)
-                    and access_manager.set_defaults(reset=True)
-            )
+            success, _ = yt_login.process(yt_login.SIGN_OUT, provider, context)
+            if success:
+                success = access_manager.set_defaults(reset=True)
             ui.show_notification(localize('succeeded' if success else 'failed'))
         else:
             success = False
@@ -1230,7 +1299,7 @@ class Provider(AbstractProvider):
             options = {
                 provider.CONTENT_TYPE: {
                     'content_type': CONTENT.VIDEO_CONTENT,
-                    'sub_type': 'history',
+                    'sub_type': CONTENT.HISTORY,
                     'category_label': None,
                 },
             }
@@ -1244,18 +1313,16 @@ class Provider(AbstractProvider):
                 return False, {provider.FALLBACK: False}
 
             playback_history.clear()
-            ui.refresh_container()
-
             ui.show_notification(
                 localize('completed'),
                 time_ms=2500,
                 audible=False,
             )
-            return True
+            return True, {provider.FORCE_REFRESH: True}
 
-        video_id = params.get('video_id')
+        video_id = params.get(VIDEO_ID)
         if not video_id:
-            return False
+            return False, None
 
         if command == 'remove':
             video_name = params.get('item_name') or video_id
@@ -1267,14 +1334,12 @@ class Provider(AbstractProvider):
                 return False, {provider.FALLBACK: False}
 
             playback_history.del_item(video_id)
-            ui.refresh_container()
-
             ui.show_notification(
                 localize('removed.name.x', video_name),
                 time_ms=2500,
                 audible=False,
             )
-            return True
+            return True, {provider.FORCE_REFRESH: True}
 
         play_data = playback_history.get_item(video_id)
         if play_data:
@@ -1289,7 +1354,7 @@ class Provider(AbstractProvider):
             }
 
         if command == 'mark_as':
-            if context.get_listitem_info('PlayCount'):
+            if ui.get_listitem_info(PLAY_COUNT):
                 play_data['play_count'] = 0
                 play_data['played_time'] = 0
                 play_data['played_percent'] = 0
@@ -1311,8 +1376,7 @@ class Provider(AbstractProvider):
             play_data['played_percent'] = 0
 
         playback_history_method(video_id, play_data)
-        ui.refresh_container()
-        return True
+        return True, {provider.FORCE_REFRESH: True}
 
     @staticmethod
     def on_root(provider, context, re_match):
@@ -1333,7 +1397,8 @@ class Provider(AbstractProvider):
         }
 
         # sign in
-        if not logged_in and settings_bool(settings.SHOW_SIGN_IN, True):
+        if ((not logged_in or logged_in == 'partially')
+                and settings_bool(settings.SHOW_SIGN_IN, True)):
             item_label = localize('sign.in')
             sign_in_item = DirectoryItem(
                 bold(item_label),
@@ -1435,7 +1500,7 @@ class Provider(AbstractProvider):
         if logged_in and settings_bool(settings.SHOW_MY_CHANNEL, True):
             my_channel_item = DirectoryItem(
                 localize('my_channel'),
-                create_uri((PATHS.CHANNEL, 'mine')),
+                create_uri(PATHS.MY_CHANNEL),
                 image='{media}/user.png',
             )
             result.append(my_channel_item)
@@ -1443,13 +1508,14 @@ class Provider(AbstractProvider):
         # watch later
         if settings_bool(settings.SHOW_WATCH_LATER, True):
             if watch_later_id:
+                path = (
+                    (PATHS.VIRTUAL_PLAYLIST, watch_later_id)
+                    if watch_later_id.lower() == 'wl' else
+                    (PATHS.MY_PLAYLIST, watch_later_id)
+                )
                 watch_later_item = DirectoryItem(
                     localize('watch_later'),
-                    create_uri(
-                        (PATHS.VIRTUAL_PLAYLIST, watch_later_id)
-                        if watch_later_id.lower() == 'wl' else
-                        (PATHS.CHANNEL, 'mine', PATHS.PLAYLIST, watch_later_id)
-                    ),
+                    create_uri(path),
                     image='{media}/watch_later.png',
                 )
                 context_menu = [
@@ -1464,6 +1530,9 @@ class Provider(AbstractProvider):
                     ),
                     menu_items.playlist_shuffle(
                         context, watch_later_id
+                    ),
+                    menu_items.refresh_listing(
+                        context, path, {}
                     ),
                 ]
                 watch_later_item.add_context_menu(context_menu)
@@ -1496,9 +1565,10 @@ class Provider(AbstractProvider):
             playlists = resource_manager.get_related_playlists('mine')
             if playlists and 'likes' in playlists:
                 liked_list_id = playlists['likes'] or 'LL'
+                path = (PATHS.VIRTUAL_PLAYLIST, liked_list_id)
                 liked_videos_item = DirectoryItem(
                     localize('video.liked'),
-                    create_uri((PATHS.VIRTUAL_PLAYLIST, liked_list_id)),
+                    create_uri(path),
                     image='{media}/likes.png',
                 )
                 context_menu = [
@@ -1513,6 +1583,9 @@ class Provider(AbstractProvider):
                     ),
                     menu_items.playlist_shuffle(
                         context, liked_list_id
+                    ),
+                    menu_items.refresh_listing(
+                        context, path, {}
                     ),
                 ]
                 liked_videos_item.add_context_menu(context_menu)
@@ -1530,13 +1603,14 @@ class Provider(AbstractProvider):
         # history
         if settings_bool(settings.SHOW_HISTORY, True):
             if history_id:
+                path = (
+                    (PATHS.VIRTUAL_PLAYLIST, history_id)
+                    if history_id.lower() == 'hl' else
+                    (PATHS.MY_PLAYLIST, history_id)
+                )
                 watch_history_item = DirectoryItem(
                     localize('history'),
-                    create_uri(
-                        (PATHS.VIRTUAL_PLAYLIST, history_id)
-                        if history_id.lower() == 'hl' else
-                        (PATHS.CHANNEL, 'mine', PATHS.PLAYLIST, history_id)
-                    ),
+                    create_uri(path),
                     image='{media}/history.png',
                 )
                 context_menu = [
@@ -1551,6 +1625,9 @@ class Provider(AbstractProvider):
                     ),
                     menu_items.playlist_shuffle(
                         context, history_id
+                    ),
+                    menu_items.refresh_listing(
+                        context, path, {}
                     ),
                 ]
                 watch_history_item.add_context_menu(context_menu)
@@ -1583,9 +1660,7 @@ class Provider(AbstractProvider):
         if logged_in and settings_bool(settings.SHOW_PLAYLISTS, True):
             playlists_item = DirectoryItem(
                 localize('playlists'),
-                create_uri(
-                    (PATHS.CHANNEL, 'mine', 'playlists',),
-                ),
+                create_uri(PATHS.MY_PLAYLISTS),
                 image='{media}/playlist.png',
             )
             result.append(playlists_item)
@@ -1603,7 +1678,7 @@ class Provider(AbstractProvider):
         if logged_in and settings_bool(settings.SHOW_SUBSCRIPTIONS, True):
             subscriptions_item = DirectoryItem(
                 localize('subscriptions'),
-                create_uri(('subscriptions', 'list')),
+                create_uri((PATHS.SUBSCRIPTIONS, 'list')),
                 image='{media}/channels.png',
             )
             result.append(subscriptions_item)
@@ -1637,7 +1712,7 @@ class Provider(AbstractProvider):
         if logged_in and settings_bool(settings.SHOW_BROWSE_CHANNELS, True):
             browse_channels_item = DirectoryItem(
                 localize('browse_channels'),
-                create_uri(('special', 'browse_channels')),
+                create_uri((PATHS.SPECIAL, 'browse_channels')),
                 image='{media}/browse_channels.png',
             )
             result.append(browse_channels_item)
@@ -1716,6 +1791,7 @@ class Provider(AbstractProvider):
 
         ui = context.get_ui()
         localize = context.localize
+        parse_item_ids = context.parse_item_ids
 
         if command in {'list', 'play'}:
             bookmarks_list = context.get_bookmarks_list()
@@ -1822,17 +1898,17 @@ class Provider(AbstractProvider):
                             yt_id = item.video_id
                             continue
 
-                        yt_id = getattr(item, 'playlist_id', None)
+                        yt_id = getattr(item, PLAYLIST_ID, None)
                         if yt_id:
                             kind = 'youtube#playlist'
                             continue
 
-                        yt_id = getattr(item, 'channel_id', None)
+                        yt_id = getattr(item, CHANNEL_ID, None)
                         if yt_id:
                             kind = 'youtube#channel'
                             continue
 
-                    item_ids = parse_item_ids(item_uri)
+                    item_ids = parse_item_ids(item_uri, from_listitem=False)
                     for _kind in ('video', 'playlist', 'channel'):
                         id_type = _kind + '_id'
                         _yt_id = item_ids.get(id_type)
@@ -1896,14 +1972,12 @@ class Provider(AbstractProvider):
                 return False, {provider.FALLBACK: False}
 
             context.get_bookmarks_list().clear()
-            ui.refresh_container()
-
             ui.show_notification(
                 localize('completed'),
                 time_ms=2500,
                 audible=False,
             )
-            return True
+            return True, {provider.FORCE_REFRESH: True}
 
         item_id = params.get('item_id')
 
@@ -1911,10 +1985,10 @@ class Provider(AbstractProvider):
             results = ui.on_keyboard_input(localize('bookmarks.edit.uri'),
                                            params.get('uri', ''))
             if not results[0]:
-                return False
+                return False, None
             item_uri = results[1]
             if not item_uri:
-                return False
+                return False, None
 
             if item_uri.startswith(('https://', 'http://')):
                 item_uri = UrlToItemConverter().process_url(
@@ -1928,12 +2002,12 @@ class Provider(AbstractProvider):
                     time_ms=2500,
                     audible=False,
                 )
-                return False
+                return False, None
 
             results = ui.on_keyboard_input(localize('bookmarks.edit.name'),
                                            params.get('item_name', item_uri))
             if not results[0]:
-                return False
+                return False, None
             item_name = results[1]
 
             item_date_time = now()
@@ -1954,7 +2028,6 @@ class Provider(AbstractProvider):
                 )
                 item.bookmark_id = item_id
                 context.get_bookmarks_list().add_item(item_id, repr(item))
-            ui.refresh_container()
 
             ui.show_notification(
                 localize('updated.x', item_name)
@@ -1963,26 +2036,30 @@ class Provider(AbstractProvider):
                 time_ms=2500,
                 audible=False,
             )
-            return True
+            return True, {provider.FORCE_REFRESH: True}
 
         if not item_id:
-            return False
+            return False, None
 
         if command == 'add':
             item = params.get('item')
             if not item:
-                return False
+                return False, None
 
             context.get_bookmarks_list().add_item(item_id, item)
-            if context.get_path().startswith(PATHS.BOOKMARKS):
-                ui.refresh_container()
-
             ui.show_notification(
                 localize('bookmark.created'),
                 time_ms=2500,
                 audible=False,
             )
-            return True
+            return (
+                True,
+                {
+                    provider.FORCE_REFRESH: context.get_path().startswith(
+                        PATHS.BOOKMARKS
+                    ),
+                },
+            )
 
         if command == 'remove':
             bookmark_name = params.get('item_name') or localize('bookmark')
@@ -1994,16 +2071,14 @@ class Provider(AbstractProvider):
                 return False, {provider.FALLBACK: False}
 
             context.get_bookmarks_list().del_item(item_id)
-            ui.refresh_container()
-
             ui.show_notification(
                 localize('removed.name.x', bookmark_name),
                 time_ms=2500,
                 audible=False,
             )
-            return True
+            return True, {provider.FORCE_REFRESH: True}
 
-        return False
+        return False, None
 
     @staticmethod
     def on_watch_later(provider, context, re_match):
@@ -2062,23 +2137,21 @@ class Provider(AbstractProvider):
                 return False, {provider.FALLBACK: False}
 
             context.get_watch_later_list().clear()
-            ui.refresh_container()
-
             ui.show_notification(
                 localize('completed'),
                 time_ms=2500,
                 audible=False,
             )
-            return True
+            return True, {provider.FORCE_REFRESH: True}
 
-        video_id = params.get('video_id')
+        video_id = params.get(VIDEO_ID)
         if not video_id:
-            return False
+            return False, None
 
         if command == 'add':
             item = params.get('item')
             if not item:
-                return False
+                return False, None
 
             context.get_watch_later_list().add_item(video_id, item)
             ui.show_notification(
@@ -2086,7 +2159,7 @@ class Provider(AbstractProvider):
                 time_ms=2500,
                 audible=False,
             )
-            return True
+            return True, None
 
         if command == 'remove':
             video_name = params.get('item_name') or localize('untitled')
@@ -2098,16 +2171,14 @@ class Provider(AbstractProvider):
                 return False, {provider.FALLBACK: False}
 
             context.get_watch_later_list().del_item(video_id)
-            ui.refresh_container()
-
             ui.show_notification(
                 localize('removed.name.x', video_name),
                 time_ms=2500,
                 audible=False,
             )
-            return True
+            return True, {provider.FORCE_REFRESH: True}
 
-        return False
+        return False, None
 
     def handle_exception(self, context, exception_to_handle):
         if not isinstance(exception_to_handle, (InvalidGrant, LoginException)):
@@ -2171,7 +2242,6 @@ class Provider(AbstractProvider):
         attrs = (
             '_resource_manager',
             '_client',
-            '_api_check',
         )
         for attr in attrs:
             try:

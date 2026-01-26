@@ -10,9 +10,9 @@
 
 from __future__ import absolute_import, division, unicode_literals
 
-import atexit
 import json
 import sys
+from atexit import register as atexit_register
 from timeit import default_timer
 from weakref import proxy
 
@@ -28,10 +28,17 @@ from ...compatibility import (
 from ...constants import (
     ABORT_FLAG,
     ADDON_ID,
+    BUSY_FLAG,
+    CHANNEL_ID,
     CONTENT,
+    FOLDER_NAME,
+    PLAYLIST_ID,
     PLAY_FORCE_AUDIO,
     SERVICE_IPC,
+    SERVICE_RUNNING_FLAG,
     SORT,
+    URI,
+    VIDEO_ID,
 )
 from ...json_store import APIKeyStore, AccessManager
 from ...player import XbmcPlaylistPlayer
@@ -196,6 +203,7 @@ class XbmcContext(AbstractContext):
         'httpd.connect.wait': 13028,
         'httpd.connect.failed': 1001,
         'inputstreamhelper.is_installed': 30625,
+        'internet.connection.required': 21451,
         'isa.enable.check': 30579,
         'key.requirement': 30731,
         'liked.video': 30716,
@@ -213,6 +221,7 @@ class XbmcContext(AbstractContext):
         'maintenance.requests_cache': 30523,
         'maintenance.search_history': 30558,
         'maintenance.watch_later': 30782,
+        'members_only': 30624,
         'my_channel': 30507,
         'my_location': 30654,
         'my_subscriptions': 30510,
@@ -357,6 +366,7 @@ class XbmcContext(AbstractContext):
         'video.comments.likes': 30733,
         'video.comments.replies': 30734,
         'video.description_links': 30544,
+        'video.description_links.from.x': 30118,
         'video.description_links.not_found': 30545,
         'video.disliked': 30538,
         'video.liked': 30508,
@@ -373,6 +383,7 @@ class XbmcContext(AbstractContext):
         'video.rate.like': 30529,
         'video.rate.none': 15015,
         'video.related': 30514,
+        'video.related.to.x': 30113,
         'videos': 3,
         'watch_later': 30107,
         'watch_later.add': 30107,
@@ -450,12 +461,12 @@ class XbmcContext(AbstractContext):
         self._ui = None
         self._playlist = None
 
-        atexit.register(self.tear_down)
+        atexit_register(self.tear_down)
 
     def init(self):
         num_args = len(sys.argv)
         if num_args:
-            uri = sys.argv[0]
+            uri = to_unicode(sys.argv[0])
             if uri.startswith('plugin://'):
                 self._plugin_handle = int(sys.argv[1])
             else:
@@ -466,16 +477,22 @@ class XbmcContext(AbstractContext):
             return
 
         # first the path of the uri
-        self.set_path(urlsplit(uri).path, force=True, update_uri=False)
+        self.set_path(
+            urlsplit(uri).path,
+            force=True,
+            parser=XbmcContextUI.get_infolabel,
+            update_uri=False,
+        )
 
         # after that try to get the params
         if num_args > 2:
-            params = sys.argv[2][1:]
+            params = to_unicode(sys.argv[2][1:])
             self._param_string = params
             self._params = {}
             if params:
                 self.parse_params(
-                    dict(parse_qsl(params, keep_blank_values=True))
+                    dict(parse_qsl(params, keep_blank_values=True)),
+                    parser=XbmcContextUI.get_infolabel,
                 )
 
         # then Kodi resume status
@@ -630,7 +647,7 @@ class XbmcContext(AbstractContext):
             except KeyError:
                 try:
                     _text_id = int(_text_id)
-                except ValueError:
+                except (TypeError, ValueError):
                     _text_id = -1
         if _text_id <= 0:
             msg = 'Undefined string ID: {text_id!r}'
@@ -667,8 +684,9 @@ class XbmcContext(AbstractContext):
                 return result % _args
             except TypeError:
                 self.log.exception(('Localization error',
-                                    'text_id: {text_id!r}',
-                                    'args:    {original_args!r}'),
+                                    'String: {result!r} ({text_id!r})',
+                                    'args:   {original_args!r}'),
+                                   result=result,
                                    text_id=text_id,
                                    original_args=args)
         return result
@@ -685,80 +703,60 @@ class XbmcContext(AbstractContext):
             self.log.debug('Applying content-type: {type!r} for {path!r}',
                            type=(sub_type or content_type),
                            path=self.get_path())
-            xbmcplugin.setContent(self._plugin_handle, content_type)
+            if content_type != 'default':
+                xbmcplugin.setContent(self._plugin_handle, content_type)
 
         if category_label is None:
             category_label = self.get_param('category_label')
         if category_label:
             xbmcplugin.setPluginCategory(self._plugin_handle, category_label)
 
-        # Label mask token details:
-        # https://github.com/xbmc/xbmc/blob/master/xbmc/utils/LabelFormatter.cpp#L33-L105
         detailed_labels = self.get_settings().show_detailed_labels()
-        if sub_type == 'history':
+        if sub_type == CONTENT.HISTORY:
             self.add_sort_method(
-                (SORT.LASTPLAYED,       '%T \u2022 %P',           '%D | %J'),
-                (SORT.PLAYCOUNT,        '%T \u2022 %P',           '%D | %J'),
-                (SORT.UNSORTED,         '%T \u2022 %P',           '%D | %J'),
-                (SORT.LABEL,            '%T \u2022 %P',           '%D | %J'),
-            ) if detailed_labels else self.add_sort_method(
-                (SORT.LASTPLAYED,),
-                (SORT.PLAYCOUNT,),
-                (SORT.UNSORTED,),
-                (SORT.LABEL,),
+                SORT.HISTORY_CONTENT_DETAILED
+                if detailed_labels else
+                SORT.HISTORY_CONTENT_SIMPLE
             )
-        elif sub_type == 'comments':
+        elif sub_type == CONTENT.COMMENTS:
             self.add_sort_method(
-                (SORT.CHANNEL,          '[%A - ]%P \u2022 %T',       '%J'),
-                (SORT.ARTIST,           '[%J - ]%P \u2022 %T',       '%A'),
-                (SORT.PROGRAM_COUNT,    '[%A - ]%P | %J \u2022 %T',  '%C'),
-                (SORT.DATE,             '[%A - ]%P \u2022 %T',       '%J'),
-                (SORT.TRACKNUM,         '[%N. ][%A - ]%P \u2022 %T', '%J'),
-            ) if detailed_labels else self.add_sort_method(
-                (SORT.CHANNEL,          '[%A - ]%T'),
-                (SORT.ARTIST,           '[%A - ]%T'),
-                (SORT.PROGRAM_COUNT,    '[%A - ]%T'),
-                (SORT.DATE,             '[%A - ]%T'),
-                (SORT.TRACKNUM,         '[%N. ][%A - ]%T '),
+                SORT.COMMENTS_CONTENT_DETAILED
+                if detailed_labels else
+                SORT.COMMENTS_CONTENT_SIMPLE
+            )
+        elif sub_type == CONTENT.PLAYLIST:
+            self.add_sort_method(
+                SORT.PLAYLIST_CONTENT_DETAILED
+                if detailed_labels else
+                SORT.PLAYLIST_CONTENT_SIMPLE
+            )
+        elif content_type == CONTENT.VIDEO_CONTENT:
+            self.add_sort_method(
+                SORT.VIDEO_CONTENT_DETAILED
+                if detailed_labels else
+                SORT.VIDEO_CONTENT_SIMPLE
             )
         else:
             self.add_sort_method(
-                (SORT.UNSORTED,         '%T \u2022 %P',           '%D | %J'),
-                (SORT.LABEL,            '%T \u2022 %P',           '%D | %J'),
-            ) if detailed_labels else self.add_sort_method(
-                (SORT.UNSORTED,),
-                (SORT.LABEL,),
-            )
-
-        if content_type == CONTENT.VIDEO_CONTENT:
-            self.add_sort_method(
-                (SORT.CHANNEL,          '[%A - ]%T \u2022 %P',    '%D | %J'),
-                (SORT.ARTIST,           '%T \u2022 %P | %D | %J', '%A'),
-                (SORT.PROGRAM_COUNT,    '%T \u2022 %P | %D | %J', '%C'),
-                (SORT.VIDEO_RATING,     '%T \u2022 %P | %D | %J', '%R'),
-                (SORT.DATE,             '%T \u2022 %P | %D',      '%J'),
-                (SORT.DATEADDED,        '%T \u2022 %P | %D',      '%a'),
-                (SORT.VIDEO_RUNTIME,    '%T \u2022 %P | %J',      '%D'),
-                (SORT.TRACKNUM,         '[%N. ]%T \u2022 %P',     '%D | %J'),
-            ) if detailed_labels else self.add_sort_method(
-                (SORT.CHANNEL,          '[%A - ]%T'),
-                (SORT.ARTIST,),
-                (SORT.PROGRAM_COUNT,),
-                (SORT.VIDEO_RATING,),
-                (SORT.DATE,),
-                (SORT.DATEADDED,),
-                (SORT.VIDEO_RUNTIME,),
-                (SORT.TRACKNUM,         '[%N. ]%T '),
+                SORT.LIST_CONTENT_DETAILED
+                if detailed_labels else
+                SORT.LIST_CONTENT_SIMPLE
             )
 
     if current_system_version.compatible(19):
-        def add_sort_method(self, *sort_methods):
+        def add_sort_method(self,
+                            sort_methods,
+                            _add_sort_method=xbmcplugin.addSortMethod):
+            handle = self._plugin_handle
             for sort_method in sort_methods:
-                xbmcplugin.addSortMethod(self._plugin_handle, *sort_method)
+                _add_sort_method(handle, *sort_method)
     else:
-        def add_sort_method(self, *sort_methods):
+        def add_sort_method(self,
+                            sort_methods,
+                            _add_sort_method=xbmcplugin.addSortMethod):
+            handle = self._plugin_handle
             for sort_method in sort_methods:
-                xbmcplugin.addSortMethod(self._plugin_handle, *sort_method[:2])
+                _add_sort_method(handle, *sort_method[:3:2])
 
     def clone(self, new_path=None, new_params=None):
         if not new_path:
@@ -794,20 +792,29 @@ class XbmcContext(AbstractContext):
                 wait=False,
                 wait_for=None,
                 wait_for_set=True,
-                block_ui=False):
+                block_ui=None,
+                _execute=xbmc.executebuiltin):
         if not wait_for:
-            xbmc.executebuiltin(command, wait)
+            if block_ui is False:
+                _execute('Dialog.Close(all,true)')
+            _execute(command, wait)
             return
 
         ui = self.get_ui()
         wait_for_abort = xbmc.Monitor().waitForAbort
 
-        xbmc.executebuiltin(command, wait)
+        if block_ui is False:
+            _execute('Dialog.Close(all,true)')
+        _execute(command, wait)
 
         if block_ui:
-            xbmc.executebuiltin('ActivateWindow(busydialognocancel)')
+            _execute('ActivateWindow(busydialognocancel)')
 
-        if wait_for_set:
+        if isinstance(wait_for, tuple):
+            wait_for, wait_for_kwargs, delay = wait_for
+            while not wait_for(**wait_for_kwargs) and not wait_for_abort(delay):
+                pass
+        elif wait_for_set:
             ui.clear_property(wait_for)
             pop_property = ui.pop_property
             while not pop_property(wait_for) and not wait_for_abort(1):
@@ -818,7 +825,7 @@ class XbmcContext(AbstractContext):
                 pass
 
         if block_ui:
-            xbmc.executebuiltin('Dialog.Close(busydialognocancel)')
+            _execute('Dialog.Close(busydialognocancel)')
 
     @staticmethod
     def sleep(timeout=None):
@@ -946,27 +953,6 @@ class XbmcContext(AbstractContext):
             ABORT_FLAG, stacklevel=3, as_bool=True
         )
 
-    @staticmethod
-    def get_infobool(name):
-        return xbmc.getCondVisibility(name)
-
-    @staticmethod
-    def get_infolabel(name):
-        return xbmc.getInfoLabel(name)
-
-    @staticmethod
-    def get_listitem_bool(detail_name):
-        return xbmc.getCondVisibility('Container.ListItem(0).' + detail_name)
-
-    @staticmethod
-    def get_listitem_property(detail_name):
-        return xbmc.getInfoLabel('Container.ListItem(0).Property({0})'
-                                 .format(detail_name))
-
-    @staticmethod
-    def get_listitem_info(detail_name):
-        return xbmc.getInfoLabel('Container.ListItem(0).' + detail_name)
-
     def tear_down(self):
         self.clear_settings()
         attrs = (
@@ -985,6 +971,8 @@ class XbmcContext(AbstractContext):
         attrs = (
             '_ui',
             '_playlist',
+            '_api_store',
+            '_access_manager',
         )
         for attr in attrs:
             try:
@@ -993,7 +981,15 @@ class XbmcContext(AbstractContext):
             except AttributeError:
                 pass
 
-    def ipc_exec(self, target, timeout=None, payload=None):
+    def ipc_exec(self, target, timeout=None, payload=None, raise_exc=False):
+        if not XbmcContextUI.get_property(SERVICE_RUNNING_FLAG, as_bool=True):
+            msg = 'Service IPC - Monitor has not started'
+            XbmcContextUI.set_property(SERVICE_RUNNING_FLAG, BUSY_FLAG)
+            if raise_exc:
+                raise RuntimeError(msg)
+            self.log.warning_trace(msg)
+            return None
+
         data = {'target': target, 'response_required': bool(timeout)}
         if payload:
             data.update(payload)
@@ -1030,7 +1026,8 @@ class XbmcContext(AbstractContext):
 
     def is_plugin_folder(self, folder_name=None):
         if folder_name is None:
-            folder_name = xbmc.getInfoLabel('Container.FolderName')
+            folder_name = XbmcContextUI.get_container_info(FOLDER_NAME,
+                                                           container_id=False)
         return folder_name == self._plugin_name
 
     def refresh_requested(self, force=False, on=False, off=False, params=None):
@@ -1051,3 +1048,39 @@ class XbmcContext(AbstractContext):
             refresh += 1
 
         return refresh
+
+    def parse_item_ids(self,
+                       uri='',
+                       from_listitem=True,
+                       _ids={'video': VIDEO_ID,
+                             'channel': CHANNEL_ID,
+                             'playlist': PLAYLIST_ID}):
+        item_ids = {}
+        if not uri and from_listitem:
+            uri = XbmcContextUI.get_listitem_info(URI)
+        if not uri or not self.is_plugin_path(uri):
+            return item_ids
+        uri = urlsplit(uri)
+
+        path = uri.path.rstrip('/')
+        while path:
+            id_type, _, next_part = path.partition('/')
+            if not next_part:
+                break
+
+            if id_type in _ids:
+                id_value = next_part.partition('/')[0]
+                if id_value:
+                    item_ids[_ids[id_type]] = id_value
+
+            path = next_part
+
+        params = dict(parse_qsl(uri.query))
+        for name in _ids.values():
+            id_value = params.get(name)
+            if not id_value and from_listitem:
+                id_value = XbmcContextUI.get_listitem_property(name)
+            if id_value:
+                item_ids[name] = id_value
+
+        return item_ids
