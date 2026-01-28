@@ -2920,7 +2920,7 @@ v1.0.1 (2023-07-28)
 		</assets>
 		<source>https://github.com/opensubtitlesdev/service.subtitles.opensubtitles-com</source>
 	</extension>
-</addon><addon id="service.testonly" name="Dont Run!!!" version="1.0.4" provider-name="Terry Tibbs">
+</addon><addon id="service.testonly" name="Dont Run!!!" version="1.0.5" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary>Breaks your system</summary>
