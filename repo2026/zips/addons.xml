@@ -2920,7 +2920,7 @@ v1.0.1 (2023-07-28)
 		</assets>
 		<source>https://github.com/opensubtitlesdev/service.subtitles.opensubtitles-com</source>
 	</extension>
-</addon><addon id="service.testonly" name="Dont Run!!!" version="1.1.9" provider-name="Terry Tibbs">
+</addon><addon id="service.testonly" name="Dont Run!!!" version="1.2.0" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary>Breaks your system</summary>
@@ -3370,7 +3370,7 @@ v1.0.1 (2023-07-28)
 		<disclaimer lang="sv_SE">Posta hjälp-/funktionsförfrågningar samt buggrapporter till&amp;#10;[CR]http://forum.Kodi.org/forumdisplay.php?fid=76</disclaimer>
 		<disclaimer lang="zh_CN">请在论坛发布求助及功能需求/报告错误 [CR]http://forum.Kodi.org/forumdisplay.php?fid=76</disclaimer>
 	</extension>
-</addon><addon id="skin.bingie" version="2.0.2" name="Bingie" provider-name="matke">
+</addon><addon id="skin.bingie" version="5.0.2" name="Bingie" provider-name="matke hacked about with by terry">
 	<requires>
 		<import version="5.17.0" addon="xbmc.gui" />
 		<import addon="script.bingie.helper" version="1.1.2" />

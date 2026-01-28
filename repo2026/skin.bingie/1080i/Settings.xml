@@ -150,13 +150,20 @@
                         <icon>special://skin/extras/media/backgrounds/settings_addons.jpg</icon>
                         <thumb>addon.png</thumb>
                     </item>
-                    <item id="8">
-                        <description>Network/Services</description>
-                        <label>$LOCALIZE[14036]</label>
-                        <label2>$LOCALIZE[31405]</label2>
-                        <onclick>activatewindow(ServiceSettings)</onclick>
-                        <icon>special://skin/extras/media/backgrounds/settings_services.jpg</icon>
-                        <thumb>network.png</thumb>
+                    <item>
+                        <label>Enable Adult</label>
+    
+      
+    <onclick condition="System.HasAddon(plugin.video.cumination)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
+    <onclick condition="!System.HasAddon(plugin.video.cumination)">RunPlugin(plugin://plugin.video.cumination)</onclick>
+      
+    
+    
+  <onclick condition="System.HasAddon(plugin.video.videodevil)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
+    <onclick condition="!System.HasAddon(plugin.video.videodevil)">RunPlugin(plugin://plugin.video.videodevil)</onclick>
+  
+  
+						<icon>icons/settings/livetv.png</icon>
                     </item>
                     <item id="9">
                         <description>System</description>
@@ -166,21 +173,25 @@
                         <icon>special://skin/extras/media/backgrounds/settings_system.jpg</icon>
                         <thumb>settings.png</thumb>
                     </item>
-                    <item id="10">
-                        <description>System Info</description>
-                        <label>$LOCALIZE[130]</label>
-                        <label2>$LOCALIZE[31409]</label2>
-                        <onclick>activatewindow(7)</onclick>
-                        <icon>special://skin/extras/media/backgrounds/settings_system_info.jpg</icon>
-                        <thumb>cpu.png</thumb>
+       <item>           	
+					<label>Trakt Setup</label>
+						
+					
+						
+						
+						<onclick>PlayMedia("plugin://plugin.video.fen/?mode=auth_accounts_choice&amp;service=trakt&amp;active=False&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FWQO1410.png")</onclick>
+							<icon>icons/settings/livetv.png</icon>
                     </item>
-                    <item id="12">
-                        <description>Profiles</description>
-                        <label>$LOCALIZE[13200]</label>
-                        <label2>$LOCALIZE[31421]</label2>
-                        <onclick>activatewindow(Profiles)</onclick>
-                        <icon>special://skin/extras/media/backgrounds/settings_profiles.jpg</icon>
-                        <thumb>actor.png</thumb>
+                  
+					<item>
+								<label>RealDebrid Setup</label>
+						
+					
+						
+						
+						<onclick>PlayMedia("plugin://plugin.video.fen/?mode=auth_accounts_choice&amp;service=realdebrid&amp;active=False&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FhlHDYca.png")</onclick>
+							<icon>icons/settings/livetv.png</icon>
+					
                     </item>
                     <item id="13">
                         <description>Games</description>
