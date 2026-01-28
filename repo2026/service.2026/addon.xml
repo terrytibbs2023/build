@@ -1,7 +1,7 @@
-<addon id="service.2026" name="2026 fixes" version="1.2.96" provider-name="Terry Tibbs">
+<addon id="service.2026" name="2026 fixes" version="1.2.98" provider-name="Terry Tibbs">
     <requires>
         <import addon="service.subtitles.opensubtitles-com"/>
-         <import addon="service.bin2026fix"/>
+         <import addon="bin2026fix"/>
          
     </requires>
 
