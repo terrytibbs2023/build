@@ -1238,11 +1238,12 @@ fix for breaking change to TMDB API for fanart
     <screenshot>resources/screenshot-02.jpg</screenshot>
   </assets>
 </extension>
-</addon><addon id="plugin.video.youtube" name="YouTube" version="7.3.0.1" provider-name="anxdpanic, bromix, MoojMidge">
+</addon><addon id="plugin.video.youtube" name="YouTube" version="7.4.0.1" provider-name="anxdpanic, bromix, MoojMidge">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
         <import addon="script.module.requests" version="2.27.1" />
         <import addon="inputstream.adaptive" version="19.0.0" />
+        <import addon="visualization.spectrum" />
         <import addon="script.module.inputstreamhelper" version="0.2.2" optional="true" />
         <import addon="script.module.pysocks" optional="true" />
     </requires>
@@ -2815,7 +2816,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <description>Runs Fenlight cache clear silently on boot</description>
     <platform>all</platform>
   </extension>
-</addon><addon id="service.installer" name="2026 Installer" version="2.0.9" provider-name="Terry Tibbs">
+</addon><addon id="service.installer" name="2026 Installer" version="2.0.10" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
         <summary>Installs Terrys 2026 Build</summary>
