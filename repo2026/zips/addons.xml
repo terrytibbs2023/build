@@ -1902,7 +1902,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="repository.xbox" name="Terrys 2026 xbox repo" version="1.0" provider-name="Terry Tibbs">
+</addon><addon id="repository.xbox" name="Terrys 2026 xbox repo" version="2.0" provider-name="Terry Tibbs">
     <extension point="xbmc.addon.repository" name="Terrys 2026 Xbox Repository">
         <dir>
             <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repoxbox/zips/addons.xml</info>

@@ -1056,10 +1056,9 @@ fix for breaking change to TMDB API for fanart
         </assets>
         <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
     </extension>
-</addon><addon id="plugin.video.fenlight" name="FenLightAM" provider-name="Tikipeter/AnonyMouse" version="2.1.39">
+</addon><addon id="plugin.video.fenlight" name="Fen Light" provider-name="Tikipeter" version="2.0.10">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
-        <import addon="script.module.pil" version="1.1.7" />
         <import addon="script.module.requests" version="2.19.1" />
     </requires>
     <extension point="xbmc.python.pluginsource" library="resources/lib/fenlight.py">
@@ -1075,8 +1074,8 @@ fix for breaking change to TMDB API for fanart
 		<disclaimer lang="en">The author of this addon does not host any of the content which is found and has no affiliation with any of the content providers.</disclaimer>
         <license />
         <assets>
-            <icon>resources/media/addon_icons/fenlight_icon_01.png</icon>
-            <fanart>resources/media/fenlight_fanart_01.jpg</fanart>
+            <icon>resources/media/fenlight_icon.png</icon>
+            <fanart>resources/media/fenlight_fanart2.jpg</fanart>
         </assets>
         <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
     </extension>
@@ -1535,6 +1534,28 @@ fix for breaking change to TMDB API for fanart
     <disclaimer lang="zh_CN">作者不对播放失败、错误的电子节目单时间造成时间浪费或其它不良影响负责。</disclaimer>
     <disclaimer lang="zh_TW">這是測試中的軟體！原創作者無法針對以下情況負責：包括播放失敗，不正確的電子節目表，多餘的時數，或任何不可預期的不良影響。</disclaimer>
   </extension>
+</addon><addon id="repository.2026" name="Terrys 2026 repo" version="1.0" provider-name="Terry Tibbs">
+    <extension point="xbmc.addon.repository" name="Terrys 2026 Repository">
+        <dir>
+            <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repo2026/zips/addons.xml</info>
+          
+
+<checksum>https://githubraw.com/terrytibbs2023/build/main/repo2026/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/repo2026/zips/</datadir>
+        </dir>
+
+
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Terry Tibbs Repo</summary>
+        <description />
+        <disclaimer />
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
 </addon><addon id="repository.EzzerMacsWizard" name="EzzerMacs Wizard Repository" version="1.1.7" provider-name="EzzerMac">
         <extension point="xbmc.addon.repository" name="EzzerMacs Wizard Repository">
 		<dir>
@@ -1880,7 +1901,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="repository.xbox" name="Terrys 2026 xbox repo" version="1.0" provider-name="Terry Tibbs">
+</addon><addon id="repository.xbox" name="Terrys 2026 xbox repo" version="2.0" provider-name="Terry Tibbs">
     <extension point="xbmc.addon.repository" name="Terrys 2026 Xbox Repository">
         <dir>
             <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repoxbox/zips/addons.xml</info>
