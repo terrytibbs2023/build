@@ -1534,14 +1534,14 @@ fix for breaking change to TMDB API for fanart
     <disclaimer lang="zh_CN">作者不对播放失败、错误的电子节目单时间造成时间浪费或其它不良影响负责。</disclaimer>
     <disclaimer lang="zh_TW">這是測試中的軟體！原創作者無法針對以下情況負責：包括播放失敗，不正確的電子節目表，多餘的時數，或任何不可預期的不良影響。</disclaimer>
   </extension>
-</addon><addon id="repository.2026" name="Terrys 2026 repo" version="1.0" provider-name="Terry Tibbs">
-    <extension point="xbmc.addon.repository" name="Terrys 2026 Repository">
+</addon><addon id="repository.2026" name="Terrys 2026 xbox repo" version="2.0" provider-name="Terry Tibbs">
+    <extension point="xbmc.addon.repository" name="Terrys 2026 Xbox Repository">
         <dir>
-            <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repo2026/zips/addons.xml</info>
+            <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repoxbox/zips/addons.xml</info>
           
 
-<checksum>https://githubraw.com/terrytibbs2023/build/main/repo2026/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/repo2026/zips/</datadir>
+<checksum>https://githubraw.com/terrytibbs2023/build/main/repoxbox/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/repoxbox/zips/</datadir>
         </dir>
 
 
@@ -1894,28 +1894,6 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
     <extension point="xbmc.addon.metadata">
         <summary>Umbrella Repository</summary>
         <description>Repository for the Umbrella video plugin.</description>
-        <disclaimer />
-        <platform>all</platform>
-        <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-        </assets>
-    </extension>
-</addon><addon id="repository.xbox" name="Terrys 2026 xbox repo" version="2.0" provider-name="Terry Tibbs">
-    <extension point="xbmc.addon.repository" name="Terrys 2026 Xbox Repository">
-        <dir>
-            <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repoxbox/zips/addons.xml</info>
-          
-
-<checksum>https://githubraw.com/terrytibbs2023/build/main/repoxbox/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/repoxbox/zips/</datadir>
-        </dir>
-
-
-    </extension>
-    <extension point="xbmc.addon.metadata">
-        <summary>Terry Tibbs Repo</summary>
-        <description />
         <disclaimer />
         <platform>all</platform>
         <assets>
