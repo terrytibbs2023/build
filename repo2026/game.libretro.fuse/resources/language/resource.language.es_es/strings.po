@@ -1,0 +1,142 @@
+# game.libretro.fuse language file
+# Addon Name: game.libretro.fuse
+# Addon id: game.libretro.fuse
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.fuse\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2017-02-04 09:56i\n"
+"PO-Revision-Date: 2024-12-26 18:34+0000\n"
+"Last-Translator: Alfonso Cachero <alfonso.cachero@gmail.com>\n"
+"Language-Team: Spanish (Spain) <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-fuse/es_es/>\n"
+"Language: es_es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.9.2\n"
+
+msgctxt "Addon Summary"
+msgid "Sinclair - ZX Spectrum (Fuse)"
+msgstr "Sinclair - ZX Spectrum (Fuse)"
+
+msgctxt "Addon Description"
+msgid "Fuse (the Free Unix Spectrum Emulator) was originally a ZX Spectrum emulator for Unix. It has since been ported to Mac OS X, Windows, the Wii, AmigaOS and MorphOS."
+msgstr "Fuse (el emulador gratuito de Spectrum para Unix) era originalmente un emulador de ZX Spectrum para Unix. Desde entonces ha sido adaptado a Mac OS X, Windows, Wii, AmigaOS y MorphOS."
+
+msgctxt "#30001"
+msgid "Model (needs content load)"
+msgstr "Modelo (necesita cargar contenido)"
+
+msgctxt "#30002"
+msgid "Size Video Border"
+msgstr "Tamaño del Borde del Vídeo"
+
+msgctxt "#30003"
+msgid "Tape Auto Load"
+msgstr "Carga Automática de Cinta"
+
+msgctxt "#30004"
+msgid "Tape Fast Load"
+msgstr "Carga Rápida de Cinta"
+
+msgctxt "#30005"
+msgid "Tape Load Sound"
+msgstr "Sonido al Cargar Cinta"
+
+msgctxt "#30006"
+msgid "Speaker Type"
+msgstr "Tipo Altavoz"
+
+msgctxt "#30007"
+msgid "AY Stereo Separation"
+msgstr "Separación Estéreo AY"
+
+msgctxt "#30008"
+msgid "Transparent Keyboard Overlay"
+msgstr "Teclado Superpuesto Transparente"
+
+msgctxt "#30009"
+msgid "Time to Release Key in ms"
+msgstr "Tiempo para Liberar la Tecla en ms"
+
+msgctxt "#30010"
+msgid "Joypad Left mapping"
+msgstr "Mapeo Joypad Izquierdo"
+
+msgctxt "#30011"
+msgid "Joypad Right mapping"
+msgstr "Mapeo Joypad Derecho"
+
+msgctxt "#30012"
+msgid "Joypad Up mapping"
+msgstr "Mapeo Joypad Arriba"
+
+msgctxt "#30013"
+msgid "Joypad Down mapping"
+msgstr "Mapeo Joypad Abajo"
+
+msgctxt "#30014"
+msgid "Joypad Start mapping"
+msgstr "Inicio Mapeo Joypad"
+
+msgctxt "#30015"
+msgid "Joypad A button mapping"
+msgstr "Mapeo Botón A Joypad"
+
+msgctxt "#30016"
+msgid "Joypad B button mapping"
+msgstr "Mapeo Botón B Joypad"
+
+msgctxt "#30017"
+msgid "Joypad X button mapping"
+msgstr "Mapeo Botón X Joypad"
+
+msgctxt "#30018"
+msgid "Joypad Y button mapping"
+msgstr "Mapeo Botón Y Joypad"
+
+msgctxt "#30019"
+msgid "Joypad L button mapping"
+msgstr "Mapeo Botón L Joypad"
+
+msgctxt "#30020"
+msgid "Joypad R button mapping"
+msgstr "Mapeo Botón R Joypad"
+
+msgctxt "#30021"
+msgid "Joypad L2 button mapping"
+msgstr "Mapeo Botón L2 Joypad"
+
+msgctxt "#30022"
+msgid "Joypad R2 button mapping"
+msgstr "Mapeo Botón R2 Joypad"
+
+msgctxt "#30023"
+msgid "Joypad L3 button mapping"
+msgstr "Mapeo Botón L3 Joypad"
+
+msgctxt "#30024"
+msgid "Joypad R3 button mapping"
+msgstr "Mapeo Botón R3 Joypad"
+
+msgctxt "#30025"
+msgid "Emulation speed percentage (needs content load)"
+msgstr "Porcentaje de velocidad de emulación (necesita cargar contenido)"
+
+msgctxt "#30026"
+msgid "Colour Palette"
+msgstr "Paleta de Color"
+
+msgctxt "#30027"
+msgid "Display joystick type and emulation speed at startup"
+msgstr "Mostrar tipo de mando y velocidad de emulación al iniciar"
+
+msgctxt "#30028"
+msgid "Use Auto Size for Savestates. For Netplay 'Off' is recommended"
+msgstr "Usar Tamaño Automático para los Guardados. Para Juego en red se recomienda apagarlo"
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Ajustes"

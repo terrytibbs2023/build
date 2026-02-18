@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+	<category label="128">
+		<setting label="30001" type="select" id="bsnes_aspect_ratio" values="Auto|1:1|4:3|NTSC|PAL" default="Auto"/>
+		<setting label="30032" type="select" id="bsnes_ppu_overscan_v" values="8|0|12|16" default="8"/>
+		<setting label="30003" type="select" id="bsnes_blur_emulation" values="OFF|ON" default="OFF"/>
+		<setting label="30028" type="select" id="bsnes_video_filter" values="None|NTSC (RF)|NTSC (Composite)|NTSC (S-Video)|NTSC (RGB)" default="None"/>
+		<setting label="30029" type="select" id="bsnes_video_luminance" values="100|0|10|20|30|40|50|60|70|80|90" default="100"/>
+		<setting label="30030" type="select" id="bsnes_video_saturation" values="100|0|10|20|30|40|50|60|70|80|90|110|120|130|140|150|160|170|180|190|200" default="100"/>
+		<setting label="30031" type="select" id="bsnes_video_gamma" values="150|100|110|120|130|140|160|170|180|190|200" default="150"/>
+		<setting label="30004" type="select" id="bsnes_ppu_fast" values="ON|OFF" default="ON"/>
+		<setting label="30005" type="select" id="bsnes_ppu_deinterlace" values="ON|OFF" default="ON"/>
+		<setting label="30006" type="select" id="bsnes_ppu_no_sprite_limit" values="OFF|ON" default="OFF"/>
+		<setting label="30007" type="select" id="bsnes_ppu_no_vram_blocking" values="OFF|ON" default="OFF"/>
+		<setting label="30008" type="select" id="bsnes_dsp_fast" values="ON|OFF" default="ON"/>
+		<setting label="30009" type="select" id="bsnes_dsp_cubic" values="OFF|ON" default="OFF"/>
+		<setting label="30010" type="select" id="bsnes_dsp_echo_shadow" values="OFF|ON" default="OFF"/>
+		<setting label="30011" type="select" id="bsnes_mode7_scale" values="1x|2x|3x|4x|5x|6x|7x|8x" default="1x"/>
+		<setting label="30012" type="select" id="bsnes_mode7_perspective" values="ON|OFF" default="ON"/>
+		<setting label="30013" type="select" id="bsnes_mode7_supersample" values="OFF|ON" default="OFF"/>
+		<setting label="30014" type="select" id="bsnes_mode7_mosaic" values="ON|OFF" default="ON"/>
+		<setting label="30015" type="select" id="bsnes_run_ahead_frames" values="OFF|1|2|3|4" default="OFF"/>
+		<setting label="30016" type="select" id="bsnes_coprocessor_delayed_sync" values="ON|OFF" default="ON"/>
+		<setting label="30017" type="select" id="bsnes_coprocessor_prefer_hle" values="ON|OFF" default="ON"/>
+		<setting label="30018" type="select" id="bsnes_hotfixes" values="OFF|ON" default="OFF"/>
+		<setting label="30019" type="select" id="bsnes_entropy" values="Low|High|None" default="Low"/>
+		<setting label="30020" type="select" id="bsnes_cpu_fastmath" values="OFF|ON" default="OFF"/>
+		<setting label="30021" type="select" id="bsnes_cpu_overclock" values="100|10|20|30|40|50|60|70|80|90|110|120|130|140|150|160|170|180|190|200|210|220|230|240|250|260|270|280|290|300|310|320|330|340|350|360|370|380|390|400" default="100"/>
+		<setting label="30022" type="select" id="bsnes_cpu_sa1_overclock" values="100|10|20|30|40|50|60|70|80|90|110|120|130|140|150|160|170|180|190|200|210|220|230|240|250|260|270|280|290|300|310|320|330|340|350|360|370|380|390|400" default="100"/>
+		<setting label="30023" type="select" id="bsnes_cpu_sfx_overclock" values="100|10|20|30|40|50|60|70|80|90|110|120|130|140|150|160|170|180|190|200|210|220|230|240|250|260|270|280|290|300|310|320|330|340|350|360|370|380|390|400|410|420|430|440|450|460|470|480|490|500|510|520|530|540|550|560|570|580|590|600|610|620|630|640|650|660|670|680|690|700|710|720|730|740|750|760|770|780|790|800" default="100"/>
+		<setting label="30024" type="select" id="bsnes_sgb_bios" values="SGB1.sfc|SGB2.sfc" default="SGB1.sfc"/>
+		<setting label="30025" type="select" id="bsnes_hide_sgb_border" values="OFF|ON" default="OFF"/>
+		<setting label="30026" type="select" id="bsnes_touchscreen_lightgun" values="ON|OFF" default="ON"/>
+		<setting label="30027" type="select" id="bsnes_touchscreen_lightgun_superscope_reverse" values="OFF|ON" default="OFF"/>
+	</category>
+</settings>

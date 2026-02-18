@@ -1,0 +1,226 @@
+# game.libretro.picodrive language file
+# Addon Name: game.libretro.picodrive
+# Addon id: game.libretro.picodrive
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.picodrive\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2017-02-04 09:56i\n"
+"PO-Revision-Date: 2024-12-27 22:04+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Danish <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-picodrive/da_dk/>\n"
+"Language: da_dk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.9.2\n"
+
+msgctxt "Addon Summary"
+msgid "Sega - MS/GG/MD/CD/32X (PicoDrive)"
+msgstr "Sega - MS/GG/MD/CD/32X (PicoDrive)"
+
+msgctxt "Addon Description"
+msgid "PicoDrive is yet another Sega Game Gear / Master System / Mega Drive / Mega CD / 32X emulator heavily optimized for ARM."
+msgstr "PicoDrive er endnu en Sega Game Gear / Master System / Mega Drive / Mega CD / 32X emulator stærkt optimeret til ARM."
+
+msgctxt "Addon Disclaimer"
+msgid "Authors: Dave (aka fdave, FinalBurn author) and notaz"
+msgstr "Forfattere: Dave (aka fdave, FinalBurn forfatter) og notaz"
+
+msgctxt "#30001"
+msgid "System Region"
+msgstr "Systemets område"
+
+msgctxt "#30002"
+msgid "Master System Type"
+msgstr "Type af hovedsystem"
+
+msgctxt "#30003"
+msgid "Master System ROM Mapping"
+msgstr "Mapping af hovedsystemets ROM"
+
+msgctxt "#30004"
+msgid "Sega CD RAM Cart"
+msgstr "Sega CD RAM-cart"
+
+msgctxt "#30005"
+msgid "Core-Provided Aspect Ratio"
+msgstr "Billedformat leveret af core"
+
+msgctxt "#30006"
+msgid "LCD Ghosting Filter"
+msgstr "Filter til LCD ghosting"
+
+msgctxt "#30007"
+msgid "Video Renderer"
+msgstr "Video-renderer"
+
+msgctxt "#30008"
+msgid "Audio Sample Rate (Hz)"
+msgstr "Lydens samplefrekvens (Hz)"
+
+msgctxt "#30009"
+msgid "FM filtering"
+msgstr "FM-filtrering"
+
+msgctxt "#30010"
+msgid "Master System FM Sound Unit"
+msgstr "Hovedsystemets FM-lydenhed"
+
+msgctxt "#30011"
+msgid "Mega Drive FM DAC noise"
+msgstr "Mega Drive FM DAC-støj"
+
+msgctxt "#30012"
+msgid "Audio Filter"
+msgstr "Lydfilter"
+
+msgctxt "#30013"
+msgid "Low-Pass Filter %"
+msgstr "Low-pass-filter %"
+
+msgctxt "#30014"
+msgid "Input Device 1"
+msgstr "Indgangsenhed 1"
+
+msgctxt "#30015"
+msgid "Input Device 2"
+msgstr "Indgangsenhed 2"
+
+msgctxt "#30016"
+msgid "Dynamic Recompilers"
+msgstr "Dynamiske recompilere"
+
+msgctxt "#30017"
+msgid "Frameskip"
+msgstr "Spring frame over"
+
+msgctxt "#30018"
+msgid "Frameskip Threshold (%)"
+msgstr "Tærskel når der springes en frame over (%)"
+
+msgctxt "#30019"
+msgid "No Sprite Limit"
+msgstr "Ingen Sprite begrænsning"
+
+msgctxt "#30020"
+msgid "68K Overclock"
+msgstr "68K overclock"
+
+msgctxt "#30021"
+msgid "Master System Palette in TMS modes"
+msgstr ""
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Indstillinger"
+
+#~ msgctxt "#30009"
+#~ msgid "Master System FM Sound Unit"
+#~ msgstr "Hovedsystemets FM-lydenhed"
+
+#~ msgctxt "#30010"
+#~ msgid "Mega Drive FM DAC noise"
+#~ msgstr "Mega Drive FM DAC-støj"
+
+#~ msgctxt "#30011"
+#~ msgid "Audio Filter"
+#~ msgstr "Lydfilter"
+
+#~ msgctxt "#30012"
+#~ msgid "Low-Pass Filter %"
+#~ msgstr "Low-pass-filter %"
+
+#~ msgctxt "#30013"
+#~ msgid "Input Device 1"
+#~ msgstr "Indgangsenhed 1"
+
+#~ msgctxt "#30014"
+#~ msgid "Input Device 2"
+#~ msgstr "Indgangsenhed 2"
+
+#~ msgctxt "#30015"
+#~ msgid "Dynamic Recompilers"
+#~ msgstr "Dynamiske recompilere"
+
+#~ msgctxt "#30016"
+#~ msgid "Frameskip"
+#~ msgstr "Spring frame over"
+
+#~ msgctxt "#30017"
+#~ msgid "Frameskip Threshold (%)"
+#~ msgstr "Tærskel når der springes en frame over (%)"
+
+#~ msgctxt "#30018"
+#~ msgid "No Sprite Limit"
+#~ msgstr "Ingen Sprite begrænsning"
+
+#~ msgctxt "#30019"
+#~ msgid "68K Overclock"
+#~ msgstr "68K overclock"
+
+#~ msgctxt "Addon Description"
+#~ msgid "PicoDrive is yet another Mega Drive / Genesis / Sega CD / Mega CD / 32X / SMS emulator heavily optimized for ARM."
+#~ msgstr "PicoDrive er endnu en Mega Drive / Genesis / Sega CD / Mega CD / 32X / SMS-emulator stærkt optimeret til ARM."
+
+#~ msgctxt "#30001"
+#~ msgid "Input device 1"
+#~ msgstr "Input-enhed 1"
+
+#~ msgctxt "#30002"
+#~ msgid "Input device 2"
+#~ msgstr "Input-enhed 2"
+
+#~ msgctxt "#30003"
+#~ msgid "No sprite limit"
+#~ msgstr "Ingen Sprite begrænsning"
+
+#~ msgctxt "#30004"
+#~ msgid "MegaCD RAM cart"
+#~ msgstr "MegaCD RAM-cart"
+
+#~ msgctxt "#30005"
+#~ msgid "Region"
+#~ msgstr "Område"
+
+#~ msgctxt "#30006"
+#~ msgid "Core-provided aspect ratio"
+#~ msgstr "Billedformat leveret af core"
+
+#~ msgctxt "#30007"
+#~ msgid "Show Overscan"
+#~ msgstr "Vis overskanderinger"
+
+#~ msgctxt "#30008"
+#~ msgid "68K Overclock"
+#~ msgstr "68K overclock"
+
+#~ msgctxt "#30009"
+#~ msgid "Dynamic recompilers"
+#~ msgstr "Dynamiske recompilere"
+
+#~ msgctxt "#30010"
+#~ msgid "Audio filter"
+#~ msgstr "Lydfilter"
+
+#~ msgctxt "#30011"
+#~ msgid "Low-pass filter %"
+#~ msgstr "Low-pass-filter %"
+
+#~ msgctxt "#30012"
+#~ msgid "Frameskip"
+#~ msgstr "Spring frame over"
+
+#~ msgctxt "#30013"
+#~ msgid "Frameskip Threshold (%)"
+#~ msgstr "Tærskel når der springes en frame over (%)"
+
+#~ msgctxt "#30014"
+#~ msgid "Renderer"
+#~ msgstr "Rendering"
+
+#~ msgctxt "#30015"
+#~ msgid "Sound quality"
+#~ msgstr "Lydkvalitet"

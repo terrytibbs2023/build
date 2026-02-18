@@ -1,0 +1,162 @@
+# game.libretro.bsnes language file
+# Addon Name: game.libretro.bsnes
+# Addon id: game.libretro.bsnes
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.bsnes\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2021-08-26 22:01i\n"
+"PO-Revision-Date: 2025-06-13 03:29+0000\n"
+"Last-Translator: wabisabi926 <liwenliang926@163.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-bsnes/zh_Hans/>\n"
+"Language: zh_cn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
+
+msgctxt "Addon Summary"
+msgid "Nintendo - SNES / SFC (bsnes)"
+msgstr "任天堂 - SNES / SFC（bsnes）"
+
+msgctxt "Addon Description"
+msgid "bsnes is a multi-platform Super Nintendo (Super Famicom) emulator from Near / Byuu that focuses on performance, features, and ease of use."
+msgstr "bsnes 是一款来自 Near/Byuu 的多平台超级任天堂（Super Famicom）模拟器，专注于性能、功能和易用性。"
+
+msgctxt "Addon Disclaimer"
+msgid "In loving memory of Near / Byuu"
+msgstr "怀念 Near / Byuu"
+
+msgctxt "#30001"
+msgid "Preferred Aspect Ratio"
+msgstr "首选纵横比"
+
+msgctxt "#30003"
+msgid "Blur Emulation"
+msgstr "模糊仿真"
+
+msgctxt "#30004"
+msgid "PPU (Video) - Fast Mode"
+msgstr "PPU（视频）- 快速模式"
+
+msgctxt "#30005"
+msgid "PPU (Video) - Deinterlace"
+msgstr "PPU（视频）- 反交错"
+
+msgctxt "#30006"
+msgid "PPU (Video) - No Sprite Limit"
+msgstr "PPU（视频）- 无 Sprite 限制"
+
+msgctxt "#30007"
+msgid "PPU (Video) - No VRAM Blocking"
+msgstr "PPU（视频）- 无 VRAM 阻塞"
+
+msgctxt "#30008"
+msgid "DSP (Audio) - Fast Mode"
+msgstr "DSP（音频）- 快速模式"
+
+msgctxt "#30009"
+msgid "DSP (Audio) - Cubic Interpolation"
+msgstr "DSP（音频）- 三次插值"
+
+msgctxt "#30010"
+msgid "DSP (Audio) - Echo Shadow RAM"
+msgstr "DSP（音频）- 回响影子内存"
+
+msgctxt "#30011"
+msgid "HD Mode 7 - Scale"
+msgstr "HD 模式7 - 缩放"
+
+msgctxt "#30012"
+msgid "HD Mode 7 - Perspective Correction"
+msgstr "HD 模式7 - 透视校正"
+
+msgctxt "#30013"
+msgid "HD Mode 7 - Supersampling"
+msgstr "HD 模式7 - 超级采样"
+
+msgctxt "#30014"
+msgid "HD Mode 7 - HD->SD Mosaic"
+msgstr "HD 模式7 - HD->SD 马赛克"
+
+msgctxt "#30015"
+msgid "Internal Run-Ahead"
+msgstr "内部先行运行"
+
+msgctxt "#30016"
+msgid "Coprocessors - Fast Mode"
+msgstr "协处理器 - 快速模式"
+
+msgctxt "#30017"
+msgid "Coprocessors - Prefer HLE"
+msgstr "协处理器 - 首选 HLE"
+
+msgctxt "#30018"
+msgid "Hotfixes"
+msgstr "修补程序"
+
+msgctxt "#30019"
+msgid "Entropy (randomization)"
+msgstr "熵（随机）"
+
+msgctxt "#30020"
+msgid "CPU Fast Math"
+msgstr "CPU 快速运算"
+
+msgctxt "#30021"
+msgid "Overclocking - CPU"
+msgstr "超频 - CPU"
+
+msgctxt "#30022"
+msgid "Overclocking - SA-1 Coprocessor"
+msgstr "超频 - SA-1 协处理器"
+
+msgctxt "#30023"
+msgid "Overclocking - SuperFX Coprocessor"
+msgstr "超频 - SuperFX 协处理器"
+
+msgctxt "#30024"
+msgid "Preferred Super Game Boy BIOS (Restart Required)"
+msgstr "首选 Super Game Boy BIOS（需要重新启动）"
+
+msgctxt "#30025"
+msgid "Hide SGB Border"
+msgstr "隐藏 SGB 边框"
+
+msgctxt "#30026"
+msgid "Touchscreen Light Gun"
+msgstr "触摸屏光线枪"
+
+msgctxt "#30027"
+msgid "Super Scope Reverse Trigger Buttons"
+msgstr "Super Scope 反向触发按钮"
+
+msgctxt "#30028"
+msgid "Filter"
+msgstr "筛选器"
+
+msgctxt "#30029"
+msgid "Color Adjustment - Luminance"
+msgstr "颜色调整 - 亮度"
+
+msgctxt "#30030"
+msgid "Color Adjustment - Saturation"
+msgstr "颜色调整 - 饱和度"
+
+msgctxt "#30031"
+msgid "Color Adjustment - Gamma"
+msgstr "颜色调整 - Gamma"
+
+msgctxt "#30032"
+msgid "Crop Vertical Overscan"
+msgstr "垂直过扫描裁剪"
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "设置"
+
+#~ msgctxt "#30002"
+#~ msgid "Crop Overscan"
+#~ msgstr "过扫剪裁"

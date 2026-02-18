@@ -1,0 +1,594 @@
+# game.libretro.beetle-psx language file
+# Addon Name: game.libretro.beetle-psx
+# Addon id: game.libretro.beetle-psx
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.beetle-psx\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2019-08-24 22:21i\n"
+"PO-Revision-Date: 2024-12-27 21:46+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Danish <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-beetle-psx/da_dk/>\n"
+"Language: da_dk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.9.2\n"
+
+msgctxt "Addon Summary"
+msgid "Sony - PlayStation (Beetle PSX)"
+msgstr "Sony - PlayStation (Beetle PSX)"
+
+msgctxt "Addon Description"
+msgid "Beetle PSX is the PlayStation module of Beetle, a port of Madnafen."
+msgstr "Beetle PSX er PlayStation-modulet i Beetle, en port af Mednafen."
+
+msgctxt "#30001"
+msgid "Internal GPU Resolution"
+msgstr "Intern GPU-opløsning"
+
+msgctxt "#30002"
+msgid "Dithering Pattern"
+msgstr "Mønster for nuanceændring"
+
+msgctxt "#30003"
+msgid "Frame Duping (Speedup)"
+msgstr "Frame-dupering (acceleration)"
+
+msgctxt "#30004"
+msgid "Display Internal FPS"
+msgstr "Vis intern FPS"
+
+msgctxt "#30005"
+msgid "Analog Self-Calibration"
+msgstr "Analog selvkalibrering"
+
+msgctxt "#30007"
+msgid "DualShock Analog Mode Combo"
+msgstr ""
+
+msgctxt "#30008"
+msgid "DualShock Analog Mode Combo Hold Delay"
+msgstr ""
+
+msgctxt "#30009"
+msgid "Port 1: Multitap Enable"
+msgstr "Port 1: Aktiver multitap"
+
+msgctxt "#30010"
+msgid "Port 2: Multitap Enable"
+msgstr "Port 2: Aktiver multitap"
+
+msgctxt "#30011"
+msgid "Gun Input Mode"
+msgstr "Tilstand for pistolens input"
+
+msgctxt "#30012"
+msgid "Gun Cursor"
+msgstr "Pistolens markør"
+
+msgctxt "#30013"
+msgid "Port 1: Gun Crosshair Color"
+msgstr "Port 1: Farve på gun crosshair"
+
+msgctxt "#30014"
+msgid "Port 2: Gun Crosshair Color"
+msgstr "Port 2: Farve på gun crosshair"
+
+msgctxt "#30015"
+msgid "Mouse Sensitivity"
+msgstr "Musens følsomhed"
+
+msgctxt "#30016"
+msgid "neGcon Twist Response"
+msgstr "neGcon twist-svar"
+
+msgctxt "#30017"
+msgid "neGcon Twist Deadzone"
+msgstr "Dødzone for neGcon Twist"
+
+msgctxt "#30018"
+msgid "Memory Card 0 Method (Restart Required)"
+msgstr "Hukommelseskort 0 metode (genstart påkrævet)"
+
+msgctxt "#30019"
+msgid "Enable Memory Card 1 (Restart Required)"
+msgstr "Aktiver hukommelseskort 1 (genstart påkrævet)"
+
+msgctxt "#30020"
+msgid "Shared Memory Cards (Restart Required)"
+msgstr "Vis hukommelseskort (genstart påkrævet)"
+
+msgctxt "#30021"
+msgid "Memory Card Left Index"
+msgstr "Venstre index for hukommelseskort"
+
+msgctxt "#30022"
+msgid "Memory Card Right Index"
+msgstr "Højre index for hukommelseskort"
+
+msgctxt "#30023"
+msgid "PGXP Operation Mode"
+msgstr "Driftstilstand for PGXP"
+
+msgctxt "#30024"
+msgid "PGXP 2D Geometry Tolerance"
+msgstr "2D geometritolerance for PGXP"
+
+msgctxt "#30025"
+msgid "PGXP Primitive Culling"
+msgstr "PGXP primitiv beskæring"
+
+msgctxt "#30026"
+msgid "Line-to-Quad Hack"
+msgstr "Hack for line-to-quad"
+
+msgctxt "#30027"
+msgid "Widescreen Mode Hack"
+msgstr "Hack til tilstand for widescreen"
+
+msgctxt "#30028"
+msgid "Widescreen Mode Hack Aspect Ratio"
+msgstr "Billedformat ved hack i tilstand for widescreen"
+
+msgctxt "#30029"
+msgid "CPU Frequency Scaling (Overclock)"
+msgstr "Skalering af CPU-frekvens (overclock)"
+
+msgctxt "#30030"
+msgid "GTE Overclock"
+msgstr "Overclock GTE"
+
+msgctxt "#30031"
+msgid "Skip BIOS"
+msgstr "Spring BIOS over"
+
+msgctxt "#30032"
+msgid "Override BIOS (Restart Required)"
+msgstr "Tilsidesæt BIOS (genstart påkrævet)"
+
+msgctxt "#30033"
+msgid "CPU Dynarec"
+msgstr "CPU Dynarec"
+
+msgctxt "#30034"
+msgid "Dynarec Code Invalidation"
+msgstr "Invalidering af dynarec-kode"
+
+msgctxt "#30035"
+msgid "Dynarec DMA/GPU/MDEC/Timer Event Cycles"
+msgstr "Dynarec DMA/GPU/MDEC/Timer hændelsescyklusser"
+
+msgctxt "#30036"
+msgid "Dynarec SPU Samples"
+msgstr "Dynarec SPU-samples"
+
+msgctxt "#30037"
+msgid "Core-Reported FPS Timing"
+msgstr "FPS-timing rapporteret af core"
+
+msgctxt "#30038"
+msgid "PAL (European) Video Timing Override"
+msgstr "Tilsidesæt PAL (europæisk) videotiming"
+
+msgctxt "#30039"
+msgid "Crop Overscan"
+msgstr "Beskær overskandering"
+
+msgctxt "#30040"
+msgid "Additional Cropping"
+msgstr "Yderligere beskæring"
+
+msgctxt "#30041"
+msgid "Offset Cropped Image"
+msgstr "Forskyd beskåret billede"
+
+msgctxt "#30042"
+msgid "GPU Rasterizer Overclock"
+msgstr "Overclock GPU-rasterizer"
+
+msgctxt "#30043"
+msgid "Core Aspect Ratio"
+msgstr "Skjul aspect ratio"
+
+msgctxt "#30044"
+msgid "Initial Scan Line - NTSC"
+msgstr "Første scanlinje - NTSC"
+
+msgctxt "#30045"
+msgid "Last Scan Line - NTSC"
+msgstr "Sidste scanlinje - NTSC"
+
+msgctxt "#30046"
+msgid "Initial Scan Line - PAL"
+msgstr "Første scanlinje - PAL"
+
+msgctxt "#30047"
+msgid "Last Scan Line - PAL"
+msgstr "Sidste scanlinje - PAL"
+
+msgctxt "#30048"
+msgid "CD Access Method (Restart Required)"
+msgstr "Adgangsmetode til CD (genstart påkrævet)"
+
+msgctxt "#30049"
+msgid "CD Loading Speed"
+msgstr "Indlæsningshastighed for CD"
+
+msgctxt "#30050"
+msgid "DualShock Analog Mode Toggle"
+msgstr ""
+
+msgctxt "#30051"
+msgid "Display OSD Messages"
+msgstr ""
+
+msgctxt "#30052"
+msgid "Deinterlace Method"
+msgstr ""
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Indstillinger"
+
+#~ msgctxt "#30006"
+#~ msgid "Enable DualShock Analog Mode Toggle"
+#~ msgstr "Aktiver skifte af DualShock analog tilstand"
+
+#~ msgctxt "#30007"
+#~ msgid "Port 1: Multitap Enable"
+#~ msgstr "Port 1: Aktiver multitap"
+
+#~ msgctxt "#30008"
+#~ msgid "Port 2: Multitap Enable"
+#~ msgstr "Port 2: Aktiver multitap"
+
+#~ msgctxt "#30009"
+#~ msgid "Gun Input Mode"
+#~ msgstr "Tilstand for pistolens input"
+
+#~ msgctxt "#30010"
+#~ msgid "Gun Cursor"
+#~ msgstr "Pistolens markør"
+
+#~ msgctxt "#30011"
+#~ msgid "Port 1: Gun Crosshair Color"
+#~ msgstr "Port 1: Farve på gun crosshair"
+
+#~ msgctxt "#30012"
+#~ msgid "Port 2: Gun Crosshair Color"
+#~ msgstr "Port 2: Farve på gun crosshair"
+
+#~ msgctxt "#30013"
+#~ msgid "Mouse Sensitivity"
+#~ msgstr "Musens følsomhed"
+
+#~ msgctxt "#30014"
+#~ msgid "neGcon Twist Response"
+#~ msgstr "neGcon twist-svar"
+
+#~ msgctxt "#30015"
+#~ msgid "neGcon Twist Deadzone"
+#~ msgstr "Dødzone for neGcon Twist"
+
+#~ msgctxt "#30016"
+#~ msgid "Memory Card 0 Method (Restart Required)"
+#~ msgstr "Hukommelseskort 0 metode (genstart påkrævet)"
+
+#~ msgctxt "#30017"
+#~ msgid "Enable Memory Card 1 (Restart Required)"
+#~ msgstr "Aktiver hukommelseskort 1 (genstart påkrævet)"
+
+#~ msgctxt "#30018"
+#~ msgid "Shared Memory Cards (Restart Required)"
+#~ msgstr "Vis hukommelseskort (genstart påkrævet)"
+
+#~ msgctxt "#30019"
+#~ msgid "Memory Card Left Index"
+#~ msgstr "Venstre index for hukommelseskort"
+
+#~ msgctxt "#30020"
+#~ msgid "Memory Card Right Index"
+#~ msgstr "Højre index for hukommelseskort"
+
+#~ msgctxt "#30021"
+#~ msgid "PGXP Operation Mode"
+#~ msgstr "Driftstilstand for PGXP"
+
+#~ msgctxt "#30022"
+#~ msgid "PGXP 2D Geometry Tolerance"
+#~ msgstr "2D geometritolerance for PGXP"
+
+#~ msgctxt "#30023"
+#~ msgid "PGXP Primitive Culling"
+#~ msgstr "PGXP primitiv beskæring"
+
+#~ msgctxt "#30024"
+#~ msgid "Line-to-Quad Hack"
+#~ msgstr "Hack for line-to-quad"
+
+#~ msgctxt "#30025"
+#~ msgid "Widescreen Mode Hack"
+#~ msgstr "Hack til tilstand for widescreen"
+
+#~ msgctxt "#30026"
+#~ msgid "Widescreen Mode Hack Aspect Ratio"
+#~ msgstr "Billedformat ved hack i tilstand for widescreen"
+
+#~ msgctxt "#30027"
+#~ msgid "CPU Frequency Scaling (Overclock)"
+#~ msgstr "Skalering af CPU-frekvens (overclock)"
+
+#~ msgctxt "#30028"
+#~ msgid "GTE Overclock"
+#~ msgstr "Overclock GTE"
+
+#~ msgctxt "#30029"
+#~ msgid "Skip BIOS"
+#~ msgstr "Spring BIOS over"
+
+#~ msgctxt "#30030"
+#~ msgid "Override BIOS (Restart Required)"
+#~ msgstr "Tilsidesæt BIOS (genstart påkrævet)"
+
+#~ msgctxt "#30031"
+#~ msgid "CPU Dynarec"
+#~ msgstr "CPU Dynarec"
+
+#~ msgctxt "#30032"
+#~ msgid "Dynarec Code Invalidation"
+#~ msgstr "Invalidering af dynarec-kode"
+
+#~ msgctxt "#30033"
+#~ msgid "Dynarec DMA/GPU/MDEC/Timer Event Cycles"
+#~ msgstr "Dynarec DMA/GPU/MDEC/Timer hændelsescyklusser"
+
+#~ msgctxt "#30034"
+#~ msgid "Dynarec SPU Samples"
+#~ msgstr "Dynarec SPU-samples"
+
+#~ msgctxt "#30035"
+#~ msgid "Core-Reported FPS Timing"
+#~ msgstr "FPS-timing rapporteret af core"
+
+#~ msgctxt "#30036"
+#~ msgid "PAL (European) Video Timing Override"
+#~ msgstr "Tilsidesæt PAL (europæisk) videotiming"
+
+#~ msgctxt "#30037"
+#~ msgid "Crop Overscan"
+#~ msgstr "Beskær overskandering"
+
+#~ msgctxt "#30038"
+#~ msgid "Additional Cropping"
+#~ msgstr "Yderligere beskæring"
+
+#~ msgctxt "#30039"
+#~ msgid "Offset Cropped Image"
+#~ msgstr "Forskyd beskåret billede"
+
+#~ msgctxt "#30040"
+#~ msgid "GPU Rasterizer Overclock"
+#~ msgstr "Overclock GPU-rasterizer"
+
+#~ msgctxt "#30041"
+#~ msgid "Core Aspect Ratio"
+#~ msgstr "Kernens billedformat"
+
+#~ msgctxt "#30042"
+#~ msgid "Initial Scan Line - NTSC"
+#~ msgstr "Første scanlinje - NTSC"
+
+#~ msgctxt "#30043"
+#~ msgid "Last Scan Line - NTSC"
+#~ msgstr "Sidste scanlinje - NTSC"
+
+#~ msgctxt "#30044"
+#~ msgid "Initial Scan Line - PAL"
+#~ msgstr "Første scanlinje - PAL"
+
+#~ msgctxt "#30045"
+#~ msgid "Last Scan Line - PAL"
+#~ msgstr "Sidste scanlinje - PAL"
+
+#~ msgctxt "#30046"
+#~ msgid "CD Access Method (Restart Required)"
+#~ msgstr "Adgangsmetode til CD (genstart påkrævet)"
+
+#~ msgctxt "#30047"
+#~ msgid "CD Loading Speed"
+#~ msgstr "Indlæsningshastighed for CD"
+
+#~ msgctxt "#30033"
+#~ msgid "Dynarec DMA/GPU Event Cycles"
+#~ msgstr "Hændelsescyklusser for dynarec DMA/GPU"
+
+#~ msgctxt "#30034"
+#~ msgid "Core-Reported FPS Timing"
+#~ msgstr "FPS-timing rapporteret af core"
+
+#~ msgctxt "#30035"
+#~ msgid "PAL (European) Video Timing Override"
+#~ msgstr "Tilsidesæt PAL (europæisk) videotiming"
+
+#~ msgctxt "#30036"
+#~ msgid "Crop Overscan"
+#~ msgstr "Beskær overskandering"
+
+#~ msgctxt "#30037"
+#~ msgid "Additional Cropping"
+#~ msgstr "Yderligere beskæring"
+
+#~ msgctxt "#30038"
+#~ msgid "Offset Cropped Image"
+#~ msgstr "Forskyd beskåret billede"
+
+#~ msgctxt "#30039"
+#~ msgid "GPU Rasterizer Overclock"
+#~ msgstr "Overclock GPU-rasterizer"
+
+#~ msgctxt "#30040"
+#~ msgid "Core Aspect Ratio"
+#~ msgstr "Billedformat for core"
+
+#~ msgctxt "#30041"
+#~ msgid "Initial Scan Line - NTSC"
+#~ msgstr "Første scanlinje - NTSC"
+
+#~ msgctxt "#30042"
+#~ msgid "Last Scan Line - NTSC"
+#~ msgstr "Sidste scanlinje - NTSC"
+
+#~ msgctxt "#30043"
+#~ msgid "Initial Scan Line - PAL"
+#~ msgstr "Første scanlinje - PAL"
+
+#~ msgctxt "#30044"
+#~ msgid "Last Scan Line - PAL"
+#~ msgstr "Sidste scanlinje - PAL"
+
+#~ msgctxt "#30045"
+#~ msgid "CD Access Method (Restart Required)"
+#~ msgstr "Adgangsmetode til CD (genstart påkrævet)"
+
+#~ msgctxt "#30046"
+#~ msgid "CD Loading Speed"
+#~ msgstr "Indlæsningshastighed for CD"
+
+#~ msgctxt "#30011"
+#~ msgid "Mouse Sensitivity"
+#~ msgstr "Musens følsomhed"
+
+#~ msgctxt "#30012"
+#~ msgid "NegCon Twist Response"
+#~ msgstr "NegCon twist-svar"
+
+#~ msgctxt "#30013"
+#~ msgid "NegCon Twist Deadzone"
+#~ msgstr "Dødzone for NegCon Twist"
+
+#~ msgctxt "#30014"
+#~ msgid "Memory Card 0 Method (Restart)"
+#~ msgstr "Hukommelseskort 0 metode (genstart)"
+
+#~ msgctxt "#30015"
+#~ msgid "Enable Memory Card 1 (Restart)"
+#~ msgstr "Aktiver hukommelseskort 1 (genstart)"
+
+#~ msgctxt "#30016"
+#~ msgid "Shared Memory Cards (Restart)"
+#~ msgstr "Delte hukommelseskort (genstart)"
+
+#~ msgctxt "#30017"
+#~ msgid "Memory Card Left Index"
+#~ msgstr "Venstre index for hukommelseskort"
+
+#~ msgctxt "#30018"
+#~ msgid "Memory Card Right Index"
+#~ msgstr "Højre index for hukommelseskort"
+
+#~ msgctxt "#30019"
+#~ msgid "PGXP Operation Mode"
+#~ msgstr "Driftstilstand for PGXP"
+
+#~ msgctxt "#30020"
+#~ msgid "PGXP 2D Geometry Tolerance"
+#~ msgstr "2D geometritolerance for PGXP"
+
+#~ msgctxt "#30021"
+#~ msgid "PGXP Primitive Culling"
+#~ msgstr "PGXP primitiv beskæring"
+
+#~ msgctxt "#30022"
+#~ msgid "Line-to-Quad Hack"
+#~ msgstr "Hack for line-to-quad"
+
+#~ msgctxt "#30023"
+#~ msgid "Widescreen Mode Hack"
+#~ msgstr "Hack til tilstand for widescreen"
+
+#~ msgctxt "#30024"
+#~ msgid "Widescreen Mode Hack Aspect Ratio"
+#~ msgstr "Billedformat ved hack i tilstand for widescreen"
+
+#~ msgctxt "#30025"
+#~ msgid "CPU Frequency Scaling (Overclock)"
+#~ msgstr "Skalering af CPU-frekvens (overclock)"
+
+#~ msgctxt "#30026"
+#~ msgid "GTE Overclock"
+#~ msgstr "Overclock GTE"
+
+#~ msgctxt "#30027"
+#~ msgid "Skip BIOS"
+#~ msgstr "Spring BIOS over"
+
+#~ msgctxt "#30028"
+#~ msgid "Override BIOS (Restart)"
+#~ msgstr "Overskriv BIOS (genstart)"
+
+#~ msgctxt "#30029"
+#~ msgid "CPU Dynarec"
+#~ msgstr "CPU Dynarec"
+
+#~ msgctxt "#30030"
+#~ msgid "Dynarec Code Invalidation"
+#~ msgstr "Invalidering af dynarec-kode"
+
+#~ msgctxt "#30031"
+#~ msgid "Dynarec DMA/GPU Event Cycles"
+#~ msgstr "Hændelsescyklusser for dynarec DMA/GPU"
+
+#~ msgctxt "#30032"
+#~ msgid "Core-Reported FPS Timing"
+#~ msgstr "FPS-timing rapporteret af core"
+
+#~ msgctxt "#30033"
+#~ msgid "PAL (European) Video Timing Override"
+#~ msgstr "Tilsidesæt PAL (europæisk) videotiming"
+
+#~ msgctxt "#30034"
+#~ msgid "Crop Overscan"
+#~ msgstr "Beskær overskandering"
+
+#~ msgctxt "#30035"
+#~ msgid "Additional Cropping"
+#~ msgstr "Yderligere beskæring"
+
+#~ msgctxt "#30036"
+#~ msgid "Offset Cropped Image"
+#~ msgstr "Forskyd beskåret billede"
+
+#~ msgctxt "#30037"
+#~ msgid "GPU Rasterizer Overclock"
+#~ msgstr "Overclock GPU-rasterizer"
+
+#~ msgctxt "#30038"
+#~ msgid "Core Aspect Ratio"
+#~ msgstr "Billedformat for core"
+
+#~ msgctxt "#30039"
+#~ msgid "Initial Scanline - NTSC"
+#~ msgstr "Første scanlinje - NTSC"
+
+#~ msgctxt "#30040"
+#~ msgid "Last Scanline - NTSC"
+#~ msgstr "Sidste scanlinje - NTSC"
+
+#~ msgctxt "#30041"
+#~ msgid "Initial Scanline - PAL"
+#~ msgstr "Første scanlinje - PAL"
+
+#~ msgctxt "#30042"
+#~ msgid "Last Scanline - PAL"
+#~ msgstr "Sidste scanlinje - PAL"
+
+#~ msgctxt "#30043"
+#~ msgid "CD Access Method (Restart)"
+#~ msgstr "Adgangsmetode til CD (genstart)"
+
+#~ msgctxt "#30044"
+#~ msgid "CD Loading Speed"
+#~ msgstr "Indlæsningshastighed for CD"

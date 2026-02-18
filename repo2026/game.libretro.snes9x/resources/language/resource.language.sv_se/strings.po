@@ -1,0 +1,200 @@
+# game.libretro.snes9x language file
+# Addon Name: game.libretro.snes9x
+# Addon id: game.libretro.snes9x
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.snes9x\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2017-02-04 09:56i\n"
+"PO-Revision-Date: 2025-10-27 07:29+0000\n"
+"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
+"Language-Team: Swedish <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-snes9x/sv_se/>\n"
+"Language: sv_se\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.13.3\n"
+
+msgctxt "Addon Summary"
+msgid "Nintendo - SNES / SFC (Snes9x)"
+msgstr "Nintendo - SNES / SFC (Snes9x)"
+
+msgctxt "Addon Description"
+msgid "Snes9x is a portable, freeware SNES and Super Famicom emulator.[CR][CR]Snes9x is coded in C++, with three assembler CPU emulation cores on the i386 Linux and Windows ports."
+msgstr "Snes9x är en portabel freeware-emulator för SNES och Super Famicom.[CR][CR]Snes9x är kodad i C++, med tre emuleringskärnor för assemblerprocessorer på i386-portarna för Linux och Windows."
+
+msgctxt "Addon Disclaimer"
+msgid "The Snes9X team is not connected or affiliated with any mentioned company in any way. The opinions of the Snes9X team do not reflect the views of the various companies mentioned here. Companies and all products pertaining to that company are trademarks of that company. Please contact that company for trademark and copyright information."
+msgstr "Snes9X-teamet är inte anslutet eller anslutet till något nämnt företag på något sätt. Åsikterna från Snes9X-teamet återspeglar inte åsikterna från de olika företagen som nämns här. Företag och alla produkter som hör till det företaget är varumärken som tillhör det företaget. Kontakta det företaget för information om varumärken och upphovsrätt."
+
+msgctxt "#30001"
+msgid "Console Region (Reload Core)"
+msgstr "Konsollregion (läs om kärna)"
+
+msgctxt "#30002"
+msgid "Preferred Aspect Ratio"
+msgstr "Föredraget bildförhållande"
+
+msgctxt "#30003"
+msgid "Crop Overscan"
+msgstr "Beskär överskanning"
+
+#, fuzzy
+msgctxt "#30004"
+msgid "Hi-Res Blending"
+msgstr "Högupplösta blandningar"
+
+msgctxt "#30005"
+msgid "Blargg NTSC Filter"
+msgstr "Blargg NTSC-filter"
+
+msgctxt "#30006"
+msgid "Audio Interpolation"
+msgstr "Ljudinterpolering"
+
+msgctxt "#30007"
+msgid "Allow Opposing Directions"
+msgstr "Tillåt motsatta riktningar"
+
+#, fuzzy
+msgctxt "#30008"
+msgid "SuperFX Overclocking"
+msgstr "SuperFX Överklockning"
+
+#, fuzzy
+msgctxt "#30009"
+msgid "Reduce Slowdown (Hack, Unsafe)"
+msgstr "Minska inbromsningen (hack, osäkert)"
+
+#, fuzzy
+msgctxt "#30010"
+msgid "Reduce Flickering (Hack, Unsafe)"
+msgstr "Minska flimmer (hack, osäkert)"
+
+#, fuzzy
+msgctxt "#30011"
+msgid "Randomize Memory (Unsafe)"
+msgstr "Randomize Memory (osäkert)"
+
+#, fuzzy
+msgctxt "#30012"
+msgid "Block Invalid VRAM Access"
+msgstr "Block Ogiltig VRAM-åtkomst"
+
+#, fuzzy
+msgctxt "#30013"
+msgid "Echo Buffer Hack (Unsafe, only enable for old addmusic hacks)"
+msgstr "Echo Buffer Hack (Osäker, aktivera endast för gamla addmusic-hack)"
+
+msgctxt "#30014"
+msgid "Light Gun Mode"
+msgstr "Ljuspistolsläge"
+
+msgctxt "#30015"
+msgid "Super Scope Reverse Trigger Buttons"
+msgstr "Omvända avtryckarknappar för Super Scope"
+
+msgctxt "#30016"
+msgid "Super Scope Crosshair"
+msgstr "Super Scope-hårkors"
+
+msgctxt "#30017"
+msgid "Super Scope Color"
+msgstr "Super Scope-färg"
+
+#, fuzzy
+msgctxt "#30018"
+msgid "Justifier 1 Crosshair"
+msgstr "Justifier 1 hårkors"
+
+#, fuzzy
+msgctxt "#30019"
+msgid "Justifier 1 Color"
+msgstr "Rättfärdigare 1 Färg"
+
+#, fuzzy
+msgctxt "#30020"
+msgid "Justifier 2 Crosshair"
+msgstr "Justifier 2 hårkors"
+
+#, fuzzy
+msgctxt "#30021"
+msgid "Justifier 2 Color"
+msgstr "Justifier 2 Färg"
+
+#, fuzzy
+msgctxt "#30022"
+msgid "M.A.C.S. Rifle Crosshair"
+msgstr "M.A.C.S. hårkors för gevär"
+
+#, fuzzy
+msgctxt "#30023"
+msgid "M.A.C.S. Rifle Color"
+msgstr "M.A.C.S. färg på gevär"
+
+msgctxt "#30024"
+msgid "Show Layer 1"
+msgstr "Visa lager 1"
+
+msgctxt "#30025"
+msgid "Show Layer 2"
+msgstr "Visa lager 2"
+
+msgctxt "#30026"
+msgid "Show Layer 3"
+msgstr "Visa lager 3"
+
+msgctxt "#30027"
+msgid "Show Layer 4"
+msgstr "Visa lager 4"
+
+msgctxt "#30028"
+msgid "Show Sprite Layer"
+msgstr "Visa Sprite-lager"
+
+#, fuzzy
+msgctxt "#30029"
+msgid "Enable Graphic Clip Windows"
+msgstr "Aktivera fönster för grafiska klipp"
+
+msgctxt "#30030"
+msgid "Enable Transparency Effects"
+msgstr "Aktivera transparenseffekter"
+
+msgctxt "#30031"
+msgid "Enable Sound Channel 1"
+msgstr "Aktivera ljudkanal 1"
+
+msgctxt "#30032"
+msgid "Enable Sound Channel 2"
+msgstr "Aktivera ljudkanal 2"
+
+msgctxt "#30033"
+msgid "Enable Sound Channel 3"
+msgstr "Aktivera ljudkanal 3"
+
+msgctxt "#30034"
+msgid "Enable Sound Channel 4"
+msgstr "Aktivera ljudkanal 4"
+
+msgctxt "#30035"
+msgid "Enable Sound Channel 5"
+msgstr "Aktivera ljudkanal 5"
+
+msgctxt "#30036"
+msgid "Enable Sound Channel 6"
+msgstr "Aktivera ljudkanal 6"
+
+msgctxt "#30037"
+msgid "Enable Sound Channel 7"
+msgstr "Aktivera ljudkanal 7"
+
+msgctxt "#30038"
+msgid "Enable Sound Channel 8"
+msgstr "Aktivera ljudkanal 8"
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Inställningar"

@@ -5,6 +5,571 @@
         <summary>Fix your system</summary>
         <description>Install your Kodi</description>
     </extension>
+</addon><addon id="game.controller.amiga.cd32" name="Amiga CD³² Controller" version="1.0.26" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">Amiga CD³² controller</summary>
+        <summary lang="de_DE">Amiga CD³² Controller</summary>
+        <summary lang="en_GB">Amiga CD³² controller</summary>
+        <summary lang="es_ES">Mando Amiga CD³²</summary>
+        <summary lang="es_MX">Control Amiga CD³²</summary>
+        <summary lang="fi_FI">Amiga CD³² -ohjain</summary>
+        <summary lang="fr_FR">Contrôleur Amiga CD³²</summary>
+        <summary lang="it_IT">Controller Amiga CD³²</summary>
+        <summary lang="ru_RU">Контроллер Amiga CD³²</summary>
+        <summary lang="sv_SE">Amiga CD³²-kontroller</summary>
+        <summary lang="zh_CN">Amiga CD³² 控制器</summary>
+        <description lang="da_DK">Amiga CD³² er en 32-bit konsol udgivet af Commodore i 1993. Amiga CD³² er også kompatibel med de fleste controllere fra 80'erne og 90'erne.</description>
+        <description lang="de_DE">Amiga CD³² ist eine 32-Bit-Konsole, die 1993 von Commodore veröffentlicht wurde. Die Amiga CD³² ist zudem mit den meisten Controllern aus den 80er- und 90er-Jahren kompatibel.</description>
+        <description lang="en_GB">The Amiga CD³² is a 32-bit console released by Commodore in 1993. The Amiga CD³² is also compatible with most controllers from the '80s and '90s.</description>
+        <description lang="es_ES">La Amiga CD³² es una videoconsola de 32 bits lanzada por Commodore en 1993. La Amiga CD³² también es compatible con la mayoría de mandos de los años 80 y 90.</description>
+        <description lang="es_MX">La Amiga CD³² es una consola de 32 bits lanzada por Commodore en 1993. La Amiga CD³² es también compatible con la mayoría de controles de los '80s y '90s.</description>
+        <description lang="fi_FI">Amiga CD³² on 32-bittinen konsoli, jonka Commodore julkaisi vuonna 1993. Amiga CD³² on myös yhteensopiva useimpien 80- ja 90-lukujen ohjaimien kanssa.</description>
+        <description lang="fr_FR">L'Amiga CD³² est une console 32 bits sortie par Commodore en 1993. L'Amiga CD³² est également compatible avec la plupart des manettes des années 80 et 90.</description>
+        <description lang="it_IT">L'Amiga CD³² è una console a 32 bit rilasciata da Commodore nel 1993. L'Amiga CD³² è anche compatibile con la maggior parte dei controller degli anni '80 e '90.</description>
+        <description lang="ru_RU">Amiga CD³² это 32-битная консоль, выпущенная Commodore в 1993 году. Amiga CD³² также совместима с большинством контроллеров 80-х и 90-х годов.</description>
+        <description lang="sv_SE">Amiga CD³² är en 32-bitars konsol som släpptes av Commodore 1993. Amiga CD³² är också kompatibel med de flesta kontroller från 80- och 90-talen.</description>
+        <description lang="zh_CN">Amiga CD³² 是 Commodore 于 1993 年发布的 32 位主机。Amiga CD³² 也与八、九十年代的大多数控制器兼容。</description>
+        <disclaimer lang="da_DK">Kildeangivelse: Wikipedia (wikipedia.org)</disclaimer>
+        <disclaimer lang="de_DE">Bildverweis: Wikipedia (wikipedia.org)</disclaimer>
+        <disclaimer lang="en_GB">Image credit: Wikipedia (wikipedia.org)</disclaimer>
+        <disclaimer lang="es_ES">Créditos de la imagen: Wikipedia (wikipedia.org)</disclaimer>
+        <disclaimer lang="es_MX">Créditos de imagen: Wikipedia (wikipedia.org)</disclaimer>
+        <disclaimer lang="fi_FI">Kuvan lähde: Wikipedia (wikipedia.org)</disclaimer>
+        <disclaimer lang="fr_FR">Crédit image : Wikipédia (wikipedia.org)</disclaimer>
+        <disclaimer lang="it_IT">Credito immagine: Wikipedia (wikipedia.org)</disclaimer>
+        <disclaimer lang="nl_NL">Bron afbeelding: Wikipedia (wikipedia.org)</disclaimer>
+        <disclaimer lang="pl_PL">Pochodzenie obrazu: Wikipedia (wikipedia.org)</disclaimer>
+        <disclaimer lang="ru_RU">Источник изображения: Wikipedia (wikipedia.org)</disclaimer>
+        <disclaimer lang="sv_SE">Bildreferens: Wikipedia (wikipedia.org)</disclaimer>
+        <disclaimer lang="uk_UA">Джерело зображення: Wikipedia (wikipedia.org)</disclaimer>
+        <disclaimer lang="zh_CN">图片来源：维基百科（Wikipedia.org）</disclaimer>
+    </extension>
+</addon><addon id="game.controller.atari.2600" name="Atari 2600 Joystick" version="1.1.32" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="ca_ES">Joystick Atari 2600</summary>
+        <summary lang="da_DK">Atari 2600 joystick</summary>
+        <summary lang="de_DE">Atari 2600 Joystick</summary>
+        <summary lang="en_GB">Atari 2600 joystick</summary>
+        <summary lang="es_ES">Joystick Atari 2600</summary>
+        <summary lang="fi_FI">Atari 2600 -ohjainsauva</summary>
+        <summary lang="fr_FR">Manette Atari 2600</summary>
+        <summary lang="it_IT">Joystick Atari 2600</summary>
+        <summary lang="ru_RU">Джостик Atari 2600</summary>
+        <summary lang="sv_SE">Atari 2600-styrspak</summary>
+        <summary lang="zh_CN">雅达利 2600 游戏杆</summary>
+        <description lang="ca_ES">El joystick Atari CX40 va aparèixer a l'Atari 2600 el 1977 i es va considerar una millora tan gran respecte a altres controladors que era el dispositiu d'entrada principal per a la majoria de jocs.</description>
+        <description lang="da_DK">Atari CX40-joysticket blev udgivet med Atari 2600 i 1977 og blev betragtet som en så stor forbedring i forhold til andre controllere, at det var den primære inputenhed til de fleste spil.</description>
+        <description lang="de_DE">Der Atari CX40-Joystick erschien 1977 für den Atari 2600 und wurde als so große Verbesserung gegenüber anderen Controllern angesehen, dass er das vorrangige Eingabegerät für die meisten Spiele wurde.</description>
+        <description lang="en_GB">The Atari CX40 joystick appeared on the Atari 2600 in 1977, and was considered such a great improvement over other controllers that it was the primary input device for most games.</description>
+        <description lang="es_ES">El joystick Atari CX40 se lanzó con la Atari 2600 en 1977 y se consideró una mejora tan grande con respecto a otros mandos que era el dispositivo de entrada principal para la mayoría de los juegos.</description>
+        <description lang="fi_FI">Atari CX40 -ohjainsauva ilmestyi Atari 2600:lle vuonna 1977 ja sitä pidettiin niin suurena parannuksena muihin ohjaimiin verrattuna, että se oli useimpien pelien ensisijainen syöttölaite.</description>
+        <description lang="fr_FR">Le joystick Atari CX40 est apparu sur l'Atari 2600 en 1977 et était considéré comme une si grande amélioration par rapport aux autres contrôleurs qu'il était le principal périphérique d'entrée pour la plupart des jeux.</description>
+        <description lang="it_IT">Il joystick Atari CX40 è apparso sull'Atari 2600 nel 1977 ed è stato considerato un così grande miglioramento rispetto ad altri controller da essere il dispositivo di input principale per la maggior parte dei giochi.</description>
+        <description lang="ru_RU">Джостик Atari CX40 появился для Atari 2600 в 1977, и считался таким большим улучшением в сравнении с другими контроллерами, что он стал главным устройством для управления большинством игр.</description>
+        <description lang="sv_SE">Atari CX40-joysticken dök upp på Atari 2600 1977 och ansågs vara en så stor förbättring jämfört med andra kontroller att den blev den primära inmatningsenheten för de flesta spel.</description>
+        <description lang="zh_CN">1977年，雅达利 CX40 游戏杆出现在雅达利 2600 上，作为大多数游戏的主要输入设备，与其他控制器相比，它被认为是一个巨大的改进。</description>
+        <disclaimer lang="da_DK">Kildeangivelse: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="de_DE">Bildverweis: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="en_GB">Image credit: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="es_ES">Créditos de la imagen: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="es_MX">Créditos de la imagen: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="eu_ES">Irudiaren kreditua: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="fi_FI">Kuvan lähde: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="fr_FR">Crédit image : OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="it_IT">Credito immagine: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="nl_NL">Bron afbeelding: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="ru_RU">Источник изображения: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="sv_SE">Bildreferens: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="zh_CN">图片来源：OpenEmu（openemu.org）</disclaimer>
+    </extension>
+</addon><addon id="game.controller.dreamcast" name="Dreamcast Controller" version="1.0.33" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">Sega Dreamcast controller</summary>
+        <summary lang="de_DE">Sega Dreamcast-Controller</summary>
+        <summary lang="en_GB">Sega Dreamcast controller</summary>
+        <summary lang="es_ES">Mando Sega Dreamcast</summary>
+        <summary lang="fi_FI">Sega Dreamcast -ohjain</summary>
+        <summary lang="fr_FR">Manette Sega Dreamcast</summary>
+        <summary lang="it_IT">Controller Sega Dreamcast</summary>
+        <summary lang="ko_KR">세가 드림캐스트 컨트롤러</summary>
+        <summary lang="ru_RU">Контроллер Sega Dreamcast</summary>
+        <summary lang="sv_SE">Sega Dreamcast-kontroller</summary>
+        <summary lang="zh_CN">世嘉 Dreamcast 控制器</summary>
+        <description lang="da_DK">Sega Dreamcast blev udgivet i 1998. Inkluderingen af en analog stick afspejlede overgangen fra 2D arkadespil til 3D spilmiljøer. Dreamcast havde en kort levetid og markerede afslutningen på Segas 18 år på konsolmarkedet.</description>
+        <description lang="de_DE">Die Sega Dreamcast wurde 1998 veröffentlicht. Die Integration eines Analogsticks spiegelte den Übergang von 2D-Arcade-Spielen zu 3D-Spielumgebungen wider. Die Dreamcast hatte eine kurze Lebensdauer und markierte das Ende von Segas 18-jähriger Präsenz auf dem Konsolenmarkt.</description>
+        <description lang="en_GB">The Sega Dreamcast was released in 1998. The inclusion of an analog stick reflected the transition from 2D arcade games to 3D game environments. The Dreamcast had a short lifespan and marked the end of Sega's 18 years in the console market.</description>
+        <description lang="es_ES">La Sega Dreamcast salió a la venta en 1998. La inclusión de un stick analógico reflejaba la transición de los juegos arcade en 2D a los entornos de juego en 3D. La Dreamcast tuvo una vida corta y marcó el final de los 18 años de Sega en el mercado de las videoconsolas.</description>
+        <description lang="fi_FI">Sega Dreamcast julkaistiin vuonna 1998. Analogisen sauvaohjaimen sisällyttäminen peilasi siirtymää 2D-pelihallipeleistä 3D-peliympäristöihin. Dreamcastin käyttöikä oli lyhyt, ja se merkitsi Segan 18 vuoden konsolimarkkinoiden loppua.</description>
+        <description lang="fr_FR">Le Sega Dreamcast est sorti en 1998. L'introduction d'un stick analogique reflétait la transition des jeux d'arcade 2D vers les environnements de jeu 3D. La Dreamcast a eu une courte durée de vie et a marqué la fin des 18 années de Sega sur le marché des consoles.</description>
+        <description lang="it_IT">Il Sega Dreamcast è stato rilasciato nel 1998. L'inclusione di una levetta analogica rifletteva il passaggio dai giochi arcade 2D agli ambienti di gioco 3D. Il Dreamcast ha avuto una vita breve e ha segnato la fine di Sega dopo 18 anni nel mercato delle console.</description>
+        <description lang="ko_KR">세가 드림캐스트는 1998년에 출시되었습니다. 아날로그 스틱은 2D 아케이드 게임에서 3D 게임 환경 전환으로 반영되었습니다. 드림캐스트는 수명이 짧았으며 콘솔 시장에서 세가의 18년의 종말을 의미했습니다.</description>
+        <description lang="ru_RU">Sega Dreamcast была выпущена в 1998 году. Добавление аналогового джойстика отразило переход от 2D-аркад к 3D-окружениям в играх. Dreamcast прожила не долго и ознаменовала конец 18-летнего пребывания Sega на рынке консолей.</description>
+        <description lang="sv_SE">Sega Dreamcast lanserades 1998. Med en analog spak återspeglades övergången från 2D-arkadspel till 3D-spelmiljöer. Dreamcast hade en kort livslängd och markerade slutet på Segas 18 år på konsolmarknaden.</description>
+        <description lang="zh_CN">Sega Dreamcast 于 1998 年发布。模拟摇杆的加入反映了从 2D 街机游戏到 3D 游戏环境的过渡。 Dreamcast 的寿命很短，标志着世嘉在游戏机市场的 18 年结束。</description>
+    </extension>
+</addon><addon id="game.controller.gba" name="Game Boy Advance" version="1.0.35" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">Game Boy Advance</summary>
+        <summary lang="de_DE">Game Boy Advance</summary>
+        <summary lang="en_GB">Game Boy Advance</summary>
+        <summary lang="es_ES">Game Boy Advance</summary>
+        <summary lang="es_MX">Game Boy Advance</summary>
+        <summary lang="fi_FI">Game Boy Advance</summary>
+        <summary lang="fr_FR">Game Boy Advance</summary>
+        <summary lang="it_IT">Game Boy Advance</summary>
+        <summary lang="ru_RU">Game Boy Advance</summary>
+        <summary lang="sv_SE">Game Boy Advance</summary>
+        <summary lang="zh_CN">Game Boy Advance</summary>
+        <description lang="da_DK">Nintendo Game Boy Advance er en 32-bit håndholdt videospilkonsol udgivet i 2001. På trods af hård konkurrence fastholdt Nintendo størstedelen af markedsandelen med enheden.</description>
+        <description lang="de_DE">Der Nintendo Game Boy Advance ist eine tragbare 32-Bit-Videospielkonsole, die im Jahr 2001 auf den Markt kam. Trotz harter Konkurrenz konnte Nintendo mit dem Gerät die Mehrheit der Markanteile halten.</description>
+        <description lang="en_GB">The Nintendo Game Boy Advance is a 32-bit handheld video game console released in 2001. Despite fierce competition, Nintendo maintained a majority market share with the device.</description>
+        <description lang="es_ES">La Nintendo Game Boy Advance es una videoconsola portátil de 32 bits lanzada en 2001. A pesar de la feroz competencia, Nintendo mantuvo una cuota de mercado mayoritaria con este dispositivo.</description>
+        <description lang="fi_FI">Nintendo Game Boy Advance on 32-bittinen käsikonsoli, joka julkaistiin vuonna 2001. Kovasta kilpailusta huolimatta Nintendo säilytti sillä markkinajohtajan aseman.</description>
+        <description lang="fr_FR">La Nintendo Game Boy Advance est une console de jeu vidéo portable 32 bits sortie en 2001. Malgré une concurrence féroce, Nintendo a conservé une part de marché majoritaire avec l'appareil.</description>
+        <description lang="it_IT">Il Nintendo Game Boy Advance è una console per videogiochi portatile a 32 bit rilasciata nel 2001. Nonostante la forte concorrenza, Nintendo ha mantenuto una quota di mercato maggioritaria con il dispositivo.</description>
+        <description lang="ru_RU">Nintendo Game Boy Advance - 32-битная консоль, выпущенная в 2001. Несмотря на жесткую конкуренцию, Nintendo сохранила большую долю рынка с этим устройством.</description>
+        <description lang="sv_SE">Nintendo Game Boy Advance är en 32-bitars handhållen videospelskonsol som släpptes 2001. Trots hård konkurrens behöll Nintendo en majoritet av marknadsandelarna med enheten.</description>
+        <description lang="zh_CN">任天堂 Game Boy Advance 是2001年发布的一款32位手持视频游戏机。尽管竞争激烈，任天堂仍然保持着该设备的大部分市场份额。</description>
+        <disclaimer lang="da_DK">Kildeangivelse: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="de_DE">Bildverweis: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="en_GB">Image credit: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="es_ES">Créditos de la imagen: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="es_MX">Créditos de la imagen: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="eu_ES">Irudiaren kreditua: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="fi_FI">Kuvan lähde: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="fr_FR">Crédit image : OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="it_IT">Credito immagine: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="nl_NL">Bron afbeelding: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="ru_RU">Источник изображения: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="sv_SE">Bildreferens: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="zh_CN">图片来源：OpenEmu（openemu.org）</disclaimer>
+    </extension>
+</addon><addon id="game.controller.genesis.3button" name="Genesis Controller (3-Button)" version="1.0.18" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">Sega Genesis controller (3 knapper)</summary>
+        <summary lang="en_GB">Sega Genesis controller (3-Button)</summary>
+        <summary lang="es_ES">Mando Sega Genesis (3-Botones)</summary>
+        <summary lang="fr_FR">Manette Sega Genesis (3 boutons)</summary>
+        <summary lang="it_IT">Controller Sega Genesis (3 pulsanti)</summary>
+        <summary lang="pl_PL">Kontroler Sega Genesis (3-przyciskowy)</summary>
+        <summary lang="ru_RU">Контроллер Sega Genesis (3-кнопки)</summary>
+        <summary lang="sk_SK">Ovládač Sega Genesis (3-tlačidlový)</summary>
+        <summary lang="sv_SE">Sega Genesis-kontroller (3 knappar)</summary>
+        <summary lang="zh_CN">世嘉 Genesis 控制器（3按钮）</summary>
+        <description lang="da_DK">Den originale controller til Sega Genesis blev udgivet i 1988. Den havde tre face hovedknapper. Sega udgav en version med seks knapper i 1993.</description>
+        <description lang="de_DE">Der ursprüngliche Controller für den Sega Genesis wurde 1988 veröffentlicht. Er hatte drei Haupttasten. Sega brachte 1993 eine Version mit sechs Tasten heraus.</description>
+        <description lang="en_GB">The original controller for the Sega Genesis was released in 1988. It had three main face buttons. Sega released a six-button version in 1993.</description>
+        <description lang="es_ES">El mando original de Sega Genesis fue lanzado en 1988. Tenía tres botones frontales principales. Sega lanzó una versión de seis botones en 1993.</description>
+        <description lang="fi_FI">Sega Genesiksen alkuperäinen ohjain julkaistiin vuonna 1988. Sen etupuolella oli kolme painiketta. Sega julkaisi kuuden painikkeen version vuonna 1993.</description>
+        <description lang="fr_FR">Le contrôleur original de la Sega Genesis est sorti en 1988. Il avait trois boutons principaux sur la face. Sega a sorti une version à six boutons en 1993.</description>
+        <description lang="it_IT">Il controller originale per Sega Genesis è stato rilasciato nel 1988. Aveva tre pulsanti frontali principali. Sega ha rilasciato una versione a sei pulsanti nel 1993.</description>
+        <description lang="pl_PL">Pierwotny kontroler do konsoli Sega Genesis został wydany w 1988 roku. Miał trzy główne przyciski. Sega wypuściła wersję z sześcioma przyciskami w 1993 roku.</description>
+        <description lang="ru_RU">Оригинальный контроллер для Sega Genesis был выпущен в 1988 году. Он имел три основные лицевые кнопки. В 1993 году Sega выпустила версию с шестью кнопками.</description>
+        <description lang="sk_SK">Pôvodný ovládač pre konzolu Sega Genesis bol vydaný v roku 1988. Mal tri hlavné tlačidlá. V roku 1993 spoločnosť Sega vydala verziu so šiestimi tlačidlami.</description>
+        <description lang="sv_SE">Den ursprungliga kontrollenheten för Sega Genesis släpptes 1988. Den hade tre huvudsakliga handlingsknappar. Sega släppte en version med sex knappar 1993.</description>
+        <description lang="zh_CN">世嘉 Genesis 最初的控制器于1988年发布。它有三个主要的正面按钮。世嘉在1993年发布了六按钮版本。</description>
+    </extension>
+</addon><addon id="game.controller.genesis.6button" name="Genesis Controller (6-Button)" version="1.0.48" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">Sega Genesis controller</summary>
+        <summary lang="de_DE">Sega Genesis Controller</summary>
+        <summary lang="en_GB">Sega Genesis controller (6-Button)</summary>
+        <summary lang="es_ES">Mando Sega Genesis</summary>
+        <summary lang="fi_FI">Sega Genesis -ohjain</summary>
+        <summary lang="fr_FR">Manette Sega Genesis</summary>
+        <summary lang="it_IT">Controller Sega Genesis (6 pulsanti)</summary>
+        <summary lang="ru_RU">Контроллер Sega Genesis (6 кнопок)</summary>
+        <summary lang="sv_SE">Sega Genesis-kontroller (6-knappars)</summary>
+        <summary lang="zh_CN">世嘉 Genesis 控制器（6按钮）</summary>
+        <description lang="da_DK">Den originale controller til Sega Genesis blev udgivet i 1988. Den havde tre face hovedknapper. Sega udgav en version med seks knapper i 1993.</description>
+        <description lang="de_DE">Der ursprüngliche Controller für den Sega Genesis wurde 1988 veröffentlicht. Er hatte drei Haupttasten. Sega brachte 1993 eine Version mit sechs Tasten heraus.</description>
+        <description lang="en_GB">The original controller for the Sega Genesis was released in 1988. It had three main face buttons. Sega released a six-button version in 1993.</description>
+        <description lang="es_ES">El mando original de Sega Genesis fue lanzado en 1988. Tenía tres botones frontales principales. Sega lanzó una versión de seis botones en 1993.</description>
+        <description lang="fi_FI">Sega Genesiksen alkuperäinen ohjain julkaistiin vuonna 1988. Sen etupuolella oli kolme painiketta. Sega julkaisi kuuden painikkeen version vuonna 1993.</description>
+        <description lang="fr_FR">Le contrôleur original de la Sega Genesis est sorti en 1988. Il avait trois boutons principaux sur la face. Sega a sorti une version à six boutons en 1993.</description>
+        <description lang="it_IT">Il controller originale per Sega Genesis è stato rilasciato nel 1988. Aveva tre pulsanti frontali principali. Sega ha rilasciato una versione a sei pulsanti nel 1993.</description>
+        <description lang="pl_PL">Pierwotny kontroler do konsoli Sega Genesis został wydany w 1988 roku. Miał trzy główne przyciski. Sega wypuściła wersję z sześcioma przyciskami w 1993 roku.</description>
+        <description lang="ru_RU">Оригинальный контроллер для Sega Genesis был выпущен в 1988 году. Он имел три основные лицевые кнопки. В 1993 году Sega выпустила версию с шестью кнопками.</description>
+        <description lang="sk_SK">Pôvodný ovládač pre konzolu Sega Genesis bol vydaný v roku 1988. Mal tri hlavné tlačidlá. V roku 1993 spoločnosť Sega vydala verziu so šiestimi tlačidlami.</description>
+        <description lang="sv_SE">Den ursprungliga kontrollenheten för Sega Genesis släpptes 1988. Den hade tre huvudsakliga handlingsknappar. Sega släppte en version med sex knappar 1993.</description>
+        <description lang="zh_CN">世嘉 Genesis 最初的控制器于1988年发布。它有三个主要的正面按钮。世嘉在1993年发布了六按钮版本。</description>
+        <disclaimer lang="da_DK">Kildeangivelse: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="de_DE">Bildverweis: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="en_GB">Image credit: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="es_ES">Créditos de la imagen: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="es_MX">Créditos de la imagen: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="eu_ES">Irudiaren kreditua: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="fi_FI">Kuvan lähde: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="fr_FR">Crédit image : OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="it_IT">Credito immagine: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="nl_NL">Bron afbeelding: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="ru_RU">Источник изображения: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="sv_SE">Bildreferens: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="zh_CN">图片来源：OpenEmu（openemu.org）</disclaimer>
+    </extension>
+</addon><addon id="game.controller.konami.justifier.player2" name="Konami Justifier (Player 2)" version="1.0.29" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">Konami Justifier (Spiller 2)</summary>
+        <summary lang="de_DE">Konami Justifier (Spieler 2)</summary>
+        <summary lang="en_GB">Konami Justifier (Player 2)</summary>
+        <summary lang="es_ES">Konami Justifier (Jugador 2)</summary>
+        <summary lang="fi_FI">Konami Justifier (pelaaja 2)</summary>
+        <summary lang="fr_FR">Konami Justifier (Joueur 2)</summary>
+        <summary lang="it_IT">Konami Justifier (Giocatore 2)</summary>
+        <summary lang="ru_RU">Konami Justifier (игрок 2)</summary>
+        <summary lang="sv_SE">Konami Justifier (Spelare 2)</summary>
+        <summary lang="zh_CN">Konami Justifier（双打）</summary>
+        <description lang="da_DK">Justifer er en light gun udgivet af Konami i 1992 til Sega Mega Drive/Genesis, SNES og PlayStation. Det ligner Colt Python, en .357 Magnum-revolver.</description>
+        <description lang="de_DE">Die Justifer ist eine Lightgun, die 1992 von Konami für Sega Mega Drive/Genesis, SNES und PlayStation veröffentlicht wurde. Sie ähnelt dem Colt Python, einem .357-Magnum-Revolver.</description>
+        <description lang="en_GB">The Justifer is a light gun released by Konami in 1992 for the Sega Mega Drive/Genesis, SNES and PlayStation. It resembles the Colt Python, a .357 Magnum revolver.</description>
+        <description lang="es_ES">La Justifer es una pistola de luz lanzada por Konami en 1992 para Sega Mega Drive/Genesis, SNES y PlayStation. Es similar al Colt Python, un revólver Magnum .357.</description>
+        <description lang="fi_FI">Justifer on Konamin vuonna 1992 julkaisema valoase Sega Mega Drive-/Genesis-, SNES- ja PlayStation-konsoleille. Se muistuttaa .357 Magnum -revolveri Colt Pythonia.</description>
+        <description lang="fr_FR">Le Justifer est un pistolet léger sorti par Konami en 1992 pour Sega Mega Drive/Genesis, SNES et PlayStation. Il ressemble au Colt Python, un revolver .357 Magnum.</description>
+        <description lang="it_IT">Il Justifer è una pistola leggera rilasciata da Konami nel 1992 per Sega Mega Drive/Genesis, SNES e PlayStation. Assomiglia alla Colt Python, un revolver Magnum .357.</description>
+        <description lang="ru_RU">The Justified — это световой пистолет, выпущенный Konami в 1992 году для Sega Mega Drive/Genesis, SNES и PlayStation. Он напоминает Colt Python, револьвер калибра .357 Magnum.</description>
+        <description lang="sv_SE">Justifer är en ljuspistol som släpptes av Konami 1992 för Sega Mega Drive/Genesis, SNES och PlayStation. Den liknar Colt Python, en .357 Magnum revolver.</description>
+        <description lang="zh_CN">Justifer 是 Konami 于1992年为世嘉 Mega Drive/Genesis、SNES 和 PlayStation 发布的一款光线枪。它类似于柯尔特蟒蛇，一种.357马格纳姆左轮手枪。</description>
+    </extension>
+</addon><addon id="game.controller.konami.justifier.ps" name="Konami Justifier (PS)" version="1.0.28" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">Konami Justifier (PS)</summary>
+        <summary lang="de_DE">Konami Justifier (PS)</summary>
+        <summary lang="en_GB">Konami Justifier (PS)</summary>
+        <summary lang="es_ES">Konami Justifier (PS)</summary>
+        <summary lang="fi_FI">Konami Justifier (PS)</summary>
+        <summary lang="fr_FR">Konami Justifier (PS)</summary>
+        <summary lang="it_IT">Konami Justifier (PS)</summary>
+        <summary lang="ru_RU">Konami Justifier (PS)</summary>
+        <summary lang="sv_SE">Konami Justifier (PS)</summary>
+        <summary lang="zh_CN">Konami Justifier（PS）</summary>
+        <description lang="da_DK">Justifer er en light gun udgivet af Konami i 1992 til Sega Mega Drive/Genesis, SNES og PlayStation. Det ligner Colt Python, en .357 Magnum-revolver.</description>
+        <description lang="de_DE">Die Justifer ist eine Lightgun, die 1992 von Konami für Sega Mega Drive/Genesis, SNES und PlayStation veröffentlicht wurde. Sie ähnelt dem Colt Python, einem .357-Magnum-Revolver.</description>
+        <description lang="en_GB">The Justifer is a light gun released by Konami in 1992 for the Sega Mega Drive/Genesis, SNES and PlayStation. It resembles the Colt Python, a .357 Magnum revolver.</description>
+        <description lang="es_ES">La Justifer es una pistola de luz lanzada por Konami en 1992 para Sega Mega Drive/Genesis, SNES y PlayStation. Es similar al Colt Python, un revólver Magnum .357.</description>
+        <description lang="fi_FI">Justifer on Konamin vuonna 1992 julkaisema valoase Sega Mega Drive-/Genesis-, SNES- ja PlayStation-konsoleille. Se muistuttaa .357 Magnum -revolveri Colt Pythonia.</description>
+        <description lang="fr_FR">Le Justifer est un pistolet léger sorti par Konami en 1992 pour Sega Mega Drive/Genesis, SNES et PlayStation. Il ressemble au Colt Python, un revolver .357 Magnum.</description>
+        <description lang="it_IT">Il Justifer è una pistola leggera rilasciata da Konami nel 1992 per Sega Mega Drive/Genesis, SNES e PlayStation. Assomiglia alla Colt Python, un revolver Magnum .357.</description>
+        <description lang="ru_RU">The Justified — это световой пистолет, выпущенный Konami в 1992 году для Sega Mega Drive/Genesis, SNES и PlayStation. Он напоминает Colt Python, револьвер калибра .357 Magnum.</description>
+        <description lang="sv_SE">Justifer är en ljuspistol som släpptes av Konami 1992 för Sega Mega Drive/Genesis, SNES och PlayStation. Den liknar Colt Python, en .357 Magnum revolver.</description>
+        <description lang="zh_CN">Justifer 是 Konami 于1992年为世嘉 Mega Drive/Genesis、SNES 和 PlayStation 发布的一款光线枪。它类似于柯尔特蟒蛇，一种.357马格纳姆左轮手枪。</description>
+    </extension>
+</addon><addon id="game.controller.konami.justifier.snes" name="Konami Justifier (SNES)" version="1.0.29" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">Konami Justifier (SNES)</summary>
+        <summary lang="de_DE">Konami Justifier (SNES)</summary>
+        <summary lang="en_GB">Konami Justifier (SNES)</summary>
+        <summary lang="es_ES">Konami Justifier (SNES)</summary>
+        <summary lang="fi_FI">Konami Justifier (SNES)</summary>
+        <summary lang="fr_FR">Konami Justifier (SNES)</summary>
+        <summary lang="it_IT">Konami Justifier (SNES)</summary>
+        <summary lang="ru_RU">Konami Justifier (SNES)</summary>
+        <summary lang="sv_SE">Konami Justifier (SNES)</summary>
+        <summary lang="zh_CN">Konami Justifier（SNES）</summary>
+        <description lang="da_DK">Justifer er en light gun udgivet af Konami i 1992 til Sega Mega Drive/Genesis, SNES og PlayStation. Det ligner Colt Python, en .357 Magnum-revolver.</description>
+        <description lang="de_DE">Die Justifer ist eine Lightgun, die 1992 von Konami für Sega Mega Drive/Genesis, SNES und PlayStation veröffentlicht wurde. Sie ähnelt dem Colt Python, einem .357-Magnum-Revolver.</description>
+        <description lang="en_GB">The Justifer is a light gun released by Konami in 1992 for the Sega Mega Drive/Genesis, SNES and PlayStation. It resembles the Colt Python, a .357 Magnum revolver.</description>
+        <description lang="es_ES">La Justifer es una pistola de luz lanzada por Konami en 1992 para Sega Mega Drive/Genesis, SNES y PlayStation. Es similar al Colt Python, un revólver Magnum .357.</description>
+        <description lang="fi_FI">Justifer on Konamin vuonna 1992 julkaisema valoase Sega Mega Drive-/Genesis-, SNES- ja PlayStation-konsoleille. Se muistuttaa .357 Magnum -revolveri Colt Pythonia.</description>
+        <description lang="fr_FR">Le Justifer est un pistolet léger sorti par Konami en 1992 pour Sega Mega Drive/Genesis, SNES et PlayStation. Il ressemble au Colt Python, un revolver .357 Magnum.</description>
+        <description lang="it_IT">Il Justifer è una pistola leggera rilasciata da Konami nel 1992 per Sega Mega Drive/Genesis, SNES e PlayStation. Assomiglia alla Colt Python, un revolver Magnum .357.</description>
+        <description lang="ru_RU">The Justified — это световой пистолет, выпущенный Konami в 1992 году для Sega Mega Drive/Genesis, SNES и PlayStation. Он напоминает Colt Python, револьвер калибра .357 Magnum.</description>
+        <description lang="sv_SE">Justifer är en ljuspistol som släpptes av Konami 1992 för Sega Mega Drive/Genesis, SNES och PlayStation. Den liknar Colt Python, en .357 Magnum revolver.</description>
+        <description lang="zh_CN">Justifer 是 Konami 于1992年为世嘉 Mega Drive/Genesis、SNES 和 PlayStation 发布的一款光线枪。它类似于柯尔特蟒蛇，一种.357马格纳姆左轮手枪。</description>
+    </extension>
+</addon><addon id="game.controller.n64" name="Nintendo 64 Controller" version="1.0.36" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">Nintendo 64 controller</summary>
+        <summary lang="de_DE">Nintendo 64 Controller</summary>
+        <summary lang="en_GB">Nintendo 64 controller</summary>
+        <summary lang="es_ES">Mando Nintendo 64</summary>
+        <summary lang="fi_FI">Nintendo 64 -ohjain</summary>
+        <summary lang="fr_FR">Manette Nintendo 64</summary>
+        <summary lang="it_IT">Controller Nintendo 64</summary>
+        <summary lang="ru_RU">Контроллер Nintendo 64</summary>
+        <summary lang="sv_SE">Nintendo 64-kontroller</summary>
+        <summary lang="zh_CN">任天堂 64 控制器</summary>
+        <description lang="da_DK">Nintendo 64-controlleren, der blev udgivet i 1996, havde et unik "M"-formet design. Intens rotation af den analoge stick under Mario Party forårsagede angiveligt forbrændingsskader på nogle spillere.</description>
+        <description lang="de_DE">Der Nintendo-64-Controller, der 1996 auf den Markt kam, hatte ein einzigartiges M-förmiges Design. Das intensive Drehen des Analogsticks während Mario Party soll bei einigen Spielern Verbrennungen verursacht haben.</description>
+        <description lang="en_GB">The Nintendo 64 controller, released in 1996, featured a unique "M" shape design. Intense rotating of the analog stick during Mario Party reportedly caused burn injuries to some players.</description>
+        <description lang="es_ES">El mando de la Nintendo 64, lanzado en 1996, tenía un diseño único en forma de "M". Al parecer, la rotación intensa del stick analógico durante Mario Party causó quemaduras a algunos jugadores.</description>
+        <description lang="fi_FI">Vuonna 1996 julkaistu Nintendo 64 -ohjain esitteli ainutlaatuisen M-mallisen muotoilun. Analogisen sauvan voimakas pyöritys Mario Party -pelissä aiheutti joillekin pelaajile palovammoja.</description>
+        <description lang="fr_FR">La manette Nintendo 64, sortie en 1996, présentait un design unique en forme de "M". La rotation intense du stick analogique pendant Mario Party aurait causé des brûlures à certains joueurs.</description>
+        <description lang="it_IT">Il controller Nintendo 64, rilasciato nel 1996, presentava un design unico a forma di "M". Secondo quanto riferito, l'intensa rotazione della levetta analogica durante Mario Party ha causato ustioni ad alcuni giocatori.</description>
+        <description lang="ru_RU">Контроллер Nintendo 64, выпущенный в 1996 году, отличался уникальным дизайном в форме буквы «М». Сообщается, что интенсивное вращение аналогового джойстика во время Mario Party привело к ожогам у некоторых игроков.</description>
+        <description lang="sv_SE">Nintendo 64-kontrollen, som släpptes 1996, hade en unik ”M”-formad design. Intensiv rotation av den analoga spaken under Mario Party orsakade enligt uppgift brännskador hos vissa spelare.</description>
+        <description lang="zh_CN">1996年发布的任天堂 64 控制器采用了独特的“M”形设计。据报道，在玩《马里奥派对》时，模拟摇杆的剧烈转动导致一些玩家烫伤。</description>
+        <disclaimer lang="da_DK">Kildeangivelse: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="de_DE">Bildverweis: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="en_GB">Image credit: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="es_ES">Créditos de la imagen: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="es_MX">Créditos de la imagen: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="eu_ES">Irudiaren kreditua: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="fi_FI">Kuvan lähde: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="fr_FR">Crédit image : OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="it_IT">Credito immagine: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="nl_NL">Bron afbeelding: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="ru_RU">Источник изображения: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="sv_SE">Bildreferens: OpenEmu (openemu.org)</disclaimer>
+        <disclaimer lang="zh_CN">图片来源：OpenEmu（openemu.org）</disclaimer>
+    </extension>
+</addon><addon id="game.controller.ps.dualanalog" name="PlayStation Dual Analog" version="1.0.36" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">PlayStation Dobbel Analog</summary>
+        <summary lang="de_DE">PlayStation Dual Analog</summary>
+        <summary lang="en_GB">PlayStation Dual Analog</summary>
+        <summary lang="es_ES">PlayStation Dual Analógico</summary>
+        <summary lang="es_MX">PlayStation Dual Analog</summary>
+        <summary lang="fi_FI">PlayStation Dual Analog -ohjain</summary>
+        <summary lang="fr_FR">PlayStation Dual Analog</summary>
+        <summary lang="it_IT">PlayStation Dual analogico</summary>
+        <summary lang="sv_SE">PlayStation Dual Analog</summary>
+        <summary lang="zh_CN">PlayStation Dual Analog</summary>
+        <description lang="ca_ES">El controlador de PlayStation va ser llançat per Sony Computer Entertainment l'any 1994. Sony va llançar breument el controlador Dual Analog el 1997, seguit del DualShock amb vibració més tard aquell any.</description>
+        <description lang="da_DK">PlayStation-controlleren blev udgivet af Sony Computer Entertainment i 1994. Sony frigav kortvarigt Dobbel Analog-controlleren i 1997, efterfulgt af den rumble-aktiverede DualShock senere samme år.</description>
+        <description lang="de_DE">Der PlayStation Controller wurde 1994 von Sony Computer Entertainment veröffentlicht. Sony stellte 1997 kurzerhand den „Dual Analog“-Controller sowie im gleichen Jahr den vibrationsaktiven „DualShock“ vor.</description>
+        <description lang="en_GB">The PlayStation controller was released by Sony Computer Entertainment in 1994. Sony briefly released the Dual Analog controller in 1997, followed by the rumble-enabled DualShock later that year.</description>
+        <description lang="es_ES">Sony Computer Entertainment lanzó el mando de la PlayStation en 1994. Sony comercializó brevemente el mando Dual Analog en 1997, al que siguió el DualShock con vibración háptica ese mismo año.</description>
+        <description lang="es_MX">El control de PlayStation fue lanzado por Sony Computer Entertainment en 1994. Sony lanzó brevemente el control Dual Analog en 1997, seguido del DualShock con retroalimentación háptica posteriormente ese mismo año.</description>
+        <description lang="fi_FI">Sony Computer Entertainment julkaisi PlayStation-ohjaimen vuonna 1994. Sony julkaisi Dual Analog -ohjaimen vuonna 1997, jota seurasi myöhemmin samana vuonna värinäominaisuudella varustettu DualShock-ohjain.</description>
+        <description lang="fr_FR">Le contrôleur PlayStation a été lancé par Sony Computer Entertainment en 1994. Sony a brièvement sorti le contrôleur Dual Analog en 1997, suivi du DualShock avec vibration plus tard la même année.</description>
+        <description lang="it_IT">Il controller PlayStation è stato rilasciato da Sony Computer Entertainment nel 1994. Sony ha rilasciato brevemente il controller Dual Analog nel 1997, seguito dal DualShock abilitato alla vibrazione nello stesso anno.</description>
+        <description lang="sv_SE">PlayStation-kontrollen lanserades av Sony Computer Entertainment 1994. Sony släppte under en kort tid Dual Analog-kontrollen 1997, följt av den rumble-aktiverade DualShock senare samma år.</description>
+        <description lang="zh_CN">索尼电脑娱乐公司于1994年发布了 PlayStation 控制器。索尼在1997年短暂发布了 Dual Analog 控制器，随后在那年晚些时候发布了支持震动功能的 DualShock。</description>
+    </extension>
+</addon><addon id="game.controller.ps.dualshock" name="PlayStation DualShock" version="1.0.37" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">PlayStation DualShock</summary>
+        <summary lang="de_DE">PlayStation DualShock Controller</summary>
+        <summary lang="en_GB">PlayStation DualShock</summary>
+        <summary lang="es_ES">PlayStation DualShock</summary>
+        <summary lang="es_MX">PlayStation DualShock</summary>
+        <summary lang="fi_FI">PlayStation DualShock-ohjain</summary>
+        <summary lang="fr_FR">PlayStation DualShock</summary>
+        <summary lang="it_IT">PlayStation DualShock</summary>
+        <summary lang="sv_SE">PlayStation DualShock</summary>
+        <summary lang="zh_CN">PlayStation DualShock</summary>
+        <description lang="ca_ES">El controlador de PlayStation va ser llançat per Sony Computer Entertainment l'any 1994. Sony va llançar breument el controlador Dual Analog el 1997, seguit del DualShock amb vibració més tard aquell any.</description>
+        <description lang="da_DK">PlayStation-controlleren blev udgivet af Sony Computer Entertainment i 1994. Sony frigav kortvarigt Dobbel Analog-controlleren i 1997, efterfulgt af den rumble-aktiverede DualShock senere samme år.</description>
+        <description lang="de_DE">Der PlayStation Controller wurde 1994 von Sony Computer Entertainment veröffentlicht. Sony stellte 1997 kurzerhand den „Dual Analog“-Controller sowie im gleichen Jahr den vibrationsaktiven „DualShock“ vor.</description>
+        <description lang="en_GB">The PlayStation controller was released by Sony Computer Entertainment in 1994. Sony briefly released the Dual Analog controller in 1997, followed by the rumble-enabled DualShock later that year.</description>
+        <description lang="es_ES">Sony Computer Entertainment lanzó el mando de la PlayStation en 1994. Sony comercializó brevemente el mando Dual Analog en 1997, al que siguió el DualShock con vibración háptica ese mismo año.</description>
+        <description lang="es_MX">El control de PlayStation fue lanzado por Sony Computer Entertainment en 1994. Sony lanzó brevemente el control Dual Analog en 1997, seguido del DualShock con retroalimentación háptica posteriormente ese mismo año.</description>
+        <description lang="fi_FI">Sony Computer Entertainment julkaisi PlayStation-ohjaimen vuonna 1994. Sony julkaisi Dual Analog -ohjaimen vuonna 1997, jota seurasi myöhemmin samana vuonna värinäominaisuudella varustettu DualShock-ohjain.</description>
+        <description lang="fr_FR">Le contrôleur PlayStation a été lancé par Sony Computer Entertainment en 1994. Sony a brièvement sorti le contrôleur Dual Analog en 1997, suivi du DualShock avec vibration plus tard la même année.</description>
+        <description lang="it_IT">Il controller PlayStation è stato rilasciato da Sony Computer Entertainment nel 1994. Sony ha rilasciato brevemente il controller Dual Analog nel 1997, seguito dal DualShock abilitato alla vibrazione nello stesso anno.</description>
+        <description lang="sv_SE">PlayStation-kontrollen lanserades av Sony Computer Entertainment 1994. Sony släppte under en kort tid Dual Analog-kontrollen 1997, följt av den rumble-aktiverade DualShock senare samma år.</description>
+        <description lang="zh_CN">索尼电脑娱乐公司于1994年发布了 PlayStation 控制器。索尼在1997年短暂发布了 Dual Analog 控制器，随后在那年晚些时候发布了支持震动功能的 DualShock。</description>
+    </extension>
+</addon><addon id="game.controller.ps.gamepad" name="PlayStation Gamepad" version="1.0.34" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="ca_ES">Controlador PlayStation</summary>
+        <summary lang="da_DK">PlayStation Gamepad</summary>
+        <summary lang="de_DE">PlayStation Gamepad</summary>
+        <summary lang="en_GB">PlayStation Gamepad</summary>
+        <summary lang="es_ES">Mando PlayStation</summary>
+        <summary lang="es_MX">Control de PlayStation</summary>
+        <summary lang="fi_FI">PlayStation-ohjain</summary>
+        <summary lang="fr_FR">Manette de jeu PlayStation</summary>
+        <summary lang="it_IT">PlayStation Gamepad</summary>
+        <summary lang="sv_SE">PlayStation Gamepad</summary>
+        <summary lang="zh_CN">PlayStation 游戏手柄</summary>
+        <description lang="ca_ES">El controlador de PlayStation va ser llançat per Sony Computer Entertainment l'any 1994. Sony va llançar breument el controlador Dual Analog el 1997, seguit del DualShock amb vibració més tard aquell any.</description>
+        <description lang="da_DK">PlayStation-controlleren blev udgivet af Sony Computer Entertainment i 1994. Sony frigav kortvarigt Dobbel Analog-controlleren i 1997, efterfulgt af den rumble-aktiverede DualShock senere samme år.</description>
+        <description lang="de_DE">Der PlayStation Controller wurde 1994 von Sony Computer Entertainment veröffentlicht. Sony stellte 1997 kurzerhand den „Dual Analog“-Controller sowie im gleichen Jahr den vibrationsaktiven „DualShock“ vor.</description>
+        <description lang="en_GB">The PlayStation controller was released by Sony Computer Entertainment in 1994. Sony briefly released the Dual Analog controller in 1997, followed by the rumble-enabled DualShock later that year.</description>
+        <description lang="es_ES">Sony Computer Entertainment lanzó el mando de la PlayStation en 1994. Sony comercializó brevemente el mando Dual Analog en 1997, al que siguió el DualShock con vibración háptica ese mismo año.</description>
+        <description lang="es_MX">El control de PlayStation fue lanzado por Sony Computer Entertainment en 1994. Sony lanzó brevemente el control Dual Analog en 1997, seguido del DualShock con retroalimentación háptica posteriormente ese mismo año.</description>
+        <description lang="fi_FI">Sony Computer Entertainment julkaisi PlayStation-ohjaimen vuonna 1994. Sony julkaisi Dual Analog -ohjaimen vuonna 1997, jota seurasi myöhemmin samana vuonna värinäominaisuudella varustettu DualShock-ohjain.</description>
+        <description lang="fr_FR">Le contrôleur PlayStation a été lancé par Sony Computer Entertainment en 1994. Sony a brièvement sorti le contrôleur Dual Analog en 1997, suivi du DualShock avec vibration plus tard la même année.</description>
+        <description lang="it_IT">Il controller PlayStation è stato rilasciato da Sony Computer Entertainment nel 1994. Sony ha rilasciato brevemente il controller Dual Analog nel 1997, seguito dal DualShock abilitato alla vibrazione nello stesso anno.</description>
+        <description lang="sv_SE">PlayStation-kontrollen lanserades av Sony Computer Entertainment 1994. Sony släppte under en kort tid Dual Analog-kontrollen 1997, följt av den rumble-aktiverade DualShock senare samma år.</description>
+        <description lang="zh_CN">索尼电脑娱乐公司于1994年发布了 PlayStation 控制器。索尼在1997年短暂发布了 Dual Analog 控制器，随后在那年晚些时候发布了支持震动功能的 DualShock。</description>
+    </extension>
+</addon><addon id="game.controller.ps.guncon.japan" name="PlayStation Guncon (Japan)" version="1.0.28" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">PlayStation Guncon (Japan)</summary>
+        <summary lang="de_DE">PlayStation Guncon (Japan)</summary>
+        <summary lang="en_GB">PlayStation Guncon (Japan)</summary>
+        <summary lang="es_ES">PlayStation Guncon (Japón)</summary>
+        <summary lang="es_MX">PlayStation Guncon (Japón)</summary>
+        <summary lang="fi_FI">PlayStation Guncon (Japani)</summary>
+        <summary lang="fr_FR">PlayStation Guncon (Japon)</summary>
+        <summary lang="it_IT">PlayStation Gun con (Giappone)</summary>
+        <summary lang="ru_RU">PlayStation Guncon (Япония)</summary>
+        <summary lang="sv_SE">PlayStation Guncon (Japan)</summary>
+        <summary lang="zh_CN">PlayStation Guncon（日本）</summary>
+        <description lang="da_DK">Guncon, kendt som G-Con i Europa, er en familie af light guns designet af Namco til PlayStation. Den originale model blev udgivet sammen med PlayStation i 1994.</description>
+        <description lang="de_DE">Die Guncon, in Europa als G-Con bekannt, ist eine Familie von leichten Waffen, die von Namco für die PlayStation entwickelt wurde. Das ursprüngliche Modell wurde zusammen mit der PlayStation im Jahr 1994 veröffentlicht.</description>
+        <description lang="en_GB">The Guncon, known as G-Con in Europe, is a family of light guns designed by Namco for the PlayStation. The original model was released alongside the PlayStation in 1994.</description>
+        <description lang="es_ES">La Guncon, conocida como G-Con en Europa, es una familia de pistolas de luz diseñadas por Namco para la PlayStation. El modelo original salió a la venta junto con la PlayStation en 1994.</description>
+        <description lang="es_MX">El Guncon, conocido como G-Con en Europa, es una familia de armas de luz diseñadas por Namco para la PlayStation. El modelo original fue lanzado junto al PlayStation en 1994.</description>
+        <description lang="fi_FI">Guncon, joka tunnetaan Euroopassa nimellä G-Con, on Namcon PlayStationille suunnittelema valoaseiden perhe. Alkuperäinen malli julkaistiin PlayStationin rinnalla vuonna 1994.</description>
+        <description lang="fr_FR">Le Guncon, connu sous le nom de G-Con en Europe, est une famille de pistolets légers conçus par Namco pour la PlayStation. Le modèle original est sorti aux côtés de la PlayStation en 1994.</description>
+        <description lang="it_IT">Il Guncon, noto come G-Con in Europa, è una famiglia di pistole leggere progettate da Namco per PlayStation. Il modello originale è stato rilasciato insieme alla PlayStation nel 1994.</description>
+        <description lang="ru_RU">Guncon, известная в Европе как G-Con - семейство легких пистолетов, разработанных компанией Namco для PlayStation. Оригинальная модель была выпущена вместе с PlayStation в 1994 году.</description>
+        <description lang="sv_SE">Guncon, känd som G-Con i Europa, är en familj av ljusvapen som designats av Namco för PlayStation. Den ursprungliga modellen släpptes tillsammans med PlayStation 1994.</description>
+        <description lang="zh_CN">Guncon，在欧洲被称为 G-Con，是 Namco 为 PlayStation 设计的一系列光线枪。首款型号于1994年与 PlayStation 一起发布。</description>
+    </extension>
+</addon><addon id="game.controller.ps.guncon.western" name="PlayStation Guncon (Western)" version="1.0.28" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">PlayStation Guncon (Western)</summary>
+        <summary lang="de_DE">PlayStation Guncon (Westlich)</summary>
+        <summary lang="en_GB">PlayStation Guncon (Western)</summary>
+        <summary lang="es_ES">PlayStation Guncon (Occidente)</summary>
+        <summary lang="es_MX">PlayStation Guncon (Occidente)</summary>
+        <summary lang="fi_FI">PlayStation Guncon (Länsimaat)</summary>
+        <summary lang="fr_FR">PlayStation Guncon (ouest)</summary>
+        <summary lang="it_IT">PlayStation Guncon (Western)</summary>
+        <summary lang="ru_RU">PlayStation Guncon (Запад)</summary>
+        <summary lang="sv_SE">PlayStation Guncon (Väst)</summary>
+        <summary lang="zh_CN">PlayStation Guncon（欧美）</summary>
+        <description lang="da_DK">Guncon, kendt som G-Con i Europa, er en familie af light guns designet af Namco til PlayStation. Den originale model blev udgivet sammen med PlayStation i 1994.</description>
+        <description lang="de_DE">Die Guncon, in Europa als G-Con bekannt, ist eine Familie von leichten Waffen, die von Namco für die PlayStation entwickelt wurde. Das ursprüngliche Modell wurde zusammen mit der PlayStation im Jahr 1994 veröffentlicht.</description>
+        <description lang="en_GB">The Guncon, known as G-Con in Europe, is a family of light guns designed by Namco for the PlayStation. The original model was released alongside the PlayStation in 1994.</description>
+        <description lang="es_ES">La Guncon, conocida como G-Con en Europa, es una familia de pistolas de luz diseñadas por Namco para la PlayStation. El modelo original salió a la venta junto con la PlayStation en 1994.</description>
+        <description lang="es_MX">El Guncon, conocido como G-Con en Europa, es una familia de armas de luz diseñadas por Namco para la PlayStation. El modelo original fue lanzado junto al PlayStation en 1994.</description>
+        <description lang="fi_FI">Guncon, joka tunnetaan Euroopassa nimellä G-Con, on Namcon PlayStationille suunnittelema valoaseiden perhe. Alkuperäinen malli julkaistiin PlayStationin rinnalla vuonna 1994.</description>
+        <description lang="fr_FR">Le Guncon, connu sous le nom de G-Con en Europe, est une famille de pistolets légers conçus par Namco pour la PlayStation. Le modèle original est sorti aux côtés de la PlayStation en 1994.</description>
+        <description lang="it_IT">Il Guncon, noto come G-Con in Europa, è una famiglia di pistole leggere progettate da Namco per PlayStation. Il modello originale è stato rilasciato insieme alla PlayStation nel 1994.</description>
+        <description lang="ru_RU">Guncon, известная в Европе как G-Con - семейство легких пистолетов, разработанных компанией Namco для PlayStation. Оригинальная модель была выпущена вместе с PlayStation в 1994 году.</description>
+        <description lang="sv_SE">Guncon, känd som G-Con i Europa, är en familj av ljusvapen som designats av Namco för PlayStation. Den ursprungliga modellen släpptes tillsammans med PlayStation 1994.</description>
+        <description lang="zh_CN">Guncon，在欧洲被称为 G-Con，是 Namco 为 PlayStation 设计的一系列光线枪。首款型号于1994年与 PlayStation 一起发布。</description>
+    </extension>
+</addon><addon id="game.controller.ps.mouse" name="PlayStation Mouse" version="1.0.29" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">PlayStation mus</summary>
+        <summary lang="de_DE">PlayStation Maus</summary>
+        <summary lang="en_GB">PlayStation mouse</summary>
+        <summary lang="es_ES">Ratón PlayStation</summary>
+        <summary lang="es_MX">Ratón PlayStation</summary>
+        <summary lang="fi_FI">PlayStation-hiiri</summary>
+        <summary lang="fr_FR">Souris Playstation</summary>
+        <summary lang="it_IT">Mouse PlayStation</summary>
+        <summary lang="pl_PL">Mysz PlayStation</summary>
+        <summary lang="ru_RU">PlayStation mouse</summary>
+        <summary lang="sv_SE">PlayStation-mus</summary>
+        <summary lang="zh_CN">PlayStation 鼠标</summary>
+        <description lang="da_DK">PlayStation Mus er en ball-mus med to knapper. Den blev udgivet sammen med PlayStation i 1994.</description>
+        <description lang="de_DE">Die PlayStation Mouse ist eine Zwei-Tasten-Kugelmaus. Sie wurde zusammen mit der PlayStation im Jahr 1994 veröffentlicht.</description>
+        <description lang="en_GB">The PlayStation Mouse is a two-button ball mouse. It was released alongside the PlayStation in 1994.</description>
+        <description lang="es_ES">El PlayStation Mouse es un ratón de bola de dos botones. Salió a la venta junto con la PlayStation en 1994.</description>
+        <description lang="es_MX">El ratón PlayStation es un ratón de rueda de 2 botones. Fue lanzado en conjunto con el PlayStation en 1994.</description>
+        <description lang="fi_FI">PlayStation-hiiri on kahdella painikkeella varustettu pallohiiri. Se julkaistiin PlayStationin rinnalla vuonna 1994.</description>
+        <description lang="fr_FR">La souris PlayStation est une souris à boule à deux boutons. Elle est sortie aux côtés de la PlayStation en 1994.</description>
+        <description lang="it_IT">Il Mouse PlayStation è un mouse a sfera a due pulsanti. È stato rilasciato insieme alla PlayStation nel 1994.</description>
+        <description lang="pl_PL">Mysz PlayStation to dwuprzyciskowa mysz kulkowa. Została wydana wraz z PlayStation w 1994 roku.</description>
+        <description lang="ru_RU">PlayStation Mouse - это двухкнопочная шариковая мышь. Она была выпущена вместе с приставкой PlayStation в 1994 году.</description>
+        <description lang="sv_SE">PlayStation-mus är en kulmus med två knappar. Den lanserades tillsammans med PlayStation 1994.</description>
+        <description lang="zh_CN">PlayStation 鼠标是一种两个按钮的滚轮鼠标。它于1994年与 PlayStation 一起发行。</description>
+    </extension>
+</addon><addon id="game.controller.ps.multitap" name="PlayStation Multitap" version="1.0.18" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">PlayStation Multitap</summary>
+        <summary lang="de_DE">PlayStation Multitap</summary>
+        <summary lang="en_GB">PlayStation Multitap</summary>
+        <summary lang="es_ES">PlayStation Multitap</summary>
+        <summary lang="es_MX">PlayStation Multitap</summary>
+        <summary lang="fi_FI">PlayStation Multitap</summary>
+        <summary lang="fr_FR">Multitap PlayStation</summary>
+        <summary lang="it_IT">PlayStation Multitap</summary>
+        <summary lang="sv_SE">PlayStation Multitap</summary>
+        <summary lang="zh_CN">PlayStation 多插转换器</summary>
+        <description lang="da_DK">Et multitap øger antallet af controller- og hukommelseskortporte, ligesom en USB-hub. Med yderligere en PlayStation Multitap kan der anvendes op til otte controllere og hukommelseskort på én gang.</description>
+        <description lang="de_DE">Ähnlich wie ein USB-Hub erweitert ein "multitap" die Anzahl der Controller- und Speicherkartenanschlüsse. Mit einem zweiten PlayStation Multitap konnten bis zu 8 Controller und Speicherkarten gleichzeitig angeschlossen werden.</description>
+        <description lang="en_GB">A multitap increases the number of controller and memory card ports, similar to a USB hub. With a second PlayStation Multitap, up to eight controllers and memory cards can be plugged in at once.</description>
+        <description lang="es_ES">Un Multitap aumenta el número de puertos para mandos y tarjetas de memoria, de forma similar a un concentrador USB. Con una segunda PlayStation Multitap, se pueden conectar hasta ocho mandos y tarjetas de memoria a la vez.</description>
+        <description lang="es_MX">Un multitap incrementa la cantidad de puertos de controles y tarjetas de memoria, similarmente a un hub USB. Con un segundo multitap, se pueden conectar hasta ocho controles y tarjetas de memoria al mismo tiempo.</description>
+        <description lang="fi_FI">Multitap lisää ohjaimen ja muistikortin porttien määrää USB-keskittimen tapaan. Toisella PlayStation Multitapilla voidaan konsoliin kytkeä jopa kahdeksan ohjainta ja muistikorttia samaan aikaan.</description>
+        <description lang="fr_FR">Un multitap augmente le nombre de ports de contrôleur et de carte mémoire, similaire à un concentrateur USB. Avec un deuxième PlayStation Multitap, jusqu'à huit contrôleurs et cartes mémoire peuvent être branchés à la fois.</description>
+        <description lang="it_IT">Un multitap aumenta il numero di porte controller e memory card, in modo simile a un hub USB. Con un secondo PlayStation Multitap, puoi collegare fino a otto controller e schede di memoria contemporaneamente.</description>
+        <description lang="sv_SE">En multitap ökar antalet portar för kontroller och minneskort, på samma sätt som en USB-hubb. Med en andra PlayStation Multitap kan upp till åtta handkontroller och minneskort anslutas samtidigt.</description>
+        <description lang="zh_CN">多插转换器增加了控制器和存储卡端口的数量，类似于 USB 集线器。使用两个PlayStation 多插转换器，最多可以同时插入八个控制器和存储卡。</description>
+    </extension>
 </addon><addon id="game.controller.snes" name="SNES Controller" version="1.0.43" provider-name="Team Kodi">
     <extension point="kodi.game.controller" library="resources/layout.xml" />
     <extension point="xbmc.addon.metadata">
@@ -112,6 +677,613 @@
         <disclaimer lang="zh_CN">图片来源：OpenEmu（openemu.org）</disclaimer>
         <disclaimer lang="zh_TW">圖片來源：OpenEmu (openemu.org)</disclaimer>
     </extension>
+</addon><addon id="game.controller.snes.mouse" name="SNES Mouse" version="1.0.28" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">SNES mus</summary>
+        <summary lang="de_DE">SNES Maus</summary>
+        <summary lang="en_GB">SNES mouse</summary>
+        <summary lang="es_ES">Ratón SNES</summary>
+        <summary lang="es_MX">Ratón SNES</summary>
+        <summary lang="fi_FI">SNES-hiiri</summary>
+        <summary lang="fr_FR">Souris SNES</summary>
+        <summary lang="it_IT">Mouse SNES</summary>
+        <summary lang="sv_SE">SNES-mus</summary>
+        <summary lang="zh_CN">SNES 鼠标</summary>
+        <description lang="da_DK">SNES-musen blev først udgivet i 1992. Den var oprindeligt designet til brug med spillet Mario Paint.</description>
+        <description lang="de_DE">Die SNES Maus wurde 1992 veröffentlicht. Sie wurde ursprünglich für das Spiel "Mario Paint" entworfen.</description>
+        <description lang="en_GB">The SNES mouse was first released in 1992. It was originally designed for use with the game Mario Paint.</description>
+        <description lang="es_ES">El ratón SNES salió a la venta por primera vez en 1992. Se diseñó originalmente para su uso con el juego Mario Paint.</description>
+        <description lang="fi_FI">SNES-hiiri julkaistiin ensimmäisen kerran vuonna 1992. Se oli alun perin suunniteltu käytettäväksi Mario Paint -pelin kanssa.</description>
+        <description lang="fr_FR">La souris SNES a été lancée pour la première fois en 1992. Elle a été conçue à l'origine pour être utilisée avec le jeu Mario Paint.</description>
+        <description lang="it_IT">Il mouse SNES è stato rilasciato per la prima volta nel 1992. È stato originariamente progettato per l'uso con il gioco Mario Paint.</description>
+        <description lang="sv_SE">SNES-musen släpptes för första gången 1992. Den var ursprungligen utformad för att användas med spelet Mario Paint.</description>
+        <description lang="zh_CN">SNES 鼠标于1992年首次发布。它最初针游戏《马里奥画板》而设计的。</description>
+    </extension>
+</addon><addon id="game.controller.snes.multitap" name="Super Multitap" version="1.0.18" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">Super Multitap</summary>
+        <summary lang="de_DE">Super Multitap</summary>
+        <summary lang="en_GB">Super Multitap</summary>
+        <summary lang="es_ES">Super Multitap</summary>
+        <summary lang="es_MX">Super Multitap</summary>
+        <summary lang="fi_FI">Super Multitap</summary>
+        <summary lang="fr_FR">Super Multitap</summary>
+        <summary lang="it_IT">Super Multitap</summary>
+        <summary lang="ru_RU">Несколько джойстиков</summary>
+        <summary lang="sv_SE">Super Multitap</summary>
+        <summary lang="zh_CN">超级多插转换器</summary>
+        <description lang="da_DK">Et multitap øger antallet af controller-porte, svarende til en USB-hub. Super Multitap blev udgivet af Hudson Soft i 1993 til brug med Bomberman-spillene.</description>
+        <description lang="de_DE">Ähnlich wie ein USB-Hub erweitert ein "multitap" die Anzahl der verfügbaren Controller-Anschlüsse. Das Super Multitap wurde 1993 von Hudson Soft für die Nutzung in Bomberman Spielen veröffentlicht.</description>
+        <description lang="en_GB">A multitap increases the number of controller ports, similar to a USB hub. The Super Multitap was released by Hudson Soft in 1993 for use with the Bomberman games.</description>
+        <description lang="es_ES">Un multitap aumenta el número de puertos para mandos, de forma similar a un concentrador USB. El Super Multitap fue lanzado por Hudson Soft en 1993 para su uso con los juegos Bomberman.</description>
+        <description lang="es_MX">Un multitap incrementa el número de puertos de mando, similarmente a un hub USB. El Super Multitap fue lanzado por Hudson Soft en 1993 para su uso con los juegos de Bomberman.</description>
+        <description lang="fi_FI">Multitap lisää ohjainporttien määrää USB-keskittimen tapaan. Vuonna 1993 Hudson Soft julkaisi Super Multitap -ohjaimen käytettäväksi Bomberman-pelien kanssa.</description>
+        <description lang="fr_FR">Un multitap augmente le nombre de ports de contrôleur, similaire à un concentrateur USB. Le Super Multitap a été publié par Hudson Soft en 1993 pour être utilisé avec les jeux Bomberman.</description>
+        <description lang="it_IT">Un multitocco aumenta il numero di porte del controller, in modo simile a un hub USB. Il Super Multitap è stato rilasciato da Hudson Soft nel 1993 per essere utilizzato con i giochi Bomberman.</description>
+        <description lang="ru_RU">Режим нескольких джойстиков позволяет увеличить число портов для контроллеров, подобно USB-хабу. Super Multitap (устройство для подключения нескольких джойстиков) было выпущено компанией Hudson Soft в 1993 году для игр с Borberman.</description>
+        <description lang="sv_SE">En multitap ökar antalet kontrollerportar, på samma sätt som en USB-hubb. Super Multitap släpptes av Hudson Soft 1993 för att användas med Bomberman-spelen.</description>
+        <description lang="zh_CN">多插转换器增加了游戏机控制器端口的数量，类似于USB集线器。1993年，Hudson Soft 发布了超级多插转换器，用于《炸弹人》游戏。</description>
+    </extension>
+</addon><addon id="game.controller.snes.super.scope" name="Super Scope" version="1.0.29" provider-name="Team Kodi">
+    <extension point="kodi.game.controller" library="resources/layout.xml" />
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <assets>
+            <icon>resources/icon.png</icon>
+        </assets>
+        <summary lang="da_DK">Super Scope</summary>
+        <summary lang="de_DE">Super Scope</summary>
+        <summary lang="en_GB">Super Scope</summary>
+        <summary lang="es_ES">Super Scope</summary>
+        <summary lang="fi_FI">Super Scope</summary>
+        <summary lang="fr_FR">Super Scope</summary>
+        <summary lang="id_ID">Super Scope</summary>
+        <summary lang="it_IT">Super Scope</summary>
+        <summary lang="sv_SE">Super Scope</summary>
+        <summary lang="zh_CN">Super Scope</summary>
+        <description lang="da_DK">Super Scope er en light gun til SNES. Den blev udgivet i 1992 som en efterfølger til NES Zapper.</description>
+        <description lang="de_DE">Das Super Scope ist eine Lightgun für das SNES. Es wurde 1992 als Nachfolger des NES Zapper veröffentlicht.</description>
+        <description lang="en_GB">The Super Scope is a light gun for the SNES. It was released in 1992 as a successor to the NES Zapper.</description>
+        <description lang="es_ES">La Nintendo Super Scope es una pistola de luz para SNES. Salió a la venta en 1992 como sucesora de la NES Zapper.</description>
+        <description lang="fi_FI">Super Scope on valoase SNES-konsolille. Se julkaistiin vuonna 1992 NES Zapperin seuraajana.</description>
+        <description lang="fr_FR">Le Super Scope est un pistolet léger pour la SNES. Il est sorti en 1992 en tant que successeur du NES Zapper.</description>
+        <description lang="id_ID">Super Scope adalah senjata ringan untuk SNES. Ini dirilis pada tahun 1992 sebagai penerus NES Zapper.</description>
+        <description lang="it_IT">Il Super Scope è una pistola leggera per SNES. È stato rilasciato nel 1992 come successore di NES Zapper.</description>
+        <description lang="sv_SE">Super Scope är en ljuspistol för SNES. Den släpptes 1992 som en efterföljare till NES Zapper.</description>
+        <description lang="zh_CN">Super Scope 是 SNES 的一种光线枪。1992年作为 NES Zapper 的继任者发布。</description>
+    </extension>
+</addon><addon id="game.libretro" name="Libretro Compatibility" version="21.0.10" provider-name="Team Kodi">
+  <backwards-compatibility abi="1.0.0" />
+  <requires>
+<import addon="kodi.binary.global.main" minversion="2.0.0" version="2.0.2" />
+<import addon="kodi.binary.global.general" minversion="1.0.4" version="1.0.5" />
+<import addon="kodi.binary.global.filesystem" minversion="1.1.7" version="1.1.9" />
+<import addon="kodi.binary.instance.game" minversion="3.0.0" version="3.0.2" /></requires>
+  <extension point="kodi.gameclient" library_windows="game.libretro.dll">
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>windows-x86_64</platform>
+    <license>GPL-2.0-or-later</license>
+    <source>https://github.com/kodi-game/game.libretro</source>
+    <assets>
+      <icon>icon.png</icon>
+    </assets>
+    <summary lang="da_DK">Libretro kompatibilitetslag til Kodi's Game API</summary>
+    <summary lang="de_DE">Libretro-Kompatibilitätsschicht für Kodis Spiele-API</summary>
+    <summary lang="en_GB">Libretro compatibility layer for Kodi's Game API</summary>
+    <summary lang="es_ES">Capa de compatibilidad de Libretro para la API de juegos de Kodi</summary>
+    <summary lang="fr_FR">Couche de compatibilité Libretro pour l'API de jeu de Kodi</summary>
+    <summary lang="hu_HU">Libreto Kompatibilis réteg Kodi Játék API-jának</summary>
+    <summary lang="it_IT">Compatibilità libretro per l'API di gioco di Kodi</summary>
+    <summary lang="sv_SE">Libretro-kompatibilitetslager för Kodis Game API</summary>
+    <summary lang="zh_CN">用于 Kodi 游戏 API 的 Libretro 兼容层</summary>
+    <description lang="da_DK">Dette add-on giver en wrapper til libretro-kerner, så de kan indlæses som spil-add-ons.</description>
+    <description lang="de_DE">Dieses Addon bietet einen Umwandler für Libretro-Cores, mit dem sie als Spielsystem Add-Ons für Kodi geladen und genutzt werden können.</description>
+    <description lang="en_GB">This add-on provides a wrapper for libretro cores, allowing them to be loaded as game add-ons.</description>
+    <description lang="es_ES">Este add-on proporciona una capa para los núcleos libretro, lo que les permite ser cargados como add-ons del juego.</description>
+    <description lang="fr_FR">Cet add-on fournit un wrapper pour les cœurs libretro, leur permettant d'être chargés en tant qu'add-ons de jeu.</description>
+    <description lang="it_IT">Questo add-on fornisce un modulo sodtware per i core libretro, consentendo loro di essere caricati come add-on di gioco.</description>
+    <description lang="sv_SE">Detta tillägg tillhandahåller en wrapper för libretro-kärnor, vilket gör att de kan läsas in som speltillägg.</description>
+    <description lang="zh_CN">这个插件为 libretro 内核提供了一个包装器，允许它们作为游戏插件加载。</description>
+  </extension>
+</addon><addon id="game.libretro.beetle-bsnes" name="Nintendo - SNES / SFC (Beetle bsnes)" version="0.9.26.34" provider-name="byuu, Mednafen Team">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+		<import addon="game.controller.snes" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.beetle-bsnes.dll">
+		<platforms>SNES</platforms>
+		<extensions>smc|fig|bs|st|sfc</extensions>
+		<supports_vfs>false</supports_vfs>
+		<supports_standalone>false</supports_standalone>
+		<requires_opengl>false</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>GPLv2</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.beetle-bsnes</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+		</assets>
+		<summary lang="da_DK">Nintendo - SNES / SFC (Beetle bsnes)</summary>
+		<summary lang="en_GB">Nintendo - SNES / SFC (Beetle bsnes)</summary>
+		<summary lang="es_ES">Nintendo - SNES / SFC (Beetle bsnes)</summary>
+		<summary lang="it_IT">Nintendo - SNES / SFC (Beetle bsnes)</summary>
+		<summary lang="ko_KR">닌텐도 - SNES / SFC (Beetle bsnes)</summary>
+		<summary lang="zh_CN">任天堂 - SNES / SFC（Beetle bSNES）</summary>
+		<description lang="da_DK">Beetle bSNES er SNES-modulet fra Beetle, en fork af Mednafen. Mednafens SNES-modul er i sig selv en fork af bSNES v0.59.</description>
+		<description lang="de_DE">Beetle bSNES ist das SNES-Modul von Beetle, einem Fork von Mednafen. Mednafens SNES-Modul selbst ist ein Fork von bSNES v0.59.</description>
+		<description lang="en_GB">Beetle bSNES is the SNES module of Beetle, a fork of Mednafen. Mednafen's SNES module itself is a fork of bSNES v0.59.</description>
+		<description lang="es_ES">Beetle bSNES es el módulo SNES de Beetle, una bifurcación de Mednafen. El propio módulo SNES de Mednafen es a su vez una bifurcación de bSNES v0.59.</description>
+		<description lang="it_IT">Beetle bSNES è il modulo SNES di Beetle, un fork di Mednafen. Lo stesso modulo SNES di Mednafen è un fork di bSNES v0.59.</description>
+		<description lang="ko_KR">비틀 bSNES는 Mednafen의 포크인 비틀의 SNES 모듈입니다. Mednafen의 SNES 모듈 자체는 bSNES v0.59의 포크입니다.</description>
+		<description lang="zh_CN">Beetle bSNES 是 Beetle 的 SNES 模块，是 Mednafen 的一个分支。Mednafen 的 SNES 模块本身又是 bSNES v0.59 的一个分支。</description>
+		<disclaimer lang="da_DK">I kærligt minde om Near / Byuu</disclaimer>
+		<disclaimer lang="de_DE">In liebevoller Erinnerung an Near / Byuu</disclaimer>
+		<disclaimer lang="en_GB">In loving memory of Near / Byuu</disclaimer>
+		<disclaimer lang="es_ES">En cariñoso recuerdo de Near / Byuu</disclaimer>
+		<disclaimer lang="it_IT">In amorevole ricordo di Near / Byuu</disclaimer>
+		<disclaimer lang="ko_KR">Near / Byuu의 사랑을 기억하며</disclaimer>
+		<disclaimer lang="ru_RU">В память о Near / Byuu</disclaimer>
+		<disclaimer lang="zh_CN">怀念 Near / Byuu</disclaimer>
+	</extension>
+</addon><addon id="game.libretro.beetle-psx" name="Sony - PlayStation (Beetle PSX)" version="0.9.44.68" provider-name="Mednafen Team">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+		<import addon="game.controller.ps.gamepad" version="1.0.0" />
+		<import addon="game.controller.ps.dualshock" version="1.0.0" />
+		<import addon="game.controller.ps.dualanalog" version="1.0.0" />
+		<import addon="game.controller.ps.guncon.western" version="1.0.0" />
+		<import addon="game.controller.ps.guncon.japan" version="1.0.0" />
+		<import addon="game.controller.konami.justifier.ps" version="1.0.0" />
+		<import addon="game.controller.ps.mouse" version="1.0.0" />
+		<import addon="game.controller.ps.multitap" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.beetle-psx.dll">
+		<platforms>PSX</platforms>
+		<extensions>exe|cue|toc|ccd|m3u|pbp|chd</extensions>
+		<supports_vfs>false</supports_vfs>
+		<supports_standalone>false</supports_standalone>
+		<requires_opengl>false</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>GPLv2</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.beetle-psx</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+		</assets>
+		<summary lang="da_DK">Sony - PlayStation (Beetle PSX)</summary>
+		<summary lang="en_GB">Sony - PlayStation (Beetle PSX)</summary>
+		<summary lang="es_ES">Sony - PlayStation (Beetle PSX)</summary>
+		<summary lang="id_ID">Sony - PlayStation (Beetle PSX)</summary>
+		<summary lang="ru_RU">Sony - PlayStation (Beetle PSX)</summary>
+		<summary lang="sv_SE">Sony - PlayStation (Beetle PSX)</summary>
+		<summary lang="zh_CN">Sony - PlayStation (Beetle PSX)</summary>
+		<description lang="da_DK">Beetle PSX er PlayStation-modulet i Beetle, en port af Mednafen.</description>
+		<description lang="de_DE">Beetle PSX ist das PlayStation-Modul von Beetle, einer Portierung von Madnafen.</description>
+		<description lang="en_GB">Beetle PSX is the PlayStation module of Beetle, a port of Madnafen.</description>
+		<description lang="es_ES">Beetle PSX es el módulo para PlayStation de Beetle, una adaptación de Mednafen.</description>
+		<description lang="fi_FI">Beetle PSX on Mednafenin Beetlestä kehittämän PlayStation-moduulin käännösversio.</description>
+		<description lang="id_ID">Beetle PSX adalah modul PlayStation dari Beetle, port dari Madnafen.</description>
+		<description lang="it_IT">Beetle PSX è il modulo PlayStation di Beetle, un port di Madnafen.</description>
+		<description lang="ru_RU">Beetle PSX — это модуль Playstation для Kodi | Форк PSX модуля Beetle для эмулятора Mednafen.</description>
+		<description lang="sv_SE">Beetle PSX är PlayStation-modulen av Beetle, en portning av Madnafen.</description>
+		<description lang="zh_CN">Beetle PSX 是 PlayStation 的 Beetle 模块，是 Madnafen 的移植。</description>
+	</extension>
+</addon><addon id="game.libretro.bsnes" name="Nintendo - SNES / SFC (bsnes)" version="115.0.0.20" provider-name="Near">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+		<import addon="game.controller.snes" version="1.0.0" />
+		<import addon="game.controller.snes.multitap" version="1.0.0" />
+		<import addon="game.controller.snes.super.scope" version="1.0.0" />
+		<import addon="game.controller.konami.justifier.snes" version="1.0.0" />
+		<import addon="game.controller.konami.justifier.player2" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.bsnes.dll">
+		<platforms />
+		<extensions>smc|sfc|gb|gbc|bs</extensions>
+		<supports_vfs>false</supports_vfs>
+		<supports_standalone>false</supports_standalone>
+		<requires_opengl>false</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>GPLv3</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.bsnes</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+		</assets>
+		<summary lang="da_DK">Nintendo - SNES / SFC (bsnes)</summary>
+		<summary lang="en_GB">Nintendo - SNES / SFC (bsnes)</summary>
+		<summary lang="es_ES">Nintendo - SNES / SFC (bsnes)</summary>
+		<summary lang="it_IT">Nintendo - SNES / SFC (bsnes)</summary>
+		<summary lang="sv_SE">Nintendo - SNES / SFC (bsnes)</summary>
+		<summary lang="zh_CN">任天堂 - SNES / SFC（bsnes）</summary>
+		<description lang="da_DK">bsnes er en multiplatform Super Nintendo (Super Famicom) emulator fra Near / Byuu, der fokuserer på ydeevne, funktioner og brugervenlighed.</description>
+		<description lang="en_GB">bsnes is a multi-platform Super Nintendo (Super Famicom) emulator from Near / Byuu that focuses on performance, features, and ease of use.</description>
+		<description lang="es_ES">bsnes es un emulador multiplataforma de Super Nintendo (Super Famicom) de Near / Byuu que se centra en el rendimiento, funcionalidades y facilidad de uso.</description>
+		<description lang="it_IT">bsnes è un emulatore multipiattaforma Super Nintendo (Super Famicom) di Near / Byuu che si concentra su prestazioni, funzionalità e facilità d'uso.</description>
+		<description lang="ru_RU">bsnes — это мультиплатформенный эмулятор Super Nintendo (Super Famicom) от Near / Byuu, в котором основное внимание уделяется производительности, функциям и простоте использования.</description>
+		<description lang="sv_SE">bsnes är en Super Nintendo (Super Famicom)-emulator för flera plattformar från Near / Byuu som fokuserar på prestanda, funktioner och användarvänlighet.</description>
+		<description lang="zh_CN">bsnes 是一款来自 Near/Byuu 的多平台超级任天堂（Super Famicom）模拟器，专注于性能、功能和易用性。</description>
+		<disclaimer lang="da_DK">I kærligt minde om Near / Byuu</disclaimer>
+		<disclaimer lang="de_DE">In liebevoller Erinnerung an Near / Byuu</disclaimer>
+		<disclaimer lang="en_GB">In loving memory of Near / Byuu</disclaimer>
+		<disclaimer lang="es_ES">En cariñoso recuerdo de Near / Byuu</disclaimer>
+		<disclaimer lang="it_IT">In amorevole ricordo di Near / Byuu</disclaimer>
+		<disclaimer lang="ko_KR">Near / Byuu의 사랑을 기억하며</disclaimer>
+		<disclaimer lang="ru_RU">В память о Near / Byuu</disclaimer>
+		<disclaimer lang="sv_SE">Till kärleksfullt minne av Near / Byuu</disclaimer>
+		<disclaimer lang="zh_CN">怀念 Near / Byuu</disclaimer>
+	</extension>
+</addon><addon id="game.libretro.flycast" name="Sega - Dreamcast/Naomi (Flycast)" version="0.1.0.52" provider-name="flyinghead">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+		<import addon="game.controller.dreamcast" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.flycast.dll">
+		<platforms>Dreamcast</platforms>
+		<extensions>chd|cdi|elf|cue|gdi|lst|bin|dat|zip|7z|m3u</extensions>
+		<supports_vfs>false</supports_vfs>
+		<supports_standalone>false</supports_standalone>
+		<requires_opengl>true</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>GPLv2</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.flycast</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+		</assets>
+		<summary lang="en_GB">Sega - Dreamcast/Naomi (Flycast)</summary>
+		<description lang="da_DK">Flycast er en fork af Reicast, en Sega Dreamcast-emulator til adskillige platforme.</description>
+		<description lang="de_DE">Flycast ist ein Ableger von Reicast, einem Multiplattform-Emulator für Sega Dreamcast.</description>
+		<description lang="en_GB">Flycast is a fork of Reicast, a multi-platform Sega Dreamcast emulator.</description>
+		<description lang="es_ES">Flycast es una bifurcación de Reicast, un emulador multiplataforma de Sega Dreamcast.</description>
+		<description lang="zh_CN">Flycast 是 Reicast 的一个分支，是一个多平台的世嘉 Dreamcast 模拟器。</description>
+	</extension>
+</addon><addon id="game.libretro.fuse" name="Sinclair - ZX Spectrum (Fuse)" version="1.6.0.41" provider-name="Team Fuse">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+		<import addon="game.controller.atari.2600" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.fuse.dll">
+		<platforms>spectrum</platforms>
+		<extensions>tzx|tap|z80|rzx|scl|trd|dsk|dck|sna|szx|zip</extensions>
+		<supports_vfs>true</supports_vfs>
+		<supports_standalone>true</supports_standalone>
+		<requires_opengl>false</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>GPLv3</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.fuse</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+		</assets>
+		<summary lang="da_DK">Sinclair - ZX Spectrum (Fuse)</summary>
+		<summary lang="en_GB">Sinclair - ZX Spectrum (Fuse)</summary>
+		<summary lang="es_ES">Sinclair - ZX Spectrum (Fuse)</summary>
+		<summary lang="zh_CN">Sinclair - ZX Spectrum (Fuse)</summary>
+		<description lang="da_DK">Fuse (den gratis Unix Spectrum-emulator) var oprindeligt en ZX Spectrum-emulator til Unix. Det er siden blevet overført til Mac OS X, Windows, Wii, AmigaOS og MorphOS.</description>
+		<description lang="de_DE">Fuse (der freie Unix-Spectrum-Emulator) war ursprünglich ein ZX-Spectrum-Emulator für Unix. Seitdem wurde er auf Mac OS X, Windows, die Wii, AmigaOS und MorphOS portiert.</description>
+		<description lang="en_GB">Fuse (the Free Unix Spectrum Emulator) was originally a ZX Spectrum emulator for Unix. It has since been ported to Mac OS X, Windows, the Wii, AmigaOS and MorphOS.</description>
+		<description lang="es_ES">Fuse (el emulador gratuito de Spectrum para Unix) era originalmente un emulador de ZX Spectrum para Unix. Desde entonces ha sido adaptado a Mac OS X, Windows, Wii, AmigaOS y MorphOS.</description>
+		<description lang="zh_CN">Fuse（自由的 Unix Spectrum 模拟器）最初是用于 Unix 的 ZX Spectrum 模拟器。它已经被移植到 Mac OS X、Windows、Wii、AmigaOS 和 MorphOS。</description>
+	</extension>
+</addon><addon id="game.libretro.mame2003" name="Arcade (MAME 2003)" version="0.78.0.64" provider-name="MAMEdev">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.mame2003.dll">
+		<platforms />
+		<extensions>zip</extensions>
+		<supports_vfs>false</supports_vfs>
+		<supports_standalone>false</supports_standalone>
+		<requires_opengl>false</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>MAME</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.mame2003</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+		</assets>
+		<summary lang="da_DK">Arcade (MAME 2003)</summary>
+		<summary lang="en_GB">Arcade (MAME 2003)</summary>
+		<summary lang="es_ES">Arcade (MAME 2003)</summary>
+		<summary lang="ga">Arcade (MAME 2003)</summary>
+		<summary lang="it_IT">Arcade (MAME 2003)</summary>
+		<summary lang="ko_KR">아케이드 (MAME 2003)</summary>
+		<summary lang="ru_RU">Arcade (MAME 2003)</summary>
+		<summary lang="sv_SE">Arcade (MAME 2003)</summary>
+		<summary lang="zh_CN">街机（MAME 2003）</summary>
+		<description lang="da_DK">MAME 0.78 til libretro. Kompatibel med MAME 0.78 sæt.</description>
+		<description lang="de_DE">MAME 0.78 für libretro. Kompatibel mit MAME 0.78 Sets.</description>
+		<description lang="en_GB">MAME 0.78 for libretro. Compatible with MAME 0.78 sets.</description>
+		<description lang="es_ES">MAME 0.78 para libretro. Compatible con los juegos de MAME 0.78.</description>
+		<description lang="ga">MAME 0.78 do libretro. Comhoiriúnach le tacair MAME 0.78.</description>
+		<description lang="it_IT">MAME 0,78 per libretro. Compatibile con i set MAME 0,78.</description>
+		<description lang="ko_KR">libretro용 MAME 0.78. MAME 0.78 세트와 호환됩니다.</description>
+		<description lang="ru_RU">MAME 0.78 для libretro. Совместимо с наборами MAME 0.78.</description>
+		<description lang="sv_SE">MAME 0.78 för libretro. Kompatibel med MAME 0.78-uppsättningar.</description>
+		<description lang="zh_CN">libretro 的 MAME 0.78。兼容 MAME 0.78 系列。</description>
+	</extension>
+</addon><addon id="game.libretro.mgba" name="Nintendo - Game Boy Advance (mGBA)" version="0.11.0.56" provider-name="endrift">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+		<import addon="game.controller.gba" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.mgba.dll">
+		<platforms>GBA</platforms>
+		<extensions>gba|gb|gbc|sgb</extensions>
+		<supports_vfs>true</supports_vfs>
+		<supports_standalone>false</supports_standalone>
+		<requires_opengl>false</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>MPLv2.0</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.mgba</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+		</assets>
+		<summary lang="en_GB">Nintendo - Game Boy Advance (mGBA)</summary>
+		<description lang="da_DK">mGBA sigter mod at være hurtigere og mere præcis end mange eksisterende Game Boy Advance-emulatorer, samt tilføje funktioner, som andre emulatorer mangler.</description>
+		<description lang="de_DE">mGBA soll schneller und genauer sein als viele bestehende „Game Boy Advance“-Emulatoren und bietet darüber hinaus Funktionen, die anderen Emulatoren fehlen.</description>
+		<description lang="en_GB">mGBA aims to be faster and more accurate than many existing Game Boy Advance emulators, as well as adding features that other emulators lack.</description>
+		<description lang="es_ES">mGBA pretende ser más rápido y preciso que muchos de los emuladores de Game Boy Advance existentes, además de añadir funciones de las que carecen otros emuladores.</description>
+		<description lang="es_MX">mGBA intenta ser más rápido y más preciso que muchos otros emuladores de Game Boy existentes, además de añadir características que otros emuladores no tienen.</description>
+		<description lang="ga">Tá sé mar aidhm ag mGBA a bheith níos tapúla agus níos cruinne ná go leor aithriseoirí Game Boy Advance atá ann cheana féin, chomh maith le gnéithe a chur leis nach bhfuil ag aithriseoirí eile.</description>
+		<description lang="sv_SE">mGBA ska vara snabbare och mer exakt än många befintliga Game Boy Advance-emulatorer och dessutom lägga till funktioner som andra emulatorer saknar.</description>
+		<description lang="zh_CN">mGBA 的目标是比许多现有的 Game Boy Advance 模拟器更快、更准确，并添加其他模拟器缺乏的功能。</description>
+	</extension>
+</addon><addon id="game.libretro.mupen64plus-nx" name="Nintendo - Nintendo 64 (Mupen64Plus-Next)" version="2.8.0.51" provider-name="m4xw, Hacktarux, gonetz, GLideN64 Contributors, Mupen64Plus Team">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+		<import addon="game.controller.n64" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.mupen64plus-nx.dll">
+		<platforms>Nintendo 64</platforms>
+		<extensions>n64|v64|z64|bin|u1</extensions>
+		<supports_vfs>true</supports_vfs>
+		<supports_standalone>false</supports_standalone>
+		<requires_opengl>true</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>GPLv2</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.mupen64plus-nx</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+		</assets>
+		<summary lang="da_DK">Nintendo - Nintendo 64 (Mupen64Plus-Next)</summary>
+		<summary lang="en_GB">Nintendo - Nintendo 64 (Mupen64Plus-Next)</summary>
+		<summary lang="es_ES">Nintendo - Nintendo 64 (Mupen64Plus-Next)</summary>
+		<summary lang="sv_SE">Nintendo - Nintendo 64 (Mupen64Plus-Next)</summary>
+		<summary lang="zh_CN">任天堂 - Nintendo 64 (Mupen64Plus-Next)</summary>
+		<description lang="da_DK">Mupen64 er en N64-emulator designet til at være multi-OS. Den bruger et plugin-system og er yderst kompatibel.</description>
+		<description lang="de_DE">Mupen64 ist ein N64-Emulator, der für mehrere Betriebssysteme konzipiert wurde. Er verwendet ein Pluginsystem und ist sehr kompatibel.</description>
+		<description lang="en_GB">Mupen64 is an N64 emulator desgined to be multi-OS. It uses a plugin system and is highly compatible.</description>
+		<description lang="es_ES">Mupen64 es un emulador de N64 diseñado para ser multi-OS. Utiliza un sistema de plugins y es altamente compatible.</description>
+		<description lang="sv_SE">Mupen64 är en N64-emulator som är utformad för att vara multi-OS. Den använder ett system med tillägg och är mycket kompatibel.</description>
+		<description lang="zh_CN">Mupen64 是一款设计为多操作系统的 N64 模拟器。它使用插件系统，并且高度兼容。</description>
+	</extension>
+</addon><addon id="game.libretro.picodrive" name="Sega - MS/GG/MD/CD/32X (PicoDrive)" version="2.05.0.55" provider-name="notaz, fdave, irixxxx">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+		<import addon="game.controller.genesis.3button" version="1.0.0" />
+		<import addon="game.controller.genesis.6button" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.picodrive.dll">
+		<platforms>Genesis|Game Gear|SEGA Master System|Sega CD|Megadrive|Mega CD</platforms>
+		<extensions>bin|gen|smd|md|32x|cue|iso|chd|m3u|sms|gg|sg|sc|68k|sgd|pco|vgm|vgz</extensions>
+		<supports_vfs>false</supports_vfs>
+		<supports_standalone>false</supports_standalone>
+		<requires_opengl>false</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>MAME</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.picodrive</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+		</assets>
+		<summary lang="da_DK">Sega - MS/GG/MD/CD/32X (PicoDrive)</summary>
+		<summary lang="en_GB">Sega - MS/GG/MD/CD/32X (PicoDrive)</summary>
+		<summary lang="es_ES">Sega - MS/GG/MD/CD/32X (PicoDrive)</summary>
+		<summary lang="ga">Sega - MS/GG/MD/CD/32X (PicoDrive)</summary>
+		<summary lang="sv_SE">Sega - MS/GG/MD/CD/32X (PicoDrive)</summary>
+		<summary lang="zh_CN">世嘉 - MS/GG/MD/CD/32X (PicoDrive)</summary>
+		<description lang="da_DK">PicoDrive er endnu en Sega Game Gear / Master System / Mega Drive / Mega CD / 32X emulator stærkt optimeret til ARM.</description>
+		<description lang="de_DE">PicoDrive ist ein weiterer Emulator für Sega Game Gear / Master System / Mega Drive / Mega CD / 32X, der stark für ARM optimiert ist.</description>
+		<description lang="en_GB">PicoDrive is yet another Sega Game Gear / Master System / Mega Drive / Mega CD / 32X emulator heavily optimized for ARM.</description>
+		<description lang="es_ES">PicoDrive es otro emulador de Sega Game Gear / Master System / Mega Drive / Mega CD / 32X muy optimizado para ARM.</description>
+		<description lang="ga">Is aithriseoir eile de chuid Sega Game Gear / Master System / Mega Drive / Mega CD / 32X é PicoDrive atá optamaithe go mór do ARM.</description>
+		<description lang="sv_SE">PicoDrive är ännu en Sega Game Gear / Master System / Mega Drive / Mega CD / 32X-emulator som är kraftigt optimerad för ARM.</description>
+		<description lang="zh_CN">PicoDrive 是另一款针对 ARM 进行了大量优化的 Sega Game Gear / Master System / Mega Drive / Mega CD / 32X 模拟器。</description>
+		<disclaimer lang="da_DK">Forfattere: Dave (aka fdave, FinalBurn forfatter) og notaz</disclaimer>
+		<disclaimer lang="de_DE">Autoren: Dave (alias fdave, FinalBurn-Autor) und notaz</disclaimer>
+		<disclaimer lang="en_GB">Authors: Dave (aka fdave, FinalBurn author) and notaz</disclaimer>
+		<disclaimer lang="es_ES">Autores: Dave (alias fdave, autor de FinalBurn) y notaz</disclaimer>
+		<disclaimer lang="ga">Údair: Dave (aka fdave, údar FinalBurn) agus notaz</disclaimer>
+		<disclaimer lang="sv_SE">Upphovspersoner: Dave (aka fdave, FinalBurn-grundare) och notaz</disclaimer>
+		<disclaimer lang="zh_CN">作者：Dave（又名 fdave，FinalBurn 作者）和 notaz</disclaimer>
+	</extension>
+</addon><addon id="game.libretro.reicast" name="Sega - Dreamcast/NAOMI (Flycast)" version="0.1.0.15" provider-name="Libretro">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+		<import addon="game.controller.dreamcast" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.reicast.dll">
+		<platforms>Dreamcast</platforms>
+		<extensions>chd|cdi|iso|elf|cue|gdi|lst|bin|dat|zip|7z|m3u</extensions>
+		<supports_vfs>false</supports_vfs>
+		<supports_standalone>false</supports_standalone>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">Sega - Dreamcast/NAOMI (Flycast) 0.1</summary>
+		<description lang="en_GB">Reicast is a multiplatform Sega Dreamcast emulator (http://reicast.com).
+
+Supported files: chd, cdi, iso, elf, bin, cue, gdi</description>
+		<disclaimer>The Reicast team is not connected or affiliated with any mentioned company in any way. The opinions of the Reicast team do not reflect the views of the various companies mentioned here. Companies and all products pertaining to that company are trademarks of that company. Please contact that company for trademark and copyright information.</disclaimer>
+		<license>GPLv2</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.reicast</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+		</assets>
+	</extension>
+</addon><addon id="game.libretro.snes9x" name="Nintendo - SNES / SFC (Snes9x)" version="1.63.0.55" provider-name="Snes9x Team">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+		<import addon="game.controller.snes" version="1.0.0" />
+		<import addon="game.controller.snes.mouse" version="1.0.0" />
+		<import addon="game.controller.snes.multitap" version="1.0.0" />
+		<import addon="game.controller.snes.super.scope" version="1.0.0" />
+		<import addon="game.controller.konami.justifier.snes" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.snes9x.dll">
+		<platforms>SNES</platforms>
+		<extensions>smc|sfc|swc|fig|bs|st</extensions>
+		<supports_vfs>true</supports_vfs>
+		<supports_standalone>false</supports_standalone>
+		<requires_opengl>false</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>Non-commercial</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.snes9x</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+		</assets>
+		<summary lang="da_DK">Nintendo - SNES / SFC (Snes9x)</summary>
+		<summary lang="en_GB">Nintendo - SNES / SFC (Snes9x)</summary>
+		<summary lang="es_ES">Nintendo - SNES / SFC (Snes9x)</summary>
+		<summary lang="ga">Nintendo - SNES / SFC (SNES9X)</summary>
+		<summary lang="sv_SE">Nintendo - SNES / SFC (Snes9x)</summary>
+		<summary lang="zh_CN">任天堂 - SNES / SFC (Snes9x)</summary>
+		<description lang="da_DK">Snes9x er en bærbar, freeware SNES- og Super Famicom-emulator.[CR][CR]Snes9x er kodet i C++ med tre CPU emuleringskerner på i386 Linux- og Windows-versionerne.</description>
+		<description lang="de_DE">Snes9x ist ein portabler, kostenloser SNES- und Super-Famicom-Emulator, der in C++ programmiert ist und drei Assembler-CPU-Emulationskerne in den i386-Linux- und Windows-Ports besitzt.</description>
+		<description lang="en_GB">Snes9x is a portable, freeware SNES and Super Famicom emulator.[CR][CR]Snes9x is coded in C++, with three assembler CPU emulation cores on the i386 Linux and Windows ports.</description>
+		<description lang="es_ES">Snes9x es un emulador gratuito y portátil de SNES y Super Famicom[CR][CR]Snes9x está codificado en C++, con tres núcleos de emulación de CPU en ensamblador para las versiones i386 de Linux y Windows.</description>
+		<description lang="fi_FI">Snes9x on kannettava, ilmainen SNES- ja Super Famicom -emulaattori.[CR][CR]Snes9x on koodattu C++-kielellä ja se sisältää kolme Assembler-prosessorin emulointiydintä i386 Linux- ja Windows-käännöksissä.</description>
+		<description lang="ga">Is éard atá i SNES9X ná aithriseoir iniompartha, freeware SNES agus Super Famicom.</description>
+		<description lang="sv_SE">Snes9x är en portabel freeware-emulator för SNES och Super Famicom.[CR][CR]Snes9x är kodad i C++, med tre emuleringskärnor för assemblerprocessorer på i386-portarna för Linux och Windows.</description>
+		<description lang="zh_CN">Snes9x 是一款便携式自由软件 SNES 和 Super Famicom 模拟器。[CR][CR]Snes9x 是用 C++ 编写的，在 i386 Linux 和 Windows 移植上有三个汇编器 CPU 仿真核。</description>
+		<disclaimer lang="da_DK">Snes9X-teamet er ikke forbundet med eller tilknyttet nogen nævnt virksomhed på nogen måde. Udtalelserne fra Snes9X-teamet afspejler ikke synspunkterne fra de forskellige virksomheder, der er nævnt her. Virksomheder og alle produkter, der vedrører det pågældende firma, er varemærker tilhørende det pågældende firma. Kontakt venligst det pågældende firma for varemærke- og copyrightoplysninger.</disclaimer>
+		<disclaimer lang="de_DE">Das Snes9X-Team ist in keiner Weise mit den genannten Unternehmen geschäftlich verbunden oder angegliedert. Die Meinungen des Snes9X-Teams spiegeln nicht die Ansichten der verschiedenen hier genannten Unternehmen wider. Unternehmen und alle Produkte, die mit diesem Unternehmen in Verbindung stehen, sind Warenzeichen des jeweiligen Unternehmens. Bitte an das jeweilige Unternehmen wenden, um Informationen zu Marken und Copyright zu erhalten.</disclaimer>
+		<disclaimer lang="en_GB">The Snes9X team is not connected or affiliated with any mentioned company in any way. The opinions of the Snes9X team do not reflect the views of the various companies mentioned here. Companies and all products pertaining to that company are trademarks of that company. Please contact that company for trademark and copyright information.</disclaimer>
+		<disclaimer lang="es_ES">El equipo de Snes9X no está relacionado ni afiliado a ninguna de las empresas mencionadas. Las opiniones del equipo de Snes9X no reflejan los puntos de vista de las distintas empresas mencionadas aquí. Las empresas y todos los productos pertenecientes a esa empresa son marcas registradas de esa empresa. Póngase en contacto con dicha empresa para obtener información sobre marcas comerciales y derechos de autor.</disclaimer>
+		<disclaimer lang="fi_FI">Snes9X-tiimi ei ole mitenkään yhteydessä tai sidoksissa mainittuihin yrityksiin, eivätkä Snes9X-tiimin mielipiteet heijasta mainittujen yritysten näkemyksiä. Yritykset ja kaikki niiden tuotteet ovat kyseisten yritysten tavaramerkkejä. Tavaramerkki- ja tekijänoikeustietoihin liittyen ole yhteydessä kyseisiin yrityksiin.</disclaimer>
+		<disclaimer lang="ga">Níl foireann SNES9X ceangailte ná cleamhnaithe le haon chuideachta a luaitear ar bhealach ar bith. Ní léiríonn tuairimí fhoireann SNES9X tuairimí na gcuideachtaí éagsúla a luaitear anseo. Is trádmharcanna den chuideachta sin iad cuideachtaí agus na táirgí go léir a bhaineann leis an gcuideachta sin. Téigh i dteagmháil leis an gcuideachta sin le haghaidh faisnéise trádmhairc agus cóipchirt.</disclaimer>
+		<disclaimer lang="sv_SE">Snes9X-teamet är inte anslutet eller anslutet till något nämnt företag på något sätt. Åsikterna från Snes9X-teamet återspeglar inte åsikterna från de olika företagen som nämns här. Företag och alla produkter som hör till det företaget är varumärken som tillhör det företaget. Kontakta det företaget för information om varumärken och upphovsrätt.</disclaimer>
+		<disclaimer lang="zh_CN">Snes9X 团队与上述任何公司均无任何关联。Snes9X 团队的意见并不反映此处提到的各个公司的意见。公司和与该公司相关的所有产品均为该公司的商标。请联系该公司获取商标和版权信息。</disclaimer>
+	</extension>
+</addon><addon id="game.libretro.stella" name="Atari - 2600 (Stella)" version="7.1.0.61" provider-name="Stephen Anthony, Bradford Mott, Eckhard Stolberg, Brian Watson">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+		<import addon="game.controller.atari.2600" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.stella.dll">
+		<platforms>Atari 2600</platforms>
+		<extensions>a26|bin</extensions>
+		<supports_vfs>true</supports_vfs>
+		<supports_standalone>false</supports_standalone>
+		<requires_opengl>false</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>GPLv2</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.stella</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+		</assets>
+		<summary lang="da_DK">Atari - 2600 (Stella)</summary>
+		<summary lang="en_GB">Atari - 2600 (Stella)</summary>
+		<summary lang="es_ES">Atari - 2600 (Stella 2014)</summary>
+		<summary lang="zh_CN">雅达利 - 2600（Stella）</summary>
+		<description lang="da_DK">Stella er en Atari 2600 VCS-emulator til flere platforme.[CR][CR]Atari 2600 Video Computer System (VCS), der blev introduceret i 1977, var det mest populære hjemmevideospilsystem i begyndelsen af 1980'erne.</description>
+		<description lang="de_DE">Stella ist ein plattformübergreifender Emulator für Atari 2600 VCS[CR][CR]Das Atari 2600 Video Computer System (VCS), das 1977 eingeführt wurde, war das beliebteste Heimvideospielsystem der frühen 1980er Jahre.</description>
+		<description lang="en_GB">Stella is a multi-platform Atari 2600 VCS emulator.[CR][CR]The Atari 2600 Video Computer System (VCS), introduced in 1977, was the most popular home video game system of the early 1980s.</description>
+		<description lang="es_ES">Stella es un emulador multiplataforma de el Atari 2600 VCS[CR][CR]El Atari 2600 Video Computer System (VCS), presentado en 1977, fue el sistema de videojuegos doméstico más popular de principios de la década de 1980.</description>
+		<description lang="zh_CN">Stella 是一款多平台雅达利 2600 VCS 模拟器。[CR][CR]1977年推出的雅达利 2600 视频计算机系统（VCS）是20世纪80年代早期最流行的家庭视频游戏系统。</description>
+		<disclaimer lang="da_DK">Stella blev oprindeligt udviklet til Linux af Bradford W. Mott og vedligeholdes i øjeblikket af Stephen Anthony.</disclaimer>
+		<disclaimer lang="de_DE">Stella wurde ursprünglich von Bradford W. Mott für Linux entwickelt und wird derzeit von Stephen Anthony gepflegt.</disclaimer>
+		<disclaimer lang="en_GB">Stella was originally developed for Linux by Bradford W. Mott, and is currently maintained by Stephen Anthony.</disclaimer>
+		<disclaimer lang="es_ES">Stella fue desarrollado originalmente para Linux por Bradford W. Mott, y actualmente lo mantiene Stephen Anthony.</disclaimer>
+		<disclaimer lang="zh_CN">Stella 最初由 Bradford W.Mott 为 Linux 开发，目前由 Stephen Anthony 维护。</disclaimer>
+	</extension>
+</addon><addon id="game.libretro.uae" name="Commodore - Amiga (PUAE)" version="5.3.0.84" provider-name="UAE Team">
+	<requires>
+		<import addon="game.libretro" version="1.0.0" />
+		<import addon="game.controller.amiga.cd32" version="1.0.0" />
+		<import addon="game.controller.default" version="1.0.0" />
+		<import addon="game.controller.keyboard" version="1.0.0" />
+		<import addon="game.controller.mouse" version="1.0.0" />
+	</requires>
+	<extension point="kodi.gameclient" library_windows="game.libretro.uae.dll">
+		<platforms />
+		<extensions>adf|adz|dms|fdi|raw|ipf|hdf|hdz|lha|slave|info|cue|ccd|nrg|mds|iso|chd|uae|m3u|zip|7z|/</extensions>
+		<supports_vfs>false</supports_vfs>
+		<supports_standalone>true</supports_standalone>
+		<requires_opengl>false</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>GPLv2</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.uae</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+		</assets>
+		<summary lang="da_DK">Commodore - Amiga (PUAE)</summary>
+		<summary lang="en_GB">Commodore - Amiga (PUAE)</summary>
+		<summary lang="es_ES">Commodore - Amiga (PUAE)</summary>
+		<summary lang="ga">Commodore - Amiga (PUAE)</summary>
+		<summary lang="it_IT">Commodore - Amiga (PUAE)</summary>
+		<summary lang="sv_SE">Commodore - Amiga (PUAE)</summary>
+		<summary lang="zh_CN">Commodore - Amiga (PUAE)</summary>
+		<description lang="da_DK">UAE står for Ubiquitous Amiga Emulator.[CR][CR]De fleste spil kræver en version af Amiga Kickstart ROM. Nogle gamle spil vil dog fungere med den indbyggede ROM-emulering.</description>
+		<description lang="de_DE">UAE steht für den Ubiquitous Amiga Emulator[CR][CR]Die meisten Spiele benötigen eine Version des Amiga Kickstart-ROM. Einige alte Spiele funktionieren jedoch auch mit der eingebauten ROM-Emulation.</description>
+		<description lang="en_GB">UAE stands for the Ubiquitous Amiga Emulator.[CR][CR]Most games require a version of the Amiga Kickstart ROM. However, some old games will work with the built-in ROM emulation.</description>
+		<description lang="es_ES">UAE son las siglas de Ubiquitous Amiga Emulator.[CR][CR]La mayoría de los juegos requieren una versión de la ROM Amiga Kickstart. Sin embargo, algunos juegos antiguos funcionarán con la emulación ROM incorporada.</description>
+		<description lang="es_MX">UAE es un acrónimo para Emulador de Amiga Ubicuo (Ubiquitous Amiga Emulator por sus siglas en inglés).[CR][CR]La mayoría de juegos requieren una versión de la Kickstart ROM de la Amiga. Sin embargo, algunos juegos antiguos funcionarán bien con la emulación de ROM incorporada.</description>
+		<description lang="ga">Seasann UAE don Ubiquitous Amiga Emulator.[CR][CR]Éilíonn formhór na gcluichí leagan den Amiga Kickstart ROM. Mar sin féin, oibreoidh roinnt seanchluichí leis an aithris ROM ionsuite.</description>
+		<description lang="it_IT">UAE sta per Ubiquitous Amiga Emulator.[CR][CR]La maggior parte dei giochi richiede una versione dell'Amiga Kickstart ROM. Tuttavia, alcuni vecchi giochi funzioneranno con l'emulazione ROM integrata.</description>
+		<description lang="ru_RU">UAE расшифровывается как Ubiquitous Amiga Emulator.[CR][CR]Для большинства игр требуется определённая версия Amiga Kickstart ROM. Тем не менее некоторые старые игры могут быть запущены с помощью встроенного эмулятора ROM.</description>
+		<description lang="sv_SE">UAE står för Ubiquitous Amiga Emulator.[CR][CR]De flesta spel kräver en version av Amiga Kickstart ROM. Vissa gamla spel fungerar dock med den inbyggda ROM-emuleringen.</description>
+		<description lang="zh_CN">UAE 即 Ubiquitous Amiga Emulator（无处不在的 Amiga 模拟器）。[CR][CR]大多数游戏需要一个版本的 Amiga 启动 ROM，而一些旧游戏可使用内建 ROM 仿真。</description>
+	</extension>
 </addon><addon id="inputstream.adaptive" version="21.5.18" name="InputStream Adaptive" provider-name="peak3d, Team Kodi">
   <requires>
 <import addon="kodi.binary.global.main" minversion="2.0.0" version="2.0.2" />

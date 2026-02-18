@@ -1,0 +1,158 @@
+# game.libretro.bsnes language file
+# Addon Name: game.libretro.bsnes
+# Addon id: game.libretro.bsnes
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.bsnes\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2021-08-26 22:01i\n"
+"PO-Revision-Date: 2025-04-08 15:13+0000\n"
+"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
+"Language-Team: Swedish <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-bsnes/sv_se/>\n"
+"Language: sv_se\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
+
+msgctxt "Addon Summary"
+msgid "Nintendo - SNES / SFC (bsnes)"
+msgstr "Nintendo - SNES / SFC (bsnes)"
+
+msgctxt "Addon Description"
+msgid "bsnes is a multi-platform Super Nintendo (Super Famicom) emulator from Near / Byuu that focuses on performance, features, and ease of use."
+msgstr "bsnes är en Super Nintendo (Super Famicom)-emulator för flera plattformar från Near / Byuu som fokuserar på prestanda, funktioner och användarvänlighet."
+
+msgctxt "Addon Disclaimer"
+msgid "In loving memory of Near / Byuu"
+msgstr "Till kärleksfullt minne av Near / Byuu"
+
+msgctxt "#30001"
+msgid "Preferred Aspect Ratio"
+msgstr "Föredraget bildförhållande"
+
+msgctxt "#30003"
+msgid "Blur Emulation"
+msgstr "Emulering av oskärpa"
+
+msgctxt "#30004"
+msgid "PPU (Video) - Fast Mode"
+msgstr "PPU (Video) - Snabbt läge"
+
+msgctxt "#30005"
+msgid "PPU (Video) - Deinterlace"
+msgstr "PPU (Video) - Deinterlace"
+
+msgctxt "#30006"
+msgid "PPU (Video) - No Sprite Limit"
+msgstr "PPU (Video) - Ingen sprite-gräns"
+
+msgctxt "#30007"
+msgid "PPU (Video) - No VRAM Blocking"
+msgstr "PPU (Video) - Ingen blockering av VRAM"
+
+msgctxt "#30008"
+msgid "DSP (Audio) - Fast Mode"
+msgstr "DSP (ljud) - Snabbläge"
+
+msgctxt "#30009"
+msgid "DSP (Audio) - Cubic Interpolation"
+msgstr "DSP (ljud) - kubisk interpolation"
+
+msgctxt "#30010"
+msgid "DSP (Audio) - Echo Shadow RAM"
+msgstr "DSP (Ljud) - Echo Shadow RAM"
+
+msgctxt "#30011"
+msgid "HD Mode 7 - Scale"
+msgstr "HD Mode 7 - Skala"
+
+msgctxt "#30012"
+msgid "HD Mode 7 - Perspective Correction"
+msgstr "HD Mode 7 - Korrektion av perspektiv"
+
+msgctxt "#30013"
+msgid "HD Mode 7 - Supersampling"
+msgstr "HD Mode 7 - Supersampling"
+
+msgctxt "#30014"
+msgid "HD Mode 7 - HD->SD Mosaic"
+msgstr "HD Mode 7 - HD->SD Mosaik"
+
+msgctxt "#30015"
+msgid "Internal Run-Ahead"
+msgstr "Intern Run-Ahead"
+
+msgctxt "#30016"
+msgid "Coprocessors - Fast Mode"
+msgstr "Coprocessors - Snabbt läge"
+
+msgctxt "#30017"
+msgid "Coprocessors - Prefer HLE"
+msgstr "Coprocessors - Föredra HLE"
+
+msgctxt "#30018"
+msgid "Hotfixes"
+msgstr "Snabbfixar"
+
+msgctxt "#30019"
+msgid "Entropy (randomization)"
+msgstr "Entropi (slumpmässighet)"
+
+msgctxt "#30020"
+msgid "CPU Fast Math"
+msgstr "CPU snabb matte"
+
+msgctxt "#30021"
+msgid "Overclocking - CPU"
+msgstr "Överklockning - CPU"
+
+msgctxt "#30022"
+msgid "Overclocking - SA-1 Coprocessor"
+msgstr "Överklockning - SA-1 Coprocessor"
+
+msgctxt "#30023"
+msgid "Overclocking - SuperFX Coprocessor"
+msgstr "Överklockning - SuperFX Coprocessor"
+
+msgctxt "#30024"
+msgid "Preferred Super Game Boy BIOS (Restart Required)"
+msgstr "Föredraget Super Game Boy BIOS (omstart krävs)"
+
+msgctxt "#30025"
+msgid "Hide SGB Border"
+msgstr "Dölj SGB-ram"
+
+msgctxt "#30026"
+msgid "Touchscreen Light Gun"
+msgstr "Ljuspistol för pekskärm"
+
+msgctxt "#30027"
+msgid "Super Scope Reverse Trigger Buttons"
+msgstr "Omvända avtryckarknappar för Super Scope"
+
+msgctxt "#30028"
+msgid "Filter"
+msgstr "Filter"
+
+msgctxt "#30029"
+msgid "Color Adjustment - Luminance"
+msgstr "Färgjustering - Luminans"
+
+msgctxt "#30030"
+msgid "Color Adjustment - Saturation"
+msgstr "Färgjustering - Mättnad"
+
+msgctxt "#30031"
+msgid "Color Adjustment - Gamma"
+msgstr "Färgjustering - Gamma"
+
+msgctxt "#30032"
+msgid "Crop Vertical Overscan"
+msgstr "Beskär vertikal overscan"
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Inställningar"

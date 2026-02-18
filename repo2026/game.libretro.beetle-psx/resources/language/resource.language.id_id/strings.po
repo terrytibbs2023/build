@@ -1,0 +1,238 @@
+# game.libretro.beetle-psx language file
+# Addon Name: game.libretro.beetle-psx
+# Addon id: game.libretro.beetle-psx
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.beetle-psx\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2019-08-24 22:21i\n"
+"PO-Revision-Date: 2024-12-27 21:47+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Indonesian <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-beetle-psx/id_id/>\n"
+"Language: id_id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.9.2\n"
+
+msgctxt "Addon Summary"
+msgid "Sony - PlayStation (Beetle PSX)"
+msgstr "Sony - PlayStation (Beetle PSX)"
+
+msgctxt "Addon Description"
+msgid "Beetle PSX is the PlayStation module of Beetle, a port of Madnafen."
+msgstr "Beetle PSX adalah modul PlayStation dari Beetle, port dari Madnafen."
+
+msgctxt "#30001"
+msgid "Internal GPU Resolution"
+msgstr "Resolusi GPU Internal"
+
+msgctxt "#30002"
+msgid "Dithering Pattern"
+msgstr "Pola Dithering"
+
+msgctxt "#30003"
+msgid "Frame Duping (Speedup)"
+msgstr "Peniru Bingkai (Cepat)"
+
+msgctxt "#30004"
+msgid "Display Internal FPS"
+msgstr "Tampilkan FPS Internal"
+
+msgctxt "#30005"
+msgid "Analog Self-Calibration"
+msgstr "Kalibrasi Analog Mandiri"
+
+msgctxt "#30007"
+msgid "DualShock Analog Mode Combo"
+msgstr "Kombo Mode Analog DualShock"
+
+msgctxt "#30008"
+msgid "DualShock Analog Mode Combo Hold Delay"
+msgstr "Penundaan Kombo Mode Analog DualShock"
+
+msgctxt "#30009"
+msgid "Port 1: Multitap Enable"
+msgstr "Port 1: Aktifkan Multitap"
+
+msgctxt "#30010"
+msgid "Port 2: Multitap Enable"
+msgstr "Port 2: Aktifkan Multitap"
+
+msgctxt "#30011"
+msgid "Gun Input Mode"
+msgstr "Mode Masukan Senjata"
+
+msgctxt "#30012"
+msgid "Gun Cursor"
+msgstr "Kursor Senjata"
+
+msgctxt "#30013"
+msgid "Port 1: Gun Crosshair Color"
+msgstr "Port 1: Warna Bidikan Senjata"
+
+msgctxt "#30014"
+msgid "Port 2: Gun Crosshair Color"
+msgstr "Port 2: Warna Bidikan Senjata"
+
+msgctxt "#30015"
+msgid "Mouse Sensitivity"
+msgstr "Sensitifitas Mouse"
+
+msgctxt "#30016"
+msgid "neGcon Twist Response"
+msgstr "Respon Putar neGcon"
+
+msgctxt "#30017"
+msgid "neGcon Twist Deadzone"
+msgstr "Zona Mati Putar neGcon"
+
+msgctxt "#30018"
+msgid "Memory Card 0 Method (Restart Required)"
+msgstr "Metode Kartu Memori 0 (Mulai Ulang)"
+
+msgctxt "#30019"
+msgid "Enable Memory Card 1 (Restart Required)"
+msgstr "Aktifkan Kartu Memori 1 (Mulai Ulang)"
+
+msgctxt "#30020"
+msgid "Shared Memory Cards (Restart Required)"
+msgstr "Kartu Memori Bersama (Mulai Ulang)"
+
+msgctxt "#30021"
+msgid "Memory Card Left Index"
+msgstr "Indeks Kiri Kartu Memori"
+
+msgctxt "#30022"
+msgid "Memory Card Right Index"
+msgstr "Indeks Kanan Kartu Memori"
+
+msgctxt "#30023"
+msgid "PGXP Operation Mode"
+msgstr "Mode Operasi PGXP"
+
+msgctxt "#30024"
+msgid "PGXP 2D Geometry Tolerance"
+msgstr "Toleransi Geometri 2D PGXP"
+
+msgctxt "#30025"
+msgid "PGXP Primitive Culling"
+msgstr "Pemusnahan Primitif PGXP"
+
+msgctxt "#30026"
+msgid "Line-to-Quad Hack"
+msgstr "Peretasan Baris-ke-Quad"
+
+msgctxt "#30027"
+msgid "Widescreen Mode Hack"
+msgstr "Peretasan Mode Layar Lebar"
+
+msgctxt "#30028"
+msgid "Widescreen Mode Hack Aspect Ratio"
+msgstr "Rasio Aspek Peretasan Mode Layar Lebar"
+
+msgctxt "#30029"
+msgid "CPU Frequency Scaling (Overclock)"
+msgstr "Penskalaan Frekuensi CPU (Overclock)"
+
+msgctxt "#30030"
+msgid "GTE Overclock"
+msgstr "Overclock GTE"
+
+msgctxt "#30031"
+msgid "Skip BIOS"
+msgstr "Lewati BIOS"
+
+msgctxt "#30032"
+msgid "Override BIOS (Restart Required)"
+msgstr "Ganti BIOS (Mulai Ulang)"
+
+msgctxt "#30033"
+msgid "CPU Dynarec"
+msgstr "CPU Dynarec"
+
+msgctxt "#30034"
+msgid "Dynarec Code Invalidation"
+msgstr "Pembatalan Kode Dynarec"
+
+msgctxt "#30035"
+msgid "Dynarec DMA/GPU/MDEC/Timer Event Cycles"
+msgstr "Siklus Peristiwa Dynarec DMA/GPU/MDEC/Timer"
+
+msgctxt "#30036"
+msgid "Dynarec SPU Samples"
+msgstr "Sampel SPU Dynarec"
+
+msgctxt "#30037"
+msgid "Core-Reported FPS Timing"
+msgstr "Waktu FPS yang Dilaporkan Inti"
+
+msgctxt "#30038"
+msgid "PAL (European) Video Timing Override"
+msgstr "Penggantian Waktu Video PAL (Eropa)"
+
+msgctxt "#30039"
+msgid "Crop Overscan"
+msgstr "Pangkas Pemindaian Lebih"
+
+msgctxt "#30040"
+msgid "Additional Cropping"
+msgstr "Pemangkasan Tambahan"
+
+msgctxt "#30041"
+msgid "Offset Cropped Image"
+msgstr "Celah Gambar yang Dipotong"
+
+msgctxt "#30042"
+msgid "GPU Rasterizer Overclock"
+msgstr "Overclock Rasterisasi GPU"
+
+msgctxt "#30043"
+msgid "Core Aspect Ratio"
+msgstr "Rasio Aspek Inti"
+
+msgctxt "#30044"
+msgid "Initial Scan Line - NTSC"
+msgstr "Jalur Pemindaian Awal - NTSC"
+
+msgctxt "#30045"
+msgid "Last Scan Line - NTSC"
+msgstr "Jalur Pemindaian Terakhir - NTSC"
+
+msgctxt "#30046"
+msgid "Initial Scan Line - PAL"
+msgstr "Jalur Pemindaian Awal - PAL"
+
+msgctxt "#30047"
+msgid "Last Scan Line - PAL"
+msgstr "Jalur Pemindaian Terakhir - PAL"
+
+msgctxt "#30048"
+msgid "CD Access Method (Restart Required)"
+msgstr "Metode Akses CD (Diperlukan Restart)"
+
+msgctxt "#30049"
+msgid "CD Loading Speed"
+msgstr "Kecepatan Memuat CD"
+
+msgctxt "#30050"
+msgid "DualShock Analog Mode Toggle"
+msgstr ""
+
+msgctxt "#30051"
+msgid "Display OSD Messages"
+msgstr ""
+
+msgctxt "#30052"
+msgid "Deinterlace Method"
+msgstr ""
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Pengaturan"
+
+#~ msgctxt "#30006"
+#~ msgid "Enable DualShock Analog Mode Toggle"
+#~ msgstr "Aktifkan Pengalih Mode Analog DualShock"
