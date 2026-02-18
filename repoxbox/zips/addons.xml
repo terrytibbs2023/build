@@ -1,0 +1,828 @@
+<?xml version='1.0' encoding='utf-8'?>
+<addons><addon id="repository.EzzerMacsWizard" name="EzzerMacs Wizard Repository" version="1.1.7" provider-name="EzzerMac">
+        <extension point="xbmc.addon.repository" name="EzzerMacs Wizard Repository">
+		<dir>
+            <info compressed="false">http://www.ezzer-mac.com/_repo/addons.xml</info>
+            <checksum>http://www.ezzer-mac.com/_repo/addons.xml.md5</checksum>
+            <datadir zip="true">http://www.ezzer-mac.com/_repo/</datadir>
+			</dir>
+            
+            <dir>
+			<info compressed="false">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/</datadir>
+		</dir>
+		
+		<dir>
+            <info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/</datadir>
+        </dir>
+		
+		<dir>
+            <info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/</datadir>
+        </dir>
+        
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/jenaddon/repository.jenrepo/master/zips/</datadir>
+            <hashes>false</hashes>
+        </dir>
+	
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
+		</dir>
+		
+		
+		<dir>
+            <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+        </dir>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+            <summary>Install all the latest Builds</summary>
+            <description>Welcome to the New and Improved EZZERMACS WIZARD for all your Community Builds, All the Help and Assistance can be found Here</description>
+            <platform>all</platform>
+		<assets>
+		<icon>icon.png</icon>
+		<fanart>fanart.jpg</fanart>
+		</assets>
+    </extension>
+</addon><addon id="repository.Rising.Tides" name="[COLOR red][B]R[/B][/COLOR][COLOR white][B]ising[/B][/COLOR] [COLOR pink][B]T[/B][/COLOR][COLOR white][B]ides[/B][/COLOR] Repository" version="1.1" provider-name="[COLOR turquoise][B]@mullafabz[/B][/COLOR]">
+	<extension point="xbmc.addon.repository" name="[COLOR red][B]R[/B][/COLOR]ising [COLOR pink][B]T[/B][/COLOR]ides Repository">
+	<dir>
+		<info compressed="false">https://mullafabz.xyz/Plugins/K19/Plugins/addons.xml</info>
+		<checksum>https://mullafabz.xyz/Plugins/K19/Plugins/addons.xml.md5</checksum>
+		<datadir zip="true">https://mullafabz.xyz/Plugins/K19/Plugins/</datadir>
+	</dir>
+	<dir>
+		<info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+    </dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>All types of Contents</summary>
+		<description>Find any type of content</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon><addon id="repository.bingie" name="Bingie Repository" provider-name="matke" version="1.0.0">
+	<extension point="xbmc.addon.repository" name="Bingie Repository">
+		<requires>
+			<import addon="xbmc.addon" version="12.0.0" />
+		</requires>
+		<dir minversion="20.9.1">
+			<info compressed="false">https://raw.githubusercontent.com/matke-84/repository.bingie/main/omega/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/matke-84/repository.bingie/main/omega/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/matke-84/repository.bingie/main/omega/</datadir>
+		</dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Bingie Repository</summary>
+        <description lang="en">A repository for Bingie skin.</description>
+        <disclaimer />
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+	</extension>
+</addon><addon id="repository.bingieplus" name="Terrys Bingie Repo" version="1.0" provider-name="Terry Tibbs">
+    <extension point="xbmc.addon.repository" name="Terrys Bingie Repository">
+        <dir>
+            <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/repo26/zips/addons.xml</info>
+          
+
+<checksum>https://githubraw.com/terrytibbs2023/build/main/repo26/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/repo26/zips/</datadir>
+        </dir>
+
+
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Terry Tibbs Repo</summary>
+        <description />
+        <disclaimer />
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon><addon id="repository.bugatsinho" name=" Bugatsinho repository" version="2.7" provider-name="Bugatsinho">
+    <extension point="xbmc.addon.repository" name="Bugatsinho repository">
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/bugatsinho/bugatsinho.github.io/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/bugatsinho/bugatsinho.github.io/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/bugatsinho/bugatsinho.github.io/master/_zips</datadir>
+            <hashes>false</hashes>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/</datadir>
+            <hashes>false</hashes>
+        </dir>
+        <dir>
+            <info>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.gz</info>
+			<checksum verify="sha256">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.gz.sha256</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
+			<artdir>https://raw.githubusercontent.com/jsergio123/zips/master/</artdir>
+			<hashes>sha256</hashes>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/Twilight0/repo.twilight0.libs/master/_zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/Twilight0/repo.twilight0.libs/master/_zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/Twilight0/repo.twilight0.libs/master/_zips/</datadir>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+        </dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/bugatsinho/python-koding/master/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/bugatsinho/python-koding/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/bugatsinho/python-koding/master/zips/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Bugatsinho repository</summary>
+        <description>This repository contains Greek, Spanish and other addons!Read first each addon's description!</description>
+        <assets>
+			<icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+		</assets>
+        <platform>all</platform>
+    </extension>
+</addon><addon id="repository.cMaNWizard" name="cMaN's Wizard Repository" version="2.8" provider-name="cMaN">
+        <extension point="xbmc.addon.repository" name="cMaN's Wizard Repository">
+		<dir>		
+            <info compressed="false">https://cmanbuildsxyz.com/cman/repo/addons.xml</info>
+            <checksum>https://cmanbuildsxyz.com/cman/repo/addonsmd5.txt</checksum>
+            <datadir zip="true">https://cmanbuildsxyz.com/cman/repo/</datadir>
+		</dir>
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+        </dir>
+        <dir>
+			<info compressed="false">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/totalrevolution/python-koding/master/zips/</datadir>
+		</dir>
+        <dir>
+            <info compressed="false">https://raw.githubusercontent.com/not-coco-joe/repository.cocoscrapers/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/not-coco-joe/repository.cocoscrapers/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/not-coco-joe/repository.cocoscrapers/master/zips/</datadir>
+		</dir>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+            <summary>Install all the latest Builds</summary>
+            <description>Welcome to the New and Improved cMaN Wizard for all your Community Builds.</description>
+            <platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+		</assets>
+    </extension>
+</addon><addon id="repository.cocoscrapers" name="CocoScrapers Repository" version="1.0.0" provider-name="CocoScrapers">
+    <extension point="xbmc.addon.repository" name="CocoScrapers Repository">
+        <dir minversion="19.0">
+            <info compressed="false">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/CocoJoe2411/repository.cocoscrapers/master/zips/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <summary>CocoScrapers Repository</summary>
+        <description>Unofficial add-ons repository</description>
+    </extension>
+</addon><addon id="repository.dobbelina" name="[COLOR pink]Dobbelina Repository[/COLOR]" version="1.0.4" provider-name="dobbelina">
+    <extension point="xbmc.addon.repository" name="[COLOR pink]Dobbelina Repository[/COLOR]">
+    <dir>
+        <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+</dir>
+<dir>
+        <info compressed="false">https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/</datadir>
+		</dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Unofficial Addons for Kodi</summary>
+		<description>For Cumination Updates
+Please visit
+https://github.com/dobbelina/repository.dobbelina/issues
+for support!
+
+Kodi is a registered trademark of the XBMC Foundation. We are not connected to or in any other way affiliated with Kodi, Team Kodi, or the XBMC Foundation.</description>
+<disclaimer>The owners and submitters to this repository do not host or distribute any of the content displayed by these addons nor do they have any affiliation with the content providers.</disclaimer>
+<forum>https://github.com/dobbelina/repository.dobbelina/issues</forum>
+        <platform>all</platform>
+    </extension>
+</addon><addon id="repository.jewrepo" name="[COLOR purple]JewRepo[/COLOR]" version="1.6.0" provider-name="JewBMX">
+    <extension point="xbmc.addon.repository" name="[COLOR purple]JewRepo[/COLOR]">
+    <dir>
+        <info compressed="false">https://raw.githubusercontent.com/jewbmx/repo/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/jewbmx/repo/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/jewbmx/repo/master/zips/</datadir>
+    </dir>
+    <dir>
+        <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+    </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Free the People, Free the World!</summary>
+        <description>JewBMX's Official Repository</description>
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>icon.png</fanart>
+        </assets>
+    </extension>
+</addon><addon id="repository.loop" name="[COLORlime]Loop[/COLOR] Repository" version="3.0.4" provider-name="The Loop">
+	<extension point="xbmc.addon.repository" name="Loop Repository">
+		<dir>
+			<info compressed="false">https://loopaddon.uk/zips19/addons.xml</info>
+	<checksum>https://loopaddon.uk/zips19/addons.xml.md5</checksum>
+			<datadir zip="true">https://loopaddon.uk/zips19/</datadir>
+		</dir>
+		<dir>
+      <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+      <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+      <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+    </dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+    <assets>
+        <icon>icon.png</icon>
+        <fanart>fanart.jpg</fanart>			
+    </assets>
+		<summary lang="en" />
+		<description lang="en" />
+		<genre />
+	</extension>
+</addon><addon id="repository.thecrew" name="[COLOR orchid]THE CREW REPO[/COLOR]" provider-name="The Crew" version="0.3.8">
+	<extension point="xbmc.addon.repository" name="The Crew">
+			<dir minversion="18.9.9">
+			<info compressed="false">https://raw.githubusercontent.com/thecrewwh/zips/master/matrix/_zip/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/thecrewwh/zips/master/matrix/_zip/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/thecrewwh/zips/master/matrix/_zip</datadir>
+			</dir>
+			<dir>
+			<info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+			</dir>
+			<dir>
+			<info compressed="false">https://raw.githubusercontent.com/unhingedthemes/zips/main/_zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/unhingedthemes/zips/main/_zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/unhingedthemes/zips/main/_zips/</datadir>
+			</dir>
+			<dir>
+			<info compressed="false">https://github.com/OldManJax/repository.animaniac/raw/master/addons.xml</info>
+			<checksum>https://github.com/OldManJax/repository.animaniac/raw/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://github.com/OldManJax/repository.animaniac/raw/master/</datadir>
+			</dir>
+			<dir>
+			<info compressed="false">https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/</datadir>
+			</dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">The Crew is a team of individuals that does what it can to provide others, you the best in entertainment.</summary>
+		<description lang="en">Many come, Many go. The true and dedicated are here. We here</description>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+			<screenshot>resources/art/ss/1.png</screenshot>
+			<screenshot>resources/art/ss/2.png</screenshot>
+			<screenshot>resources/art/ss/3.png</screenshot>
+		</assets>
+	</extension>
+</addon><addon id="repository.umbrella" name="Umbrella Repository" version="2.2.4" provider-name="Umbrella">
+    <extension point="xbmc.addon.repository" name="Umbrella Repository">
+        <dir minversion="18.9.701" maxversion="19.5">
+            <info compressed="false">https://raw.githubusercontent.com/umbrellaplug/umbrellaplug.github.io/master/matrix/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/umbrellaplug/umbrellaplug.github.io/master/matrix/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/umbrellaplug/umbrellaplug.github.io/master/matrix/zips/</datadir>
+        </dir>
+	    <dir minversion="19.8.0">
+            <info compressed="false">https://raw.githubusercontent.com/umbrellaplug/umbrellaplug.github.io/master/nexus/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/umbrellaplug/umbrellaplug.github.io/master/nexus/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/umbrellaplug/umbrellaplug.github.io/master/nexus/zips/</datadir>
+        </dir>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Umbrella Repository</summary>
+        <description>Repository for the Umbrella video plugin.</description>
+        <disclaimer />
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon><addon id="resource.images.studios.coloured" name="Studio Icons - Coloured - Modded" version="1.0.0012" provider-name="lynxstrike">
+	<extension point="kodi.resource.images" compile="true" type="studios" />
+	<requires>
+		<import addon="kodi.resource" version="1.0.0" />
+	</requires>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Coloured Studio Icons</summary>
+		<description lang="en">Coloured Studio Icons</description>
+		<platform>all</platform>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+		<news>
+			v1.0.0012 (2025-12-13)
+			- Logos requested by @kittmaster, part 4
+			- Logo requested by @knedl (re-issue)
+		</news>
+	</extension>
+</addon><addon id="screensaver.bingie" name="Bingie Screensaver" version="1.0.0" provider-name="matke">
+    <requires>
+        <import addon="skin.bingie" version="1.0.0" />
+    </requires>
+    
+    <extension point="xbmc.ui.screensaver" library="default.py" />
+    <extension point="xbmc.python.script" library="script.py" />
+    
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Bingie Screensaver</summary>
+        <description lang="en">Netflix styled screensaver for Bingie skin.</description>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon><addon id="script.bingie.helper" name="Bingie Helper" version="1.1.2" provider-name="cartman.dos, matke">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0" />
+		<import addon="script.module.simplejson" version="3.17.0" />
+	</requires>
+	<extension point="xbmc.python.script" library="default.py" />
+	<extension point="xbmc.addon.metadata">
+		<language />
+		<summary lang="en">Bingie Helper</summary>
+		<description lang="en">Helper for some of Bingie skin features.</description>
+		<platform>all</platform>
+		<license>GPL v3.0</license>
+		<forum />
+		<website />
+		<source>https://github.com/matke-84/script.bingie.helper/</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon><addon id="script.bingie.toolbox" name="Bingie Toolbox" version="1.0.0" provider-name="matke">
+    <requires>
+		<import addon="xbmc.python" version="3.0.0" />
+        <import addon="xbmc.addon" version="12.0.0" />
+        <import addon="script.module.simplejson" version="3.3.0" />
+		<import addon="script.module.simplecache" version="1.0.0" />
+    </requires>
+
+    <extension point="xbmc.python.library" library="default.py" />
+    <extension point="xbmc.python.pluginsource" library="plugin.py" />
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Bingie Toolbox</summary>
+        <description>Toolbox for Bingie skin.</description>
+		<assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+        <language />
+        <platform>all</platform>
+        <license>GPL v2.0</license>
+        <forum />
+        <website />
+        <source />
+    </extension>
+</addon><addon id="script.bingie.widgets" name="Bingie Widgets" version="1.0.1" provider-name="matke">
+    <requires>
+		<import addon="xbmc.python" version="3.0.0" />
+        <import addon="xbmc.addon" version="12.0.0" />
+        <import addon="script.module.simplecache" version="2.0.2" />
+		<import addon="script.module.requests" version="2.9.1" />
+        <import addon="script.module.infotagger" version="0.0.4" />
+    </requires>
+
+    <extension point="xbmc.python.pluginsource" library="plugin.py">
+        <provides>video</provides>
+    </extension>
+    <extension library="service.py" point="xbmc.service" start="login" />
+
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">Bingie Widgets</summary>
+        <description>Widgets for Bingie skin.</description>
+		<assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+        <language />
+        <platform>all</platform>
+        <license>GPL v2.0</license>
+        <forum />
+        <website />
+        <source />
+    </extension>
+</addon><addon id="script.fentastic.helper" name="FENtastic Helper" version="0.6.20a" provider-name="Tikipeter, Ivar Brandt">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.requests" version="2.19.1" />
+    </requires>
+    <extension point="xbmc.python.library" library="resources/lib/default.py" />
+    <extension point="xbmc.service" library="resources/lib/service.py" start="startup" />
+    <extension point="xbmc.addon.metadata">
+        <news />
+        <platform>all</platform>
+        <license>GPL-2.0-only</license>
+        <forum />
+        <source />
+        <assets>
+            <icon>resources/media/icon.png</icon>
+            <fanart>resources/media/fanart.jpg</fanart>
+        </assets>
+        <description lang="en_GB">FENtastic Helper for the FENtastic Skin.</description>
+        <description lang="en_NZ">FENtastic Helper for the FENtastic Skin.</description>
+        <description lang="en_US">FENtastic Helper for the FENtastic Skin.</description>
+    </extension>
+</addon><addon id="script.module.addon.signals" name="Addon Signals" version="0.0.6+matrix.1" provider-name="Rick Phillips (ruuk)">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+    <extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Inter-addon signalling</summary>
+        <description lang="en_GB">Provides signal/slot mechanism for inter-addon communication</description>
+        <platform>all</platform>
+        <license>LGPL-2.1-only</license>
+        <source>https://github.com/ruuk/script.module.addon.signals</source>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon><addon id="script.module.autocompletion" name="AutoCompletion library" version="2.1.1" provider-name="Philipp Temminghoff (phil65), bbaronSVK, finkleandeinhorn, berkhornet">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.requests" version="2.9.1" />
+    </requires>
+    <extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Module providing some AutoCompletion functions</summary>
+        <description lang="en_GB">Module providing some AutoCompletion functions</description>
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <source>https://github.com/finkleandeinhorn/script.module.autocompletion</source>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+    </extension>
+</addon><addon id="script.module.backports.zoneinfo" name="zoneinfo" version="0.2.1" provider-name="pganssle">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+    <import addon="script.module.tzdata" version="2021.5" />
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">A concrete time zone implementation to support the IANA time zone database</summary>
+    <description lang="en_GB">The zoneinfo module provides a concrete time zone implementation to support the IANA time zone database as originally specified in PEP 615.</description>
+    <platform>all</platform>
+    <license>Apache-2.0</license>
+    <website>https://pypi.org/project/backports.zoneinfo</website>
+    <source>https://github.com/pganssle/zoneinfo</source>
+    <assets>
+      <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
+</addon><addon id="script.module.beautifulsoup4" name="beautifulsoup4" version="4.12.2" provider-name="Leonard Richardson">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+    <import addon="script.module.soupsieve" version="2.4.1" />
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Screen-scraping library</summary>
+    <description lang="en_GB">Beautiful Soup is a library that makes it easy to scrape information from web pages. It sits atop an HTML or XML parser, providing Pythonic idioms for iterating, searching, and modifying the parse tree.</description>
+    <license>MIT</license>
+    <platform>all</platform>
+    <website>https://www.crummy.com/software/BeautifulSoup/</website>
+	<source>https://code.launchpad.net/beautifulsoup</source>
+    <assets>
+      <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
+</addon><addon id="script.module.bingie" name="bingie common" provider-name="jurialmunkey,matke" version="1.0.0">
+  <requires>
+    <import addon="xbmc.python" version="3.0.1" />
+    <import addon="script.module.requests" version="2.9.1" />
+    <import addon="script.module.infotagger" version="0.0.5" />
+  </requires>
+  <extension point="xbmc.python.module" library="resources/modules" />
+  <extension point="xbmc.addon.metadata">
+    <description lang="en_GB">Common code required by TMDb Bingie Helper.</description>
+    <license>GPL-3.0-or-later</license>
+    <website>https://github.com/matke-84/script.module.bingie</website>
+    <assets>
+      <icon>icon.png</icon>
+    </assets>
+  </extension>
+</addon><addon id="script.module.certifi" name="certifi" version="2023.5.7" provider-name="Certifi">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Certifi: Python SSL Certificates</summary>
+    <description lang="en_GB">Certifi is a carefully curated collection of Root Certificates for validating the trustworthiness of SSL certificates while verifying the identity of TLS hosts. It has been extracted from the Requests project.</description>
+    <license>MPL-2.0</license>
+    <website>https://github.com/certifi/python-certifi</website>
+    <source>https://github.com/certifi/python-certifi</source>
+    <assets>
+      <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
+</addon><addon id="script.module.chardet" name="chardet" version="5.1.0" provider-name="Character Encoding Detector">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">The Universal Character Encoding Detector</summary>
+    <description lang="en_GB">The Universal Character Encoding Detector</description>
+    <license>LGPL-2.1</license>
+    <platform>all</platform>
+    <website>https://chardet.readthedocs.io/</website>
+    <source>https://github.com/chardet/chardet</source>
+    <assets>
+      <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
+</addon><addon id="script.module.cocoscrapers" name="CocoScrapers Module" version="1.0.37" provider-name="CocoJoe">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0" />
+		<import addon="script.module.requests" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="lib/default.py">
+		<provides>executable</provides>
+	</extension> 
+	<extension point="xbmc.service" library="lib/service.py" start="startup" />
+	<extension point="xbmc.python.module" library="lib" />
+	<extension point="xbmc.addon.metadata">
+		<reuselanguageinvoker>false</reuselanguageinvoker>
+		<summary lang="en">CocoScrapers Module</summary>
+		<description>A module that can be used to provide site scrapers.</description>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<forum />
+		<website />
+		<source />
+		<disclaimer lang="en">The author is not responsible for the use of this addon. The author is not responsible for the content found using this addon. The author does not host or own any content found within this addon.[CR]The author is in no way affiliated with Kodi, Team Kodi, or the XBMC Foundation.[CR]This is a Non-profit resource, organized solely for educational purposes which is protected under the Fair-Use doctrine of the Copyright Act, Specifically section 107, which does promote freedom of expression, by permitting the unlicensed use of copyright-protected works.</disclaimer>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.png</fanart>
+			<screenshot />
+		</assets>
+		<news />
+	</extension>
+</addon><addon id="script.module.dateutil" name="python-dateutil" version="2.8.2" provider-name="Paul Ganssle, Gustavo Niemeyer, Tomi Pieviläinen, Yaron de Leeuw">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+    <import addon="script.module.six" version="1.15.0+matrix.1" />
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Extensions to the standard Python datetime module</summary>
+    <description lang="en_GB">The dateutil module provides powerful extensions to the standard datetime module, available in Python.</description>
+    <license>Apache-2.0, BSD-3-Clause</license>
+    <website>https://dateutil.readthedocs.io/en/stable/</website>
+    <source>https://github.com/dateutil/dateutil</source>
+    <assets>
+      <icon>icon.png</icon>
+    </assets>
+  </extension>
+</addon><addon id="script.module.defusedxml" name="defusedxml" version="0.6.0+matrix.1" provider-name="Christian Heimes">
+	<requires>
+		<import addon="xbmc.python" version="3.0.0" />
+	</requires>
+	<extension point="xbmc.python.module" library="lib" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">defusedxml -- defusing XML bombs and other exploits</summary>
+		<description lang="en_GB">Packed for KODI from https://github.com/tiran/defusedxml</description>
+		<platform>all</platform>
+		<license>PSF</license>
+		<website>https://pypi.org/project/defusedxml/</website>
+		<source>https://github.com/tiran/defusedxml</source>
+		<assets>
+			<icon>icon.png</icon>
+		</assets>
+	</extension>
+</addon><addon id="script.module.future" name="future" version="1.0.0+matrix.1" provider-name="Ed Schofield">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Clean single-source support for Python 3 and 2</summary>
+    <description lang="en_GB">future is the missing compatibility layer between Python 2 and Python 3. It allows you to use a single, clean Python 3.x-compatible codebase to support both Python 2 and Python 3 with minimal overhead.</description>
+    <license>MIT</license>
+    <platform>all</platform>
+    <website>https://python-future.org</website>
+    <source>https://github.com/PythonCharmers/python-future</source>
+    <assets>
+      <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
+</addon><addon id="script.module.httplib2" name="httplib2" version="0.22.0+matrix.1" provider-name="Joe Gregorio">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+    <import addon="script.module.pyparsing" version="3.1.1" />
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">A comprehensive HTTP client library.</summary>
+    <description lang="en_GB">A comprehensive HTTP client library.</description>
+    <license>MIT</license>
+    <platform>all</platform>
+    <website>https://github.com/httplib2/httplib2</website>
+    <source>https://github.com/httplib2/httplib2</source>
+    <assets>
+      <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
+</addon><addon id="script.module.idna" name="idna" version="3.10.0" provider-name="Kim Davies">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Internationalized Domain Names for Python</summary>
+    <description lang="en_GB">Internationalized Domain Names for Python</description>
+    <license>BSD-3-Clause</license>
+    <platform>all</platform>
+    <website>https://github.com/kjd/idna</website>
+    <source>https://github.com/kjd/idna</source>
+    <assets>
+      <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
+</addon><addon id="script.module.infotagger" name="InfoTagger" provider-name="jurialmunkey" version="0.0.8">
+  <requires>
+    <import addon="xbmc.python" version="3.0.1" />
+  </requires>
+  <extension point="xbmc.python.module" library="resources/modules" />
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="en_GB">Python wrapper for setInfo on Nexus InfoTags</summary>
+    <description lang="en_GB">Python wrapper for setInfo on Nexus InfoTags</description>
+    <license>GPL-3.0-or-later</license>
+    <website>https://github.com/jurialmunkey/script.module.infotagger</website>
+    <source>https://github.com/jurialmunkey/script.module.infotagger</source>
+    <assets>
+      <icon>icon.png</icon>
+    </assets>
+  </extension>
+
+</addon><addon id="script.module.inputstreamhelper" name="InputStream Helper" version="0.8.5" provider-name="emilsvennesson, dagwieers, mediaminister, horstle">
+  <requires>
+    
+    <import addon="xbmc.python" version="3.0.0" />
+    <import addon="script.module.pysocks" version="1.6.8" optional="true" />
+  </requires>
+  
+  <extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="de_DE">Kodi InputStream und DRM Wiedergabe einfach gemacht</summary>
+    <summary lang="el_GR">Βοηθός Inputstream για το Kodi και εύκολη αναπαραγωγή DRM</summary>
+    <summary lang="en_GB">Kodi InputStream and DRM playback made easy</summary>
+    <summary lang="es_ES">Kodi InputStream y reproducción DRM echa fácil</summary>
+    <summary lang="fr_FR">La lecture Kodi InputStream et DRM en toute simplicité</summary>
+    <summary lang="hr_HR">Kodi InputStream olakšava reprodukciju DRM zaštićenog sadržaja</summary>
+    <summary lang="sv_SE">Kodi InputStream och DRM-uppspelning på ett enkelt sätt</summary>
+    <description lang="de_DE">Dieses einfache Kodi-Modul macht das Leben für Addon Entwickler einfacher, die auf InputStream basierte Addons und DRM Wiedergabe angewiesen sind.</description>
+    <description lang="el_GR">Μία απλή μονάδα για το Kodi η οποία διευκολύνει την ζωή των προγραμματιστών οι οποίοι εξαρτώνται από τα πρόσθετσ InputStream και αναπαραγωγή τύπου DRM.</description>
+    <description lang="en_GB">A simple Kodi module that makes life easier for add-on developers relying on InputStream based add-ons and DRM playback.</description>
+    <description lang="es_ES">Un módulo Kodi simple que hace la vida más fácil para los desarrolladores de complementos que dependen de complementos basados en InputStream y reproducción de DRM.</description>
+    <description lang="fr_FR">Un simple module Kodi qui simplifie la vie des développeurs de modules complémentaires en s’appuyant sur des modules complémentaires basés sur InputStream et sur la lecture de DRM.</description>
+    <description lang="hr_HR">Jednostavan Kodi modul koji olakšava razvijanje dodataka koji se temelje na InputStream dodatku i reprodukciji DRM zaštićenog sadržaja.</description>
+    <description lang="ru_RU">Простой модуль для Kodi, который облегчает жизнь разработчикам дополнений, с использованием InputStream дополнений и воспроизведения DRM контента.</description>
+    <description lang="sv_SE">En enkel Kodi-modul som underlättar livet för tilläggsutvecklare som förlitar sig på InputStream-baserade tillägg och DRM-uppspelning.</description>
+    <news>
+v0.8.5 (2025-12-29)
+- Fix Widevine CDM installation on 32-bit ARM
+
+v0.8.4 (2025-11-04)
+- Fix Widevine CDM installation on ARM hardware
+
+v0.8.3 (2025-10-10)
+- Fix removing older Widevine CDM backups
+
+v0.8.2 (2025-09-25)
+- Fix Widevine CDM installation on 32-bit Windows
+
+v0.8.1 (2025-09-22)
+- Fix Widevine CDM installation on ARM hardware
+
+v0.8.0 (2025-09-19)
+- Fix Widevine CDM installation on Windows, Linux and Macintosh
+- Add support for LG webOS
+
+v0.7.0 (2024-09-24)
+- Get rid of distutils dependency
+- Option to get Widevine from lacros image
+- Remove support for Python 2 and pre-Matrix Kodi versions
+
+v0.6.1 (2023-05-30)
+- Performance improvements on Linux ARM
+- This will be the last release for Python 2 i.e. Kodi 18 (Leia) and below. The next release will require Python 3 and Kodi 19 (Matrix) or higher.
+
+v0.6.0 (2023-05-03)
+- Initial support for AARCH64 Linux
+- Initial support for AARCH64 Macs
+- New option to install a specific version on most platforms
+
+v0.5.10 (2022-04-18)
+- Fix automatic submission of release
+- Update German translation
+- Fix update_frequency setting
+- Fix install_from
+- Improve/Fix Widevine extraction from Chrome OS images
+
+v0.5.9 (2022-03-22)
+- Update Croatian translation
+- Replace deprecated LooseVersion
+- Fix http_get decode error
+- Option to install Widevine from specified source
+    </news>
+    <platform>all</platform>
+    <license>MIT</license>
+    <website>https://github.com/emilsvennesson/script.module.inputstreamhelper/wiki</website>
+    <source>https://github.com/emilsvennesson/script.module.inputstreamhelper</source>
+    <assets>
+      <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
+</addon><addon id="skin.bingie" version="5.0.2" name="Bingie" provider-name="matke hacked about with by terry">
+	<requires>
+		<import version="5.17.0" addon="xbmc.gui" />
+		<import addon="script.bingie.helper" version="1.1.2" />
+		<import addon="script.bingie.toolbox" version="1.0.0" />
+		<import addon="script.bingie.widgets" version="1.0.1" />
+		<import addon="script.skinshortcuts" version="2.0.3" />
+		<import addon="resource.images.studios.coloured" version="1.0.0" />
+		<import addon="plugin.video.tmdb.bingie.helper" version="1.0.1" />
+		<import addon="plugin.program.autocompletion" version="2.1.3" />
+	</requires>
+	<extension debugging="false" defaultthemename="Textures.xbt" effectslowdown="1" point="xbmc.gui.skin">
+        <res aspect="16:9" default="true" folder="1080i" height="1080" width="1920" />
+    </extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">Kodi skin with Netflix layout.</summary>
+		<summary lang="zh_CN">Netflix 布局 Kodi 皮肤。</summary>
+		<summary lang="es_ES">Kodi con diseño Netflix.</summary>
+		<summary lang="es_AR">Kodi con diseño Netflix.</summary>
+		<summary lang="es_MX">Kodi con diseño Netflix.</summary>
+		<description lang="en_GB">Bingie – The home of your favorite movies and shows!</description>
+		<description lang="zh_CN">Bingie -你最喜欢的电影和节目的主界面！</description>
+		<description lang="es_ES">Bingie - tu hogar de películas y series favoritas!</description>
+		<description lang="es_AR">Bingie - tu hogar de películas y series favoritas!</description>
+		<description lang="es_MX">Bingie - tu hogar de películas y series favoritas!</description>
+		<platform>all</platform>
+		<license>GPL v2.0</license>
+		<forum />
+		<source />
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>			
+		</assets>
+	</extension>
+</addon></addons>
