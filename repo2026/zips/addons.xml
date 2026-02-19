@@ -4014,6 +4014,20 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
     <description>Runs Fenlight cache clear silently on boot</description>
     <platform>all</platform>
   </extension>
+</addon><addon id="service.firstboot.fenauth" name="First Boot Fen Auth" version="1.0.0" provider-name="Dave">
+
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+
+    <extension point="xbmc.service" library="service.py" />
+
+    <extension point="xbmc.addon.metadata">
+        <summary>Runs Fen Trakt &amp; RealDebrid auth on first boot only</summary>
+        <description>Prompts user on first run to authenticate Fen Trakt &amp; RealDebrid</description>
+        <platform>all</platform>
+    </extension>
+
 </addon><addon id="service.installer" name="2026 Installer" version="2.0.10" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py" />
     <extension point="xbmc.addon.metadata">
