@@ -84,7 +84,7 @@ if __name__ == "__main__":
         dialog = xbmcgui.Dialog()
         yes = dialog.yesno(
             "Bingie Setup",
-            "Bingie Needs Trakt and RealDebrid To Work, Are you ready to activate them now?"
+            "Bingie Needs Trakt and Real-Debrid To Work, Are you ready to activate them now?"
         )
         log(f"User selected: {'YES' if yes else 'NO'}")
 
