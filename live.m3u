@@ -1,119 +1,43 @@
 #EXTM3U
 
+#EXTINF:-1 tvg-id="TNT.Sports.1.HD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/tnt-sports-1-uk.png" group-title="> UK Sport <", TNT Sport 1 HD
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/tnt-sports-1-uk.png
 
-#EXTINF:-1 tvg-id="BBC.One.Lon.HD.uk" tvg-logo="", BBC One
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-356.php
+#EXTINF:-1 tvg-id="TNT.Sports.2.HD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/tnt-sports-2-uk.png" group-title="> UK Sport <", TNT Sport 2 HD
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/tnt-sports-2-uk.png
 
-#EXTINF:-1 tvg-id="BBC Two UK" tvg-logo="", BBC Two
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-357.php
+#EXTINF:-1 tvg-id="TNT.Sports.3.HD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/tnt-sports-3-uk.png" group-title="> UK Sport <", TNT Sport 3 HD
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/tnt-sports-3-uk.png
 
-#EXTINF:-1 tvg-id="ITV1.uk" tvg-logo="", ITV
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-350.php
+#EXTINF:-1 tvg-id="TNT.Sports.4.HD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/tnt-sports-4-uk.png" group-title="> UK Sport <", TNT Sport 4 HD
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/tnt-sports-4-uk.png
 
-#EXTINF:-1 tvg-id="Channel 4 UK" tvg-logo="", Channel 4
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-354.php
+#EXTINF:-1 tvg-id="Premier.Sports.1.HD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/premier-sports-1-uk.png" group-title="> UK Sport <", Premier Sports 1 UK
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/premier-sports-1-uk.png
 
-#EXTINF:-1 tvg-id="Channel 5 UK" tvg-logo="", Channel 5
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-355.php
+#EXTINF:-1 tvg-id="Premier.Sports.2.HD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/premier-sports-2-uk.png" group-title="> UK Sport <", Premier Sports 2 UK
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/premier-sports-2-uk.png
 
-#EXTINF:-1 tvg-id="GOLD.HD.uk" tvg-logo="", UK Gold
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-687.php
+#EXTINF:-1 tvg-id="SkySp.Action.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-action-hz-uk.png" group-title="> UK Sport <", Sky Sport Action UK
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-action-hz-uk.png
 
-#EXTINF:-1 tvg-id="ITV2.uk" tvg-logo="", ITV 2 UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-351.php
+#EXTINF:-1 tvg-id="SkySpCricket.HD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-cricket-hz-uk.png" group-title="> UK Sport <", Sky Sport Cricket
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-cricket-hz-uk.png
 
-#EXTINF:-1 tvg-id="ITV3.uk" tvg-logo="", ITV 3 UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-352.php
+#EXTINF:-1 tvg-id="SkySp.Fball.HD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-football-hz-uk.png" group-title="> UK Sport <", Sky Sport Football UK
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-football-hz-uk.png
 
-#EXTINF:-1 tvg-id="ITV4.uk" tvg-logo="", ITV 4 UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-353.php
+#EXTINF:-1 tvg-id="SkySp.Golf.HD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-golf-hz-uk.png" group-title="> UK Sport <", Sky Sport Golf
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-golf-hz-uk.png
 
-#EXTINF:-1 tvg-id="E4.HD.uk" tvg-logo="", E4 Channel
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-363.php
+#EXTINF:-1 tvg-id="SkySpMainEvHD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-main-event-hz-uk.png" group-title="> UK Sport <", Sky Sport Main Event
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-main-event-hz-uk.png
 
-#EXTINF:-1 tvg-id="MTV.HD.uk" tvg-logo="", MTV UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-367.php
+#EXTINF:-1 tvg-id="SkySp.PL.HD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-premier-league-hz-uk.png" group-title="> UK Sport <", Sky Sport Premier League
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/main/countries/united-kingdom/sky-sports-premier-league-hz-uk.png
 
-#EXTINF:-1 tvg-id="Eurosport.1.HD.uk" tvg-logo="", EuroSport 1 UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-41.php
+#EXTINF:-1 tvg-id="Premier.Sports.1.HD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/premier-sports-1-uk.png" group-title="> EPL Channels <", Premier Sports 1 UK
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/premier-sports-1-uk.png
 
-#EXTINF:-1 tvg-id="Eurosport.2.HD.uk" tvg-logo="", EuroSport 2 UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-42.php
-
-
-
-#EXTINF:-1 tvg-id="Racing.TV.uk" tvg-logo="", Racing Tv UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-555.php
-
-
-#EXTINF:-1 tvg-id="SkySp.Fball.uk" tvg-logo="", SkySports Football
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-35.php
-
-#EXTINF:-1 tvg-id="SkySp.Arena.uk" tvg-logo="", SkySports Arena
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-36.php
-
-#EXTINF:-1 tvg-id="SkySp.Action.uk" tvg-logo="", SkySports Action
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-37.php
-
-#EXTINF:-1 tvg-id="SkySpMainEv.uk" tvg-logo="", SkySports Main Event
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-38.php
-
-
-#EXTINF:-1 tvg-id="SkySp.PL.uk" tvg-logo="", SkySports PL
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-130.php
-
-#EXTINF:-1 tvg-id="SkySp.PL.uk" tvg-logo="", AceStream PL
-http://127.0.0.1:6878/ace/getstream?id=ec5eabe0144ccfffc337e1d6708e2afb81d0638e
-
-#EXTINF:-1 tvg-id="SkySp.F1.uk" tvg-logo="", SkySports F1
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-60.php
-
-#EXTINF:-1 tvg-id="SkySp.Cricket.uk" tvg-logo="", SkySports Cricket
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-65.php
-
-#EXTINF:-1 tvg-id="SkySp.Golf.uk" tvg-logo="", SkySports Golf
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-70.php
-
-
-#EXTINF:-1 tvg-id="SkySp.News.HD.uk" tvg-logo="", SkySports News
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-366.php
-
-#EXTINF:-1 tvg-id="SkySp.Mix.HD.uk" tvg-logo="", SkySports MIX
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-449.php
-
-
-#EXTINF:-1 tvg-id="SkySp.Racing.uk" tvg-logo="", SkySports Racing
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-554.php
-
-
-#EXTINF:-1 tvg-id="TNT.Sports.1.uk" tvg-logo="", TNT Sports 1 UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-31.php
-
-#EXTINF:-1 tvg-id="TNT.Sports.2.uk" tvg-logo="", TNT Sports 2 UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-32.php
-
-#EXTINF:-1 tvg-id="TNT.Sports.3.uk" tvg-logo="", TNT Sports 3 UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-33.php
-
-#EXTINF:-1 tvg-id="TNT.Sports.4.uk" tvg-logo="", TNT Sports 4 UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-34.php
-
-
-#EXTINF:-1 tvg-id="SkySpMainEv.uk" tvg-logo="", AceStream Main Event
-http://127.0.0.1:6878/ace/getstream?id=eab7aeef0218ce8b0752e596e4792b69eda4df5e
-
-#EXTINF:-1 tvg-id="SkySp.PL.uk" tvg-logo="", AceStream PL
-http://127.0.0.1:6878/ace/getstream?id=ec5eabe0144ccfffc337e1d6708e2afb81d0638e
-
-#EXTINF:-1 tvg-id="SkySp.Fball.uk" tvg-logo="", AceStream Football
-http://127.0.0.1:6878/ace/getstream?id=8dbe2d515e9131fa311353537736f8c94be9b26d
-
-
-#EXTINF:-1 tvg-id="TNT.Sports.1.uk" tvg-logo="", TNT Acestream 1 UK
-http://127.0.0.1:6878/ace/getstream?id=90a3bf8ec3584007de4183143883aae24c3f356c
-
-#EXTINF:-1 tvg-id="premier.Sports.1.uk" tvg-logo="", Premier Sports 1 UK
-plugin://plugin.video.daddylive/?mode=play&url=https://dlhd.sx/stream/stream-143.php
-
-#EXTINF
-
+#EXTINF:-1 tvg-id="Premier.Sports.2.HD.uk" tvg-name="" tvg-logo="https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/premier-sports-2-uk.png" group-title="> EPL Channels <", Premier Sports 2 UK
+http://127.0.0.1:6878/ace/getstream?id=efc60cfe5e3a349baa02bcc49f6647c21a9c3c5b&Icon=https://raw.githubusercontent.com/tv-logo/tv-logos/refs/heads/main/countries/united-kingdom/premier-sports-2-uk.png
