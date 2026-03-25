@@ -1999,7 +1999,7 @@ msgid "Navigate to: [B]%s[/B]"
 msgstr ""
 
 msgctxt "#32701"
-msgid "Enter the following code: [B]%s[/B]"
+msgid "Enter the following code: %s"
 msgstr ""
 
 msgctxt "#32702"

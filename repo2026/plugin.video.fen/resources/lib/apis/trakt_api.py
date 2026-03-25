@@ -96,7 +96,7 @@ def trakt_get_device_token(device_codes):
 		user_code = str(device_codes['user_code'])
 		try: copy2clip(user_code)
 		except: pass
-		content = '[CR]%s[CR]%s' % (ls(32700) % str(device_codes['verification_url']), ls(32701) % '[COLOR red]%s[/COLOR]' % user_code)
+		content = '[CR]%s[CR]%s' % (ls(32700) % str(device_codes['verification_url']), ls(32701) % '[B][COLOR white]%s[/COLOR][/B]' % user_code)
 		current_highlight = set_temp_highlight('red')
 		progressDialog = progress_dialog('%s %s' % (ls(32037), ls(32057)), get_icon('trakt_qrcode'))
 		progressDialog.update(content, 0)
