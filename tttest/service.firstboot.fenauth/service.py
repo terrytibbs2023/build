@@ -13,11 +13,11 @@ SETTINGS_PATH = xbmcvfs.translatePath(
 
 # POV AUTH TRIGGERS
 TRAKT_TRIGGER = (
-   'PlayMedia("plugin://plugin.video.pov/?mode=auth_trakt")'
+   ''
 )
 
 RD_TRIGGER = (
-    'PlayMedia("plugin://plugin.video.pov/?mode=auth_debrid")'
+    ''
 )
 
 def log(msg, level=xbmc.LOGINFO):
@@ -86,7 +86,7 @@ if __name__ == "__main__":
         dialog = xbmcgui.Dialog()
         yes = dialog.yesno(
             "Bingie Setup",
-            "Bingie Needs Trakt and Real-Debrid To Work, Are you ready to activate them now?"
+            "Bingie Needs Trakt and Real-Debrid To Work, Goto Settings Then Accounts Setup"
         )
         log(f"User selected: {'YES' if yes else 'NO'}")
 
