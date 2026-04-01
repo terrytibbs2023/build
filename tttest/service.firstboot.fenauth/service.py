@@ -5,24 +5,19 @@ import xml.etree.ElementTree as ET
 import time
 import traceback
 
-LOG_PREFIX = "[FenSetupService] "
+LOG_PREFIX = "[POVSetupService] "
 
 SETTINGS_PATH = xbmcvfs.translatePath(
-    "special://profile/addon_data/plugin.video.fen/settings.xml"
+    "special://profile/addon_data/plugin.video.pov/settings.xml"
 )
 
-TRAKT_TRIGGER = (PlayMedia("plugin://plugin.video.pov/?mode=myservices&amp;name=My+Services&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FWQO1410.png")'
+# POV AUTH TRIGGERS
+TRAKT_TRIGGER = (
+    'PlayMedia("plugin://plugin.video.pov/?action=auth_trakt")'
 )
-888888888888888888888888888888888888
-
-<onclick>")</onclick>
-							<icon>icons/settings/livetv.png</icon>
-                    </item>
-88888888888888888888888
 
 RD_TRIGGER = (
-    'PlayMedia("plugin://plugin.video.fen/?mode=auth_accounts_choice'
-    '&service=realdebrid&active=False&isFolder=false&iconImage=https%3A%2F%2Fi.imgur.com%2FhlHDYca.png")'
+    'PlayMedia("plugin://plugin.video.pov/?action=auth_rd")'
 )
 
 def log(msg, level=xbmc.LOGINFO):
@@ -34,28 +29,31 @@ def get_setting(root, key):
             return (setting.text or "").strip()
     return ""
 
-def fen_settings():
+def pov_settings():
     if not xbmcvfs.exists(SETTINGS_PATH):
-        log("Fen settings.xml not found")
+        log("POV settings.xml not found")
         return None
     try:
         tree = ET.parse(SETTINGS_PATH)
         return tree.getroot()
     except Exception as e:
-        log(f"Error reading Fen settings: {e}", xbmc.LOGERROR)
+        log(f"Error reading POV settings: {e}", xbmc.LOGERROR)
         return None
 
+# POV setting keys:
+# trakt.enabled
+# debrid.enabled
 def trakt_enabled():
-    root = fen_settings()
+    root = pov_settings()
     if not root:
         return False
-    return get_setting(root, "trakt.indicators_active").lower() == "true"
+    return get_setting(root, "trakt.enabled").lower() == "true"
 
 def rd_enabled():
-    root = fen_settings()
+    root = pov_settings()
     if not root:
         return False
-    return get_setting(root, "rd.enabled").lower() == "true"
+    return get_setting(root, "debrid.enabled").lower() == "true"
 
 def wait_for_kodi_home(timeout=20):
     for _ in range(timeout):
@@ -64,7 +62,7 @@ def wait_for_kodi_home(timeout=20):
         time.sleep(1)
     return False
 
-def wait_for_fen_dialog_close(timeout=60):
+def wait_for_pov_dialog_close(timeout=60):
     for _ in range(timeout):
         if not xbmc.getCondVisibility("Window.IsActive(yesnodialog)") and \
            not xbmc.getCondVisibility("Window.IsActive(busydialog)") and \
@@ -100,7 +98,7 @@ if __name__ == "__main__":
         if not trakt_enabled():
             log("Triggering Trakt auth")
             xbmc.executebuiltin(TRAKT_TRIGGER)
-            wait_for_fen_dialog_close()
+            wait_for_pov_dialog_close()
         else:
             log("Trakt already enabled — skipping")
 
@@ -108,7 +106,7 @@ if __name__ == "__main__":
         if not rd_enabled():
             log("Triggering RealDebrid auth")
             xbmc.executebuiltin(RD_TRIGGER)
-            wait_for_fen_dialog_close()
+            wait_for_pov_dialog_close()
         else:
             log("RealDebrid already enabled — skipping")
 
@@ -118,4 +116,3 @@ if __name__ == "__main__":
         log("Exception in service.py", xbmc.LOGERROR)
         log(repr(e), xbmc.LOGERROR)
         log(traceback.format_exc(), xbmc.LOGERROR)
-
