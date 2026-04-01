@@ -33,7 +33,7 @@ def authorize():
 	def _builder():
 		for name, api in services:
 			item = kodi_utils.make_listitem()
-			item.setLabel('[B]%s[/B]' % name.upper())
+			item.setLabel('[B]%s' % name.upper())
 			item.setLabel2(auth_str if api().token else noauth_str)
 			item.setArt({'icon': '%s%s' % (icon_path, api.icon)})
 			yield(item)
