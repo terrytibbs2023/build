@@ -1,6 +1,6 @@
 <addon id="service.firstboot.fenauth"
        name="First Boot Fen Auth"
-       version="1.0.5"
+       version="1.0.6"
        provider-name="Dave">
 
     <requires>
