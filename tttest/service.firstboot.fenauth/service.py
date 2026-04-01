@@ -13,11 +13,11 @@ SETTINGS_PATH = xbmcvfs.translatePath(
 
 # POV AUTH TRIGGERS
 TRAKT_TRIGGER = (
-    'PlayMedia("plugin://plugin.video.pov/?action=auth_trakt")'
+   'PlayMedia("plugin://plugin.video.pov/?mode=auth_trakt")'
 )
 
 RD_TRIGGER = (
-    'PlayMedia("plugin://plugin.video.pov/?action=auth_rd")'
+    'PlayMedia("plugin://plugin.video.pov/?mode=auth_debrid")'
 )
 
 def log(msg, level=xbmc.LOGINFO):
