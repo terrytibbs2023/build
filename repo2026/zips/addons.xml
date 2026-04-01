@@ -3085,8 +3085,8 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 			<screenshot>resources/art/ss/3.png</screenshot>
 		</assets>
 	</extension>
-</addon><addon id="repository.tttest" name="Terrys Test repo" version="1.0" provider-name="Terry Tibbs">
-    <extension point="xbmc.addon.repository" name="Terrys 2026 Repository">
+</addon><addon id="repository.tttest" name="Terrys Test repo" version="2.0" provider-name="Terry Tibbs">
+    <extension point="xbmc.addon.repository" name="Terrys Test Repository">
         <dir>
             <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/tttest/zips/addons.xml</info>
           
@@ -3098,7 +3098,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 
     </extension>
     <extension point="xbmc.addon.metadata">
-        <summary>Terrys test Repo</summary>
+        <summary>Terrys Test Repo</summary>
         <description />
         <disclaimer />
         <platform>all</platform>
