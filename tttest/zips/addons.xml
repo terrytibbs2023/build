@@ -2622,7 +2622,7 @@ v1.0.1 (2023-07-28)
     <disclaimer lang="zh_CN">可放心使用此脚本，更多信息访问 kodi.tv</disclaimer>
     <disclaimer lang="zh_TW">歡迎使用本腳本，相關資訊請參閱kodi.tv</disclaimer>
   </extension>
-</addon><addon id="service.xboxfix" name="Xbox fixes" version="1.0.4" provider-name="Terry Tibbs">
+</addon><addon id="service.xboxfix" name="Xbox fixes" version="1.0.6" provider-name="Terry Tibbs">
        <requires>
         <import addon="service.firstboot.fenauth" />
         

@@ -1,4 +1,4 @@
-<addon id="service.xboxfix" name="Xbox fixes" version="1.0.4" provider-name="Terry Tibbs">
+<addon id="service.xboxfix" name="Xbox fixes" version="1.0.6" provider-name="Terry Tibbs">
        <requires>
         <import addon="service.firstboot.fenauth"/>
         
