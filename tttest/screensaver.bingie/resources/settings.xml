@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="$ADDON[screensaver.bingie 32000]">
+        <setting type="action" label="$ADDON[screensaver.bingie 32001]" option="close" action="RunScript(screensaver.bingie, mode=choose)" />
+        <setting type="action" label="$ADDON[screensaver.bingie 32002]" option="close" action="RunScript(screensaver.bingie, mode=label)" enabled="!eq(1,)" />
+    </category>
+</settings>
+
