@@ -1339,6 +1339,28 @@ fix for fanarttv landscape art overwriting TMDb landscape art
 			<fanart>fanart.jpg</fanart>
 		</assets>
 	</extension>
+</addon><addon id="repository.all" name="Terrys repo" version="2.0" provider-name="Terry Tibbs">
+    <extension point="xbmc.addon.repository" name="Terrys Repository">
+        <dir>
+            <info compressed="false">https://githubraw.com/terrytibbs2023/build/main/all/zips/addons.xml</info>
+          
+
+<checksum>https://githubraw.com/terrytibbs2023/build/main/all/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://githubraw.com/terrytibbs2023/build/main/all/zips/</datadir>
+        </dir>
+
+
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary>Terry Tibbs Repo</summary>
+        <description />
+        <disclaimer />
+        <platform>all</platform>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
 </addon><addon id="repository.bingie" name="Bingie Repository" provider-name="matke" version="1.0.0">
 	<extension point="xbmc.addon.repository" name="Bingie Repository">
 		<requires>
