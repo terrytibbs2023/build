@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="Inputstream">
+        <setting id="inputstream_behavior"
+                 type="labelenum"
+                 label="Inputstream behavior"
+                 values="Always On|Always Off|Always Ask"
+                 default="2"
+                 />
+    </category>
+</settings>
