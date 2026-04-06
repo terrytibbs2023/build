@@ -1,0 +1,50 @@
+<shortcuts>
+	<shortcut>
+		<defaultID />
+		<label>Trending Movies</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://https%3a%2f%2fi.imgu.com%2fvBwrjLV.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.fen/?name=33067&amp;iconImage=trending_recent&amp;mode=build_movie_list&amp;action=trakt_movies_trending_recent",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID />
+		<label>Recommended Movies</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://https%3a%2f%2fi.imgu.com%2fxihFNwP.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.fen/?mode=build_movie_list&amp;action=trakt_recommendations&amp;new_page=movies&amp;category_name=Movies+Recommended&amp;iconImage=https%3A%2F%2Fi.imgu.com%2FxihFNwP.png",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID />
+		<label>New Shows</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://https%3a%2f%2fi.imgu.com%2fO2bqOfI.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.fen/?name=32460&amp;action=tmdb_tv_premieres&amp;iconImage=fresh&amp;mode=build_tvshow_list",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID />
+		<label>Trending Shows</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://https%3a%2f%2fi.imgu.com%2fvBwrjLV.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.fen/?name=33067&amp;iconImage=trending_recent&amp;mode=build_tvshow_list&amp;action=trakt_tv_trending_recent",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID />
+		<label>Recommeded Shows</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://https%3a%2f%2fi.imgu.com%2fxihFNwP.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.fen/?mode=build_tvshow_list&amp;action=trakt_recommendations&amp;new_page=shows&amp;category_name=TV+Shows+Recommended&amp;iconImage=https%3A%2F%2Fi.imgu.com%2FxihFNwP.png",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID />
+		<label>Next Episodes</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://https%3a%2f%2fi.imgu.com%2f0KFvjKR.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.fen/?name=32483&amp;iconImage=next_episodes&amp;mode=build_next_episode",return)</action>
+		</shortcut>
+	</shortcuts>

@@ -1,0 +1,58 @@
+<shortcuts>
+	<shortcut>
+		<defaultID />
+		<label>Latest Movies</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://special%3a%2f%2fhome%2faddons%2fplugin.video.pov%2fresources%2fskins%2fDefault%2fmedia%2fdvd.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.pov/?name=32461&amp;iconImage=dvd.png&amp;mode=build_movie_list&amp;action=tmdb_movies_latest_releases",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID />
+		<label>Recommended Movies</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://special%3a%2f%2fhome%2faddons%2fplugin.video.pov%2fresources%2fskins%2fDefault%2fmedia%2ftrakt.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.pov/?mode=build_movie_list&amp;action=trakt_recommendations&amp;name=Movies&amp;iconImage=special%3A%2F%2Fhome%2Faddons%2Fplugin.video.pov%2Fresources%2Fskins%2FDefault%2Fmedia%2Ftrakt.png",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID />
+		<label>True Crime Documentaries</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://special%3a%2f%2fhome%2faddons%2fplugin.video.pov%2fresources%2fskins%2fDefault%2fmedia%2ftrakt.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.pov/?mode=build_trakt_list&amp;user=lish408&amp;slug=true-crime-documentary-series-film&amp;list_id=11416887&amp;list_type=user_lists&amp;name=True+Crime+Documentary+Series+%26+Film",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID />
+		<label>Anime Shows</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://special%3a%2f%2fhome%2faddons%2fplugin.video.pov%2fresources%2fskins%2fDefault%2fmedia%2ftv.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.pov/?name=Series+Trending&amp;iconImage=tv.png&amp;mode=build_tvshow_list&amp;action=trakt_tvanime_trending",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID />
+		<label>Current Shows</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://special%3a%2f%2fhome%2faddons%2fplugin.video.pov%2fresources%2fskins%2fDefault%2fmedia%2ftrending.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.pov/?name=32449&amp;iconImage=trending.png&amp;mode=build_tvshow_list&amp;action=trakt_tv_trending_recent",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID />
+		<label>Recommended Shows</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://special%3a%2f%2fhome%2faddons%2fplugin.video.pov%2fresources%2fskins%2fDefault%2fmedia%2ftrakt.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.pov/?mode=build_tvshow_list&amp;action=trakt_recommendations&amp;name=TV+Shows&amp;iconImage=special%3A%2F%2Fhome%2Faddons%2Fplugin.video.pov%2Fresources%2Fskins%2FDefault%2Fmedia%2Ftrakt.png",return)</action>
+		</shortcut>
+	<shortcut>
+		<defaultID />
+		<label>Next Episodes</label>
+		<label2>Video Add-On</label2>
+		<icon>DefaultShortcut.png</icon>
+		<thumb>image://special%3a%2f%2fhome%2faddons%2fplugin.video.pov%2fresources%2fskins%2fDefault%2fmedia%2fnext_episodes.png/</thumb>
+		<action>ActivateWindow(Videos,"plugin://plugin.video.pov/?name=32483&amp;iconImage=next_episodes.png&amp;mode=build_next_episode",return)</action>
+		</shortcut>
+	</shortcuts>

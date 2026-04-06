@@ -1,0 +1,61 @@
+<settings version="2">
+    <setting id="module.provider" default="true">Magneto</setting>
+    <setting id="provider.1337x" default="true">false</setting>
+    <setting id="provider.bitsearch" default="true">false</setting>
+    <setting id="provider.eztv" default="true">false</setting>
+    <setting id="provider.kickass2" default="true">false</setting>
+    <setting id="provider.knaben" default="true">false</setting>
+    <setting id="provider.nyaa" default="true">false</setting>
+    <setting id="provider.piratebay">true</setting>
+    <setting id="provider.rutor" default="true">false</setting>
+    <setting id="provider.torlock" default="true">false</setting>
+    <setting id="provider.torrentdownload">true</setting>
+    <setting id="provider.torrentproject2" default="true">false</setting>
+    <setting id="provider.torrentz2" default="true">false</setting>
+    <setting id="provider.ytsmx" default="true">false</setting>
+    <setting id="provider.bitmagnet" default="true">false</setting>
+    <setting id="provider.comet" default="true">false</setting>
+    <setting id="comet.url" default="true">0</setting>
+    <setting id="provider.mediafusion" default="true">false</setting>
+    <setting id="mediafusion.url" default="true">0</setting>
+    <setting id="provider.meteor" default="true">false</setting>
+    <setting id="provider.torz" default="true">false</setting>
+    <setting id="torz.url" default="true">0</setting>
+    <setting id="provider.torrentio">true</setting>
+    <setting id="provider.torrentsdb" default="true">false</setting>
+    <setting id="provider.zilean">true</setting>
+    <setting id="zilean.url" default="true">0</setting>
+    <setting id="provider.dmm" default="true">false</setting>
+    <setting id="provider.prowlarr" default="true">false</setting>
+    <setting id="prowlarr.token" default="true"></setting>
+    <setting id="prowlarr.url" default="true"></setting>
+    <setting id="provider.tbtorznab" default="true">false</setting>
+    <setting id="torbox.token" default="true"></setting>
+    <setting id="filter.foreign.single.audio" default="true">false</setting>
+    <setting id="filter.undesirables" default="true">false</setting>
+    <setting id="debug.enabled" default="true">false</setting>
+    <setting id="debug.location" default="true">0</setting>
+    <setting id="debug.reversed" default="true">false</setting>
+    <setting id="provider.aiostreams">true</setting>
+    <setting id="results.list_format">1</setting>
+    <setting id="highlight.type">1</setting>
+    <setting id="scraper_single_highlight" default="true">dodgerblue</setting>
+    <setting id="scraper_single_display" default="true">[COLOR FF1E90FF]dodgerblue[/COLOR]</setting>
+    <setting id="scraper_4k_highlight" default="true">magenta</setting>
+    <setting id="scraper_4k_display" default="true">[COLOR FFFF00FF]magenta[/COLOR]</setting>
+    <setting id="scraper_1080p_highlight" default="true">orange</setting>
+    <setting id="scraper_1080p_display" default="true">[COLOR FFFFA500]orange[/COLOR]</setting>
+    <setting id="scraper_720p_highlight" default="true">blue</setting>
+    <setting id="scraper_720p_display" default="true">[COLOR FF0000FF]blue[/COLOR]</setting>
+    <setting id="scraper_SD_highlight" default="true">green</setting>
+    <setting id="scraper_SD_display" default="true">[COLOR FF008000]green[/COLOR]</setting>
+    <setting id="scraping_timeout">30</setting>
+    <setting id="aiostreams_instance" default="true">0</setting>
+    <setting id="aio.ku_url" default="true">https://aiostreams.stremio.ru</setting>
+    <setting id="aio.custom_url" default="true"></setting>
+    <setting id="aio.viren_url" default="true">https://aiostreams.viren070.me</setting>
+    <setting id="aio.yeb_url" default="true">https://aiostreams.fortheweak.cloud</setting>
+    <setting id="aio.midnight_url" default="true">https://aiostreamsfortheweebsstable.midnightignite.me</setting>
+    <setting id="aio.username" default="true"></setting>
+    <setting id="aio.password" default="true"></setting>
+</settings>

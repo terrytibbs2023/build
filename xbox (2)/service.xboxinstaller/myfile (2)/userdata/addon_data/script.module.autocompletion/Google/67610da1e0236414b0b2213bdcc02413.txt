@@ -1,0 +1,1 @@
+["pk", ["pkr to gbp", "pk humble", "pk", "pkr to inr", "pkp intercity", "pku", "pkp", "pkm", "pkk", "pkhex"], [], {"google:suggestsubtypes": [[512, 433], [512, 433], [512, 433], [512, 433], [512, 433], [512, 433], [512, 433, 131], [512], [512, 433], [512, 433, 131]], "google:suggesttype": ["QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY"]}]

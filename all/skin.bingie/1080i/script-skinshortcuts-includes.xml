@@ -844,9 +844,9 @@
 			<thumb />
 			<property name="labelID">var-defmusichub3name</property>
 			<property name="defaultID">var-defmusichub3name</property>
-			<onclick>C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedalbums.xsp</onclick>
-			<property name="path">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedalbums.xsp</property>
-			<property name="list">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedalbums.xsp</property>
+			<onclick>/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedalbums.xsp</onclick>
+			<property name="path">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedalbums.xsp</property>
+			<property name="list">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedalbums.xsp</property>
 			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(900).ListItem.Property(submenuVisibility),musichub)</visible>
 			<property name="group">musichub</property>
 			<property name="isSubmenu">True</property>
@@ -860,9 +860,9 @@
 			<thumb />
 			<property name="labelID">31131</property>
 			<property name="defaultID">31131</property>
-			<onclick>C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedartists.xsp</onclick>
-			<property name="path">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedartists.xsp</property>
-			<property name="list">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedartists.xsp</property>
+			<onclick>/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedartists.xsp</onclick>
+			<property name="path">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedartists.xsp</property>
+			<property name="list">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedartists.xsp</property>
 			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(900).ListItem.Property(submenuVisibility),musichub)</visible>
 			<property name="group">musichub</property>
 			<property name="isSubmenu">True</property>
@@ -876,9 +876,9 @@
 			<thumb />
 			<property name="labelID">31211</property>
 			<property name="defaultID">31211</property>
-			<onclick>C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedsongs.xsp</onclick>
-			<property name="path">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedsongs.xsp</property>
-			<property name="list">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedsongs.xsp</property>
+			<onclick>/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedsongs.xsp</onclick>
+			<property name="path">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedsongs.xsp</property>
+			<property name="list">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedsongs.xsp</property>
 			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Container(900).ListItem.Property(submenuVisibility),musichub)</visible>
 			<property name="group">musichub</property>
 			<property name="isSubmenu">True</property>
@@ -3196,9 +3196,9 @@
 			<thumb />
 			<property name="labelID">var-defmusichub3name</property>
 			<property name="defaultID">var-defmusichub3name</property>
-			<onclick>C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedalbums.xsp</onclick>
-			<property name="path">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedalbums.xsp</property>
-			<property name="list">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedalbums.xsp</property>
+			<onclick>/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedalbums.xsp</onclick>
+			<property name="path">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedalbums.xsp</property>
+			<property name="list">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedalbums.xsp</property>
 			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
 			<property name="group">musichub</property>
 			<property name="isSubmenu">True</property>
@@ -3212,9 +3212,9 @@
 			<thumb />
 			<property name="labelID">31131</property>
 			<property name="defaultID">31131</property>
-			<onclick>C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedartists.xsp</onclick>
-			<property name="path">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedartists.xsp</property>
-			<property name="list">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedartists.xsp</property>
+			<onclick>/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedartists.xsp</onclick>
+			<property name="path">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedartists.xsp</property>
+			<property name="list">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedartists.xsp</property>
 			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
 			<property name="group">musichub</property>
 			<property name="isSubmenu">True</property>
@@ -3228,9 +3228,9 @@
 			<thumb />
 			<property name="labelID">31211</property>
 			<property name="defaultID">31211</property>
-			<onclick>C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedsongs.xsp</onclick>
-			<property name="path">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedsongs.xsp</property>
-			<property name="list">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedsongs.xsp</property>
+			<onclick>/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedsongs.xsp</onclick>
+			<property name="path">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedsongs.xsp</property>
+			<property name="list">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedsongs.xsp</property>
 			<visible>String.IsEqual(System.ProfileName,Master user)</visible>
 			<property name="group">musichub</property>
 			<property name="isSubmenu">True</property>
@@ -3246,9 +3246,9 @@
 			<thumb />
 			<property name="labelID">var-defmusichub3name</property>
 			<property name="defaultID">var-defmusichub3name</property>
-			<onclick>C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedalbums.xsp</onclick>
-			<property name="path">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedalbums.xsp</property>
-			<property name="list">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedalbums.xsp</property>
+			<onclick>/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedalbums.xsp</onclick>
+			<property name="path">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedalbums.xsp</property>
+			<property name="list">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedalbums.xsp</property>
 			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Window(10000).Property(submenuVisibility),musichub)</visible>
 			<property name="group">musichub</property>
 			<property name="isSubmenu">True</property>
@@ -3262,9 +3262,9 @@
 			<thumb />
 			<property name="labelID">31131</property>
 			<property name="defaultID">31131</property>
-			<onclick>C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedartists.xsp</onclick>
-			<property name="path">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedartists.xsp</property>
-			<property name="list">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedartists.xsp</property>
+			<onclick>/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedartists.xsp</onclick>
+			<property name="path">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedartists.xsp</property>
+			<property name="list">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedartists.xsp</property>
 			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Window(10000).Property(submenuVisibility),musichub)</visible>
 			<property name="group">musichub</property>
 			<property name="isSubmenu">True</property>
@@ -3278,9 +3278,9 @@
 			<thumb />
 			<property name="labelID">31211</property>
 			<property name="defaultID">31211</property>
-			<onclick>C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedsongs.xsp</onclick>
-			<property name="path">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedsongs.xsp</property>
-			<property name="list">C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedsongs.xsp</property>
+			<onclick>/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedsongs.xsp</onclick>
+			<property name="path">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedsongs.xsp</property>
+			<property name="list">/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedsongs.xsp</property>
 			<visible>[String.IsEqual(System.ProfileName,Master user)] + String.IsEqual(Window(10000).Property(submenuVisibility),musichub)</visible>
 			<property name="group">musichub</property>
 			<property name="isSubmenu">True</property>
@@ -3306,7 +3306,7 @@
 			<param name="submenuid" value="" />
 			<param name="widgetTags" value="WidgetTagOverlayDisable" />
 			<param name="widgetTarget" value="music" />
-			<param name="widgetPath" value="C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedalbums.xsp" />
+			<param name="widgetPath" value="/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedalbums.xsp" />
 			<param name="widgetStyle" value="widget_layout_square" />
 			<param name="widgetSortBy" value="" />
 			<param name="widgetSortOrder" value="" />
@@ -3328,7 +3328,7 @@
 			<param name="submenuid" value="" />
 			<param name="widgetTags" value="WidgetTagOverlayDisable" />
 			<param name="widgetTarget" value="music" />
-			<param name="widgetPath" value="C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedartists.xsp" />
+			<param name="widgetPath" value="/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedartists.xsp" />
 			<param name="widgetStyle" value="widget_layout_square" />
 			<param name="widgetSortBy" value="" />
 			<param name="widgetSortOrder" value="" />
@@ -3350,7 +3350,7 @@
 			<param name="submenuid" value="" />
 			<param name="widgetTags" value="WidgetTagOverlayDisable" />
 			<param name="widgetTarget" value="music" />
-			<param name="widgetPath" value="C:\Users\ecr\AppData\Roaming\Kodi\addons\skin.bingie\extras\widgetplaylists\recentlyaddedsongs.xsp" />
+			<param name="widgetPath" value="/home/ecr/.var/app/tv.kodi.Kodi/data/addons/skin.bingie/extras/widgetplaylists/recentlyaddedsongs.xsp" />
 			<param name="widgetStyle" value="widget_layout_square" />
 			<param name="widgetSortBy" value="" />
 			<param name="widgetSortOrder" value="" />
