@@ -41,7 +41,6 @@ def trakt_enabled():
     root = fen_settings()
     if root is None:
         return False
-    # In POV, Trakt is considered active if a token exists
     token = get_setting(root, "trakt.token")
     return token not in ("", None)
 
@@ -49,7 +48,6 @@ def rd_enabled():
     root = fen_settings()
     if root is None:
         return False
-    # In POV, RD must be enabled AND have a token
     enabled = get_setting(root, "rd.enabled").lower() == "true"
     token = get_setting(root, "rd.token")
     return enabled and token not in ("", None)
@@ -74,60 +72,52 @@ if __name__ == "__main__":
     try:
         log("Service start")
 
-        # Initial check
-        trakt = trakt_enabled()
-        rd = rd_enabled()
-
-        # If both are already enabled, exit immediately
-        if trakt and rd:
-            log("Trakt & RD already enabled — exiting")
-            raise SystemExit
-
         wait_for_kodi_home()
         time.sleep(2)
 
-        missing = []
-        if not trakt:
-            missing.append("Trakt")
-        if not rd:
-            missing.append("Real-Debrid")
-
-        missing_str = ", ".join(missing) if missing else "None"
-
         dialog = xbmcgui.Dialog()
-        yes = dialog.yesno(
-            "Bingie Setup",
-            "You Must Enable These Accounts NOW!:\n\n%s\n\n"
-            "Bingie needs Trakt and Real-Debrid to work.\n"
-            "Open POV My Services to enable them now?" % missing_str
-        )
-        log(f"User selected: {'YES' if yes else 'NO'}")
 
-        if not yes:
-            log("User declined — exiting")
-            raise SystemExit
+        while True:
+            trakt = trakt_enabled()
+            rd = rd_enabled()
 
-        # Open POV My Services (user chooses Trakt/RD there)
-        log("Opening POV My Services window")
-        xbmc.executebuiltin(MY_SERVICES_TRIGGER)
-        wait_for_fen_dialog_close()
+            # If both are enabled, exit the loop and end service
+            if trakt and rd:
+                log("Both Trakt and Real-Debrid are enabled — exiting service")
+                break
 
-        # Re-check after user returns
-        time.sleep(1)
-        trakt = trakt_enabled()
-        rd = rd_enabled()
-
-        if trakt and rd:
-            log("Both Trakt and Real-Debrid are now enabled")
-        else:
-            still_missing = []
+            missing = []
             if not trakt:
-                still_missing.append("Trakt")
+                missing.append("Trakt")
             if not rd:
-                still_missing.append("Real-Debrid")
-            log("Still not enabled: %s" % ", ".join(still_missing))
+                missing.append("Real-Debrid")
+
+            missing_str = ", ".join(missing)
+
+            yes = dialog.yesno(
+                "Bingie Setup",
+                "You Must Enable These Accounts NOW!:\n\n%s\n\n"
+                "Bingie needs Trakt and Real-Debrid to work.\n"
+                "Open POV My Services to enable them now?" % missing_str
+            )
+
+            log(f"User selected: {'YES' if yes else 'NO'}")
+
+            if not yes:
+                # User said NO → loop again
+                log("User declined — showing dialog again")
+                time.sleep(1)
+                continue
+
+            # User said YES → open POV My Services
+            log("Opening POV My Services window")
+            xbmc.executebuiltin(MY_SERVICES_TRIGGER)
+
+            wait_for_fen_dialog_close()
+            time.sleep(1)
 
         log("Service end (normal)")
+        raise SystemExit
 
     except Exception as e:
         log("Exception in service.py", xbmc.LOGERROR)

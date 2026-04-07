@@ -1913,7 +1913,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
         <icon>icon.png</icon>
         <fanart>fanart.jpg</fanart>
     </extension>
-</addon><addon id="service.firstboot.fenauth" name="First Boot Fen Auth" version="1.0.2" provider-name="Dave">
+</addon><addon id="service.firstboot.fenauth" name="First Boot Fen Auth" version="1.0.8" provider-name="Dave">
 
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
