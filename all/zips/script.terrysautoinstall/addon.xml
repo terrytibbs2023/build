@@ -1,12 +1,13 @@
 <addon id="script.terrysautoinstall"
        name="AutoSetup"
-       version="1.1.63"
+       version="1.1.64"
        provider-name="Terry Tibbs 2025">
     <requires>
         <import addon="xbmc.python" version="3.0.0"/>
         <import addon="plugin.video.pov"/>
         <import addon="plugin.video.youtube"/>
-        <import addon="plugin.video.theloop"/>
+        <import addon="plugin.video.the-loop"/>
+       <import addon="plugin.video.Rising.Tides"/>
     </requires>
     <extension point="xbmc.python.script" library="resources/lib/default.py"/>
     <extension point="xbmc.addon.metadata">
