@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-    <addon id="script.bingie.toolbox" name="Bingie Toolbox" version="1.0.1" provider-name="matke">
+    <addon id="script.bingie.toolbox" name="Bingie Toolbox" version="1.0.2" provider-name="matke">
     <requires>
 		<import addon="xbmc.python" version="3.0.0"/>
         <import addon="xbmc.addon" version="12.0.0"/>
@@ -9,6 +9,9 @@
         <import addon="plugin.video.youtube"/>
         <import addon="plugin.video.the-loop"/>
        <import addon="plugin.video.Rising.Tides"/>
+        <import addon="plugin.audio.mp3streams"/>
+        <import addon="plugin.audio.radio_de_light"/>
+       
     </requires>
 
     <extension point="xbmc.python.library" library="default.py" />
