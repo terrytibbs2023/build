@@ -1097,7 +1097,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 			<fanart>resources/fanart.jpg</fanart>
 		</assets>
 	</extension>
-</addon><addon id="script.bingie.toolbox" name="Bingie Toolbox" version="1.0.2" provider-name="matke">
+</addon><addon id="script.bingie.toolbox" name="Bingie Toolbox" version="1.0.4" provider-name="matke">
     <requires>
 		<import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.addon" version="12.0.0" />
@@ -1108,7 +1108,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
         <import addon="plugin.video.the-loop" />
        <import addon="plugin.video.Rising.Tides" />
         <import addon="plugin.audio.mp3streams" />
-        <import addon="plugin.audio.radio_de_light" />
+        <import addon="service.firstboot.fenauth" />
        
     </requires>
 
