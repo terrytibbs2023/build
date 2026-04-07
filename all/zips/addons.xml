@@ -1075,12 +1075,16 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 			<fanart>resources/fanart.jpg</fanart>
 		</assets>
 	</extension>
-</addon><addon id="script.bingie.toolbox" name="Bingie Toolbox" version="1.0.0" provider-name="matke">
+</addon><addon id="script.bingie.toolbox" name="Bingie Toolbox" version="1.0.1" provider-name="matke">
     <requires>
 		<import addon="xbmc.python" version="3.0.0" />
         <import addon="xbmc.addon" version="12.0.0" />
         <import addon="script.module.simplejson" version="3.3.0" />
 		<import addon="script.module.simplecache" version="1.0.0" />
+		 <import addon="plugin.video.pov" />
+        <import addon="plugin.video.youtube" />
+        <import addon="plugin.video.the-loop" />
+       <import addon="plugin.video.Rising.Tides" />
     </requires>
 
     <extension point="xbmc.python.library" library="default.py" />
