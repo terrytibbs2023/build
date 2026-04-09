@@ -4,6 +4,7 @@ import xbmcvfs
 import xml.etree.ElementTree as ET
 import time
 import traceback
+xbmc.executebuiltin('UpdateAddonRepos')
 
 LOG_PREFIX = "[FenSetupService] "
 
