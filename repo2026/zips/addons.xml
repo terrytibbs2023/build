@@ -2228,10 +2228,15 @@ fix for breaking change to TMDB API for fanart
         </assets>
         <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
     </extension>
-</addon><addon id="plugin.video.fenlight" name="Fen Light" provider-name="Tikipeter" version="2.0.10">
+</addon><addon id="plugin.video.fenlight" name="FenLightAM" provider-name="Tikipeter/AnonyMouse" version="2.1.40">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
+        <import addon="script.module.pil" version="1.1.7" />
         <import addon="script.module.requests" version="2.19.1" />
+        
+          <import addon="script.terrysautoinstall" />
+        
+        
     </requires>
     <extension point="xbmc.python.pluginsource" library="resources/lib/fenlight.py">
         <provides>video</provides>
@@ -2246,8 +2251,8 @@ fix for breaking change to TMDB API for fanart
 		<disclaimer lang="en">The author of this addon does not host any of the content which is found and has no affiliation with any of the content providers.</disclaimer>
         <license />
         <assets>
-            <icon>resources/media/fenlight_icon.png</icon>
-            <fanart>resources/media/fenlight_fanart2.jpg</fanart>
+            <icon>resources/media/addon_icons/fenlight_icon_01.png</icon>
+            <fanart>resources/media/fenlight_fanart_01.jpg</fanart>
         </assets>
         <news>INFO: For latest changes see Changelog within Tools of add-on.</news>
     </extension>
@@ -4092,7 +4097,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
         <description lang="zh_CN">皮肤加载项，提供简单的用户快捷方式管理和列表（需要皮肤支持）</description>
         <description lang="zh_TW">插件为皮肤提供了简单的管理和用户连接方式列表 (需要皮肤支持)</description>
     </extension>
-</addon><addon id="script.terrysautoinstall" name="AutoSetup" version="1.1.60" provider-name="Terry Tibbs 2025">
+</addon><addon id="script.terrysautoinstall" name="AutoSetup" version="1.1.84" provider-name="Terry Tibbs 2025">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
     </requires>
