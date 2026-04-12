@@ -2,136 +2,147 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Pokémon Card Lookup (GBP – Market Price Only)</title>
+<title>Pokémon Price App</title>
 
 <style>
     body {
-        font-family: Arial, sans-serif;
-        background: #f3f3f3;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #f2f2f7;
         margin: 0;
-        padding: 20px;
+        padding: 0;
     }
 
-    h1 {
+    /* APP HEADER */
+    .app-header {
+        position: sticky;
+        top: 0;
+        background: #ffffff;
+        padding: 15px 20px;
+        font-size: 22px;
+        font-weight: 600;
         text-align: center;
-        font-size: clamp(20px, 5vw, 32px);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        z-index: 10;
     }
 
+    /* SEARCH BAR */
     #searchBox {
-        width: 100%;
-        padding: 12px;
-        font-size: 18px;
-        border-radius: 6px;
-        border: 1px solid #aaa;
-        margin-bottom: 20px;
+        width: calc(100% - 40px);
+        margin: 15px 20px;
+        padding: 14px;
+        font-size: 17px;
+        border-radius: 12px;
+        border: 1px solid #ccc;
+        background: #fff;
     }
 
+    /* FILTERS */
     #filters {
         display: flex;
         gap: 10px;
-        margin-bottom: 20px;
+        padding: 0 20px;
         flex-wrap: wrap;
     }
 
     #filters select {
         flex: 1;
         min-width: 140px;
-        padding: 10px;
+        padding: 12px;
         font-size: 16px;
+        border-radius: 12px;
+        border: 1px solid #ccc;
+        background: #fff;
     }
 
+    /* CARD GRID */
     #results {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 15px;
+        padding: 20px;
     }
 
     .card {
-        background: white;
-        padding: 10px;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        cursor: pointer;
-        transition: 0.2s;
+        background: #fff;
+        border-radius: 16px;
+        padding: 12px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         text-align: center;
+        transition: 0.2s;
     }
 
     .card:hover {
-        transform: scale(1.05);
+        transform: scale(1.03);
     }
 
     .card img {
         width: 100%;
-        height: auto;
-        border-radius: 6px;
+        border-radius: 12px;
     }
 
+    .card h3 {
+        font-size: 16px;
+        margin: 10px 0 4px;
+    }
+
+    .card p {
+        font-size: 14px;
+        color: #666;
+        margin: 0;
+    }
+
+    /* DETAILS PANEL */
     #details {
-        margin-top: 30px;
+        background: #fff;
+        margin: 20px;
         padding: 20px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    .variant-block {
-        margin-top: 20px;
-        padding: 15px;
-        background: #fafafa;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-    }
-
-    .variant-block h4 {
-        margin: 0 0 10px 0;
-        font-size: 18px;
-        color: #333;
-    }
-
-    .variant-block table {
+    #details img {
         width: 100%;
-        border-collapse: collapse;
-        overflow-x: auto;
-        display: block;
+        border-radius: 16px;
+        margin-bottom: 20px;
     }
 
-    table, th, td {
-        border: 1px solid #ccc;
+    .info-block {
+        background: #f9f9fb;
+        padding: 15px;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #e5e5ea;
     }
 
-    th, td {
-        padding: 8px;
-        text-align: center;
+    .info-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 6px;
     }
 
-    th {
-        background: #eee;
+    .info-value {
+        font-size: 18px;
+        font-weight: 700;
+        color: #007aff;
+    }
+
+    .variant-title {
+        font-size: 17px;
+        font-weight: 600;
+        margin-top: 20px;
+        margin-bottom: 10px;
     }
 
     @media (max-width: 600px) {
-        #details img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        th, td {
-            padding: 6px;
-            font-size: 14px;
-        }
-
-        .card h3 {
-            font-size: 16px;
-        }
-
-        .card p {
-            font-size: 14px;
-        }
+        .card h3 { font-size: 15px; }
+        .card p { font-size: 13px; }
+        .info-value { font-size: 17px; }
     }
 </style>
 </head>
 <body>
 
-<h1>Pokémon Card Lookup (GBP – Market Price Only)</h1>
+<div class="app-header">Pokémon Price App</div>
 
 <input id="searchBox" type="text" placeholder="Loading GBP rate..." disabled>
 
@@ -148,11 +159,11 @@ const API_URL = "https://api.pokemontcg.io/v2/cards";
 let GBP_RATE = null;
 let allCards = [];
 
-// Load GBP rate first
+/* Load GBP rate */
 async function init() {
     await loadGBP();
     document.getElementById("searchBox").disabled = false;
-    document.getElementById("searchBox").placeholder = "Search by name or number (e.g., Charizard, 4/102)";
+    document.getElementById("searchBox").placeholder = "Search cards...";
 }
 
 async function loadGBP() {
@@ -166,23 +177,20 @@ async function loadGBP() {
 }
 
 function usdToGbp(usd) {
-    if (usd == null || GBP_RATE == null) return "£—";
+    if (!usd || !GBP_RATE) return "£—";
     return "£" + (usd * GBP_RATE).toFixed(2);
 }
 
+/* Search */
 document.getElementById("searchBox").addEventListener("keyup", async function(e) {
     if (!GBP_RATE) return;
 
     const query = e.target.value.trim();
     if (query.length < 2) return;
 
-    let q;
-    if (query.includes("/")) {
-        const [num, total] = query.split("/");
-        q = `number:${num} AND set.printedTotal:${total}`;
-    } else {
-        q = `name:${query}*`;
-    }
+    let q = query.includes("/")
+        ? `number:${query.split("/")[0]} AND set.printedTotal:${query.split("/")[1]}`
+        : `name:${query}*`;
 
     const res = await fetch(`${API_URL}?q=${encodeURIComponent(q)}`);
     const data = await res.json();
@@ -192,6 +200,7 @@ document.getElementById("searchBox").addEventListener("keyup", async function(e)
     renderResults();
 });
 
+/* Filters */
 function populateFilters() {
     const setFilter = document.getElementById("setFilter");
     const rarityFilter = document.getElementById("rarityFilter");
@@ -209,6 +218,7 @@ function populateFilters() {
 document.getElementById("setFilter").addEventListener("change", renderResults);
 document.getElementById("rarityFilter").addEventListener("change", renderResults);
 
+/* Results grid */
 function renderResults() {
     const setValue = document.getElementById("setFilter").value;
     const rarityValue = document.getElementById("rarityFilter").value;
@@ -234,6 +244,7 @@ function renderResults() {
     });
 }
 
+/* Details panel */
 function showDetails(card) {
     const details = document.getElementById("details");
 
@@ -241,42 +252,29 @@ function showDetails(card) {
     let variantsHtml = "";
 
     for (const variantName in prices) {
-        const variant = prices[variantName];
-        const market = variant.market ?? null;
-
-        if (market == null) continue;
+        const market = prices[variantName].market;
+        if (!market) continue;
 
         variantsHtml += `
-            <div class="variant-block">
-                <h4>${variantName}</h4>
-                <table>
-                    <tr>
-                        <th>Metric</th>
-                        <th>Price (GBP)</th>
-                        <th>Source</th>
-                    </tr>
-                    <tr>
-                        <td>Market</td>
-                        <td>${usdToGbp(market)}</td>
-                        <td>TCGplayer</td>
-                    </tr>
-                </table>
+            <div class="variant-title">${variantName}</div>
+            <div class="info-block">
+                <div class="info-title">Market Price</div>
+                <div class="info-value">${usdToGbp(market)}</div>
+                <div style="font-size:13px;color:#666;margin-top:4px;">Source: TCGplayer</div>
             </div>
         `;
     }
 
-    if (!variantsHtml) {
-        variantsHtml = "<p>No market pricing available.</p>";
-    }
+    if (!variantsHtml) variantsHtml = "<p>No market pricing available.</p>";
 
     details.innerHTML = `
+        <img src="${card.images.large}">
         <h2>${card.name}</h2>
-        <img src="${card.images.large}" style="max-width:100%; display:block; margin-bottom:20px;">
         <p><strong>Set:</strong> ${card.set.name}</p>
         <p><strong>Number:</strong> ${card.number}</p>
         <p><strong>Rarity:</strong> ${card.rarity ?? "Unknown"}</p>
 
-        <h3>Market Prices (GBP)</h3>
+        <h3 style="margin-top:25px;">Market Prices (GBP)</h3>
         ${variantsHtml}
     `;
 }
