@@ -152,11 +152,26 @@
         color: #222;
     }
 
-    @media (max-width: 600px) {
-        .card h3 { font-size: 18px; }
-        .card p { font-size: 15px; }
-        .info-value { font-size: 24px; }
+    /* SMS BUTTON */
+    .sms-btn {
+        width: 100%;
+        margin-top: 12px;
+        padding: 16px;
+        font-size: 20px;
+        font-weight: 800;
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        cursor: pointer;
     }
+
+    .sms-btn:active {
+        transform: scale(0.97);
+        background: #3a6fd6;
+    }
+
 </style>
 </head>
 <body>
@@ -274,12 +289,21 @@ function showDetails(card) {
         const market = prices[variantName].market;
         if (!market) continue;
 
+        const priceGbp = usdToGbp(market);
+        const smsText = encodeURIComponent(
+            `Card: ${card.name}\nVariant: ${variantName}\nPrice: ${priceGbp}`
+        );
+
         variantsHtml += `
             <div class="variant-title">${variantName}</div>
             <div class="info-block">
                 <div class="info-title">Market Price</div>
-                <div class="info-value">${usdToGbp(market)}</div>
+                <div class="info-value">${priceGbp}</div>
                 <div style="font-size:15px;color:#666;margin-top:4px;">Source: TCGplayer</div>
+
+                <a href="sms:+447483251962?body=${smsText}">
+                    <button class="sms-btn">Send Price</button>
+                </a>
             </div>
         `;
     }
