@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Pokémon Price App</title>
+<title>Eastcoast Card Inquiry</title>
 
 <style>
     :root {
@@ -27,13 +27,21 @@
         position: sticky;
         top: 0;
         background: var(--card-bg);
-        padding: 22px 20px;
+        padding: 22px 20px 10px;
         font-size: 26px;
         font-weight: 800;
         text-align: center;
         box-shadow: var(--shadow);
         z-index: 10;
         color: #222;
+    }
+
+    /* ⭐ LOGO STYLE ⭐ */
+    .logo {
+        width: 140px;
+        margin: 10px auto 0;
+        display: block;
+        border-radius: 12px;
     }
 
     #searchBox {
@@ -168,7 +176,11 @@
 </head>
 <body>
 
-<div class="app-header">Pokémon Price App</div>
+<!-- ⭐ APP NAME — CHANGE THIS ⭐ -->
+<div class="app-header">Card Inquiry</div>
+
+<!-- ⭐ LOGO URL — CHANGE THIS ⭐ -->
+<img class="logo" src="https://files.websitebuilder.prositehosting.co.uk/8b/e9/8be9aecf-cb17-445e-b11b-3ec60a27c26d.png">
 
 <input id="searchBox" type="text" placeholder="Loading GBP rate..." disabled>
 
@@ -302,7 +314,7 @@ Card Number: ${card.number}
 Set: ${card.set.name}
 Image: ${card.images.large}
 
-I understand the price of ${finalPrice} is a guide and was wondering what's the best you can do on it if you have it.`
+I understand the guide price of ${finalPrice} is a guide and was wondering what's the best you can do on it if you have it.`
         );
 
         variantsHtml += `
