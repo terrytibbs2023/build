@@ -2,190 +2,227 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pokémon Price App</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Eastcoast Card Inquiry</title>
 
 <style>
-:root {
-    --accent: #25D366;
-    --bg: #f2f2f7;
-    --card: rgba(255,255,255,0.85);
-    --blur: blur(16px);
-    --radius: 18px;
-}
+    :root {
+        --accent: #25D366; 
+        --bg: #f2f2f7; /* iOS light gray background */
+        --card-bg: #ffffff;
+        --radius: 16px;
+        --shadow: 0 4px 12px rgba(0,0,0,0.08);
+        --header-height: 70px;
+    }
 
-/* RESET */
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
-    background: var(--bg);
-}
+    * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+    }
 
-/* HEADER (iOS style glass) */
-.header {
-    position: sticky;
-    top: 0;
-    backdrop-filter: var(--blur);
-    background: rgba(255,255,255,0.7);
-    padding: 18px;
-    font-size: 22px;
-    font-weight: 700;
-    text-align: center;
-    z-index: 100;
-}
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        margin: 0;
+        padding-top: calc(var(--header-height) + 80px); /* Space for sticky header + search */
+        color: #1c1c1e;
+    }
 
-/* SEARCH */
-.search {
-    margin: 12px;
-    padding: 16px;
-    border-radius: var(--radius);
-    border: none;
-    width: calc(100% - 24px);
-    font-size: 16px;
-    background: white;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
+    /* Floating Header */
+    .app-header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 15px 0;
+        text-align: center;
+        z-index: 100;
+        border-bottom: 1px solid #d1d1d6;
+    }
 
-/* FILTER BAR */
-.filters {
-    display: flex;
-    gap: 10px;
-    padding: 0 12px;
-}
+    .logo {
+        height: 40px;
+        display: block;
+        margin: 0 auto;
+    }
 
-.filters select {
-    flex: 1;
-    padding: 14px;
-    border-radius: 14px;
-    border: none;
-    background: white;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-}
+    /* Fixed Search Bar Area */
+    .search-container {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        padding: 10px 16px;
+        z-index: 90;
+    }
 
-/* GRID */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px,1fr));
-    gap: 14px;
-    padding: 12px;
-}
+    #searchBox {
+        width: 100%;
+        padding: 16px;
+        font-size: 18px;
+        border-radius: 12px;
+        border: 1px solid #d1d1d6;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        outline: none;
+    }
 
-/* CARD */
-.card {
-    background: var(--card);
-    backdrop-filter: var(--blur);
-    border-radius: var(--radius);
-    padding: 10px;
-    text-align: center;
-    transition: 0.2s;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
-}
+    #searchBox:focus {
+        border-color: var(--accent);
+    }
 
-.card:active {
-    transform: scale(0.96);
-}
+    #filters {
+        display: flex;
+        gap: 10px;
+        padding: 0 16px 15px;
+    }
 
-.card img {
-    width: 100%;
-    border-radius: 12px;
-}
+    #filters select {
+        flex: 1;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: 1px solid #d1d1d6;
+        background: var(--card-bg);
+        appearance: none; /* Removes default arrow to style custom */
+    }
 
-.card h3 {
-    font-size: 14px;
-    margin: 8px 0 2px;
-}
+    /* Results Grid - 2 per row on small screens, big fonts */
+    #results {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        padding: 16px;
+    }
 
-.card p {
-    font-size: 12px;
-    color: #666;
-}
+    .card {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        padding: 10px;
+        box-shadow: var(--shadow);
+        text-align: center;
+        animation: fadeIn 0.3s ease-in;
+    }
 
-/* FULLSCREEN DETAILS (APP STYLE PAGE) */
-.details {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    overflow-y: auto;
-    z-index: 999;
-    transform: translateY(100%);
-    transition: 0.35s ease;
-}
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-.details.active {
-    transform: translateY(0);
-}
+    .card img {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 8px;
+    }
 
-/* BACK BUTTON */
-.back {
-    padding: 16px;
-    font-size: 16px;
-    font-weight: 600;
-}
+    .card h3 {
+        font-size: 16px;
+        margin: 5px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
-/* DETAIL CONTENT */
-.detail-content {
-    padding: 16px;
-}
+    .card p {
+        font-size: 13px;
+        color: #8e8e93;
+        margin-bottom: 5px;
+    }
 
-.detail-content img {
-    width: 100%;
-    border-radius: 16px;
-}
+    /* Large Detail View */
+    #details {
+        margin: 16px;
+        padding: 20px;
+        background: var(--card-bg);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        display: none; /* Hidden until card selected */
+    }
 
-.price-box {
-    margin-top: 14px;
-    padding: 16px;
-    border-radius: 16px;
-    background: #f7f7f7;
-}
+    #details.active {
+        display: block;
+    }
 
-.price {
-    font-size: 26px;
-    font-weight: 800;
-    color: var(--accent);
-}
+    #details img {
+        width: 100%;
+        border-radius: 15px;
+        margin-bottom: 20px;
+    }
 
-/* BUTTON */
-.buy-btn {
-    margin-top: 10px;
-    width: 100%;
-    padding: 14px;
-    border-radius: 14px;
-    border: none;
-    background: var(--accent);
-    color: white;
-    font-weight: 700;
-    font-size: 16px;
-}
+    .detail-title {
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 5px;
+    }
 
-/* SMOOTH SCROLL */
-html {
-    scroll-behavior: smooth;
-}
+    .detail-meta {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .info-block {
+        background: #f8f8f8;
+        padding: 20px;
+        border-radius: 20px;
+        margin-top: 15px;
+        border: 1px solid #eee;
+    }
+
+    .info-title {
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #888;
+        margin-bottom: 5px;
+    }
+
+    .info-value {
+        font-size: 32px;
+        font-weight: 900;
+        color: #000;
+        margin-bottom: 15px;
+    }
+
+    .sms-btn {
+        width: 100%;
+        padding: 20px;
+        font-size: 18px;
+        font-weight: 700;
+        background: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 15px;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+    }
+
+    .sms-btn:active {
+        opacity: 0.8;
+        transform: scale(0.98);
+    }
 </style>
 </head>
-
 <body>
 
-<div class="header">Pokémon Cards</div>
-
-<input id="searchBox" class="search" placeholder="Search cards...">
-
-<div class="filters">
-    <select id="setFilter"></select>
-    <select id="rarityFilter"></select>
+<div class="app-header">
+    <img class="logo" src="https://files.websitebuilder.prositehosting.co.uk/8b/e9/8be9aecf-cb17-445e-b11b-3ec60a27c26d.png" alt="Logo">
 </div>
 
-<div id="results" class="grid"></div>
-
-<!-- FULLSCREEN DETAILS -->
-<div id="details" class="details">
-    <div class="back" onclick="closeDetails()">← Back</div>
-    <div id="detailContent" class="detail-content"></div>
+<div class="search-container">
+    <input id="searchBox" type="text" placeholder="Loading GBP rate..." disabled>
 </div>
+
+<div id="filters">
+    <select id="setFilter"><option value="">All Sets</option></select>
+    <select id="rarityFilter"><option value="">All Rarities</option></select>
+</div>
+
+<div id="results"></div>
+<div id="details"></div>
 
 <script>
 const API_URL = "https://api.pokemontcg.io/v2/cards";
@@ -193,32 +230,73 @@ let GBP_RATE = null;
 let allCards = [];
 
 async function init() {
-    const fx = await fetch("https://open.er-api.com/v6/latest/USD");
-    const data = await fx.json();
-    GBP_RATE = data.rates.GBP;
+    await loadGBP();
+    document.getElementById("searchBox").disabled = false;
+    document.getElementById("searchBox").placeholder = "Search (e.g. Pikachu or 1/100)";
 }
 
-function usdToGbp(v) {
-    if (!v || !GBP_RATE) return "£—";
-    return "£" + (v * GBP_RATE).toFixed(2);
+async function loadGBP() {
+    try {
+        const fx = await fetch("https://open.er-api.com/v6/latest/USD");
+        const data = await fx.json();
+        GBP_RATE = data.rates.GBP;
+    } catch {
+        GBP_RATE = 1.0; 
+    }
 }
 
-document.getElementById("searchBox").addEventListener("keyup", async e => {
-    const q = e.target.value;
-    if (q.length < 2) return;
+function usdToGbp(usd) {
+    if (!usd || !GBP_RATE) return "£—";
+    return "£" + (usd * GBP_RATE).toFixed(2);
+}
 
-    const res = await fetch(`${API_URL}?q=name:${q}*`);
-    const data = await res.json();
+document.getElementById("searchBox").addEventListener("keyup", async function(e) {
+    const query = e.target.value.trim();
+    if (query.length < 2) return;
 
-    allCards = data.data;
-    render();
+    let q = query.includes("/")
+        ? `number:${query.split("/")[0]} AND set.printedTotal:${query.split("/")[1]}`
+        : `name:${query}*`;
+
+    try {
+        const res = await fetch(`${API_URL}?q=${encodeURIComponent(q)}`);
+        const data = await res.json();
+        allCards = data.data || [];
+        populateFilters();
+        renderResults();
+        document.getElementById("details").classList.remove("active");
+    } catch (err) {
+        console.error("Search failed", err);
+    }
 });
 
-function render() {
-    const el = document.getElementById("results");
-    el.innerHTML = "";
+function populateFilters() {
+    const setFilter = document.getElementById("setFilter");
+    const rarityFilter = document.getElementById("rarityFilter");
+    const sets = [...new Set(allCards.map(c => c.set.name))].sort();
+    const rarities = [...new Set(allCards.map(c => c.rarity || "Unknown"))].sort();
 
-    allCards.forEach(card => {
+    setFilter.innerHTML = `<option value="">All Sets</option>`;
+    rarityFilter.innerHTML = `<option value="">All Rarities</option>`;
+
+    sets.forEach(s => setFilter.innerHTML += `<option value="${s}">${s}</option>`);
+    rarities.forEach(r => rarityFilter.innerHTML += `<option value="${r}">${r}</option>`);
+}
+
+document.getElementById("setFilter").addEventListener("change", renderResults);
+document.getElementById("rarityFilter").addEventListener("change", renderResults);
+
+function renderResults() {
+    const setValue = document.getElementById("setFilter").value;
+    const rarityValue = document.getElementById("rarityFilter").value;
+    const resultsDiv = document.getElementById("results");
+    resultsDiv.innerHTML = "";
+
+    let filtered = allCards;
+    if (setValue) filtered = filtered.filter(c => c.set.name === setValue);
+    if (rarityValue) filtered = filtered.filter(c => (c.rarity || "Unknown") === rarityValue);
+
+    filtered.forEach(card => {
         const div = document.createElement("div");
         div.className = "card";
         div.innerHTML = `
@@ -227,35 +305,55 @@ function render() {
             <p>${card.set.name}</p>
         `;
         div.onclick = () => showDetails(card);
-        el.appendChild(div);
+        resultsDiv.appendChild(div);
     });
 }
 
 function showDetails(card) {
+    const details = document.getElementById("details");
     const prices = card.tcgplayer?.prices || {};
-    let html = `<img src="${card.images.large}">
-    <h2>${card.name}</h2>
-    <p>${card.set.name}</p>`;
+    let variantsHtml = "";
+    const PRICE_MARKUP = 0.10;
 
-    for (let v in prices) {
-        if (!prices[v].market) continue;
+    for (const variantName in prices) {
+        const market = prices[variantName].market;
+        if (!market) continue;
 
-        const price = usdToGbp(prices[v].market);
+        let priceGbpStr = usdToGbp(market);
+        let adjustedPrice = (parseFloat(priceGbpStr.replace("£","")) * (1 + PRICE_MARKUP)).toFixed(2);
+        let finalPrice = "£" + adjustedPrice;
 
-        html += `
-        <div class="price-box">
-            <div>${v}</div>
-            <div class="price">${price}</div>
-            <button class="buy-btn">Buy via WhatsApp</button>
-        </div>`;
+        const waMessage = encodeURIComponent(
+`Hi Dave, I'm interested in:
+Card: ${card.name}
+Set: ${card.set.name}
+Ref: ${card.number}
+Guide Price: ${finalPrice}
+
+Do you have this in stock?`
+        );
+
+        variantsHtml += `
+            <div class="info-block">
+                <div class="info-title">${variantName} Edition</div>
+                <div class="info-value">${finalPrice}</div>
+                <a class="sms-btn" href="https://wa.me/447483251962?text=${waMessage}">
+                    Enquire on WhatsApp
+                </a>
+            </div>
+        `;
     }
 
-    document.getElementById("detailContent").innerHTML = html;
-    document.getElementById("details").classList.add("active");
-}
+    details.innerHTML = `
+        <img src="${card.images.large}">
+        <div class="detail-title">${card.name}</div>
+        <div class="detail-meta">${card.set.name} • ${card.number}</div>
+        ${variantsHtml || "<p>No pricing available for this card.</p>"}
+        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" style="width:100%; background:none; border:none; color:#007aff; margin-top:20px; font-size:16px;">Back to top ↑</button>
+    `;
 
-function closeDetails() {
-    document.getElementById("details").classList.remove("active");
+    details.classList.add("active");
+    details.scrollIntoView({ behavior: "smooth" });
 }
 
 init();
