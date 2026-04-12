@@ -6,7 +6,7 @@
 
 <style>
     :root {
-        --accent: #4f8cff;
+        --accent: #25D366; /* WhatsApp green */
         --bg: #eef1f5;
         --card-bg: #ffffff;
         --radius: 20px;
@@ -23,7 +23,6 @@
         padding: 0;
     }
 
-    /* APP HEADER */
     .app-header {
         position: sticky;
         top: 0;
@@ -38,7 +37,6 @@
         letter-spacing: 0.5px;
     }
 
-    /* SEARCH BAR */
     #searchBox {
         width: calc(100% - 40px);
         margin: 20px;
@@ -50,7 +48,6 @@
         background: var(--card-bg);
     }
 
-    /* FILTERS */
     #filters {
         display: flex;
         gap: 12px;
@@ -69,7 +66,6 @@
         box-shadow: var(--shadow);
     }
 
-    /* CARD GRID */
     #results {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
@@ -108,7 +104,6 @@
         margin: 0;
     }
 
-    /* DETAILS PANEL */
     #details {
         background: var(--card-bg);
         margin: 20px;
@@ -152,7 +147,6 @@
         color: #222;
     }
 
-    /* SMS BUTTON */
     .sms-btn {
         width: 100%;
         margin-top: 12px;
@@ -169,9 +163,8 @@
 
     .sms-btn:active {
         transform: scale(0.97);
-        background: #3a6fd6;
+        background: #1da851;
     }
-
 </style>
 </head>
 <body>
@@ -290,8 +283,17 @@ function showDetails(card) {
         if (!market) continue;
 
         const priceGbp = usdToGbp(market);
-        const smsText = encodeURIComponent(
-            `Card: ${card.name}\nVariant: ${variantName}\nPrice: ${priceGbp}`
+
+        const waMessage = encodeURIComponent(
+`Hi Dave, I am interested to know if you have this card.
+
+Card: ${card.name}
+Variant: ${variantName}
+Card Number: ${card.number}
+Set: ${card.set.name}
+Image: ${card.images.large}
+
+I understand the price of ${priceGbp} is a guide and was wondering what's the best you can do on it if you have it.`
         );
 
         variantsHtml += `
@@ -301,8 +303,8 @@ function showDetails(card) {
                 <div class="info-value">${priceGbp}</div>
                 <div style="font-size:15px;color:#666;margin-top:4px;">Source: TCGplayer</div>
 
-                <a href="sms:+447483251962?body=${smsText}">
-                    <button class="sms-btn">Send Price</button>
+                <a href="https://wa.me/447483251962?text=${waMessage}">
+                    <button class="sms-btn">WhatsApp Dave</button>
                 </a>
             </div>
         `;
