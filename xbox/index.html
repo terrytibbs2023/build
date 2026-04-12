@@ -293,24 +293,23 @@ Card Number: ${card.number}
 Set: ${card.set.name}
 Image: ${card.images.large}
 
-I understand the price of ${priceGbp} is a guide and was wondering what's the best you can do on it if you have it.`
+I understand the guide price of ${priceGbp} is a guide and was wondering what's the best you can do on it if you have it.`
         );
 
         variantsHtml += `
             <div class="variant-title">${variantName}</div>
             <div class="info-block">
-                <div class="info-title">Market Price</div>
+                <div class="info-title">Guide Price</div>
                 <div class="info-value">${priceGbp}</div>
-                <div style="font-size:15px;color:#666;margin-top:4px;">Source: TCGplayer</div>
 
                 <a href="https://wa.me/447483251962?text=${waMessage}">
-                    <button class="sms-btn">WhatsApp Dave</button>
+                    <button class="sms-btn">I want to buy this card</button>
                 </a>
             </div>
         `;
     }
 
-    if (!variantsHtml) variantsHtml = "<p>No market pricing available.</p>";
+    if (!variantsHtml) variantsHtml = "<p>No guide pricing available.</p>";
 
     details.innerHTML = `
         <img src="${card.images.large}">
@@ -319,7 +318,6 @@ I understand the price of ${priceGbp} is a guide and was wondering what's the be
         <p style="font-size:18px;"><strong>Number:</strong> ${card.number}</p>
         <p style="font-size:18px;"><strong>Rarity:</strong> ${card.rarity ?? "Unknown"}</p>
 
-        <h3 style="margin-top:30px;font-size:24px;font-weight:800;">Market Prices (GBP)</h3>
         ${variantsHtml}
     `;
 }
