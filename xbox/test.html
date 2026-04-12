@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pokémon Price App</title>
+
+<style>
+:root {
+    --accent: #25D366;
+    --bg: #f2f2f7;
+    --card: rgba(255,255,255,0.85);
+    --blur: blur(16px);
+    --radius: 18px;
+}
+
+/* RESET */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+    background: var(--bg);
+}
+
+/* HEADER (iOS style glass) */
+.header {
+    position: sticky;
+    top: 0;
+    backdrop-filter: var(--blur);
+    background: rgba(255,255,255,0.7);
+    padding: 18px;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    z-index: 100;
+}
+
+/* SEARCH */
+.search {
+    margin: 12px;
+    padding: 16px;
+    border-radius: var(--radius);
+    border: none;
+    width: calc(100% - 24px);
+    font-size: 16px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* FILTER BAR */
+.filters {
+    display: flex;
+    gap: 10px;
+    padding: 0 12px;
+}
+
+.filters select {
+    flex: 1;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px,1fr));
+    gap: 14px;
+    padding: 12px;
+}
+
+/* CARD */
+.card {
+    background: var(--card);
+    backdrop-filter: var(--blur);
+    border-radius: var(--radius);
+    padding: 10px;
+    text-align: center;
+    transition: 0.2s;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+.card:active {
+    transform: scale(0.96);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.card h3 {
+    font-size: 14px;
+    margin: 8px 0 2px;
+}
+
+.card p {
+    font-size: 12px;
+    color: #666;
+}
+
+/* FULLSCREEN DETAILS (APP STYLE PAGE) */
+.details {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    overflow-y: auto;
+    z-index: 999;
+    transform: translateY(100%);
+    transition: 0.35s ease;
+}
+
+.details.active {
+    transform: translateY(0);
+}
+
+/* BACK BUTTON */
+.back {
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* DETAIL CONTENT */
+.detail-content {
+    padding: 16px;
+}
+
+.detail-content img {
+    width: 100%;
+    border-radius: 16px;
+}
+
+.price-box {
+    margin-top: 14px;
+    padding: 16px;
+    border-radius: 16px;
+    background: #f7f7f7;
+}
+
+.price {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--accent);
+}
+
+/* BUTTON */
+.buy-btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* SMOOTH SCROLL */
+html {
+    scroll-behavior: smooth;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">Pokémon Cards</div>
+
+<input id="searchBox" class="search" placeholder="Search cards...">
+
+<div class="filters">
+    <select id="setFilter"></select>
+    <select id="rarityFilter"></select>
+</div>
+
+<div id="results" class="grid"></div>
+
+<!-- FULLSCREEN DETAILS -->
+<div id="details" class="details">
+    <div class="back" onclick="closeDetails()">← Back</div>
+    <div id="detailContent" class="detail-content"></div>
+</div>
+
+<script>
+const API_URL = "https://api.pokemontcg.io/v2/cards";
+let GBP_RATE = null;
+let allCards = [];
+
+async function init() {
+    const fx = await fetch("https://open.er-api.com/v6/latest/USD");
+    const data = await fx.json();
+    GBP_RATE = data.rates.GBP;
+}
+
+function usdToGbp(v) {
+    if (!v || !GBP_RATE) return "£—";
+    return "£" + (v * GBP_RATE).toFixed(2);
+}
+
+document.getElementById("searchBox").addEventListener("keyup", async e => {
+    const q = e.target.value;
+    if (q.length < 2) return;
+
+    const res = await fetch(`${API_URL}?q=name:${q}*`);
+    const data = await res.json();
+
+    allCards = data.data;
+    render();
+});
+
+function render() {
+    const el = document.getElementById("results");
+    el.innerHTML = "";
+
+    allCards.forEach(card => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+            <img src="${card.images.small}">
+            <h3>${card.name}</h3>
+            <p>${card.set.name}</p>
+        `;
+        div.onclick = () => showDetails(card);
+        el.appendChild(div);
+    });
+}
+
+function showDetails(card) {
+    const prices = card.tcgplayer?.prices || {};
+    let html = `<img src="${card.images.large}">
+    <h2>${card.name}</h2>
+    <p>${card.set.name}</p>`;
+
+    for (let v in prices) {
+        if (!prices[v].market) continue;
+
+        const price = usdToGbp(prices[v].market);
+
+        html += `
+        <div class="price-box">
+            <div>${v}</div>
+            <div class="price">${price}</div>
+            <button class="buy-btn">Buy via WhatsApp</button>
+        </div>`;
+    }
+
+    document.getElementById("detailContent").innerHTML = html;
+    document.getElementById("details").classList.add("active");
+}
+
+function closeDetails() {
+    document.getElementById("details").classList.remove("active");
+}
+
+init();
+</script>
+
+</body>
+</html>
