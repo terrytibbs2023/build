@@ -7,10 +7,13 @@
 <style>
     :root {
         --accent: #4f8cff;
-        --bg: #f1f3f4;
+        --bg: #eef1f5;
         --card-bg: #ffffff;
-        --radius: 18px;
-        --shadow: 0 4px 12px rgba(0,0,0,0.12);
+        --radius: 20px;
+        --shadow: 0 6px 14px rgba(0,0,0,0.12);
+        --big-text: 22px;
+        --medium-text: 18px;
+        --small-text: 16px;
     }
 
     body {
@@ -25,21 +28,22 @@
         position: sticky;
         top: 0;
         background: var(--card-bg);
-        padding: 18px 20px;
-        font-size: 22px;
-        font-weight: 700;
+        padding: 22px 20px;
+        font-size: 26px;
+        font-weight: 800;
         text-align: center;
         box-shadow: var(--shadow);
         z-index: 10;
         color: #222;
+        letter-spacing: 0.5px;
     }
 
     /* SEARCH BAR */
     #searchBox {
         width: calc(100% - 40px);
         margin: 20px;
-        padding: 16px;
-        font-size: 17px;
+        padding: 18px;
+        font-size: var(--medium-text);
         border-radius: var(--radius);
         border: none;
         box-shadow: var(--shadow);
@@ -49,16 +53,16 @@
     /* FILTERS */
     #filters {
         display: flex;
-        gap: 10px;
+        gap: 12px;
         padding: 0 20px;
         flex-wrap: wrap;
     }
 
     #filters select {
         flex: 1;
-        min-width: 140px;
-        padding: 14px;
-        font-size: 16px;
+        min-width: 150px;
+        padding: 16px;
+        font-size: var(--medium-text);
         border-radius: var(--radius);
         border: none;
         background: var(--card-bg);
@@ -68,15 +72,15 @@
     /* CARD GRID */
     #results {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 18px;
+        grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+        gap: 20px;
         padding: 20px;
     }
 
     .card {
         background: var(--card-bg);
         border-radius: var(--radius);
-        padding: 14px;
+        padding: 16px;
         box-shadow: var(--shadow);
         text-align: center;
         transition: 0.2s;
@@ -92,13 +96,14 @@
     }
 
     .card h3 {
-        font-size: 16px;
-        margin: 10px 0 4px;
+        font-size: var(--medium-text);
+        margin: 12px 0 6px;
         color: #222;
+        font-weight: 700;
     }
 
     .card p {
-        font-size: 14px;
+        font-size: var(--small-text);
         color: #666;
         margin: 0;
     }
@@ -107,7 +112,7 @@
     #details {
         background: var(--card-bg);
         margin: 20px;
-        padding: 20px;
+        padding: 22px;
         border-radius: var(--radius);
         box-shadow: var(--shadow);
     }
@@ -120,37 +125,37 @@
 
     .info-block {
         background: #f7f9fa;
-        padding: 16px;
+        padding: 18px;
         border-radius: var(--radius);
-        margin-bottom: 15px;
+        margin-bottom: 18px;
         border: 1px solid #e5e5ea;
     }
 
     .info-title {
-        font-size: 15px;
-        font-weight: 600;
+        font-size: var(--medium-text);
+        font-weight: 700;
         margin-bottom: 6px;
         color: #444;
     }
 
     .info-value {
-        font-size: 20px;
-        font-weight: 700;
+        font-size: 26px;
+        font-weight: 800;
         color: var(--accent);
     }
 
     .variant-title {
-        font-size: 18px;
-        font-weight: 700;
-        margin-top: 25px;
-        margin-bottom: 10px;
+        font-size: 22px;
+        font-weight: 800;
+        margin-top: 28px;
+        margin-bottom: 12px;
         color: #222;
     }
 
     @media (max-width: 600px) {
-        .card h3 { font-size: 15px; }
-        .card p { font-size: 13px; }
-        .info-value { font-size: 18px; }
+        .card h3 { font-size: 18px; }
+        .card p { font-size: 15px; }
+        .info-value { font-size: 24px; }
     }
 </style>
 </head>
@@ -238,7 +243,7 @@ function renderResults() {
     const rarityValue = document.getElementById("rarityFilter").value;
 
     const resultsDiv = document.getElementById("results");
-    resultsDiv.innerinnerHTML = "";
+    resultsDiv.innerHTML = "";
 
     let filtered = allCards;
 
@@ -274,7 +279,7 @@ function showDetails(card) {
             <div class="info-block">
                 <div class="info-title">Market Price</div>
                 <div class="info-value">${usdToGbp(market)}</div>
-                <div style="font-size:13px;color:#666;margin-top:4px;">Source: TCGplayer</div>
+                <div style="font-size:15px;color:#666;margin-top:4px;">Source: TCGplayer</div>
             </div>
         `;
     }
@@ -283,12 +288,12 @@ function showDetails(card) {
 
     details.innerHTML = `
         <img src="${card.images.large}">
-        <h2>${card.name}</h2>
-        <p><strong>Set:</strong> ${card.set.name}</p>
-        <p><strong>Number:</strong> ${card.number}</p>
-        <p><strong>Rarity:</strong> ${card.rarity ?? "Unknown"}</p>
+        <h2 style="font-size:26px;font-weight:800;margin-bottom:10px;">${card.name}</h2>
+        <p style="font-size:18px;"><strong>Set:</strong> ${card.set.name}</p>
+        <p style="font-size:18px;"><strong>Number:</strong> ${card.number}</p>
+        <p style="font-size:18px;"><strong>Rarity:</strong> ${card.rarity ?? "Unknown"}</p>
 
-        <h3 style="margin-top:25px;">Market Prices (GBP)</h3>
+        <h3 style="margin-top:30px;font-size:24px;font-weight:800;">Market Prices (GBP)</h3>
         ${variantsHtml}
     `;
 }
