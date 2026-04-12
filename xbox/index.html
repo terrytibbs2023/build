@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Pokémon Card Lookup (GBP Only – Market Price Only)</title>
+
+<style>
+    body { font-family: Arial, sans-serif; background: #f3f3f3; margin: 0; padding: 20px; }
+    h1 { text-align: center; }
+    #searchBox { width: 100%; padding: 12px; font-size: 18px; border-radius: 6px; border: 1px solid #aaa; margin-bottom: 20px; }
+    #filters { display: flex; gap: 10px; margin-bottom: 20px; }
+    select { padding: 10px; font-size: 16px; border-radius: 6px; border: 1px solid #aaa; }
+    #results { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+    .card { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; transition: 0.2s; text-align: center; }
+    .card:hover { transform: scale(1.05); }
+    .card img { width: 100%; border-radius: 6px; }
+    #details { margin-top: 30px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+
+    .variant-section { margin-top: 15px; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; background: #fafafa; }
+    .variant-header { padding: 10px 12px; cursor: pointer; background: #e9e9e9; font-weight: bold; display: flex; justify-content: space-between; align-items: center; }
+    .variant-body { display: none; padding: 10px 12px; background: #fff; }
+    .chevron { font-size: 14px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    table, th, td { border: 1px solid #ccc; }
+    th, td { padding: 8px; text-align: center; }
+    th { background: #eee; }
+</style>
+</head>
+<body>
+
+<h1>Pokémon Card Lookup (GBP – Market Price Only)</h1>
+
+<input id="searchBox" type="text" placeholder="Loading GBP rate..." disabled>
+
+<div id="filters">
+    <select id="setFilter"><option value="">All Sets</option></select>
+    <select id="rarityFilter"><option value="">All Rarities</option></select>
+</div>
+
+<div id="results"></div>
+<div id="details"></div>
+
+<script>
+const API_URL = "https://api.pokemontcg.io/v2/cards";
+let GBP_RATE = null;
+let allCards = [];
+
+// Load GBP rate first
+async function init() {
+    await loadGBP();
+    document.getElementById("searchBox").disabled = false;
+    document.getElementById("searchBox").placeholder = "Search by name or number (e.g., Charizard, 4/102)";
+}
+
+async function loadGBP() {
+    try {
+        const fx = await fetch("https://open.er-api.com/v6/latest/USD");
+        const data = await fx.json();
+        GBP_RATE = data.rates.GBP;
+    } catch {
+        GBP_RATE = null;
+    }
+}
+
+function usdToGbp(usd) {
+    if (usd == null || GBP_RATE == null) return "£—";
+    return "£" + (usd * GBP_RATE).toFixed(2);
+}
+
+document.getElementById("searchBox").addEventListener("keyup", async function(e) {
+    if (!GBP_RATE) return;
+
+    const query = e.target.value.trim();
+    if (query.length < 2) return;
+
+    let q;
+    if (query.includes("/")) {
+        const [num, total] = query.split("/");
+        q = `number:${num} AND set.printedTotal:${total}`;
+    } else {
+        q = `name:${query}*`;
+    }
+
+    const res = await fetch(`${API_URL}?q=${encodeURIComponent(q)}`);
+    const data = await res.json();
+
+    allCards = data.data || [];
+    populateFilters();
+    renderResults();
+});
+
+function populateFilters() {
+    const setFilter = document.getElementById("setFilter");
+    const rarityFilter = document.getElementById("rarityFilter");
+
+    const sets = [...new Set(allCards.map(c => c.set.name))].sort();
+    const rarities = [...new Set(allCards.map(c => c.rarity || "Unknown"))].sort();
+
+    setFilter.innerHTML = `<option value="">All Sets</option>`;
+    rarityFilter.innerHTML = `<option value="">All Rarities</option>`;
+
+    sets.forEach(s => setFilter.innerHTML += `<option value="${s}">${s}</option>`);
+    rarities.forEach(r => rarityFilter.innerHTML += `<option value="${r}">${r}</option>`);
+}
+
+document.getElementById("setFilter").addEventListener("change", renderResults);
+document.getElementById("rarityFilter").addEventListener("change", renderResults);
+
+function renderResults() {
+    const setValue = document.getElementById("setFilter").value;
+    const rarityValue = document.getElementById("rarityFilter").value;
+
+    const resultsDiv = document.getElementById("results");
+    resultsDiv.innerHTML = "";
+
+    let filtered = allCards;
+
+    if (setValue) filtered = filtered.filter(c => c.set.name === setValue);
+    if (rarityValue) filtered = filtered.filter(c => (c.rarity || "Unknown") === rarityValue);
+
+    filtered.forEach(card => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+            <img src="${card.images.small}">
+            <h3>${card.name}</h3>
+            <p>${card.set.name}</p>
+        `;
+        div.onclick = () => showDetails(card);
+        resultsDiv.appendChild(div);
+    });
+}
+
+function showDetails(card) {
+    const details = document.getElementById("details");
+
+    const prices = card.tcgplayer?.prices || {};
+    let variantsHtml = "";
+
+    for (const variantName in prices) {
+        const variant = prices[variantName];
+        const market = variant.market ?? null;
+
+        if (market == null) continue;
+
+        variantsHtml += `
+            <div class="variant-section">
+                <div class="variant-header">
+                    <div>${variantName}</div>
+                    <div class="chevron">▼</div>
+                </div>
+                <div class="variant-body">
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Price (GBP)</th>
+                            <th>Source</th>
+                        </tr>
+                        <tr>
+                            <td>Market</td>
+                            <td>${usdToGbp(market)}</td>
+                            <td>TCGplayer</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        `;
+    }
+
+    if (!variantsHtml) {
+        variantsHtml = "<p>No market pricing available.</p>";
+    }
+
+    details.innerHTML = `
+        <h2>${card.name}</h2>
+        <img src="${card.images.large}" style="max-width:250px; display:block; margin-bottom:20px;">
+        <p><strong>Set:</strong> ${card.set.name}</p>
+        <p><strong>Number:</strong> ${card.number}</p>
+        <p><strong>Rarity:</strong> ${card.rarity ?? "Unknown"}</p>
+
+        <h3>Market Price (GBP)</h3>
+        ${variantsHtml}
+    `;
+
+    setupVariantToggles();
+}
+
+function setupVariantToggles() {
+    const headers = document.querySelectorAll(".variant-header");
+    headers.forEach(header => {
+        header.onclick = () => {
+            const body = header.nextElementSibling;
+            const chevron = header.querySelector(".chevron");
+            const isOpen = body.style.display === "block";
+            body.style.display = isOpen ? "none" : "block";
+            chevron.textContent = isOpen ? "▼" : "▲";
+        };
+    });
+}
+
+init();
+</script>
+
+</body>
+</html>
+
