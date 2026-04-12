@@ -34,6 +34,7 @@
         box-shadow: var(--shadow);
         z-index: 10;
         color: #222;
+        letter-spacing: 0.5px;
     }
 
     #searchBox {
@@ -277,21 +278,11 @@ function showDetails(card) {
     const prices = card.tcgplayer?.prices || {};
     let variantsHtml = "";
 
-    // ⭐ PRICE ADJUSTMENT SETTINGS ⭐
-    // Change this number to adjust markup percentage
-    // Example: 0.10 = 10%, 0.20 = 20%, 0.05 = 5%
-    const PRICE_MARKUP = 0.10;
-
     for (const variantName in prices) {
         const market = prices[variantName].market;
         if (!market) continue;
 
-        // Convert USD → GBP
-        let priceGbp = usdToGbp(market);
-
-        // ⭐ APPLY MARKUP ⭐
-        let adjustedPrice = (parseFloat(priceGbp.replace("£","")) * (1 + PRICE_MARKUP)).toFixed(2);
-        let finalPrice = "£" + adjustedPrice;
+        const priceGbp = usdToGbp(market);
 
         const waMessage = encodeURIComponent(
 `Hi Dave, I am interested to know if you have this card.
@@ -302,14 +293,14 @@ Card Number: ${card.number}
 Set: ${card.set.name}
 Image: ${card.images.large}
 
-I understand the guide price of ${finalPrice} is a guide and was wondering what's the best you can do on it if you have it.`
+I understand the guide price of ${priceGbp} is a guide and was wondering what's the best you can do on it if you have it.`
         );
 
         variantsHtml += `
             <div class="variant-title">${variantName}</div>
             <div class="info-block">
                 <div class="info-title">Guide Price</div>
-                <div class="info-value">${finalPrice}</div>
+                <div class="info-value">${priceGbp}</div>
 
                 <a href="https://wa.me/447483251962?text=${waMessage}">
                     <button class="sms-btn">I want to buy this card</button>
