@@ -2,84 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Pokémon Card Lookup (GBP – Market Price Only)</title>
+<title>Pokémon Card Lookup (GBP Only – Market Price Only)</title>
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #f3f3f3;
-        margin: 0;
-        padding: 20px;
-    }
+    body { font-family: Arial, sans-serif; background: #f3f3f3; margin: 0; padding: 20px; }
+    h1 { text-align: center; }
+    #searchBox { width: 100%; padding: 12px; font-size: 18px; border-radius: 6px; border: 1px solid #aaa; margin-bottom: 20px; }
+    #filters { display: flex; gap: 10px; margin-bottom: 20px; }
+    select { padding: 10px; font-size: 16px; border-radius: 6px; border: 1px solid #aaa; }
+    #results { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+    .card { background: white; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; transition: 0.2s; text-align: center; }
+    .card:hover { transform: scale(1.05); }
+    .card img { width: 100%; border-radius: 6px; }
+    #details { margin-top: 30px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
-    h1 {
-        text-align: center;
-        font-size: clamp(20px, 5vw, 32px);
-    }
-
-    #searchBox {
-        width: 100%;
-        padding: 12px;
-        font-size: 18px;
-        border-radius: 6px;
-        border: 1px solid #aaa;
-        margin-bottom: 20px;
-    }
-
-    #filters {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-    }
-
-    #filters select {
-        flex: 1;
-        min-width: 140px;
-        padding: 10px;
-        font-size: 16px;
-    }
-
-    #results {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-        gap: 15px;
-    }
-
-    .card {
-        background: white;
-        padding: 10px;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        cursor: pointer;
-        transition: 0.2s;
-        text-align: center;
-    }
-
-    .card:hover {
-        transform: scale(1.05);
-    }
-
-    .card img {
-        width: 100%;
-        height: auto;
-        border-radius: 6px;
-    }
-
-    #details {
-        margin-top: 30px;
-        padding: 20px;
-        background: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .variant-block {
-        margin-top: 20px;
-        padding: 15px;
-        background: #fafafa;
-        border: 1px solid #ddd;
-        border-radius: 6px;
+    .variant-block { 
+        margin-top: 20px; 
+        padding: 15px; 
+        background: #fafafa; 
+        border: 1px solid #ddd; 
+        border-radius: 6px; 
     }
 
     .variant-block h4 {
@@ -88,45 +30,10 @@
         color: #333;
     }
 
-    .variant-block table {
-        width: 100%;
-        border-collapse: collapse;
-        overflow-x: auto;
-        display: block;
-    }
-
-    table, th, td {
-        border: 1px solid #ccc;
-    }
-
-    th, td {
-        padding: 8px;
-        text-align: center;
-    }
-
-    th {
-        background: #eee;
-    }
-
-    @media (max-width: 600px) {
-        #details img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        th, td {
-            padding: 6px;
-            font-size: 14px;
-        }
-
-        .card h3 {
-            font-size: 16px;
-        }
-
-        .card p {
-            font-size: 14px;
-        }
-    }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    table, th, td { border: 1px solid #ccc; }
+    th, td { padding: 8px; text-align: center; }
+    th { background: #eee; }
 </style>
 </head>
 <body>
@@ -271,7 +178,7 @@ function showDetails(card) {
 
     details.innerHTML = `
         <h2>${card.name}</h2>
-        <img src="${card.images.large}" style="max-width:100%; display:block; margin-bottom:20px;">
+        <img src="${card.images.large}" style="max-width:250px; display:block; margin-bottom:20px;">
         <p><strong>Set:</strong> ${card.set.name}</p>
         <p><strong>Number:</strong> ${card.number}</p>
         <p><strong>Rarity:</strong> ${card.rarity ?? "Unknown"}</p>
