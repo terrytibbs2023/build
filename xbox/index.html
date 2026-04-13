@@ -19,6 +19,7 @@
 
         * {
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -27,15 +28,14 @@
             background: var(--bg);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: var(--text-main);
-            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            width: 100%;
         }
 
         .app-container {
             max-width: 500px;
             margin: 0 auto;
             min-height: 100vh;
-            background: var(--bg);
             display: flex;
             flex-direction: column;
             width: 100%;
@@ -59,7 +59,7 @@
             padding: 12px 15px 8px;
         }
 
-        .header-logo { height: 26px; width: auto; }
+        .header-logo { height: 24px; width: auto; }
         .header-title { font-size: 16px; font-weight: 700; }
 
         .search-container { padding: 0 12px 12px; }
@@ -88,14 +88,14 @@
             font-weight: 600;
         }
 
-        /* EQUAL SIZE GRID SYSTEM */
+        /* FIXED GRID SYSTEM - Prevents jumping and off-screen columns */
         #results {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Exactly 50/50 split */
+            grid-template-columns: repeat(2, 1fr); /* Strict 50/50 split */
             gap: 12px;
             padding: 12px;
             width: 100%;
-            align-items: stretch; /* Forces cards to same height in a row */
+            table-layout: fixed; /* Helps stabilize the layout */
         }
 
         .card {
@@ -104,18 +104,15 @@
             padding: 10px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.04);
             display: flex;
-            flex-direction: column; /* Allows content to push footer down */
-            height: 100%; 
+            flex-direction: column;
+            width: 100%; /* Keeps it inside its 50% box */
             cursor: pointer;
-            transition: transform 0.1s;
+            height: 100%;
         }
 
-        .card:active { transform: scale(0.97); }
-
-        /* Forced Square-ish Image Box */
         .card-img-wrapper {
             width: 100%;
-            aspect-ratio: 1 / 1.35; /* Keeps all card frames identical */
+            aspect-ratio: 1 / 1.35;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -132,10 +129,11 @@
         }
 
         .card-info {
-            flex-grow: 1; /* Pushes the set name to the bottom if names differ in length */
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            min-width: 0; /* Prevents text from pushing box wider */
         }
 
         .card-info h3 {
@@ -143,7 +141,6 @@
             line-height: 1.3;
             margin: 0;
             color: var(--text-main);
-            /* Truncate long names to 2 lines so they don't break the layout */
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -159,7 +156,6 @@
             text-overflow: ellipsis;
         }
 
-        /* DETAILS VIEW */
         #details {
             margin: 12px;
             padding: 20px;
@@ -322,6 +318,9 @@ function renderResults() {
         div.onclick = () => showDetails(card);
         resultsDiv.appendChild(div);
     });
+    
+    // Smooth scroll to top of search on new search
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function showDetails(card) {
