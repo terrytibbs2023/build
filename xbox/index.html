@@ -2,215 +2,257 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Eastcoast Card Inquiry</title>
+<title>Card Inquiry</title>
 
 <style>
-    :root {
-        --accent: #25D366; /* WhatsApp green */
-        --bg: #eef1f5;
-        --card-bg: #ffffff;
-        --radius: 20px;
-        --shadow: 0 6px 14px rgba(0,0,0,0.12);
-        --big-text: 22px;
-        --medium-text: 18px;
-        --small-text: 16px;
-    }
+/* ------------------------------
+   HARD‑LOCK TO MOBILE WIDTH
+------------------------------ */
+body {
+    margin: 0;
+    padding: 0;
+    background: #F2F2F7;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Roboto", sans-serif;
+    display: flex;
+    justify-content: center;
+}
 
-    body {
-        font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: var(--bg);
-        margin: 0;
-        padding: 0;
-    }
+.app-container {
+    width: 390px; /* iPhone width */
+    min-height: 100vh;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 1px #E5E5EA;
+}
 
-    .app-header {
-        position: sticky;
-        top: 0;
-        background: var(--card-bg);
-        padding: 22px 20px 10px;
-        font-size: 26px;
-        font-weight: 800;
-        text-align: center;
-        box-shadow: var(--shadow);
-        z-index: 10;
-        color: #222;
-    }
+/* ------------------------------
+   iOS HEADER
+------------------------------ */
+.header {
+    text-align: center;
+    padding: 22px 0 10px;
+    background: #FFFFFF;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.08);
+}
 
-    /* ⭐ LOGO STYLE ⭐ */
-    .logo {
-        width: 140px;
-        margin: 10px auto 0;
-        display: block;
-        border-radius: 12px;
-    }
+.header-title {
+    font-size: 28px;
+    font-weight: 800;
+    color: #111;
+    margin-bottom: 6px;
+}
 
-    #searchBox {
-        width: calc(100% - 40px);
-        margin: 20px;
-        padding: 18px;
-        font-size: var(--medium-text);
-        border-radius: var(--radius);
-        border: none;
-        box-shadow: var(--shadow);
-        background: var(--card-bg);
-    }
+.header-logo {
+    width: 120px;
+    border-radius: 12px;
+}
 
-    #filters {
-        display: flex;
-        gap: 12px;
-        padding: 0 20px;
-        flex-wrap: wrap;
-    }
+/* ------------------------------
+   SEARCH BAR
+------------------------------ */
+#searchBox {
+    width: calc(100% - 40px);
+    margin: 18px 20px;
+    padding: 16px;
+    font-size: 20px;
+    border-radius: 14px;
+    border: 1px solid #D1D1D6;
+    background: #F9F9FB;
+}
 
-    #filters select {
-        flex: 1;
-        min-width: 150px;
-        padding: 16px;
-        font-size: var(--medium-text);
-        border-radius: var(--radius);
-        border: none;
-        background: var(--card-bg);
-        box-shadow: var(--shadow);
-    }
+/* ------------------------------
+   FILTERS
+------------------------------ */
+#filters {
+    display: flex;
+    gap: 12px;
+    padding: 0 20px;
+}
 
-    #results {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
-        gap: 20px;
-        padding: 20px;
-    }
+#filters select {
+    flex: 1;
+    padding: 14px;
+    font-size: 18px;
+    border-radius: 12px;
+    border: 1px solid #D1D1D6;
+    background: #FFFFFF;
+}
 
-    .card {
-        background: var(--card-bg);
-        border-radius: var(--radius);
-        padding: 16px;
-        box-shadow: var(--shadow);
-        text-align: center;
-        transition: 0.2s;
-    }
+/* ------------------------------
+   CARD GRID (2 columns)
+------------------------------ */
+#results {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    padding: 20px;
+}
 
-    .card:hover {
-        transform: scale(1.03);
-    }
+.card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: 0.2s;
+}
 
-    .card img {
-        width: 100%;
-        border-radius: var(--radius);
-    }
+.card:hover {
+    transform: scale(1.03);
+}
 
-    .card h3 {
-        font-size: var(--medium-text);
-        margin: 12px 0 6px;
-        color: #222;
-        font-weight: 700;
-    }
+.card img {
+    width: 100%;
+    border-radius: 12px;
+}
 
-    .card p {
-        font-size: var(--small-text);
-        color: #666;
-        margin: 0;
-    }
+.card h3 {
+    font-size: 18px;
+    margin: 8px 0 2px;
+    font-weight: 700;
+}
 
-    #details {
-        background: var(--card-bg);
-        margin: 20px;
-        padding: 22px;
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-    }
+.card p {
+    font-size: 15px;
+    color: #666;
+    margin: 0;
+}
 
-    #details img {
-        width: 100%;
-        border-radius: var(--radius);
-        margin-bottom: 20px;
-    }
+/* ------------------------------
+   BOTTOM SHEET DETAILS PANEL
+------------------------------ */
+#details {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(100%);
+    width: 390px;
+    max-height: 85vh;
+    background: #FFFFFF;
+    border-radius: 22px 22px 0 0;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
+    padding: 22px;
+    overflow-y: auto;
+    transition: 0.35s ease;
+    z-index: 50;
+}
 
-    .info-block {
-        background: #f7f9fa;
-        padding: 18px;
-        border-radius: var(--radius);
-        margin-bottom: 18px;
-        border: 1px solid #e5e5ea;
-    }
+#details.open {
+    transform: translateX(-50%) translateY(0);
+}
 
-    .info-title {
-        font-size: var(--medium-text);
-        font-weight: 700;
-        margin-bottom: 6px;
-        color: #444;
-    }
+#details img {
+    width: 100%;
+    border-radius: 16px;
+    margin-bottom: 18px;
+}
 
-    .info-value {
-        font-size: 26px;
-        font-weight: 800;
-        color: var(--accent);
-    }
+.variant-title {
+    font-size: 22px;
+    font-weight: 800;
+    margin-top: 20px;
+}
 
-    .variant-title {
-        font-size: 22px;
-        font-weight: 800;
-        margin-top: 28px;
-        margin-bottom: 12px;
-        color: #222;
-    }
+.info-block {
+    background: #F2F2F7;
+    padding: 16px;
+    border-radius: 14px;
+    margin-top: 10px;
+}
 
-    .sms-btn {
-        width: 100%;
-        margin-top: 12px;
-        padding: 16px;
-        font-size: 20px;
-        font-weight: 800;
-        background: var(--accent);
-        color: white;
-        border: none;
-        border-radius: 16px;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-        cursor: pointer;
-    }
+.info-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
 
-    .sms-btn:active {
-        transform: scale(0.97);
-        background: #1da851;
-    }
+.info-value {
+    font-size: 26px;
+    font-weight: 900;
+    color: #007AFF;
+}
+
+/* ------------------------------
+   BUTTON
+------------------------------ */
+.sms-btn {
+    width: 100%;
+    margin-top: 14px;
+    padding: 16px;
+    font-size: 22px;
+    font-weight: 800;
+    background: #007AFF;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.sms-btn:active {
+    transform: scale(0.97);
+}
 </style>
 </head>
 <body>
 
-<!-- ⭐ APP NAME — CHANGE THIS ⭐ -->
-<div class="app-header">Card Inquiry</div>
+<div class="app-container">
 
-<!-- ⭐ LOGO URL — CHANGE THIS ⭐ -->
-<img class="logo" src="https://files.websitebuilder.prositehosting.co.uk/8b/e9/8be9aecf-cb17-445e-b11b-3ec60a27c26d.png">
+    <div class="header">
+        <div class="header-title">Card Inquiry</div>
+        <img class="header-logo" src="https://files.websitebuilder.prositehosting.co.uk/8b/e9/8be9aecf-cb17-445e-b11b-3ec60a27c26d.png">
+    </div>
 
-<input id="searchBox" type="text" placeholder="Loading GBP rate..." disabled>
+    <input id="searchBox" type="text" placeholder="Loading GBP rate..." disabled>
 
-<div id="filters">
-    <select id="setFilter"><option value="">All Sets</option></select>
-    <select id="rarityFilter"><option value="">All Rarities</option></select>
+    <div id="filters">
+        <select id="setFilter"><option value="">All Sets</option></select>
+        <select id="rarityFilter"><option value="">All Rarities</option></select>
+    </div>
+
+    <div id="results"></div>
+    <div id="details"></div>
+
 </div>
 
-<div id="results"></div>
-<div id="details"></div>
-
 <script>
+/* ------------------------------
+   GLOBALS
+------------------------------ */
 const API_URL = "https://api.pokemontcg.io/v2/cards";
 let GBP_RATE = null;
 let allCards = [];
 
-/* Load GBP rate */
+/* ------------------------------
+   INIT
+------------------------------ */
 async function init() {
     await loadGBP();
-    document.getElementById("searchBox").disabled = false;
-    document.getElementById("searchBox").placeholder = "Search cards...";
+    const sb = document.getElementById("searchBox");
+    sb.disabled = false;
+    sb.placeholder = "Search cards...";
 }
 
+/* ------------------------------
+   GBP LOADER (FAST + RELIABLE)
+------------------------------ */
 async function loadGBP() {
+    const FALLBACK = 0.78;
+
+    const timeout = (ms) =>
+        new Promise((_, reject) => setTimeout(() => reject("timeout"), ms));
+
     try {
-        const fx = await fetch("https://open.er-api.com/v6/latest/USD");
+        const fx = await Promise.race([
+            fetch("https://api.exchangerate.host/latest?base=USD"),
+            timeout(3000)
+        ]);
+
         const data = await fx.json();
-        GBP_RATE = data.rates.GBP;
+        GBP_RATE = data.rates.GBP || FALLBACK;
     } catch {
-        GBP_RATE = null;
+        GBP_RATE = FALLBACK;
     }
 }
 
@@ -219,10 +261,10 @@ function usdToGbp(usd) {
     return "£" + (usd * GBP_RATE).toFixed(2);
 }
 
-/* Search */
+/* ------------------------------
+   SEARCH
+------------------------------ */
 document.getElementById("searchBox").addEventListener("keyup", async function(e) {
-    if (!GBP_RATE) return;
-
     const query = e.target.value.trim();
     if (query.length < 2) return;
 
@@ -238,7 +280,9 @@ document.getElementById("searchBox").addEventListener("keyup", async function(e)
     renderResults();
 });
 
-/* Filters */
+/* ------------------------------
+   FILTERS
+------------------------------ */
 function populateFilters() {
     const setFilter = document.getElementById("setFilter");
     const rarityFilter = document.getElementById("rarityFilter");
@@ -256,7 +300,9 @@ function populateFilters() {
 document.getElementById("setFilter").addEventListener("change", renderResults);
 document.getElementById("rarityFilter").addEventListener("change", renderResults);
 
-/* Results grid */
+/* ------------------------------
+   RESULTS GRID
+------------------------------ */
 function renderResults() {
     const setValue = document.getElementById("setFilter").value;
     const rarityValue = document.getElementById("rarityFilter").value;
@@ -282,34 +328,30 @@ function renderResults() {
     });
 }
 
-/* Details panel */
+/* ------------------------------
+   DETAILS PANEL
+------------------------------ */
 function showDetails(card) {
     const details = document.getElementById("details");
 
     const prices = card.tcgplayer?.prices || {};
     let variantsHtml = "";
 
-    // ⭐ PRICE ADJUSTMENT SETTINGS ⭐
-    // Change this number to adjust markup percentage
-    // Example: 0.10 = 10%, 0.20 = 20%, 0.05 = 5%
-    const PRICE_MARKUP = 0.10;
+    const MARKUP = 0.10;
 
-    for (const variantName in prices) {
-        const market = prices[variantName].market;
+    for (const variant in prices) {
+        const market = prices[variant].market;
         if (!market) continue;
 
-        // Convert USD → GBP
-        let priceGbp = usdToGbp(market);
-
-        // ⭐ APPLY MARKUP ⭐
-        let adjustedPrice = (parseFloat(priceGbp.replace("£","")) * (1 + PRICE_MARKUP)).toFixed(2);
-        let finalPrice = "£" + adjustedPrice;
+        let gbp = usdToGbp(market);
+        let adjusted = (parseFloat(gbp.replace("£","")) * (1 + MARKUP)).toFixed(2);
+        let finalPrice = "£" + adjusted;
 
         const waMessage = encodeURIComponent(
 `Hi Dave, I am interested to know if you have this card.
 
 Card: ${card.name}
-Variant: ${variantName}
+Variant: ${variant}
 Card Number: ${card.number}
 Set: ${card.set.name}
 Image: ${card.images.large}
@@ -318,32 +360,27 @@ I understand the guide price of ${finalPrice} is a guide and was wondering what'
         );
 
         variantsHtml += `
-            <div class="variant-title">${variantName}</div>
+            <div class="variant-title">${variant}</div>
             <div class="info-block">
                 <div class="info-title">Guide Price</div>
                 <div class="info-value">${finalPrice}</div>
-
                 <a href="https://wa.me/447483251962?text=${waMessage}">
-                    <button class="sms-btn">I want to buy this card</button>
+                    <button class="sms-btn">Message on WhatsApp</button>
                 </a>
             </div>
         `;
     }
 
-    if (!variantsHtml) variantsHtml = "<p>No guide pricing available.</p>";
-
     details.innerHTML = `
         <img src="${card.images.large}">
-        <h2 style="font-size:26px;font-weight:800;margin-bottom:10px;">${card.name}</h2>
+        <h2 style="font-size:26px;font-weight:800;">${card.name}</h2>
         <p style="font-size:18px;"><strong>Set:</strong> ${card.set.name}</p>
         <p style="font-size:18px;"><strong>Number:</strong> ${card.number}</p>
         <p style="font-size:18px;"><strong>Rarity:</strong> ${card.rarity ?? "Unknown"}</p>
-
         ${variantsHtml}
     `;
 
-    // ⭐ Auto-scroll to details
-    details.scrollIntoView({ behavior: "smooth" });
+    details.classList.add("open");
 }
 
 init();
