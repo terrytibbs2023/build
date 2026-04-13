@@ -8,7 +8,7 @@
     <style>
         :root {
             --primary: #007AFF;
-            --primary-muted: rgba(0, 122, 255, 0.12); /* New style for secondary buttons */
+            --primary-muted: rgba(0, 122, 255, 0.08);
             --bg: #F8F9FB;
             --card-bg: #FFFFFF;
             --text-main: #1C1C1E;
@@ -27,7 +27,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* App Shell */
         .app-container {
             max-width: 500px;
             margin: 0 auto;
@@ -37,7 +36,6 @@
             flex-direction: column;
         }
 
-        /* Modern Sticky Header */
         .header-stack {
             position: sticky;
             top: 0;
@@ -53,24 +51,23 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 20px 10px;
+            padding: 12px 20px 8px;
         }
 
         .header-logo {
-            height: 32px;
+            height: 28px;
             width: auto;
             object-fit: contain;
         }
 
         .header-title {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 700;
             letter-spacing: -0.5px;
         }
 
-        /* Search & Filters */
         .search-container {
-            padding: 0 16px 16px;
+            padding: 0 16px 12px;
         }
 
         .search-wrapper {
@@ -81,11 +78,11 @@
 
         #searchBox {
             width: 100%;
-            padding: 12px 12px 12px 40px;
-            border-radius: 12px;
+            padding: 10px 10px 10px 36px;
+            border-radius: 10px;
             border: none;
             background: rgba(0,0,0,0.05);
-            font-size: 16px;
+            font-size: 15px;
             outline: none;
             transition: all 0.2s;
         }
@@ -97,13 +94,14 @@
 
         .search-icon {
             position: absolute;
-            left: 14px;
+            left: 12px;
+            font-size: 14px;
             color: var(--text-secondary);
         }
 
         .filter-row {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             padding: 0 16px 12px;
             overflow-x: auto;
             scrollbar-width: none;
@@ -115,45 +113,48 @@
             appearance: none;
             background: #fff;
             border: 1px solid #E5E5EA;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--text-main);
-            min-width: 100px;
+            min-width: 90px;
             cursor: pointer;
         }
 
-        /* Results Grid */
+        /* COMPACT RESULTS GRID */
         #results {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            padding: 16px;
+            gap: 12px;
+            padding: 12px;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 18px;
-            padding: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border-radius: 14px;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
             transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
         }
 
-        .card:active { transform: scale(0.95); }
+        .card:active { transform: scale(0.96); }
 
         .card img {
             width: 100%;
-            aspect-ratio: 2.5/3.5;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            aspect-ratio: 1 / 1.4; /* Slightly tighter aspect ratio */
+            object-fit: contain;
+            background: #fdfdfd;
+            border-radius: 8px;
+            margin-bottom: 6px;
         }
 
         .card-info h3 {
-            font-size: 14px;
+            font-size: 13px;
+            line-height: 1.2;
             margin: 0;
             white-space: nowrap;
             overflow: hidden;
@@ -161,12 +162,14 @@
         }
 
         .card-info p {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-secondary);
             margin: 2px 0 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        /* Details Overlay Style */
         #details {
             margin: 16px;
             padding: 20px;
@@ -174,12 +177,12 @@
             border-radius: 24px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             display: none;
-            animation: slideUp 0.4s ease-out;
+            animation: slideUp 0.3s ease-out;
             margin-bottom: 40px;
         }
 
         @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
+            from { transform: translateY(20px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
@@ -198,10 +201,9 @@
             border: 1px solid rgba(0,0,0,0.03);
         }
 
-        .price-label { font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; }
-        .price-value { font-size: 28px; font-weight: 900; color: var(--primary); margin: 4px 0 12px; }
+        .price-label { font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;}
+        .price-value { font-size: 26px; font-weight: 900; color: var(--primary); margin: 4px 0 12px; }
 
-        /* General Button Style */
         .btn {
             display: flex;
             align-items: center;
@@ -210,42 +212,31 @@
             width: 100%;
             padding: 14px;
             text-decoration: none;
-            border-radius: 12px;
+            border-radius: 14px;
             font-weight: 700;
             font-size: 16px;
             border: none;
             cursor: pointer;
-            transition: opacity 0.2s, transform 0.1s;
+            transition: all 0.2s;
         }
 
-        .btn:active {
-            transform: scale(0.98);
-        }
+        .btn:active { transform: scale(0.97); }
 
-        /* Specific Button Variations */
-        .btn-whatsapp {
-            background: var(--whatsapp-green);
-            color: white;
-        }
-
-        /* Updated Back Button Style */
-        .btn-secondary {
+        .btn-whatsapp { background: var(--whatsapp-green); color: white; }
+        
+        .btn-back {
             background: var(--primary-muted);
             color: var(--primary);
             margin-top: 20px;
         }
 
-        .loader {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
-        }
+        .loader { text-align: center; padding: 40px; color: var(--text-secondary); }
     </style>
 </head>
 <body>
 
 <div class="app-container">
-    <div class="header-stack">
+    <div id="appHeader" class="header-stack">
         <div class="brand-bar">
             <img class="header-logo" src="https://files.websitebuilder.prositehosting.co.uk/8b/e9/8be9aecf-cb17-445e-b11b-3ec60a27c26d.png" alt="Logo">
             <div class="header-title">Market Inquiry</div>
@@ -332,12 +323,16 @@ document.getElementById("setFilter").addEventListener("change", renderResults);
 document.getElementById("rarityFilter").addEventListener("change", renderResults);
 
 function renderResults() {
-    const setValue = document.getElementById("setFilter").value;
-    const rarityValue = document.getElementById("rarityFilter").value;
     const resultsDiv = document.getElementById("results");
     const detailsDiv = document.getElementById("details");
+    const header = document.getElementById("appHeader");
     
     detailsDiv.style.display = "none";
+    resultsDiv.style.display = "grid";
+    header.style.display = "block";
+
+    const setValue = document.getElementById("setFilter").value;
+    const rarityValue = document.getElementById("rarityFilter").value;
     resultsDiv.innerHTML = "";
 
     let filtered = allCards;
@@ -367,8 +362,11 @@ function renderResults() {
 function showDetails(card) {
     const details = document.getElementById("details");
     const results = document.getElementById("results");
+    const header = document.getElementById("appHeader");
 
-    results.innerHTML = ""; 
+    results.style.display = "none"; 
+    header.style.display = "none"; 
+    
     const prices = card.tcgplayer?.prices || {};
     let variantsHtml = "";
     const MARKUP = 0.10;
@@ -381,7 +379,15 @@ function showDetails(card) {
         let finalPrice = "£" + (gbpNum * (1 + MARKUP)).toFixed(2);
 
         const waMessage = encodeURIComponent(
-            `Hi Dave, I'm interested in:\n\n*${card.name}*\nVariant: ${variant}\nSet: ${card.set.name}\n\nGuide Price: ${finalPrice}\n\nDo you have this in stock?`
+`Hi Dave, I am interested to know if you have this card.
+
+Card: ${card.name}
+Variant: ${variant}
+Card Number: ${card.number}
+Set: ${card.set.name}
+Image: ${card.images.large}
+
+I understand the guide price of ${finalPrice} is a guide and was wondering what's the best you can do on it if you have it.`
         );
 
         variantsHtml += `
@@ -389,7 +395,7 @@ function showDetails(card) {
                 <div class="price-label">${variant} Market Guide</div>
                 <div class="price-value">${finalPrice}</div>
                 <a class="btn btn-whatsapp" href="https://wa.me/447483251962?text=${waMessage}">
-                    <i class="fa-brands fa-whatsapp"></i> Check Availability
+                    <i class="fa-brands fa-whatsapp"></i> Message on WhatsApp
                 </a>
             </div>
         `;
@@ -398,17 +404,28 @@ function showDetails(card) {
     details.innerHTML = `
         <img class="details-hero" src="${card.images.large}">
         <h2 style="margin:0 0 5px 0; font-size:24px;">${card.name}</h2>
-        <div style="display:flex; gap:10px; margin-bottom:20px; color:var(--text-secondary); font-size:14px; font-weight:600;">
+        <div style="display:flex; gap:10px; margin-bottom:20px; color:var(--text-secondary); font-size:13px; font-weight:600;">
             <span>${card.set.name}</span> • <span>${card.number}</span>
         </div>
         ${variantsHtml || '<p>No pricing available for this card.</p>'}
-        <button class="btn btn-secondary" onclick="location.reload()">
-            <i class="fa-solid fa-chevron-left"></i> Back to Search
+        <button class="btn btn-back" onclick="closeDetails()">
+            <i class="fa-solid fa-chevron-left"></i> Back to Results
         </button>
     `;
 
     details.style.display = "block";
     window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function closeDetails() {
+    const details = document.getElementById("details");
+    const results = document.getElementById("results");
+    const header = document.getElementById("appHeader");
+
+    details.style.display = "none";
+    results.style.display = "grid";
+    header.style.display = "block";
+    window.scrollTo({ top: 0, behavior: "auto" });
 }
 
 function debounce(func, timeout = 300){
