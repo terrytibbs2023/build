@@ -4,32 +4,31 @@
 <meta charset="UTF-8">
 <title>Card Inquiry</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
 <style>
-/* ------------------------------
-   HARD‑LOCK TO MOBILE WIDTH
------------------------------- */
 body {
     margin: 0;
     padding: 0;
     background: #F2F2F7;
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Roboto", sans-serif;
-    display: flex;
-    justify-content: center;
 }
 
 .app-container {
-    width: 390px; /* iPhone width */
+    width: 100%;
+    max-width: 430px;
     min-height: 100vh;
+    margin: 0 auto;
     background: #FFFFFF;
     box-shadow: 0 0 0 1px #E5E5EA;
+    display: flex;
+    flex-direction: column;
 }
 
-/* ------------------------------
-   iOS HEADER
------------------------------- */
+/* HEADER */
 .header {
     text-align: center;
-    padding: 22px 0 10px;
+    padding: 18px 16px 10px;
     background: #FFFFFF;
     position: sticky;
     top: 0;
@@ -38,7 +37,7 @@ body {
 }
 
 .header-title {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 800;
     color: #111;
     margin-bottom: 6px;
@@ -49,92 +48,85 @@ body {
     border-radius: 12px;
 }
 
-/* ------------------------------
-   SEARCH BAR
------------------------------- */
+/* SEARCH */
 #searchBox {
-    width: calc(100% - 40px);
-    margin: 18px 20px;
-    padding: 16px;
-    font-size: 20px;
-    border-radius: 14px;
-    border: 1px solid #D1D1D6;
-    background: #F9F9FB;
-}
-
-/* ------------------------------
-   FILTERS
------------------------------- */
-#filters {
-    display: flex;
-    gap: 12px;
-    padding: 0 20px;
-}
-
-#filters select {
-    flex: 1;
+    width: calc(100% - 32px);
+    margin: 14px 16px;
     padding: 14px;
     font-size: 18px;
     border-radius: 12px;
     border: 1px solid #D1D1D6;
+    background: #F9F9FB;
+}
+
+/* FILTERS */
+#filters {
+    display: flex;
+    gap: 10px;
+    padding: 0 16px 8px;
+}
+
+#filters select {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D6;
     background: #FFFFFF;
 }
 
-/* ------------------------------
-   CARD GRID (2 columns)
------------------------------- */
+/* GRID */
 #results {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    padding: 20px;
+    gap: 12px;
+    padding: 12px 16px 80px;
 }
 
 .card {
     background: #FFFFFF;
-    border-radius: 16px;
-    padding: 10px;
+    border-radius: 14px;
+    padding: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    transition: 0.2s;
+    transition: 0.15s;
 }
 
-.card:hover {
-    transform: scale(1.03);
+.card:active {
+    transform: scale(0.97);
 }
 
 .card img {
     width: 100%;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 
 .card h3 {
-    font-size: 18px;
-    margin: 8px 0 2px;
+    font-size: 16px;
+    margin: 6px 0 2px;
     font-weight: 700;
 }
 
 .card p {
-    font-size: 15px;
+    font-size: 13px;
     color: #666;
     margin: 0;
 }
 
-/* ------------------------------
-   BOTTOM SHEET DETAILS PANEL
------------------------------- */
+/* BOTTOM SHEET */
 #details {
     position: fixed;
-    bottom: 0;
     left: 50%;
+    bottom: 0;
     transform: translateX(-50%) translateY(100%);
-    width: 390px;
-    max-height: 85vh;
+    width: 100%;
+    max-width: 430px;
+    max-height: 80vh;
     background: #FFFFFF;
-    border-radius: 22px 22px 0 0;
+    border-radius: 20px 20px 0 0;
     box-shadow: 0 -4px 20px rgba(0,0,0,0.25);
-    padding: 22px;
+    padding: 18px 16px 24px;
     overflow-y: auto;
-    transition: 0.35s ease;
+    transition: 0.3s ease;
     z-index: 50;
 }
 
@@ -144,48 +136,70 @@ body {
 
 #details img {
     width: 100%;
-    border-radius: 16px;
-    margin-bottom: 18px;
+    border-radius: 14px;
+    margin-bottom: 14px;
 }
 
-.variant-title {
+.close-details {
+    font-size: 26px;
+    font-weight: 600;
+    color: #444;
+    text-align: right;
+    padding: 4px 4px 10px;
+    cursor: pointer;
+}
+.close-details:active {
+    opacity: 0.5;
+}
+
+.details-title {
     font-size: 22px;
     font-weight: 800;
-    margin-top: 20px;
+    margin-bottom: 4px;
+}
+
+.details-meta {
+    font-size: 16px;
+    margin: 2px 0;
+}
+
+/* VARIANTS */
+.variant-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-top: 16px;
 }
 
 .info-block {
     background: #F2F2F7;
-    padding: 16px;
-    border-radius: 14px;
-    margin-top: 10px;
+    padding: 12px;
+    border-radius: 12px;
+    margin-top: 8px;
 }
 
 .info-title {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 
 .info-value {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 900;
     color: #007AFF;
 }
 
-/* ------------------------------
-   BUTTON
------------------------------- */
+/* BUTTON */
 .sms-btn {
     width: 100%;
-    margin-top: 14px;
-    padding: 16px;
-    font-size: 22px;
+    margin-top: 10px;
+    padding: 14px;
+    font-size: 18px;
     font-weight: 800;
     background: #007AFF;
     color: white;
     border: none;
-    border-radius: 14px;
+    border-radius: 12px;
     cursor: pointer;
     transition: 0.15s;
 }
@@ -217,16 +231,11 @@ body {
 </div>
 
 <script>
-/* ------------------------------
-   GLOBALS
------------------------------- */
 const API_URL = "https://api.pokemontcg.io/v2/cards";
 let GBP_RATE = null;
 let allCards = [];
 
-/* ------------------------------
-   INIT
------------------------------- */
+/* INIT */
 async function init() {
     await loadGBP();
     const sb = document.getElementById("searchBox");
@@ -234,9 +243,7 @@ async function init() {
     sb.placeholder = "Search cards...";
 }
 
-/* ------------------------------
-   GBP LOADER (FAST + RELIABLE)
------------------------------- */
+/* GBP LOADER */
 async function loadGBP() {
     const FALLBACK = 0.78;
 
@@ -261,9 +268,7 @@ function usdToGbp(usd) {
     return "£" + (usd * GBP_RATE).toFixed(2);
 }
 
-/* ------------------------------
-   SEARCH
------------------------------- */
+/* SEARCH */
 document.getElementById("searchBox").addEventListener("keyup", async function(e) {
     const query = e.target.value.trim();
     if (query.length < 2) return;
@@ -280,9 +285,7 @@ document.getElementById("searchBox").addEventListener("keyup", async function(e)
     renderResults();
 });
 
-/* ------------------------------
-   FILTERS
------------------------------- */
+/* FILTERS */
 function populateFilters() {
     const setFilter = document.getElementById("setFilter");
     const rarityFilter = document.getElementById("rarityFilter");
@@ -300,9 +303,7 @@ function populateFilters() {
 document.getElementById("setFilter").addEventListener("change", renderResults);
 document.getElementById("rarityFilter").addEventListener("change", renderResults);
 
-/* ------------------------------
-   RESULTS GRID
------------------------------- */
+/* GRID */
 function renderResults() {
     const setValue = document.getElementById("setFilter").value;
     const rarityValue = document.getElementById("rarityFilter").value;
@@ -328,9 +329,12 @@ function renderResults() {
     });
 }
 
-/* ------------------------------
-   DETAILS PANEL
------------------------------- */
+/* CLOSE DETAILS */
+function closeDetails() {
+    document.getElementById("details").classList.remove("open");
+}
+
+/* DETAILS PANEL */
 function showDetails(card) {
     const details = document.getElementById("details");
 
@@ -371,12 +375,17 @@ I understand the guide price of ${finalPrice} is a guide and was wondering what'
         `;
     }
 
+    if (!variantsHtml) {
+        variantsHtml = `<p style="margin-top:12px;font-size:16px;">No guide pricing available.</p>`;
+    }
+
     details.innerHTML = `
+        <div class="close-details" onclick="closeDetails()">✕</div>
         <img src="${card.images.large}">
-        <h2 style="font-size:26px;font-weight:800;">${card.name}</h2>
-        <p style="font-size:18px;"><strong>Set:</strong> ${card.set.name}</p>
-        <p style="font-size:18px;"><strong>Number:</strong> ${card.number}</p>
-        <p style="font-size:18px;"><strong>Rarity:</strong> ${card.rarity ?? "Unknown"}</p>
+        <div class="details-title">${card.name}</div>
+        <p class="details-meta"><strong>Set:</strong> ${card.set.name}</p>
+        <p class="details-meta"><strong>Number:</strong> ${card.number}</p>
+        <p class="details-meta"><strong>Rarity:</strong> ${card.rarity ?? "Unknown"}</p>
         ${variantsHtml}
     `;
 
