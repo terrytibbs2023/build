@@ -39,6 +39,7 @@
             display: flex;
             flex-direction: column;
             width: 100%;
+            position: relative;
         }
 
         .header-stack {
@@ -88,14 +89,14 @@
             font-weight: 600;
         }
 
-        /* FIXED GRID SYSTEM - Prevents jumping and off-screen columns */
+        /* GRID SYSTEM */
         #results {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Strict 50/50 split */
+            grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             padding: 12px;
             width: 100%;
-            table-layout: fixed; /* Helps stabilize the layout */
+            min-height: 200px; /* Ensures space for the loader */
         }
 
         .card {
@@ -105,7 +106,7 @@
             box-shadow: 0 2px 6px rgba(0,0,0,0.04);
             display: flex;
             flex-direction: column;
-            width: 100%; /* Keeps it inside its 50% box */
+            width: 100%;
             cursor: pointer;
             height: 100%;
         }
@@ -133,7 +134,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-width: 0; /* Prevents text from pushing box wider */
+            min-width: 0;
         }
 
         .card-info h3 {
@@ -199,7 +200,28 @@
         .btn-whatsapp { background: var(--whatsapp-green); color: white; }
         .btn-back { background: var(--primary-muted); color: var(--primary); margin-top: 15px; }
 
-        .loader { text-align: center; padding: 40px; color: var(--text-secondary); }
+        /* CENTERED LOADER STYLE */
+        .loader-container {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh; /* Centers vertically relative to view */
+            color: var(--text-secondary);
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .loader-container i {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
     </style>
 </head>
 <body>
@@ -255,7 +277,12 @@ document.getElementById("searchBox").addEventListener("keyup", debounce(async fu
     const query = e.target.value.trim();
     if (query.length < 3) return;
 
-    document.getElementById("results").innerHTML = '<div class="loader"><i class="fa-solid fa-spinner fa-spin"></i></div>';
+    // CENTERED LOADER
+    document.getElementById("results").innerHTML = `
+        <div class="loader-container">
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            <div>Searching...</div>
+        </div>`;
     
     let q = query.includes("/")
         ? `number:${query.split("/")[0]} AND set.printedTotal:${query.split("/")[1]}`
@@ -301,7 +328,7 @@ function renderResults() {
     if (rarityValue) filtered = filtered.filter(c => (c.rarity || "Unknown") === rarityValue);
 
     if (filtered.length === 0) {
-        resultsDiv.innerHTML = '<div style="grid-column: 1/-1; text-align:center; padding:40px;">No cards found.</div>';
+        resultsDiv.innerHTML = '<div class="loader-container">No cards found.</div>';
         return;
     }
 
@@ -319,7 +346,6 @@ function renderResults() {
         resultsDiv.appendChild(div);
     });
     
-    // Smooth scroll to top of search on new search
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
