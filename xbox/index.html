@@ -2,204 +2,209 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Card Inquiry Pro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
             --primary: #007AFF;
-            --primary-muted: rgba(0, 122, 255, 0.08);
-            --bg: #F8F9FB;
+            --bg: #F2F2F7;
             --card-bg: #FFFFFF;
-            --text-main: #1C1C1E;
+            --text-main: #000000;
             --text-secondary: #8E8E93;
-            --whatsapp-green: #25D366;
-            --safe-area-top: env(safe-area-inset-top);
+            --whatsapp: #25D366;
+            --header-bg: rgba(255, 255, 255, 0.8);
         }
 
-        /* RESET & BODY STABILIZATION */
+        /* THE "OFF-SCREEN" KILLER RESET */
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             -webkit-tap-highlight-color: transparent;
         }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: var(--text-main);
-            overflow-x: hidden; /* Prevents side-scrolling */
-            width: 100vw;
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            background-color: var(--bg);
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         .app-container {
+            width: 100%;
             max-width: 500px;
             margin: 0 auto;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            width: 100%;
+            position: relative;
         }
 
-        /* HEADER FIX */
-        .header-stack {
+        /* MODERN APP HEADER */
+        .app-header {
             position: sticky;
             top: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding-top: var(--safe-area-top);
+            z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 0.5px solid rgba(0,0,0,0.1);
+            padding: env(safe-area-inset-top) 16px 12px;
         }
 
-        .brand-bar {
+        .nav-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 15px;
+            height: 44px;
+            margin-bottom: 8px;
         }
 
-        .header-logo { height: 22px; width: auto; }
-        .header-title { font-size: 15px; font-weight: 700; }
+        .nav-logo { height: 28px; width: auto; }
+        .nav-title { font-size: 17px; font-weight: 600; letter-spacing: -0.4px; }
 
-        .search-container { padding: 0 12px 10px; }
-        .search-wrapper { position: relative; display: flex; align-items: center; }
-
-        #searchBox {
-            width: 100%;
-            padding: 10px 10px 10px 36px;
+        .search-pill {
+            position: relative;
+            background: rgba(118, 118, 128, 0.12);
             border-radius: 10px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            margin-bottom: 12px;
+        }
+
+        .search-pill i { color: var(--text-secondary); font-size: 14px; margin-right: 8px; }
+
+        .search-pill input {
+            background: none;
             border: none;
-            background: rgba(0,0,0,0.06);
-            font-size: 16px; /* Prevents iOS auto-zoom */
             outline: none;
+            width: 100%;
+            font-size: 16px;
+            color: var(--text-main);
         }
 
-        .search-icon { position: absolute; left: 12px; color: var(--text-secondary); }
+        .filter-scroller {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+        .filter-scroller::-webkit-scrollbar { display: none; }
 
-        .filter-row { display: flex; gap: 6px; padding: 0 12px 10px; overflow-x: auto; scrollbar-width: none; }
-        .filter-row::-webkit-scrollbar { display: none; }
-
-        select {
-            appearance: none;
+        .filter-pill {
             background: #fff;
-            border: 1px solid #E5E5EA;
-            padding: 6px 10px;
+            border: 0.5px solid rgba(0,0,0,0.1);
             border-radius: 8px;
+            padding: 6px 12px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 500;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
-        /* THE GRID STABILIZER */
-        #results {
+        /* GRID FIX: Forces absolute confinement to screen width */
+        .card-grid {
             display: grid;
-            /* minmax(0, 1fr) ensures content cannot force the column wider than the screen */
-            grid-template-columns: repeat(2, minmax(0, 1fr)); 
-            grid-auto-rows: 1fr;
-            gap: 10px;
-            padding: 10px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 16px;
             width: 100%;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+            border-radius: 14px;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
-            width: 100%; 
-            cursor: pointer;
-            height: 100%;
-            overflow: hidden; /* Contains all children */
+            width: 100%;
+            transition: transform 0.2s;
         }
 
-        .card-img-wrapper {
+        .card:active { transform: scale(0.96); }
+
+        .card-img {
             width: 100%;
             aspect-ratio: 1 / 1.38;
+            background: #F9F9FB;
+            border-radius: 8px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 8px;
-            background: #fdfdfd;
-            border-radius: 6px;
             overflow: hidden;
         }
 
-        .card img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
+        .card-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-        .card-info {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            min-width: 0; /* Critical for text truncation in flexboxes */
-        }
-
-        .card-info h3 {
-            font-size: 12px;
-            line-height: 1.3;
-            margin: 0;
-            color: var(--text-main);
-            overflow-wrap: break-word; /* Prevents names from pushing off screen */
+        .card-name {
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 4px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        .card-info p {
-            font-size: 10px;
+        .card-meta {
+            font-size: 11px;
             color: var(--text-secondary);
-            margin: 4px 0 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-        /* LOADING STATE */
-        .loader-container {
-            grid-column: 1 / -1;
+        /* LOADER */
+        .loader {
+            grid-column: 1/-1;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 40vh;
+            padding: 60px 0;
             color: var(--text-secondary);
         }
 
-        .loader-container i { font-size: 28px; color: var(--primary); margin-bottom: 10px; }
-
-        /* DETAILS VIEW */
-        #details {
-            margin: 10px;
-            padding: 15px;
-            background: white;
-            border-radius: 16px;
+        /* DETAILS */
+        #details-view {
             display: none;
-            animation: slideUp 0.3s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(15px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .details-hero { width: 100%; border-radius: 12px; margin-bottom: 15px; }
-
-        .variant-card {
+            padding: 16px;
             background: var(--bg);
-            border-radius: 12px;
-            padding: 12px;
-            margin-top: 10px;
+            min-height: 100vh;
         }
 
-        .price-value { font-size: 22px; font-weight: 800; color: var(--primary); margin: 4px 0 10px; }
+        .details-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .details-img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .price-box {
+            background: var(--bg);
+            border-radius: 15px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+
+        .price-label { font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; }
+        .price-tag { font-size: 28px; font-weight: 800; color: var(--primary); margin: 4px 0 12px; }
 
         .btn {
             display: flex;
@@ -207,221 +212,173 @@
             justify-content: center;
             gap: 8px;
             width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 14px;
+            height: 50px;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
             border: none;
             cursor: pointer;
-            text-decoration: none;
         }
 
-        .btn-whatsapp { background: var(--whatsapp-green); color: white; }
-        .btn-back { background: var(--primary-muted); color: var(--primary); margin-top: 12px; }
+        .btn-wa { background: var(--whatsapp); color: white; margin-top: 10px; }
+        .btn-back { background: rgba(0,0,0,0.05); color: var(--text-main); margin-top: 20px; }
+
     </style>
 </head>
 <body>
 
 <div class="app-container">
-    <div id="appHeader" class="header-stack">
-        <div class="brand-bar">
-            <img class="header-logo" src="https://files.websitebuilder.prositehosting.co.uk/8b/e9/8be9aecf-cb17-445e-b11b-3ec60a27c26d.png" alt="Logo">
-            <div class="header-title">Market Inquiry</div>
-            <div style="width: 22px"></div> 
+    <header class="app-header" id="mainHeader">
+        <div class="nav-bar">
+            <img src="https://files.websitebuilder.prositehosting.co.uk/8b/e9/8be9aecf-cb17-445e-b11b-3ec60a27c26d.png" class="nav-logo" alt="Logo">
+            <span class="nav-title">Pokemon Market</span>
+            <div style="width: 28px"></div>
         </div>
 
-        <div class="search-container">
-            <div class="search-wrapper">
-                <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input id="searchBox" type="text" placeholder="Loading rates..." disabled>
+        <div class="search-pill">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search cards..." disabled>
+        </div>
+
+        <div class="filter-scroller">
+            <div class="filter-pill">
+                Set: <select id="setSelect" style="border:none; outline:none; font-weight:700;"><option value="">All</option></select>
+            </div>
+            <div class="filter-pill">
+                Rarity: <select id="raritySelect" style="border:none; outline:none; font-weight:700;"><option value="">All</option></select>
             </div>
         </div>
+    </header>
 
-        <div id="filters" class="filter-row">
-            <select id="setFilter"><option value="">All Sets</option></select>
-            <select id="rarityFilter"><option value="">All Rarities</option></select>
-        </div>
-    </div>
-
-    <div id="results"></div>
-    <div id="details"></div>
+    <div id="results-view" class="card-grid"></div>
+    
+    <div id="details-view"></div>
 </div>
 
 <script>
-const API_URL = "https://api.pokemontcg.io/v2/cards";
-let GBP_RATE = null;
-let allCards = [];
+const API = "https://api.pokemontcg.io/v2/cards";
+let gbpRate = 0.78;
+let cards = [];
 
-async function init() {
-    await loadGBP();
-    const sb = document.getElementById("searchBox");
-    sb.disabled = false;
-    sb.placeholder = "Search card name...";
-}
-
-async function loadGBP() {
+async function startup() {
     try {
-        const fx = await fetch("https://open.er-api.com/v6/latest/USD");
-        const data = await fx.json();
-        GBP_RATE = data.rates.GBP || 0.78;
-    } catch { GBP_RATE = 0.78; }
-}
-
-function usdToGbp(usd) { return usd * GBP_RATE; }
-
-document.getElementById("searchBox").addEventListener("keyup", debounce(async function(e) {
-    const query = e.target.value.trim();
-    if (query.length < 3) return;
-
-    document.getElementById("results").innerHTML = `
-        <div class="loader-container">
-            <i class="fa-solid fa-spinner fa-spin"></i>
-            <div>Searching...</div>
-        </div>`;
-    
-    let q = query.includes("/")
-        ? `number:${query.split("/")[0]} AND set.printedTotal:${query.split("/")[1]}`
-        : `name:"${query}*"`;
-
-    try {
-        const res = await fetch(`${API_URL}?q=${encodeURIComponent(q)}`);
+        const res = await fetch("https://open.er-api.com/v6/latest/USD");
         const data = await res.json();
-        allCards = data.data || [];
-        populateFilters();
-        renderResults();
-    } catch (err) { console.error(err); }
+        gbpRate = data.rates.GBP || 0.78;
+    } catch(e) {}
+    
+    const input = document.getElementById('searchInput');
+    input.disabled = false;
+    input.placeholder = "Search by name (e.g. Charizard)";
+}
+
+document.getElementById('searchInput').addEventListener('input', debounce(async (e) => {
+    const val = e.target.value.trim();
+    if (val.length < 3) return;
+
+    const grid = document.getElementById('results-view');
+    grid.innerHTML = `<div class="loader"><i class="fa-solid fa-circle-notch fa-spin fa-2x"></i><p style="margin-top:10px">Searching Market...</p></div>`;
+
+    const q = val.includes('/') 
+        ? `number:${val.split('/')[0]} AND set.printedTotal:${val.split('/')[1]}`
+        : `name:"${val}*"`;
+
+    try {
+        const res = await fetch(`${API}?q=${encodeURIComponent(q)}`);
+        const data = await res.json();
+        cards = data.data || [];
+        updateFilters();
+        render();
+    } catch(err) {}
 }, 500));
 
-function populateFilters() {
-    const setFilter = document.getElementById("setFilter");
-    const rarityFilter = document.getElementById("rarityFilter");
-    const sets = [...new Set(allCards.map(c => c.set.name))].sort();
-    const rarities = [...new Set(allCards.map(c => c.rarity || "Unknown"))].sort();
-
-    setFilter.innerHTML = `<option value="">All Sets</option>` + sets.map(s => `<option value="${s}">${s}</option>`).join('');
-    rarityFilter.innerHTML = `<option value="">All Rarities</option>` + rarities.map(r => `<option value="${r}">${r}</option>`).join('');
+function updateFilters() {
+    const sets = [...new Set(cards.map(c => c.set.name))].sort();
+    const rarities = [...new Set(cards.map(c => c.rarity || "Other"))].sort();
+    
+    document.getElementById('setSelect').innerHTML = '<option value="">All</option>' + sets.map(s => `<option value="${s}">${s}</option>`).join('');
+    document.getElementById('raritySelect').innerHTML = '<option value="">All</option>' + rarities.map(r => `<option value="${r}">${r}</option>`).join('');
 }
 
-document.getElementById("setFilter").addEventListener("change", renderResults);
-document.getElementById("rarityFilter").addEventListener("change", renderResults);
+document.getElementById('setSelect').onchange = render;
+document.getElementById('raritySelect').onchange = render;
 
-function renderResults() {
-    const resultsDiv = document.getElementById("results");
-    const detailsDiv = document.getElementById("details");
-    const header = document.getElementById("appHeader");
-    
-    detailsDiv.style.display = "none";
-    resultsDiv.style.display = "grid";
-    header.style.display = "block";
+function render() {
+    const grid = document.getElementById('results-view');
+    const sVal = document.getElementById('setSelect').value;
+    const rVal = document.getElementById('raritySelect').value;
 
-    const setValue = document.getElementById("setFilter").value;
-    const rarityValue = document.getElementById("rarityFilter").value;
-    resultsDiv.innerHTML = "";
+    let filtered = cards;
+    if(sVal) filtered = filtered.filter(c => c.set.name === sVal);
+    if(rVal) filtered = filtered.filter(c => (c.rarity || "Other") === rVal);
 
-    let filtered = allCards;
-    if (setValue) filtered = filtered.filter(c => c.set.name === setValue);
-    if (rarityValue) filtered = filtered.filter(c => (c.rarity || "Unknown") === rarityValue);
-
-    if (filtered.length === 0) {
-        resultsDiv.innerHTML = '<div class="loader-container">No cards found.</div>';
-        return;
-    }
-
-    filtered.forEach(card => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `
-            <div class="card-img-wrapper"><img src="${card.images.small}" loading="lazy"></div>
-            <div class="card-info">
-                <h3>${card.name}</h3>
-                <p>${card.set.name}</p>
-            </div>
-        `;
-        div.onclick = () => showDetails(card);
-        resultsDiv.appendChild(div);
-    });
-
-    // Forced Layout Sync
-    requestAnimationFrame(() => {
-        resultsDiv.style.display = 'none';
-        resultsDiv.offsetHeight; 
-        resultsDiv.style.display = 'grid';
-        window.scrollTo({ top: 0, behavior: 'auto' });
-    });
+    grid.innerHTML = filtered.map((c, i) => `
+        <div class="card" onclick="openCard(${i})">
+            <div class="card-img"><img src="${c.images.small}" loading="lazy"></div>
+            <div class="card-name">${c.name}</div>
+            <div class="card-meta">${c.set.name}</div>
+        </div>
+    `).join('') || '<p style="grid-column:1/-1; text-align:center; padding:40px;">No cards found.</p>';
 }
 
-function showDetails(card) {
-    const details = document.getElementById("details");
-    const results = document.getElementById("results");
-    const header = document.getElementById("appHeader");
+function openCard(index) {
+    const c = cards[index];
+    const view = document.getElementById('details-view');
+    const grid = document.getElementById('results-view');
+    const head = document.getElementById('mainHeader');
 
-    results.style.display = "none"; 
-    header.style.display = "none"; 
-    
-    const prices = card.tcgplayer?.prices || {};
-    let variantsHtml = "";
-    const MARKUP = 0.10;
+    grid.style.display = 'none';
+    head.style.display = 'none';
+    view.style.display = 'block';
 
-    for (const variant in prices) {
-        const market = prices[variant].market;
+    const prices = c.tcgplayer?.prices || {};
+    let variants = "";
+
+    for (const type in prices) {
+        const market = prices[type].market;
         if (!market) continue;
+        const gbp = (market * gbpRate * 1.10).toFixed(2);
+        
+        const msg = encodeURIComponent(`Hi Dave, I'm checking if you have this card:\n\n${c.name} (${c.set.name})\nNumber: ${c.number}\nVariant: ${type}\nGuide Price: £${gbp}\n\n${c.images.large}`);
 
-        let gbpNum = usdToGbp(market);
-        let finalPrice = "£" + (gbpNum * (1 + MARKUP)).toFixed(2);
-
-        const waMessage = encodeURIComponent(
-`Hi Dave, I am interested to know if you have this card.
-
-Card: ${card.name}
-Variant: ${variant}
-Card Number: ${card.number}
-Set: ${card.set.name}
-Image: ${card.images.large}
-
-I understand the guide price of ${finalPrice} is a guide and was wondering what's the best you can do on it if you have it.`
-        );
-
-        variantsHtml += `
-            <div class="variant-card">
-                <div style="font-size:10px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${variant} Market Guide</div>
-                <div class="price-value">${finalPrice}</div>
-                <a class="btn btn-whatsapp" href="https://wa.me/447483251962?text=${waMessage}">
-                    <i class="fa-brands fa-whatsapp"></i> Message on WhatsApp
+        variants += `
+            <div class="price-box">
+                <div class="price-label">${type} Market Guide</div>
+                <div class="price-tag">£${gbp}</div>
+                <a href="https://wa.me/447483251962?text=${msg}" class="btn btn-wa">
+                    <i class="fa-brands fa-whatsapp"></i> Message Dave
                 </a>
             </div>
         `;
     }
 
-    details.innerHTML = `
-        <img class="details-hero" src="${card.images.large}">
-        <h2 style="margin:0; font-size:20px;">${card.name}</h2>
-        <div style="margin-bottom:12px; color:var(--text-secondary); font-size:12px;">${card.set.name} • ${card.number}</div>
-        ${variantsHtml || '<p>No pricing available.</p>'}
-        <button class="btn btn-back" onclick="closeDetails()">
-            <i class="fa-solid fa-chevron-left"></i> Back to Results
-        </button>
+    view.innerHTML = `
+        <div class="details-card">
+            <img src="${c.images.large}" class="details-img">
+            <h1 style="font-size:22px; margin-bottom:4px;">${c.name}</h1>
+            <p style="color:var(--text-secondary); margin-bottom:20px;">${c.set.name} #${c.number}</p>
+            ${variants || '<p>No live pricing data available.</p>'}
+            <button class="btn btn-back" onclick="closeCard()">Back to Results</button>
+        </div>
     `;
-
-    details.style.display = "block";
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo(0,0);
 }
 
-function closeDetails() {
-    document.getElementById("details").style.display = "none";
-    document.getElementById("results").style.display = "grid";
-    document.getElementById("appHeader").style.display = "block";
-    window.scrollTo({ top: 0, behavior: "auto" });
+function closeCard() {
+    document.getElementById('details-view').style.display = 'none';
+    document.getElementById('results-view').style.display = 'grid';
+    document.getElementById('mainHeader').style.display = 'block';
 }
 
-function debounce(func, timeout = 300){
-  let timer;
-  return (...args) => {
-    clearTimeout(timer);
-    timer = setTimeout(() => { func.apply(this, args); }, timeout);
-  };
+function debounce(fn, t) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn(...args), t);
+    };
 }
 
-init();
+startup();
 </script>
 </body>
 </html>
