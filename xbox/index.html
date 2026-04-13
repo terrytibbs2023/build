@@ -17,84 +17,36 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-        html, body {
-            width: 100%; height: 100%; overflow-x: hidden;
-            background-color: var(--bg);
-            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        }
-
+        html, body { width: 100%; height: 100%; overflow-x: hidden; background-color: var(--bg); font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
-
-        /* HEADER */
-        .app-header {
-            position: sticky; top: 0; z-index: 1000;
-            background: var(--header-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(0,0,0,0.08); padding: env(safe-area-inset-top) 0 16px;
-        }
-
+        .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: env(safe-area-inset-top) 0 16px; }
         .header-top-row { display: flex; align-items: center; padding: 15px 20px 5px; }
         .nav-logo { height: 32px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1)); }
         .large-title { padding: 0 20px 15px; font-size: 28px; font-weight: 800; letter-spacing: -1px; }
-
         .search-area { padding: 0 16px; margin-bottom: 15px; }
-        .search-pill {
-            position: relative; background: rgba(118, 118, 128, 0.12); border-radius: 12px;
-            height: 46px; display: flex; align-items: center; padding: 0 16px;
-        }
+        .search-pill { position: relative; background: rgba(118, 118, 128, 0.12); border-radius: 12px; height: 46px; display: flex; align-items: center; padding: 0 16px; }
         .search-pill i { color: var(--text-secondary); font-size: 18px; margin-right: 12px; }
         .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 17px; color: var(--text-main); }
-
         .filter-scroller { display: flex; gap: 10px; overflow-x: auto; padding: 0 16px; scrollbar-width: none; }
         .filter-scroller::-webkit-scrollbar { display: none; }
-
-        .filter-wrapper {
-            position: relative; display: flex; align-items: center; background: #fff;
-            border-radius: 10px; padding: 8px 12px; border: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02); min-width: 100px;
-        }
+        .filter-wrapper { position: relative; display: flex; align-items: center; background: #fff; border-radius: 10px; padding: 8px 12px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 4px rgba(0,0,0,0.02); min-width: 100px; }
         .filter-wrapper label { font-size: 12px; font-weight: 700; color: var(--text-secondary); margin-right: 6px; text-transform: uppercase; }
         .filter-wrapper select { appearance: none; background: none; border: none; outline: none; font-size: 13px; font-weight: 600; width: 100%; padding-right: 15px; }
         .filter-wrapper::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 10px; position: absolute; right: 12px; color: var(--primary); pointer-events: none; }
-
-        /* UPDATED ADVERT CARD */
-        #ad-container { padding: 16px; animation: fadeIn 0.4s ease-out; }
-        .ad-card {
-            background: #ffffff;
-            border-radius: 20px; 
-            overflow: hidden; 
-            text-decoration: none; 
-            display: block;
-            border: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.04);
-        }
-        .ad-banner-bg { 
-            background: #f9f9fb; 
-            width: 100%; 
-            height: 160px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            padding: 20px;
-        }
+        #ad-container { padding: 16px; }
+        .ad-card { background: #ffffff; border-radius: 20px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 20px rgba(0,0,0,0.04); }
+        .ad-banner-bg { background: #f9f9fb; width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .ad-banner-img { max-width: 80%; max-height: 80%; object-fit: contain; }
         .ad-content { padding: 20px; border-top: 1px solid rgba(0,0,0,0.03); }
         .ad-tag { color: var(--primary); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: inline-block; }
         .ad-title { font-size: 20px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }
         .ad-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* GRID */
         .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 16px; width: 100%; }
-        .card { background: var(--card-bg); border-radius: 18px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.03); transition: transform 0.2s; }
-        .card:active { transform: scale(0.96); }
+        .card { background: var(--card-bg); border-radius: 18px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.03); }
         .card-img { width: 100%; aspect-ratio: 1 / 1.38; background: #F9F9FB; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .card-img img { max-width: 90%; max-height: 90%; object-fit: contain; }
         .card-name { font-size: 14px; font-weight: 700; line-height: 1.25; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .card-meta { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
-
-        /* DETAILS */
         #details-view { display: none; padding: 16px; }
         .details-card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
         .details-img { width: 100%; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
@@ -111,13 +63,13 @@
 <div class="app-container">
     <header class="app-header" id="mainHeader">
         <div class="header-top-row">
-            <img id="branding-logo" src="https://files.websitebuilder.prositehosting.co.uk/8b/e9/8be9aecf-cb17-445e-b11b-3ec60a27c26d.png" class="nav-logo" alt="Logo">
+            <img id="ui-logo-top" src="" class="nav-logo" alt="Logo">
         </div>
-        <div class="large-title">Market Scan</div>
+        <div id="ui-app-title" class="large-title">Ellis TCG Card Search</div>
         <div class="search-area">
             <div class="search-pill">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="Loading market rates..." disabled>
+                <input type="text" id="searchInput" placeholder="Loading..." disabled>
             </div>
         </div>
         <div class="filter-scroller">
@@ -127,14 +79,14 @@
     </header>
 
     <div id="ad-container">
-        <a href="https://www.yourstorelink.com" class="ad-card">
+        <a id="ui-ad-link" href="" class="ad-card">
             <div class="ad-banner-bg">
-                <img src="https://files.websitebuilder.prositehosting.co.uk/8b/e9/8be9aecf-cb17-445e-b11b-3ec60a27c26d.png" class="ad-banner-img" alt="Branding">
+                <img id="ui-logo-ad" src="" class="ad-banner-img" alt="Branding">
             </div>
             <div class="ad-content">
                 <span class="ad-tag">Official Store</span>
-                <div class="ad-title">Browse Our Full Collection</div>
-                <div class="ad-desc">Can't find what you're looking for? Visit our main store for exclusive deals on secret rares and bundles.</div>
+                <div id="ui-ad-title" class="ad-title">Browse Our Full Collection</div>
+                <div id="ui-ad-desc" class="ad-desc">Can't find what you're looking for? Visit our main store for exclusive deals on secret rares and bundles.</div>
             </div>
         </a>
     </div>
@@ -144,11 +96,49 @@
 </div>
 
 <script>
+/** * ================================================
+ * EDIT THESE SETTINGS TO CUSTOMIZE YOUR APP
+ * ================================================
+ */
+const APP_CONFIG = {
+    // Branding
+    logoUrl: "https://files.websitebuilder.prositehosting.co.uk/8b/e9/8be9aecf-cb17-445e-b11b-3ec60a27c26d.png",
+    appTitle: "Ellis TCG Card Search",
+    
+    // Store Advert Settings
+    storeUrl: "https://essexconsolerepair.co.uk",
+    adTitle: "Browse Our Full Collection",
+    adDescription: "Can't find what you're looking for? Visit our main store for exclusive deals on secret rares and bundles.",
+    
+    // WhatsApp Settings
+    phoneNumber: "447483251962", // International format (no +)
+    buttonText: "I Want To Buy This Card",
+    
+    // The message format (Edit this carefully)
+    getMessage: (card, type, price) => {
+        return `Hi Dave, I'm checking if you have this card,i understand the price is a guide price and was hoping to get the price you can sell it for.:\n\n${card.name} (${card.set.name})\nNumber: ${card.number}\nVariant: ${type}\nGuide Price: £${price}\n\n${card.images.large}`;
+    }
+};
+
+/** * ================================================
+ * APP LOGIC - (Don't edit below unless you need to)
+ * ================================================
+ */
 const API = "https://api.pokemontcg.io/v2/cards";
 let gbpRate = 0.78;
 let cards = [];
 
+function applyBranding() {
+    document.getElementById('ui-logo-top').src = APP_CONFIG.logoUrl;
+    document.getElementById('ui-logo-ad').src = APP_CONFIG.logoUrl;
+    document.getElementById('ui-app-title').innerText = APP_CONFIG.appTitle;
+    document.getElementById('ui-ad-link').href = APP_CONFIG.storeUrl;
+    document.getElementById('ui-ad-title').innerText = APP_CONFIG.adTitle;
+    document.getElementById('ui-ad-desc').innerText = APP_CONFIG.adDescription;
+}
+
 async function startup() {
+    applyBranding();
     try {
         const res = await fetch("https://open.er-api.com/v6/latest/USD");
         const data = await res.json();
@@ -163,16 +153,13 @@ document.getElementById('searchInput').addEventListener('input', debounce(async 
     const val = e.target.value.trim();
     const adContainer = document.getElementById('ad-container');
     const grid = document.getElementById('results-view');
-
     if (val.length < 3) {
         adContainer.style.display = 'block';
         grid.innerHTML = "";
         return;
     }
-
     adContainer.style.display = 'none';
-    grid.innerHTML = `<div class="loader"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><p style="margin-top:15px; font-weight:500;">Searching Market...</p></div>`;
-
+    grid.innerHTML = `<div class="loader"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><p style="margin-top:15px; font-weight:500;">Searching For Cards...</p></div>`;
     const q = val.includes('/') ? `number:${val.split('/')[0]} AND set.printedTotal:${val.split('/')[1]}` : `name:"${val}*"`;
     try {
         const res = await fetch(`${API}?q=${encodeURIComponent(q)}`);
@@ -215,11 +202,7 @@ function openCard(index) {
     const grid = document.getElementById('results-view');
     const head = document.getElementById('mainHeader');
     const ad = document.getElementById('ad-container');
-    
-    grid.style.display = 'none';
-    head.style.display = 'none';
-    ad.style.display = 'none';
-    view.style.display = 'block';
+    grid.style.display = 'none'; head.style.display = 'none'; ad.style.display = 'none'; view.style.display = 'block';
     
     const prices = c.tcgplayer?.prices || {};
     let variants = "";
@@ -227,11 +210,13 @@ function openCard(index) {
         const market = prices[type].market;
         if (!market) continue;
         const gbp = (market * gbpRate * 1.10).toFixed(2);
-        const msg = encodeURIComponent(`Hi Dave, I'm checking if you have this card:\n\n${c.name} (${c.set.name})\nNumber: ${c.number}\nVariant: ${type}\nGuide Price: £${gbp}\n\n${c.images.large}`);
+        const text = APP_CONFIG.getMessage(c, type, gbp);
+        const waLink = `https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(text)}`;
+        
         variants += `<div class="price-box">
             <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} Market Guide</div>
             <div class="price-tag">£${gbp}</div>
-            <a href="https://wa.me/447483251962?text=${msg}" class="btn btn-wa"><i class="fa-brands fa-whatsapp"></i> Message Dave</a>
+            <a href="${waLink}" class="btn btn-wa"><i class="fa-brands fa-whatsapp"></i> ${APP_CONFIG.buttonText}</a>
         </div>`;
     }
     view.innerHTML = `<div class="details-card">
