@@ -122,12 +122,13 @@
             cursor: pointer;
         }
 
-        /* COMPACT RESULTS GRID */
+        /* STABILIZED RESULTS GRID */
         #results {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             padding: 12px;
+            align-items: stretch; /* Ensures cards in the same row have equal height */
         }
 
         .card {
@@ -139,32 +140,52 @@
             cursor: pointer;
             display: flex;
             flex-direction: column;
+            height: 100%; /* Fill the grid cell */
+            box-sizing: border-box;
         }
 
         .card:active { transform: scale(0.96); }
 
-        .card img {
+        /* Fixed Image Container to prevent misalignment */
+        .card-img-wrapper {
             width: 100%;
-            aspect-ratio: 1 / 1.4; /* Slightly tighter aspect ratio */
-            object-fit: contain;
+            aspect-ratio: 1 / 1.4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: #fdfdfd;
             border-radius: 8px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .card-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
         }
 
         .card-info h3 {
             font-size: 13px;
             line-height: 1.2;
             margin: 0;
-            white-space: nowrap;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Allow 2 lines then truncate */
+            -webkit-box-orient: vertical;
             overflow: hidden;
-            text-overflow: ellipsis;
         }
 
         .card-info p {
             font-size: 11px;
             color: var(--text-secondary);
-            margin: 2px 0 0;
+            margin: 4px 0 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -348,7 +369,9 @@ function renderResults() {
         const div = document.createElement("div");
         div.className = "card";
         div.innerHTML = `
-            <img src="${card.images.small}" loading="lazy">
+            <div class="card-img-wrapper">
+                <img src="${card.images.small}" loading="lazy">
+            </div>
             <div class="card-info">
                 <h3>${card.name}</h3>
                 <p>${card.set.name}</p>
@@ -387,7 +410,7 @@ Card Number: ${card.number}
 Set: ${card.set.name}
 Image: ${card.images.large}
 
-I understand the price of ${finalPrice} is a guide and was wondering what's the best you can do on it if you have it.`
+I understand the guide price of ${finalPrice} is a guide and was wondering what's the best you can do on it if you have it.`
         );
 
         variantsHtml += `
