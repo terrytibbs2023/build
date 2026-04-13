@@ -13,9 +13,10 @@
             --text-main: #000000;
             --text-secondary: #8E8E93;
             --whatsapp: #25D366;
-            --header-bg: rgba(255, 255, 255, 0.85);
+            --header-bg: rgba(255, 255, 255, 0.8);
         }
 
+        /* THE "OFF-SCREEN" KILLER RESET */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -41,140 +42,114 @@
             position: relative;
         }
 
-        /* PREMIUM APP HEADER */
+        /* MODERN APP HEADER */
         .app-header {
             position: sticky;
             top: 0;
             z-index: 1000;
             background: var(--header-bg);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(0,0,0,0.08);
-            padding: env(safe-area-inset-top) 0 12px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 0.5px solid rgba(0,0,0,0.1);
+            padding: env(safe-area-inset-top) 16px 12px;
         }
 
-        .header-top-row {
+        .nav-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 20px 5px;
+            height: 44px;
+            margin-bottom: 8px;
         }
 
-        .nav-logo { 
-            height: 32px; 
-            width: auto;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
-        }
-
-        /* Large App Title Style */
-        .large-title {
-            padding: 0 20px 15px;
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: -1px;
-            color: var(--text-main);
-        }
-
-        .search-area {
-            padding: 0 16px;
-            margin-bottom: 15px;
-        }
+        .nav-logo { height: 28px; width: auto; }
+        .nav-title { font-size: 17px; font-weight: 600; letter-spacing: -0.4px; }
 
         .search-pill {
             position: relative;
-            background: rgba(118, 118, 128, 0.15);
-            border-radius: 12px;
-            height: 46px; /* Taller for better "thumb" targets */
+            background: rgba(118, 118, 128, 0.12);
+            border-radius: 10px;
+            height: 36px;
             display: flex;
             align-items: center;
-            padding: 0 16px;
-            transition: background 0.2s;
+            padding: 0 12px;
+            margin-bottom: 12px;
         }
 
-        .search-pill:focus-within {
-            background: rgba(118, 118, 128, 0.2);
-        }
-
-        .search-pill i { 
-            color: var(--text-secondary); 
-            font-size: 18px; 
-            margin-right: 12px; 
-        }
+        .search-pill i { color: var(--text-secondary); font-size: 14px; margin-right: 8px; }
 
         .search-pill input {
             background: none;
             border: none;
             outline: none;
             width: 100%;
-            font-size: 17px; /* Standard iOS input size to prevent zoom */
+            font-size: 16px;
             color: var(--text-main);
-            font-weight: 400;
         }
 
         .filter-scroller {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             overflow-x: auto;
-            padding: 0 16px 5px;
+            padding-bottom: 4px;
             scrollbar-width: none;
         }
         .filter-scroller::-webkit-scrollbar { display: none; }
 
         .filter-pill {
             background: #fff;
-            border: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            border-radius: 10px;
-            padding: 8px 14px;
-            font-size: 13px;
-            font-weight: 600;
+            border: 0.5px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 12px;
+            font-weight: 500;
             white-space: nowrap;
             display: flex;
             align-items: center;
-            gap: 6px;
-            color: var(--text-main);
+            gap: 4px;
         }
 
-        /* GRID REMAINS STABLE */
+        /* GRID FIX: Forces absolute confinement to screen width */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
+            gap: 12px;
             padding: 16px;
             width: 100%;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 18px;
-            padding: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 14px;
+            padding: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
             width: 100%;
-            border: 1px solid rgba(0,0,0,0.03);
+            transition: transform 0.2s;
         }
+
+        .card:active { transform: scale(0.96); }
 
         .card-img {
             width: 100%;
             aspect-ratio: 1 / 1.38;
             background: #F9F9FB;
-            border-radius: 10px;
-            margin-bottom: 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
 
-        .card-img img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        .card-img img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
         .card-name {
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 1.25;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.2;
             margin-bottom: 4px;
-            color: var(--text-main);
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -182,12 +157,25 @@
         }
 
         .card-meta {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-secondary);
-            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        /* DETAILS OVERLAY */
+        /* LOADER */
+        .loader {
+            grid-column: 1/-1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 0;
+            color: var(--text-secondary);
+        }
+
+        /* DETAILS */
         #details-view {
             display: none;
             padding: 16px;
@@ -197,83 +185,67 @@
 
         .details-card {
             background: white;
-            border-radius: 24px;
-            padding: 24px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
         .details-img {
             width: 100%;
-            border-radius: 15px;
+            border-radius: 12px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         .price-box {
             background: var(--bg);
-            border-radius: 18px;
-            padding: 20px;
-            margin-top: 15px;
-            border: 1px solid rgba(0,0,0,0.03);
+            border-radius: 15px;
+            padding: 16px;
+            margin-top: 12px;
         }
 
-        .price-label { font-size: 12px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px; }
-        .price-tag { font-size: 32px; font-weight: 800; color: var(--primary); margin: 6px 0 15px; }
+        .price-label { font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; }
+        .price-tag { font-size: 28px; font-weight: 800; color: var(--primary); margin: 4px 0 12px; }
 
         .btn {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             width: 100%;
-            height: 54px;
-            border-radius: 14px;
-            font-weight: 700;
-            font-size: 16px;
+            height: 50px;
+            border-radius: 12px;
+            font-weight: 600;
             text-decoration: none;
             border: none;
             cursor: pointer;
-            transition: opacity 0.2s;
         }
 
-        .btn-wa { background: var(--whatsapp); color: white; }
-        .btn-back { background: rgba(0,0,0,0.06); color: var(--text-main); margin-top: 25px; }
+        .btn-wa { background: var(--whatsapp); color: white; margin-top: 10px; }
+        .btn-back { background: rgba(0,0,0,0.05); color: var(--text-main); margin-top: 20px; }
 
-        .loader {
-            grid-column: 1/-1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 80px 0;
-            color: var(--text-secondary);
-        }
     </style>
 </head>
 <body>
 
 <div class="app-container">
     <header class="app-header" id="mainHeader">
-        <div class="header-top-row">
+        <div class="nav-bar">
             <img src="https://files.websitebuilder.prositehosting.co.uk/8b/e9/8be9aecf-cb17-445e-b11b-3ec60a27c26d.png" class="nav-logo" alt="Logo">
-            <i class="fa-regular fa-circle-user" style="font-size: 24px; color: var(--primary);"></i>
+            <span class="nav-title">Pokemon Market</span>
+            <div style="width: 28px"></div>
         </div>
 
-        <div class="large-title">Market Scan</div>
-
-        <div class="search-area">
-            <div class="search-pill">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="Search cards..." disabled>
-            </div>
+        <div class="search-pill">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="searchInput" placeholder="Search cards..." disabled>
         </div>
 
         <div class="filter-scroller">
             <div class="filter-pill">
-                Set <select id="setSelect" style="border:none; outline:none; font-weight:700; background:none; margin-left:4px;"><option value="">All</option></select>
+                Set: <select id="setSelect" style="border:none; outline:none; font-weight:700;"><option value="">All</option></select>
             </div>
             <div class="filter-pill">
-                Rarity <select id="raritySelect" style="border:none; outline:none; font-weight:700; background:none; margin-left:4px;"><option value="">All</option></select>
+                Rarity: <select id="raritySelect" style="border:none; outline:none; font-weight:700;"><option value="">All</option></select>
             </div>
         </div>
     </header>
@@ -297,7 +269,7 @@ async function startup() {
     
     const input = document.getElementById('searchInput');
     input.disabled = false;
-    input.placeholder = "Card name or number...";
+    input.placeholder = "Search by name (e.g. Charizard)";
 }
 
 document.getElementById('searchInput').addEventListener('input', debounce(async (e) => {
@@ -305,7 +277,7 @@ document.getElementById('searchInput').addEventListener('input', debounce(async 
     if (val.length < 3) return;
 
     const grid = document.getElementById('results-view');
-    grid.innerHTML = `<div class="loader"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><p style="margin-top:15px; font-weight:500;">Searching Market...</p></div>`;
+    grid.innerHTML = `<div class="loader"><i class="fa-solid fa-circle-notch fa-spin fa-2x"></i><p style="margin-top:10px">Searching Market...</p></div>`;
 
     const q = val.includes('/') 
         ? `number:${val.split('/')[0]} AND set.printedTotal:${val.split('/')[1]}`
@@ -323,6 +295,7 @@ document.getElementById('searchInput').addEventListener('input', debounce(async 
 function updateFilters() {
     const sets = [...new Set(cards.map(c => c.set.name))].sort();
     const rarities = [...new Set(cards.map(c => c.rarity || "Other"))].sort();
+    
     document.getElementById('setSelect').innerHTML = '<option value="">All</option>' + sets.map(s => `<option value="${s}">${s}</option>`).join('');
     document.getElementById('raritySelect').innerHTML = '<option value="">All</option>' + rarities.map(r => `<option value="${r}">${r}</option>`).join('');
 }
@@ -345,7 +318,7 @@ function render() {
             <div class="card-name">${c.name}</div>
             <div class="card-meta">${c.set.name}</div>
         </div>
-    `).join('') || '<p style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-secondary);">No results match your search.</p>';
+    `).join('') || '<p style="grid-column:1/-1; text-align:center; padding:40px;">No cards found.</p>';
 }
 
 function openCard(index) {
@@ -382,9 +355,9 @@ function openCard(index) {
     view.innerHTML = `
         <div class="details-card">
             <img src="${c.images.large}" class="details-img">
-            <h1 style="font-size:26px; font-weight:800; margin-bottom:6px; letter-spacing:-0.5px;">${c.name}</h1>
-            <p style="color:var(--text-secondary); font-size:14px; margin-bottom:25px; font-weight:500;">${c.set.name} • #${c.number}</p>
-            ${variants || '<p style="padding:20px; text-align:center; color:var(--text-secondary);">No live pricing available.</p>'}
+            <h1 style="font-size:22px; margin-bottom:4px;">${c.name}</h1>
+            <p style="color:var(--text-secondary); margin-bottom:20px;">${c.set.name} #${c.number}</p>
+            ${variants || '<p>No live pricing data available.</p>'}
             <button class="btn btn-back" onclick="closeCard()">Back to Results</button>
         </div>
     `;
