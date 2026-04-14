@@ -251,7 +251,7 @@ function showCardDetails(c) {
         const btnAttr = isAdded ? "disabled" : "";
 
         variants += `<div class="price-box">
-            <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} Guide Price</div>
+            <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} - Guide Price</div>
             <div class="price-tag">£${gbp}</div>
             
             <button id="btn-${c.id}-${type}" ${btnAttr} onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${gbp}")' class="${btnClass}">
