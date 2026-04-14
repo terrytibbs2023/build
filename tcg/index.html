@@ -70,6 +70,16 @@
         </button>
     </div>
 
+    <div id="ad-container" style="padding:16px;">
+        <a href="https://essexconsolerepair.co.uk" target="_blank" style="text-decoration:none; color:inherit;">
+            <div style="background: white; border-radius: 20px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05); text-align:center; padding:20px;">
+                <img src="https://imagecdn.websitebuilder.prositehosting.co.uk/22/3e/223ef076-9a2d-4062-98c2-25f95c7952d0.png" style="max-width: 150px; margin-bottom:10px;">
+                <div style="font-weight: 800; color: var(--text-main);">Essex Console Repair</div>
+                <div style="font-size: 12px; color: var(--text-secondary);">Official Sponsor - Click to Visit</div>
+            </div>
+        </a>
+    </div>
+
     <div id="results-view" class="card-grid"></div>
     <div id="details-view"></div>
 </div>
@@ -120,7 +130,12 @@ async function startup() {
 
 document.getElementById('searchInput').addEventListener('input', debounce(async (e) => {
     const val = e.target.value.trim();
-    if (val.length < 3) { document.getElementById('results-view').innerHTML = ""; return; }
+    if (val.length < 3) { 
+        document.getElementById('results-view').innerHTML = ""; 
+        document.getElementById('ad-container').style.display = 'block';
+        return; 
+    }
+    document.getElementById('ad-container').style.display = 'none';
     document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;"><i class="fa-solid fa-spinner fa-spin"></i> Searching...</p>`;
     const q = val.includes('/') ? `number:${val.split('/')[0]} AND set.printedTotal:${val.split('/')[1]}` : `name:"${val}*"`;
     const res = await fetch(`${API}?q=${encodeURIComponent(q)}`);
@@ -146,6 +161,7 @@ function openCard(idx, fromList) {
     document.getElementById('mainHeader').style.display = 'none';
     document.getElementById('results-view').style.display = 'none';
     document.getElementById('list-modal').style.display = 'none';
+    document.getElementById('ad-container').style.display = 'none';
     document.getElementById('detailsHeader').style.display = 'flex';
     document.getElementById('backText').innerText = fromList ? "Back to Inquiry List" : "Back to Search";
     
@@ -235,9 +251,9 @@ function closeCardUI() {
     document.getElementById('detailsHeader').style.display = 'none';
     document.getElementById('results-view').style.display = 'grid';
     document.getElementById('mainHeader').style.display = 'block';
+    if(document.getElementById('searchInput').value.length < 3) document.getElementById('ad-container').style.display = 'block';
 }
 
-// RESTORED WHATSAPP FORMAT WITH IMAGE LINKS
 function sendFinalWhatsApp() {
     let msg = "Hi Dave, Do you have these cards? I UNDERSTAND THE PRICES ARE GUIDE ONLY so can you give me the total you can sell for please?:\n\n";
     shoppingList.forEach((item, i) => {
