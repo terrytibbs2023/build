@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Ellis TCG Card Search</title>
     
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://scontent-lhr6-2.xx.fbcdn.net/v/t39.30808-6/586722015_122100567723131819_786900678622678002_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=2a1932&_nc_ohc=WDWwua9SFZIQ7kNvwF5bdl7&_nc_oc=AdrgqHXe0nTdxZuJqVy86pAsbe-mEkL3WEmcqBExPxPBNcf7dEGr1m37DXiqJFBBd8A&_nc_zt=23&_nc_ht=scontent-lhr6-2.xx&_nc_gid=APuFORar1eguSeHTQaIvCw&_nc_ss=7a389&oh=00_Af0G-vSpnAli0Ro0h5J8BCvIpa-u4LayR71DvERIZLcBeg&oe=69E40DB7">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -36,10 +41,9 @@
         .search-pill { background: rgba(118, 118, 128, 0.12); border-radius: 12px; height: 46px; display: flex; align-items: center; padding: 0 16px; margin-bottom: 12px; }
         .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 17px; margin-left: 10px; }
 
-        /* LOCKED FILTERS - Fixed size and no jumping */
         .filter-row { display: flex; gap: 10px; padding: 0 16px 10px; width: 100%; justify-content: space-between; }
         .filter-select { 
-            width: 48%; /* Fixed width so they never change size */
+            width: 48%; 
             background: white; 
             border: 1px solid rgba(0,0,0,0.1); 
             padding: 10px; 
@@ -52,7 +56,6 @@
             white-space: nowrap;
         }
 
-        /* SPONSOR STYLES */
         #ad-container { padding: 16px; }
         .ad-card { background: #ffffff; border-radius: 20px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 20px rgba(0,0,0,0.04); margin-bottom: 16px; }
         .ad-banner-bg { background: #f9f9fb; width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px; }
@@ -103,12 +106,8 @@
             </div>
         </div>
         <div class="filter-row">
-            <select id="setFilter" class="filter-select">
-                <option value="">All Sets</option>
-            </select>
-            <select id="rarityFilter" class="filter-select">
-                <option value="">All Rarities</option>
-            </select>
+            <select id="setFilter" class="filter-select"><option value="">All Sets</option></select>
+            <select id="rarityFilter" class="filter-select"><option value="">All Rarities</option></select>
         </div>
     </header>
 
@@ -129,7 +128,6 @@
                 <div class="ad-desc">Buy Booster Boxes, Elite Trainer Boxes, and TCG accessories.</div>
             </div>
         </a>
-
         <a href="https://essexconsolerepair.co.uk" target="_blank" class="ad-card">
             <div class="ad-banner-bg">
                 <img src="https://imagecdn.websitebuilder.prositehosting.co.uk/22/3e/223ef076-9a2d-4062-98c2-25f95c7952d0.png" class="ad-banner-img">
@@ -161,18 +159,20 @@
 </div>
 
 <script>
-const APP_CONFIG = { 
-    phoneNumber: "447483251962",
-    buttonText: "Add to Inquiry List",
-    addedText: "Added to List"
-};
+// REGISTER YOUR SERVICE WORKER FILE
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js');
+    });
+}
+
+const APP_CONFIG = { phoneNumber: "447483251962", buttonText: "Add to Inquiry List", addedText: "Added to List" };
 const API = "https://api.pokemontcg.io/v2/cards";
 let gbpRate = 0.78;
 let cards = [];
 let shoppingList = JSON.parse(localStorage.getItem('tcgInquiryList')) || [];
 let deferredPrompt;
 
-// PWA Install Logic
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
@@ -213,8 +213,7 @@ async function startup() {
         const setSelect = document.getElementById('setFilter');
         setsData.data.forEach(set => {
             const opt = document.createElement('option');
-            opt.value = set.id;
-            opt.textContent = set.name;
+            opt.value = set.id; opt.textContent = set.name;
             setSelect.appendChild(opt);
         });
 
@@ -222,8 +221,7 @@ async function startup() {
         const raritySelect = document.getElementById('rarityFilter');
         rarities.forEach(r => {
             const opt = document.createElement('option');
-            opt.value = r;
-            opt.textContent = r;
+            opt.value = r; opt.textContent = r;
             raritySelect.appendChild(opt);
         });
     } catch(e) {}
