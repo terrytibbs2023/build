@@ -24,8 +24,6 @@
             --header-bg: rgba(255, 255, 255, 0.85);
             --danger: #FF3B30;
             --disabled: #C7C7CC;
-            --warning-bg: #FFF9E6;
-            --warning-border: #FFCC00;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -42,12 +40,6 @@
         .search-pill { position: relative; background: rgba(118, 118, 128, 0.12); border-radius: 12px; height: 46px; display: flex; align-items: center; padding: 0 16px; }
         .search-pill i { color: var(--text-secondary); font-size: 18px; margin-right: 12px; }
         .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 17px; color: var(--text-main); }
-        .filter-scroller { display: flex; gap: 10px; overflow-x: auto; padding: 0 16px; scrollbar-width: none; }
-        .filter-scroller::-webkit-scrollbar { display: none; }
-        .filter-wrapper { position: relative; display: flex; align-items: center; background: #fff; border-radius: 10px; padding: 8px 12px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 4px rgba(0,0,0,0.02); min-width: 100px; }
-        .filter-wrapper label { font-size: 12px; font-weight: 700; color: var(--text-secondary); margin-right: 6px; text-transform: uppercase; }
-        .filter-wrapper select { appearance: none; background: none; border: none; outline: none; font-size: 13px; font-weight: 600; width: 100%; padding-right: 15px; }
-        .filter-wrapper::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 10px; position: absolute; right: 12px; color: var(--primary); pointer-events: none; }
 
         /* GRID */
         .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 16px; width: 100%; }
@@ -55,7 +47,6 @@
         .card-img { width: 100%; aspect-ratio: 1 / 1.38; background: #F9F9FB; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .card-img img { max-width: 90%; max-height: 90%; object-fit: contain; }
         .card-name { font-size: 14px; font-weight: 700; line-height: 1.25; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .card-meta { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
 
         /* DETAILS VIEW */
         #details-view { display: none; padding: 16px; }
@@ -65,7 +56,6 @@
         .price-tag { font-size: 36px; font-weight: 800; color: var(--primary); margin: 4px 0 15px; }
         .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; border-radius: 14px; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: 0.2s; }
         .btn-wa { height: 54px; font-size: 16px; background: var(--whatsapp); color: white; }
-        .btn-ebay-small { height: 38px; font-size: 13px; background: none; color: var(--ebay); border: 1.5px solid var(--ebay); margin-top: 12px; }
         .btn-added { height: 54px; font-size: 16px; background: var(--disabled) !important; color: white !important; cursor: default; }
         .btn-back { height: 50px; background: rgba(0,0,0,0.06); color: var(--text-main); margin-top: 25px; font-size: 15px; }
 
@@ -92,26 +82,21 @@
         <div class="search-area">
             <div class="search-pill">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="Loading..." disabled>
+                <input type="text" id="searchInput" placeholder="Loading...">
             </div>
-        </div>
-        <div class="filter-scroller">
-            <div class="filter-wrapper"><label>Set</label><select id="setSelect"><option value="">All</option></select></div>
-            <div class="filter-wrapper"><label>Rarity</label><select id="raritySelect"><option value="">All</option></select></div>
         </div>
     </header>
 
-    <div id="ad-container">
-        <a id="ui-ad-link" href="" class="ad-card" style="text-decoration: none; display: block; background: white; border-radius: 20px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05);">
+    <div id="ad-container" style="padding:16px;">
+        <div style="background: white; border-radius: 20px; overflow: hidden; border: 1px solid rgba(0,0,0,0.05);">
             <div style="background: #f9f9fb; height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px;">
                 <img id="ui-logo-ad" src="" style="max-width: 80%; max-height: 80%; object-fit: contain;">
             </div>
             <div style="padding: 20px;">
-                <span style="color: var(--primary); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">Official Sponsor</span>
+                <span style="color: var(--primary); font-size: 11px; font-weight: 800; text-transform: uppercase;">Official Sponsor</span>
                 <div id="ui-ad-title" style="font-size: 20px; font-weight: 800; color: var(--text-main); margin: 6px 0;">Essex Console Repair</div>
-                <div id="ui-ad-desc" style="font-size: 14px; color: var(--text-secondary); line-height: 1.4;">Ps5/Xbox/Switch/Hdmi Ports</div>
             </div>
-        </a>
+        </div>
     </div>
 
     <div id="results-view" class="card-grid"></div>
@@ -146,6 +131,7 @@ let gbpRate = 0.78;
 let cards = [];
 let shoppingList = JSON.parse(localStorage.getItem('tcgInquiryList')) || [];
 let deferredPrompt;
+let currentlyFromList = false;
 
 // PWA Install
 window.addEventListener('beforeinstallprompt', (e) => {
@@ -164,41 +150,28 @@ function triggerInstall() {
   }
 }
 
-// HISTORY NAVIGATION FIX
+// NAVIGATION FIX: Handles back swipe
 window.onpopstate = function(event) {
-    const isDetailsVisible = document.getElementById('details-view').style.display === 'block';
-    const isListVisible = document.getElementById('list-modal').style.display === 'block';
-
-    if (isDetailsVisible) {
-        // If we were looking at a card from the list, stay in the list
+    if (document.getElementById('details-view').style.display === 'block') {
+        closeCardUI();
         if (event.state && event.state.fromList) {
-            closeCardUI();
             document.getElementById('list-modal').style.display = 'block';
-        } else {
-            closeCardUI();
         }
-    } else if (isListVisible) {
+    } else if (document.getElementById('list-modal').style.display === 'block') {
         hideListUI();
     }
 };
 
 async function startup() {
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
-    applyBranding();
+    document.getElementById('ui-logo-ad').src = APP_CONFIG.logoUrl;
+    document.getElementById('ui-app-title').innerText = APP_CONFIG.appTitle;
     updateCartUI();
     try {
         const res = await fetch("https://open.er-api.com/v6/latest/USD");
         const data = await res.json();
         gbpRate = data.rates.GBP || 0.78;
     } catch(e) {}
-    const input = document.getElementById('searchInput');
-    input.disabled = false;
-    input.placeholder = "Card name or number...";
-}
-
-function applyBranding() {
-    document.getElementById('ui-logo-ad').src = APP_CONFIG.logoUrl;
-    document.getElementById('ui-app-title').innerText = APP_CONFIG.appTitle;
 }
 
 document.getElementById('searchInput').addEventListener('input', debounce(async (e) => {
@@ -209,34 +182,23 @@ document.getElementById('searchInput').addEventListener('input', debounce(async 
         return;
     }
     document.getElementById('ad-container').style.display = 'none';
-    document.getElementById('results-view').innerHTML = `<div class="loader"><i class="fa-solid fa-spinner fa-spin fa-2x"></i></div>`;
+    document.getElementById('results-view').innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:40px;"><i class="fa-solid fa-spinner fa-spin fa-2x"></i></div>`;
     const q = val.includes('/') ? `number:${val.split('/')[0]} AND set.printedTotal:${val.split('/')[1]}` : `name:"${val}*"`;
     try {
         const res = await fetch(`${API}?q=${encodeURIComponent(q)}`);
         const data = await res.json();
         cards = data.data || [];
-        updateFilters();
-        render();
+        renderGrid();
     } catch(err) {}
 }, 500));
 
-function updateFilters() {
-    const sets = [...new Set(cards.map(c => c.set.name))].sort();
-    const rarities = [...new Set(cards.map(c => c.rarity || "Other"))].sort();
-    document.getElementById('setSelect').innerHTML = '<option value="">All</option>' + sets.map(s => `<option value="${s}">${s}</option>`).join('');
-    document.getElementById('raritySelect').innerHTML = '<option value="">All</option>' + rarities.map(r => `<option value="${r}">${r}</option>`).join('');
-}
-
-document.getElementById('setSelect').onchange = render;
-document.getElementById('raritySelect').onchange = render;
-
-function render() {
+function renderGrid() {
     const grid = document.getElementById('results-view');
     grid.innerHTML = cards.map((c, i) => `
         <div class="card" onclick="openCardFromObject(${i})">
             <div class="card-img"><img src="${c.images.small}" loading="lazy"></div>
             <div class="card-name">${c.name}</div>
-            <div class="card-meta">${c.set.name}</div>
+            <div style="font-size:12px; color:var(--text-secondary);">${c.set.name}</div>
         </div>
     `).join('');
 }
@@ -250,50 +212,54 @@ function reopenCardFromList(index) {
 }
 
 function showCardDetails(c, fromList) {
-    // Add history step. 'fromList' state helps back button know where to go.
+    currentlyFromList = fromList;
     history.pushState({view: 'card', fromList: fromList}, '');
 
     document.getElementById('results-view').style.display = 'none';
     document.getElementById('mainHeader').style.display = 'none';
     document.getElementById('ad-container').style.display = 'none';
     document.getElementById('list-modal').style.display = 'none';
+    
     const view = document.getElementById('details-view');
     view.style.display = 'block';
     
     const displayNum = `${c.number}/${c.set.printedTotal}`;
-    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_nkw=${encodeURIComponent(c.name + ' ' + displayNum + ' sold')}&LH_Sold=1&LH_Complete=1`;
-    
-    let variants = "";
     const prices = c.tcgplayer?.prices || {};
+    let variants = "";
+    
     if (Object.keys(prices).length > 0) {
         for (const type in prices) {
             const market = prices[type].market;
-            if (market) variants += generatePriceBox(c, type, (market * gbpRate * 1.10).toFixed(2), ebayLink);
+            if (market) {
+                const gbp = (market * gbpRate * 1.10).toFixed(2);
+                variants += generatePriceBox(c, type, gbp);
+            }
         }
     } else {
-        variants = generatePriceBox(c, "Standard", "TBC", ebayLink);
+        variants = generatePriceBox(c, "Standard", "TBC");
     }
 
     view.innerHTML = `<div class="details-card">
         <img src="${c.images.large}" class="details-img">
-        <h1 style="text-align:center;">${c.name}</h1>
+        <h1 style="text-align:center; font-size:24px;">${c.name}</h1>
         <p style="text-align:center; color:var(--text-secondary); margin-bottom:20px;">${c.set.name} • #${displayNum}</p>
         ${variants}
-        <button class="btn btn-back" onclick="handleBack()">Back</button>
+        <button class="btn btn-back" onclick="handleBack()">
+            ${fromList ? '<i class="fa-solid fa-list"></i> Back to Inquiry List' : '<i class="fa-solid fa-arrow-left"></i> Back to Search'}
+        </button>
     </div>`;
     window.scrollTo(0,0);
 }
 
-function generatePriceBox(c, type, price, ebay) {
+function generatePriceBox(c, type, price) {
     const isAdded = shoppingList.some(item => item.id === c.id && item.type === type);
     return `<div class="price-box">
-        <div style="font-size:12px; color:var(--text-secondary);">${type} Guide</div>
-        <div class="price-tag">${price === "TBC" ? "TBC" : '£'+price}</div>
+        <div style="font-size:12px; color:var(--text-secondary); text-transform:uppercase;">${type}</div>
+        <div class="price-tag">${price === "TBC" ? "TBC" : "£"+price}</div>
         <button id="btn-${c.id}-${type}" class="${isAdded ? 'btn btn-added' : 'btn btn-wa'}" ${isAdded ? 'disabled' : ''} 
                 onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${price}")'>
             ${isAdded ? '<i class="fa-solid fa-check"></i> Added' : '<i class="fa-solid fa-plus"></i> Add to List'}
         </button>
-        <a href="${ebay}" target="_blank" class="btn btn-ebay-small"><i class="fa-brands fa-ebay"></i> View Sold</a>
     </div>`;
 }
 
@@ -316,13 +282,13 @@ function showList() {
     const container = document.getElementById('list-items-container');
     container.innerHTML = shoppingList.map((item, index) => `
         <div class="list-item" onclick="reopenCardFromList(${index})">
-            <div>
+            <div style="padding-left:10px;">
                 <div style="font-weight:700;">${item.name}</div>
                 <div style="font-size:12px; color:var(--primary); font-weight:700;">${item.price === "TBC" ? "TBC" : "£"+item.price} (${item.type})</div>
             </div>
             <button class="remove-btn" onclick="event.stopPropagation(); removeItem(${index})">Remove</button>
         </div>
-    `).join('') || "<p style='text-align:center; padding:20px;'>List is empty</p>";
+    `).join('') || "<p style='text-align:center; padding:20px;'>No cards in list</p>";
     document.getElementById('list-modal').style.display = 'block';
 }
 
@@ -334,12 +300,14 @@ function removeItem(i) {
 }
 
 function handleBack() { window.history.back(); }
+
 function closeCardUI() {
     document.getElementById('details-view').style.display = 'none';
     document.getElementById('results-view').style.display = 'grid';
     document.getElementById('mainHeader').style.display = 'block';
     if(document.getElementById('searchInput').value.length < 3) document.getElementById('ad-container').style.display = 'block';
 }
+
 function hideListUI() { document.getElementById('list-modal').style.display = 'none'; }
 
 function sendFinalWhatsApp() {
