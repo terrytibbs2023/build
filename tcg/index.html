@@ -279,7 +279,9 @@ function closeCardUI() {
 function sendFinalWhatsApp() {
     let msg = "Hi Dave, Do you have these cards? I UNDERSTAND THE PRICES ARE GUIDE ONLY so can you give me the total you can sell for please?:\n\n";
     shoppingList.forEach((item, i) => {
-        msg += `*${i+1}. ${item.name}* (${item.type}) - Guide: ${item.price}\nLink: ${item.imageUrl}\n\n`;
+        const c = item.fullData;
+        const displayNum = `#${c.number}/${c.set.printedTotal || '?'}`;
+        msg += `*${i+1}. ${item.name}* (${displayNum}) [${item.type}] - Guide: ${item.price}\nLink: ${item.imageUrl}\n\n`;
     });
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
 }
