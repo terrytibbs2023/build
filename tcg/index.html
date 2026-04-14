@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Ellis TCG Card Search</title>
     
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Ellis TCG","short_name":"Ellis TCG","start_url":"index.html","display":"standalone","background_color":"#F2F2F7","theme_color":"#007AFF","icons":[{"src":"https://scontent-lhr6-2.xx.fbcdn.net/v/t39.30808-6/586722015_122100567723131819_786900678622678002_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=2a1932&_nc_ohc=WDWwua9SFZIQ7kNvwF5bdl7&_nc_oc=AdrgqHXe0nTdxZuJqVy86pAsbe-mEkL3WEmcqBExPxPBNcf7dEGr1m37DXiqJFBBd8A&_nc_zt=23&_nc_ht=scontent-lhr6-2.xx&_nc_gid=APuFORar1eguSeHTQaIvCw&_nc_ss=7a389&oh=00_Af0G-vSpnAli0Ro0h5J8BCvIpa-u4LayR71DvERIZLcBeg&oe=69E40DB7","sizes":"512x512","type":"image/jpeg"}]}'>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="https://scontent-lhr6-2.xx.fbcdn.net/v/t39.30808-6/586722015_122100567723131819_786900678622678002_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=2a1932&_nc_ohc=WDWwua9SFZIQ7kNvwF5bdl7&_nc_oc=AdrgqHXe0nTdxZuJqVy86pAsbe-mEkL3WEmcqBExPxPBNcf7dEGr1m37DXiqJFBBd8A&_nc_zt=23&_nc_ht=scontent-lhr6-2.xx&_nc_gid=APuFORar1eguSeHTQaIvCw&_nc_ss=7a389&oh=00_Af0G-vSpnAli0Ro0h5J8BCvIpa-u4LayR71DvERIZLcBeg&oe=69E40DB7">
@@ -29,7 +29,7 @@
         .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; padding-bottom: 100px; }
         
         /* INSTALL BANNER */
-        .install-banner { background: var(--primary); color: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; }
+        .install-banner { background: var(--primary); color: white; padding: 12px 16px; display: none; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; }
         .install-btn { background: white; color: var(--primary); border: none; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; }
 
         .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 10px 0 16px; }
@@ -159,11 +159,14 @@
 </div>
 
 <script>
-// REGISTER YOUR SERVICE WORKER FILE
+// SELF-CONTAINED SERVICE WORKER (No sw.js file needed)
 if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js');
-    });
+    const swCode = `
+        self.addEventListener('install', e => self.skipWaiting());
+        self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));
+    `;
+    const blob = new Blob([swCode], {type: 'text/javascript'});
+    navigator.serviceWorker.register(URL.createObjectURL(blob));
 }
 
 const APP_CONFIG = { phoneNumber: "447483251962", buttonText: "Add to Inquiry List", addedText: "Added to List" };
@@ -176,17 +179,20 @@ let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
+    document.getElementById('installBanner').style.display = 'flex';
 });
 
 function installPWA() {
     if (deferredPrompt) {
         deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(() => {
-            document.getElementById('installBanner').style.display = 'none';
+        deferredPrompt.userChoice.then((choice) => {
+            if (choice.outcome === 'accepted') {
+                document.getElementById('installBanner').style.display = 'none';
+            }
             deferredPrompt = null;
         });
     } else {
-        alert("To install, use your browser's 'Add to Home Screen' option.");
+        alert("To install: Tap your browser menu (or Share icon on iPhone) and select 'Add to Home Screen'.");
     }
 }
 
@@ -378,7 +384,6 @@ function closeCardUI() {
     document.getElementById('detailsHeader').style.display = 'none';
     document.getElementById('results-view').style.display = 'grid';
     document.getElementById('mainHeader').style.display = 'block';
-    document.getElementById('installBanner').style.display = 'flex';
     if(document.getElementById('searchInput').value.length < 3) document.getElementById('ad-container').style.display = 'block';
 }
 
