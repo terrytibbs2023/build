@@ -13,12 +13,9 @@
             --text-main: #000000;
             --text-secondary: #8E8E93;
             --whatsapp: #25D366;
-            --ebay: #0064D2;
             --header-bg: rgba(255, 255, 255, 0.85);
             --danger: #FF3B30;
             --disabled: #C7C7CC;
-            --warning-bg: #FFF9E6;
-            --warning-border: #FFCC00;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -39,6 +36,16 @@
         .filter-wrapper select { appearance: none; background: none; border: none; outline: none; font-size: 13px; font-weight: 600; width: 100%; padding-right: 15px; }
         .filter-wrapper::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 10px; position: absolute; right: 12px; color: var(--primary); pointer-events: none; }
 
+        /* ADVERT */
+        #ad-container { padding: 16px; }
+        .ad-card { background: #ffffff; border-radius: 20px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 20px rgba(0,0,0,0.04); }
+        .ad-banner-bg { background: #f9f9fb; width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .ad-banner-img { max-width: 80%; max-height: 80%; object-fit: contain; }
+        .ad-content { padding: 20px; border-top: 1px solid rgba(0,0,0,0.03); }
+        .ad-tag { color: var(--primary); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: inline-block; }
+        .ad-title { font-size: 20px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }
+        .ad-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
+
         /* GRID */
         .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 16px; width: 100%; }
         .card { background: var(--card-bg); border-radius: 18px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.03); cursor: pointer; }
@@ -51,18 +58,12 @@
         #details-view { display: none; padding: 16px; }
         .details-card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
         .details-img { width: 100%; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-        
-        .disclaimer-box { background: var(--warning-bg); border: 1px solid var(--warning-border); border-radius: 12px; padding: 12px; margin-bottom: 20px; font-size: 13px; line-height: 1.4; color: #856404; text-align: center; }
-        .disclaimer-box b { color: #000; }
-
-        .price-box { background: var(--bg); border-radius: 18px; padding: 20px; margin-top: 15px; border: 1px solid rgba(0,0,0,0.03); text-align: center; }
-        .price-tag { font-size: 36px; font-weight: 800; color: var(--primary); margin: 4px 0 15px; }
-        
-        .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; border-radius: 14px; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: 0.2s; }
-        .btn-wa { height: 54px; font-size: 16px; background: var(--whatsapp); color: white; }
-        .btn-ebay-small { height: 38px; font-size: 13px; background: none; color: var(--ebay); border: 1.5px solid var(--ebay); margin-top: 12px; }
-        .btn-added { height: 54px; font-size: 16px; background: var(--disabled) !important; color: white !important; cursor: default; }
-        .btn-back { height: 50px; background: rgba(0,0,0,0.06); color: var(--text-main); margin-top: 25px; font-size: 15px; }
+        .price-box { background: var(--bg); border-radius: 18px; padding: 20px; margin-top: 15px; border: 1px solid rgba(0,0,0,0.03); }
+        .price-tag { font-size: 32px; font-weight: 800; color: var(--primary); margin: 6px 0 15px; }
+        .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 54px; border-radius: 14px; font-weight: 700; font-size: 16px; text-decoration: none; border: none; cursor: pointer; transition: 0.2s; }
+        .btn-wa { background: var(--whatsapp); color: white; }
+        .btn-added { background: var(--disabled) !important; color: white !important; cursor: default; }
+        .btn-back { background: rgba(0,0,0,0.06); color: var(--text-main); margin-top: 25px; }
 
         /* FLOATING CART BAR */
         .cart-bar { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: var(--text-main); color: white; height: 60px; border-radius: 30px; display: none; align-items: center; justify-content: space-between; padding: 0 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 2000; cursor: pointer; }
@@ -70,19 +71,9 @@
 
         /* LIST MODAL */
         #list-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 3000; padding: 20px; overflow-y: auto; }
-        .list-item { background: white; padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
-        .list-item:active { background: #f9f9f9; }
-        .remove-btn { color: var(--danger); font-weight: 600; font-size: 14px; border: none; background: none; cursor: pointer; padding: 10px; }
+        .list-item { background: white; padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(0,0,0,0.05); }
+        .remove-btn { color: var(--danger); font-weight: 600; font-size: 14px; border: none; background: none; cursor: pointer; }
         
-        /* ADVERT */
-        #ad-container { padding: 16px; }
-        .ad-card { background: #ffffff; border-radius: 20px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 20px rgba(0,0,0,0.04); }
-        .ad-banner-bg { background: #f9f9fb; width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .ad-banner-img { max-width: 80%; max-height: 80%; object-fit: contain; }
-        .ad-content { padding: 20px; border-top: 1px solid rgba(0,0,0,0.03); }
-        .ad-tag { color: var(--primary); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: inline-block; }
-        .ad-title { font-size: 20px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }
-        .ad-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
         .loader { grid-column: 1/-1; display: flex; flex-direction: column; align-items: center; padding: 80px 0; color: var(--text-secondary); }
     </style>
 </head>
@@ -126,6 +117,7 @@
 <div id="list-modal">
     <h2 style="margin-bottom: 20px; font-size: 24px; font-weight: 800;">Your Inquiry List</h2>
     <div id="list-items-container"></div>
+    
     <div style="margin-top: 30px;">
         <button class="btn btn-wa" onclick="sendFinalWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Send List to WhatsApp</button>
         <button class="btn btn-back" onclick="hideList()">Close & Continue Searching</button>
@@ -147,7 +139,7 @@ const APP_CONFIG = {
 const API = "https://api.pokemontcg.io/v2/cards";
 let gbpRate = 0.78;
 let cards = [];
-let shoppingList = JSON.parse(localStorage.getItem('tcgInquiryList')) || [];
+let shoppingList = [];
 
 function applyBranding() {
     document.getElementById('ui-logo-ad').src = APP_CONFIG.logoUrl;
@@ -159,7 +151,6 @@ function applyBranding() {
 
 async function startup() {
     applyBranding();
-    updateCartUI();
     try {
         const res = await fetch("https://open.er-api.com/v6/latest/USD");
         const data = await res.json();
@@ -209,7 +200,7 @@ function render() {
     if(sVal) filtered = filtered.filter(c => c.set.name === sVal);
     if(rVal) filtered = filtered.filter(c => (c.rarity || "Other") === rVal);
     grid.innerHTML = filtered.map((c, i) => `
-        <div class="card" onclick="openCardFromObject(${i})">
+        <div class="card" onclick="openCard(${i})">
             <div class="card-img"><img src="${c.images.small}" loading="lazy"></div>
             <div class="card-name">${c.name}</div>
             <div class="card-meta">${c.set.name}</div>
@@ -217,27 +208,14 @@ function render() {
     `).join('') || '<p style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-secondary);">No results match your search.</p>';
 }
 
-// Open card from the current 'cards' search array
-function openCardFromObject(index) {
-    showCardDetails(cards[index]);
-}
-
-// CORE FUNCTION: Renders the details of any card object passed to it
-function showCardDetails(c) {
+function openCard(index) {
+    const c = cards[index];
     const view = document.getElementById('details-view');
     const grid = document.getElementById('results-view');
     const head = document.getElementById('mainHeader');
     const ad = document.getElementById('ad-container');
-    const modal = document.getElementById('list-modal');
+    grid.style.display = 'none'; head.style.display = 'none'; ad.style.display = 'none'; view.style.display = 'block';
     
-    // Hide UI elements
-    grid.style.display = 'none'; head.style.display = 'none'; ad.style.display = 'none'; modal.style.display = 'none';
-    view.style.display = 'block';
-    
-    const displayNum = `${c.number}/${c.set.printedTotal}`;
-    const ebaySearchTerm = `${c.name} ${displayNum} ${c.set.name} pokemon sold`;
-    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(ebaySearchTerm)}&LH_Sold=1&LH_Complete=1`;
-
     const prices = c.tcgplayer?.prices || {};
     let variants = "";
     for (const type in prices) {
@@ -245,6 +223,7 @@ function showCardDetails(c) {
         if (!market) continue;
         const gbp = (market * gbpRate * 1.10).toFixed(2);
         
+        // Check if this specific card variant is already in the list
         const isAdded = shoppingList.some(item => item.id === c.id && item.type === type);
         const btnClass = isAdded ? "btn btn-added" : "btn btn-wa";
         const btnText = isAdded ? `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}` : `<i class="fa-solid fa-plus"></i> ${APP_CONFIG.buttonText}`;
@@ -253,70 +232,36 @@ function showCardDetails(c) {
         variants += `<div class="price-box">
             <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} Guide Price</div>
             <div class="price-tag">£${gbp}</div>
-            
-            <button id="btn-${c.id}-${type}" ${btnAttr} onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${gbp}")' class="${btnClass}">
+            <button id="btn-${c.id}-${type}" ${btnAttr} onclick="addItem('${c.id}', '${c.name.replace(/'/g, "")}', '${c.set.name.replace(/'/g, "")}', '${c.number}', '${type}', '${gbp}', '${c.images.large}')" class="${btnClass}">
                 ${btnText}
             </button>
-
-            <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small">
-                <i class="fa-brands fa-ebay"></i> View eBay Sold
-            </a>
         </div>`;
     }
-
     view.innerHTML = `<div class="details-card">
         <img src="${c.images.large}" class="details-img">
-        <h1 style="font-size:26px; font-weight:800; margin-bottom:6px; text-align:center;">${c.name}</h1>
-        <p style="color:var(--text-secondary); font-size:14px; margin-bottom:20px; text-align:center;">${c.set.name} • #${displayNum}</p>
-        
-        <div class="disclaimer-box">
-            <b>Please Note:</b> These prices are live market guides only. Final valuations will be confirmed by <b>Ellis TCG</b> upon inquiry.
-        </div>
-
-        ${variants || '<p style="text-align:center; padding:20px;">No live pricing available.</p>'}
-        
-        <button class="btn btn-back" onclick="closeCard()">Back to Search</button>
+        <h1 style="font-size:26px; font-weight:800; margin-bottom:6px;">${c.name}</h1>
+        <p style="color:var(--text-secondary); font-size:14px; margin-bottom:25px;">${c.set.name} • #${c.number}</p>
+        ${variants || '<p>No live pricing available.</p>'}
+        <button class="btn btn-back" onclick="closeCard()">Back to Results</button>
     </div>`;
     window.scrollTo(0,0);
 }
 
-function addItem(cardObj, type, price) {
-    if (shoppingList.some(item => item.id === cardObj.id && item.type === type)) return;
+function addItem(id, name, set, num, type, price, imageUrl) {
+    // Duplicate check (extra safety)
+    if (shoppingList.some(item => item.id === id && item.type === type)) return;
+
+    shoppingList.push({ id, name, set, num, type, price, imageUrl });
+    document.getElementById('cartBar').style.display = 'flex';
+    document.getElementById('cartCount').innerText = shoppingList.length;
     
-    // Save the entire card object so we can reopen it later
-    shoppingList.push({ 
-        id: cardObj.id, 
-        name: cardObj.name, 
-        set: cardObj.set.name, 
-        num: cardObj.number, 
-        type: type, 
-        price: price, 
-        imageUrl: cardObj.images.large,
-        fullData: cardObj 
-    });
-    
-    saveAndRefresh();
-    
-    const btn = document.getElementById(`btn-${cardObj.id}-${type}`);
+    // Update button status
+    const btn = document.getElementById(`btn-${id}-${type}`);
     if (btn) {
-        btn.classList.remove('btn-wa'); btn.classList.add('btn-added');
+        btn.classList.remove('btn-wa');
+        btn.classList.add('btn-added');
         btn.innerHTML = `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}`;
         btn.disabled = true;
-    }
-}
-
-function saveAndRefresh() {
-    localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList));
-    updateCartUI();
-}
-
-function updateCartUI() {
-    const bar = document.getElementById('cartBar');
-    if (shoppingList.length > 0) {
-        bar.style.display = 'flex';
-        document.getElementById('cartCount').innerText = shoppingList.length;
-    } else {
-        bar.style.display = 'none';
     }
 }
 
@@ -326,29 +271,25 @@ function showList() {
         container.innerHTML = "<p style='text-align:center; padding:40px; color:var(--text-secondary);'>Your list is empty.</p>";
     } else {
         container.innerHTML = shoppingList.map((item, index) => `
-            <div class="list-item" onclick='reopenCardFromList(${index})'>
+            <div class="list-item">
                 <div>
                     <div style="font-weight:700;">${item.name}</div>
                     <div style="font-size:12px; color:var(--text-secondary);">${item.set} (#${item.num})</div>
-                    <div style="font-weight:700; color:var(--primary); font-size:14px;">£${item.price} (${item.type})</div>
+                    <div style="font-weight:700; color:var(--primary); font-size:14px; margin-top:2px;">£${item.price} (${item.type})</div>
                 </div>
-                <button class="remove-btn" onclick="event.stopPropagation(); removeItem(${index})">Remove</button>
+                <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
             </div>
         `).join('');
     }
     document.getElementById('list-modal').style.display = 'block';
 }
 
-function reopenCardFromList(index) {
-    const item = shoppingList[index];
-    if (item && item.fullData) {
-        showCardDetails(item.fullData);
-    }
-}
-
 function removeItem(index) {
     shoppingList.splice(index, 1);
-    saveAndRefresh();
+    document.getElementById('cartCount').innerText = shoppingList.length;
+    if (shoppingList.length === 0) {
+        document.getElementById('cartBar').style.display = 'none';
+    }
     showList();
 }
 
@@ -358,10 +299,12 @@ function hideList() {
 
 function sendFinalWhatsApp() {
     if (shoppingList.length === 0) return;
-    let message = "Hi Dave, I'm checking if you have these cards. I understand prices are guides:\n\n";
+
+    let message = "Hi Dave, I'm checking if you have these cards. I understand the prices are guides:\n\n";
     shoppingList.forEach((item, i) => {
         message += `*${i+1}. ${item.name}*\nSet: ${item.set} (#${item.num})\nVariant: ${item.type} | Guide: £${item.price}\nImage: ${item.imageUrl}\n\n`;
     });
+
     const waLink = `https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(waLink, '_blank');
 }
