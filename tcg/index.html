@@ -9,10 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Ellis TCG","short_name":"Ellis TCG","start_url":"index.html","display":"standalone","background_color":"#F2F2F7","theme_color":"#007AFF","icons":[{"src":"https://scontent-lhr6-2.xx.fbcdn.net/v/t39.30808-6/586722015_122100567723131819_786900678622678002_n.jpg","sizes":"512x512","type":"image/jpeg"}]}'>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     
@@ -66,8 +62,8 @@
         .search-pill { background: var(--pill-bg); border-radius: 24px; height: 50px; display: flex; align-items: center; padding: 0 20px; margin-bottom: 15px; }
         .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 16px; margin-left: 10px; color: var(--text-main); font-weight: 500; }
 
-        .filter-row { display: flex; gap: 10px; padding: 0 16px; }
-        .filter-select { flex: 1; background: var(--pill-bg); color: var(--text-main); border: none; padding: 12px; border-radius: 14px; font-size: 13px; font-weight: 600; outline: none; appearance: none; }
+        .filter-row { display: flex; gap: 10px; padding: 0 16px; height: 44px; width: 100%; }
+        .filter-select { flex: 1; width: 50%; background: var(--pill-bg); color: var(--text-main); border: none; padding: 0 12px; border-radius: 12px; font-size: 13px; font-weight: 600; outline: none; appearance: none; height: 100%; }
 
         .ad-card { background: var(--card-bg); border-radius: 24px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(128,128,128,0.1); box-shadow: var(--shadow); margin: 16px; }
         .ad-banner-img { width: 100%; height: 160px; object-fit: cover; background: #eee; display: block; }
@@ -77,7 +73,7 @@
         .ad-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
 
         .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 16px; }
-        .card { background: var(--card-bg); border-radius: 24px; padding: 14px; box-shadow: var(--shadow); border: 1px solid rgba(128,128,128,0.05); }
+        .card { background: var(--card-bg); border-radius: 24px; padding: 14px; box-shadow: var(--shadow); border: 1px solid rgba(128,128,128,0.05); cursor: pointer; }
         .card-img { width: 100%; border-radius: 14px; background: rgba(128,128,128,0.05); aspect-ratio: 1/1.4; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; overflow: hidden; }
         .card-img img { width: 100%; height: 100%; object-fit: contain; }
 
@@ -172,13 +168,6 @@ const API = "https://api.pokemontcg.io/v2/cards";
 let gbpRate = 0.78;
 let cards = [];
 let shoppingList = JSON.parse(localStorage.getItem('tcgInquiryList')) || [];
-let deferredPrompt;
-
-window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
-function installPWA() {
-    if (deferredPrompt) { deferredPrompt.prompt(); } 
-    else { alert("To install: Use your browser menu and select 'Add to Home Screen'."); }
-}
 
 function toggleTheme() {
     const root = document.documentElement;
@@ -211,7 +200,7 @@ async function startup() {
             opt.value = set.id; opt.textContent = set.name;
             setSelect.appendChild(opt);
         });
-        const rarities = ["Common", "Uncommon", "Rare", "Rare Holo", "Rare Ultra", "Rare Rainbow", "Rare Secret", "Illustration Rare", "Special Illustration Rare"];
+        const rarities = ["Common", "Uncommon", "Rare", "Rare Holo", "Rare Ultra", "Rare Rainbow", "Rare Secret", "Promo", "Illustration Rare", "Special Illustration Rare"];
         const raritySelect = document.getElementById('rarityFilter');
         rarities.forEach(r => {
             const opt = document.createElement('option');
@@ -225,22 +214,31 @@ const handleSearch = debounce(async () => {
     const val = document.getElementById('searchInput').value.trim();
     const set = document.getElementById('setFilter').value;
     const rarity = document.getElementById('rarityFilter').value;
-    if (val.length < 3 && !set && !rarity) { 
+
+    if (!val && !set && !rarity) { 
         document.getElementById('results-view').innerHTML = ""; 
         document.getElementById('ad-container').style.display = 'block';
         return; 
     }
+
     document.getElementById('ad-container').style.display = 'none';
+    document.getElementById('results-view').style.display = 'grid';
     document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;">Searching...</p>`;
-    let q = val ? `name:"${val}*"` : "";
-    if (set) q += (q ? " AND " : "") + `set.id:${set}`;
-    if (rarity) q += (q ? " AND " : "") + `rarity:"${rarity}"`;
+    
+    let queryParts = [];
+    if (val) queryParts.push(`name:"${val}*"`);
+    if (set) queryParts.push(`set.id:"${set}"`);
+    if (rarity) queryParts.push(`rarity:"${rarity}"`);
+    
+    const q = queryParts.join(" AND ");
     try {
         const res = await fetch(`${API}?q=${encodeURIComponent(q)}&orderBy=-set.releaseDate`);
         const data = await res.json();
         cards = data.data || [];
         renderGrid();
-    } catch(e) {}
+    } catch(e) {
+        document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;">Error loading cards.</p>`;
+    }
 }, 500);
 
 document.getElementById('searchInput').addEventListener('input', handleSearch);
@@ -248,17 +246,22 @@ document.getElementById('setFilter').addEventListener('change', handleSearch);
 document.getElementById('rarityFilter').addEventListener('change', handleSearch);
 
 function renderGrid() {
+    if (cards.length === 0) {
+        document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;">No cards found.</p>`;
+        return;
+    }
     document.getElementById('results-view').innerHTML = cards.map((c, i) => `
         <div class="card" onclick="openCard(${i}, false)">
             <div class="card-img"><img src="${c.images.small}"></div>
             <div style="font-weight:800; font-size:15px; margin-bottom:2px;">${c.name}</div>
-            <div style="font-size:12px; color:var(--text-secondary); font-weight:500;">${c.set.name}</div>
+            <div style="font-size:12px; color:var(--text-secondary); font-weight:500;">${c.set.name} • ${c.number}/${c.set.printedTotal}</div>
         </div>
     `).join('');
 }
 
 function openCard(idx, fromList) {
     const c = fromList ? shoppingList[idx].fullData : cards[idx];
+    if (!c) return;
     history.pushState({view: 'card'}, '');
     document.getElementById('mainHeader').style.display = 'none';
     document.getElementById('results-view').style.display = 'none';
@@ -267,6 +270,7 @@ function openCard(idx, fromList) {
     document.getElementById('detailsHeader').style.display = 'flex';
     const view = document.getElementById('details-view');
     view.style.display = 'block';
+    
     const prices = c.tcgplayer?.prices || {};
     let variants = "";
     for (const type in prices) {
@@ -276,12 +280,14 @@ function openCard(idx, fromList) {
         }
     }
     if(!variants) variants = generatePriceBox(c, "Standard", "TBC");
+    
     view.innerHTML = `<div class="details-card">
         <img src="${c.images.large}" class="details-img" style="width:100%">
         <h1 style="text-align:center; font-weight:900;">${c.name}</h1>
-        <p style="text-align:center; color:var(--text-secondary); margin-bottom:15px;">${c.set.name} • #${c.number}</p>
+        <p style="text-align:center; color:var(--text-secondary); margin-bottom:15px;">${c.set.name} • #${c.number}/${c.set.printedTotal}</p>
         ${variants}
     </div>`;
+    
     document.querySelectorAll('.barcode-svg').forEach(svg => {
         JsBarcode(svg, svg.dataset.code, { format: "CODE128", width: 1.5, height: 30, displayValue: true, fontSize: 10, margin: 0 });
     });
@@ -291,6 +297,7 @@ function openCard(idx, fromList) {
 function generatePriceBox(c, type, priceDisplay) {
     const isAdded = shoppingList.some(item => item.id === c.id && item.type === type);
     const priceVal = priceDisplay === "TBC" ? "TBC" : `£${priceDisplay}`;
+    const fullCode = `${c.number}/${c.set.printedTotal}`;
     const cleanName = c.name.substring(0,3).toLowerCase().replace(/[^a-z]/g, '');
     const barcodeText = `${cleanName}${c.number}${type.substring(0,2)}`;
     
@@ -302,14 +309,22 @@ function generatePriceBox(c, type, priceDisplay) {
                 onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceVal}")'>
             ${isAdded ? 'Added' : 'Add to Inquiry'}
         </button>
-        <a href="https://www.ebay.co.uk/sch/i.html?_nkw=${encodeURIComponent(c.name + ' ' + c.number)} sold" target="_blank" class="btn btn-ebay-small">
+        <a href="https://www.ebay.co.uk/sch/i.html?_nkw=${encodeURIComponent(c.name + ' ' + fullCode + ' ' + c.set.name + ' pokemon sold')}&LH_Sold=1&LH_Complete=1" target="_blank" class="btn btn-ebay-small">
             <i class="fa-brands fa-ebay"></i> eBay Sold Prices
         </a>
     </div>`;
 }
 
 function addItem(c, type, priceVal) {
-    shoppingList.push({ id: c.id, name: c.name, type, price: priceVal, img: c.images.large, fullData: c });
+    const fullCode = `${c.number}/${c.set.printedTotal}`;
+    shoppingList.push({ 
+        id: c.id, 
+        name: `${c.name} (${fullCode})`, 
+        type, 
+        price: priceVal, 
+        img: c.images.large, 
+        fullData: c 
+    });
     localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList));
     updateCartUI();
     const btn = document.getElementById(`btn-${c.id}-${type}`);
@@ -326,24 +341,34 @@ function showList() {
     document.getElementById('list-modal').style.display = 'block';
     document.getElementById('list-items-container').innerHTML = shoppingList.map((item, index) => `
         <div class="list-item">
-            <div>
+            <div onclick="openCard(${index}, true)" style="flex:1; cursor:pointer;">
                 <div style="font-weight:800;">${item.name}</div>
                 <div style="color:var(--primary); font-size:12px;">${item.type} • ${item.price}</div>
             </div>
-            <button onclick="removeItem(${index})" style="color:red; background:none; border:none; font-weight:700;">Remove</button>
+            <button onclick="removeItem(${index})" style="color:red; background:none; border:none; font-weight:700; padding:10px;">Remove</button>
         </div>
     `).join('') || "<p style='text-align:center;'>List is empty.</p>";
 }
 
 function removeItem(i) { shoppingList.splice(i, 1); localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList)); updateCartUI(); showList(); }
 function handleBack() { window.history.back(); }
+
 window.onpopstate = () => {
     document.getElementById('details-view').style.display = 'none';
     document.getElementById('list-modal').style.display = 'none';
     document.getElementById('detailsHeader').style.display = 'none';
     document.getElementById('mainHeader').style.display = 'block';
-    if(document.getElementById('searchInput').value.length < 3) document.getElementById('ad-container').style.display = 'block';
-    else document.getElementById('results-view').style.display = 'grid';
+    
+    const val = document.getElementById('searchInput').value;
+    const set = document.getElementById('setFilter').value;
+    const rarity = document.getElementById('rarityFilter').value;
+
+    if(!val && !set && !rarity) {
+        document.getElementById('ad-container').style.display = 'block';
+        document.getElementById('results-view').style.display = 'none';
+    } else {
+        document.getElementById('results-view').style.display = 'grid';
+    }
 };
 
 function sendFinalWhatsApp() {
@@ -351,6 +376,7 @@ function sendFinalWhatsApp() {
     shoppingList.forEach((item, i) => { msg += `${i+1}. ${item.name} (${item.type}) - ${item.price}\n`; });
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
 }
+function installPWA() { alert("To install: Use your browser menu and select 'Add to Home Screen'."); }
 function debounce(fn, t) { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), t); }; }
 startup();
 </script>
