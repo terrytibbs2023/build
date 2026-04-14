@@ -14,7 +14,6 @@
             --text-main: #000000;
             --text-secondary: #8E8E93;
             --whatsapp: #25D366;
-            --ebay: #0064D2;
             --header-bg: rgba(255, 255, 255, 0.9);
             --disabled: #C7C7CC;
         }
@@ -32,7 +31,7 @@
         .search-pill { background: rgba(118, 118, 128, 0.12); border-radius: 12px; height: 46px; display: flex; align-items: center; padding: 0 16px; }
         .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 17px; margin-left: 10px; }
 
-        /* SPONSOR STYLES */
+        /* FIXED SPONSOR STYLES */
         #ad-container { padding: 16px; }
         .ad-card { background: #ffffff; border-radius: 20px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 20px rgba(0,0,0,0.04); }
         .ad-banner-bg { background: #f9f9fb; width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px; }
@@ -55,7 +54,6 @@
         
         .btn { display: flex; align-items: center; justify-content: center; height: 54px; width: 100%; border-radius: 14px; font-weight: 700; border: none; cursor: pointer; text-decoration: none; gap: 8px; }
         .btn-wa { background: var(--whatsapp); color: white; }
-        .btn-ebay-small { height: 38px; font-size: 13px; background: none; color: var(--ebay); border: 1.5px solid var(--ebay); margin-top: 12px; }
         .btn-added { background: var(--disabled); color: white; cursor: default; }
 
         .cart-bar { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: var(--text-main); color: white; height: 60px; border-radius: 30px; display: none; align-items: center; justify-content: space-between; padding: 0 25px; z-index: 2000; cursor: pointer; }
@@ -182,31 +180,27 @@ function openCard(idx, fromList) {
     
     const view = document.getElementById('details-view');
     view.style.display = 'block';
-
-    const displayNum = `${c.number}/${c.set.printedTotal || '?'}`;
-    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(c.name + ' ' + displayNum + ' ' + c.set.name + ' pokemon sold')}&LH_Sold=1&LH_Complete=1`;
     
     const prices = c.tcgplayer?.prices || {};
     let variants = "";
     for (const type in prices) {
         if (prices[type].market) {
             const val = (prices[type].market * gbpRate * 1.10).toFixed(2);
-            variants += generatePriceBox(c, type, val, ebayLink);
+            variants += generatePriceBox(c, type, val);
         }
     }
-    if(!variants) variants = generatePriceBox(c, "Standard", "TBC", ebayLink);
+    if(!variants) variants = generatePriceBox(c, "Standard", "TBC");
 
     view.innerHTML = `<div class="details-card">
         <img src="${c.images.large}" class="details-img">
         <h1 style="text-align:center;">${c.name}</h1>
-        <p style="text-align:center; color:var(--text-secondary); margin-bottom:10px;">${c.set.name} • #${displayNum}</p>
+        <p style="text-align:center; color:var(--text-secondary); margin-bottom:10px;">${c.set.name} • #${c.number}</p>
         ${variants}
-        <button class="btn" style="margin-top:20px; background:rgba(0,0,0,0.05);" onclick="handleBack()">Back to Search</button>
     </div>`;
     window.scrollTo(0,0);
 }
 
-function generatePriceBox(c, type, priceDisplay, ebayLink) {
+function generatePriceBox(c, type, priceDisplay) {
     const isAdded = shoppingList.some(item => item.id === c.id && item.type === type);
     const btnClass = isAdded ? "btn btn-added" : "btn btn-wa";
     const btnText = isAdded ? `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}` : `<i class="fa-solid fa-plus"></i> ${APP_CONFIG.buttonText}`;
@@ -220,9 +214,6 @@ function generatePriceBox(c, type, priceDisplay, ebayLink) {
                 onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceVal}")'>
             ${btnText}
         </button>
-        <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small">
-            <i class="fa-brands fa-ebay"></i> View eBay Last Sold
-        </a>
     </div>`;
 }
 
