@@ -13,23 +13,25 @@
             --text-main: #000000;
             --text-secondary: #8E8E93;
             --whatsapp: #25D366;
+            --ebay: #0064D2;
             --header-bg: rgba(255, 255, 255, 0.85);
+            --danger: #FF3B30;
+            --disabled: #C7C7CC;
+            --warning-bg: #FFF9E6;
+            --warning-border: #FFCC00;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         html, body { width: 100%; height: 100%; overflow-x: hidden; background-color: var(--bg); font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
+        .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding-bottom: 100px; }
         
         /* HEADER */
         .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: env(safe-area-inset-top) 0 16px; }
-        .header-top-row { display: none; } /* Hidden to remove top logo space */
         .large-title { padding: 20px 20px 15px; font-size: 28px; font-weight: 800; letter-spacing: -1px; }
-        
         .search-area { padding: 0 16px; margin-bottom: 15px; }
         .search-pill { position: relative; background: rgba(118, 118, 128, 0.12); border-radius: 12px; height: 46px; display: flex; align-items: center; padding: 0 16px; }
         .search-pill i { color: var(--text-secondary); font-size: 18px; margin-right: 12px; }
         .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 17px; color: var(--text-main); }
-        
         .filter-scroller { display: flex; gap: 10px; overflow-x: auto; padding: 0 16px; scrollbar-width: none; }
         .filter-scroller::-webkit-scrollbar { display: none; }
         .filter-wrapper { position: relative; display: flex; align-items: center; background: #fff; border-radius: 10px; padding: 8px 12px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 4px rgba(0,0,0,0.02); min-width: 100px; }
@@ -37,19 +39,9 @@
         .filter-wrapper select { appearance: none; background: none; border: none; outline: none; font-size: 13px; font-weight: 600; width: 100%; padding-right: 15px; }
         .filter-wrapper::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 10px; position: absolute; right: 12px; color: var(--primary); pointer-events: none; }
 
-        /* ADVERT/SPONSOR CARD */
-        #ad-container { padding: 16px; }
-        .ad-card { background: #ffffff; border-radius: 20px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 20px rgba(0,0,0,0.04); }
-        .ad-banner-bg { background: #f9f9fb; width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .ad-banner-img { max-width: 80%; max-height: 80%; object-fit: contain; }
-        .ad-content { padding: 20px; border-top: 1px solid rgba(0,0,0,0.03); }
-        .ad-tag { color: var(--primary); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: inline-block; }
-        .ad-title { font-size: 20px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }
-        .ad-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
-
         /* GRID */
         .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 16px; width: 100%; }
-        .card { background: var(--card-bg); border-radius: 18px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.03); }
+        .card { background: var(--card-bg); border-radius: 18px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.03); cursor: pointer; }
         .card-img { width: 100%; aspect-ratio: 1 / 1.38; background: #F9F9FB; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .card-img img { max-width: 90%; max-height: 90%; object-fit: contain; }
         .card-name { font-size: 14px; font-weight: 700; line-height: 1.25; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -59,11 +51,38 @@
         #details-view { display: none; padding: 16px; }
         .details-card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
         .details-img { width: 100%; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
-        .price-box { background: var(--bg); border-radius: 18px; padding: 20px; margin-top: 15px; border: 1px solid rgba(0,0,0,0.03); }
-        .price-tag { font-size: 32px; font-weight: 800; color: var(--primary); margin: 6px 0 15px; }
-        .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 54px; border-radius: 14px; font-weight: 700; font-size: 16px; text-decoration: none; border: none; }
-        .btn-wa { background: var(--whatsapp); color: white; }
-        .btn-back { background: rgba(0,0,0,0.06); color: var(--text-main); margin-top: 25px; }
+        
+        .disclaimer-box { background: var(--warning-bg); border: 1px solid var(--warning-border); border-radius: 12px; padding: 12px; margin-bottom: 20px; font-size: 13px; line-height: 1.4; color: #856404; text-align: center; }
+        .disclaimer-box b { color: #000; }
+
+        .price-box { background: var(--bg); border-radius: 18px; padding: 20px; margin-top: 15px; border: 1px solid rgba(0,0,0,0.03); text-align: center; }
+        .price-tag { font-size: 36px; font-weight: 800; color: var(--primary); margin: 4px 0 15px; }
+        
+        .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; border-radius: 14px; font-weight: 700; text-decoration: none; border: none; cursor: pointer; transition: 0.2s; }
+        .btn-wa { height: 54px; font-size: 16px; background: var(--whatsapp); color: white; }
+        .btn-ebay-small { height: 38px; font-size: 13px; background: none; color: var(--ebay); border: 1.5px solid var(--ebay); margin-top: 12px; }
+        .btn-added { height: 54px; font-size: 16px; background: var(--disabled) !important; color: white !important; cursor: default; }
+        .btn-back { height: 50px; background: rgba(0,0,0,0.06); color: var(--text-main); margin-top: 25px; font-size: 15px; }
+
+        /* FLOATING CART BAR */
+        .cart-bar { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: var(--text-main); color: white; height: 60px; border-radius: 30px; display: none; align-items: center; justify-content: space-between; padding: 0 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 2000; cursor: pointer; }
+        .cart-count-badge { background: var(--primary); padding: 4px 10px; border-radius: 10px; font-size: 14px; }
+
+        /* LIST MODAL */
+        #list-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 3000; padding: 20px; overflow-y: auto; }
+        .list-item { background: white; padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
+        .list-item:active { background: #f9f9f9; }
+        .remove-btn { color: var(--danger); font-weight: 600; font-size: 14px; border: none; background: none; cursor: pointer; padding: 10px; }
+        
+        /* ADVERT */
+        #ad-container { padding: 16px; }
+        .ad-card { background: #ffffff; border-radius: 20px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 20px rgba(0,0,0,0.04); }
+        .ad-banner-bg { background: #f9f9fb; width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .ad-banner-img { max-width: 80%; max-height: 80%; object-fit: contain; }
+        .ad-content { padding: 20px; border-top: 1px solid rgba(0,0,0,0.03); }
+        .ad-tag { color: var(--primary); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: inline-block; }
+        .ad-title { font-size: 20px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }
+        .ad-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
         .loader { grid-column: 1/-1; display: flex; flex-direction: column; align-items: center; padding: 80px 0; color: var(--text-secondary); }
     </style>
 </head>
@@ -71,8 +90,6 @@
 
 <div class="app-container">
     <header class="app-header" id="mainHeader">
-        <div class="header-top-row">
-            </div>
         <div id="ui-app-title" class="large-title">Ellis TCG Card Search</div>
         <div class="search-area">
             <div class="search-pill">
@@ -88,9 +105,7 @@
 
     <div id="ad-container">
         <a id="ui-ad-link" href="" class="ad-card">
-            <div class="ad-banner-bg">
-                <img id="ui-logo-ad" src="" class="ad-banner-img" alt="Branding">
-            </div>
+            <div class="ad-banner-bg"><img id="ui-logo-ad" src="" class="ad-banner-img" alt="Branding"></div>
             <div class="ad-content">
                 <span class="ad-tag">Official Sponsor</span>
                 <div id="ui-ad-title" class="ad-title">Essex Console Repair</div>
@@ -103,41 +118,38 @@
     <div id="details-view"></div>
 </div>
 
+<div class="cart-bar" id="cartBar" onclick="showList()">
+    <span>View Inquiry List</span>
+    <span class="cart-count-badge" id="cartCount">0</span>
+</div>
+
+<div id="list-modal">
+    <h2 style="margin-bottom: 20px; font-size: 24px; font-weight: 800;">Your Inquiry List</h2>
+    <div id="list-items-container"></div>
+    <div style="margin-top: 30px;">
+        <button class="btn btn-wa" onclick="sendFinalWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Send List to WhatsApp</button>
+        <button class="btn btn-back" onclick="hideList()">Close & Continue Searching</button>
+    </div>
+</div>
+
 <script>
-/** * ================================================
- * EDIT THESE SETTINGS TO CUSTOMIZE YOUR APP
- * ================================================
- */
 const APP_CONFIG = {
-    // Branding
     logoUrl: "https://imagecdn.websitebuilder.prositehosting.co.uk/22/3e/223ef076-9a2d-4062-98c2-25f95c7952d0.png",
     appTitle: "Ellis TCG Card Search",
-    
-    // Store Advert Settings
     storeUrl: "https://essexconsolerepair.co.uk",
     adTitle: "Essex Console Repair",
     adDescription: "Ps5/Xbox/Switch/Hdmi Ports",
-    
-    // WhatsApp Settings
     phoneNumber: "447483251962",
-    buttonText: "I Want To Buy This Card",
-    
-    // Spell-checked message format
-    getMessage: (card, type, price) => {
-        return `Hi Dave, I'm checking if you have this card. I understand the price is a guide price and was hoping to get the price you can sell it for: ${card.name} (${card.set.name}) Number: ${card.number} Variant: ${type} Guide Price: £${price} ${card.images.large}`;
-    }
+    buttonText: "Add to Inquiry List",
+    addedText: "Added to List"
 };
 
-/** * ================================================
- * APP LOGIC
- * ================================================
- */
 const API = "https://api.pokemontcg.io/v2/cards";
 let gbpRate = 0.78;
 let cards = [];
+let shoppingList = JSON.parse(localStorage.getItem('tcgInquiryList')) || [];
 
 function applyBranding() {
-    // Logo only applied to the ad/sponsor section now
     document.getElementById('ui-logo-ad').src = APP_CONFIG.logoUrl;
     document.getElementById('ui-app-title').innerText = APP_CONFIG.appTitle;
     document.getElementById('ui-ad-link').href = APP_CONFIG.storeUrl;
@@ -147,6 +159,7 @@ function applyBranding() {
 
 async function startup() {
     applyBranding();
+    updateCartUI();
     try {
         const res = await fetch("https://open.er-api.com/v6/latest/USD");
         const data = await res.json();
@@ -196,7 +209,7 @@ function render() {
     if(sVal) filtered = filtered.filter(c => c.set.name === sVal);
     if(rVal) filtered = filtered.filter(c => (c.rarity || "Other") === rVal);
     grid.innerHTML = filtered.map((c, i) => `
-        <div class="card" onclick="openCard(${i})">
+        <div class="card" onclick="openCardFromObject(${i})">
             <div class="card-img"><img src="${c.images.small}" loading="lazy"></div>
             <div class="card-name">${c.name}</div>
             <div class="card-meta">${c.set.name}</div>
@@ -204,37 +217,167 @@ function render() {
     `).join('') || '<p style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-secondary);">No results match your search.</p>';
 }
 
-function openCard(index) {
-    const c = cards[index];
+function openCardFromObject(index) {
+    showCardDetails(cards[index]);
+}
+
+function showCardDetails(c) {
     const view = document.getElementById('details-view');
     const grid = document.getElementById('results-view');
     const head = document.getElementById('mainHeader');
     const ad = document.getElementById('ad-container');
-    grid.style.display = 'none'; head.style.display = 'none'; ad.style.display = 'none'; view.style.display = 'block';
+    const modal = document.getElementById('list-modal');
     
+    grid.style.display = 'none'; head.style.display = 'none'; ad.style.display = 'none'; modal.style.display = 'none';
+    view.style.display = 'block';
+    
+    const displayNum = `${c.number}/${c.set.printedTotal}`;
+    const ebaySearchTerm = `${c.name} ${displayNum} ${c.set.name} pokemon sold`;
+    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(ebaySearchTerm)}&LH_Sold=1&LH_Complete=1`;
+
     const prices = c.tcgplayer?.prices || {};
     let variants = "";
-    for (const type in prices) {
-        const market = prices[type].market;
-        if (!market) continue;
-        const gbp = (market * gbpRate * 1.10).toFixed(2);
-        const text = APP_CONFIG.getMessage(c, type, gbp);
-        const waLink = `https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(text)}`;
-        
-        variants += `<div class="price-box">
-            <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} Guide Price</div>
-            <div class="price-tag">£${gbp}</div>
-            <a href="${waLink}" class="btn btn-wa"><i class="fa-brands fa-whatsapp"></i> ${APP_CONFIG.buttonText}</a>
-        </div>`;
+    
+    // Check if we have ANY price data
+    const hasPrices = Object.keys(prices).length > 0;
+
+    if (hasPrices) {
+        for (const type in prices) {
+            const market = prices[type].market;
+            if (!market) continue;
+            const gbp = (market * gbpRate * 1.10).toFixed(2);
+            variants += generatePriceBox(c, type, gbp, ebayLink);
+        }
+    } else {
+        // FALLBACK: If no live price data exists, show one box with eBay link
+        variants = generatePriceBox(c, "Standard", "TBC", ebayLink);
     }
+
     view.innerHTML = `<div class="details-card">
         <img src="${c.images.large}" class="details-img">
-        <h1 style="font-size:26px; font-weight:800; margin-bottom:6px;">${c.name}</h1>
-        <p style="color:var(--text-secondary); font-size:14px; margin-bottom:25px;">${c.set.name} • #${c.number}</p>
-        ${variants || '<p>No live pricing available.</p>'}
-        <button class="btn btn-back" onclick="closeCard()">Back to Results</button>
+        <h1 style="font-size:26px; font-weight:800; margin-bottom:6px; text-align:center;">${c.name}</h1>
+        <p style="color:var(--text-secondary); font-size:14px; margin-bottom:20px; text-align:center;">${c.set.name} • #${displayNum}</p>
+        
+        <div class="disclaimer-box">
+            <b>Please Note:</b> These prices are live market guides only. Final valuations will be confirmed by <b>Ellis TCG</b> upon inquiry.
+        </div>
+
+        ${variants}
+        
+        <button class="btn btn-back" onclick="closeCard()">Back to Search</button>
     </div>`;
     window.scrollTo(0,0);
+}
+
+// Helper to create the price box HTML
+function generatePriceBox(c, type, priceDisplay, ebayLink) {
+    const isAdded = shoppingList.some(item => item.id === c.id && item.type === type);
+    const btnClass = isAdded ? "btn btn-added" : "btn btn-wa";
+    const btnText = isAdded ? `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}` : `<i class="fa-solid fa-plus"></i> ${APP_CONFIG.buttonText}`;
+    const btnAttr = isAdded ? "disabled" : "";
+    const priceVal = priceDisplay === "TBC" ? "TBC" : `£${priceDisplay}`;
+
+    return `<div class="price-box">
+        <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} - Guide Price</div>
+        <div class="price-tag">${priceVal}</div>
+        
+        <button id="btn-${c.id}-${type}" ${btnAttr} onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceDisplay}")' class="${btnClass}">
+            ${btnText}
+        </button>
+
+        <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small">
+            <i class="fa-brands fa-ebay"></i> View eBay Sold
+        </a>
+    </div>`;
+}
+
+function addItem(cardObj, type, price) {
+    if (shoppingList.some(item => item.id === cardObj.id && item.type === type)) return;
+    
+    shoppingList.push({ 
+        id: cardObj.id, 
+        name: cardObj.name, 
+        set: cardObj.set.name, 
+        num: cardObj.number, 
+        type: type, 
+        price: price, 
+        imageUrl: cardObj.images.large,
+        fullData: cardObj 
+    });
+    
+    saveAndRefresh();
+    
+    const btn = document.getElementById(`btn-${cardObj.id}-${type}`);
+    if (btn) {
+        btn.classList.remove('btn-wa'); btn.classList.add('btn-added');
+        btn.innerHTML = `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}`;
+        btn.disabled = true;
+    }
+}
+
+function saveAndRefresh() {
+    localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList));
+    updateCartUI();
+}
+
+function updateCartUI() {
+    const bar = document.getElementById('cartBar');
+    if (shoppingList.length > 0) {
+        bar.style.display = 'flex';
+        document.getElementById('cartCount').innerText = shoppingList.length;
+    } else {
+        bar.style.display = 'none';
+    }
+}
+
+function showList() {
+    const container = document.getElementById('list-items-container');
+    if(shoppingList.length === 0) {
+        container.innerHTML = "<p style='text-align:center; padding:40px; color:var(--text-secondary);'>Your list is empty.</p>";
+    } else {
+        container.innerHTML = shoppingList.map((item, index) => {
+            const displayPrice = item.price === "TBC" ? "TBC" : `£${item.price}`;
+            return `
+                <div class="list-item" onclick='reopenCardFromList(${index})'>
+                    <div>
+                        <div style="font-weight:700;">${item.name}</div>
+                        <div style="font-size:12px; color:var(--text-secondary);">${item.set} (#${item.num})</div>
+                        <div style="font-weight:700; color:var(--primary); font-size:14px;">${displayPrice} (${item.type})</div>
+                    </div>
+                    <button class="remove-btn" onclick="event.stopPropagation(); removeItem(${index})">Remove</button>
+                </div>
+            `;
+        }).join('');
+    }
+    document.getElementById('list-modal').style.display = 'block';
+}
+
+function reopenCardFromList(index) {
+    const item = shoppingList[index];
+    if (item && item.fullData) {
+        showCardDetails(item.fullData);
+    }
+}
+
+function removeItem(index) {
+    shoppingList.splice(index, 1);
+    saveAndRefresh();
+    showList();
+}
+
+function hideList() {
+    document.getElementById('list-modal').style.display = 'none';
+}
+
+function sendFinalWhatsApp() {
+    if (shoppingList.length === 0) return;
+    let message = "Hi Dave, I'm checking if you have these cards. I understand prices are guides:\n\n";
+    shoppingList.forEach((item, i) => {
+        const p = item.price === "TBC" ? "TBC" : `£${item.price}`;
+        message += `*${i+1}. ${item.name}*\nSet: ${item.set} (#${item.num})\nVariant: ${item.type} | Guide: ${p}\nImage: ${item.imageUrl}\n\n`;
+    });
+    const waLink = `https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(waLink, '_blank');
 }
 
 function closeCard() {
@@ -250,6 +393,7 @@ function debounce(fn, t) {
     let timer;
     return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), t); };
 }
+
 startup();
 </script>
 </body>

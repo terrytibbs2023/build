@@ -217,12 +217,10 @@ function render() {
     `).join('') || '<p style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-secondary);">No results match your search.</p>';
 }
 
-// Open card from the current 'cards' search array
 function openCardFromObject(index) {
     showCardDetails(cards[index]);
 }
 
-// CORE FUNCTION: Renders the details of any card object passed to it
 function showCardDetails(c) {
     const view = document.getElementById('details-view');
     const grid = document.getElementById('results-view');
@@ -230,7 +228,6 @@ function showCardDetails(c) {
     const ad = document.getElementById('ad-container');
     const modal = document.getElementById('list-modal');
     
-    // Hide UI elements
     grid.style.display = 'none'; head.style.display = 'none'; ad.style.display = 'none'; modal.style.display = 'none';
     view.style.display = 'block';
     
@@ -240,28 +237,20 @@ function showCardDetails(c) {
 
     const prices = c.tcgplayer?.prices || {};
     let variants = "";
-    for (const type in prices) {
-        const market = prices[type].market;
-        if (!market) continue;
-        const gbp = (market * gbpRate * 1.10).toFixed(2);
-        
-        const isAdded = shoppingList.some(item => item.id === c.id && item.type === type);
-        const btnClass = isAdded ? "btn btn-added" : "btn btn-wa";
-        const btnText = isAdded ? `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}` : `<i class="fa-solid fa-plus"></i> ${APP_CONFIG.buttonText}`;
-        const btnAttr = isAdded ? "disabled" : "";
+    
+    // Check if we have ANY price data
+    const hasPrices = Object.keys(prices).length > 0;
 
-        variants += `<div class="price-box">
-            <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} - Guide Price</div>
-            <div class="price-tag">£${gbp}</div>
-            
-            <button id="btn-${c.id}-${type}" ${btnAttr} onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${gbp}")' class="${btnClass}">
-                ${btnText}
-            </button>
-
-            <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small">
-                <i class="fa-brands fa-ebay"></i> View eBay Sold
-            </a>
-        </div>`;
+    if (hasPrices) {
+        for (const type in prices) {
+            const market = prices[type].market;
+            if (!market) continue;
+            const gbp = (market * gbpRate * 1.10).toFixed(2);
+            variants += generatePriceBox(c, type, gbp, ebayLink);
+        }
+    } else {
+        // FALLBACK: If no live price data exists, show one box with eBay link
+        variants = generatePriceBox(c, "Standard", "TBC", ebayLink);
     }
 
     view.innerHTML = `<div class="details-card">
@@ -273,17 +262,38 @@ function showCardDetails(c) {
             <b>Please Note:</b> These prices are live market guides only. Final valuations will be confirmed by <b>Ellis TCG</b> upon inquiry.
         </div>
 
-        ${variants || '<p style="text-align:center; padding:20px;">No live pricing available.</p>'}
+        ${variants}
         
         <button class="btn btn-back" onclick="closeCard()">Back to Search</button>
     </div>`;
     window.scrollTo(0,0);
 }
 
+// Helper to create the price box HTML
+function generatePriceBox(c, type, priceDisplay, ebayLink) {
+    const isAdded = shoppingList.some(item => item.id === c.id && item.type === type);
+    const btnClass = isAdded ? "btn btn-added" : "btn btn-wa";
+    const btnText = isAdded ? `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}` : `<i class="fa-solid fa-plus"></i> ${APP_CONFIG.buttonText}`;
+    const btnAttr = isAdded ? "disabled" : "";
+    const priceVal = priceDisplay === "TBC" ? "TBC" : `£${priceDisplay}`;
+
+    return `<div class="price-box">
+        <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} - Guide Price</div>
+        <div class="price-tag">${priceVal}</div>
+        
+        <button id="btn-${c.id}-${type}" ${btnAttr} onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceDisplay}")' class="${btnClass}">
+            ${btnText}
+        </button>
+
+        <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small">
+            <i class="fa-brands fa-ebay"></i> View eBay Sold
+        </a>
+    </div>`;
+}
+
 function addItem(cardObj, type, price) {
     if (shoppingList.some(item => item.id === cardObj.id && item.type === type)) return;
     
-    // Save the entire card object so we can reopen it later
     shoppingList.push({ 
         id: cardObj.id, 
         name: cardObj.name, 
@@ -325,16 +335,19 @@ function showList() {
     if(shoppingList.length === 0) {
         container.innerHTML = "<p style='text-align:center; padding:40px; color:var(--text-secondary);'>Your list is empty.</p>";
     } else {
-        container.innerHTML = shoppingList.map((item, index) => `
-            <div class="list-item" onclick='reopenCardFromList(${index})'>
-                <div>
-                    <div style="font-weight:700;">${item.name}</div>
-                    <div style="font-size:12px; color:var(--text-secondary);">${item.set} (#${item.num})</div>
-                    <div style="font-weight:700; color:var(--primary); font-size:14px;">£${item.price} (${item.type})</div>
+        container.innerHTML = shoppingList.map((item, index) => {
+            const displayPrice = item.price === "TBC" ? "TBC" : `£${item.price}`;
+            return `
+                <div class="list-item" onclick='reopenCardFromList(${index})'>
+                    <div>
+                        <div style="font-weight:700;">${item.name}</div>
+                        <div style="font-size:12px; color:var(--text-secondary);">${item.set} (#${item.num})</div>
+                        <div style="font-weight:700; color:var(--primary); font-size:14px;">${displayPrice} (${item.type})</div>
+                    </div>
+                    <button class="remove-btn" onclick="event.stopPropagation(); removeItem(${index})">Remove</button>
                 </div>
-                <button class="remove-btn" onclick="event.stopPropagation(); removeItem(${index})">Remove</button>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     }
     document.getElementById('list-modal').style.display = 'block';
 }
@@ -360,7 +373,8 @@ function sendFinalWhatsApp() {
     if (shoppingList.length === 0) return;
     let message = "Hi Dave, I'm checking if you have these cards. I understand prices are guides:\n\n";
     shoppingList.forEach((item, i) => {
-        message += `*${i+1}. ${item.name}*\nSet: ${item.set} (#${item.num})\nVariant: ${item.type} | Guide: £${item.price}\nImage: ${item.imageUrl}\n\n`;
+        const p = item.price === "TBC" ? "TBC" : `£${item.price}`;
+        message += `*${i+1}. ${item.name}*\nSet: ${item.set} (#${item.num})\nVariant: ${item.type} | Guide: ${p}\nImage: ${item.imageUrl}\n\n`;
     });
     const waLink = `https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(waLink, '_blank');
