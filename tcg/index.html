@@ -24,65 +24,63 @@
             --disabled: #C7C7CC;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        html, body { width: 100%; height: 100%; background-color: var(--bg); font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; padding-bottom: 100px; }
-        
-        /* INSTALL BANNER - Hidden by default, shown via JS */
-        .install-banner { 
-            background: var(--primary); 
-            color: white; 
-            padding: 12px 16px; 
-            display: none; 
-            justify-content: space-between; 
-            align-items: center; 
-            font-size: 14px; 
-            font-weight: 600; 
-            position: relative;
-            z-index: 5000;
+        /* DARK MODE STYLES */
+        [data-theme="dark"] {
+            --bg: #000000;
+            --card-bg: #1C1C1E;
+            --text-main: #FFFFFF;
+            --text-secondary: #AEAEB2;
+            --header-bg: rgba(28, 28, 30, 0.9);
         }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        html, body { width: 100%; height: 100%; background-color: var(--bg); font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; transition: background-color 0.3s; }
+        .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; padding-bottom: 100px; color: var(--text-main); }
+        
+        .install-banner { background: var(--primary); color: white; padding: 12px 16px; display: none; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; position: relative; z-index: 5000; }
         .install-btn { background: white; color: var(--primary); border: none; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; }
 
         .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 10px 0 16px; }
         .details-header { display: none; position: sticky; top: 0; z-index: 1100; background: var(--header-bg); backdrop-filter: blur(20px); height: 60px; align-items: center; padding: 0 16px; border-bottom: 1px solid rgba(0,0,0,0.08); }
         .nav-back-btn { background: none; border: none; color: var(--primary); font-size: 17px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; }
 
-        .large-title { padding: 15px 20px 15px; font-size: 28px; font-weight: 800; }
+        .header-top-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px 5px; }
+        .large-title { font-size: 28px; font-weight: 800; }
+        .theme-toggle { background: none; border: none; color: var(--primary); font-size: 20px; cursor: pointer; }
+
         .search-area { padding: 0 16px; }
         .search-pill { background: rgba(118, 118, 128, 0.12); border-radius: 12px; height: 46px; display: flex; align-items: center; padding: 0 16px; margin-bottom: 12px; }
-        .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 17px; margin-left: 10px; }
+        .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 17px; margin-left: 10px; color: var(--text-main); }
 
         .filter-row { display: flex; gap: 10px; padding: 0 16px 10px; width: 100%; justify-content: space-between; }
         .filter-select { 
             width: 48%; 
-            background: white; 
-            border: 1px solid rgba(0,0,0,0.1); 
+            background: var(--card-bg); 
+            color: var(--text-main);
+            border: 1px solid rgba(128,128,128,0.2); 
             padding: 10px; 
             border-radius: 10px; 
             font-size: 13px; 
             font-weight: 600; 
             outline: none; 
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
         }
 
         #ad-container { padding: 16px; }
-        .ad-card { background: #ffffff; border-radius: 20px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 20px rgba(0,0,0,0.04); margin-bottom: 16px; }
-        .ad-banner-bg { background: #f9f9fb; width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .ad-card { background: var(--card-bg); border-radius: 20px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(128,128,128,0.1); box-shadow: 0 10px 20px rgba(0,0,0,0.04); margin-bottom: 16px; }
+        .ad-banner-bg { background: rgba(128,128,128,0.05); width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .ad-banner-img { max-width: 80%; max-height: 80%; object-fit: contain; }
-        .ad-content { padding: 20px; border-top: 1px solid rgba(0,0,0,0.03); text-align: left; }
+        .ad-content { padding: 20px; border-top: 1px solid rgba(128,128,128,0.05); text-align: left; }
         .ad-tag { color: var(--primary); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; display: inline-block; }
         .ad-title { font-size: 20px; font-weight: 800; color: var(--text-main); margin-bottom: 6px; }
         .ad-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
 
         .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 16px; }
         .card { background: var(--card-bg); border-radius: 18px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); cursor: pointer; }
-        .card-img { width: 100%; aspect-ratio: 1 / 1.38; background: #F9F9FB; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
+        .card-img { width: 100%; aspect-ratio: 1 / 1.38; background: rgba(128,128,128,0.05); border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; }
         .card-img img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
         #details-view { display: none; padding: 16px; }
-        .details-card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .details-card { background: var(--card-bg); border-radius: 24px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
         .details-img { width: 100%; border-radius: 15px; margin-bottom: 20px; }
         .price-box { background: var(--bg); border-radius: 18px; padding: 20px; margin-top: 15px; text-align: center; }
         .price-tag { font-size: 32px; font-weight: 800; color: var(--primary); margin: 4px 0 15px; }
@@ -92,9 +90,9 @@
         .btn-ebay-small { height: 38px; font-size: 13px; background: none; color: var(--ebay); border: 1.5px solid var(--ebay); margin-top: 12px; }
         .btn-added { background: var(--disabled); color: white; cursor: default; }
 
-        .cart-bar { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: var(--text-main); color: white; height: 60px; border-radius: 30px; display: none; align-items: center; justify-content: space-between; padding: 0 25px; z-index: 2000; cursor: pointer; }
-        #list-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 3000; padding: 20px; overflow-y: auto; }
-        .list-item { background: white; padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .cart-bar { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: #2C2C2E; color: white; height: 60px; border-radius: 30px; display: none; align-items: center; justify-content: space-between; padding: 0 25px; z-index: 2000; cursor: pointer; }
+        #list-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 3000; padding: 20px; overflow-y: auto; color: var(--text-main); }
+        .list-item { background: var(--card-bg); padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; border: 1px solid rgba(128,128,128,0.1); }
     </style>
 </head>
 <body>
@@ -109,11 +107,14 @@
 
 <div class="app-container">
     <header class="app-header" id="mainHeader">
-        <div class="large-title">Ellis TCG Card Search</div>
+        <div class="header-top-row">
+            <div class="large-title">Ellis TCG</div>
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
+        </div>
         <div class="search-area">
             <div class="search-pill">
                 <i class="fa-solid fa-magnifying-glass" style="color:var(--text-secondary)"></i>
-                <input type="text" id="searchInput" placeholder="Search card name or number...">
+                <input type="text" id="searchInput" placeholder="Search name or number...">
             </div>
         </div>
         <div class="filter-row">
@@ -165,7 +166,7 @@
     <div id="list-items-container"></div>
     <div style="margin-top: 30px;">
         <button class="btn btn-wa" onclick="sendFinalWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Send Inquiry To EllisTcg</button>
-        <button class="btn" style="margin-top:15px; background:rgba(0,0,0,0.05);" onclick="handleBack()">Close & Continue Searching</button>
+        <button class="btn" style="margin-top:15px; background:rgba(128,128,128,0.15); color:var(--text-main);" onclick="handleBack()">Close & Continue Searching</button>
     </div>
 </div>
 
@@ -180,6 +181,22 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register(URL.createObjectURL(blob));
 }
 
+// DARK MODE TOGGLE LOGIC
+function toggleTheme() {
+    const body = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    if (body.getAttribute('data-theme') === 'dark') {
+        body.removeAttribute('data-theme');
+        btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        localStorage.setItem('theme', 'light');
+    } else {
+        body.setAttribute('data-theme', 'dark');
+        btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+        localStorage.setItem('theme', 'dark');
+    }
+}
+if(localStorage.getItem('theme') === 'dark') toggleTheme();
+
 const APP_CONFIG = { phoneNumber: "447483251962", buttonText: "Add to Inquiry List", addedText: "Added to List" };
 const API = "https://api.pokemontcg.io/v2/cards";
 let gbpRate = 0.78;
@@ -187,11 +204,9 @@ let cards = [];
 let shoppingList = JSON.parse(localStorage.getItem('tcgInquiryList')) || [];
 let deferredPrompt;
 
-// Only show banner if not already installed
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    // Show the banner automatically when the browser is ready
     document.getElementById('installBanner').style.display = 'flex';
 });
 
@@ -199,13 +214,11 @@ function installPWA() {
     if (deferredPrompt) {
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then((choice) => {
-            if (choice.outcome === 'accepted') {
-                document.getElementById('installBanner').style.display = 'none';
-            }
+            if (choice.outcome === 'accepted') document.getElementById('installBanner').style.display = 'none';
             deferredPrompt = null;
         });
     } else {
-        alert("To install: Tap your browser menu (or Share icon on iPhone) and select 'Add to Home Screen'.");
+        alert("To install: Tap 'Share' (iPhone) or the browser menu (Android) and select 'Add to Home Screen'.");
     }
 }
 
@@ -250,16 +263,13 @@ const handleSearch = debounce(async () => {
     const val = document.getElementById('searchInput').value.trim();
     const set = document.getElementById('setFilter').value;
     const rarity = document.getElementById('rarityFilter').value;
-
     if (val.length < 3 && !set && !rarity) { 
         document.getElementById('results-view').innerHTML = ""; 
         document.getElementById('ad-container').style.display = 'block';
         return; 
     }
-    
     document.getElementById('ad-container').style.display = 'none';
     document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;"><i class="fa-solid fa-spinner fa-spin"></i> Searching...</p>`;
-    
     let queryParts = [];
     if (val) {
         if (val.includes('/')) {
@@ -271,7 +281,6 @@ const handleSearch = debounce(async () => {
     }
     if (set) queryParts.push(`set.id:${set}`);
     if (rarity) queryParts.push(`rarity:"${rarity}"`);
-    
     const res = await fetch(`${API}?q=${encodeURIComponent(queryParts.join(' AND '))}`);
     const data = await res.json();
     cards = data.data || [];
@@ -295,7 +304,6 @@ function renderGrid() {
 function openCard(idx, fromList) {
     const c = fromList ? shoppingList[idx].fullData : cards[idx];
     history.pushState({view: 'card', fromList: fromList}, '');
-    
     document.getElementById('mainHeader').style.display = 'none';
     document.getElementById('installBanner').style.display = 'none';
     document.getElementById('results-view').style.display = 'none';
@@ -303,13 +311,10 @@ function openCard(idx, fromList) {
     document.getElementById('ad-container').style.display = 'none';
     document.getElementById('detailsHeader').style.display = 'flex';
     document.getElementById('backText').innerText = fromList ? "Back to Inquiry List" : "Back to Search";
-    
     const view = document.getElementById('details-view');
     view.style.display = 'block';
-
     const displayNum = `${c.number}/${c.set.printedTotal || '?'}`;
     const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(c.name + ' ' + displayNum + ' ' + c.set.name + ' pokemon sold')}&LH_Sold=1&LH_Complete=1`;
-    
     const prices = c.tcgplayer?.prices || {};
     let variants = "";
     for (const type in prices) {
@@ -319,13 +324,12 @@ function openCard(idx, fromList) {
         }
     }
     if(!variants) variants = generatePriceBox(c, "Standard", "TBC", ebayLink);
-
     view.innerHTML = `<div class="details-card">
         <img src="${c.images.large}" class="details-img">
         <h1 style="text-align:center;">${c.name}</h1>
         <p style="text-align:center; color:var(--text-secondary); margin-bottom:10px;">${c.set.name} • #${displayNum}</p>
         ${variants}
-        <button class="btn" style="margin-top:20px; background:rgba(0,0,0,0.05);" onclick="handleBack()">Back</button>
+        <button class="btn" style="margin-top:20px; background:rgba(128,128,128,0.15); color:var(--text-main);" onclick="handleBack()">Back</button>
     </div>`;
     window.scrollTo(0,0);
 }
@@ -336,17 +340,11 @@ function generatePriceBox(c, type, priceDisplay, ebayLink) {
     const btnText = isAdded ? `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}` : `<i class="fa-solid fa-plus"></i> ${APP_CONFIG.buttonText}`;
     const btnAttr = isAdded ? "disabled" : "";
     const priceVal = priceDisplay === "TBC" ? "TBC" : `£${priceDisplay}`;
-
     return `<div class="price-box">
         <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} - Guide Price</div>
         <div class="price-tag">${priceVal}</div>
-        <button id="btn-${c.id}-${type}" class="${btnClass}" ${btnAttr} 
-                onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceVal}")'>
-            ${btnText}
-        </button>
-        <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small">
-            <i class="fa-brands fa-ebay"></i> View eBay Last Sold
-        </a>
+        <button id="btn-${c.id}-${type}" class="${btnClass}" ${btnAttr} onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceVal}")'>${btnText}</button>
+        <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small"><i class="fa-brands fa-ebay"></i> View eBay Last Sold</a>
     </div>`;
 }
 
@@ -382,11 +380,7 @@ function removeItem(i) { shoppingList.splice(i, 1); localStorage.setItem('tcgInq
 
 function handleBack() {
     if (document.getElementById('details-view').style.display === 'block') {
-        if (history.state && history.state.fromList) {
-            closeCardUI();
-            showList(true);
-            return;
-        }
+        if (history.state && history.state.fromList) { closeCardUI(); showList(true); return; }
     }
     window.history.back();
 }
@@ -397,10 +391,7 @@ function closeCardUI() {
     document.getElementById('detailsHeader').style.display = 'none';
     document.getElementById('results-view').style.display = 'grid';
     document.getElementById('mainHeader').style.display = 'block';
-    
-    // Check if install banner should re-appear
     if(deferredPrompt) document.getElementById('installBanner').style.display = 'flex';
-    
     if(document.getElementById('searchInput').value.length < 3) document.getElementById('ad-container').style.display = 'block';
 }
 
