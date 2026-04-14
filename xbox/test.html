@@ -15,6 +15,7 @@
             --whatsapp: #25D366;
             --header-bg: rgba(255, 255, 255, 0.85);
             --danger: #FF3B30;
+            --disabled: #C7C7CC;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -61,6 +62,7 @@
         .price-tag { font-size: 32px; font-weight: 800; color: var(--primary); margin: 6px 0 15px; }
         .btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 54px; border-radius: 14px; font-weight: 700; font-size: 16px; text-decoration: none; border: none; cursor: pointer; transition: 0.2s; }
         .btn-wa { background: var(--whatsapp); color: white; }
+        .btn-added { background: var(--disabled) !important; color: white !important; cursor: default; }
         .btn-back { background: rgba(0,0,0,0.06); color: var(--text-main); margin-top: 25px; }
 
         /* FLOATING CART BAR */
@@ -123,8 +125,6 @@
 </div>
 
 <script>
-/** * CONFIGURATION
- */
 const APP_CONFIG = {
     logoUrl: "https://imagecdn.websitebuilder.prositehosting.co.uk/22/3e/223ef076-9a2d-4062-98c2-25f95c7952d0.png",
     appTitle: "Ellis TCG Card Search",
@@ -132,7 +132,8 @@ const APP_CONFIG = {
     adTitle: "Essex Console Repair",
     adDescription: "Ps5/Xbox/Switch/Hdmi Ports",
     phoneNumber: "447483251962",
-    buttonText: "Add to Inquiry List"
+    buttonText: "Add to Inquiry List",
+    addedText: "Added to List"
 };
 
 const API = "https://api.pokemontcg.io/v2/cards";
@@ -160,7 +161,6 @@ async function startup() {
     input.placeholder = "Card name or number...";
 }
 
-// Search Logic
 document.getElementById('searchInput').addEventListener('input', debounce(async (e) => {
     const val = e.target.value.trim();
     const adContainer = document.getElementById('ad-container');
@@ -223,15 +223,17 @@ function openCard(index) {
         if (!market) continue;
         const gbp = (market * gbpRate * 1.10).toFixed(2);
         
-        // Use single quotes carefully for the onclick string
-        const cleanName = c.name.replace(/'/g, "");
-        const cleanSet = c.set.name.replace(/'/g, "");
+        // Check if this specific card variant is already in the list
+        const isAdded = shoppingList.some(item => item.id === c.id && item.type === type);
+        const btnClass = isAdded ? "btn btn-added" : "btn btn-wa";
+        const btnText = isAdded ? `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}` : `<i class="fa-solid fa-plus"></i> ${APP_CONFIG.buttonText}`;
+        const btnAttr = isAdded ? "disabled" : "";
 
         variants += `<div class="price-box">
             <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} Guide Price</div>
             <div class="price-tag">£${gbp}</div>
-            <button onclick="addItem('${c.id}', '${cleanName}', '${cleanSet}', '${c.number}', '${type}', '${gbp}', '${c.images.large}')" class="btn btn-wa">
-                <i class="fa-solid fa-plus"></i> ${APP_CONFIG.buttonText}
+            <button id="btn-${c.id}-${type}" ${btnAttr} onclick="addItem('${c.id}', '${c.name.replace(/'/g, "")}', '${c.set.name.replace(/'/g, "")}', '${c.number}', '${type}', '${gbp}', '${c.images.large}')" class="${btnClass}">
+                ${btnText}
             </button>
         </div>`;
     }
@@ -245,23 +247,22 @@ function openCard(index) {
     window.scrollTo(0,0);
 }
 
-/**
- * LIST LOGIC
- */
 function addItem(id, name, set, num, type, price, imageUrl) {
-    shoppingList.push({ name, set, num, type, price, imageUrl });
+    // Duplicate check (extra safety)
+    if (shoppingList.some(item => item.id === id && item.type === type)) return;
+
+    shoppingList.push({ id, name, set, num, type, price, imageUrl });
     document.getElementById('cartBar').style.display = 'flex';
     document.getElementById('cartCount').innerText = shoppingList.length;
     
-    // Feedback on button
-    const btn = event.currentTarget;
-    const originalContent = btn.innerHTML;
-    btn.innerHTML = "<i class='fa-solid fa-check'></i> Added to List";
-    btn.style.background = "#000";
-    setTimeout(() => {
-        btn.innerHTML = originalContent;
-        btn.style.background = "var(--whatsapp)";
-    }, 1200);
+    // Update button status
+    const btn = document.getElementById(`btn-${id}-${type}`);
+    if (btn) {
+        btn.classList.remove('btn-wa');
+        btn.classList.add('btn-added');
+        btn.innerHTML = `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}`;
+        btn.disabled = true;
+    }
 }
 
 function showList() {
@@ -300,12 +301,8 @@ function sendFinalWhatsApp() {
     if (shoppingList.length === 0) return;
 
     let message = "Hi Dave, I'm checking if you have these cards. I understand the prices are guides:\n\n";
-    
     shoppingList.forEach((item, i) => {
-        message += `*${i+1}. ${item.name}*\n`;
-        message += `Set: ${item.set} (#${item.num})\n`;
-        message += `Variant: ${item.type} | Guide: £${item.price}\n`;
-        message += `Image: ${item.imageUrl}\n\n`; // This generates the preview in WhatsApp
+        message += `*${i+1}. ${item.name}*\nSet: ${item.set} (#${item.num})\nVariant: ${item.type} | Guide: £${item.price}\nImage: ${item.imageUrl}\n\n`;
     });
 
     const waLink = `https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`;
