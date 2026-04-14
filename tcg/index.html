@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Ellis TCG Card Search</title>
     
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Ellis TCG","short_name":"Ellis TCG","start_url":"index.html","display":"standalone","background_color":"#F2F2F7","theme_color":"#007AFF","icons":[{"src":"https://scontent-lhr6-2.xx.fbcdn.net/v/t39.30808-6/586722015_122100567723131819_786900678622678002_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=2a1932&_nc_ohc=WDWwua9SFZIQ7kNvwF5bdl7&_nc_oc=AdrgqHXe0nTdxZuJqVy86pAsbe-mEkL3WEmcqBExPxPBNcf7dEGr1m37DXiqJFBBd8A&_nc_zt=23&_nc_ht=scontent-lhr6-2.xx&_nc_gid=APuFORar1eguSeHTQaIvCw&_nc_ss=7a389&oh=00_Af0G-vSpnAli0Ro0h5J8BCvIpa-u4LayR71DvERIZLcBeg&oe=69E40DB7","sizes":"512x512","type":"image/jpeg"}]}'>
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="apple-touch-icon" href="https://scontent-lhr6-2.xx.fbcdn.net/v/t39.30808-6/586722015_122100567723131819_786900678622678002_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=2a1932&_nc_ohc=WDWwua9SFZIQ7kNvwF5bdl7&_nc_oc=AdrgqHXe0nTdxZuJqVy86pAsbe-mEkL3WEmcqBExPxPBNcf7dEGr1m37DXiqJFBBd8A&_nc_zt=23&_nc_ht=scontent-lhr6-2.xx&_nc_gid=APuFORar1eguSeHTQaIvCw&_nc_ss=7a389&oh=00_Af0G-vSpnAli0Ro0h5J8BCvIpa-u4LayR71DvERIZLcBeg&oe=69E40DB7">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     
@@ -27,27 +22,14 @@
             --shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
 
-        [data-theme="dark"] {
-            --bg: #0A0A0B;
-            --card-bg: #1C1C1E;
-            --text-main: #F2F2F7;
-            --text-secondary: #A1A1AA;
-            --header-bg: rgba(18, 18, 18, 0.85);
-            --pill-bg: rgba(255, 255, 255, 0.08);
-            --shadow: 0 10px 30px rgba(0,0,0,0.4);
-        }
-
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg); font-family: 'Inter', -apple-system, sans-serif; transition: 0.4s; color: var(--text-main); }
+        body { background-color: var(--bg); font-family: 'Inter', -apple-system, sans-serif; color: var(--text-main); }
         .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; padding-bottom: 120px; }
         
         .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 12px 0 20px; border-bottom: 1px solid rgba(128,128,128,0.1); }
         .title-container { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px 15px; }
         .large-title { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
         
-        .header-actions { display: flex; gap: 10px; }
-        .header-btn { background: transparent; border: 1.5px solid var(--primary); color: var(--primary); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: 0.3s; }
-
         .search-area { padding: 0 16px; }
         .search-pill { background: var(--pill-bg); border-radius: 24px; height: 50px; display: flex; align-items: center; padding: 0 20px; margin-bottom: 15px; }
         .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 16px; margin-left: 10px; color: var(--text-main); font-weight: 500; }
@@ -91,10 +73,6 @@
     <header class="app-header" id="mainHeader">
         <div class="title-container">
             <div class="large-title">Ellis TCG Search</div>
-            <div class="header-actions">
-                <button class="header-btn" onclick="installPWA()"><i class="fa-solid fa-download"></i></button>
-                <button class="header-btn" onclick="toggleTheme()" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
-            </div>
         </div>
         <div class="search-area">
             <div class="search-pill">
@@ -346,18 +324,6 @@ window.onpopstate = () => {
     }
 };
 
-function toggleTheme() {
-    const isDark = document.documentElement.hasAttribute('data-theme');
-    const btn = document.getElementById('themeBtn');
-    if (isDark) {
-        document.documentElement.removeAttribute('data-theme');
-        btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
-    } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-    }
-}
-
 function sendFinalWhatsApp() {
     let msg = "Hi Dave, do you have these available? (Guide prices only):\n\n";
     shoppingList.forEach((item, i) => { 
@@ -367,8 +333,6 @@ function sendFinalWhatsApp() {
 }
 
 function debounce(fn, t) { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), t); }; }
-
-function installPWA() { alert("To install: Use your browser menu and select 'Add to Home Screen'."); }
 
 startup();
 </script>
