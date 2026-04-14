@@ -24,7 +24,7 @@
             --disabled: #C7C7CC;
         }
 
-        /* DARK MODE STYLES */
+        /* DARK MODE COLORS */
         [data-theme="dark"] {
             --bg: #000000;
             --card-bg: #1C1C1E;
@@ -34,19 +34,21 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        html, body { width: 100%; height: 100%; background-color: var(--bg); font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; transition: background-color 0.3s; }
+        html, body { width: 100%; height: 100%; background-color: var(--bg); font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; transition: background-color 0.3s ease; }
         .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; padding-bottom: 100px; color: var(--text-main); }
         
+        /* INSTALL BANNER */
         .install-banner { background: var(--primary); color: white; padding: 12px 16px; display: none; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; position: relative; z-index: 5000; }
         .install-btn { background: white; color: var(--primary); border: none; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; }
 
-        .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 10px 0 16px; }
-        .details-header { display: none; position: sticky; top: 0; z-index: 1100; background: var(--header-bg); backdrop-filter: blur(20px); height: 60px; align-items: center; padding: 0 16px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+        .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(128,128,128,0.2); padding: 10px 0 16px; }
+        .details-header { display: none; position: sticky; top: 0; z-index: 1100; background: var(--header-bg); backdrop-filter: blur(20px); height: 60px; align-items: center; padding: 0 16px; border-bottom: 1px solid rgba(128,128,128,0.2); }
         .nav-back-btn { background: none; border: none; color: var(--primary); font-size: 17px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; }
 
-        .header-top-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px 5px; }
+        /* TITLE AREA + TOGGLE */
+        .title-container { position: relative; padding: 15px 20px 15px; }
         .large-title { font-size: 28px; font-weight: 800; }
-        .theme-toggle { background: none; border: none; color: var(--primary); font-size: 20px; cursor: pointer; }
+        .theme-toggle { position: absolute; right: 20px; top: 22px; background: none; border: none; color: var(--primary); font-size: 22px; cursor: pointer; padding: 5px; }
 
         .search-area { padding: 0 16px; }
         .search-pill { background: rgba(118, 118, 128, 0.12); border-radius: 12px; height: 46px; display: flex; align-items: center; padding: 0 16px; margin-bottom: 12px; }
@@ -107,14 +109,16 @@
 
 <div class="app-container">
     <header class="app-header" id="mainHeader">
-        <div class="header-top-row">
-            <div class="large-title">Ellis TCG</div>
-            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
+        <div class="title-container">
+            <div class="large-title">Ellis TCG Search</div>
+            <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">
+                <i class="fa-solid fa-moon"></i>
+            </button>
         </div>
         <div class="search-area">
             <div class="search-pill">
                 <i class="fa-solid fa-magnifying-glass" style="color:var(--text-secondary)"></i>
-                <input type="text" id="searchInput" placeholder="Search name or number...">
+                <input type="text" id="searchInput" placeholder="Search card name or number...">
             </div>
         </div>
         <div class="filter-row">
@@ -181,21 +185,24 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register(URL.createObjectURL(blob));
 }
 
-// DARK MODE TOGGLE LOGIC
+// THEME TOGGLE FUNCTION
 function toggleTheme() {
-    const body = document.documentElement;
+    const root = document.documentElement;
     const btn = document.getElementById('themeBtn');
-    if (body.getAttribute('data-theme') === 'dark') {
-        body.removeAttribute('data-theme');
+    if (root.getAttribute('data-theme') === 'dark') {
+        root.removeAttribute('data-theme');
         btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
         localStorage.setItem('theme', 'light');
     } else {
-        body.setAttribute('data-theme', 'dark');
+        root.setAttribute('data-theme', 'dark');
         btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
         localStorage.setItem('theme', 'dark');
     }
 }
-if(localStorage.getItem('theme') === 'dark') toggleTheme();
+if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    document.getElementById('themeBtn').innerHTML = '<i class="fa-solid fa-sun"></i>';
+}
 
 const APP_CONFIG = { phoneNumber: "447483251962", buttonText: "Add to Inquiry List", addedText: "Added to List" };
 const API = "https://api.pokemontcg.io/v2/cards";
