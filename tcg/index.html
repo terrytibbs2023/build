@@ -135,7 +135,7 @@
     <div id="list-items-container"></div>
     <div style="margin-top: 30px;">
         <button class="btn btn-wa" onclick="sendFinalWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Send List to WhatsApp</button>
-        <button class="btn btn-back" onclick="hideList()">Close & Continue Searching</button>
+        <button class="btn btn-back" onclick="handleBack()">Close & Continue Searching</button>
     </div>
 </div>
 
@@ -156,6 +156,15 @@ let gbpRate = 0.78;
 let cards = [];
 let shoppingList = JSON.parse(localStorage.getItem('tcgInquiryList')) || [];
 
+// HISTORY FIX: Listen for the swipe back/back button
+window.onpopstate = function(event) {
+    if (document.getElementById('details-view').style.display === 'block') {
+        closeCardUI();
+    } else if (document.getElementById('list-modal').style.display === 'block') {
+        hideListUI();
+    }
+};
+
 function applyBranding() {
     document.getElementById('ui-logo-ad').src = APP_CONFIG.logoUrl;
     document.getElementById('ui-app-title').innerText = APP_CONFIG.appTitle;
@@ -165,11 +174,9 @@ function applyBranding() {
 }
 
 async function startup() {
-    // Service Worker Registration for App Installability
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').catch(err => console.log("SW Register Failed", err));
     }
-
     applyBranding();
     updateCartUI();
     try {
@@ -234,6 +241,9 @@ function openCardFromObject(index) {
 }
 
 function showCardDetails(c) {
+    // HISTORY FIX: Add a history entry when opening card
+    history.pushState({view: 'card'}, '');
+
     const view = document.getElementById('details-view');
     const grid = document.getElementById('results-view');
     const head = document.getElementById('mainHeader');
@@ -273,7 +283,7 @@ function showCardDetails(c) {
 
         ${variants}
         
-        <button class="btn btn-back" onclick="closeCard()">Back to Search</button>
+        <button class="btn btn-back" onclick="handleBack()">Back to Search</button>
     </div>`;
     window.scrollTo(0,0);
 }
@@ -330,6 +340,9 @@ function updateCartUI() {
 }
 
 function showList() {
+    // HISTORY FIX: Add entry for list
+    history.pushState({view: 'list'}, '');
+
     const container = document.getElementById('list-items-container');
     if(shoppingList.length === 0) {
         container.innerHTML = "<p style='text-align:center; padding:40px; color:var(--text-secondary);'>Your list is empty.</p>";
@@ -364,7 +377,22 @@ function removeItem(index) {
     showList();
 }
 
-function hideList() {
+// HISTORY FIX: Generic handle for button clicks
+function handleBack() {
+    window.history.back();
+}
+
+// Actual UI logic separated from history
+function closeCardUI() {
+    document.getElementById('details-view').style.display = 'none';
+    document.getElementById('results-view').style.display = 'grid';
+    document.getElementById('mainHeader').style.display = 'block';
+    if(document.getElementById('searchInput').value.length < 3) {
+        document.getElementById('ad-container').style.display = 'block';
+    }
+}
+
+function hideListUI() {
     document.getElementById('list-modal').style.display = 'none';
 }
 
@@ -377,15 +405,6 @@ function sendFinalWhatsApp() {
     });
     const waLink = `https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(waLink, '_blank');
-}
-
-function closeCard() {
-    document.getElementById('details-view').style.display = 'none';
-    document.getElementById('results-view').style.display = 'grid';
-    document.getElementById('mainHeader').style.display = 'block';
-    if(document.getElementById('searchInput').value.length < 3) {
-        document.getElementById('ad-container').style.display = 'block';
-    }
 }
 
 function debounce(fn, t) {
