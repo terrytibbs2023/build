@@ -25,7 +25,7 @@
         
         /* INSTALL BANNER */
         .install-banner { background: var(--primary); color: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; }
-        .install-btn { background: white; color: var(--primary); border: none; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 12px; }
+        .install-btn { background: white; color: var(--primary); border: none; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; }
 
         .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 10px 0 16px; }
         .details-header { display: none; position: sticky; top: 0; z-index: 1100; background: var(--header-bg); backdrop-filter: blur(20px); height: 60px; align-items: center; padding: 0 16px; border-bottom: 1px solid rgba(0,0,0,0.08); }
@@ -36,10 +36,21 @@
         .search-pill { background: rgba(118, 118, 128, 0.12); border-radius: 12px; height: 46px; display: flex; align-items: center; padding: 0 16px; margin-bottom: 12px; }
         .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 17px; margin-left: 10px; }
 
-        /* FILTERS */
-        .filter-row { display: flex; gap: 8px; padding: 0 16px 10px; overflow-x: auto; white-space: nowrap; }
-        .filter-row::-webkit-scrollbar { display: none; }
-        .filter-select { background: white; border: 1px solid rgba(0,0,0,0.1); padding: 8px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; outline: none; }
+        /* LOCKED FILTERS - Fixed size and no jumping */
+        .filter-row { display: flex; gap: 10px; padding: 0 16px 10px; width: 100%; justify-content: space-between; }
+        .filter-select { 
+            width: 48%; /* Fixed width so they never change size */
+            background: white; 
+            border: 1px solid rgba(0,0,0,0.1); 
+            padding: 10px; 
+            border-radius: 10px; 
+            font-size: 13px; 
+            font-weight: 600; 
+            outline: none; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
 
         /* SPONSOR STYLES */
         #ad-container { padding: 16px; }
@@ -74,9 +85,12 @@
 </head>
 <body>
 
-<div id="installBanner" class="install-banner" style="display:none;">
+<div id="installBanner" class="install-banner">
     <span>Install Ellis TCG Card Search?</span>
-    <button class="install-btn" onclick="installPWA()">Install</button>
+    <div>
+        <button class="install-btn" onclick="installPWA()">Install</button>
+        <button onclick="this.parentElement.parentElement.style.display='none'" style="background:none; border:none; color:white; margin-left:10px; font-size:18px;">×</button>
+    </div>
 </div>
 
 <div class="app-container">
@@ -111,7 +125,7 @@
             </div>
             <div class="ad-content">
                 <span class="ad-tag">Shop Pokémon</span>
-                <div class="ad-title">Magic Madhouse</div>
+                <div class="ad-title">East Coast Collectables</div>
                 <div class="ad-desc">Buy Booster Boxes, Elite Trainer Boxes, and TCG accessories.</div>
             </div>
         </a>
@@ -162,7 +176,6 @@ let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    document.getElementById('installBanner').style.display = 'flex';
 });
 
 function installPWA() {
@@ -172,6 +185,8 @@ function installPWA() {
             document.getElementById('installBanner').style.display = 'none';
             deferredPrompt = null;
         });
+    } else {
+        alert("To install, use your browser's 'Add to Home Screen' option.");
     }
 }
 
@@ -265,6 +280,7 @@ function openCard(idx, fromList) {
     history.pushState({view: 'card', fromList: fromList}, '');
     
     document.getElementById('mainHeader').style.display = 'none';
+    document.getElementById('installBanner').style.display = 'none';
     document.getElementById('results-view').style.display = 'none';
     document.getElementById('list-modal').style.display = 'none';
     document.getElementById('ad-container').style.display = 'none';
@@ -364,6 +380,7 @@ function closeCardUI() {
     document.getElementById('detailsHeader').style.display = 'none';
     document.getElementById('results-view').style.display = 'grid';
     document.getElementById('mainHeader').style.display = 'block';
+    document.getElementById('installBanner').style.display = 'flex';
     if(document.getElementById('searchInput').value.length < 3) document.getElementById('ad-container').style.display = 'block';
 }
 
