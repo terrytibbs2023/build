@@ -11,6 +11,8 @@
     <link rel="apple-touch-icon" href="https://scontent-lhr6-2.xx.fbcdn.net/v/t39.30808-6/586722015_122100567723131819_786900678622678002_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=2a1932&_nc_ohc=WDWwua9SFZIQ7kNvwF5bdl7&_nc_oc=AdrgqHXe0nTdxZuJqVy86pAsbe-mEkL3WEmcqBExPxPBNcf7dEGr1m37DXiqJFBBd8A&_nc_zt=23&_nc_ht=scontent-lhr6-2.xx&_nc_gid=APuFORar1eguSeHTQaIvCw&_nc_ss=7a389&oh=00_Af0G-vSpnAli0Ro0h5J8BCvIpa-u4LayR71DvERIZLcBeg&oe=69E40DB7">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    
     <style>
         :root {
             --primary: #007AFF;
@@ -44,21 +46,7 @@
         .large-title { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
         
         .header-actions { display: flex; gap: 10px; }
-        .header-btn { 
-            background: transparent; 
-            border: 1.5px solid var(--primary); 
-            color: var(--primary); 
-            width: 40px; 
-            height: 40px; 
-            border-radius: 50%; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 16px; 
-            transition: 0.3s; 
-        }
-        .header-btn:active { transform: scale(0.9); background: var(--pill-bg); }
+        .header-btn { background: transparent; border: 1.5px solid var(--primary); color: var(--primary); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: 0.3s; }
 
         .search-area { padding: 0 16px; }
         .search-pill { background: var(--pill-bg); border-radius: 24px; height: 50px; display: flex; align-items: center; padding: 0 20px; margin-bottom: 15px; }
@@ -66,14 +54,6 @@
 
         .filter-row { display: flex; gap: 10px; padding: 0 16px; }
         .filter-select { flex: 1; background: var(--pill-bg); color: var(--text-main); border: none; padding: 12px; border-radius: 14px; font-size: 13px; font-weight: 600; outline: none; appearance: none; }
-
-        .ad-card { background: var(--card-bg); border-radius: 24px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(128,128,128,0.1); box-shadow: var(--shadow); margin: 16px; }
-        .ad-banner-bg { background: rgba(128,128,128,0.05); height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px; text-align: center; }
-        .ad-banner-img { max-width: 80%; max-height: 85%; object-fit: contain; }
-        .ad-content { padding: 20px; }
-        .ad-tag { color: var(--primary); font-size: 11px; font-weight: 900; text-transform: uppercase; margin-bottom: 6px; display: block; }
-        .ad-title { font-size: 19px; font-weight: 800; margin-bottom: 4px; color: var(--text-main); }
-        .ad-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
 
         .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 16px; }
         .card { background: var(--card-bg); border-radius: 24px; padding: 14px; box-shadow: var(--shadow); border: 1px solid rgba(128,128,128,0.05); }
@@ -84,15 +64,25 @@
         .details-card { background: var(--card-bg); border-radius: 30px; padding: 24px; box-shadow: var(--shadow); }
         .details-img { width: 100%; border-radius: 20px; margin-bottom: 20px; }
         
+        .barcode-mini { background: white; padding: 10px; border-radius: 12px; margin-bottom: 12px; text-align: center; border: 1px solid #eee; }
+        .barcode-mini svg { max-width: 100%; height: auto; }
+
         .price-box { background: var(--bg); border-radius: 22px; padding: 22px; margin-top: 15px; text-align: center; border: 1px solid rgba(128,128,128,0.1); }
         .price-tag { font-size: 34px; font-weight: 900; color: var(--primary); margin: 5px 0 15px; }
 
         .btn { display: flex; align-items: center; justify-content: center; height: 58px; width: 100%; border-radius: 18px; font-weight: 700; border: none; cursor: pointer; font-size: 16px; gap: 10px; }
         .btn-wa { background: var(--whatsapp); color: white; }
         .btn-added { background: #D1D1D6; color: white; cursor: default; }
-        .btn-ebay-small { height: 42px; font-size: 13px; background: var(--pill-bg); color: var(--ebay); margin-top: 15px; text-decoration: none; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-weight: 700; }
 
-        .cart-bar { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 85%; max-width: 380px; background: var(--primary); color: white; height: 64px; border-radius: 32px; display: none; align-items: center; justify-content: space-between; padding: 0 25px; z-index: 2000; box-shadow: 0 15px 35px rgba(0, 122, 255, 0.4); font-weight: 700; cursor: pointer; }
+        .ad-card { background: var(--card-bg); border-radius: 24px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(128,128,128,0.1); box-shadow: var(--shadow); margin: 16px; }
+        .ad-banner-bg { background: rgba(128,128,128,0.05); height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .ad-banner-img { max-width: 80%; max-height: 85%; object-fit: contain; }
+        .ad-content { padding: 20px; }
+        .ad-tag { color: var(--primary); font-size: 11px; font-weight: 900; text-transform: uppercase; margin-bottom: 6px; display: block; }
+        .ad-title { font-size: 19px; font-weight: 800; margin-bottom: 4px; color: var(--text-main); }
+        .ad-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
+
+        .cart-bar { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 85%; max-width: 380px; background: var(--primary); color: white; height: 64px; border-radius: 32px; display: none; align-items: center; justify-content: space-between; padding: 0 25px; z-index: 2000; box-shadow: 0 15px 35px rgba(0, 122, 255, 0.4); font-weight: 700; }
         #list-modal { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 3000; padding: 25px; overflow-y: auto; }
         .list-item { background: var(--card-bg); padding: 18px; border-radius: 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(128,128,128,0.1); }
     </style>
@@ -104,12 +94,8 @@
         <div class="title-container">
             <div class="large-title">Ellis TCG Search</div>
             <div class="header-actions">
-                <button class="header-btn" id="installAppBtn" onclick="installPWA()" title="Install App">
-                    <i class="fa-solid fa-download"></i>
-                </button>
-                <button class="header-btn" onclick="toggleTheme()" id="themeBtn">
-                    <i class="fa-solid fa-moon"></i>
-                </button>
+                <button class="header-btn" onclick="installPWA()"><i class="fa-solid fa-download"></i></button>
+                <button class="header-btn" onclick="toggleTheme()" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
             </div>
         </div>
         <div class="search-area">
@@ -124,7 +110,7 @@
         </div>
     </header>
 
-    <div class="details-header" id="detailsHeader" style="display:none; height:70px; background:var(--header-bg); backdrop-filter:blur(15px); align-items:center; padding:0 20px; position:sticky; top:0; z-index:1100;">
+    <div id="detailsHeader" style="display:none; height:70px; background:var(--header-bg); backdrop-filter:blur(15px); align-items:center; padding:0 20px; position:sticky; top:0; z-index:1100;">
         <button onclick="handleBack()" style="background:none; border:none; color:var(--primary); font-size:17px; font-weight:bold; display:flex; align-items:center; gap:8px;">
             <i class="fa-solid fa-arrow-left"></i> <span>Back</span>
         </button>
@@ -137,14 +123,6 @@
                 <span class="ad-tag">Shop Pokémon</span>
                 <div class="ad-title">East Coast Collectables</div>
                 <div class="ad-desc">Booster Boxes, ETBs, and TCG accessories.</div>
-            </div>
-        </a>
-        
-        <a href="https://essexconsolerepair.co.uk" target="_blank" class="ad-card">
-            <div class="ad-content">
-                <span class="ad-tag" style="color: var(--primary);">Official Sponsor</span>
-                <div class="ad-title" style="color: var(--text-main);">Essex Console Repair</div>
-                <div class="ad-desc" style="color: var(--text-secondary);">HDMI Ports, PS5, Xbox, and Switch repairs. Local expert service.</div>
             </div>
         </a>
     </div>
@@ -173,48 +151,6 @@ const API = "https://api.pokemontcg.io/v2/cards";
 let gbpRate = 0.78;
 let cards = [];
 let shoppingList = JSON.parse(localStorage.getItem('tcgInquiryList')) || [];
-let deferredPrompt;
-
-if ('serviceWorker' in navigator) {
-    const swCode = `self.addEventListener('install', e => self.skipWaiting()); self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));`;
-    const blob = new Blob([swCode], {type: 'text/javascript'});
-    navigator.serviceWorker.register(URL.createObjectURL(blob));
-}
-
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-});
-
-function installPWA() {
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    if (isIOS) {
-        alert("To install on iPhone:\n\n1. Tap 'Share' (square with arrow icon)\n2. Tap 'Add to Home Screen'");
-    } else if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
-    } else {
-        alert("To install: Use your browser menu and select 'Add to Home Screen'.");
-    }
-}
-
-function toggleTheme() {
-    const root = document.documentElement;
-    const btn = document.getElementById('themeBtn');
-    if (root.getAttribute('data-theme') === 'dark') {
-        root.removeAttribute('data-theme');
-        btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
-        localStorage.setItem('theme', 'light');
-    } else {
-        root.setAttribute('data-theme', 'dark');
-        btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-        localStorage.setItem('theme', 'dark');
-    }
-}
-if (localStorage.getItem('theme') === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    document.getElementById('themeBtn').innerHTML = '<i class="fa-solid fa-sun"></i>';
-}
 
 async function startup() {
     updateCartUI();
@@ -232,7 +168,7 @@ async function startup() {
             opt.value = set.id; opt.textContent = set.name;
             setSelect.appendChild(opt);
         });
-        const rarities = ["Common", "Uncommon", "Rare", "Rare Holo", "Rare Ultra", "Rare Rainbow", "Rare Secret", "Promo", "Illustration Rare", "Special Illustration Rare"];
+        const rarities = ["Common", "Uncommon", "Rare", "Rare Holo", "Rare Ultra", "Rare Rainbow", "Rare Secret", "Illustration Rare", "Special Illustration Rare"];
         const raritySelect = document.getElementById('rarityFilter');
         rarities.forEach(r => {
             const opt = document.createElement('option');
@@ -242,24 +178,37 @@ async function startup() {
     } catch(e) {}
 }
 
+// FIXED SEARCH LOGIC
 const handleSearch = debounce(async () => {
     const val = document.getElementById('searchInput').value.trim();
     const set = document.getElementById('setFilter').value;
     const rarity = document.getElementById('rarityFilter').value;
-    if (val.length < 3 && !set && !rarity) { 
+    
+    // Logic: Only show results if something is entered or selected
+    if (!val && !set && !rarity) { 
         document.getElementById('results-view').innerHTML = ""; 
         document.getElementById('ad-container').style.display = 'block';
         return; 
     }
+
     document.getElementById('ad-container').style.display = 'none';
-    document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;"><i class="fa-solid fa-spinner fa-spin"></i> Searching...</p>`;
-    let q = val ? `name:"${val}*"` : "";
-    if (set) q += (q ? " AND " : "") + `set.id:${set}`;
-    if (rarity) q += (q ? " AND " : "") + `rarity:"${rarity}"`;
-    const res = await fetch(`${API}?q=${encodeURIComponent(q)}`);
-    const data = await res.json();
-    cards = data.data || [];
-    renderGrid();
+    document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;">Searching...</p>`;
+    
+    let queryParts = [];
+    if (val) queryParts.push(`name:"${val}*"`);
+    if (set) queryParts.push(`set.id:"${set}"`);
+    if (rarity) queryParts.push(`rarity:"${rarity}"`);
+    
+    const q = queryParts.join(" AND ");
+    
+    try {
+        const res = await fetch(`${API}?q=${encodeURIComponent(q)}&orderBy=-set.releaseDate`);
+        const data = await res.json();
+        cards = data.data || [];
+        renderGrid();
+    } catch(e) {
+        document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;">Error loading cards.</p>`;
+    }
 }, 500);
 
 document.getElementById('searchInput').addEventListener('input', handleSearch);
@@ -267,6 +216,10 @@ document.getElementById('setFilter').addEventListener('change', handleSearch);
 document.getElementById('rarityFilter').addEventListener('change', handleSearch);
 
 function renderGrid() {
+    if (cards.length === 0) {
+        document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;">No cards found.</p>`;
+        return;
+    }
     document.getElementById('results-view').innerHTML = cards.map((c, i) => `
         <div class="card" onclick="openCard(${i}, false)">
             <div class="card-img"><img src="${c.images.small}"></div>
@@ -281,11 +234,11 @@ function openCard(idx, fromList) {
     history.pushState({view: 'card'}, '');
     document.getElementById('mainHeader').style.display = 'none';
     document.getElementById('results-view').style.display = 'none';
-    document.getElementById('list-modal').style.display = 'none';
     document.getElementById('ad-container').style.display = 'none';
     document.getElementById('detailsHeader').style.display = 'flex';
     const view = document.getElementById('details-view');
     view.style.display = 'block';
+    
     const prices = c.tcgplayer?.prices || {};
     let variants = "";
     for (const type in prices) {
@@ -295,35 +248,44 @@ function openCard(idx, fromList) {
         }
     }
     if(!variants) variants = generatePriceBox(c, "Standard", "TBC");
+    
     view.innerHTML = `<div class="details-card">
         <img src="${c.images.large}" class="details-img" style="width:100%">
         <h1 style="text-align:center; font-weight:900;">${c.name}</h1>
         <p style="text-align:center; color:var(--text-secondary); margin-bottom:15px;">${c.set.name} • #${c.number}</p>
         ${variants}
     </div>`;
-    window.scrollTo(0,0);
+
+    document.querySelectorAll('.barcode-svg').forEach(svg => {
+        JsBarcode(svg, svg.dataset.code, { format: "CODE128", width: 2, height: 40, displayValue: true, fontSize: 12 });
+    });
 }
 
 function generatePriceBox(c, type, priceDisplay) {
     const isAdded = shoppingList.some(item => item.id === c.id && item.type === type);
-    const priceVal = priceDisplay === "TBC" ? "TBC" : `£${priceDisplay}`;
+    const cleanType = type.toLowerCase().replace(/\s+/g, '');
+    const barcodeText = `${c.name.substring(0,3).toLowerCase()}${c.number}/${c.set.printedTotal}-${cleanType}`;
     return `<div class="price-box">
+        <div class="barcode-mini"><svg class="barcode-svg" data-code="${barcodeText}"></svg></div>
         <div style="font-size:12px; font-weight:800; color:var(--text-secondary);">${type} Market</div>
-        <div class="price-tag">${priceVal}</div>
+        <div class="price-tag">${priceDisplay === "TBC" ? "TBC" : '£' + priceDisplay}</div>
         <button id="btn-${c.id}-${type}" class="btn ${isAdded ? 'btn-added' : 'btn-wa'}" ${isAdded ? 'disabled' : ''} 
-                onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceVal}")'>
+                onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceDisplay}")'>
             ${isAdded ? 'Added' : 'Add to Inquiry'}
         </button>
-        <a href="https://www.ebay.co.uk/sch/i.html?_nkw=${encodeURIComponent(c.name + ' ' + c.number)} sold" target="_blank" class="btn btn-ebay-small"><i class="fa-brands fa-ebay"></i> eBay Sold Prices</a>
     </div>`;
 }
 
 function addItem(c, type, priceVal) {
-    shoppingList.push({ id: c.id, name: c.name, type, price: priceVal, imageUrl: c.images.large, fullData: c });
+    shoppingList.push({ id: c.id, name: c.name, type, price: priceVal, fullData: c });
     localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList));
     updateCartUI();
-    const b = document.getElementById(`btn-${c.id}-${type}`);
-    if(b) { b.className = "btn btn-added"; b.innerHTML = "Added"; b.disabled = true; }
+    const btn = document.getElementById(`btn-${c.id}-${type}`);
+    if(btn) {
+        btn.className = "btn btn-added";
+        btn.innerText = "Added";
+        btn.disabled = true;
+    }
 }
 
 function updateCartUI() {
@@ -333,17 +295,13 @@ function updateCartUI() {
 
 function showList() {
     history.pushState({view: 'list'}, '');
-    const container = document.getElementById('list-items-container');
-    container.innerHTML = shoppingList.map((item, index) => `
-        <div class="list-item">
-            <div>
-                <div style="font-weight:800;">${item.name}</div>
-                <div style="color:var(--primary); font-size:12px;">${item.type} • ${item.price}</div>
-            </div>
-            <button onclick="removeItem(${index})" style="color:#FF3B30; background:none; border:none; font-weight:700;">Remove</button>
-        </div>
-    `).join('') || "<p style='text-align:center;'>List is empty.</p>";
     document.getElementById('list-modal').style.display = 'block';
+    document.getElementById('list-items-container').innerHTML = shoppingList.map((item, index) => `
+        <div class="list-item">
+            <div><strong>${item.name}</strong><br><small>${item.type} • £${item.price}</small></div>
+            <button onclick="removeItem(${index})" style="color:red; border:none; background:none;">Remove</button>
+        </div>
+    `).join('') || "<p style='text-align:center;'>Your list is empty.</p>";
 }
 
 function removeItem(i) { shoppingList.splice(i, 1); localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList)); updateCartUI(); showList(); }
@@ -353,14 +311,30 @@ window.onpopstate = () => {
     document.getElementById('details-view').style.display = 'none';
     document.getElementById('list-modal').style.display = 'none';
     document.getElementById('detailsHeader').style.display = 'none';
-    document.getElementById('results-view').style.display = (document.getElementById('searchInput').value.length >= 3) ? 'grid' : 'none';
     document.getElementById('mainHeader').style.display = 'block';
-    if(document.getElementById('searchInput').value.length < 3) document.getElementById('ad-container').style.display = 'block';
+    if(!document.getElementById('searchInput').value && !document.getElementById('setFilter').value && !document.getElementById('rarityFilter').value) {
+        document.getElementById('ad-container').style.display = 'block';
+        document.getElementById('results-view').style.display = 'none';
+    } else {
+        document.getElementById('results-view').style.display = 'grid';
+    }
 };
+
+function toggleTheme() {
+    const isDark = document.documentElement.hasAttribute('data-theme');
+    const btn = document.getElementById('themeBtn');
+    if (isDark) {
+        document.documentElement.removeAttribute('data-theme');
+        btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+    } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
+}
 
 function sendFinalWhatsApp() {
     let msg = "Hi Dave, do you have these available? (Guide prices only):\n\n";
-    shoppingList.forEach((item, i) => { msg += `${i+1}. ${item.name} (${item.type}) - ${item.price}\n`; });
+    shoppingList.forEach((item, i) => { msg += `${i+1}. ${item.name} (${item.type}) - £${item.price}\n`; });
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
