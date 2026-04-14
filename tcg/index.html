@@ -398,7 +398,7 @@ function hideListUI() {
 
 function sendFinalWhatsApp() {
     if (shoppingList.length === 0) return;
-    let message = "Hi Dave, I'm checking if you have these cards. I understand prices are guides:\n\n";
+    let message = "Hi Dave, I'm checking if you have these cards. I understand prices are guides only so can you give me the final price if you have them please?:\n\n";
     shoppingList.forEach((item, i) => {
         const p = item.price === "TBC" ? "TBC" : `£${item.price}`;
         message += `*${i+1}. ${item.name}*\nSet: ${item.set} (#${item.num})\nVariant: ${item.type} | Guide: ${p}\nImage: ${item.imageUrl}\n\n`;
