@@ -16,7 +16,6 @@
             --text-main: #1C1C1E;
             --text-secondary: #8E8E93;
             --whatsapp: #34C759;
-            --ebay: #0064D2;
             --header-bg: rgba(255, 255, 255, 0.85);
             --pill-bg: rgba(118, 118, 128, 0.12);
             --shadow: 0 8px 24px rgba(0,0,0,0.08);
@@ -276,9 +275,12 @@ function addItem(c, type, priceVal) {
     shoppingList.push({ 
         id: c.id, 
         name: c.name, 
+        set: c.set.name,
+        num: c.number,
+        total: c.set.printedTotal || c.set.total,
         type, 
         price: priceVal, 
-        img: c.images.small, 
+        img: c.images.large, 
         fullData: c 
     });
     localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList));
@@ -327,7 +329,12 @@ window.onpopstate = () => {
 function sendFinalWhatsApp() {
     let msg = "Hi Dave, do you have these available? (Guide prices only):\n\n";
     shoppingList.forEach((item, i) => { 
-        msg += `${i+1}. ${item.name} (${item.type}) - £${item.price}\n   📷 ${item.img}\n\n`; 
+        msg += `${i+1}. ${item.name}\n`;
+        msg += `Set: ${item.set}\n`;
+        msg += `Number: #${item.num}/${item.total}\n`;
+        msg += `Type: ${item.type}\n`;
+        msg += `Price: £${item.price}\n`;
+        msg += `📷 Link: ${item.img}\n\n`; 
     });
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
 }
