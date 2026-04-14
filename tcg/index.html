@@ -23,14 +23,23 @@
         html, body { width: 100%; height: 100%; background-color: var(--bg); font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; padding-bottom: 100px; }
         
+        /* INSTALL BANNER */
+        .install-banner { background: var(--primary); color: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; }
+        .install-btn { background: white; color: var(--primary); border: none; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 12px; }
+
         .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 10px 0 16px; }
         .details-header { display: none; position: sticky; top: 0; z-index: 1100; background: var(--header-bg); backdrop-filter: blur(20px); height: 60px; align-items: center; padding: 0 16px; border-bottom: 1px solid rgba(0,0,0,0.08); }
         .nav-back-btn { background: none; border: none; color: var(--primary); font-size: 17px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; }
 
         .large-title { padding: 15px 20px 15px; font-size: 28px; font-weight: 800; }
         .search-area { padding: 0 16px; }
-        .search-pill { background: rgba(118, 118, 128, 0.12); border-radius: 12px; height: 46px; display: flex; align-items: center; padding: 0 16px; }
+        .search-pill { background: rgba(118, 118, 128, 0.12); border-radius: 12px; height: 46px; display: flex; align-items: center; padding: 0 16px; margin-bottom: 12px; }
         .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 17px; margin-left: 10px; }
+
+        /* FILTERS */
+        .filter-row { display: flex; gap: 8px; padding: 0 16px 10px; overflow-x: auto; white-space: nowrap; }
+        .filter-row::-webkit-scrollbar { display: none; }
+        .filter-select { background: white; border: 1px solid rgba(0,0,0,0.1); padding: 8px 12px; border-radius: 10px; font-size: 13px; font-weight: 600; outline: none; }
 
         /* SPONSOR STYLES */
         #ad-container { padding: 16px; }
@@ -65,6 +74,11 @@
 </head>
 <body>
 
+<div id="installBanner" class="install-banner" style="display:none;">
+    <span>Install Ellis TCG Card Search?</span>
+    <button class="install-btn" onclick="installPWA()">Install</button>
+</div>
+
 <div class="app-container">
     <header class="app-header" id="mainHeader">
         <div class="large-title">Ellis TCG Card Search</div>
@@ -73,6 +87,14 @@
                 <i class="fa-solid fa-magnifying-glass" style="color:var(--text-secondary)"></i>
                 <input type="text" id="searchInput" placeholder="Search card name or number...">
             </div>
+        </div>
+        <div class="filter-row">
+            <select id="setFilter" class="filter-select">
+                <option value="">All Sets</option>
+            </select>
+            <select id="rarityFilter" class="filter-select">
+                <option value="">All Rarities</option>
+            </select>
         </div>
     </header>
 
@@ -83,13 +105,13 @@
     </div>
 
     <div id="ad-container">
-        <a href="https://www.facebook.com/p/East-Coast-Collectables-61583954579869/" target="_blank" class="ad-card">
+        <a href="https://magicmadhouse.co.uk" target="_blank" class="ad-card">
             <div class="ad-banner-bg">
-                <img src="https://scontent-lhr6-2.xx.fbcdn.net/v/t39.30808-6/586722015_122100567723131819_786900678622678002_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=2a1932&_nc_ohc=WDWwua9SFZIQ7kNvwF5bdl7&_nc_oc=AdrgqHXe0nTdxZuJqVy86pAsbe-mEkL3WEmcqBExPxPBNcf7dEGr1m37DXiqJFBBd8A&_nc_zt=23&_nc_ht=scontent-lhr6-2.xx&_nc_gid=APuFORar1eguSeHTQaIvCw&_nc_ss=7a389&oh=00_Af0G-vSpnAli0Ro0h5J8BCvIpa-u4LayR71DvERIZLcBeg&oe=69E40DB7" class="ad-banner-img">
+                <img src="https://cdn.magicmadhouse.co.uk/images/site/magic-madhouse-logo-2023.png" class="ad-banner-img">
             </div>
             <div class="ad-content">
-                <span class="ad-tag">Checkout Our Facebook</span>
-                <div class="ad-title">East Coast Collectables</div>
+                <span class="ad-tag">Shop Pokémon</span>
+                <div class="ad-title">Magic Madhouse</div>
                 <div class="ad-desc">Buy Booster Boxes, Elite Trainer Boxes, and TCG accessories.</div>
             </div>
         </a>
@@ -134,6 +156,24 @@ const API = "https://api.pokemontcg.io/v2/cards";
 let gbpRate = 0.78;
 let cards = [];
 let shoppingList = JSON.parse(localStorage.getItem('tcgInquiryList')) || [];
+let deferredPrompt;
+
+// PWA Install Logic
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    document.getElementById('installBanner').style.display = 'flex';
+});
+
+function installPWA() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+            document.getElementById('installBanner').style.display = 'none';
+            deferredPrompt = null;
+        });
+    }
+}
 
 window.onpopstate = (event) => {
     if (document.getElementById('details-view').style.display === 'block') {
@@ -145,30 +185,70 @@ window.onpopstate = (event) => {
 };
 
 async function startup() {
-    document.getElementById('searchInput').disabled = false;
     updateCartUI();
     try {
-        const res = await fetch("https://open.er-api.com/v6/latest/USD");
-        const data = await res.json();
-        gbpRate = data.rates.GBP || 0.78;
+        const [rateRes, setsRes] = await Promise.all([
+            fetch("https://open.er-api.com/v6/latest/USD"),
+            fetch("https://api.pokemontcg.io/v2/sets?orderBy=-releaseDate")
+        ]);
+        const rateData = await rateRes.json();
+        gbpRate = rateData.rates.GBP || 0.78;
+        
+        const setsData = await setsRes.json();
+        const setSelect = document.getElementById('setFilter');
+        setsData.data.forEach(set => {
+            const opt = document.createElement('option');
+            opt.value = set.id;
+            opt.textContent = set.name;
+            setSelect.appendChild(opt);
+        });
+
+        const rarities = ["Common", "Uncommon", "Rare", "Rare Holo", "Rare Ultra", "Rare Rainbow", "Rare Secret", "Promo", "Illustration Rare", "Special Illustration Rare"];
+        const raritySelect = document.getElementById('rarityFilter');
+        rarities.forEach(r => {
+            const opt = document.createElement('option');
+            opt.value = r;
+            opt.textContent = r;
+            raritySelect.appendChild(opt);
+        });
     } catch(e) {}
 }
 
-document.getElementById('searchInput').addEventListener('input', debounce(async (e) => {
-    const val = e.target.value.trim();
-    if (val.length < 3) { 
+const handleSearch = debounce(async () => {
+    const val = document.getElementById('searchInput').value.trim();
+    const set = document.getElementById('setFilter').value;
+    const rarity = document.getElementById('rarityFilter').value;
+
+    if (val.length < 3 && !set && !rarity) { 
         document.getElementById('results-view').innerHTML = ""; 
         document.getElementById('ad-container').style.display = 'block';
         return; 
     }
+    
     document.getElementById('ad-container').style.display = 'none';
     document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;"><i class="fa-solid fa-spinner fa-spin"></i> Searching...</p>`;
-    const q = val.includes('/') ? `number:${val.split('/')[0]} AND set.printedTotal:${val.split('/')[1]}` : `name:"${val}*"`;
-    const res = await fetch(`${API}?q=${encodeURIComponent(q)}`);
+    
+    let queryParts = [];
+    if (val) {
+        if (val.includes('/')) {
+            const [num, total] = val.split('/');
+            queryParts.push(`number:${num} AND set.printedTotal:${total}`);
+        } else {
+            queryParts.push(`name:"${val}*"`);
+        }
+    }
+    if (set) queryParts.push(`set.id:${set}`);
+    if (rarity) queryParts.push(`rarity:"${rarity}"`);
+    
+    const res = await fetch(`${API}?q=${encodeURIComponent(queryParts.join(' AND '))}`);
     const data = await res.json();
     cards = data.data || [];
     renderGrid();
-}, 500));
+}, 500);
+
+document.getElementById('searchInput').addEventListener('input', handleSearch);
+document.getElementById('setFilter').addEventListener('change', handleSearch);
+document.getElementById('rarityFilter').addEventListener('change', handleSearch);
 
 function renderGrid() {
     document.getElementById('results-view').innerHTML = cards.map((c, i) => `
