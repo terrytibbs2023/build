@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Ellis TCG Card Search</title>
     
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Ellis TCG","short_name":"Ellis TCG","start_url":"index.html","display":"standalone","background_color":"#F2F2F7","theme_color":"#007AFF","icons":[{"src":"https://scontent-lhr6-2.xx.fbcdn.net/v/t39.30808-6/586722015_122100567723131819_786900678622678002_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=2a1932&_nc_ohc=WDWwua9SFZIQ7kNvwF5bdl7&_nc_oc=AdrgqHXe0nTdxZuJqVy86pAsbe-mEkL3WEmcqBExPxPBNcf7dEGr1m37DXiqJFBBd8A&_nc_zt=23&_nc_ht=scontent-lhr6-2.xx&_nc_gid=APuFORar1eguSeHTQaIvCw&_nc_ss=7a389&oh=00_Af0G-vSpnAli0Ro0h5J8BCvIpa-u4LayR71DvERIZLcBeg&oe=69E40DB7","sizes":"512x512","type":"image/jpeg"}]}'>
-
+    <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="apple-touch-icon" href="https://scontent-lhr6-2.xx.fbcdn.net/v/t39.30808-6/586722015_122100567723131819_786900678622678002_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=2a1932&_nc_ohc=WDWwua9SFZIQ7kNvwF5bdl7&_nc_oc=AdrgqHXe0nTdxZuJqVy86pAsbe-mEkL3WEmcqBExPxPBNcf7dEGr1m37DXiqJFBBd8A&_nc_zt=23&_nc_ht=scontent-lhr6-2.xx&_nc_gid=APuFORar1eguSeHTQaIvCw&_nc_ss=7a389&oh=00_Af0G-vSpnAli0Ro0h5J8BCvIpa-u4LayR71DvERIZLcBeg&oe=69E40DB7">
@@ -30,7 +29,7 @@
         .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; padding-bottom: 100px; }
         
         /* INSTALL BANNER */
-        .install-banner { background: var(--primary); color: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; display: none; }
+        .install-banner { background: var(--primary); color: white; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-size: 14px; font-weight: 600; }
         .install-btn { background: white; color: var(--primary); border: none; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 12px; cursor: pointer; }
 
         .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: 10px 0 16px; }
@@ -92,8 +91,8 @@
 <div id="installBanner" class="install-banner">
     <span>Install Ellis TCG Card Search?</span>
     <div>
-        <button class="install-btn" id="installBtn">Install</button>
-        <button onclick="document.getElementById('installBanner').style.display='none'" style="background:none; border:none; color:white; margin-left:10px; font-size:18px;">×</button>
+        <button class="install-btn" onclick="installPWA()">Install</button>
+        <button onclick="this.parentElement.parentElement.style.display='none'" style="background:none; border:none; color:white; margin-left:10px; font-size:18px;">×</button>
     </div>
 </div>
 
@@ -160,39 +159,36 @@
 </div>
 
 <script>
-// SELF-CONTAINED SERVICE WORKER
+// REGISTER YOUR SERVICE WORKER FILE
 if ('serviceWorker' in navigator) {
-    const swBlob = new Blob([`
-        self.addEventListener('fetch', function(e) { e.respondWith(fetch(e.request)); });
-    `], {type: 'text/javascript'});
-    navigator.serviceWorker.register(URL.createObjectURL(swBlob));
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js');
+    });
 }
-
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    document.getElementById('installBanner').style.display = 'flex';
-});
-
-document.getElementById('installBtn').addEventListener('click', async () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === 'accepted') {
-            document.getElementById('installBanner').style.display = 'none';
-        }
-        deferredPrompt = null;
-    } else {
-        alert("To install: Tap the Share icon (bottom middle) and select 'Add to Home Screen'.");
-    }
-});
 
 const APP_CONFIG = { phoneNumber: "447483251962", buttonText: "Add to Inquiry List", addedText: "Added to List" };
 const API = "https://api.pokemontcg.io/v2/cards";
 let gbpRate = 0.78;
 let cards = [];
 let shoppingList = JSON.parse(localStorage.getItem('tcgInquiryList')) || [];
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+});
+
+function installPWA() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(() => {
+            document.getElementById('installBanner').style.display = 'none';
+            deferredPrompt = null;
+        });
+    } else {
+        alert("To install, use your browser's 'Add to Home Screen' option.");
+    }
+}
 
 window.onpopstate = (event) => {
     if (document.getElementById('details-view').style.display === 'block') {
@@ -212,6 +208,7 @@ async function startup() {
         ]);
         const rateData = await rateRes.json();
         gbpRate = rateData.rates.GBP || 0.78;
+        
         const setsData = await setsRes.json();
         const setSelect = document.getElementById('setFilter');
         setsData.data.forEach(set => {
@@ -219,6 +216,7 @@ async function startup() {
             opt.value = set.id; opt.textContent = set.name;
             setSelect.appendChild(opt);
         });
+
         const rarities = ["Common", "Uncommon", "Rare", "Rare Holo", "Rare Ultra", "Rare Rainbow", "Rare Secret", "Promo", "Illustration Rare", "Special Illustration Rare"];
         const raritySelect = document.getElementById('rarityFilter');
         rarities.forEach(r => {
@@ -233,13 +231,16 @@ const handleSearch = debounce(async () => {
     const val = document.getElementById('searchInput').value.trim();
     const set = document.getElementById('setFilter').value;
     const rarity = document.getElementById('rarityFilter').value;
+
     if (val.length < 3 && !set && !rarity) { 
         document.getElementById('results-view').innerHTML = ""; 
         document.getElementById('ad-container').style.display = 'block';
         return; 
     }
+    
     document.getElementById('ad-container').style.display = 'none';
     document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;"><i class="fa-solid fa-spinner fa-spin"></i> Searching...</p>`;
+    
     let queryParts = [];
     if (val) {
         if (val.includes('/')) {
@@ -251,6 +252,7 @@ const handleSearch = debounce(async () => {
     }
     if (set) queryParts.push(`set.id:${set}`);
     if (rarity) queryParts.push(`rarity:"${rarity}"`);
+    
     const res = await fetch(`${API}?q=${encodeURIComponent(queryParts.join(' AND '))}`);
     const data = await res.json();
     cards = data.data || [];
@@ -274,6 +276,7 @@ function renderGrid() {
 function openCard(idx, fromList) {
     const c = fromList ? shoppingList[idx].fullData : cards[idx];
     history.pushState({view: 'card', fromList: fromList}, '');
+    
     document.getElementById('mainHeader').style.display = 'none';
     document.getElementById('installBanner').style.display = 'none';
     document.getElementById('results-view').style.display = 'none';
@@ -281,10 +284,13 @@ function openCard(idx, fromList) {
     document.getElementById('ad-container').style.display = 'none';
     document.getElementById('detailsHeader').style.display = 'flex';
     document.getElementById('backText').innerText = fromList ? "Back to Inquiry List" : "Back to Search";
+    
     const view = document.getElementById('details-view');
     view.style.display = 'block';
+
     const displayNum = `${c.number}/${c.set.printedTotal || '?'}`;
     const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(c.name + ' ' + displayNum + ' ' + c.set.name + ' pokemon sold')}&LH_Sold=1&LH_Complete=1`;
+    
     const prices = c.tcgplayer?.prices || {};
     let variants = "";
     for (const type in prices) {
@@ -294,6 +300,7 @@ function openCard(idx, fromList) {
         }
     }
     if(!variants) variants = generatePriceBox(c, "Standard", "TBC", ebayLink);
+
     view.innerHTML = `<div class="details-card">
         <img src="${c.images.large}" class="details-img">
         <h1 style="text-align:center;">${c.name}</h1>
@@ -310,11 +317,17 @@ function generatePriceBox(c, type, priceDisplay, ebayLink) {
     const btnText = isAdded ? `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}` : `<i class="fa-solid fa-plus"></i> ${APP_CONFIG.buttonText}`;
     const btnAttr = isAdded ? "disabled" : "";
     const priceVal = priceDisplay === "TBC" ? "TBC" : `£${priceDisplay}`;
+
     return `<div class="price-box">
         <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} - Guide Price</div>
         <div class="price-tag">${priceVal}</div>
-        <button id="btn-${c.id}-${type}" class="${btnClass}" ${btnAttr} onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceVal}")'>${btnText}</button>
-        <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small"><i class="fa-brands fa-ebay"></i> View eBay Last Sold</a>
+        <button id="btn-${c.id}-${type}" class="${btnClass}" ${btnAttr} 
+                onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceVal}")'>
+            ${btnText}
+        </button>
+        <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small">
+            <i class="fa-brands fa-ebay"></i> View eBay Last Sold
+        </a>
     </div>`;
 }
 
@@ -336,7 +349,10 @@ function showList(isBackNav = false) {
     const container = document.getElementById('list-items-container');
     container.innerHTML = shoppingList.map((item, index) => `
         <div class="list-item" onclick="openCard(${index}, true)">
-            <div><div style="font-weight:700;">${item.name}</div><div style="color:var(--primary); font-size:12px; font-weight:600;">${item.type} - Guide: ${item.price}</div></div>
+            <div>
+                <div style="font-weight:700;">${item.name}</div>
+                <div style="color:var(--primary); font-size:12px; font-weight:600;">${item.type} - Guide: ${item.price}</div>
+            </div>
             <button onclick="event.stopPropagation(); removeItem(${index})" style="color:red; background:none; border:none; font-weight:600;">Remove</button>
         </div>
     `).join('') || "<p style='text-align:center;'>Your list is empty.</p>";
@@ -347,7 +363,11 @@ function removeItem(i) { shoppingList.splice(i, 1); localStorage.setItem('tcgInq
 
 function handleBack() {
     if (document.getElementById('details-view').style.display === 'block') {
-        if (history.state && history.state.fromList) { closeCardUI(); showList(true); return; }
+        if (history.state && history.state.fromList) {
+            closeCardUI();
+            showList(true);
+            return;
+        }
     }
     window.history.back();
 }
@@ -358,6 +378,7 @@ function closeCardUI() {
     document.getElementById('detailsHeader').style.display = 'none';
     document.getElementById('results-view').style.display = 'grid';
     document.getElementById('mainHeader').style.display = 'block';
+    document.getElementById('installBanner').style.display = 'flex';
     if(document.getElementById('searchInput').value.length < 3) document.getElementById('ad-container').style.display = 'block';
 }
 
