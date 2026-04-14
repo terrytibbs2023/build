@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ellis-tcg-v1';
+const CACHE_NAME = 'ellis-tcg-v2';
 const ASSETS = [
   'index.html',
   'manifest.json'
