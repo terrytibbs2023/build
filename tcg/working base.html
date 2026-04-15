@@ -25,20 +25,21 @@
         html, body { width: 100%; height: 100%; overflow-x: hidden; background-color: var(--bg); font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding-bottom: 100px; }
         
+        /* HEADER */
         .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: env(safe-area-inset-top) 0 16px; }
         .large-title { padding: 20px 20px 15px; font-size: 28px; font-weight: 800; letter-spacing: -1px; }
         .search-area { padding: 0 16px; margin-bottom: 15px; }
         .search-pill { position: relative; background: rgba(118, 118, 128, 0.12); border-radius: 12px; height: 46px; display: flex; align-items: center; padding: 0 16px; }
         .search-pill i { color: var(--text-secondary); font-size: 18px; margin-right: 12px; }
         .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 17px; color: var(--text-main); }
-        
         .filter-scroller { display: flex; gap: 10px; overflow-x: auto; padding: 0 16px; scrollbar-width: none; }
         .filter-scroller::-webkit-scrollbar { display: none; }
-        .filter-wrapper { position: relative; display: flex; align-items: center; background: #fff; border-radius: 10px; padding: 8px 12px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 4px rgba(0,0,0,0.02); min-width: 140px; }
+        .filter-wrapper { position: relative; display: flex; align-items: center; background: #fff; border-radius: 10px; padding: 8px 12px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 2px 4px rgba(0,0,0,0.02); min-width: 100px; }
         .filter-wrapper label { font-size: 12px; font-weight: 700; color: var(--text-secondary); margin-right: 6px; text-transform: uppercase; }
-        .filter-wrapper select { appearance: none; background: none; border: none; outline: none; font-size: 13px; font-weight: 600; width: 100%; padding-right: 15px; color: var(--text-main); }
+        .filter-wrapper select { appearance: none; background: none; border: none; outline: none; font-size: 13px; font-weight: 600; width: 100%; padding-right: 15px; }
         .filter-wrapper::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 10px; position: absolute; right: 12px; color: var(--primary); pointer-events: none; }
 
+        /* GRID */
         .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 16px; width: 100%; }
         .card { background: var(--card-bg); border-radius: 18px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; border: 1px solid rgba(0,0,0,0.03); cursor: pointer; }
         .card-img { width: 100%; aspect-ratio: 1 / 1.38; background: #F9F9FB; border-radius: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -46,6 +47,7 @@
         .card-name { font-size: 14px; font-weight: 700; line-height: 1.25; margin-bottom: 4px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .card-meta { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
 
+        /* DETAILS VIEW */
         #details-view { display: none; padding: 16px; }
         .details-card { background: white; border-radius: 24px; padding: 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
         .details-img { width: 100%; border-radius: 15px; margin-bottom: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
@@ -62,13 +64,17 @@
         .btn-added { height: 54px; font-size: 16px; background: var(--disabled) !important; color: white !important; cursor: default; }
         .btn-back { height: 50px; background: rgba(0,0,0,0.06); color: var(--text-main); margin-top: 25px; font-size: 15px; }
 
+        /* FLOATING CART BAR */
         .cart-bar { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: var(--text-main); color: white; height: 60px; border-radius: 30px; display: none; align-items: center; justify-content: space-between; padding: 0 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 2000; cursor: pointer; }
         .cart-count-badge { background: var(--primary); padding: 4px 10px; border-radius: 10px; font-size: 14px; }
 
+        /* LIST MODAL */
         #list-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg); z-index: 3000; padding: 20px; overflow-y: auto; }
-        .list-item { background: white; padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(0,0,0,0.05); }
+        .list-item { background: white; padding: 15px; border-radius: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(0,0,0,0.05); cursor: pointer; transition: background 0.2s; }
+        .list-item:active { background: #f9f9f9; }
         .remove-btn { color: var(--danger); font-weight: 600; font-size: 14px; border: none; background: none; cursor: pointer; padding: 10px; }
         
+        /* ADVERT */
         #ad-container { padding: 16px; }
         .ad-card { background: #ffffff; border-radius: 20px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 20px rgba(0,0,0,0.04); }
         .ad-banner-bg { background: #f9f9fb; width: 100%; height: 160px; display: flex; align-items: center; justify-content: center; padding: 20px; }
@@ -99,7 +105,7 @@
 
     <div id="ad-container">
         <a id="ui-ad-link" href="" class="ad-card">
-            <div class="ad-banner-bg"><img id="ui-logo-ad" src="" class="ad-banner-img"></div>
+            <div class="ad-banner-bg"><img id="ui-logo-ad" src="" class="ad-banner-img" alt="Branding"></div>
             <div class="ad-content">
                 <span class="ad-tag">Official Sponsor</span>
                 <div id="ui-ad-title" class="ad-title">Essex Console Repair</div>
@@ -127,7 +133,6 @@
 </div>
 
 <script>
-// BLOCK 2: CONFIG & STARTUP
 const APP_CONFIG = {
     logoUrl: "https://imagecdn.websitebuilder.prositehosting.co.uk/22/3e/223ef076-9a2d-4062-98c2-25f95c7952d0.png",
     appTitle: "Ellis TCG Card Search",
@@ -155,101 +160,68 @@ function applyBranding() {
 async function startup() {
     applyBranding();
     updateCartUI();
-    
     try {
-        const [setsRes, raritiesRes, rateRes] = await Promise.all([
-            fetch("https://api.pokemontcg.io/v2/sets?orderBy=-releaseDate"),
-            fetch("https://api.pokemontcg.io/v2/rarities"),
-            fetch("https://open.er-api.com/v6/latest/USD")
-        ]);
-        
-        const setsData = await setsRes.json();
-        const raritiesData = await raritiesRes.json();
-        const rateData = await rateRes.json();
-
-        gbpRate = rateData.rates.GBP || 0.78;
-
-        document.getElementById('setSelect').innerHTML = '<option value="">All</option>' + 
-            setsData.data.map(s => `<option value="${s.name}">${s.name}</option>`).join('');
-        
-        document.getElementById('raritySelect').innerHTML = '<option value="">All</option>' + 
-            raritiesData.data.map(r => `<option value="${r}">${r}</option>`).join('');
-
-        const input = document.getElementById('searchInput');
-        input.disabled = false;
-        input.placeholder = "Card name or number...";
-    } catch(e) { console.error("Startup error", e); }
+        const res = await fetch("https://open.er-api.com/v6/latest/USD");
+        const data = await res.json();
+        gbpRate = data.rates.GBP || 0.78;
+    } catch(e) {}
+    const input = document.getElementById('searchInput');
+    input.disabled = false;
+    input.placeholder = "Card name or number...";
 }
 
-// BLOCK 3: SEARCH & FILTER ENGINE
-async function performUnifiedSearch() {
-    const sVal = document.getElementById('setSelect').value;
-    const rVal = document.getElementById('raritySelect').value;
-    const searchVal = document.getElementById('searchInput').value.trim();
+document.getElementById('searchInput').addEventListener('input', debounce(async (e) => {
+    const val = e.target.value.trim();
     const adContainer = document.getElementById('ad-container');
     const grid = document.getElementById('results-view');
-
-    if (!sVal && !rVal && searchVal.length < 3) {
+    if (val.length < 3) {
         adContainer.style.display = 'block';
         grid.innerHTML = "";
-        cards = [];
         return;
     }
-
     adContainer.style.display = 'none';
-    grid.innerHTML = `<div class="loader"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><p style="margin-top:15px; font-weight:500;">Searching...</p></div>`;
-    
-    let queryParts = [];
-    if (searchVal.length >= 3) {
-        if (searchVal.includes('/')) {
-            const parts = searchVal.split('/');
-            queryParts.push(`number:${parts[0]} AND set.printedTotal:${parts[1]}`);
-        } else {
-            queryParts.push(`name:"${searchVal}*"`);
-        }
-    }
-
-    if (sVal) queryParts.push(`set.name:"${sVal}"`);
-    if (rVal) queryParts.push(`rarity:"${rVal}"`);
-
-    const finalQuery = queryParts.join(' AND ');
-
+    grid.innerHTML = `<div class="loader"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><p style="margin-top:15px; font-weight:500;">Searching For Cards...</p></div>`;
+    const q = val.includes('/') ? `number:${val.split('/')[0]} AND set.printedTotal:${val.split('/')[1]}` : `name:"${val}*"`;
     try {
-        const res = await fetch(`${API}?q=${encodeURIComponent(finalQuery)}&orderBy=number`);
+        const res = await fetch(`${API}?q=${encodeURIComponent(q)}`);
         const data = await res.json();
         cards = data.data || [];
+        updateFilters();
         render();
-    } catch(err) {
-        grid.innerHTML = '<p style="text-align:center; padding:20px;">Connection Error.</p>';
-    }
+    } catch(err) {}
+}, 500));
+
+function updateFilters() {
+    const sets = [...new Set(cards.map(c => c.set.name))].sort();
+    const rarities = [...new Set(cards.map(c => c.rarity || "Other"))].sort();
+    document.getElementById('setSelect').innerHTML = '<option value="">All</option>' + sets.map(s => `<option value="${s}">${s}</option>`).join('');
+    document.getElementById('raritySelect').innerHTML = '<option value="">All</option>' + rarities.map(r => `<option value="${r}">${r}</option>`).join('');
 }
+
+document.getElementById('setSelect').onchange = render;
+document.getElementById('raritySelect').onchange = render;
 
 function render() {
     const grid = document.getElementById('results-view');
-    grid.innerHTML = cards.map((c, i) => `
-        <div class="card" onclick="openCardDetails(${i})">
+    const sVal = document.getElementById('setSelect').value;
+    const rVal = document.getElementById('raritySelect').value;
+    let filtered = cards;
+    if(sVal) filtered = filtered.filter(c => c.set.name === sVal);
+    if(rVal) filtered = filtered.filter(c => (c.rarity || "Other") === rVal);
+    grid.innerHTML = filtered.map((c, i) => `
+        <div class="card" onclick="openCardFromObject(${i})">
             <div class="card-img"><img src="${c.images.small}" loading="lazy"></div>
             <div class="card-name">${c.name}</div>
             <div class="card-meta">${c.set.name}</div>
         </div>
-    `).join('') || '<p style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-secondary);">No cards found matching this combination.</p>';
+    `).join('') || '<p style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-secondary);">No results match your search.</p>';
 }
 
-// BLOCK 4: CARD DETAILS & INQUIRY LIST
-function openCardDetails(index) {
-    const c = cards[index];
-    renderCardUI(c);
+function openCardFromObject(index) {
+    showCardDetails(cards[index]);
 }
 
-// Helper to open details specifically from the inquiry list
-function openCardFromList(index) {
-    const item = shoppingList[index];
-    // We use the fullData stored when the item was added
-    renderCardUI(item.fullData);
-    hideList(); 
-}
-
-function renderCardUI(c) {
+function showCardDetails(c) {
     const view = document.getElementById('details-view');
     const grid = document.getElementById('results-view');
     const head = document.getElementById('mainHeader');
@@ -265,6 +237,8 @@ function renderCardUI(c) {
 
     const prices = c.tcgplayer?.prices || {};
     let variants = "";
+    
+    // Check if we have ANY price data
     const hasPrices = Object.keys(prices).length > 0;
 
     if (hasPrices) {
@@ -275,6 +249,7 @@ function renderCardUI(c) {
             variants += generatePriceBox(c, type, gbp, ebayLink);
         }
     } else {
+        // FALLBACK: If no live price data exists, show one box with eBay link
         variants = generatePriceBox(c, "Standard", "TBC", ebayLink);
     }
 
@@ -282,16 +257,21 @@ function renderCardUI(c) {
         <img src="${c.images.large}" class="details-img">
         <h1 style="font-size:26px; font-weight:800; margin-bottom:6px; text-align:center;">${c.name}</h1>
         <p style="color:var(--text-secondary); font-size:14px; margin-bottom:20px; text-align:center;">${c.set.name} • #${displayNum}</p>
-        <div class="disclaimer-box"><b>Please Note:</b> Market guides only. Final valuations confirmed by <b>Ellis TCG</b>.</div>
+        
+        <div class="disclaimer-box">
+            <b>Please Note:</b> These prices are live market guides only. Final valuations will be confirmed by <b>Ellis TCG</b> upon inquiry.
+        </div>
+
         ${variants}
+        
         <button class="btn btn-back" onclick="closeCard()">Back to Search</button>
     </div>`;
     window.scrollTo(0,0);
 }
 
+// Helper to create the price box HTML
 function generatePriceBox(c, type, priceDisplay, ebayLink) {
-    const uid = `${c.id}-${type}`;
-    const isAdded = shoppingList.some(item => item.uid === uid);
+    const isAdded = shoppingList.some(item => item.id === c.id && item.type === type);
     const btnClass = isAdded ? "btn btn-added" : "btn btn-wa";
     const btnText = isAdded ? `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}` : `<i class="fa-solid fa-plus"></i> ${APP_CONFIG.buttonText}`;
     const btnAttr = isAdded ? "disabled" : "";
@@ -300,18 +280,34 @@ function generatePriceBox(c, type, priceDisplay, ebayLink) {
     return `<div class="price-box">
         <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} - Guide Price</div>
         <div class="price-tag">${priceVal}</div>
-        <button id="btn-${uid}" ${btnAttr} onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceDisplay}")' class="${btnClass}">${btnText}</button>
-        <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small"><i class="fa-brands fa-ebay"></i> View eBay Sold</a>
+        
+        <button id="btn-${c.id}-${type}" ${btnAttr} onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceDisplay}")' class="${btnClass}">
+            ${btnText}
+        </button>
+
+        <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small">
+            <i class="fa-brands fa-ebay"></i> View eBay Sold
+        </a>
     </div>`;
 }
 
 function addItem(cardObj, type, price) {
-    const uid = `${cardObj.id}-${type}`;
-    if (shoppingList.some(item => item.uid === uid)) return;
-    shoppingList.push({ uid, name: cardObj.name, set: cardObj.set.name, num: `${cardObj.number}/${cardObj.set.printedTotal}`, type, price, imageUrl: cardObj.images.large, fullData: cardObj });
-    localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList));
-    updateCartUI();
-    const btn = document.getElementById(`btn-${uid}`);
+    if (shoppingList.some(item => item.id === cardObj.id && item.type === type)) return;
+    
+    shoppingList.push({ 
+        id: cardObj.id, 
+        name: cardObj.name, 
+        set: cardObj.set.name, 
+        num: cardObj.number, 
+        type: type, 
+        price: price, 
+        imageUrl: cardObj.images.large,
+        fullData: cardObj 
+    });
+    
+    saveAndRefresh();
+    
+    const btn = document.getElementById(`btn-${cardObj.id}-${type}`);
     if (btn) {
         btn.classList.remove('btn-wa'); btn.classList.add('btn-added');
         btn.innerHTML = `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}`;
@@ -319,10 +315,19 @@ function addItem(cardObj, type, price) {
     }
 }
 
+function saveAndRefresh() {
+    localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList));
+    updateCartUI();
+}
+
 function updateCartUI() {
     const bar = document.getElementById('cartBar');
-    bar.style.display = shoppingList.length > 0 ? 'flex' : 'none';
-    if (shoppingList.length > 0) document.getElementById('cartCount').innerText = shoppingList.length;
+    if (shoppingList.length > 0) {
+        bar.style.display = 'flex';
+        document.getElementById('cartCount').innerText = shoppingList.length;
+    } else {
+        bar.style.display = 'none';
+    }
 }
 
 function showList() {
@@ -330,45 +335,64 @@ function showList() {
     if(shoppingList.length === 0) {
         container.innerHTML = "<p style='text-align:center; padding:40px; color:var(--text-secondary);'>Your list is empty.</p>";
     } else {
-        container.innerHTML = shoppingList.map((item, index) => `
-            <div class="list-item" style="cursor:pointer;" onclick="openCardFromList(${index})">
-                <div style="flex-grow:1;">
-                    <div style="font-weight:700;">${item.name}</div>
-                    <div style="font-size:12px; color:var(--text-secondary);">${item.set} (#${item.num})</div>
-                    <div style="font-weight:700; color:var(--primary); font-size:14px;">${item.price === "TBC" ? "TBC" : "£"+item.price} (${item.type})</div>
+        container.innerHTML = shoppingList.map((item, index) => {
+            const displayPrice = item.price === "TBC" ? "TBC" : `£${item.price}`;
+            return `
+                <div class="list-item" onclick='reopenCardFromList(${index})'>
+                    <div>
+                        <div style="font-weight:700;">${item.name}</div>
+                        <div style="font-size:12px; color:var(--text-secondary);">${item.set} (#${item.num})</div>
+                        <div style="font-weight:700; color:var(--primary); font-size:14px;">${displayPrice} (${item.type})</div>
+                    </div>
+                    <button class="remove-btn" onclick="event.stopPropagation(); removeItem(${index})">Remove</button>
                 </div>
-                <button class="remove-btn" onclick="event.stopPropagation(); removeItem(${index})">Remove</button>
-            </div>`).join('');
+            `;
+        }).join('');
     }
     document.getElementById('list-modal').style.display = 'block';
 }
 
-function removeItem(index) { shoppingList.splice(index, 1); localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList)); updateCartUI(); showList(); }
-function hideList() { document.getElementById('list-modal').style.display = 'none'; }
+function reopenCardFromList(index) {
+    const item = shoppingList[index];
+    if (item && item.fullData) {
+        showCardDetails(item.fullData);
+    }
+}
+
+function removeItem(index) {
+    shoppingList.splice(index, 1);
+    saveAndRefresh();
+    showList();
+}
+
+function hideList() {
+    document.getElementById('list-modal').style.display = 'none';
+}
 
 function sendFinalWhatsApp() {
     if (shoppingList.length === 0) return;
     let message = "Hi Dave, I'm checking if you have these cards. I understand prices are guides:\n\n";
     shoppingList.forEach((item, i) => {
-        message += `*${i+1}. ${item.name}*\nSet: ${item.set} (#${item.num})\nVariant: ${item.type} | Guide: ${item.price === "TBC" ? "TBC" : "£"+item.price}\nImage: ${item.imageUrl}\n\n`;
+        const p = item.price === "TBC" ? "TBC" : `£${item.price}`;
+        message += `*${i+1}. ${item.name}*\nSet: ${item.set} (#${item.num})\nVariant: ${item.type} | Guide: ${p}\nImage: ${item.imageUrl}\n\n`;
     });
-    window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    const waLink = `https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(waLink, '_blank');
 }
 
 function closeCard() {
     document.getElementById('details-view').style.display = 'none';
     document.getElementById('results-view').style.display = 'grid';
     document.getElementById('mainHeader').style.display = 'block';
-    if(document.getElementById('searchInput').value.length < 3 && !document.getElementById('setSelect').value && !document.getElementById('raritySelect').value) {
+    if(document.getElementById('searchInput').value.length < 3) {
         document.getElementById('ad-container').style.display = 'block';
     }
 }
 
-function debounce(fn, t) { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), t); }; }
-
-document.getElementById('searchInput').addEventListener('input', debounce(performUnifiedSearch, 500));
-document.getElementById('setSelect').onchange = performUnifiedSearch;
-document.getElementById('raritySelect').onchange = performUnifiedSearch;
+function debounce(fn, t) {
+    let timer;
+    return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), t); };
+}
 
 startup();
 </script>
