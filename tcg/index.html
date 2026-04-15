@@ -17,63 +17,56 @@
             --primary: #007AFF; --bg: #F2F2F7; --card-bg: #FFFFFF;
             --text-main: #1C1C1E; --text-secondary: #8E8E93;
             --whatsapp: #34C759; --ebay: #0064D2;
-            --header-bg: rgba(255, 255, 255, 0.9); --pill-bg: rgba(118, 118, 128, 0.12);
+            --header-bg: rgba(255, 255, 255, 0.85); --pill-bg: rgba(118, 118, 128, 0.12);
             --shadow: 0 8px 24px rgba(0,0,0,0.08);
         }
         [data-theme="dark"] {
             --bg: #0A0A0B; --card-bg: #1C1C1E; --text-main: #F2F2F7;
-            --text-secondary: #A1A1AA; --header-bg: rgba(18, 18, 18, 0.9);
+            --text-secondary: #A1A1AA; --header-bg: rgba(18, 18, 18, 0.85);
             --pill-bg: rgba(255, 255, 255, 0.08); --shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--bg); font-family: 'Outfit', sans-serif; color: var(--text-main); transition: background 0.4s; overflow-x: hidden; }
+        body { background-color: var(--bg); font-family: 'Outfit', sans-serif; color: var(--text-main); transition: 0.4s; overflow-x: hidden; }
+        .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; padding-bottom: 120px; }
         
-        .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; padding-bottom: 140px; }
-        
-        /* HEADER STABILITY - Fixed height prevents jumping */
-        .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(20px); height: 165px; border-bottom: 1px solid rgba(128,128,128,0.1); }
-        .title-container { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; }
+        .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(15px); padding: 12px 0 20px; border-bottom: 1px solid rgba(128,128,128,0.1); }
+        .title-container { display: flex; justify-content: space-between; align-items: center; padding: 10px 20px 15px; }
         .large-title { font-size: 24px; font-weight: 800; }
+        .header-btn { background: transparent; border: 1.5px solid var(--primary); color: var(--primary); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; }
         
-        .search-area { padding: 0 16px; display: flex; flex-direction: column; gap: 8px; }
-        .search-pill { background: var(--pill-bg); border-radius: 20px; height: 44px; display: flex; align-items: center; padding: 0 15px; }
+        .search-area { padding: 0 16px; }
+        .search-pill { background: var(--pill-bg); border-radius: 24px; height: 50px; display: flex; align-items: center; padding: 0 20px; margin-bottom: 15px; }
         .search-pill input { background: none; border: none; outline: none; width: 100%; font-size: 16px; margin-left: 10px; color: var(--text-main); }
+        .filter-row { display: flex; gap: 10px; padding: 0 16px; height: 44px; margin-bottom: 10px; }
+        .filter-select { flex: 1; background: var(--pill-bg); color: var(--text-main); border: none; padding: 0 12px; border-radius: 12px; font-size: 13px; font-weight: 600; outline: none; }
         
-        .filter-row { display: flex; gap: 8px; height: 38px; }
-        .filter-select { flex: 1; background: var(--pill-bg); color: var(--text-main); border: none; padding: 0 10px; border-radius: 10px; font-size: 13px; font-weight: 600; outline: none; }
-        
-        /* SPONSORS */
         .ad-card { background: var(--card-bg); border-radius: 24px; overflow: hidden; text-decoration: none; display: block; border: 1px solid rgba(128,128,128,0.1); box-shadow: var(--shadow); margin: 16px; }
-        .ad-banner-img { width: 100%; height: 160px; object-fit: cover; background: #eee; }
-        .ad-content { padding: 15px 20px; }
-        .ad-tag { color: var(--primary); font-size: 11px; font-weight: 900; text-transform: uppercase; }
-        .ad-title { font-size: 19px; font-weight: 800; margin: 4px 0; color: var(--text-main); }
+        .ad-banner-img { width: 100%; height: 160px; object-fit: cover; background: #eee; display: block; }
+        .ad-content { padding: 15px 20px 20px; }
+        .ad-tag { color: var(--primary); font-size: 11px; font-weight: 900; text-transform: uppercase; margin-bottom: 4px; display: block; }
+        .ad-title { font-size: 19px; font-weight: 800; margin-bottom: 4px; color: var(--text-main); }
         .ad-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.4; }
 
         .card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; padding: 16px; }
-        .card { background: var(--card-bg); border-radius: 24px; padding: 14px; box-shadow: var(--shadow); }
-        .card-img { width: 100%; border-radius: 14px; background: rgba(128,128,128,0.05); aspect-ratio: 1/1.4; overflow: hidden; margin-bottom: 12px; }
+        .card { background: var(--card-bg); border-radius: 24px; padding: 14px; box-shadow: var(--shadow); cursor: pointer; }
+        .card-img { width: 100%; border-radius: 14px; background: rgba(128,128,128,0.05); aspect-ratio: 1/1.4; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; overflow: hidden; }
         .card-img img { width: 100%; height: 100%; object-fit: contain; }
         
-        /* DETAILS & BARCODE FIX */
         #details-view { display: none; padding: 16px; }
-        .details-card { background: var(--card-bg); border-radius: 30px; padding: 20px; box-shadow: var(--shadow); }
-        .barcode-box { background: white; padding: 10px; border-radius: 12px; margin: 15px 0; text-align: center; border: 1px solid #eee; overflow: hidden; }
-        .barcode-box svg { max-width: 100%; height: auto; }
+        .details-card { background: var(--card-bg); border-radius: 30px; padding: 24px; box-shadow: var(--shadow); }
+        .barcode-box { background: white; padding: 10px; border-radius: 12px; margin-bottom: 20px; text-align: center; border: 1px solid #eee; overflow: hidden; }
+        .barcode-box svg { max-width: 100%; }
         
-        .price-box { background: var(--bg); border-radius: 22px; padding: 20px; margin-top: 15px; text-align: center; }
-        .price-tag { font-size: 32px; font-weight: 900; color: var(--primary); margin: 5px 0 15px; }
-        
-        .btn { display: flex; align-items: center; justify-content: center; height: 56px; width: 100%; border-radius: 16px; font-weight: 700; border: none; cursor: pointer; gap: 10px; }
+        .price-box { background: var(--bg); border-radius: 22px; padding: 22px; margin-top: 15px; text-align: center; }
+        .price-tag { font-size: 34px; font-weight: 900; color: var(--primary); margin: 5px 0 15px; }
+        .btn { display: flex; align-items: center; justify-content: center; height: 58px; width: 100%; border-radius: 18px; font-weight: 700; border: none; cursor: pointer; gap: 10px; }
         .btn-wa { background: var(--whatsapp); color: white; }
-        .btn-added { background: #D1D1D6; color: white; }
-        .btn-ebay-small { height: 40px; font-size: 13px; background: var(--pill-bg); color: var(--ebay); margin-top: 15px; text-decoration: none; border-radius: 10px; font-weight: 700; }
+        .btn-added { background: #D1D1D6; color: white; cursor: default; }
+        .btn-ebay-small { height: 42px; font-size: 13px; background: var(--pill-bg); color: var(--ebay); margin-top: 15px; text-decoration: none; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-weight: 700; }
         
-        /* INQUIRY BAR STABILITY */
-        .cart-bar { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 400px; background: var(--primary); color: white; height: 60px; border-radius: 30px; display: none; align-items: center; justify-content: space-between; padding: 0 25px; z-index: 2000; box-shadow: 0 10px 30px rgba(0, 122, 255, 0.4); font-weight: 700; }
-        
-        #list-modal { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 3000; padding: 20px; overflow-y: auto; }
-        .list-item { background: var(--card-bg); padding: 15px; border-radius: 18px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(128,128,128,0.1); }
+        .cart-bar { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 85%; max-width: 380px; background: var(--primary); color: white; height: 64px; border-radius: 32px; display: none; align-items: center; justify-content: space-between; padding: 0 25px; z-index: 2000; box-shadow: 0 15px 35px rgba(0, 122, 255, 0.4); font-weight: 700; cursor: pointer; }
+        #list-modal { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 3000; padding: 25px; overflow-y: auto; }
+        .list-item { background: var(--card-bg); padding: 18px; border-radius: 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(128,128,128,0.1); }
     </style>
 </head>
 <body>
@@ -82,7 +75,7 @@
     <header class="app-header" id="mainHeader">
         <div class="title-container">
             <div class="large-title">Ellis TCG Search</div>
-            <button class="header-btn" onclick="toggleTheme()" id="themeBtn" style="border:none; background:none; color:var(--text-main); font-size: 20px;"><i class="fa-solid fa-moon"></i></button>
+            <button class="header-btn" onclick="toggleTheme()" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
         </div>
         <div class="search-area">
             <div class="search-pill">
@@ -96,7 +89,7 @@
         </div>
     </header>
 
-    <div id="detailsHeader" style="display:none; height:60px; background:var(--header-bg); backdrop-filter:blur(20px); align-items:center; padding:0 20px; position:sticky; top:0; z-index:1100; border-bottom: 1px solid rgba(128,128,128,0.1);">
+    <div id="detailsHeader" style="display:none; height:70px; background:var(--header-bg); backdrop-filter:blur(15px); align-items:center; padding:0 20px; position:sticky; top:0; z-index:1100;">
         <button onclick="handleBack()" style="background:none; border:none; color:var(--primary); font-size:17px; font-weight:bold; display:flex; align-items:center; gap:8px;">
             <i class="fa-solid fa-arrow-left"></i> <span>Back</span>
         </button>
@@ -126,15 +119,15 @@
 
 <div class="cart-bar" id="cartBar" onclick="showList()">
     <span>View Inquiry List</span>
-    <span id="cartCount" style="background:rgba(255,255,255,0.2); padding:4px 10px; border-radius:12px;">0</span>
+    <span id="cartCount" style="background:rgba(255,255,255,0.2); padding:5px 12px; border-radius:15px;">0</span>
 </div>
 
 <div id="list-modal">
-    <h2 style="margin-bottom: 20px; font-size: 26px; font-weight: 800;">Inquiry List</h2>
+    <h2 style="margin-bottom: 25px; font-size: 28px; font-weight: 900;">Inquiry List</h2>
     <div id="list-items-container"></div>
-    <div style="margin-top: 25px;">
+    <div style="margin-top: 30px;">
         <button class="btn btn-wa" onclick="sendFinalWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Send to EllisTcg</button>
-        <button class="btn" style="margin-top:12px; background:var(--pill-bg); color:var(--text-main);" onclick="handleBack()">Continue Searching</button>
+        <button class="btn" style="margin-top:15px; background:var(--pill-bg); color:var(--text-main);" onclick="handleBack()">Continue Searching</button>
     </div>
 </div>
 
@@ -183,21 +176,30 @@ const handleSearch = debounce(async () => {
     const val = document.getElementById('searchInput').value.trim();
     const set = document.getElementById('setFilter').value;
     const rarity = document.getElementById('rarityFilter').value;
+    
     if (!val && !set && !rarity) { 
         document.getElementById('results-view').innerHTML = ""; 
         document.getElementById('ad-container').style.display = 'block';
         return; 
     }
+    
     document.getElementById('ad-container').style.display = 'none';
     document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;">Searching...</p>`;
-    let q = [];
-    if (val) q.push(`name:"${val}*"`);
-    if (set) q.push(`set.id:"${set}"`);
-    if (rarity) q.push(`rarity:"${rarity}"`);
-    const res = await fetch(`${API}?q=${encodeURIComponent(q.join(" AND "))}&orderBy=-set.releaseDate`);
-    const data = await res.json();
-    cards = data.data || [];
-    renderGrid();
+    
+    let queryParts = [];
+    if (val) queryParts.push(`name:"${val}*"`);
+    if (set) queryParts.push(`set.id:"${set}"`);
+    if (rarity) queryParts.push(`rarity:"${rarity}"`);
+    const q = queryParts.join(" AND ");
+    
+    try {
+        const res = await fetch(`${API}?q=${encodeURIComponent(q)}&orderBy=-set.releaseDate`);
+        const data = await res.json();
+        cards = data.data || [];
+        renderGrid();
+    } catch (e) {
+        document.getElementById('results-view').innerHTML = `<p style="grid-column:1/-1; text-align:center; padding:40px;">Error loading cards.</p>`;
+    }
 }, 500);
 
 function renderGrid() {
@@ -221,56 +223,66 @@ function openCard(idx, fromList) {
     view.style.display = 'block';
     
     const fullCode = `${c.number}/${c.set.printedTotal || '?'}`;
-    const barcodeVal = `${c.name.substring(0, 3).toUpperCase()}-${fullCode}`;
-    const ebay = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(c.name + ' ' + fullCode + ' sold')}&LH_Sold=1&LH_Complete=1`;
+    const prefix = c.name.substring(0, 3).toUpperCase();
+    const barcodeString = `${prefix}-${fullCode}`;
+    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(c.name + ' ' + fullCode + ' sold')}&LH_Sold=1&LH_Complete=1`;
     
-    let variants = "";
     const prices = c.tcgplayer?.prices || {};
+    let variants = "";
     for (const type in prices) {
         if (prices[type].market) {
             const val = (prices[type].market * gbpRate * 1.10).toFixed(2);
-            variants += generatePriceBox(c, type, val, ebay);
+            variants += generatePriceBox(c, type, val, ebayLink);
         }
     }
-    if(!variants) variants = generatePriceBox(c, "Standard", "TBC", ebay);
+    if(!variants) variants = generatePriceBox(c, "Standard", "TBC", ebayLink);
 
     view.innerHTML = `<div class="details-card">
-        <img src="${c.images.large}" style="width:100%; border-radius:15px;">
+        <img src="${c.images.large}" style="width:100%; border-radius:15px; margin-bottom:15px;">
         <div class="barcode-box"><svg id="barcode"></svg></div>
-        <h1 style="text-align:center; font-weight:800; margin-top:10px;">${c.name}</h1>
-        <p style="text-align:center; color:var(--text-secondary);">#${fullCode}</p>
+        <h1 style="text-align:center; font-weight:800;">${c.name}</h1>
+        <p style="text-align:center; color:var(--text-secondary); margin-bottom:20px;">Card Code: ${fullCode}</p>
         ${variants}
     </div>`;
     
-    JsBarcode("#barcode", barcodeVal, { format: "CODE128", width: 2, height: 45, displayValue: true });
+    JsBarcode("#barcode", barcodeString, { format: "CODE128", width: 2, height: 40, displayValue: true });
     window.scrollTo(0,0);
 }
 
-function generatePriceBox(c, type, priceDisplay, ebay) {
+function generatePriceBox(c, type, priceDisplay, ebayLink) {
     const isAdded = shoppingList.some(item => item.id === c.id && item.type === type);
     const priceVal = priceDisplay === "TBC" ? "TBC" : `£${priceDisplay}`;
+    const cardJson = JSON.stringify(c).replace(/'/g, "&apos;");
+    
     return `<div class="price-box">
         <div style="font-size:12px; font-weight:700;">${type} - Guide Price</div>
         <div class="price-tag">${priceVal}</div>
-        <button id="btn-${c.id}-${type.replace(/\s/g, '')}" class="btn ${isAdded ? 'btn-added' : 'btn-wa'}" ${isAdded ? 'disabled' : ''} 
-                onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceVal}")'>
+        <button id="btn-${c.id}-${type.replace(/\s/g, '')}" class="btn ${isAdded ? 'btn-added' : 'btn-wa'}" 
+                onclick='addItem(${cardJson}, "${type}", "${priceVal}")'>
+            <i class="fa-solid ${isAdded ? 'fa-check' : 'fa-plus'}"></i>
             ${isAdded ? APP_CONFIG.addedText : APP_CONFIG.buttonText}
         </button>
-        <a href="${ebay}" target="_blank" class="btn btn-ebay-small"><i class="fa-brands fa-ebay"></i> eBay Sold</a>
+        <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small"><i class="fa-brands fa-ebay"></i> eBay Sold</a>
     </div>`;
 }
 
 function addItem(c, type, priceVal) {
+    if (shoppingList.some(item => item.id === c.id && item.type === type)) return;
     shoppingList.push({ id: c.id, name: c.name, type, price: priceVal, imageUrl: c.images.large, fullData: c });
     localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList));
     updateCartUI();
-    const b = document.getElementById(`btn-${c.id}-${type.replace(/\s/g, '')}`);
-    if(b) { b.className = "btn btn-added"; b.innerText = APP_CONFIG.addedText; b.disabled = true; }
+    const btn = document.getElementById(`btn-${c.id}-${type.replace(/\s/g, '')}`);
+    if (btn) { btn.className = "btn btn-added"; btn.innerHTML = `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}`; }
 }
 
 function updateCartUI() {
-    document.getElementById('cartBar').style.display = shoppingList.length > 0 ? 'flex' : 'none';
-    document.getElementById('cartCount').innerText = shoppingList.length;
+    const bar = document.getElementById('cartBar');
+    if (shoppingList.length > 0) {
+        bar.style.display = 'flex';
+        document.getElementById('cartCount').innerText = shoppingList.length;
+    } else {
+        bar.style.display = 'none';
+    }
 }
 
 function showList() {
@@ -278,27 +290,43 @@ function showList() {
     document.getElementById('results-view').style.display = 'none';
     document.getElementById('details-view').style.display = 'none';
     document.getElementById('ad-container').style.display = 'none';
-    document.getElementById('list-items-container').innerHTML = shoppingList.map((item, index) => `
-        <div class="list-item" onclick="openCard(${index}, true)">
-            <div><b>${item.name}</b><br><small>${item.type} - ${item.price}</small></div>
-            <button onclick="event.stopPropagation(); removeItem(${index})" style="color:red; border:none; background:none; font-weight:bold;">Remove</button>
-        </div>
-    `).join('') || "Empty";
     document.getElementById('list-modal').style.display = 'block';
+    
+    const container = document.getElementById('list-items-container');
+    if (shoppingList.length === 0) {
+        container.innerHTML = `<p style="text-align:center; padding:20px;">Your list is empty.</p>`;
+    } else {
+        container.innerHTML = shoppingList.map((item, index) => `
+            <div class="list-item" onclick="openCard(${index}, true)">
+                <div>
+                    <b>${item.name}</b><br>
+                    <small>${item.type} • ${item.price}</small>
+                </div>
+                <button onclick="event.stopPropagation(); removeItem(${index})" style="background:none; border:none; color:#FF3B30; font-weight:700;">Remove</button>
+            </div>
+        `).join('');
+    }
 }
 
-function removeItem(i) { shoppingList.splice(i, 1); localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList)); updateCartUI(); showList(); }
+function removeItem(idx) {
+    shoppingList.splice(idx, 1);
+    localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList));
+    updateCartUI();
+    showList();
+}
 
 function handleBack() {
     document.getElementById('details-view').style.display = 'none';
     document.getElementById('detailsHeader').style.display = 'none';
     document.getElementById('list-modal').style.display = 'none';
     document.getElementById('mainHeader').style.display = 'block';
-    document.getElementById('results-view').style.display = 'grid';
-    if(document.getElementById('searchInput').value.length < 1) {
+    if (document.getElementById('searchInput').value.trim() === "" && document.getElementById('setFilter').value === "" && document.getElementById('rarityFilter').value === "") {
         document.getElementById('ad-container').style.display = 'block';
         document.getElementById('results-view').style.display = 'none';
+    } else {
+        document.getElementById('results-view').style.display = 'grid';
     }
+    updateCartUI();
 }
 
 function sendFinalWhatsApp() {
@@ -310,7 +338,14 @@ function sendFinalWhatsApp() {
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 
-function debounce(fn, t) { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), t); }; }
+function debounce(fn, t) {
+    let timer;
+    return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn(...args), t);
+    };
+}
+
 document.getElementById('searchInput').addEventListener('input', handleSearch);
 document.getElementById('setFilter').addEventListener('change', handleSearch);
 document.getElementById('rarityFilter').addEventListener('change', handleSearch);
