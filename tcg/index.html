@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     
     <style>
         :root {
@@ -44,7 +43,7 @@
             color: var(--text-main); 
             overflow-x: hidden; 
             -webkit-font-smoothing: antialiased;
-            transition: 0.4s;
+            transition: background-color 0.4s;
         }
 
         input, select, button { font-family: 'Outfit', sans-serif !important; }
@@ -80,9 +79,6 @@
         #details-view { display: none; padding: 16px; }
         .details-card { background: var(--card-bg); border-radius: 30px; padding: 24px; box-shadow: var(--shadow); }
         .details-img { width: 100%; border-radius: 20px; margin-bottom: 20px; }
-        
-        .barcode-mini { background: white; padding: 8px; border-radius: 10px; margin-bottom: 10px; text-align: center; border: 1px solid #eee; overflow: hidden; }
-        .barcode-mini svg { max-width: 100%; height: auto; }
 
         .price-box { background: var(--bg); border-radius: 22px; padding: 22px; margin-top: 15px; text-align: center; border: 1px solid rgba(128,128,128,0.1); }
         .price-tag { font-size: 34px; font-weight: 900; color: var(--primary); margin: 5px 0 15px; }
@@ -94,7 +90,7 @@
 
         .cart-bar { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); width: 85%; max-width: 380px; background: var(--primary); color: white; height: 64px; border-radius: 32px; display: none; align-items: center; justify-content: space-between; padding: 0 25px; z-index: 2000; box-shadow: 0 15px 35px rgba(0, 122, 255, 0.4); font-weight: 700; cursor: pointer; }
         #list-modal { display: none; position: fixed; inset: 0; background: var(--bg); z-index: 3000; padding: 25px; overflow-y: auto; }
-        .list-item { background: var(--card-bg); padding: 18px; border-radius: 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(128,128,128,0.1); }
+        .list-item { background: var(--card-bg); padding: 18px; border-radius: 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(128,128,128,0.1); cursor: pointer; }
     </style>
 </head>
 <body>
@@ -104,7 +100,6 @@
         <div class="title-container">
             <div class="large-title">Ellis TCG Search</div>
             <div class="header-actions">
-                <button class="header-btn" onclick="installPWA()"><i class="fa-solid fa-download"></i></button>
                 <button class="header-btn" onclick="toggleTheme()" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
             </div>
         </div>
@@ -127,14 +122,6 @@
     </div>
 
     <div id="ad-container">
-        <a href="https://magicmadhouse.co.uk" target="_blank" class="ad-card">
-            <img src="https://scontent-lhr6-2.xx.fbcdn.net/v/t39.30808-6/586722015_122100567723131819_786900678622678002_n.jpg" class="ad-banner-img">
-            <div class="ad-content">
-                <span class="ad-tag">Shop Pokémon</span>
-                <div class="ad-title">East Coast Collectables</div>
-                <div class="ad-desc">Booster Boxes, ETBs, and TCG accessories.</div>
-            </div>
-        </a>
         <a href="https://essexconsolerepair.co.uk" target="_blank" class="ad-card">
             <div class="ad-content">
                 <span class="ad-tag">Official Sponsor</span>
@@ -163,7 +150,11 @@
 </div>
 
 <script>
-const APP_CONFIG = { phoneNumber: "447483251962" };
+const APP_CONFIG = { 
+    phoneNumber: "447483251962",
+    buttonText: "Add to Inquiry List",
+    addedText: "Added to List"
+};
 const API = "https://api.pokemontcg.io/v2/cards";
 let gbpRate = 0.78;
 let cards = [];
@@ -262,73 +253,70 @@ function renderGrid() {
 function openCard(idx, fromList) {
     const c = fromList ? shoppingList[idx].fullData : cards[idx];
     if (!c) return;
-    history.pushState({view: 'card'}, '');
+    history.pushState({view: 'card', fromList: fromList}, '');
+    
     document.getElementById('mainHeader').style.display = 'none';
     document.getElementById('results-view').style.display = 'none';
     document.getElementById('ad-container').style.display = 'none';
     document.getElementById('list-modal').style.display = 'none'; 
     document.getElementById('detailsHeader').style.display = 'flex';
+    
     const view = document.getElementById('details-view');
     view.style.display = 'block';
     
+    const displayNum = `${c.number}/${c.set.printedTotal || '?'}`;
+    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(c.name + ' ' + displayNum + ' ' + c.set.name + ' pokemon sold')}&LH_Sold=1&LH_Complete=1`;
+
     const prices = c.tcgplayer?.prices || {};
     let variants = "";
     for (const type in prices) {
         if (prices[type].market) {
             const val = (prices[type].market * gbpRate * 1.10).toFixed(2);
-            variants += generatePriceBox(c, type, val);
+            variants += generatePriceBox(c, type, val, ebayLink);
         }
     }
-    if(!variants) variants = generatePriceBox(c, "Standard", "TBC");
+    if(!variants) variants = generatePriceBox(c, "Standard", "TBC", ebayLink);
     
     view.innerHTML = `<div class="details-card">
         <img src="${c.images.large}" class="details-img" style="width:100%">
         <h1 style="text-align:center; font-weight:900;">${c.name}</h1>
-        <p style="text-align:center; color:var(--text-secondary); margin-bottom:15px;">${c.set.name} • #${c.number}/${c.set.printedTotal}</p>
+        <p style="text-align:center; color:var(--text-secondary); margin-bottom:15px;">${c.set.name} • #${displayNum}</p>
         ${variants}
     </div>`;
     
-    document.querySelectorAll('.barcode-svg').forEach(svg => {
-        JsBarcode(svg, svg.dataset.code, { format: "CODE128", width: 1.5, height: 30, displayValue: true, fontSize: 10, margin: 0 });
-    });
     window.scrollTo(0,0);
 }
 
-function generatePriceBox(c, type, priceDisplay) {
+function generatePriceBox(c, type, priceDisplay, ebayLink) {
     const isAdded = shoppingList.some(item => item.id === c.id && item.type === type);
     const priceVal = priceDisplay === "TBC" ? "TBC" : `£${priceDisplay}`;
-    const fullCode = `${c.number}/${c.set.printedTotal}`;
-    const cleanName = c.name.substring(0,3).toLowerCase().replace(/[^a-z]/g, '');
-    const barcodeText = `${cleanName}${c.number}${type.substring(0,2)}`;
-    
+    const btnClass = isAdded ? "btn btn-added" : "btn btn-wa";
+    const btnText = isAdded ? `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}` : `<i class="fa-solid fa-plus"></i> ${APP_CONFIG.buttonText}`;
+    const btnAttr = isAdded ? "disabled" : "";
+
     return `<div class="price-box">
-        <div class="barcode-mini"><svg class="barcode-svg" data-code="${barcodeText}"></svg></div>
-        <div style="font-size:12px; font-weight:800; color:var(--text-secondary);">${type} Market</div>
+        <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} - Guide Price</div>
         <div class="price-tag">${priceVal}</div>
-        <button id="btn-${c.id}-${type}" class="btn ${isAdded ? 'btn-added' : 'btn-wa'}" ${isAdded ? 'disabled' : ''} 
+        <button id="btn-${c.id}-${type}" class="${btnClass}" ${btnAttr} 
                 onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceVal}")'>
-            ${isAdded ? 'Added' : 'Add to Inquiry'}
+            ${btnText}
         </button>
-        <a href="https://www.ebay.co.uk/sch/i.html?_nkw=${encodeURIComponent(c.name + ' ' + fullCode + ' ' + c.set.name + ' pokemon sold')}&LH_Sold=1&LH_Complete=1" target="_blank" class="btn btn-ebay-small">
-            <i class="fa-brands fa-ebay"></i> eBay Sold Prices
+        <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small">
+            <i class="fa-brands fa-ebay"></i> View eBay Last Sold
         </a>
     </div>`;
 }
 
 function addItem(c, type, priceVal) {
-    const fullCode = `${c.number}/${c.set.printedTotal}`;
-    shoppingList.push({ 
-        id: c.id, 
-        name: `${c.name} (${fullCode})`, 
-        type, 
-        price: priceVal, 
-        img: c.images.large, 
-        fullData: c 
-    });
+    shoppingList.push({ id: c.id, name: c.name, type, price: priceVal, imageUrl: c.images.large, fullData: c });
     localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList));
     updateCartUI();
-    const btn = document.getElementById(`btn-${c.id}-${type}`);
-    if(btn) { btn.className = "btn btn-added"; btn.innerText = "Added"; btn.disabled = true; }
+    const b = document.getElementById(`btn-${c.id}-${type}`);
+    if(b) { 
+        b.className = "btn btn-added"; 
+        b.innerHTML = `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}`; 
+        b.disabled = true; 
+    }
 }
 
 function updateCartUI() {
@@ -336,48 +324,68 @@ function updateCartUI() {
     document.getElementById('cartCount').innerText = shoppingList.length;
 }
 
-function showList() {
-    history.pushState({view: 'list'}, '');
-    document.getElementById('list-modal').style.display = 'block';
-    document.getElementById('list-items-container').innerHTML = shoppingList.map((item, index) => `
-        <div class="list-item">
-            <div onclick="openCard(${index}, true)" style="flex:1; cursor:pointer;">
-                <div style="font-weight:800;">${item.name}</div>
-                <div style="color:var(--primary); font-size:12px;">${item.type} • ${item.price}</div>
+function showList(isBackNav = false) {
+    if (!isBackNav) history.pushState({view: 'list'}, '');
+    const container = document.getElementById('list-items-container');
+    container.innerHTML = shoppingList.map((item, index) => `
+        <div class="list-item" onclick="openCard(${index}, true)">
+            <div>
+                <div style="font-weight:700;">${item.name}</div>
+                <div style="color:var(--primary); font-size:12px; font-weight:600;">${item.type} - Guide: ${item.price}</div>
             </div>
-            <button onclick="removeItem(${index})" style="color:red; background:none; border:none; font-weight:700; padding:10px;">Remove</button>
+            <button onclick="event.stopPropagation(); removeItem(${index})" style="color:red; background:none; border:none; font-weight:600; padding:10px;">Remove</button>
         </div>
-    `).join('') || "<p style='text-align:center;'>List is empty.</p>";
+    `).join('') || "<p style='text-align:center; padding:20px;'>Your list is empty.</p>";
+    document.getElementById('list-modal').style.display = 'block';
 }
 
-function removeItem(i) { shoppingList.splice(i, 1); localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList)); updateCartUI(); showList(); }
-function handleBack() { window.history.back(); }
+function removeItem(i) { 
+    shoppingList.splice(i, 1); 
+    localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList)); 
+    updateCartUI(); 
+    showList(true); 
+}
 
-window.onpopstate = () => {
-    document.getElementById('details-view').style.display = 'none';
-    document.getElementById('list-modal').style.display = 'none';
-    document.getElementById('detailsHeader').style.display = 'none';
-    document.getElementById('mainHeader').style.display = 'block';
-    
-    const val = document.getElementById('searchInput').value;
-    const set = document.getElementById('setFilter').value;
-    const rarity = document.getElementById('rarityFilter').value;
-
-    if(!val && !set && !rarity) {
-        document.getElementById('ad-container').style.display = 'block';
-        document.getElementById('results-view').style.display = 'none';
-    } else {
-        document.getElementById('results-view').style.display = 'grid';
+function handleBack() {
+    if (document.getElementById('details-view').style.display === 'block') {
+        if (history.state && history.state.fromList) {
+            closeCardUI();
+            showList(true);
+            return;
+        }
+        closeCardUI();
+        return;
     }
-};
+    if (document.getElementById('list-modal').style.display === 'block') {
+        document.getElementById('list-modal').style.display = 'none';
+        return;
+    }
+    window.history.back();
+}
+
+function closeCardUI() {
+    document.getElementById('details-view').style.display = 'none';
+    document.getElementById('detailsHeader').style.display = 'none';
+    document.getElementById('results-view').style.display = 'grid';
+    document.getElementById('mainHeader').style.display = 'block';
+    if(document.getElementById('searchInput').value.length < 3) document.getElementById('ad-container').style.display = 'block';
+}
 
 function sendFinalWhatsApp() {
-    let msg = "Hi Dave, do you have these available? (Guide prices only):\n\n";
-    shoppingList.forEach((item, i) => { msg += `${i+1}. ${item.name} (${item.type}) - ${item.price}\n`; });
+    let msg = "Hi Dave, Do you have these cards? I UNDERSTAND THE PRICES ARE GUIDE ONLY so can you give me the total you can sell for please?:\n\n";
+    shoppingList.forEach((item, i) => {
+        const c = item.fullData;
+        const displayNum = `#${c.number}/${c.set.printedTotal || '?'}`;
+        msg += `*${i+1}. ${item.name}* (${displayNum}) [${item.type}] - Guide: ${item.price}\nLink: ${item.imageUrl}\n\n`;
+    });
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
 }
-function installPWA() { alert("To install: Use your browser menu and select 'Add to Home Screen'."); }
-function debounce(fn, t) { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), t); }; }
+
+function debounce(fn, t) { 
+    let timer; 
+    return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), t); }; 
+}
+
 startup();
 </script>
 </body>
