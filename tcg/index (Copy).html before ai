@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <title>Card Inquiry Pro</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="manifest" href="manifest.json" />
     <style>
         :root {
             --primary: #007AFF;
@@ -316,7 +317,7 @@ function renderCardUI(c) {
         variants = generatePriceBox(c, "Standard", "TBC", ebayLink);
     }
     view.innerHTML = `<div class="details-card">
-        <img src="${c.images.large}" class="details-img">
+        <img src="${c.images.large}" class="details-img" />
         <h1 style="font-size:26px; font-weight:800; margin-bottom:6px; text-align:center;">${c.name}</h1>
         <p style="color:var(--text-secondary); font-size:14px; margin-bottom:20px; text-align:center;">${c.set.name} • #${displayNum}</p>
         <div class="disclaimer-box"><b>Please Note:</b> Market guides only. Final valuations confirmed by <b>Ellis TCG</b>.</div>
@@ -410,6 +411,17 @@ document.getElementById('searchInput').addEventListener('input', debounce(perfor
 document.getElementById('setSelect').onchange = performUnifiedSearch;
 document.getElementById('raritySelect').onchange = performUnifiedSearch;
 startup();
+
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js').then(registration => {
+      console.log('ServiceWorker registered with scope:', registration.scope);
+    }).catch(error => {
+      console.log('ServiceWorker registration failed:', error);
+    });
+  });
+}
 </script>
 </body>
 </html>
