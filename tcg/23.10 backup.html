@@ -188,7 +188,6 @@ function handleRarityChange(value) {
 function handleCardClick(card) {
     state.selectedCard = card;
     state.view = 'details';
-    history.pushState({ view: 'details' }, '');
     window.scrollTo(0, 0);
     render();
 }
@@ -227,18 +226,13 @@ function handleSendWhatsApp() {
 }
 
 function goBack() {
-    if (window.history.length > 1 && state.view !== 'search') {
-        history.back();
-    } else {
-        state.view = 'search';
-        state.selectedCard = null;
-        render();
-    }
+    state.view = 'search';
+    state.selectedCard = null;
+    render();
 }
 
 function openList() {
     state.view = 'list';
-    history.pushState({ view: 'list' }, '');
     window.scrollTo(0, 0);
     render();
 }
@@ -528,18 +522,6 @@ function render() {
 }
 
 // ============== INIT ==============
-
-// Handle back/forward swipes
-window.addEventListener('popstate', (event) => {
-    if (event.state && event.state.view) {
-        state.view = event.state.view;
-    } else {
-        state.view = 'search';
-        state.selectedCard = null;
-    }
-    render();
-});
-
 document.documentElement.classList.toggle('dark', state.isDark);
 initApp();
 </script>
