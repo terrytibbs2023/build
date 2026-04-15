@@ -21,7 +21,6 @@
             --warning-border: #FFCC00;
         }
 
-        /* DARK MODE THEME */
         body.dark-theme {
             --bg: #1C1C1E;
             --card-bg: #2C2C2E;
@@ -37,7 +36,6 @@
         .app-container { width: 100%; max-width: 500px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; padding-bottom: 100px; }
         
         .app-header { position: sticky; top: 0; z-index: 1000; background: var(--header-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-bottom: 1px solid rgba(0,0,0,0.08); padding: env(safe-area-inset-top) 0 16px; }
-        
         .header-top { display: flex; justify-content: space-between; align-items: center; padding-right: 20px; }
         .theme-toggle { font-size: 20px; cursor: pointer; color: var(--text-main); padding: 10px; }
 
@@ -139,7 +137,7 @@
     <div id="list-items-container"></div>
     <div style="margin-top: 30px;">
         <button class="btn btn-wa" onclick="sendFinalWhatsApp()"><i class="fa-brands fa-whatsapp"></i> Send List to WhatsApp</button>
-        <button class="btn btn-back" onclick="hideList()">Close & Continue Searching</button>
+        <button class="btn btn-back" onclick="handleBack()">Close & Continue Searching</button>
     </div>
 </div>
 
@@ -159,7 +157,7 @@ const API = "https://api.pokemontcg.io/v2/cards";
 let gbpRate = 0.78;
 let cards = [];
 let shoppingList = JSON.parse(localStorage.getItem('tcgInquiryList')) || [];
-let lastView = "search"; // TRACKER: "search" or "list"
+let lastSource = "search"; // TRACKER: "search" or "list"
 
 function toggleTheme() {
     const isDark = document.body.classList.toggle('dark-theme');
@@ -173,7 +171,6 @@ function applyBranding() {
     document.getElementById('ui-ad-link').href = APP_CONFIG.storeUrl;
     document.getElementById('ui-ad-title').innerText = APP_CONFIG.adTitle;
     document.getElementById('ui-ad-desc').innerText = APP_CONFIG.adDescription;
-    
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-theme');
         document.getElementById('theme-icon').className = 'fa-solid fa-sun';
@@ -183,6 +180,8 @@ function applyBranding() {
 async function startup() {
     applyBranding();
     updateCartUI();
+    // Set initial history state
+    history.replaceState({view: 'search'}, '');
     try {
         const [setsRes, raritiesRes, rateRes] = await Promise.all([
             fetch("https://api.pokemontcg.io/v2/sets?orderBy=-releaseDate"),
@@ -250,25 +249,43 @@ function render() {
     `).join('') || '<p style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-secondary);">No cards found.</p>';
 }
 
-window.onpopstate = function() {
-    // Determine if we need to close the modal or the card view
-    if (document.getElementById('list-modal').style.display === 'block') {
-        hideList(true);
-    } else {
-        closeCard(true); 
+// NAVIGATION ENGINE
+window.onpopstate = function(e) {
+    const state = e.state ? e.state.view : 'search';
+    
+    // Reset all views
+    document.getElementById('list-modal').style.display = 'none';
+    document.getElementById('details-view').style.display = 'none';
+    document.getElementById('mainHeader').style.display = 'none';
+    document.getElementById('results-view').style.display = 'none';
+
+    if (state === 'search') {
+        document.getElementById('mainHeader').style.display = 'block';
+        document.getElementById('results-view').style.display = 'grid';
+        if(document.getElementById('searchInput').value.length < 3 && !document.getElementById('setSelect').value && !document.getElementById('raritySelect').value) {
+            document.getElementById('ad-container').style.display = 'block';
+        }
+    } else if (state === 'list') {
+        showListUI();
+    } else if (state === 'details') {
+        // We shouldn't really land here via back button without it being handled, 
+        // but if we do, we show the card content.
+        document.getElementById('details-view').style.display = 'block';
     }
 };
 
+function handleBack() {
+    history.back();
+}
+
 function openCardDetails(index) {
-    lastView = "search";
-    const c = cards[index];
-    renderCardUI(c);
+    lastSource = "search";
+    renderCardUI(cards[index]);
 }
 
 function openCardFromList(index) {
-    lastView = "list";
-    const item = shoppingList[index];
-    renderCardUI(item.fullData);
+    lastSource = "list";
+    renderCardUI(shoppingList[index].fullData);
 }
 
 function renderCardUI(c) {
@@ -278,7 +295,9 @@ function renderCardUI(c) {
     const ad = document.getElementById('ad-container');
     const modal = document.getElementById('list-modal');
     
+    // Add history entry
     history.pushState({view: 'details'}, '');
+    
     grid.style.display = 'none'; head.style.display = 'none'; ad.style.display = 'none'; modal.style.display = 'none';
     view.style.display = 'block';
     
@@ -302,7 +321,7 @@ function renderCardUI(c) {
         <p style="color:var(--text-secondary); font-size:14px; margin-bottom:20px; text-align:center;">${c.set.name} • #${displayNum}</p>
         <div class="disclaimer-box"><b>Please Note:</b> Market guides only. Final valuations confirmed by <b>Ellis TCG</b>.</div>
         ${variants}
-        <button class="btn btn-back" onclick="closeCard()">Back</button>
+        <button class="btn btn-back" onclick="handleBack()">Back</button>
     </div>`;
     window.scrollTo(0,0);
 }
@@ -343,6 +362,10 @@ function updateCartUI() {
 
 function showList() {
     history.pushState({view: 'list'}, ''); 
+    showListUI();
+}
+
+function showListUI() {
     const container = document.getElementById('list-items-container');
     if(shoppingList.length === 0) {
         container.innerHTML = "<p style='text-align:center; padding:40px; color:var(--text-secondary);'>Your list is empty.</p>";
@@ -357,19 +380,20 @@ function showList() {
                 <button class="remove-btn" onclick="event.stopPropagation(); removeItem(${index})">Remove</button>
             </div>`).join('');
     }
+    document.getElementById('details-view').style.display = 'none';
+    document.getElementById('mainHeader').style.display = 'none';
     document.getElementById('list-modal').style.display = 'block';
+}
+
+function hideList() {
+    handleBack();
 }
 
 function removeItem(index) { 
     shoppingList.splice(index, 1); 
     localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList)); 
     updateCartUI(); 
-    showList(); 
-}
-
-function hideList(isPopState = false) {
-    document.getElementById('list-modal').style.display = 'none';
-    if (!isPopState && history.state?.view === 'list') history.back();
+    showListUI();
 }
 
 function sendFinalWhatsApp() {
@@ -379,22 +403,6 @@ function sendFinalWhatsApp() {
         message += `*${i+1}. ${item.name}*\nSet: ${item.set} (#${item.num})\nVariant: ${item.type} | Guide: ${item.price === "TBC" ? "TBC" : "£"+item.price}\nImage: ${item.imageUrl}\n\n`;
     });
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-}
-
-function closeCard(isPopState = false) {
-    document.getElementById('details-view').style.display = 'none';
-    
-    if (lastView === "list") {
-        showList();
-    } else {
-        document.getElementById('results-view').style.display = 'grid';
-        document.getElementById('mainHeader').style.display = 'block';
-        if(document.getElementById('searchInput').value.length < 3 && !document.getElementById('setSelect').value && !document.getElementById('raritySelect').value) {
-            document.getElementById('ad-container').style.display = 'block';
-        }
-    }
-    
-    if (!isPopState && history.state?.view === 'details') history.back();
 }
 
 function debounce(fn, t) { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), t); }; }
