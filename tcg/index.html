@@ -155,30 +155,24 @@ function applyBranding() {
 async function startup() {
     applyBranding();
     updateCartUI();
-    
     try {
         const [setsRes, raritiesRes, rateRes] = await Promise.all([
             fetch("https://api.pokemontcg.io/v2/sets?orderBy=-releaseDate"),
             fetch("https://api.pokemontcg.io/v2/rarities"),
             fetch("https://open.er-api.com/v6/latest/USD")
         ]);
-        
         const setsData = await setsRes.json();
         const raritiesData = await raritiesRes.json();
         const rateData = await rateRes.json();
-
         gbpRate = rateData.rates.GBP || 0.78;
-
         document.getElementById('setSelect').innerHTML = '<option value="">All</option>' + 
             setsData.data.map(s => `<option value="${s.name}">${s.name}</option>`).join('');
-        
         document.getElementById('raritySelect').innerHTML = '<option value="">All</option>' + 
             raritiesData.data.map(r => `<option value="${r}">${r}</option>`).join('');
-
         const input = document.getElementById('searchInput');
         input.disabled = false;
         input.placeholder = "Card name or number...";
-    } catch(e) { console.error("Startup error", e); }
+    } catch(e) {}
 }
 
 // BLOCK 3: SEARCH & FILTER ENGINE
@@ -188,17 +182,14 @@ async function performUnifiedSearch() {
     const searchVal = document.getElementById('searchInput').value.trim();
     const adContainer = document.getElementById('ad-container');
     const grid = document.getElementById('results-view');
-
     if (!sVal && !rVal && searchVal.length < 3) {
         adContainer.style.display = 'block';
         grid.innerHTML = "";
         cards = [];
         return;
     }
-
     adContainer.style.display = 'none';
     grid.innerHTML = `<div class="loader"><i class="fa-solid fa-spinner fa-spin fa-2x"></i><p style="margin-top:15px; font-weight:500;">Searching...</p></div>`;
-    
     let queryParts = [];
     if (searchVal.length >= 3) {
         if (searchVal.includes('/')) {
@@ -208,12 +199,9 @@ async function performUnifiedSearch() {
             queryParts.push(`name:"${searchVal}*"`);
         }
     }
-
     if (sVal) queryParts.push(`set.name:"${sVal}"`);
     if (rVal) queryParts.push(`rarity:"${rVal}"`);
-
     const finalQuery = queryParts.join(' AND ');
-
     try {
         const res = await fetch(`${API}?q=${encodeURIComponent(finalQuery)}&orderBy=number`);
         const data = await res.json();
@@ -232,8 +220,14 @@ function render() {
             <div class="card-name">${c.name}</div>
             <div class="card-meta">${c.set.name}</div>
         </div>
-    `).join('') || '<p style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-secondary);">No cards found matching this combination.</p>';
+    `).join('') || '<p style="grid-column:1/-1; text-align:center; padding:60px; color:var(--text-secondary);">No cards found.</p>';
 }
+
+// LISTEN FOR SWIPE BACK / BROWSER BACK
+window.onpopstate = function() {
+    closeCard(true); 
+    hideList(true);
+};
 
 // BLOCK 4: CARD DETAILS & INQUIRY LIST
 function openCardDetails(index) {
@@ -241,11 +235,10 @@ function openCardDetails(index) {
     renderCardUI(c);
 }
 
-// Helper to open details specifically from the inquiry list
 function openCardFromList(index) {
     const item = shoppingList[index];
-    // We use the fullData stored when the item was added
     renderCardUI(item.fullData);
+    // Note: hideList will handle history.back()
     hideList(); 
 }
 
@@ -256,18 +249,18 @@ function renderCardUI(c) {
     const ad = document.getElementById('ad-container');
     const modal = document.getElementById('list-modal');
     
+    // Push state so swipe back works
+    history.pushState({view: 'details'}, '');
+
     grid.style.display = 'none'; head.style.display = 'none'; ad.style.display = 'none'; modal.style.display = 'none';
     view.style.display = 'block';
     
     const displayNum = `${c.number}/${c.set.printedTotal}`;
-    const ebaySearchTerm = `${c.name} ${displayNum} ${c.set.name} pokemon sold`;
-    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(ebaySearchTerm)}&LH_Sold=1&LH_Complete=1`;
+    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(c.name + ' ' + displayNum + ' ' + c.set.name + ' sold')}&LH_Sold=1&LH_Complete=1`;
 
     const prices = c.tcgplayer?.prices || {};
     let variants = "";
-    const hasPrices = Object.keys(prices).length > 0;
-
-    if (hasPrices) {
+    if (Object.keys(prices).length > 0) {
         for (const type in prices) {
             const market = prices[type].market;
             if (!market) continue;
@@ -292,15 +285,13 @@ function renderCardUI(c) {
 function generatePriceBox(c, type, priceDisplay, ebayLink) {
     const uid = `${c.id}-${type}`;
     const isAdded = shoppingList.some(item => item.uid === uid);
-    const btnClass = isAdded ? "btn btn-added" : "btn btn-wa";
-    const btnText = isAdded ? `<i class="fa-solid fa-check"></i> ${APP_CONFIG.addedText}` : `<i class="fa-solid fa-plus"></i> ${APP_CONFIG.buttonText}`;
-    const btnAttr = isAdded ? "disabled" : "";
     const priceVal = priceDisplay === "TBC" ? "TBC" : `£${priceDisplay}`;
-
     return `<div class="price-box">
         <div style="font-size:12px; font-weight:700; color:var(--text-secondary); text-transform:uppercase;">${type} - Guide Price</div>
         <div class="price-tag">${priceVal}</div>
-        <button id="btn-${uid}" ${btnAttr} onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceDisplay}")' class="${btnClass}">${btnText}</button>
+        <button id="btn-${uid}" ${isAdded ? 'disabled' : ''} onclick='addItem(${JSON.stringify(c).replace(/'/g, "&apos;")}, "${type}", "${priceDisplay}")' class="btn ${isAdded ? 'btn-added' : 'btn-wa'}">
+            ${isAdded ? '<i class="fa-solid fa-check"></i> ' + APP_CONFIG.addedText : '<i class="fa-solid fa-plus"></i> ' + APP_CONFIG.buttonText}
+        </button>
         <a href="${ebayLink}" target="_blank" class="btn btn-ebay-small"><i class="fa-brands fa-ebay"></i> View eBay Sold</a>
     </div>`;
 }
@@ -326,6 +317,7 @@ function updateCartUI() {
 }
 
 function showList() {
+    history.pushState({view: 'list'}, ''); 
     const container = document.getElementById('list-items-container');
     if(shoppingList.length === 0) {
         container.innerHTML = "<p style='text-align:center; padding:40px; color:var(--text-secondary);'>Your list is empty.</p>";
@@ -344,7 +336,11 @@ function showList() {
 }
 
 function removeItem(index) { shoppingList.splice(index, 1); localStorage.setItem('tcgInquiryList', JSON.stringify(shoppingList)); updateCartUI(); showList(); }
-function hideList() { document.getElementById('list-modal').style.display = 'none'; }
+
+function hideList(isPopState = false) {
+    document.getElementById('list-modal').style.display = 'none';
+    if (!isPopState && history.state?.view === 'list') history.back();
+}
 
 function sendFinalWhatsApp() {
     if (shoppingList.length === 0) return;
@@ -355,17 +351,17 @@ function sendFinalWhatsApp() {
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
-function closeCard() {
+function closeCard(isPopState = false) {
     document.getElementById('details-view').style.display = 'none';
     document.getElementById('results-view').style.display = 'grid';
     document.getElementById('mainHeader').style.display = 'block';
+    if (!isPopState && history.state?.view === 'details') history.back();
     if(document.getElementById('searchInput').value.length < 3 && !document.getElementById('setSelect').value && !document.getElementById('raritySelect').value) {
         document.getElementById('ad-container').style.display = 'block';
     }
 }
 
 function debounce(fn, t) { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), t); }; }
-
 document.getElementById('searchInput').addEventListener('input', debounce(performUnifiedSearch, 500));
 document.getElementById('setSelect').onchange = performUnifiedSearch;
 document.getElementById('raritySelect').onchange = performUnifiedSearch;
