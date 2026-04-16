@@ -15,33 +15,10 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            -webkit-tap-highlight-color: transparent; 
-        }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            padding: 16px;
-            width: 100%;
-        }
-        .card-btn {
-            appearance: none;
-            background: none;
-            border: none;
-            padding: 0;
-            margin: 0;
-            width: 100%;
-            cursor: pointer;
-            text-align: left;
-            position: relative;
-            z-index: 1;
-        }
     </style>
 </head>
 <body class="bg-slate-100 dark:bg-slate-900 min-h-screen transition-colors duration-300">
@@ -125,8 +102,6 @@ async function initApp() {
         state.sets = setsData.data || [];
         state.rarities = raritiesData.data || [];
         state.gbpRate = rateData.rates?.GBP || 0.78;
-        
-        history.replaceState({ view: 'search', hasSearched: false, showAd: true, cards: [] }, '');
         render();
     } catch (error) {
         console.error('Failed to initialize:', error);
@@ -163,17 +138,6 @@ async function executeSearch() {
         const res = await fetch(url);
         const data = await res.json();
         state.cards = data.data || [];
-        
-        history.pushState({ 
-            view: 'search', 
-            hasSearched: true, 
-            showAd: false, 
-            cards: state.cards,
-            searchTerm: state.searchTerm,
-            selectedSet: state.selectedSet,
-            selectedRarity: state.selectedRarity
-        }, '');
-
     } catch (error) {
         console.error('Search failed:', error);
         state.cards = [];
@@ -193,7 +157,6 @@ function resetHome() {
     state.selectedCard = null;
     state.showAd = true;
     state.hasSearched = false;
-    history.pushState({ view: 'search', hasSearched: false, showAd: true, cards: [] }, '');
     render();
 }
 
@@ -229,7 +192,6 @@ function handleCardClick(card) {
 function handleAddToList(card, type, price) {
     const uid = `${card.id}-${type}`;
     if (state.shoppingList.some(item => item.uid === uid)) return;
-    
     state.shoppingList.push({
         uid,
         name: card.name,
@@ -240,7 +202,6 @@ function handleAddToList(card, type, price) {
         imageUrl: card.images.large,
         fullData: JSON.parse(JSON.stringify(card))
     });
-    
     localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
     render();
 }
@@ -262,7 +223,7 @@ function handleSendWhatsApp() {
 }
 
 function goBack() {
-    if (window.history.length > 1) {
+    if (window.history.length > 1 && state.view !== 'search') {
         history.back();
     } else {
         resetHome();
@@ -372,21 +333,17 @@ function renderCardGrid() {
         return state.hasSearched ? `<div class="flex flex-col items-center justify-center py-20 text-slate-400"><p class="text-lg font-medium">No cards found</p></div>` : ''; 
     }
     return `
-        <div class="card-grid">
+        <div class="grid grid-cols-2 gap-4 p-4">
             ${state.cards.map((card, i) => `
-                <div 
-                    onclick="handleCardClick(state.cards[${i}])" 
-                    class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 w-full h-full flex flex-col cursor-pointer transition-transform active:scale-95"
-                >
+                <button onclick="handleCardClick(state.cards[${i}])" class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 text-left hover:scale-[1.02] transition-transform">
                     <div class="aspect-[1/1.4] bg-slate-100 dark:bg-slate-700 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
-                        <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="max-w-[95%] max-h-[95%] object-contain" />
+                        <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="max-w-[90%] max-h-[90%] object-contain" />
                     </div>
                     <h3 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">${card.name}</h3>
                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${card.set.name}</p>
-                </div>
+                </button>
             `).join('')}
         </div>
-        <div class="h-32 w-full"></div>
     `;
 }
 
@@ -425,8 +382,8 @@ function renderCardDetails() {
                         </div>
                         <div class="text-[10px] font-mono text-center text-black mt-2 tracking-[0.2em] font-bold">${barcodeString}</div>
                     </div>
-                    <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" 
-                        class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400 cursor-default' : 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20'} transition-all">
+                    <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" ${isAdded ? 'disabled' : ''}
+                        class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20'} transition-all">
                         ${isAdded ? 'Added to List' : 'Add to Inquiry List'}
                     </button>
                     <a href="${ebayLink}" target="_blank" class="w-full h-10 mt-3 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
@@ -436,7 +393,6 @@ function renderCardDetails() {
             `;
         }).join('');
     } else {
-        const isAdded = state.shoppingList.some(item => item.uid === `${card.id}-Standard`);
         const barcodeString = generateBarcodeString(card, 'Standard');
         const barcodeData = generateBarcodeData(barcodeString);
         priceBoxes = `
@@ -448,10 +404,7 @@ function renderCardDetails() {
                     </div>
                     <div class="text-[10px] font-mono text-center text-black mt-2 tracking-[0.2em] font-bold">${barcodeString}</div>
                 </div>
-                <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" 
-                    class="w-full h-14 rounded-xl font-bold ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 text-white'} mb-3">
-                    ${isAdded ? 'Added to List' : 'Add to Inquiry List'}
-                </button>
+                <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white mb-3">Add to Inquiry List</button>
                 <a href="${ebayLink}" target="_blank" class="w-full h-10 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
                     View eBay Sold
                 </a>
@@ -482,7 +435,7 @@ function renderCardDetails() {
 function renderInquiryList() {
     const items = state.shoppingList;
     return `
-        <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-[100] overflow-y-auto">
+        <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-50 overflow-y-auto">
             <div class="max-w-md mx-auto p-4 pb-32">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-2xl font-black text-slate-900 dark:text-white">Inquiry List</h2>
@@ -498,7 +451,7 @@ function renderInquiryList() {
                                 <p class="text-[11px] text-slate-500 font-bold">${item.set} (#${item.num})</p>
                                 <p class="text-blue-600 dark:text-blue-400 font-black text-sm mt-1">${item.price}</p>
                             </div>
-                            <button onclick="handleRemoveItem(event, ${index})" class="text-red-500 self-start p-2 relative z-10 hover:bg-red-50 rounded-lg"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                            <button onclick="handleRemoveItem(event, ${index})" class="text-red-500 self-start p-2 relative z-10"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
                         </div>
                     `).join('')}
                     <div class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-100 dark:from-slate-900 to-transparent">
@@ -516,7 +469,7 @@ function renderCartBar() {
     const count = state.shoppingList.length;
     if (count === 0 || state.view !== 'search') return '';
     return `
-        <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl z-40 font-black transition-transform hover:scale-105 active:scale-95">
+        <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl z-50 font-black transition-transform hover:scale-105 active:scale-95">
             <span>Inquiry List</span>
             <span class="bg-white text-blue-600 px-3 py-1 rounded-xl">${count}</span>
         </button>
@@ -547,25 +500,10 @@ function render() {
 
 // ============== INIT ==============
 window.addEventListener('popstate', (event) => {
-    if (event.state) {
-        state.view = event.state.view;
-        state.selectedCard = event.state.card || null;
-        state.hasSearched = event.state.hasSearched || false;
-        state.showAd = event.state.showAd;
-        state.cards = event.state.cards || [];
-        state.searchTerm = event.state.searchTerm || '';
-        state.selectedSet = event.state.selectedSet || '';
-        state.selectedRarity = event.state.selectedRarity || '';
-    } else {
-        state.view = 'search';
-        state.selectedCard = null;
-        state.hasSearched = false;
-        state.showAd = true;
-        state.cards = [];
-    }
+    state.view = (event.state && event.state.view) ? event.state.view : 'search';
+    state.selectedCard = (event.state && event.state.card) ? event.state.card : null;
     render();
 });
-
 document.documentElement.classList.toggle('dark', state.isDark);
 initApp();
 </script>
