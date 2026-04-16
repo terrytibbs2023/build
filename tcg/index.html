@@ -163,7 +163,8 @@ async function searchCards() {
     }
 }
 
-const debouncedSearch = debounce(searchCards, 500);
+// Fixed: Increased delay to 1500ms so the keyboard doesn't close while you are typing
+const debouncedSearch = debounce(searchCards, 1500);
 
 // ============== ACTIONS ==============
 function toggleTheme() {
