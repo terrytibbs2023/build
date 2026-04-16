@@ -15,13 +15,34 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            /* Prevents the 'bounce' effect on some browsers to allow our custom pull-to-refresh */
+            overscroll-behavior-y: contain; 
+        }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        /* Pull to refresh visual */
+        #ptr-element {
+            height: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: height 0.2s ease;
+            background: transparent;
+        }
     </style>
 </head>
 <body class="bg-slate-100 dark:bg-slate-900 min-h-screen transition-colors duration-300">
+
+<div id="ptr-element" class="text-blue-500 font-bold text-sm">
+    <svg class="w-6 h-6 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+    </svg>
+</div>
 
 <div id="app"></div>
 
@@ -59,6 +80,32 @@ let state = {
 };
 
 let searchTimeout = null;
+
+// ============== PULL TO REFRESH LOGIC ==============
+let touchStart = 0;
+let touchEnd = 0;
+
+window.addEventListener('touchstart', e => {
+    touchStart = e.targetTouches[0].pageY;
+}, {passive: true});
+
+window.addEventListener('touchmove', e => {
+    const touchCurrent = e.targetTouches[0].pageY;
+    const ptr = document.getElementById('ptr-element');
+    // Only pull to refresh if at the top of the search view
+    if (window.scrollY === 0 && state.view === 'search' && touchCurrent > touchStart) {
+        const distance = touchCurrent - touchStart;
+        if (distance < 80) ptr.style.height = distance + 'px';
+    }
+}, {passive: true});
+
+window.addEventListener('touchend', e => {
+    const ptr = document.getElementById('ptr-element');
+    if (ptr.offsetHeight > 60) {
+        location.reload(); // Hard refresh to reset the app state
+    }
+    ptr.style.height = '0px';
+}, {passive: true});
 
 // ============== UTILITIES ==============
 function generateBarcodeString(card, variantType) {
@@ -117,7 +164,6 @@ async function initApp() {
 
 async function searchCards() {
     const { searchTerm, selectedSet, selectedRarity } = state;
-    
     if (!searchTerm && !selectedSet && !selectedRarity) {
         state.cards = [];
         state.showAd = true;
@@ -125,18 +171,14 @@ async function searchCards() {
         render();
         return;
     }
-
-    if (searchTerm && searchTerm.length < 3 && !selectedSet && !selectedRarity) {
-        return;
-    }
-
+    if (searchTerm && searchTerm.length < 3 && !selectedSet && !selectedRarity) return;
+    
     state.showAd = false;
     state.isLoading = true;
     state.hasSearched = true;
     render();
 
     const queryParts = [];
-    
     if (searchTerm && searchTerm.length >= 3) {
         if (searchTerm.includes('/')) {
             const parts = searchTerm.split('/');
@@ -147,7 +189,6 @@ async function searchCards() {
     }
     if (selectedSet) queryParts.push(`set.name:"${selectedSet}"`);
     if (selectedRarity) queryParts.push(`rarity:"${selectedRarity}"`);
-
     const query = queryParts.join(' AND ');
 
     try {
@@ -155,7 +196,6 @@ async function searchCards() {
         const data = await res.json();
         state.cards = data.data || [];
     } catch (error) {
-        console.error('Search failed:', error);
         state.cards = [];
     } finally {
         state.isLoading = false;
@@ -163,7 +203,6 @@ async function searchCards() {
     }
 }
 
-// Fixed: Increased delay to 1500ms so the keyboard doesn't close while you are typing
 const debouncedSearch = debounce(searchCards, 1500);
 
 // ============== ACTIONS ==============
@@ -200,16 +239,10 @@ function handleCardClick(card) {
 function handleAddToList(card, type, price) {
     const uid = `${card.id}-${type}`;
     if (state.shoppingList.some(item => item.uid === uid)) return;
-
     state.shoppingList.push({
-        uid,
-        name: card.name,
-        set: card.set.name,
+        uid, name: card.name, set: card.set.name,
         num: `${card.number}/${card.set.printedTotal}`,
-        type,
-        price,
-        imageUrl: card.images.large,
-        fullData: card
+        type, price, imageUrl: card.images.large, fullData: card
     });
     localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
     render();
@@ -254,39 +287,23 @@ function renderSearchHeader() {
             <div class="flex items-center justify-between px-4 py-3">
                 <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">${APP_CONFIG.appTitle}</h1>
                 <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                    ${state.isDark 
-                        ? '<svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>'
-                        : '<svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>'
-                    }
+                    ${state.isDark ? '☀️' : '🌙'}
                 </button>
             </div>
             <div class="px-4 pb-3">
                 <div class="relative bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center px-4 h-12">
-                    <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    <input 
-                        type="text" 
-                        value="${state.searchTerm}"
-                        oninput="handleSearchChange(this.value)"
-                        placeholder="Card name or number..."
-                        class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400"
-                    />
+                    <input type="text" value="${state.searchTerm}" oninput="handleSearchChange(this.value)" placeholder="Card name or number..." class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400" />
                 </div>
             </div>
             <div class="flex gap-2 px-4 pb-4 overflow-x-auto scrollbar-hide">
-                <div class="flex items-center bg-white dark:bg-slate-800 rounded-lg px-3 py-2 border border-slate-200 dark:border-slate-700 min-w-[140px]">
-                    <label class="text-xs font-bold text-slate-500 uppercase mr-2">Set</label>
-                    <select onchange="handleSetChange(this.value)" class="bg-transparent border-none outline-none text-sm font-semibold text-slate-900 dark:text-white flex-1">
-                        <option value="">All</option>
-                        ${state.sets.map(s => `<option value="${s.name}" ${state.selectedSet === s.name ? 'selected' : ''}>${s.name}</option>`).join('')}
-                    </select>
-                </div>
-                <div class="flex items-center bg-white dark:bg-slate-800 rounded-lg px-3 py-2 border border-slate-200 dark:border-slate-700 min-w-[140px]">
-                    <label class="text-xs font-bold text-slate-500 uppercase mr-2">Rarity</label>
-                    <select onchange="handleRarityChange(this.value)" class="bg-transparent border-none outline-none text-sm font-semibold text-slate-900 dark:text-white flex-1">
-                        <option value="">All</option>
-                        ${state.rarities.map(r => `<option value="${r}" ${state.selectedRarity === r ? 'selected' : ''}>${r}</option>`).join('')}
-                    </select>
-                </div>
+                <select onchange="handleSetChange(this.value)" class="bg-white dark:bg-slate-800 rounded-lg px-3 py-2 border text-sm font-semibold">
+                    <option value="">All Sets</option>
+                    ${state.sets.map(s => `<option value="${s.name}" ${state.selectedSet === s.name ? 'selected' : ''}>${s.name}</option>`).join('')}
+                </select>
+                <select onchange="handleRarityChange(this.value)" class="bg-white dark:bg-slate-800 rounded-lg px-3 py-2 border text-sm font-semibold">
+                    <option value="">All Rarities</option>
+                    ${state.rarities.map(r => `<option value="${r}" ${state.selectedRarity === r ? 'selected' : ''}>${r}</option>`).join('')}
+                </select>
             </div>
         </header>
     `;
@@ -295,14 +312,13 @@ function renderSearchHeader() {
 function renderSponsorCard() {
     return `
         <div class="p-4">
-            <a href="${APP_CONFIG.storeUrl}" target="_blank" rel="noopener noreferrer" class="block bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-shadow">
+            <a href="${APP_CONFIG.storeUrl}" target="_blank" class="block bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700">
                 <div class="bg-slate-100 dark:bg-slate-700 h-40 flex items-center justify-center p-4">
                     <img src="${APP_CONFIG.logoUrl}" alt="Sponsor" class="max-w-[80%] max-h-[80%] object-contain" />
                 </div>
-                <div class="p-4 border-t border-slate-100 dark:border-slate-700">
-                    <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Official Sponsor</span>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">${APP_CONFIG.adDescription}</p>
+                <div class="p-4">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">${APP_CONFIG.adTitle}</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">${APP_CONFIG.adDescription}</p>
                 </div>
             </a>
         </div>
@@ -311,38 +327,18 @@ function renderSponsorCard() {
 
 function renderCardGrid() {
     if (state.cards.length === 0) {
-        if (state.hasSearched) {
-            return `
-                <div class="flex flex-col items-center justify-center py-20 text-slate-400">
-                    <svg class="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                    <p class="text-lg font-medium">No cards found</p>
-                    <p class="text-sm mt-1">Try adjusting your search or filters</p>
-                </div>
-            `;
-        }
-        return ''; 
+        return state.hasSearched ? `<div class="py-20 text-center text-slate-400">No cards found</div>` : '';
     }
-
     return `
         <div class="grid grid-cols-2 gap-4 p-4">
             ${state.cards.map((card, i) => `
-                <button onclick="handleCardClick(state.cards[${i}])" class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 text-left hover:scale-[1.02] transition-transform">
+                <button onclick="handleCardClick(state.cards[${i}])" class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 text-left">
                     <div class="aspect-[1/1.4] bg-slate-100 dark:bg-slate-700 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
                         <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="max-w-[90%] max-h-[90%] object-contain" />
                     </div>
                     <h3 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">${card.name}</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${card.set.name}</p>
                 </button>
             `).join('')}
-        </div>
-    `;
-}
-
-function renderLoadingSpinner() {
-    return `
-        <div class="flex flex-col items-center justify-center py-20 text-slate-400">
-            <div class="w-10 h-10 border-4 border-slate-200 dark:border-slate-700 border-t-blue-500 rounded-full animate-spin"></div>
-            <p class="mt-4 font-medium">Searching...</p>
         </div>
     `;
 }
@@ -350,209 +346,55 @@ function renderLoadingSpinner() {
 function renderCardDetails() {
     const card = state.selectedCard;
     if (!card) return '';
-
     const displayNum = `${card.number}/${card.set.printedTotal}`;
     const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + displayNum + ' ' + card.set.name + ' sold')}&LH_Sold=1&LH_Complete=1`;
     const prices = card.tcgplayer?.prices || {};
 
-    let priceBoxes = '';
-    
-    if (Object.keys(prices).length > 0) {
-        priceBoxes = Object.entries(prices).map(([type, priceData]) => {
-            const market = priceData.market;
-            if (!market) return '';
-            const priceDisplay = formatPrice(market);
-            const uid = `${card.id}-${type}`;
-            const isAdded = state.shoppingList.some(item => item.uid === uid);
-            const barcodeString = generateBarcodeString(card, type);
-            const barWidths = generateBarWidths(barcodeString);
-
-            return `
-                <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4">
-                    <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase text-center mb-1">${type} - Guide Price</div>
-                    <div class="text-4xl font-bold text-center text-blue-600 dark:text-blue-400 mb-4">${priceDisplay}</div>
-                    
-                    <div class="bg-white dark:bg-slate-800 rounded-xl p-4 mb-4">
-                        <div class="flex justify-center items-end gap-[2px] h-20">
-                            ${barWidths.map((width, i) => `<div class="bg-slate-900 dark:bg-white" style="width: ${width}px; height: ${i % 3 === 0 ? '100%' : '80%'}"></div>`).join('')}
-                        </div>
-                        <div class="text-xs font-mono text-center text-slate-600 dark:text-slate-300 mt-2 tracking-widest font-bold">${barcodeString}</div>
-                    </div>
-                    
-                    <button 
-                        onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')"
-                        ${isAdded ? 'disabled' : ''}
-                        class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded 
-                            ? 'bg-slate-300 dark:bg-slate-600 text-slate-500 dark:text-slate-400 cursor-not-allowed' 
-                            : 'bg-green-500 hover:bg-green-600 text-white'}"
-                    >
-                        ${isAdded 
-                            ? `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> ${APP_CONFIG.addedText}`
-                            : `<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> ${APP_CONFIG.buttonText}`
-                        }
-                    </button>
-                    <a href="${ebayLink}" target="_blank" rel="noopener noreferrer" class="w-full h-10 mt-3 rounded-xl font-semibold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                        View eBay Sold
-                    </a>
-                </div>
-            `;
-        }).join('');
-    } else {
-        const barcodeString = generateBarcodeString(card, 'Standard');
+    let priceBoxes = Object.entries(prices).map(([type, priceData]) => {
+        const market = priceData.market;
+        if (!market) return '';
+        const priceDisplay = formatPrice(market);
+        const barcodeString = generateBarcodeString(card, type);
         const barWidths = generateBarWidths(barcodeString);
-        
-        priceBoxes = `
-            <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5">
-                <div class="text-4xl font-bold text-center text-slate-400 mb-4">TBC</div>
-                
+        const isAdded = state.shoppingList.some(item => item.uid === `${card.id}-${type}`);
+
+        return `
+            <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4">
+                <div class="text-4xl font-bold text-center text-blue-600 dark:text-blue-400 mb-4">${priceDisplay}</div>
                 <div class="bg-white dark:bg-slate-800 rounded-xl p-4 mb-4">
                     <div class="flex justify-center items-end gap-[2px] h-20">
-                        ${barWidths.map((width, i) => `<div class="bg-slate-900 dark:bg-white" style="width: ${width}px; height: ${i % 3 === 0 ? '100%' : '80%'}"></div>`).join('')}
+                        ${barWidths.map(w => `<div class="bg-slate-900 dark:bg-white" style="width: ${w}px; height: 100%"></div>`).join('')}
                     </div>
-                    <div class="text-xs font-mono text-center text-slate-600 dark:text-slate-300 mt-2 tracking-widest font-bold">${barcodeString}</div>
+                    <div class="text-xs font-mono text-center mt-2 tracking-widest font-bold">${barcodeString}</div>
                 </div>
-                
-                <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    ${APP_CONFIG.buttonText}
-                </button>
-                <a href="${ebayLink}" target="_blank" rel="noopener noreferrer" class="w-full h-10 mt-3 rounded-xl font-semibold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                    View eBay Sold
-                </a>
+                <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" ${isAdded ? 'disabled' : ''} class="w-full h-14 rounded-xl font-bold ${isAdded ? 'bg-slate-300' : 'bg-green-500 text-white'}">${isAdded ? APP_CONFIG.addedText : APP_CONFIG.buttonText}</button>
+                <a href="${ebayLink}" target="_blank" class="w-full h-10 mt-3 rounded-xl font-semibold flex items-center justify-center border-2 border-blue-600 text-blue-600">View eBay Sold</a>
             </div>
         `;
-    }
+    }).join('');
 
-    return `
-        <div class="min-h-screen bg-slate-100 dark:bg-slate-900 p-4">
-            <div class="max-w-md mx-auto">
-                <button onclick="goBack()" class="flex items-center gap-2 text-slate-600 dark:text-slate-300 mb-4 hover:text-slate-900 dark:hover:text-white transition-colors">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    <span class="font-medium">Back</span>
-                </button>
-
-                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-lg">
-                    <img src="${card.images.large}" alt="${card.name}" class="w-full rounded-2xl shadow-md mb-6" />
-                    <h1 class="text-2xl font-bold text-center text-slate-900 dark:text-white mb-2">${card.name}</h1>
-                    <p class="text-slate-500 dark:text-slate-400 text-center text-sm mb-4">${card.set.name}</p>
-                    
-                    <div class="bg-slate-100 dark:bg-slate-700 rounded-2xl p-4 mb-6">
-                        <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase text-center mb-2">Card Number</div>
-                        <div class="text-3xl font-bold text-center text-slate-900 dark:text-white tracking-wider">${displayNum}</div>
-                    </div>
-
-                    <div class="bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-xl p-4 mb-6">
-                        <p class="text-sm text-amber-800 dark:text-amber-200 text-center">
-                            <strong>Please Note:</strong> Market guides only. Final valuations confirmed by <strong>Ellis TCG</strong>.
-                        </p>
-                    </div>
-
-                    ${priceBoxes}
-                </div>
-            </div>
-        </div>
-    `;
+    return `<div class="p-4"><button onclick="goBack()" class="mb-4">Back</button><div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-lg"><img src="${card.images.large}" class="w-full rounded-2xl mb-6"/><h1 class="text-2xl font-bold text-center">${card.name}</h1><p class="text-center mb-6">${card.set.name} (#${displayNum})</p><div class="bg-amber-50 p-4 mb-6 text-sm text-center"><strong>Please Note:</strong> Market guides only. Final valuations confirmed by <strong>Ellis TCG</strong>.</div>${priceBoxes || 'No prices found'}</div></div>`;
 }
 
 function renderInquiryList() {
-    const items = state.shoppingList;
-    
-    return `
-        <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-50 overflow-y-auto">
-            <div class="max-w-md mx-auto p-4">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Your Inquiry List</h2>
-                    <button onclick="goBack()" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
-                        <svg class="w-6 h-6 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                </div>
-
-                ${items.length === 0 
-                    ? `<div class="text-center py-20 text-slate-400"><p class="text-lg">Your list is empty</p></div>`
-                    : `<div class="space-y-3">
-                        ${items.map((item, index) => `
-                            <div onclick="handleCardClick(state.shoppingList[${index}].fullData)" class="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md border border-slate-100 dark:border-slate-700 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                                <div class="flex justify-between items-start">
-                                    <div class="flex-1">
-                                        <h3 class="font-bold text-slate-900 dark:text-white">${item.name}</h3>
-                                        <p class="text-sm text-slate-500 dark:text-slate-400">${item.set} (#${item.num})</p>
-                                        <p class="font-bold text-blue-600 dark:text-blue-400 mt-1">${item.price === 'TBC' ? 'TBC' : item.price} (${item.type})</p>
-                                    </div>
-                                    <button onclick="event.stopPropagation(); handleRemoveItem(${index})" class="text-red-500 font-semibold text-sm px-3 py-1 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">Remove</button>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>`
-                }
-
-                ${items.length > 0 
-                    ? `<div class="mt-8 space-y-3">
-                        <button onclick="handleSendWhatsApp()" class="w-full h-14 bg-green-500 hover:bg-green-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
-                            Send List to WhatsApp
-                        </button>
-                        <button onclick="goBack()" class="w-full h-12 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
-                            Close & Continue Searching
-                        </button>
-                    </div>`
-                    : ''
-                }
-            </div>
-        </div>
-    `;
+    return `<div class="p-4"><div class="flex justify-between mb-6"><h2 class="text-2xl font-bold">List</h2><button onclick="goBack()">Close</button></div>${state.shoppingList.map((item, i) => `<div class="bg-white p-4 rounded-xl mb-3 shadow flex justify-between"><div>${item.name}<br><span class="text-blue-600 font-bold">${item.price}</span></div><button onclick="handleRemoveItem(${i})" class="text-red-500">Remove</button></div>`).join('')}<button onclick="handleSendWhatsApp()" class="w-full h-14 bg-green-500 text-white rounded-xl font-bold mt-8">Send to WhatsApp</button></div>`;
 }
 
-function renderCartBar() {
-    const count = state.shoppingList.length;
-    if (count === 0 || state.view !== 'search') return '';
-    
-    return `
-        <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-full flex items-center justify-between px-6 shadow-2xl z-50 hover:bg-blue-700 transition-colors">
-            <span class="font-bold">View Inquiry List</span>
-            <span class="bg-white text-blue-600 px-3 py-1 rounded-lg font-bold">${count}</span>
-        </button>
-    `;
-}
-
-// ============== MAIN RENDER ==============
 function render() {
     const app = document.getElementById('app');
-    
-    let content = '';
-    
-    if (state.view === 'search') {
-        content = `
-            ${renderSearchHeader()}
-            ${state.showAd ? renderSponsorCard() : ''}
-            ${state.isLoading ? renderLoadingSpinner() : renderCardGrid()}
-            ${renderCartBar()}
-        `;
-    } else if (state.view === 'details') {
-        content = renderCardDetails();
-    } else if (state.view === 'list') {
-        content = renderInquiryList();
-    }
-    
-    app.innerHTML = content;
+    if (state.view === 'search') app.innerHTML = `${renderSearchHeader()}${state.showAd ? renderSponsorCard() : ''}${state.isLoading ? '<div class="text-center py-20">Searching...</div>' : renderCardGrid()}${state.shoppingList.length > 0 ? `<button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] bg-blue-600 text-white h-16 rounded-full font-bold">View List (${state.shoppingList.length})</button>` : ''}`;
+    else if (state.view === 'details') app.innerHTML = renderCardDetails();
+    else if (state.view === 'list') app.innerHTML = renderInquiryList();
 }
 
 // ============== INIT ==============
-
-window.addEventListener('popstate', (event) => {
-    if (event.state && event.state.view) {
-        state.view = event.state.view;
-    } else {
-        state.view = 'search';
-        state.selectedCard = null;
-    }
+window.addEventListener('popstate', (e) => {
+    state.view = e.state?.view || 'search';
+    state.selectedCard = null;
     render();
 });
-
 document.documentElement.classList.toggle('dark', state.isDark);
 initApp();
 </script>
-
 </body>
 </html>
