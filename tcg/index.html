@@ -50,7 +50,6 @@ let state = {
     hasSearched: false,
     showAd: true,
     isDark: localStorage.getItem('theme') === 'dark',
-    // Search form state (local to header)
     searchTerm: '',
     selectedSet: '',
     selectedRarity: ''
@@ -111,10 +110,7 @@ async function initApp() {
 
 async function executeSearch() {
     const { searchTerm, selectedSet, selectedRarity } = state;
-    
-    if (!searchTerm && !selectedSet && !selectedRarity) {
-        return;
-    }
+    if (!searchTerm && !selectedSet && !selectedRarity) return;
 
     state.showAd = false;
     state.isLoading = true;
@@ -122,7 +118,6 @@ async function executeSearch() {
     render();
 
     const queryParts = [];
-    
     if (searchTerm) {
         const term = searchTerm.trim();
         if (term.includes('/')) {
@@ -138,14 +133,10 @@ async function executeSearch() {
     if (selectedRarity) queryParts.push(`rarity:"${selectedRarity}"`);
 
     const query = queryParts.join(' AND ');
-    console.log('Search query:', query);
-
     try {
         const url = `${API_BASE}/cards?q=${encodeURIComponent(query)}&orderBy=number&pageSize=96`;
-        console.log('Fetching:', url);
         const res = await fetch(url);
         const data = await res.json();
-        console.log('Results:', data.data?.length || 0);
         state.cards = data.data || [];
     } catch (error) {
         console.error('Search failed:', error);
@@ -182,10 +173,12 @@ function handleSearchInput(value) {
 
 function handleSetChange(value) {
     state.selectedSet = value;
+    executeSearch();
 }
 
 function handleRarityChange(value) {
     state.selectedRarity = value;
+    executeSearch();
 }
 
 function handleCardClick(card) {
@@ -313,9 +306,6 @@ function renderSearchHeader() {
                         enterkeyhint="search"
                         class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium"
                     />
-                    <button type="submit" class="ml-2 px-4 py-1.5 bg-blue-500 text-white rounded-lg font-semibold text-sm hover:bg-blue-600 transition-colors">
-                        Search
-                    </button>
                 </form>
             </div>
             <div class="flex gap-2 px-4 pb-4 overflow-x-auto scrollbar-hide">
@@ -333,9 +323,6 @@ function renderSearchHeader() {
                         ${state.rarities.map(r => `<option value="${r}" ${state.selectedRarity === r ? 'selected' : ''}>${r}</option>`).join('')}
                     </select>
                 </div>
-                <button onclick="executeSearch()" class="px-4 py-2 bg-blue-500 text-white rounded-lg font-semibold text-sm hover:bg-blue-600 transition-colors flex-shrink-0">
-                    Apply Filters
-                </button>
             </div>
         </header>
     `;
@@ -343,10 +330,7 @@ function renderSearchHeader() {
 
 function renderCardGrid() {
     if (state.cards.length === 0) {
-        if (state.hasSearched) {
-            return `<div class="flex flex-col items-center justify-center py-20 text-slate-400"><p class="text-lg font-medium">No cards found</p></div>`;
-        }
-        return ''; 
+        return state.hasSearched ? `<div class="flex flex-col items-center justify-center py-20 text-slate-400"><p class="text-lg font-medium">No cards found</p></div>` : ''; 
     }
     return `
         <div class="grid grid-cols-2 gap-4 p-4">
@@ -379,11 +363,11 @@ function renderCardDetails() {
     const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + displayNum + ' ' + card.set.name + ' sold')}&LH_Sold=1&LH_Complete=1`;
     const prices = card.tcgplayer?.prices || {};
     let priceBoxes = '';
+    
     if (Object.keys(prices).length > 0) {
         priceBoxes = Object.entries(prices).map(([type, priceData]) => {
-            const market = priceData.market;
-            if (!market) return '';
-            const priceDisplay = formatPrice(market);
+            if (!priceData.market) return '';
+            const priceDisplay = formatPrice(priceData.market);
             const uid = `${card.id}-${type}`;
             const isAdded = state.shoppingList.some(item => item.uid === uid);
             const barcodeString = generateBarcodeString(card, type);
