@@ -15,10 +15,37 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            -webkit-tap-highlight-color: transparent; 
+            overscroll-behavior-y: none;
+        }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        /* Grid Fixes */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            padding: 16px;
+            width: 100%;
+        }
+        .card-btn {
+            appearance: none;
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            cursor: pointer;
+            text-align: left;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 <body class="bg-slate-100 dark:bg-slate-900 min-h-screen transition-colors duration-300">
@@ -115,6 +142,11 @@ async function executeSearch() {
     state.showAd = false;
     state.isLoading = true;
     state.hasSearched = true;
+    
+    if (state.view !== 'search' || !state.hasSearched) {
+         history.pushState({ view: 'search', hasSearched: true }, '');
+    }
+    
     render();
 
     const queryParts = [];
@@ -223,7 +255,7 @@ function handleSendWhatsApp() {
 }
 
 function goBack() {
-    if (window.history.length > 1 && state.view !== 'search') {
+    if (window.history.length > 1) {
         history.back();
     } else {
         resetHome();
@@ -333,18 +365,24 @@ function renderCardGrid() {
         return state.hasSearched ? `<div class="flex flex-col items-center justify-center py-20 text-slate-400"><p class="text-lg font-medium">No cards found</p></div>` : ''; 
     }
     return `
-        <div class="grid grid-cols-2 gap-4 p-4">
+        <div class="card-grid">
             ${state.cards.map((card, i) => `
-                <button onclick="handleCardClick(state.cards[${i}])" class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 text-left hover:scale-[1.02] transition-transform">
-                    <div class="aspect-[1/1.4] bg-slate-100 dark:bg-slate-700 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
-                        <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="max-w-[90%] max-h-[90%] object-contain" />
+                <button 
+                    onclick="handleCardClick(state.cards[${i}])" 
+                    type="button"
+                    class="card-btn"
+                >
+                    <div class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 w-full h-full flex flex-col pointer-events-none">
+                        <div class="aspect-[1/1.4] bg-slate-100 dark:bg-slate-700 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
+                            <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="max-w-[95%] max-h-[95%] object-contain" />
+                        </div>
+                        <h3 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">${card.name}</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${card.set.name}</p>
                     </div>
-                    <h3 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">${card.name}</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${card.set.name}</p>
                 </button>
             `).join('')}
         </div>
-    `;
+        <div class="h-32 w-full"></div> `;
 }
 
 function renderLoadingSpinner() {
@@ -435,7 +473,7 @@ function renderCardDetails() {
 function renderInquiryList() {
     const items = state.shoppingList;
     return `
-        <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-50 overflow-y-auto">
+        <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-[100] overflow-y-auto">
             <div class="max-w-md mx-auto p-4 pb-32">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-2xl font-black text-slate-900 dark:text-white">Inquiry List</h2>
@@ -469,7 +507,7 @@ function renderCartBar() {
     const count = state.shoppingList.length;
     if (count === 0 || state.view !== 'search') return '';
     return `
-        <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl z-50 font-black transition-transform hover:scale-105 active:scale-95">
+        <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl z-40 font-black transition-transform hover:scale-105 active:scale-95">
             <span>Inquiry List</span>
             <span class="bg-white text-blue-600 px-3 py-1 rounded-xl">${count}</span>
         </button>
@@ -500,8 +538,17 @@ function render() {
 
 // ============== INIT ==============
 window.addEventListener('popstate', (event) => {
-    state.view = (event.state && event.state.view) ? event.state.view : 'search';
-    state.selectedCard = (event.state && event.state.card) ? event.state.card : null;
+    if (event.state) {
+        state.view = event.state.view;
+        state.selectedCard = event.state.card || null;
+        state.hasSearched = event.state.hasSearched || false;
+        if (state.view === 'search' && state.hasSearched) state.showAd = false;
+    } else {
+        state.view = 'search';
+        state.selectedCard = null;
+        state.hasSearched = false;
+        state.showAd = true;
+    }
     render();
 });
 document.documentElement.classList.toggle('dark', state.isDark);
