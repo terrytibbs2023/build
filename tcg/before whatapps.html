@@ -28,6 +28,7 @@
 <script>
 // ============== CONFIG ==============
 const APP_CONFIG = {
+    logoUrl: "https://imagecdn.websitebuilder.prositehosting.co.uk/22/3e/223ef076-9a2d-4062-98c2-25f95c7952d0.png",
     appTitle: "Ellis TCG Card Search",
     storeUrl: "https://essexconsolerepair.co.uk",
     adTitle: "Essex Console Repair",
@@ -195,7 +196,7 @@ function handleRarityChange(value) {
 function handleCardClick(card) {
     state.selectedCard = card;
     state.view = 'details';
-    history.pushState({ view: 'details', card: card }, '');
+    history.pushState({ view: 'details' }, '');
     window.scrollTo(0, 0);
     render();
 }
@@ -211,14 +212,14 @@ function handleAddToList(card, type, price) {
         type,
         price,
         imageUrl: card.images.large,
-        fullData: JSON.parse(JSON.stringify(card))
+        fullData: JSON.parse(JSON.stringify(card)) // Deep copy
     });
     localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
     render();
 }
 
 function handleRemoveItem(e, index) {
-    e.stopPropagation();
+    e.stopPropagation(); // Prevents click from opening the card
     state.shoppingList.splice(index, 1);
     localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
     render();
@@ -254,7 +255,7 @@ function renderSocialStories() {
     const socials = [
         { name: 'TikTok', color: 'bg-black', icon: '📱', url: 'https://tiktok.com' },
         { name: 'Facebook', color: 'bg-blue-600', icon: '👥', url: 'https://facebook.com' },
-        { name: 'WhatsApp', color: 'bg-green-500', icon: '💬', url: `https://wa.me/${APP_CONFIG.phoneNumber}` },
+        { name: 'Instagram', color: 'bg-gradient-to-tr from-yellow-400 to-purple-600', icon: '📸', url: '#' },
         { name: 'Web', color: 'bg-slate-700', icon: '🌐', url: APP_CONFIG.storeUrl }
     ];
 
@@ -280,7 +281,10 @@ function renderSponsorCard() {
     return `
         <div class="p-4">
             <a href="${APP_CONFIG.storeUrl}" target="_blank" class="block bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700">
-                <div class="p-4">
+                <div class="bg-slate-100 dark:bg-slate-700 h-32 flex items-center justify-center p-4">
+                    <img src="${APP_CONFIG.logoUrl}" alt="Sponsor" class="max-w-[70%] max-h-[70%] object-contain" />
+                </div>
+                <div class="p-4 border-t border-slate-100 dark:border-slate-700">
                     <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Official Sponsor</span>
                     <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
                     <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${APP_CONFIG.adDescription}</p>
@@ -445,7 +449,7 @@ function renderInquiryList() {
     const items = state.shoppingList;
     return `
         <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-50 overflow-y-auto">
-            <div class="max-w-md mx-auto p-4 pb-32">
+            <div class="max-w-md mx-auto p-4 pb-24">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-2xl font-black text-slate-900 dark:text-white">Inquiry List</h2>
                     <button onclick="goBack()" class="p-2 bg-white dark:bg-slate-800 rounded-full shadow-md"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
