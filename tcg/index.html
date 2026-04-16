@@ -18,13 +18,11 @@
         body { 
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
             -webkit-tap-highlight-color: transparent; 
-            overscroll-behavior-y: none;
         }
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         
-        /* Grid Fixes */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -43,8 +41,6 @@
             text-align: left;
             position: relative;
             z-index: 1;
-            display: flex;
-            flex-direction: column;
         }
     </style>
 </head>
@@ -129,6 +125,8 @@ async function initApp() {
         state.sets = setsData.data || [];
         state.rarities = raritiesData.data || [];
         state.gbpRate = rateData.rates?.GBP || 0.78;
+        
+        history.replaceState({ view: 'search', hasSearched: false, showAd: true, cards: [] }, '');
         render();
     } catch (error) {
         console.error('Failed to initialize:', error);
@@ -142,11 +140,6 @@ async function executeSearch() {
     state.showAd = false;
     state.isLoading = true;
     state.hasSearched = true;
-    
-    if (state.view !== 'search' || !state.hasSearched) {
-         history.pushState({ view: 'search', hasSearched: true }, '');
-    }
-    
     render();
 
     const queryParts = [];
@@ -170,6 +163,17 @@ async function executeSearch() {
         const res = await fetch(url);
         const data = await res.json();
         state.cards = data.data || [];
+        
+        history.pushState({ 
+            view: 'search', 
+            hasSearched: true, 
+            showAd: false, 
+            cards: state.cards,
+            searchTerm: state.searchTerm,
+            selectedSet: state.selectedSet,
+            selectedRarity: state.selectedRarity
+        }, '');
+
     } catch (error) {
         console.error('Search failed:', error);
         state.cards = [];
@@ -189,6 +193,7 @@ function resetHome() {
     state.selectedCard = null;
     state.showAd = true;
     state.hasSearched = false;
+    history.pushState({ view: 'search', hasSearched: false, showAd: true, cards: [] }, '');
     render();
 }
 
@@ -224,6 +229,7 @@ function handleCardClick(card) {
 function handleAddToList(card, type, price) {
     const uid = `${card.id}-${type}`;
     if (state.shoppingList.some(item => item.uid === uid)) return;
+    
     state.shoppingList.push({
         uid,
         name: card.name,
@@ -234,6 +240,7 @@ function handleAddToList(card, type, price) {
         imageUrl: card.images.large,
         fullData: JSON.parse(JSON.stringify(card))
     });
+    
     localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
     render();
 }
@@ -367,22 +374,20 @@ function renderCardGrid() {
     return `
         <div class="card-grid">
             ${state.cards.map((card, i) => `
-                <button 
+                <div 
                     onclick="handleCardClick(state.cards[${i}])" 
-                    type="button"
-                    class="card-btn"
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 w-full h-full flex flex-col cursor-pointer transition-transform active:scale-95"
                 >
-                    <div class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 w-full h-full flex flex-col pointer-events-none">
-                        <div class="aspect-[1/1.4] bg-slate-100 dark:bg-slate-700 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
-                            <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="max-w-[95%] max-h-[95%] object-contain" />
-                        </div>
-                        <h3 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">${card.name}</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${card.set.name}</p>
+                    <div class="aspect-[1/1.4] bg-slate-100 dark:bg-slate-700 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
+                        <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="max-w-[95%] max-h-[95%] object-contain" />
                     </div>
-                </button>
+                    <h3 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">${card.name}</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${card.set.name}</p>
+                </div>
             `).join('')}
         </div>
-        <div class="h-32 w-full"></div> `;
+        <div class="h-32 w-full"></div>
+    `;
 }
 
 function renderLoadingSpinner() {
@@ -420,8 +425,8 @@ function renderCardDetails() {
                         </div>
                         <div class="text-[10px] font-mono text-center text-black mt-2 tracking-[0.2em] font-bold">${barcodeString}</div>
                     </div>
-                    <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" ${isAdded ? 'disabled' : ''}
-                        class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20'} transition-all">
+                    <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" 
+                        class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400 cursor-default' : 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20'} transition-all">
                         ${isAdded ? 'Added to List' : 'Add to Inquiry List'}
                     </button>
                     <a href="${ebayLink}" target="_blank" class="w-full h-10 mt-3 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
@@ -431,6 +436,7 @@ function renderCardDetails() {
             `;
         }).join('');
     } else {
+        const isAdded = state.shoppingList.some(item => item.uid === `${card.id}-Standard`);
         const barcodeString = generateBarcodeString(card, 'Standard');
         const barcodeData = generateBarcodeData(barcodeString);
         priceBoxes = `
@@ -442,7 +448,10 @@ function renderCardDetails() {
                     </div>
                     <div class="text-[10px] font-mono text-center text-black mt-2 tracking-[0.2em] font-bold">${barcodeString}</div>
                 </div>
-                <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white mb-3">Add to Inquiry List</button>
+                <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" 
+                    class="w-full h-14 rounded-xl font-bold ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 text-white'} mb-3">
+                    ${isAdded ? 'Added to List' : 'Add to Inquiry List'}
+                </button>
                 <a href="${ebayLink}" target="_blank" class="w-full h-10 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
                     View eBay Sold
                 </a>
@@ -489,7 +498,7 @@ function renderInquiryList() {
                                 <p class="text-[11px] text-slate-500 font-bold">${item.set} (#${item.num})</p>
                                 <p class="text-blue-600 dark:text-blue-400 font-black text-sm mt-1">${item.price}</p>
                             </div>
-                            <button onclick="handleRemoveItem(event, ${index})" class="text-red-500 self-start p-2 relative z-10"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                            <button onclick="handleRemoveItem(event, ${index})" class="text-red-500 self-start p-2 relative z-10 hover:bg-red-50 rounded-lg"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
                         </div>
                     `).join('')}
                     <div class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-100 dark:from-slate-900 to-transparent">
@@ -542,15 +551,21 @@ window.addEventListener('popstate', (event) => {
         state.view = event.state.view;
         state.selectedCard = event.state.card || null;
         state.hasSearched = event.state.hasSearched || false;
-        if (state.view === 'search' && state.hasSearched) state.showAd = false;
+        state.showAd = event.state.showAd;
+        state.cards = event.state.cards || [];
+        state.searchTerm = event.state.searchTerm || '';
+        state.selectedSet = event.state.selectedSet || '';
+        state.selectedRarity = event.state.selectedRarity || '';
     } else {
         state.view = 'search';
         state.selectedCard = null;
         state.hasSearched = false;
         state.showAd = true;
+        state.cards = [];
     }
     render();
 });
+
 document.documentElement.classList.toggle('dark', state.isDark);
 initApp();
 </script>
