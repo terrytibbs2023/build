@@ -108,6 +108,8 @@ async function initApp() {
 
 async function searchCards() {
     const { searchTerm, selectedSet, selectedRarity } = state;
+    
+    // If everything is empty, go back to home screen
     if (!searchTerm && !selectedSet && !selectedRarity) {
         resetHome();
         return;
@@ -171,6 +173,8 @@ function handleSearchInput(value) {
 
 function handleKeyDown(e) {
     if (e.key === 'Enter') {
+        // Prevent default mobile keyboard behavior and trigger search
+        e.target.blur(); 
         searchCards();
     }
 }
