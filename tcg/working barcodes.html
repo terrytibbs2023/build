@@ -70,16 +70,26 @@ function generateBarcodeString(card, variantType) {
 }
 
 function generateBarcodeData(barcodeString) {
+    // Generates a high-contrast binary pattern suitable for scanning
     const barData = [];
+    
+    // Start Pattern
     barData.push({ width: 3, type: 'bar' }, { width: 1, type: 'space' });
+
     for (let i = 0; i < barcodeString.length; i++) {
         const charValue = barcodeString.charCodeAt(i);
+        // Convert char to 7-bit pattern for visual density
         for (let bit = 0; bit < 7; bit++) {
             const isBar = (charValue >> bit) & 1;
-            barData.push({ width: isBar ? 3 : 1, type: 'bar' });
+            barData.push({ 
+                width: isBar ? 3 : 1, 
+                type: 'bar' 
+            });
             barData.push({ width: 1, type: 'space' });
         }
     }
+
+    // Stop Pattern
     barData.push({ width: 3, type: 'bar' });
     return barData;
 }
@@ -118,11 +128,18 @@ async function initApp() {
 
 async function searchCards() {
     const { searchTerm, selectedSet, selectedRarity } = state;
+    
     if (!searchTerm && !selectedSet && !selectedRarity) {
-        resetHome();
+        state.cards = [];
+        state.showAd = true;
+        state.hasSearched = false;
+        render();
         return;
     }
-    if (searchTerm && searchTerm.length < 3 && !selectedSet && !selectedRarity) return;
+
+    if (searchTerm && searchTerm.length < 3 && !selectedSet && !selectedRarity) {
+        return;
+    }
 
     state.showAd = false;
     state.isLoading = true;
@@ -130,6 +147,7 @@ async function searchCards() {
     render();
 
     const queryParts = [];
+    
     if (searchTerm && searchTerm.length >= 3) {
         if (searchTerm.includes('/')) {
             const parts = searchTerm.split('/');
@@ -159,18 +177,6 @@ async function searchCards() {
 const debouncedSearch = debounce(searchCards, 1500);
 
 // ============== ACTIONS ==============
-function resetHome() {
-    state.view = 'search';
-    state.cards = [];
-    state.searchTerm = '';
-    state.selectedSet = '';
-    state.selectedRarity = '';
-    state.selectedCard = null;
-    state.showAd = true;
-    state.hasSearched = false;
-    render();
-}
-
 function toggleTheme() {
     state.isDark = !state.isDark;
     localStorage.setItem('theme', state.isDark ? 'dark' : 'light');
@@ -204,6 +210,7 @@ function handleCardClick(card) {
 function handleAddToList(card, type, price) {
     const uid = `${card.id}-${type}`;
     if (state.shoppingList.some(item => item.uid === uid)) return;
+
     state.shoppingList.push({
         uid,
         name: card.name,
@@ -212,14 +219,13 @@ function handleAddToList(card, type, price) {
         type,
         price,
         imageUrl: card.images.large,
-        fullData: JSON.parse(JSON.stringify(card)) // Deep copy
+        fullData: card
     });
     localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
     render();
 }
 
-function handleRemoveItem(e, index) {
-    e.stopPropagation(); // Prevents click from opening the card
+function handleRemoveItem(index) {
     state.shoppingList.splice(index, 1);
     localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
     render();
@@ -238,7 +244,9 @@ function goBack() {
     if (window.history.length > 1 && state.view !== 'search') {
         history.back();
     } else {
-        resetHome();
+        state.view = 'search';
+        state.selectedCard = null;
+        render();
     }
 }
 
@@ -250,60 +258,11 @@ function openList() {
 }
 
 // ============== COMPONENTS ==============
-
-function renderSocialStories() {
-    const socials = [
-        { name: 'TikTok', color: 'bg-black', icon: '📱', url: 'https://tiktok.com' },
-        { name: 'Facebook', color: 'bg-blue-600', icon: '👥', url: 'https://facebook.com' },
-        { name: 'Instagram', color: 'bg-gradient-to-tr from-yellow-400 to-purple-600', icon: '📸', url: '#' },
-        { name: 'Web', color: 'bg-slate-700', icon: '🌐', url: APP_CONFIG.storeUrl }
-    ];
-
-    return `
-        <div class="px-4 py-4 overflow-x-auto flex gap-4 scrollbar-hide">
-            ${socials.map(s => `
-                <a href="${s.url}" target="_blank" class="flex flex-col items-center gap-1 flex-shrink-0">
-                    <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 to-green-400">
-                        <div class="bg-white dark:bg-slate-900 w-full h-full rounded-full p-1">
-                            <div class="${s.color} w-full h-full rounded-full flex items-center justify-center text-xl shadow-inner">
-                                ${s.icon}
-                            </div>
-                        </div>
-                    </div>
-                    <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tighter">${s.name}</span>
-                </a>
-            `).join('')}
-        </div>
-    `;
-}
-
-function renderSponsorCard() {
-    return `
-        <div class="p-4">
-            <a href="${APP_CONFIG.storeUrl}" target="_blank" class="block bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700">
-                <div class="bg-slate-100 dark:bg-slate-700 h-32 flex items-center justify-center p-4">
-                    <img src="${APP_CONFIG.logoUrl}" alt="Sponsor" class="max-w-[70%] max-h-[70%] object-contain" />
-                </div>
-                <div class="p-4 border-t border-slate-100 dark:border-slate-700">
-                    <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Official Sponsor</span>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${APP_CONFIG.adDescription}</p>
-                </div>
-            </a>
-        </div>
-    `;
-}
-
 function renderSearchHeader() {
     return `
         <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700">
             <div class="flex items-center justify-between px-4 py-3">
-                <div class="flex items-center gap-3">
-                    <button onclick="resetHome()" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all text-slate-600 dark:text-slate-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                    </button>
-                    <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">${APP_CONFIG.appTitle}</h1>
-                </div>
+                <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">${APP_CONFIG.appTitle}</h1>
                 <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
                     ${state.isDark 
                         ? '<svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>'
@@ -319,7 +278,7 @@ function renderSearchHeader() {
                         value="${state.searchTerm}"
                         oninput="handleSearchChange(this.value)"
                         placeholder="Card name or number..."
-                        class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium"
+                        class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400"
                     />
                 </div>
             </div>
@@ -343,10 +302,33 @@ function renderSearchHeader() {
     `;
 }
 
+function renderSponsorCard() {
+    return `
+        <div class="p-4">
+            <a href="${APP_CONFIG.storeUrl}" target="_blank" rel="noopener noreferrer" class="block bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700 hover:shadow-lg transition-shadow">
+                <div class="bg-slate-100 dark:bg-slate-700 h-40 flex items-center justify-center p-4">
+                    <img src="${APP_CONFIG.logoUrl}" alt="Sponsor" class="max-w-[80%] max-h-[80%] object-contain" />
+                </div>
+                <div class="p-4 border-t border-slate-100 dark:border-slate-700">
+                    <span class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Official Sponsor</span>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">${APP_CONFIG.adDescription}</p>
+                </div>
+            </a>
+        </div>
+    `;
+}
+
 function renderCardGrid() {
     if (state.cards.length === 0) {
         if (state.hasSearched) {
-            return `<div class="flex flex-col items-center justify-center py-20 text-slate-400"><p class="text-lg font-medium">No cards found</p></div>`;
+            return `
+                <div class="flex flex-col items-center justify-center py-20 text-slate-400">
+                    <svg class="w-16 h-16 mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                    <p class="text-lg font-medium">No cards found</p>
+                    <p class="text-sm mt-1">Try adjusting your search or filters</p>
+                </div>
+            `;
         }
         return ''; 
     }
@@ -370,7 +352,7 @@ function renderLoadingSpinner() {
     return `
         <div class="flex flex-col items-center justify-center py-20 text-slate-400">
             <div class="w-10 h-10 border-4 border-slate-200 dark:border-slate-700 border-t-blue-500 rounded-full animate-spin"></div>
-            <p class="mt-4 font-medium uppercase text-xs">Searching...</p>
+            <p class="mt-4 font-medium">Searching...</p>
         </div>
     `;
 }
@@ -378,11 +360,13 @@ function renderLoadingSpinner() {
 function renderCardDetails() {
     const card = state.selectedCard;
     if (!card) return '';
+
     const displayNum = `${card.number}/${card.set.printedTotal}`;
     const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + displayNum + ' ' + card.set.name + ' sold')}&LH_Sold=1&LH_Complete=1`;
     const prices = card.tcgplayer?.prices || {};
 
     let priceBoxes = '';
+    
     if (Object.keys(prices).length > 0) {
         priceBoxes = Object.entries(prices).map(([type, priceData]) => {
             const market = priceData.market;
@@ -394,22 +378,33 @@ function renderCardDetails() {
             const barcodeData = generateBarcodeData(barcodeString);
 
             return `
-                <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4 border border-slate-100 dark:border-slate-700">
+                <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4">
                     <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase text-center mb-1">${type} - Guide Price</div>
-                    <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-4">${priceDisplay}</div>
+                    <div class="text-4xl font-bold text-center text-blue-600 dark:text-blue-400 mb-4">${priceDisplay}</div>
                     
-                    <div class="bg-white dark:bg-slate-900 rounded-xl p-4 mb-4 border border-slate-200 dark:border-slate-800">
-                        <div class="flex justify-center items-end gap-0 h-16">
-                            ${barcodeData.map(bar => `<div class="${bar.type === 'bar' ? 'bg-slate-900 dark:bg-white' : 'bg-transparent'}" style="width: ${bar.width}px; height: 100%"></div>`).join('')}
+                    <div class="bg-white dark:bg-slate-800 rounded-xl p-4 mb-4 overflow-hidden">
+                        <div class="flex justify-center items-end gap-0 h-20">
+                            ${barcodeData.map((bar, i) => 
+                                `<div class="${bar.type === 'bar' ? 'bg-slate-900 dark:bg-white' : 'bg-transparent'}" style="width: ${bar.width}px; height: 100%"></div>`
+                            ).join('')}
                         </div>
-                        <div class="text-[10px] font-mono text-center text-slate-500 dark:text-slate-400 mt-2 tracking-[0.2em] font-bold">${barcodeString}</div>
+                        <div class="text-xs font-mono text-center text-slate-600 dark:text-slate-300 mt-2 tracking-widest font-bold">${barcodeString}</div>
                     </div>
                     
-                    <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" ${isAdded ? 'disabled' : ''}
-                        class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20'} transition-all">
-                        ${isAdded ? 'Added to List' : 'Add to Inquiry List'}
+                    <button 
+                        onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')"
+                        ${isAdded ? 'disabled' : ''}
+                        class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded 
+                            ? 'bg-slate-300 dark:bg-slate-600 text-slate-500 dark:text-slate-400 cursor-not-allowed' 
+                            : 'bg-green-500 hover:bg-green-600 text-white'}"
+                    >
+                        ${isAdded 
+                            ? '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Added to List'
+                            : '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg> Add to Inquiry List'
+                        }
                     </button>
-                    <a href="${ebayLink}" target="_blank" class="w-full h-10 mt-3 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
+                    <a href="${ebayLink}" target="_blank" rel="noopener noreferrer" class="w-full h-10 mt-3 rounded-xl font-semibold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                         View eBay Sold
                     </a>
                 </div>
@@ -418,26 +413,56 @@ function renderCardDetails() {
     } else {
         const barcodeString = generateBarcodeString(card, 'Standard');
         const barcodeData = generateBarcodeData(barcodeString);
-        priceBoxes = `<div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 text-center"><div class="text-2xl font-black text-slate-400 mb-4">PRICE TBC</div>
-        <div class="bg-white dark:bg-slate-900 rounded-xl p-4 mb-4 h-16 flex justify-center items-end gap-0 border border-slate-200 dark:border-slate-800">${barcodeData.map(bar => `<div class="${bar.type === 'bar' ? 'bg-slate-900 dark:bg-white' : 'bg-transparent'}" style="width: ${bar.width}px; height: 100%"></div>`).join('')}</div>
-        <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white">Add to Inquiry List</button></div>`;
+        
+        priceBoxes = `
+            <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5">
+                <div class="text-4xl font-bold text-center text-slate-400 mb-4">TBC</div>
+                
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-4 mb-4 overflow-hidden">
+                    <div class="flex justify-center items-end gap-0 h-20">
+                        ${barcodeData.map((bar, i) => 
+                            `<div class="${bar.type === 'bar' ? 'bg-slate-900 dark:bg-white' : 'bg-transparent'}" style="width: ${bar.width}px; height: 100%"></div>`
+                        ).join('')}
+                    </div>
+                    <div class="text-xs font-mono text-center text-slate-600 dark:text-slate-300 mt-2 tracking-widest font-bold">${barcodeString}</div>
+                </div>
+                
+                <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                    Add to Inquiry List
+                </button>
+                <a href="${ebayLink}" target="_blank" rel="noopener noreferrer" class="w-full h-10 mt-3 rounded-xl font-semibold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                    View eBay Sold
+                </a>
+            </div>
+        `;
     }
 
     return `
         <div class="min-h-screen bg-slate-100 dark:bg-slate-900 p-4">
             <div class="max-w-md mx-auto">
-                <button onclick="goBack()" class="flex items-center gap-2 text-slate-600 dark:text-slate-400 mb-4 font-bold">
+                <button onclick="goBack()" class="flex items-center gap-2 text-slate-600 dark:text-slate-300 mb-4 hover:text-slate-900 dark:hover:text-white transition-colors">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    Back
+                    <span class="font-medium">Back</span>
                 </button>
-                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl border border-slate-200 dark:border-slate-700">
-                    <img src="${card.images.large}" class="w-full rounded-2xl shadow-lg mb-6 border border-slate-100 dark:border-slate-700" />
-                    <h1 class="text-2xl font-black text-center text-slate-900 dark:text-white leading-tight">${card.name}</h1>
-                    <p class="text-slate-500 text-center font-bold text-sm mb-6">${card.set.name}</p>
-                    <div class="bg-slate-100 dark:bg-slate-900/50 rounded-2xl p-4 mb-6 border border-slate-200 dark:border-slate-800">
-                        <div class="text-[10px] font-black text-slate-400 uppercase text-center mb-1">Card Identifier</div>
-                        <div class="text-2xl font-black text-center text-slate-900 dark:text-white">${displayNum}</div>
+
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-lg">
+                    <img src="${card.images.large}" alt="${card.name}" class="w-full rounded-2xl shadow-md mb-6" />
+                    <h1 class="text-2xl font-bold text-center text-slate-900 dark:text-white mb-2">${card.name}</h1>
+                    <p class="text-slate-500 dark:text-slate-400 text-center text-sm mb-4">${card.set.name}</p>
+                    
+                    <div class="bg-slate-100 dark:bg-slate-700 rounded-2xl p-4 mb-6">
+                        <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase text-center mb-2">Card Number</div>
+                        <div class="text-3xl font-bold text-center text-slate-900 dark:text-white tracking-wider">${displayNum}</div>
                     </div>
+
+                    <div class="bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-xl p-4 mb-6">
+                        <p class="text-sm text-amber-800 dark:text-amber-200 text-center">
+                            <strong>Please Note:</strong> Market guides only. Final valuations confirmed by <strong>Ellis TCG</strong>.
+                        </p>
+                    </div>
+
                     ${priceBoxes}
                 </div>
             </div>
@@ -447,32 +472,47 @@ function renderCardDetails() {
 
 function renderInquiryList() {
     const items = state.shoppingList;
+    
     return `
         <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-50 overflow-y-auto">
-            <div class="max-w-md mx-auto p-4 pb-24">
+            <div class="max-w-md mx-auto p-4">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white">Inquiry List</h2>
-                    <button onclick="goBack()" class="p-2 bg-white dark:bg-slate-800 rounded-full shadow-md"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Your Inquiry List</h2>
+                    <button onclick="goBack()" class="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">
+                        <svg class="w-6 h-6 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
                 </div>
-                ${items.length === 0 ? '<div class="text-center py-20 text-slate-400 font-bold uppercase tracking-widest text-xs">No cards in list</div>' : 
-                `<div class="space-y-3">
-                    ${items.map((item, index) => `
-                        <div onclick="handleCardClick(state.shoppingList[${index}].fullData)" class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm flex gap-4 cursor-pointer hover:border-blue-500 transition-colors">
-                            <img src="${item.imageUrl}" class="w-16 h-auto rounded-lg pointer-events-none" />
-                            <div class="flex-1 pointer-events-none">
-                                <h3 class="font-black text-slate-900 dark:text-white text-sm">${item.name}</h3>
-                                <p class="text-[11px] text-slate-500 font-bold">${item.set} (#${item.num})</p>
-                                <p class="text-blue-600 dark:text-blue-400 font-black text-sm mt-1">${item.price}</p>
+
+                ${items.length === 0 
+                    ? `<div class="text-center py-20 text-slate-400"><p class="text-lg">Your list is empty</p></div>`
+                    : `<div class="space-y-3">
+                        ${items.map((item, index) => `
+                            <div onclick="handleCardClick(state.shoppingList[${index}].fullData)" class="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-md border border-slate-100 dark:border-slate-700 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                                <div class="flex justify-between items-start">
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-slate-900 dark:text-white">${item.name}</h3>
+                                        <p class="text-sm text-slate-500 dark:text-slate-400">${item.set} (#${item.num})</p>
+                                        <p class="font-bold text-blue-600 dark:text-blue-400 mt-1">${item.price === 'TBC' ? 'TBC' : item.price} (${item.type})</p>
+                                    </div>
+                                    <button onclick="event.stopPropagation(); handleRemoveItem(${index})" class="text-red-500 font-semibold text-sm px-3 py-1 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">Remove</button>
+                                </div>
                             </div>
-                            <button onclick="handleRemoveItem(event, ${index})" class="text-red-500 self-start p-2 relative z-10"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
-                        </div>
-                    `).join('')}
-                    <div class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-100 dark:from-slate-900 to-transparent">
-                        <button onclick="handleSendWhatsApp()" class="w-full max-w-md mx-auto h-16 bg-green-500 text-white rounded-2xl font-black flex items-center justify-center gap-3 shadow-xl shadow-green-500/20">
-                            Send Inquiry to Dave
+                        `).join('')}
+                    </div>`
+                }
+
+                ${items.length > 0 
+                    ? `<div class="mt-8 space-y-3">
+                        <button onclick="handleSendWhatsApp()" class="w-full h-14 bg-green-500 hover:bg-green-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+                            Send List to WhatsApp
                         </button>
-                    </div>
-                </div>`}
+                        <button onclick="goBack()" class="w-full h-12 bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl font-semibold hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors">
+                            Close & Continue Searching
+                        </button>
+                    </div>`
+                    : ''
+                }
             </div>
         </div>
     `;
@@ -481,10 +521,11 @@ function renderInquiryList() {
 function renderCartBar() {
     const count = state.shoppingList.length;
     if (count === 0 || state.view !== 'search') return '';
+    
     return `
-        <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl z-50 font-black transition-transform hover:scale-105 active:scale-95">
-            <span>Inquiry List</span>
-            <span class="bg-white text-blue-600 px-3 py-1 rounded-xl">${count}</span>
+        <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-full flex items-center justify-between px-6 shadow-2xl z-50 hover:bg-blue-700 transition-colors">
+            <span class="font-bold">View Inquiry List</span>
+            <span class="bg-white text-blue-600 px-3 py-1 rounded-lg font-bold">${count}</span>
         </button>
     `;
 }
@@ -492,15 +533,13 @@ function renderCartBar() {
 // ============== MAIN RENDER ==============
 function render() {
     const app = document.getElementById('app');
+    
     let content = '';
     
     if (state.view === 'search') {
         content = `
             ${renderSearchHeader()}
-            ${state.showAd ? `
-                ${renderSocialStories()}
-                ${renderSponsorCard()}
-            ` : ''}
+            ${state.showAd ? renderSponsorCard() : ''}
             ${state.isLoading ? renderLoadingSpinner() : renderCardGrid()}
             ${renderCartBar()}
         `;
@@ -509,15 +548,22 @@ function render() {
     } else if (state.view === 'list') {
         content = renderInquiryList();
     }
+    
     app.innerHTML = content;
 }
 
 // ============== INIT ==============
+
 window.addEventListener('popstate', (event) => {
-    state.view = (event.state && event.state.view) ? event.state.view : 'search';
-    state.selectedCard = (event.state && event.state.card) ? event.state.card : null;
+    if (event.state && event.state.view) {
+        state.view = event.state.view;
+    } else {
+        state.view = 'search';
+        state.selectedCard = null;
+    }
     render();
 });
+
 document.documentElement.classList.toggle('dark', state.isDark);
 initApp();
 </script>
