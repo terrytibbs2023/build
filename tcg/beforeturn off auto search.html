@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>Ellis TCG Card Search</title>
+    <title>TCG Card Search</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -57,6 +57,8 @@ let state = {
     isDark: localStorage.getItem('theme') === 'dark'
 };
 
+let searchTimeout = null;
+
 // ============== UTILITIES ==============
 function generateBarcodeString(card, variantType) {
     const namePrefix = card.name.substring(0, 3).toUpperCase();
@@ -86,6 +88,13 @@ function formatPrice(usd) {
     return `£${gbp.toFixed(2)}`;
 }
 
+function debounce(fn, delay) {
+    return function(...args) {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => fn.apply(this, args), delay);
+    };
+}
+
 // ============== API ==============
 async function initApp() {
     try {
@@ -112,6 +121,7 @@ async function searchCards() {
         resetHome();
         return;
     }
+    if (searchTerm && searchTerm.length < 3 && !selectedSet && !selectedRarity) return;
 
     state.showAd = false;
     state.isLoading = true;
@@ -119,7 +129,7 @@ async function searchCards() {
     render();
 
     const queryParts = [];
-    if (searchTerm) {
+    if (searchTerm && searchTerm.length >= 3) {
         if (searchTerm.includes('/')) {
             const parts = searchTerm.split('/');
             queryParts.push(`number:${parts[0]} AND set.printedTotal:${parts[1]}`);
@@ -145,6 +155,8 @@ async function searchCards() {
     }
 }
 
+const debouncedSearch = debounce(searchCards, 1500);
+
 // ============== ACTIONS ==============
 function resetHome() {
     state.view = 'search';
@@ -165,14 +177,9 @@ function toggleTheme() {
     render();
 }
 
-function handleSearchInput(value) {
+function handleSearchChange(value) {
     state.searchTerm = value;
-}
-
-function handleKeyDown(e) {
-    if (e.key === 'Enter') {
-        searchCards();
-    }
+    debouncedSearch();
 }
 
 function handleSetChange(value) {
@@ -306,9 +313,8 @@ function renderSearchHeader() {
                     <input 
                         type="text" 
                         value="${state.searchTerm}"
-                        oninput="handleSearchInput(this.value)"
-                        onkeydown="handleKeyDown(event)"
-                        placeholder="Type and press Enter..."
+                        oninput="handleSearchChange(this.value)"
+                        placeholder="Card name or number..."
                         class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium"
                     />
                 </div>
@@ -408,17 +414,9 @@ function renderCardDetails() {
     } else {
         const barcodeString = generateBarcodeString(card, 'Standard');
         const barcodeData = generateBarcodeData(barcodeString);
-        priceBoxes = `
-            <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 text-center">
-                <div class="text-2xl font-black text-slate-400 mb-4">PRICE TBC</div>
-                <div class="bg-white dark:bg-slate-900 rounded-xl p-4 mb-4 h-16 flex justify-center items-end gap-0 border border-slate-200 dark:border-slate-800">
-                    ${barcodeData.map(bar => `<div class="${bar.type === 'bar' ? 'bg-slate-900 dark:bg-white' : 'bg-transparent'}" style="width: ${bar.width}px; height: 100%"></div>`).join('')}
-                </div>
-                <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white mb-3">Add to Inquiry List</button>
-                <a href="${ebayLink}" target="_blank" class="w-full h-10 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
-                    View eBay Sold
-                </a>
-            </div>`;
+        priceBoxes = `<div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 text-center"><div class="text-2xl font-black text-slate-400 mb-4">PRICE TBC</div>
+        <div class="bg-white dark:bg-slate-900 rounded-xl p-4 mb-4 h-16 flex justify-center items-end gap-0 border border-slate-200 dark:border-slate-800">${barcodeData.map(bar => `<div class="${bar.type === 'bar' ? 'bg-slate-900 dark:bg-white' : 'bg-transparent'}" style="width: ${bar.width}px; height: 100%"></div>`).join('')}</div>
+        <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white">Add to Inquiry List</button></div>`;
     }
 
     return `
