@@ -106,20 +106,19 @@ async function initApp() {
     }
 }
 
-async function searchCards() {
+async function searchCards(e) {
+    if (e) e.preventDefault();
     const { searchTerm, selectedSet, selectedRarity } = state;
-    
-    // If everything is empty, go back to home screen
     if (!searchTerm && !selectedSet && !selectedRarity) {
         resetHome();
         return;
     }
-
     state.showAd = false;
     state.isLoading = true;
     state.hasSearched = true;
     render();
-
+    const input = document.querySelector('input[type="search"]');
+    if (input) input.blur();
     const queryParts = [];
     if (searchTerm) {
         if (searchTerm.includes('/')) {
@@ -131,9 +130,7 @@ async function searchCards() {
     }
     if (selectedSet) queryParts.push(`set.name:"${selectedSet}"`);
     if (selectedRarity) queryParts.push(`rarity:"${selectedRarity}"`);
-
     const query = queryParts.join(' AND ');
-
     try {
         const res = await fetch(`${API_BASE}/cards?q=${encodeURIComponent(query)}&orderBy=number`);
         const data = await res.json();
@@ -169,14 +166,6 @@ function toggleTheme() {
 
 function handleSearchInput(value) {
     state.searchTerm = value;
-}
-
-function handleKeyDown(e) {
-    if (e.key === 'Enter') {
-        // Prevent default mobile keyboard behavior and trigger search
-        e.target.blur(); 
-        searchCards();
-    }
 }
 
 function handleSetChange(value) {
@@ -254,7 +243,6 @@ function renderSocialStories() {
         { name: 'WhatsApp', color: 'bg-green-500', icon: '💬', url: `https://wa.me/${APP_CONFIG.phoneNumber}` },
         { name: 'Web', color: 'bg-slate-700', icon: '🌐', url: APP_CONFIG.storeUrl }
     ];
-
     return `
         <div class="px-4 py-4 overflow-x-auto flex gap-4 scrollbar-hide">
             ${socials.map(s => `
@@ -305,17 +293,17 @@ function renderSearchHeader() {
                 </button>
             </div>
             <div class="px-4 pb-3">
-                <div class="relative bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center px-4 h-12">
+                <form action="#" onsubmit="searchCards(event)" class="relative bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center px-4 h-12">
                     <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     <input 
-                        type="text" 
+                        type="search" 
                         value="${state.searchTerm}"
                         oninput="handleSearchInput(this.value)"
-                        onkeydown="handleKeyDown(event)"
-                        placeholder="Type and press Enter..."
+                        placeholder="Type and press search..."
+                        enterkeyhint="search"
                         class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium"
                     />
-                </div>
+                </form>
             </div>
             <div class="flex gap-2 px-4 pb-4 overflow-x-auto scrollbar-hide">
                 <div class="flex items-center bg-white dark:bg-slate-800 rounded-lg px-3 py-2 border border-slate-200 dark:border-slate-700 min-w-[140px]">
@@ -344,7 +332,6 @@ function renderCardGrid() {
         }
         return ''; 
     }
-
     return `
         <div class="grid grid-cols-2 gap-4 p-4">
             ${state.cards.map((card, i) => `
@@ -375,7 +362,6 @@ function renderCardDetails() {
     const displayNum = `${card.number}/${card.set.printedTotal}`;
     const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + displayNum + ' ' + card.set.name + ' sold')}&LH_Sold=1&LH_Complete=1`;
     const prices = card.tcgplayer?.prices || {};
-
     let priceBoxes = '';
     if (Object.keys(prices).length > 0) {
         priceBoxes = Object.entries(prices).map(([type, priceData]) => {
@@ -386,19 +372,16 @@ function renderCardDetails() {
             const isAdded = state.shoppingList.some(item => item.uid === uid);
             const barcodeString = generateBarcodeString(card, type);
             const barcodeData = generateBarcodeData(barcodeString);
-
             return `
                 <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4 border border-slate-100 dark:border-slate-700">
                     <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase text-center mb-1">${type} - Guide Price</div>
                     <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-4">${priceDisplay}</div>
-                    
                     <div class="bg-white dark:bg-slate-900 rounded-xl p-4 mb-4 border border-slate-200 dark:border-slate-800">
                         <div class="flex justify-center items-end gap-0 h-16">
                             ${barcodeData.map(bar => `<div class="${bar.type === 'bar' ? 'bg-slate-900 dark:bg-white' : 'bg-transparent'}" style="width: ${bar.width}px; height: 100%"></div>`).join('')}
                         </div>
                         <div class="text-[10px] font-mono text-center text-slate-500 dark:text-slate-400 mt-2 tracking-[0.2em] font-bold">${barcodeString}</div>
                     </div>
-                    
                     <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" ${isAdded ? 'disabled' : ''}
                         class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20'} transition-all">
                         ${isAdded ? 'Added to List' : 'Add to Inquiry List'}
@@ -424,7 +407,6 @@ function renderCardDetails() {
                 </a>
             </div>`;
     }
-
     return `
         <div class="min-h-screen bg-slate-100 dark:bg-slate-900 p-4">
             <div class="max-w-md mx-auto">
@@ -495,7 +477,6 @@ function renderCartBar() {
 function render() {
     const app = document.getElementById('app');
     let content = '';
-    
     if (state.view === 'search') {
         content = `
             ${renderSearchHeader()}
@@ -523,6 +504,5 @@ window.addEventListener('popstate', (event) => {
 document.documentElement.classList.toggle('dark', state.isDark);
 initApp();
 </script>
-
 </body>
 </html>
