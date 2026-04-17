@@ -1,9 +1,9 @@
-const CACHE_NAME = 'ecc-cache-v5';
+const CACHE_NAME = 'ecc-cache-v1';
 const urlsToCache = [
   './',
   './index.html',
   './manifest.json',
-  './icon.jpeg'
+  './icona.jpg'
 ];
 
 self.addEventListener('install', event => {
