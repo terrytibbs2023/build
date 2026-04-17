@@ -60,14 +60,14 @@
 // CONFIGURATION AREA - CHANGE HERE
 // ==========================================
 const APP_CONFIG = {
-appTitle: "<span style='font-size: 24px;'>Card Inquiry</span><br><span style='font-size: 18px;'>East Coast Collectibles</span>", // CHANGE HERE: App Header Name
-    storeUrl: "https://essexconsolerepair.co.uk", // CHANGE HERE: Website Link
-    adTitle: "Essex Console Repair",             // CHANGE HERE: Shop Name (Sponsor Card)
-    adDescription: "Ps5/Xbox/Switch/Hdmi Ports", // CHANGE HERE: Shop Description
-    phoneNumber: "447749893611",                 // CHANGE HERE: WhatsApp Number
-    bannerImage: "ecc.png", // CHANGE HERE: Top Banner
-    markupPercentage: 1.15,                      // CHANGE HERE: The 10% markup (1.10 = +10%, 1.20 = +20%)
-    minPriceGbp: 0.20                            // CHANGE HERE: Minimum price allowed in GBP
+appTitle: "<span style='font-size: 24px;'>Card Inquiry</span><br><span style='font-size: 18px;'>East Coast Collectibles</span>", 
+    storeUrl: "https://essexconsolerepair.co.uk", 
+    adTitle: "Essex Console Repair",             
+    adDescription: "Ps5/Xbox/Switch/Hdmi Ports", 
+    phoneNumber: "447749893611",                 
+    bannerImage: "ecc.png", 
+    markupPercentage: 1.15,                      
+    minPriceGbp: 0.20                            
 };
 // ==========================================
 
@@ -181,6 +181,12 @@ function toggleTheme() {
     state.isDark = !state.isDark;
     localStorage.setItem('theme', state.isDark ? 'dark' : 'light');
     document.documentElement.classList.toggle('dark', state.isDark);
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+        metaTheme.setAttribute('content', state.isDark ? '#0f172a' : '#f1f5f9');
+    }
+    
     render();
 }
 
@@ -461,7 +467,7 @@ function renderInquiryList() {
                             <button onclick="handleRemoveItem(event, ${index})" class="text-red-500 self-start p-2 relative z-10"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
                         </div>
                     `).join('')}
-                    <div class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-100 dark:from-slate-900 to-transparent">
+                    <div class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-100 dark:from-slate-900 via-slate-100 dark:via-slate-900 to-transparent">
                         <button onclick="handleSendWhatsApp()" class="w-full max-w-md mx-auto h-16 bg-green-500 text-white rounded-2xl font-black flex items-center justify-center gap-3 shadow-xl shadow-green-500/20">
                             Send Inquiry to Dave
                         </button>
@@ -478,7 +484,7 @@ function renderCartBar() {
     return `
         <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl z-50 font-black transition-transform hover:scale-105 active:scale-95">
             <span>Inquiry List</span>
-            <span class="bg-white text-blue-600 px-3 py-1 rounded-xl">${count}</span>
+            <span class="bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-xl">${count}</span>
         </button>
     `;
 }
@@ -513,7 +519,6 @@ window.addEventListener('popstate', (event) => {
 document.documentElement.classList.toggle('dark', state.isDark);
 initApp();
 
-// PWA Service Worker Registration
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js');
