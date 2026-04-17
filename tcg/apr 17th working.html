@@ -51,20 +51,13 @@
 <div id="app"></div>
 
 <script>
-// ==========================================
-// CONFIGURATION AREA - CHANGE HERE
-// ==========================================
 const APP_CONFIG = {
-    appTitle: "Ellis TCG Card Search",           // CHANGE HERE: App Header Name
-    storeUrl: "https://essexconsolerepair.co.uk", // CHANGE HERE: Website Link
-    adTitle: "Essex Console Repair",             // CHANGE HERE: Shop Name (Sponsor Card)
-    adDescription: "Ps5/Xbox/Switch/Hdmi Ports", // CHANGE HERE: Shop Description
-    phoneNumber: "447483251962",                 // CHANGE HERE: WhatsApp Number
-    bannerImage: "https://imagecdn.websitebuilder.prositehosting.co.uk/22/3e/223ef076-9a2d-4062-98c2-25f95c7952d0.png", // CHANGE HERE: Top Banner
-    markupPercentage: 1.10,                      // CHANGE HERE: The 10% markup (1.10 = +10%, 1.20 = +20%)
-    minPriceGbp: 0.20                            // CHANGE HERE: Minimum price allowed in GBP
+    appTitle: "Ellis TCG Card Search",
+    storeUrl: "https://essexconsolerepair.co.uk",
+    adTitle: "Essex Console Repair",
+    adDescription: "Ps5/Xbox/Switch/Hdmi Ports",
+    phoneNumber: "447483251962"
 };
-// ==========================================
 
 const API_BASE = "https://api.pokemontcg.io/v2";
 
@@ -86,14 +79,7 @@ let state = {
 };
 
 function formatPrice(usd) {
-    // CHANGE HERE: Calculation of Market + Markup
-    let gbp = usd * state.gbpRate * APP_CONFIG.markupPercentage;
-    
-    // CHANGE HERE: Round up logic
-    if (gbp < APP_CONFIG.minPriceGbp) {
-        gbp = APP_CONFIG.minPriceGbp;
-    }
-    
+    const gbp = usd * state.gbpRate * 1.10;
     return `£${gbp.toFixed(2)}`;
 }
 
@@ -236,6 +222,7 @@ function handleSendWhatsApp() {
     if (state.shoppingList.length === 0) return;
     let message = "Hi Dave, I'm checking if you have these cards. I understand prices are guides:\n\n";
     state.shoppingList.forEach((item, i) => {
+        // REMOVED '#' from WhatsApp message
         message += `*${i + 1}. ${item.name}*\nSet: ${item.set} (${item.num})\nVariant: ${item.type} | Guide: ${item.price === 'TBC' ? 'TBC' : item.price}\nImage: ${item.imageUrl}\n\n`;
     });
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
@@ -264,10 +251,12 @@ function renderSocialStories() {
         { name: 'Web', color: 'bg-slate-700', icon: '🌐', url: APP_CONFIG.storeUrl }
     ];
     
+    const bannerImg = "https://imagecdn.websitebuilder.prositehosting.co.uk/22/3e/223ef076-9a2d-4062-98c2-25f95c7952d0.png";
+
     return `
         <div class="px-4 pt-4">
              <div class="block w-full aspect-video bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700 mb-4">
-                <img src="${APP_CONFIG.bannerImage}" class="w-full h-full object-cover" alt="TCG Featured" />
+                <img src="${bannerImg}" class="w-full h-full object-cover" alt="TCG Featured" />
              </div>
         </div>
         <div class="px-2 pb-4 flex justify-around items-center">
