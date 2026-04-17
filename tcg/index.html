@@ -117,7 +117,8 @@ async function executeSearch() {
         const term = searchTerm.trim();
         if (term.includes('/')) {
             const parts = term.split('/');
-            const num = parts[0];
+            // FIX: Strip leading zeros from the card number (e.g. 001 becomes 1)
+            const num = parts[0].replace(/^0+/, ''); 
             const total = parts[1];
             queryParts.push(`number:${num} AND (set.printedTotal:${total} OR set.total:${total})`);
         } else {
@@ -187,7 +188,6 @@ function handleAddToList(card, type, price) {
     const uid = `${card.id}-${type}`;
     if (state.shoppingList.some(item => item.uid === uid)) return;
     
-    // Applying the Full Card Code Rule (e.g. 100/67)
     const cardCode = `${card.number}/${card.set.printedTotal}`;
     
     state.shoppingList.push({
@@ -243,7 +243,6 @@ function renderSocialStories() {
         { name: 'Web', color: 'bg-slate-700', icon: '🌐', url: APP_CONFIG.storeUrl }
     ];
     
-    // Restored Original Banner Image
     const bannerImg = "https://imagecdn.websitebuilder.prositehosting.co.uk/22/3e/223ef076-9a2d-4062-98c2-25f95c7952d0.png";
 
     return `
@@ -432,7 +431,7 @@ function renderInquiryList() {
                 ${items.length === 0 ? '<div class="text-center py-20 text-slate-400 font-bold uppercase tracking-widest text-xs">No cards in list</div>' : 
                 `<div class="space-y-3">
                     ${items.map((item, index) => `
-                        <div onclick="handleCardClick(state.shoppingList[index].fullData)" class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm flex gap-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <div onclick="handleCardClick(state.shoppingList[${index}].fullData)" class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm flex gap-4 cursor-pointer hover:border-blue-500 transition-colors">
                             <img src="${item.imageUrl}" class="w-16 h-auto rounded-lg pointer-events-none" />
                             <div class="flex-1 pointer-events-none">
                                 <h3 class="font-black text-slate-900 dark:text-white text-sm">${item.name}</h3>
