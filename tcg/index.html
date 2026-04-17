@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <title>Ellis TCG Card Search</title>
+    <title>Card Inquiry East Coast Colectables</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -55,13 +55,13 @@
 // CONFIGURATION AREA - CHANGE HERE
 // ==========================================
 const APP_CONFIG = {
-    appTitle: "Ellis TCG Card Search",           // CHANGE HERE: App Header Name
+appTitle: "Card Inquiry<br>East Coast Colectables", // CHANGE HERE: App Header Name
     storeUrl: "https://essexconsolerepair.co.uk", // CHANGE HERE: Website Link
     adTitle: "Essex Console Repair",             // CHANGE HERE: Shop Name (Sponsor Card)
     adDescription: "Ps5/Xbox/Switch/Hdmi Ports", // CHANGE HERE: Shop Description
     phoneNumber: "447483251962",                 // CHANGE HERE: WhatsApp Number
     bannerImage: "https://imagecdn.websitebuilder.prositehosting.co.uk/22/3e/223ef076-9a2d-4062-98c2-25f95c7952d0.png", // CHANGE HERE: Top Banner
-    markupPercentage: 1.10,                      // CHANGE HERE: The 10% markup (1.10 = +10%, 1.20 = +20%)
+    markupPercentage: 1.15,                      // CHANGE HERE: The 10% markup (1.10 = +10%, 1.20 = +20%)
     minPriceGbp: 0.20                            // CHANGE HERE: Minimum price allowed in GBP
 };
 // ==========================================
@@ -258,7 +258,7 @@ function openList() {
 
 function renderSocialStories() {
     const socials = [
-        { name: 'TikTok', color: 'bg-black', icon: '📱', url: 'https://tiktok.com' },
+        { name: 'TikTok', color: 'bg-black', icon: '📱', url: 'https://www.tiktok.com/@east.coast.collec1' },
         { name: 'Facebook', color: 'bg-blue-600', icon: '👥', url: 'https://facebook.com' },
         { name: 'WhatsApp', color: 'bg-green-500', icon: '💬', url: `https://wa.me/${APP_CONFIG.phoneNumber}` },
         { name: 'Web', color: 'bg-slate-700', icon: '🌐', url: APP_CONFIG.storeUrl }
@@ -325,7 +325,7 @@ function renderSearchHeader() {
                         type="search" 
                         value="${state.searchTerm}"
                         oninput="handleSearchInput(this.value)"
-                        placeholder="Search name or 1/191..."
+                        placeholder="Type card name or number..."
                         enterkeyhint="search"
                         class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium"
                     />
