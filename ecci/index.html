@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0f172a">
     <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icona.jpg">
     
     <title>Card Inquiry East Coast Collectibles</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -20,7 +21,14 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        
+        :root { color-scheme: dark; }
+
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background-color: #0f172a;
+        }
+
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -84,7 +92,7 @@ let state = {
     isLoading: false,
     hasSearched: false,
     showAd: true,
-    isDark: localStorage.getItem('theme') === 'dark',
+    isDark: localStorage.getItem('theme') === null ? true : localStorage.getItem('theme') === 'dark',
     searchTerm: '',
     selectedSet: '',
     selectedRarity: ''
@@ -492,6 +500,9 @@ function renderCartBar() {
 function render() {
     const app = document.getElementById('app');
     let content = '';
+    
+    document.documentElement.classList.toggle('dark', state.isDark);
+    
     if (state.view === 'search') {
         content = `
             ${renderSearchHeader()}
