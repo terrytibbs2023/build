@@ -89,12 +89,9 @@
             transition: all 0.3s ease;
         }
 
-        /* Override Tailwind with variables for full theme support */
         header { background-color: var(--bg-main) !important; border-color: var(--border) !important; }
         .card-bg { background-color: var(--bg-card) !important; border-color: var(--border) !important; }
         .input-bg { background-color: var(--bg-input) !important; color: var(--text-main) !important; }
-        .text-primary { color: var(--text-main) !important; }
-        .text-secondary { color: var(--text-dim) !important; }
         
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .fixed-dropdown-container { height: 42px; width: 50%; display: flex; align-items: center; }
@@ -175,7 +172,6 @@ async function executeSearch() {
     state.isLoading = true;
     state.hasSearched = true;
     render();
-    
     let queryParts = [];
     if (state.searchTerm) {
         const term = state.searchTerm.trim();
@@ -186,7 +182,6 @@ async function executeSearch() {
     }
     if (state.selectedSet) queryParts.push(`set.name:"${state.selectedSet}"`);
     if (state.selectedRarity) queryParts.push(`rarity:"${state.selectedRarity}"`);
-    
     try {
         const res = await fetch(`${API_BASE}/cards?q=${encodeURIComponent(queryParts.join(' AND '))}&orderBy=-set.releaseDate,number&pageSize=96`);
         const data = await res.json();
@@ -218,6 +213,15 @@ function startBannerSlideshow() {
     }, 8000);
 }
 
+function handleSendWhatsApp() {
+    if (state.shoppingList.length === 0) return;
+    let message = "Hi Dave, I'm checking if you have these cards:\n\n";
+    state.shoppingList.forEach((item, i) => {
+        message += `*${i + 1}. ${item.name}*\nSet: ${item.set} (${item.code})\nVariant: ${item.type} | Guide: ${item.price}\n\n`;
+    });
+    window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+}
+
 // --- RENDER FUNCTIONS ---
 
 function renderHeader() {
@@ -225,13 +229,13 @@ function renderHeader() {
         <header class="sticky top-0 z-50 border-b backdrop-blur-md">
             <div class="flex items-center justify-between px-4 py-3">
                 <div class="flex items-center gap-3">
-                    <button onclick="location.reload()" class="p-2 input-bg rounded-xl">
+                    <button onclick="location.reload()" class="p-2 input-bg rounded-xl text-slate-600 dark:text-slate-300">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </button>
-                    <h1 class="text-2xl font-black tracking-tight leading-tight">${APP_CONFIG.appTitle}</h1>
+                    <h1 class="text-2xl font-extrabold tracking-tight leading-tight">${APP_CONFIG.appTitle}</h1>
                 </div>
-                <button onclick="cycleTheme()" class="p-3 input-bg rounded-full shadow-lg">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button onclick="cycleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <svg class="w-7 h-7 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                     </svg>
                 </button>
@@ -242,13 +246,13 @@ function renderHeader() {
                 </div>
             </div>
             <div class="flex gap-2 px-4 pb-4">
-                <div class="fixed-dropdown-container input-bg rounded-lg px-3 border border-transparent">
+                <div class="fixed-dropdown-container input-bg rounded-lg px-3 border border-slate-200 dark:border-slate-700">
                     <select onchange="state.selectedSet=this.value; executeSearch();">
                         <option value="">Set...</option>
                         ${state.sets.map(s => `<option value="${s.name}" ${state.selectedSet === s.name ? 'selected' : ''}>${s.name}</option>`).join('')}
                     </select>
                 </div>
-                <div class="fixed-dropdown-container input-bg rounded-lg px-3 border border-transparent">
+                <div class="fixed-dropdown-container input-bg rounded-lg px-3 border border-slate-200 dark:border-slate-700">
                     <select onchange="state.selectedRarity=this.value; executeSearch();">
                         <option value="">Rarity...</option>
                         ${state.rarities.map(r => `<option value="${r}" ${state.selectedRarity === r ? 'selected' : ''}>${r}</option>`).join('')}
@@ -265,72 +269,135 @@ function renderMain() {
 
     let content = '';
     if (state.showAd) {
+        const socials = [
+            { name: 'TikTok', color: 'bg-black', icon: '📱', url: 'https://www.tiktok.com/@east.coast.collec1' },
+            { name: 'Facebook', color: 'bg-blue-600', icon: '👥', url: 'https://www.facebook.com/p/East-Coast-Collectables-61583954579869/' },
+            { name: 'WhatsApp', color: 'bg-green-500', icon: '💬', url: `https://wa.me/${APP_CONFIG.phoneNumber}` },
+            { name: 'Web', color: 'bg-slate-700', icon: '🌐', url: `https://share.google/U7aWnYjaMe3HzClcR` }
+        ];
         content += `
             <div class="px-4 pt-4">
-                <div class="card-bg w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border mb-4">
+                <div class="card-bg w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md border mb-4">
                     <img id="banner-slideshow" src="${APP_CONFIG.bannerImages[state.currentBannerIndex]}" class="w-full h-full object-cover" />
                 </div>
             </div>
-            <div class="px-4 pb-4 flex justify-around items-center">
-                ${['TikTok', 'Facebook', 'WhatsApp', 'Web'].map(name => `<div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full input-bg flex items-center justify-center text-xl">📱</div><span class="text-[10px] font-bold opacity-60 uppercase">${name}</span></div>`).join('')}
+            <div class="px-2 pb-4 flex justify-around items-center">
+                ${socials.map(s => `
+                    <a href="${s.url}" target="_blank" class="flex flex-col items-center gap-1">
+                        <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 to-green-400">
+                            <div class="bg-white dark:bg-slate-900 w-full h-full rounded-full p-1">
+                                <div class="${s.color} w-full h-full rounded-full flex items-center justify-center text-xl shadow-inner">${s.icon}</div>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tighter">${s.name}</span>
+                    </a>
+                `).join('')}
             </div>
             <div class="px-4 pb-4">
                 <a href="${APP_CONFIG.storeUrl}" class="block card-bg p-4 rounded-2xl border shadow-sm">
-                    <span class="text-[10px] font-black text-blue-500 uppercase tracking-widest">Advertisement</span>
-                    <h3 class="font-bold mt-1">${APP_CONFIG.adTitle}</h3>
-                    <p class="text-xs text-secondary">${APP_CONFIG.adDescription}</p>
+                    <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Advertisement</span>
+                    <h3 class="font-bold text-slate-900 dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">${APP_CONFIG.adDescription}</p>
                 </a>
             </div>
         `;
     }
 
     if (state.isLoading) {
-        content += `<div class="text-center py-20 opacity-50 font-bold">Searching Archive...</div>`;
+        content += `<div class="text-center py-20 text-slate-400">Searching...</div>`;
     } else {
         content += `
             <div class="grid grid-cols-2 gap-4 p-4 pb-32">
                 ${state.cards.map((card, i) => `
-                    <div onclick="showCard(${i})" class="card-bg rounded-2xl p-3 shadow-md border text-left">
+                    <div onclick="showCard(${i})" class="card-bg rounded-2xl p-3 shadow-md border text-left cursor-pointer">
                         <div class="aspect-[1/1.4] input-bg rounded-xl mb-2 flex items-center justify-center overflow-hidden">
                             <img src="${card.images.small}" class="max-w-[90%] max-h-[90%] object-contain" />
                         </div>
-                        <h3 class="font-bold text-sm line-clamp-2">${card.name}</h3>
-                        <p class="text-[10px] text-secondary mt-1 uppercase font-bold">${card.set.name} (${getFullCardCode(card)})</p>
+                        <h3 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">${card.name}</h3>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 uppercase font-bold tracking-tight">${card.set.name} (${getFullCardCode(card)})</p>
                     </div>
                 `).join('')}
             </div>
         `;
     }
+    content += renderCartBar();
     return content;
 }
 
 function renderDetails() {
     const card = state.selectedCard;
     const code = getFullCardCode(card);
-    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + code + ' sold')}&LH_Sold=1&LH_Complete=1`;
+    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + code + ' ' + card.set.name + ' sold')}&LH_Sold=1&LH_Complete=1`;
     
     return `
-        <div class="p-4">
-            <button onclick="state.view='search'; render();" class="font-bold text-secondary mb-4">← Back</button>
-            <div class="card-bg rounded-3xl p-6 shadow-2xl border">
-                <img src="${card.images.large}" class="w-full rounded-2xl mb-6 shadow-xl" />
-                <h1 class="text-2xl font-black text-center">${card.name}</h1>
-                <p class="text-center text-secondary mb-6">${card.set.name} • ${code}</p>
-                
+        <div class="p-4 max-w-2xl mx-auto">
+            <button onclick="state.view='search'; render();" class="font-bold text-slate-500 mb-4 flex items-center gap-2">← Back</button>
+            <div class="card-bg rounded-3xl p-6 shadow-xl border">
+                <img src="${card.images.large}" class="w-full rounded-2xl mb-6 shadow-2xl" />
+                <h1 class="text-2xl font-black text-center text-slate-900 dark:text-white">${card.name}</h1>
+                <p class="text-center text-slate-500 mb-6 font-medium">${card.set.name} • ${code}</p>
+                <div class="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-xl mb-6 text-[11px] text-amber-800 dark:text-amber-200 text-center leading-tight">
+                    <strong>Note:</strong> Prices shown are automated guides. Stock availability and final condition price confirmed via WhatsApp.
+                </div>
                 ${Object.entries(card.tcgplayer?.prices || {}).map(([type, data]) => {
+                    if (!data.market) return '';
                     const price = formatPrice(data.market);
+                    const isAdded = state.shoppingList.some(item => item.uid === `${card.id}-${type}`);
                     return `
-                        <div class="input-bg rounded-2xl p-5 mb-4 border border-white/5">
-                            <div class="text-xs font-bold opacity-50 uppercase text-center mb-1">${type} Market Guide</div>
-                            <div class="text-4xl font-black text-center text-blue-500 mb-4">${price}</div>
-                            <button onclick="addToList('${type}', '${price}')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white shadow-lg mb-3">Add to Inquiry List</button>
+                        <div class="input-bg rounded-2xl p-5 mb-4 border border-slate-200 dark:border-slate-700">
+                            <div class="text-xs font-bold text-slate-500 uppercase text-center mb-1">${type} Market Guide</div>
+                            <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-4">${price}</div>
+                            <button onclick="addToList('${type}', '${price}')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white shadow-lg mb-3 ${isAdded ? 'opacity-50' : ''}">${isAdded ? 'Added to Inquiry' : 'Add to Inquiry List'}</button>
                             <a href="${ebayLink}" target="_blank" class="w-full h-12 rounded-xl border-2 border-blue-500 flex items-center justify-center gap-2 text-blue-500 font-bold italic text-sm">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M11.63 4.25c-1.4 0-2.3.61-2.93 1.48L7.33 8.35c-.13.19-.24.37-.32.54H4.5c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6c0-1.1-.9-2-2-2h-3.32c-.11-.26-.26-.51-.47-.79l-1.63-2.18c-.53-.74-1.39-1.12-2.45-1.12zM12 11c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/></svg>
                                 View Sold Prices on eBay
                             </a>
                         </div>
                     `;
                 }).join('')}
             </div>
+        </div>
+    `;
+}
+
+function renderList() {
+    return `
+        <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-[100] p-4 overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-black text-slate-900 dark:text-white">Inquiry List</h2>
+                <button onclick="state.view='search'; render();" class="text-3xl font-light text-slate-900 dark:text-white">✕</button>
+            </div>
+            ${state.shoppingList.length === 0 ? '<div class="text-center py-20 text-slate-500 font-bold">Your list is currently empty</div>' : `
+                <div class="space-y-3 pb-32">
+                    ${state.shoppingList.map((item, i) => `
+                        <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl flex items-center gap-4 border border-slate-100 dark:border-slate-700 shadow-sm">
+                            <div class="flex-1">
+                                <h3 class="font-bold text-sm text-slate-900 dark:text-white leading-tight">${item.name}</h3>
+                                <p class="text-[10px] text-slate-500 font-bold uppercase mt-1">Variant: ${item.type} • Guide: ${item.price}</p>
+                                <p class="text-[10px] text-slate-400">${item.set} (${item.code})</p>
+                            </div>
+                            <button onclick="removeItem(${i})" class="text-red-500 p-2 text-xl">✕</button>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-slate-200 dark:border-slate-700 z-[110]">
+                    <button onclick="handleSendWhatsApp()" class="w-full h-16 bg-green-500 text-white rounded-2xl font-black shadow-lg flex items-center justify-center gap-2">
+                        <span>Send to Dave</span>
+                    </button>
+                </div>
+            `}
+        </div>
+    `;
+}
+
+function renderCartBar() {
+    if (state.shoppingList.length === 0 || state.view !== 'search') return '';
+    return `
+        <div class="fixed bottom-8 left-0 right-0 flex justify-center z-[80] pointer-events-none">
+            <button onclick="state.view='list'; render()" class="pointer-events-auto w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl font-black active:scale-95 transition-transform">
+                <span>Inquiry List</span>
+                <span class="bg-white text-blue-600 px-3 py-1 rounded-xl text-sm font-black">${state.shoppingList.length}</span>
+            </button>
         </div>
     `;
 }
@@ -343,8 +410,12 @@ function showCard(index) {
 }
 
 function addToList(type, price) {
+    const uid = `${state.selectedCard.id}-${type}`;
+    if (state.shoppingList.some(item => item.uid === uid)) return;
     state.shoppingList.push({
+        uid,
         name: state.selectedCard.name,
+        set: state.selectedCard.set.name,
         code: getFullCardCode(state.selectedCard),
         type,
         price
@@ -353,9 +424,18 @@ function addToList(type, price) {
     render();
 }
 
+function removeItem(index) {
+    state.shoppingList.splice(index, 1);
+    localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
+    render();
+}
+
 function render() {
     const app = document.getElementById('app');
     document.documentElement.className = state.currentTheme;
+    // Sync dark mode for tailwind
+    const isDarkBackground = ['dark', 'emerald', 'rose', 'amber', 'midnight'].includes(state.currentTheme);
+    document.documentElement.classList.toggle('dark', isDarkBackground);
     app.innerHTML = renderHeader() + renderMain();
 }
 
