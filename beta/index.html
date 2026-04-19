@@ -21,27 +21,92 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        :root { color-scheme: dark; }
-        body { 
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background-color: #0f172a;
+        
+        :root {
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --bg-input: #334155;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: #334155;
+            --accent: #3b82f6;
         }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .light {
+            --bg-main: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-input: #e2e8f0;
+            --text-main: #0f172a;
+            --text-dim: #64748b;
+            --border: #cbd5e1;
+            --accent: #2563eb;
+        }
+
+        .emerald {
+            --bg-main: #064e3b;
+            --bg-card: #065f46;
+            --bg-input: #047857;
+            --text-main: #ecfdf5;
+            --text-dim: #a7f3d0;
+            --border: #059669;
+            --accent: #34d399;
+        }
+
+        .rose {
+            --bg-main: #4c0519;
+            --bg-card: #881337;
+            --bg-input: #9f1239;
+            --text-main: #fff1f2;
+            --text-dim: #fecdd3;
+            --border: #be123c;
+            --accent: #fb7185;
+        }
+
+        .amber {
+            --bg-main: #451a03;
+            --bg-card: #78350f;
+            --bg-input: #92400e;
+            --text-main: #fffbeb;
+            --text-dim: #fde68a;
+            --border: #b45309;
+            --accent: #fbbf24;
+        }
+
+        .midnight {
+            --bg-main: #1e1b4b;
+            --bg-card: #312e81;
+            --bg-input: #3730a3;
+            --text-main: #eef2ff;
+            --text-dim: #c7d2fe;
+            --border: #4338ca;
+            --accent: #818cf8;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        /* Override Tailwind with variables for full theme support */
+        header { background-color: var(--bg-main) !important; border-color: var(--border) !important; }
+        .card-bg { background-color: var(--bg-card) !important; border-color: var(--border) !important; }
+        .input-bg { background-color: var(--bg-input) !important; color: var(--text-main) !important; }
+        .text-primary { color: var(--text-main) !important; }
+        .text-secondary { color: var(--text-dim) !important; }
+        
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         .fixed-dropdown-container { height: 42px; width: 50%; display: flex; align-items: center; }
-        select { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; appearance: none; background-color: transparent; border: none; outline: none; }
+        select { width: 100%; appearance: none; background: transparent; border: none; outline: none; color: inherit; font-weight: bold; }
         #banner-slideshow { transition: opacity 0.5s ease-in-out; }
     </style>
 </head>
-<body class="bg-slate-100 dark:bg-slate-900 min-h-screen transition-colors duration-300">
+<body class="min-h-screen">
 
 <div id="app"></div>
 
 <script>
-// ==========================================
-// CONFIGURATION AREA
-// ==========================================
 const APP_CONFIG = {
     appTitle: "<span style='font-size: 24px;'>Card Inquiry</span><br><span style='font-size: 18px;'>East Coast Collectibles</span>", 
     storeUrl: "https://essexconsolerepair.co.uk", 
@@ -55,6 +120,7 @@ const APP_CONFIG = {
 };
 
 const API_BASE = "https://api.pokemontcg.io/v2";
+const THEMES = ['dark', 'light', 'emerald', 'rose', 'amber', 'midnight'];
 
 let state = {
     view: 'search',
@@ -67,14 +133,12 @@ let state = {
     isLoading: false,
     hasSearched: false,
     showAd: true,
-    isDark: localStorage.getItem('theme') === null ? true : localStorage.getItem('theme') === 'dark',
+    currentTheme: localStorage.getItem('appTheme') || 'dark',
     searchTerm: '',
     selectedSet: '',
     selectedRarity: '',
     currentBannerIndex: 0 
 };
-
-// --- CORE UTILITIES ---
 
 function formatPrice(usd) {
     let baseGbp = usd * state.gbpRate;
@@ -84,15 +148,10 @@ function formatPrice(usd) {
 }
 
 function getFullCardCode(card) {
-    const number = String(card.number);
-    const total = String(card.set.printedTotal || card.set.total);
-    return `${number}/${total}`;
+    return `${card.number}/${card.set.printedTotal || card.set.total}`;
 }
 
-// --- APP LOGIC ---
-
 async function initApp() {
-    history.replaceState({ view: 'search', hasSearched: false }, '');
     try {
         const [setsRes, raritiesRes, rateRes] = await Promise.all([
             fetch(`${API_BASE}/sets?orderBy=-releaseDate`),
@@ -111,29 +170,25 @@ async function initApp() {
 }
 
 async function executeSearch() {
-    const { searchTerm, selectedSet, selectedRarity } = state;
-    if (!searchTerm && !selectedSet && !selectedRarity) return;
+    if (!state.searchTerm && !state.selectedSet && !state.selectedRarity) return;
     state.showAd = false;
     state.isLoading = true;
     state.hasSearched = true;
-    history.pushState({ view: 'search', hasSearched: true }, '');
     render();
+    
     let queryParts = [];
-    if (searchTerm) {
-        const term = searchTerm.trim();
+    if (state.searchTerm) {
+        const term = state.searchTerm.trim();
         if (term.includes('/')) {
-            const parts = term.split('/');
-            const num = parts[0].replace(/^0+/, ''); 
-            const total = parts[1];
-            queryParts.push(`number:${num} AND (set.printedTotal:${total} OR set.total:${total})`);
+            const [num, total] = term.split('/');
+            queryParts.push(`number:${num.replace(/^0+/, '')} AND (set.printedTotal:${total} OR set.total:${total})`);
         } else { queryParts.push(`name:"${term}*"`); }
     }
-    if (selectedSet) queryParts.push(`set.name:"${selectedSet}"`);
-    if (selectedRarity) queryParts.push(`rarity:"${selectedRarity}"`);
-    const query = queryParts.join(' AND ');
+    if (state.selectedSet) queryParts.push(`set.name:"${state.selectedSet}"`);
+    if (state.selectedRarity) queryParts.push(`rarity:"${state.selectedRarity}"`);
+    
     try {
-        const url = `${API_BASE}/cards?q=${encodeURIComponent(query)}&orderBy=-set.releaseDate,number&pageSize=96`;
-        const res = await fetch(url);
+        const res = await fetch(`${API_BASE}/cards?q=${encodeURIComponent(queryParts.join(' AND '))}&orderBy=-set.releaseDate,number&pageSize=96`);
         const data = await res.json();
         state.cards = data.data || [];
     } catch (error) { state.cards = []; } finally {
@@ -142,275 +197,11 @@ async function executeSearch() {
     }
 }
 
-function resetHome() {
-    state.view = 'search';
-    state.cards = [];
-    state.searchTerm = '';
-    state.selectedSet = '';
-    state.selectedRarity = '';
-    state.selectedCard = null;
-    state.showAd = true;
-    state.hasSearched = false;
+function cycleTheme() {
+    const next = THEMES[(THEMES.indexOf(state.currentTheme) + 1) % THEMES.length];
+    state.currentTheme = next;
+    localStorage.setItem('appTheme', next);
     render();
-}
-
-function goBack() {
-    if (state.view !== 'search' || state.hasSearched) {
-        history.back();
-    } else {
-        resetHome();
-    }
-}
-
-window.addEventListener('popstate', (event) => {
-    if (!event.state || (event.state.view === 'search' && !event.state.hasSearched)) {
-        state.view = 'search';
-        state.cards = [];
-        state.searchTerm = '';
-        state.selectedSet = '';
-        state.selectedRarity = '';
-        state.selectedCard = null;
-        state.showAd = true;
-        state.hasSearched = false;
-    } else {
-        state.view = event.state.view || 'search';
-        state.selectedCard = event.state.card || null;
-        state.hasSearched = event.state.hasSearched || false;
-    }
-    render();
-});
-
-function toggleTheme() {
-    state.isDark = !state.isDark;
-    localStorage.setItem('theme', state.isDark ? 'dark' : 'light');
-    render();
-}
-
-function openList() {
-    state.view = 'list';
-    render();
-}
-
-function handleCardClick(card) {
-    state.selectedCard = card;
-    state.view = 'details';
-    history.pushState({ view: 'details', card: card, hasSearched: true }, '');
-    window.scrollTo(0, 0);
-    render();
-}
-
-function handleAddToList(card, type, price) {
-    const uid = `${card.id}-${type}`;
-    if (state.shoppingList.some(item => item.uid === uid)) return;
-    state.shoppingList.push({
-        uid,
-        name: card.name,
-        set: card.set.name,
-        num: getFullCardCode(card),
-        type,
-        price,
-        imageUrl: card.images.large,
-        fullData: JSON.parse(JSON.stringify(card))
-    });
-    localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
-    render();
-}
-
-function handleRemoveItem(e, index) {
-    e.stopPropagation();
-    state.shoppingList.splice(index, 1);
-    localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
-    render();
-}
-
-function handleSendWhatsApp() {
-    if (state.shoppingList.length === 0) return;
-    let message = "Hi Dave, I'm checking if you have these cards:\n\n";
-    state.shoppingList.forEach((item, i) => {
-        message += `*${i + 1}. ${item.name}*\nSet: ${item.set} (${item.num})\nVariant: ${item.type} | Guide: ${item.price}\n\n`;
-    });
-    window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-}
-
-// --- RENDERERS ---
-
-function renderSocialStories() {
-    const socials = [
-        { name: 'TikTok', color: 'bg-black', icon: '📱', url: 'https://www.tiktok.com/@east.coast.collec1' },
-        { name: 'Facebook', color: 'bg-blue-600', icon: '👥', url: 'https://www.facebook.com/p/East-Coast-Collectables-61583954579869/' },
-        { name: 'WhatsApp', color: 'bg-green-500', icon: '💬', url: `https://wa.me/${APP_CONFIG.phoneNumber}` },
-        { name: 'Web', color: 'bg-slate-700', icon: '🌐', url: `https://share.google/U7aWnYjaMe3HzClcR` }
-    ];
-    return `
-        <div class="px-4 pt-4">
-             <div class="block w-full aspect-[4/3] bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700 mb-4">
-                <img id="banner-slideshow" src="${APP_CONFIG.bannerImages[state.currentBannerIndex]}" class="w-full h-full object-cover" />
-             </div>
-        </div>
-        <div class="px-2 pb-4 flex justify-around items-center">
-            ${socials.map(s => `
-                <a href="${s.url}" target="_blank" class="flex flex-col items-center gap-1">
-                    <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 to-green-400">
-                        <div class="bg-white dark:bg-slate-900 w-full h-full rounded-full p-1">
-                            <div class="${s.color} w-full h-full rounded-full flex items-center justify-center text-xl shadow-inner">${s.icon}</div>
-                        </div>
-                    </div>
-                    <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tighter">${s.name}</span>
-                </a>
-            `).join('')}
-        </div>
-    `;
-}
-
-function renderSearchHeader() {
-    return `
-        <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700">
-            <div class="flex items-center justify-between px-4 py-3">
-                <div class="flex items-center gap-3">
-                    <button onclick="resetHome()" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </button>
-                    <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">${APP_CONFIG.appTitle}</h1>
-                </div>
-                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <svg class="w-6 h-6 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                </button>
-            </div>
-            <div class="px-4 pb-3">
-                <div class="relative bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center px-4 h-12">
-                    <input type="search" value="${state.searchTerm}" oninput="state.searchTerm=this.value" onkeypress="if(event.key === 'Enter'){ event.preventDefault(); executeSearch(); }" placeholder="Card name or number..." class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white font-medium" />
-                </div>
-            </div>
-            <div class="flex gap-2 px-4 pb-4">
-                <div class="fixed-dropdown-container bg-white dark:bg-slate-800 rounded-lg px-3 border border-slate-200 dark:border-slate-700">
-                    <select onchange="state.selectedSet=this.value; executeSearch();" class="text-sm font-bold text-slate-900 dark:text-white">
-                        <option value="">Set...</option>
-                        ${state.sets.map(s => `<option value="${s.name}" ${state.selectedSet === s.name ? 'selected' : ''}>${s.name}</option>`).join('')}
-                    </select>
-                </div>
-                <div class="fixed-dropdown-container bg-white dark:bg-slate-800 rounded-lg px-3 border border-slate-200 dark:border-slate-700">
-                    <select onchange="state.selectedRarity=this.value; executeSearch();" class="text-sm font-bold text-slate-900 dark:text-white">
-                        <option value="">Rarity...</option>
-                        ${state.rarities.map(r => `<option value="${r}" ${state.selectedRarity === r ? 'selected' : ''}>${r}</option>`).join('')}
-                    </select>
-                </div>
-            </div>
-        </header>
-    `;
-}
-
-function renderCardGrid() {
-    if (state.cards.length === 0) return state.hasSearched ? `<div class="text-center py-20 text-slate-400 font-bold">No cards found</div>` : '';
-    return `
-        <div class="grid grid-cols-2 gap-4 p-4 pb-32">
-            ${state.cards.map((card, i) => `
-                <button onclick="handleCardClick(state.cards[${i}])" class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 text-left">
-                    <div class="aspect-[1/1.4] bg-slate-100 dark:bg-slate-700 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
-                        <img src="${card.images.small}" class="max-w-[90%] max-h-[90%] object-contain" />
-                    </div>
-                    <h3 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">${card.name}</h3>
-                    <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 uppercase font-bold tracking-tight">${card.set.name} (${getFullCardCode(card)})</p>
-                </button>
-            `).join('')}
-        </div>
-    `;
-}
-
-function renderCardDetails() {
-    const card = state.selectedCard;
-    const displayNum = getFullCardCode(card);
-    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + displayNum + ' ' + card.set.name + ' sold')}&LH_Sold=1&LH_Complete=1`;
-    const prices = card.tcgplayer?.prices || {};
-    let priceSection = Object.entries(prices).map(([type, data]) => {
-        if (!data.market) return '';
-        const price = formatPrice(data.market);
-        const isAdded = state.shoppingList.some(item => item.uid === `${card.id}-${type}`);
-        return `
-            <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4 border border-slate-200 dark:border-slate-600">
-                <div class="text-xs font-bold text-slate-500 uppercase text-center mb-1">${type} Market Guide</div>
-                <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-4">${price}</div>
-                <button onclick="handleAddToList(state.selectedCard, '${type}', '${price}')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white shadow-lg mb-3 ${isAdded ? 'opacity-50' : ''}">${isAdded ? 'Added to Inquiry' : 'Add to Inquiry List'}</button>
-                
-                <a href="${ebayLink}" target="_blank" class="w-full h-12 rounded-xl border-2 border-blue-500 flex items-center justify-center gap-2 text-blue-500 font-bold italic text-sm">
-                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M11.63 4.25c-1.4 0-2.3.61-2.93 1.48L7.33 8.35c-.13.19-.24.37-.32.54H4.5c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6c0-1.1-.9-2-2-2h-3.32c-.11-.26-.26-.51-.47-.79l-1.63-2.18c-.53-.74-1.39-1.12-2.45-1.12zM12 11c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/></svg>
-                    View Sold Prices on eBay
-                </a>
-            </div>
-        `;
-    }).join('');
-
-    return `
-        <div class="p-4 max-w-2xl mx-auto">
-            <button onclick="goBack()" class="font-bold text-slate-500 mb-4 flex items-center gap-2">← Back</button>
-            <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl border border-slate-100 dark:border-slate-700">
-                <img src="${card.images.large}" class="w-full rounded-2xl mb-6 shadow-2xl" />
-                <h1 class="text-2xl font-black text-center text-slate-900 dark:text-white">${card.name}</h1>
-                <p class="text-center text-slate-500 mb-6 font-medium">${card.set.name} • ${displayNum}</p>
-                <div class="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-xl mb-6 text-[11px] text-amber-800 dark:text-amber-200 text-center leading-tight">
-                    <strong>Note:</strong> Prices shown are automated guides. Stock availability and final condition price confirmed via WhatsApp.
-                </div>
-                ${priceSection || '<div class="text-center font-bold text-slate-400 py-10 italic">Price data unavailable. Add to list to inquire.</div>'}
-            </div>
-        </div>
-    `;
-}
-
-function renderInquiryList() {
-    const items = state.shoppingList;
-    return `
-        <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-[100] p-4 overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-black text-slate-900 dark:text-white">Inquiry List</h2>
-                <button onclick="state.view='search'; render();" class="text-3xl font-light text-slate-900 dark:text-white">✕</button>
-            </div>
-            ${items.length === 0 ? '<div class="text-center py-20 text-slate-500 font-bold">Your list is currently empty</div>' : `
-                <div class="space-y-3 pb-32">
-                    ${items.map((item, i) => `
-                        <div onclick="handleCardClick(state.shoppingList[${i}].fullData)" class="bg-white dark:bg-slate-800 p-4 rounded-2xl flex items-center gap-4 border border-slate-100 dark:border-slate-700 shadow-sm cursor-pointer active:scale-[0.98] transition-transform">
-                            <img src="${item.imageUrl}" class="w-14 h-auto rounded" />
-                            <div class="flex-1">
-                                <h3 class="font-bold text-sm text-slate-900 dark:text-white leading-tight">${item.name}</h3>
-                                <p class="text-[10px] text-slate-500 font-bold uppercase mt-1">${item.type} • ${item.price}</p>
-                                <p class="text-[10px] text-slate-400">${item.set} (${item.num})</p>
-                            </div>
-                            <button onclick="handleRemoveItem(event, ${i})" class="text-red-500 p-2 text-xl relative z-10">✕</button>
-                        </div>
-                    `).join('')}
-                </div>
-                <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-slate-200 dark:border-slate-700 z-[110]">
-                    <button onclick="handleSendWhatsApp()" class="w-full h-16 bg-green-500 text-white rounded-2xl font-black shadow-lg flex items-center justify-center gap-2">
-                        <span>Send to Dave</span>
-                    </button>
-                </div>
-            `}
-        </div>
-    `;
-}
-
-function renderCartBar() {
-    if (state.shoppingList.length === 0 || state.view !== 'search') return '';
-    return `
-        <div class="fixed bottom-8 left-0 right-0 flex justify-center z-[80] pointer-events-none">
-            <button onclick="openList()" class="pointer-events-auto w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl font-black active:scale-95 transition-transform">
-                <span>Inquiry List</span>
-                <span class="bg-white text-blue-600 px-3 py-1 rounded-xl text-sm font-black">${state.shoppingList.length}</span>
-            </button>
-        </div>
-    `;
-}
-
-function renderSponsorCard() {
-    return `
-        <div class="px-4 pb-4">
-            <a href="${APP_CONFIG.storeUrl}" class="block bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Advertisement</span>
-                <h3 class="font-bold text-slate-900 dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
-                <p class="text-xs text-slate-500 dark:text-slate-400">${APP_CONFIG.adDescription}</p>
-            </a>
-        </div>
-    `;
 }
 
 function startBannerSlideshow() {
@@ -427,16 +218,145 @@ function startBannerSlideshow() {
     }, 8000);
 }
 
+// --- RENDER FUNCTIONS ---
+
+function renderHeader() {
+    return `
+        <header class="sticky top-0 z-50 border-b backdrop-blur-md">
+            <div class="flex items-center justify-between px-4 py-3">
+                <div class="flex items-center gap-3">
+                    <button onclick="location.reload()" class="p-2 input-bg rounded-xl">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <h1 class="text-2xl font-black tracking-tight leading-tight">${APP_CONFIG.appTitle}</h1>
+                </div>
+                <button onclick="cycleTheme()" class="p-3 input-bg rounded-full shadow-lg">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+                    </svg>
+                </button>
+            </div>
+            <div class="px-4 pb-3">
+                <div class="input-bg rounded-xl flex items-center px-4 h-12">
+                    <input type="search" value="${state.searchTerm}" oninput="state.searchTerm=this.value" onkeypress="if(event.key === 'Enter') executeSearch()" placeholder="Card name or number..." class="w-full bg-transparent border-none outline-none font-medium placeholder:opacity-50" />
+                </div>
+            </div>
+            <div class="flex gap-2 px-4 pb-4">
+                <div class="fixed-dropdown-container input-bg rounded-lg px-3 border border-transparent">
+                    <select onchange="state.selectedSet=this.value; executeSearch();">
+                        <option value="">Set...</option>
+                        ${state.sets.map(s => `<option value="${s.name}" ${state.selectedSet === s.name ? 'selected' : ''}>${s.name}</option>`).join('')}
+                    </select>
+                </div>
+                <div class="fixed-dropdown-container input-bg rounded-lg px-3 border border-transparent">
+                    <select onchange="state.selectedRarity=this.value; executeSearch();">
+                        <option value="">Rarity...</option>
+                        ${state.rarities.map(r => `<option value="${r}" ${state.selectedRarity === r ? 'selected' : ''}>${r}</option>`).join('')}
+                    </select>
+                </div>
+            </div>
+        </header>
+    `;
+}
+
+function renderMain() {
+    if (state.view === 'details') return renderDetails();
+    if (state.view === 'list') return renderList();
+
+    let content = '';
+    if (state.showAd) {
+        content += `
+            <div class="px-4 pt-4">
+                <div class="card-bg w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border mb-4">
+                    <img id="banner-slideshow" src="${APP_CONFIG.bannerImages[state.currentBannerIndex]}" class="w-full h-full object-cover" />
+                </div>
+            </div>
+            <div class="px-4 pb-4 flex justify-around items-center">
+                ${['TikTok', 'Facebook', 'WhatsApp', 'Web'].map(name => `<div class="flex flex-col items-center gap-1"><div class="w-14 h-14 rounded-full input-bg flex items-center justify-center text-xl">📱</div><span class="text-[10px] font-bold opacity-60 uppercase">${name}</span></div>`).join('')}
+            </div>
+            <div class="px-4 pb-4">
+                <a href="${APP_CONFIG.storeUrl}" class="block card-bg p-4 rounded-2xl border shadow-sm">
+                    <span class="text-[10px] font-black text-blue-500 uppercase tracking-widest">Advertisement</span>
+                    <h3 class="font-bold mt-1">${APP_CONFIG.adTitle}</h3>
+                    <p class="text-xs text-secondary">${APP_CONFIG.adDescription}</p>
+                </a>
+            </div>
+        `;
+    }
+
+    if (state.isLoading) {
+        content += `<div class="text-center py-20 opacity-50 font-bold">Searching Archive...</div>`;
+    } else {
+        content += `
+            <div class="grid grid-cols-2 gap-4 p-4 pb-32">
+                ${state.cards.map((card, i) => `
+                    <div onclick="showCard(${i})" class="card-bg rounded-2xl p-3 shadow-md border text-left">
+                        <div class="aspect-[1/1.4] input-bg rounded-xl mb-2 flex items-center justify-center overflow-hidden">
+                            <img src="${card.images.small}" class="max-w-[90%] max-h-[90%] object-contain" />
+                        </div>
+                        <h3 class="font-bold text-sm line-clamp-2">${card.name}</h3>
+                        <p class="text-[10px] text-secondary mt-1 uppercase font-bold">${card.set.name} (${getFullCardCode(card)})</p>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+    return content;
+}
+
+function renderDetails() {
+    const card = state.selectedCard;
+    const code = getFullCardCode(card);
+    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + code + ' sold')}&LH_Sold=1&LH_Complete=1`;
+    
+    return `
+        <div class="p-4">
+            <button onclick="state.view='search'; render();" class="font-bold text-secondary mb-4">← Back</button>
+            <div class="card-bg rounded-3xl p-6 shadow-2xl border">
+                <img src="${card.images.large}" class="w-full rounded-2xl mb-6 shadow-xl" />
+                <h1 class="text-2xl font-black text-center">${card.name}</h1>
+                <p class="text-center text-secondary mb-6">${card.set.name} • ${code}</p>
+                
+                ${Object.entries(card.tcgplayer?.prices || {}).map(([type, data]) => {
+                    const price = formatPrice(data.market);
+                    return `
+                        <div class="input-bg rounded-2xl p-5 mb-4 border border-white/5">
+                            <div class="text-xs font-bold opacity-50 uppercase text-center mb-1">${type} Market Guide</div>
+                            <div class="text-4xl font-black text-center text-blue-500 mb-4">${price}</div>
+                            <button onclick="addToList('${type}', '${price}')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white shadow-lg mb-3">Add to Inquiry List</button>
+                            <a href="${ebayLink}" target="_blank" class="w-full h-12 rounded-xl border-2 border-blue-500 flex items-center justify-center gap-2 text-blue-500 font-bold italic text-sm">
+                                View Sold Prices on eBay
+                            </a>
+                        </div>
+                    `;
+                }).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function showCard(index) {
+    state.selectedCard = state.cards[index];
+    state.view = 'details';
+    window.scrollTo(0,0);
+    render();
+}
+
+function addToList(type, price) {
+    state.shoppingList.push({
+        name: state.selectedCard.name,
+        code: getFullCardCode(state.selectedCard),
+        type,
+        price
+    });
+    localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
+    render();
+}
+
 function render() {
     const app = document.getElementById('app');
-    document.documentElement.classList.toggle('dark', state.isDark);
-    if (state.view === 'search') {
-        app.innerHTML = renderSearchHeader() + (state.showAd ? renderSocialStories() + renderSponsorCard() : '') + (state.isLoading ? '<div class="text-center py-20 text-slate-400">Searching...</div>' : renderCardGrid()) + renderCartBar();
-    } else if (state.view === 'details') {
-        app.innerHTML = renderCardDetails();
-    } else if (state.view === 'list') {
-        app.innerHTML = renderInquiryList();
-    }
+    document.documentElement.className = state.currentTheme;
+    app.innerHTML = renderHeader() + renderMain();
 }
 
 initApp();
