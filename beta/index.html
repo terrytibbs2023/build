@@ -21,46 +21,17 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-        
         :root { color-scheme: dark; }
-
         body { 
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
             background-color: #0f172a;
         }
-
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        
-        .fixed-dropdown-container {
-            height: 42px; 
-            width: 50%;   
-            display: flex;
-            align-items: center;
-        }
-
-        select {
-            width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            appearance: none;
-            background-color: transparent;
-            border: none;
-            outline: none;
-        }
-
-        .social-container {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            padding: 0 10px;
-        }
-
-        #banner-slideshow {
-            transition: opacity 0.5s ease-in-out;
-        }
+        .fixed-dropdown-container { height: 42px; width: 50%; display: flex; align-items: center; }
+        select { width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; appearance: none; background-color: transparent; border: none; outline: none; }
+        #banner-slideshow { transition: opacity 0.5s ease-in-out; }
     </style>
 </head>
 <body class="bg-slate-100 dark:bg-slate-900 min-h-screen transition-colors duration-300">
@@ -78,11 +49,10 @@ const APP_CONFIG = {
     adDescription: "Ps5/Xbox/Switch/Hdmi Ports", 
     phoneNumber: "447749893611",                  
     bannerImages: ["ecc1.png", "ecc2.png", "ecc3.png"], 
-    markupUnder5: 1.40, // 40% markup
-    markupOver5: 1.10,  // 10% markup
+    markupUnder5: 1.40, 
+    markupOver5: 1.10,  
     minPriceGbp: 0.20                            
 };
-// ==========================================
 
 const API_BASE = "https://api.pokemontcg.io/v2";
 
@@ -104,28 +74,12 @@ let state = {
     currentBannerIndex: 0 
 };
 
-function startBannerSlideshow() {
-    setInterval(() => {
-        state.currentBannerIndex = (state.currentBannerIndex + 1) % APP_CONFIG.bannerImages.length;
-        const bannerImg = document.getElementById('banner-slideshow');
-        if (bannerImg) {
-            bannerImg.style.opacity = '0';
-            setTimeout(() => {
-                bannerImg.src = APP_CONFIG.bannerImages[state.currentBannerIndex];
-                bannerImg.style.opacity = '1';
-            }, 500);
-        }
-    }, 8000); 
-}
+// --- CORE UTILITIES ---
 
 function formatPrice(usd) {
     let baseGbp = usd * state.gbpRate;
-    // VARIABLE PRICING LOGIC
     let finalGbp = baseGbp < 5 ? baseGbp * APP_CONFIG.markupUnder5 : baseGbp * APP_CONFIG.markupOver5;
-    
-    if (finalGbp < APP_CONFIG.minPriceGbp) {
-        finalGbp = APP_CONFIG.minPriceGbp;
-    }
+    if (finalGbp < APP_CONFIG.minPriceGbp) finalGbp = APP_CONFIG.minPriceGbp;
     return `£${finalGbp.toFixed(2)}`;
 }
 
@@ -135,7 +89,10 @@ function getFullCardCode(card) {
     return `${number}/${total}`;
 }
 
+// --- APP LOGIC ---
+
 async function initApp() {
+    history.replaceState({ view: 'search', hasSearched: false }, '');
     try {
         const [setsRes, raritiesRes, rateRes] = await Promise.all([
             fetch(`${API_BASE}/sets?orderBy=-releaseDate`),
@@ -150,20 +107,17 @@ async function initApp() {
         state.gbpRate = rateData.rates?.GBP || 0.78;
         render();
         startBannerSlideshow();
-    } catch (error) {
-        console.error('Failed to initialize:', error);
-    }
+    } catch (error) { console.error('Init failed:', error); }
 }
 
 async function executeSearch() {
     const { searchTerm, selectedSet, selectedRarity } = state;
     if (!searchTerm && !selectedSet && !selectedRarity) return;
-
     state.showAd = false;
     state.isLoading = true;
     state.hasSearched = true;
+    history.pushState({ view: 'search', hasSearched: true }, '');
     render();
-
     let queryParts = [];
     if (searchTerm) {
         const term = searchTerm.trim();
@@ -172,22 +126,17 @@ async function executeSearch() {
             const num = parts[0].replace(/^0+/, ''); 
             const total = parts[1];
             queryParts.push(`number:${num} AND (set.printedTotal:${total} OR set.total:${total})`);
-        } else {
-            queryParts.push(`name:"${term}*"`);
-        }
+        } else { queryParts.push(`name:"${term}*"`); }
     }
     if (selectedSet) queryParts.push(`set.name:"${selectedSet}"`);
     if (selectedRarity) queryParts.push(`rarity:"${selectedRarity}"`);
-
     const query = queryParts.join(' AND ');
     try {
         const url = `${API_BASE}/cards?q=${encodeURIComponent(query)}&orderBy=-set.releaseDate,number&pageSize=96`;
         const res = await fetch(url);
         const data = await res.json();
         state.cards = data.data || [];
-    } catch (error) {
-        state.cards = [];
-    } finally {
+    } catch (error) { state.cards = []; } finally {
         state.isLoading = false;
         render();
     }
@@ -202,34 +151,51 @@ function resetHome() {
     state.selectedCard = null;
     state.showAd = true;
     state.hasSearched = false;
+    history.replaceState({ view: 'search', hasSearched: false }, '');
     render();
 }
+
+function goBack() {
+    if (state.view !== 'search' || state.hasSearched) {
+        history.back();
+    } else {
+        resetHome();
+    }
+}
+
+window.addEventListener('popstate', (event) => {
+    if (!event.state || (event.state.view === 'search' && !event.state.hasSearched)) {
+        state.view = 'search';
+        state.cards = [];
+        state.searchTerm = '';
+        state.selectedSet = '';
+        state.selectedRarity = '';
+        state.selectedCard = null;
+        state.showAd = true;
+        state.hasSearched = false;
+    } else {
+        state.view = event.state.view || 'search';
+        state.selectedCard = event.state.card || null;
+        state.hasSearched = event.state.hasSearched || false;
+    }
+    render();
+});
 
 function toggleTheme() {
     state.isDark = !state.isDark;
     localStorage.setItem('theme', state.isDark ? 'dark' : 'light');
-    document.documentElement.classList.toggle('dark', state.isDark);
     render();
 }
 
-function handleSearchInput(value) {
-    state.searchTerm = value;
-}
-
-function handleSetChange(value) {
-    state.selectedSet = value;
-    executeSearch();
-}
-
-function handleRarityChange(value) {
-    state.selectedRarity = value;
-    executeSearch();
+function openList() {
+    state.view = 'list';
+    render();
 }
 
 function handleCardClick(card) {
     state.selectedCard = card;
     state.view = 'details';
-    history.pushState({ view: 'details', card: card }, '');
+    history.pushState({ view: 'details', card: card, hasSearched: true }, '');
     window.scrollTo(0, 0);
     render();
 }
@@ -237,7 +203,6 @@ function handleCardClick(card) {
 function handleAddToList(card, type, price) {
     const uid = `${card.id}-${type}`;
     if (state.shoppingList.some(item => item.uid === uid)) return;
-    
     state.shoppingList.push({
         uid,
         name: card.name,
@@ -261,30 +226,14 @@ function handleRemoveItem(e, index) {
 
 function handleSendWhatsApp() {
     if (state.shoppingList.length === 0) return;
-    let message = "Hi Dave, I'm checking if you have these cards. I understand prices are guides:\n\n";
+    let message = "Hi Dave, I'm checking if you have these cards:\n\n";
     state.shoppingList.forEach((item, i) => {
-        message += `*${i + 1}. ${item.name}*\nSet: ${item.set} (${item.num})\nVariant: ${item.type} | Guide: ${item.price}\nImage: ${item.imageUrl}\n\n`;
+        message += `*${i + 1}. ${item.name}*\nSet: ${item.set} (${item.num})\nVariant: ${item.type} | Guide: ${item.price}\n\n`;
     });
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
-// UPDATED BACK BUTTON LOGIC
-function goBack() {
-    if (window.history.length > 1 && state.view !== 'search') {
-        history.back();
-        // Refresh after a small delay to ensure the search state is current
-        setTimeout(() => { window.location.reload(); }, 50);
-    } else {
-        resetHome();
-    }
-}
-
-function openList() {
-    state.view = 'list';
-    history.pushState({ view: 'list' }, '');
-    window.scrollTo(0, 0);
-    render();
-}
+// --- RENDERERS ---
 
 function renderSocialStories() {
     const socials = [
@@ -293,11 +242,10 @@ function renderSocialStories() {
         { name: 'WhatsApp', color: 'bg-green-500', icon: '💬', url: `https://wa.me/${APP_CONFIG.phoneNumber}` },
         { name: 'Web', color: 'bg-slate-700', icon: '🌐', url: `https://share.google/U7aWnYjaMe3HzClcR` }
     ];
-    
     return `
         <div class="px-4 pt-4">
              <div class="block w-full aspect-[4/3] bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700 mb-4">
-                <img id="banner-slideshow" src="${APP_CONFIG.bannerImages[state.currentBannerIndex]}" class="w-full h-full object-cover" alt="TCG Featured" />
+                <img id="banner-slideshow" src="${APP_CONFIG.bannerImages[state.currentBannerIndex]}" class="w-full h-full object-cover" />
              </div>
         </div>
         <div class="px-2 pb-4 flex justify-around items-center">
@@ -305,9 +253,7 @@ function renderSocialStories() {
                 <a href="${s.url}" target="_blank" class="flex flex-col items-center gap-1">
                     <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 to-green-400">
                         <div class="bg-white dark:bg-slate-900 w-full h-full rounded-full p-1">
-                            <div class="${s.color} w-full h-full rounded-full flex items-center justify-center text-xl shadow-inner">
-                                ${s.icon}
-                            </div>
+                            <div class="${s.color} w-full h-full rounded-full flex items-center justify-center text-xl shadow-inner">${s.icon}</div>
                         </div>
                     </div>
                     <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tighter">${s.name}</span>
@@ -317,59 +263,34 @@ function renderSocialStories() {
     `;
 }
 
-function renderSponsorCard() {
-    return `
-        <div class="p-4">
-            <a href="${APP_CONFIG.storeUrl}" target="_blank" class="block bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700">
-                <div class="p-4">
-                    <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Advertisement</span>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${APP_CONFIG.adDescription}</p>
-                </div>
-            </a>
-        </div>
-    `;
-}
-
 function renderSearchHeader() {
     return `
         <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700">
             <div class="flex items-center justify-between px-4 py-3">
                 <div class="flex items-center gap-3">
-                    <button onclick="resetHome()" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all text-slate-600 dark:text-slate-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    <button onclick="resetHome()" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </button>
                     <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">${APP_CONFIG.appTitle}</h1>
                 </div>
-                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                    ${state.isDark 
-                        ? '<svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>'
-                        : '<svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>'
-                    }
+                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+                    ${state.isDark ? '☀️' : '🌙'}
                 </button>
             </div>
             <div class="px-4 pb-3">
-                <form action="#" onsubmit="event.preventDefault(); executeSearch();" class="relative bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center px-4 h-12">
-                    <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    <input 
-                        type="search" 
-                        value="${state.searchTerm}"
-                        oninput="handleSearchInput(this.value)"
-                        placeholder="Type card name or number..."
-                        enterkeyhint="search"
-                        class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium"
-                    />
-                </form>
+                <div class="relative bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center px-4 h-12">
+                    <input type="search" value="${state.searchTerm}" oninput="state.searchTerm=this.value" onkeypress="if(event.key === 'Enter'){ event.preventDefault(); executeSearch(); }" placeholder="Card name or number..." class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white font-medium" />
+                </div>
             </div>
             <div class="flex gap-2 px-4 pb-4">
                 <div class="fixed-dropdown-container bg-white dark:bg-slate-800 rounded-lg px-3 border border-slate-200 dark:border-slate-700">
-                    <select onchange="handleSetChange(this.value)" class="text-sm font-bold text-slate-900 dark:text-white">
+                    <select onchange="state.selectedSet=this.value; executeSearch();" class="text-sm font-bold text-slate-900 dark:text-white">
                         <option value="">Set...</option>
                         ${state.sets.map(s => `<option value="${s.name}" ${state.selectedSet === s.name ? 'selected' : ''}>${s.name}</option>`).join('')}
                     </select>
                 </div>
                 <div class="fixed-dropdown-container bg-white dark:bg-slate-800 rounded-lg px-3 border border-slate-200 dark:border-slate-700">
-                    <select onchange="handleRarityChange(this.value)" class="text-sm font-bold text-slate-900 dark:text-white">
+                    <select onchange="state.selectedRarity=this.value; executeSearch();" class="text-sm font-bold text-slate-900 dark:text-white">
                         <option value="">Rarity...</option>
                         ${state.rarities.map(r => `<option value="${r}" ${state.selectedRarity === r ? 'selected' : ''}>${r}</option>`).join('')}
                     </select>
@@ -380,89 +301,52 @@ function renderSearchHeader() {
 }
 
 function renderCardGrid() {
-    if (state.cards.length === 0) {
-        return state.hasSearched ? `<div class="flex flex-col items-center justify-center py-20 text-slate-400"><p class="text-lg font-medium">No cards found</p></div>` : ''; 
-    }
+    if (state.cards.length === 0) return state.hasSearched ? `<div class="text-center py-20 text-slate-400 font-bold">No cards found</div>` : '';
     return `
-        <div class="grid grid-cols-2 gap-4 p-4">
+        <div class="grid grid-cols-2 gap-4 p-4 pb-32">
             ${state.cards.map((card, i) => `
-                <button onclick="handleCardClick(state.cards[${i}])" class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 text-left hover:scale-[1.02] transition-transform">
+                <button onclick="handleCardClick(state.cards[${i}])" class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 text-left">
                     <div class="aspect-[1/1.4] bg-slate-100 dark:bg-slate-700 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
-                        <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="max-w-[90%] max-h-[90%] object-contain" />
+                        <img src="${card.images.small}" class="max-w-[90%] max-h-[90%] object-contain" />
                     </div>
                     <h3 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">${card.name}</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${card.set.name}</p>
+                    <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 uppercase font-bold tracking-tight">${card.set.name} (${getFullCardCode(card)})</p>
                 </button>
             `).join('')}
         </div>
     `;
 }
 
-function renderLoadingSpinner() {
-    return `
-        <div class="flex flex-col items-center justify-center py-20 text-slate-400">
-            <div class="w-10 h-10 border-4 border-slate-200 dark:border-slate-700 border-t-blue-500 rounded-full animate-spin"></div>
-            <p class="mt-4 font-medium uppercase text-xs">Searching...</p>
-        </div>
-    `;
-}
-
 function renderCardDetails() {
     const card = state.selectedCard;
-    if (!card) return '';
     const displayNum = getFullCardCode(card);
     const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + displayNum + ' ' + card.set.name + ' sold')}&LH_Sold=1&LH_Complete=1`;
     const prices = card.tcgplayer?.prices || {};
-    let priceBoxes = '';
-    
-    if (Object.keys(prices).length > 0) {
-        priceBoxes = Object.entries(prices).map(([type, priceData]) => {
-            if (!priceData.market) return '';
-            const priceDisplay = formatPrice(priceData.market);
-            const uid = `${card.id}-${type}`;
-            const isAdded = state.shoppingList.some(item => item.uid === uid);
-            return `
-                <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4 border border-slate-100 dark:border-slate-700">
-                    <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase text-center mb-1">${type} - Guide Price</div>
-                    <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-4">${priceDisplay}</div>
-                    <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" ${isAdded ? 'disabled' : ''}
-                        class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20'} transition-all">
-                        ${isAdded ? 'Added to List' : 'Add to Inquiry List'}
-                    </button>
-                    <a href="${ebayLink}" target="_blank" class="w-full h-10 mt-3 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
-                        View eBay Sold
-                    </a>
-                </div>
-            `;
-        }).join('');
-    } else {
-        priceBoxes = `
-            <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 text-center">
-                <div class="text-2xl font-black text-slate-400 mb-4">PRICE TBC</div>
-                <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white mb-3">Add to Inquiry List</button>
-                <a href="${ebayLink}" target="_blank" class="w-full h-10 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
-                    View eBay Sold
-                </a>
-            </div>`;
-    }
+    let priceSection = Object.entries(prices).map(([type, data]) => {
+        if (!data.market) return '';
+        const price = formatPrice(data.market);
+        const isAdded = state.shoppingList.some(item => item.uid === `${card.id}-${type}`);
+        return `
+            <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4 border border-slate-200 dark:border-slate-600">
+                <div class="text-xs font-bold text-slate-500 uppercase text-center mb-1">${type} Market Guide</div>
+                <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-4">${price}</div>
+                <button onclick="handleAddToList(state.selectedCard, '${type}', '${price}')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white shadow-lg ${isAdded ? 'opacity-50' : ''}">${isAdded ? 'Added to Inquiry' : 'Add to Inquiry List'}</button>
+                <a href="${ebayLink}" target="_blank" class="block text-center text-blue-500 font-bold mt-3 text-sm italic">View Sold Prices on eBay</a>
+            </div>
+        `;
+    }).join('');
+
     return `
-        <div class="min-h-screen bg-slate-100 dark:bg-slate-900 p-4">
-            <div class="max-w-md mx-auto">
-                <button onclick="goBack()" class="flex items-center gap-2 text-slate-600 dark:text-slate-400 mb-4 font-bold">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    Back
-                </button>
-                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl border border-slate-200 dark:border-slate-700">
-                    <img src="${card.images.large}" class="w-full rounded-2xl shadow-lg mb-6 border border-slate-100 dark:border-slate-700" />
-                    <h1 class="text-2xl font-black text-center text-slate-900 dark:text-white leading-tight">${card.name}</h1>
-                    <p class="text-slate-500 text-center font-bold text-sm mb-6">${card.set.name} • ${displayNum}</p>
-                    <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-4 mb-6">
-                        <p class="text-[11px] leading-relaxed text-amber-800 dark:text-amber-200 font-medium text-center">
-                            <b>Please Note:</b> Prices are for guide only. Prices & Stock will be confirmed by <b>East Coast Collectibles by Whatapp</b>.
-                        </p>
-                    </div>
-                    ${priceBoxes}
+        <div class="p-4 max-w-2xl mx-auto">
+            <button onclick="goBack()" class="font-bold text-slate-500 mb-4 flex items-center gap-2">← Back</button>
+            <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl border border-slate-100 dark:border-slate-700">
+                <img src="${card.images.large}" class="w-full rounded-2xl mb-6 shadow-2xl" />
+                <h1 class="text-2xl font-black text-center dark:text-white">${card.name}</h1>
+                <p class="text-center text-slate-500 mb-6 font-medium">${card.set.name} • ${displayNum}</p>
+                <div class="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-xl mb-6 text-[11px] text-amber-800 dark:text-amber-200 text-center leading-tight">
+                    <strong>Note:</strong> Prices shown are automated guides. Stock availability and final condition price confirmed via WhatsApp.
                 </div>
+                ${priceSection || '<div class="text-center font-bold text-slate-400 py-10 italic">Price data unavailable. Add to list to inquire.</div>'}
             </div>
         </div>
     `;
@@ -471,76 +355,84 @@ function renderCardDetails() {
 function renderInquiryList() {
     const items = state.shoppingList;
     return `
-        <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-50 overflow-y-auto">
-            <div class="max-w-md mx-auto p-4 pb-32">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white">Inquiry List</h2>
-                    <button onclick="goBack()" class="p-2 bg-white dark:bg-slate-800 rounded-full shadow-md"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
-                </div>
-                ${items.length === 0 ? '<div class="text-center py-20 text-slate-400 font-bold uppercase tracking-widest text-xs">No cards in list</div>' : 
-                `<div class="space-y-3">
-                    ${items.map((item, index) => `
-                        <div onclick="handleCardClick(state.shoppingList[${index}].fullData)" class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm flex gap-4 cursor-pointer hover:border-blue-500 transition-colors">
-                            <img src="${item.imageUrl}" class="w-16 h-auto rounded-lg pointer-events-none" />
-                            <div class="flex-1 pointer-events-none">
-                                <h3 class="font-black text-slate-900 dark:text-white text-sm">${item.name}</h3>
-                                <p class="text-[11px] text-slate-500 font-bold">${item.set} (${item.num})</p>
-                                <p class="text-blue-600 dark:text-blue-400 font-black text-sm mt-1">${item.price}</p>
+        <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-[100] p-4 overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-black dark:text-white">Inquiry List</h2>
+                <button onclick="state.view='search'; render();" class="text-3xl font-light">✕</button>
+            </div>
+            ${items.length === 0 ? '<div class="text-center py-20 text-slate-500 font-bold">Your list is currently empty</div>' : `
+                <div class="space-y-3 pb-32">
+                    ${items.map((item, i) => `
+                        <div onclick="handleCardClick(state.shoppingList[${i}].fullData)" class="bg-white dark:bg-slate-800 p-4 rounded-2xl flex items-center gap-4 border border-slate-100 dark:border-slate-700 shadow-sm cursor-pointer active:scale-[0.98] transition-transform">
+                            <img src="${item.imageUrl}" class="w-14 h-auto rounded" />
+                            <div class="flex-1">
+                                <h3 class="font-bold text-sm dark:text-white leading-tight">${item.name}</h3>
+                                <p class="text-[10px] text-slate-500 font-bold uppercase mt-1">${item.type} • ${item.price}</p>
+                                <p class="text-[10px] text-slate-400">${item.set} (${item.num})</p>
                             </div>
-                            <button onclick="handleRemoveItem(event, ${index})" class="text-red-500 self-start p-2 relative z-10"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                            <button onclick="handleRemoveItem(event, ${i})" class="text-red-500 p-2 text-xl relative z-10">✕</button>
                         </div>
                     `).join('')}
-                    <div class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-100 dark:from-slate-900 via-slate-100 dark:via-slate-900 to-transparent">
-                        <button onclick="handleSendWhatsApp()" class="w-full max-w-md mx-auto h-16 bg-green-500 text-white rounded-2xl font-black flex items-center justify-center gap-3 shadow-xl shadow-green-500/20">
-                            Send Inquiry to Dave
-                        </button>
-                    </div>
-                </div>`}
-            </div>
+                </div>
+                <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-slate-200 dark:border-slate-700 z-[110]">
+                    <button onclick="handleSendWhatsApp()" class="w-full h-16 bg-green-500 text-white rounded-2xl font-black shadow-lg flex items-center justify-center gap-2">
+                        <span>Send to Dave</span>
+                    </button>
+                </div>
+            `}
         </div>
     `;
 }
 
 function renderCartBar() {
-    const count = state.shoppingList.length;
-    if (count === 0 || state.view !== 'search') return '';
+    if (state.shoppingList.length === 0 || state.view !== 'search') return '';
     return `
-        <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl z-50 font-black transition-transform hover:scale-105 active:scale-95">
-            <span>Inquiry List</span>
-            <span class="bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-xl">${count}</span>
-        </button>
+        <div class="fixed bottom-8 left-0 right-0 flex justify-center z-[80] pointer-events-none">
+            <button onclick="openList()" class="pointer-events-auto w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl font-black active:scale-95 transition-transform">
+                <span>Inquiry List</span>
+                <span class="bg-white text-blue-600 px-3 py-1 rounded-xl text-sm font-black">${state.shoppingList.length}</span>
+            </button>
+        </div>
     `;
+}
+
+function renderSponsorCard() {
+    return `
+        <div class="px-4 pb-4">
+            <a href="${APP_CONFIG.storeUrl}" class="block bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Advertisement</span>
+                <h3 class="font-bold dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">${APP_CONFIG.adDescription}</p>
+            </a>
+        </div>
+    `;
+}
+
+function startBannerSlideshow() {
+    setInterval(() => {
+        state.currentBannerIndex = (state.currentBannerIndex + 1) % APP_CONFIG.bannerImages.length;
+        const img = document.getElementById('banner-slideshow');
+        if (img) {
+            img.style.opacity = '0';
+            setTimeout(() => {
+                img.src = APP_CONFIG.bannerImages[state.currentBannerIndex];
+                img.style.opacity = '1';
+            }, 500);
+        }
+    }, 8000);
 }
 
 function render() {
     const app = document.getElementById('app');
-    let content = '';
-    
     document.documentElement.classList.toggle('dark', state.isDark);
-    
     if (state.view === 'search') {
-        content = `
-            ${renderSearchHeader()}
-            ${state.showAd ? `
-                ${renderSocialStories()}
-                ${renderSponsorCard()}
-            ` : ''}
-            ${state.isLoading ? renderLoadingSpinner() : renderCardGrid()}
-            ${renderCartBar()}
-        `;
+        app.innerHTML = renderSearchHeader() + (state.showAd ? renderSocialStories() + renderSponsorCard() : '') + (state.isLoading ? '<div class="text-center py-20 text-slate-400">Searching...</div>' : renderCardGrid()) + renderCartBar();
     } else if (state.view === 'details') {
-        content = renderCardDetails();
+        app.innerHTML = renderCardDetails();
     } else if (state.view === 'list') {
-        content = renderInquiryList();
+        app.innerHTML = renderInquiryList();
     }
-    app.innerHTML = content;
 }
-
-window.addEventListener('popstate', (event) => {
-    state.view = (event.state && event.state.view) ? event.state.view : 'search';
-    state.selectedCard = (event.state && event.state.card) ? event.state.card : null;
-    render();
-});
 
 initApp();
 </script>
