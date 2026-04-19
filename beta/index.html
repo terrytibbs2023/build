@@ -51,13 +51,6 @@
             outline: none;
         }
 
-        .social-container {
-            display: flex;
-            justify-content: space-around;
-            width: 100%;
-            padding: 0 10px;
-        }
-
         #banner-slideshow {
             transition: opacity 0.5s ease-in-out;
         }
@@ -79,11 +72,9 @@ const APP_CONFIG = {
     phoneNumber: "447749893611",                  
     bannerImages: ["ecc1.png", "ecc2.png", "ecc3.png"], 
     
-    // <--- MANUAL CHANGE: MARKUP PERCENTAGES --->
-    markupUnder5: 1.40, // Adds 40% if card is under £5
-    markupOver5: 1.10,  // Adds 10% if card is over £5
+    markupUnder5: 1.40,
+    markupOver5: 1.10,
     
-    // <--- MANUAL CHANGE: MINIMUM PRICE --->
     minPriceGbp: 0.20                            
 };
 // ==========================================
@@ -125,13 +116,11 @@ function startBannerSlideshow() {
 function formatPrice(usd) {
     let baseGbp = usd * state.gbpRate;
     let finalGbp;
-
     if (baseGbp < 5) {
         finalGbp = baseGbp * APP_CONFIG.markupUnder5;
     } else {
         finalGbp = baseGbp * APP_CONFIG.markupOver5;
     }
-
     if (finalGbp < APP_CONFIG.minPriceGbp) {
         finalGbp = APP_CONFIG.minPriceGbp;
     }
@@ -226,12 +215,10 @@ function toggleTheme() {
     state.isDark = !state.isDark;
     localStorage.setItem('theme', state.isDark ? 'dark' : 'light');
     document.documentElement.classList.toggle('dark', state.isDark);
-    
     const metaTheme = document.querySelector('meta[name="theme-color"]');
     if (metaTheme) {
         metaTheme.setAttribute('content', state.isDark ? '#0f172a' : '#f1f5f9');
     }
-    
     render();
 }
 
@@ -260,9 +247,7 @@ function handleCardClick(card) {
 function handleAddToList(card, type, price) {
     const uid = `${card.id}-${type}`;
     if (state.shoppingList.some(item => item.uid === uid)) return;
-    
     const cardCode = getFullCardCode(card);
-    
     state.shoppingList.push({
         uid,
         name: card.name,
@@ -317,17 +302,17 @@ function renderSocialStories() {
     ];
     
     return `
-        <div class="px-4 pt-0"> 
-             <div class="block w-full aspect-[4/3] bg-white dark:bg-slate-800 overflow-hidden shadow-md mb-4 rounded-2xl">
+        <div class="px-4 mt-2"> 
+             <div class="w-full aspect-[4/3] overflow-hidden rounded-2xl">
                 <img id="banner-slideshow" src="${APP_CONFIG.bannerImages[state.currentBannerIndex]}" class="w-full h-full object-cover" alt="TCG Featured" />
              </div>
         </div>
-        <div class="px-2 pb-4 flex justify-around items-center">
+        <div class="px-2 py-4 flex justify-around items-center">
             ${socials.map(s => `
                 <a href="${s.url}" target="_blank" class="flex flex-col items-center gap-1">
                     <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 to-green-400">
                         <div class="bg-white dark:bg-slate-900 w-full h-full rounded-full p-1">
-                            <div class="${s.color} w-full h-full rounded-full flex items-center justify-center text-xl shadow-inner">
+                            <div class="${s.color} w-full h-full rounded-full flex items-center justify-center text-xl">
                                 ${s.icon}
                             </div>
                         </div>
@@ -341,8 +326,8 @@ function renderSocialStories() {
 
 function renderSponsorCard() {
     return `
-        <div class="p-4">
-            <a href="${APP_CONFIG.storeUrl}" target="_blank" class="block bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700">
+        <div class="p-4 pt-0">
+            <a href="${APP_CONFIG.storeUrl}" target="_blank" class="block bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-slate-100 dark:border-slate-700">
                 <div class="p-4">
                     <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Advertisement</span>
                     <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
@@ -358,12 +343,12 @@ function renderSearchHeader() {
         <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700">
             <div class="flex items-center justify-between px-4 py-3">
                 <div class="flex items-center gap-3">
-                    <button onclick="resetHome()" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all text-slate-600 dark:text-slate-300">
+                    <button onclick="resetHome()" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-300">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     </button>
                     <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">${APP_CONFIG.appTitle}</h1>
                 </div>
-                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <button onclick="toggleTheme()" class="p-2 rounded-full">
                     ${state.isDark 
                         ? '<svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>'
                         : '<svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>'
@@ -373,14 +358,7 @@ function renderSearchHeader() {
             <div class="px-4 pb-3">
                 <form action="#" onsubmit="event.preventDefault(); executeSearch();" class="relative bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center px-4 h-12">
                     <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    <input 
-                        type="search" 
-                        value="${state.searchTerm}"
-                        oninput="handleSearchInput(this.value)"
-                        placeholder="Type card name or number..."
-                        enterkeyhint="search"
-                        class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium"
-                    />
+                    <input type="search" value="${state.searchTerm}" oninput="handleSearchInput(this.value)" placeholder="Type card name or number..." enterkeyhint="search" class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium" />
                 </form>
             </div>
             <div class="flex gap-2 px-4 pb-4">
@@ -408,7 +386,7 @@ function renderCardGrid() {
     return `
         <div class="grid grid-cols-2 gap-4 p-4">
             ${state.cards.map((card, i) => `
-                <button onclick="handleCardClick(state.cards[${i}])" class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 text-left hover:scale-[1.02] transition-transform">
+                <button onclick="handleCardClick(state.cards[${i}])" class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 text-left">
                     <div class="aspect-[1/1.4] bg-slate-100 dark:bg-slate-700 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
                         <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="max-w-[90%] max-h-[90%] object-contain" />
                     </div>
@@ -421,12 +399,7 @@ function renderCardGrid() {
 }
 
 function renderLoadingSpinner() {
-    return `
-        <div class="flex flex-col items-center justify-center py-20 text-slate-400">
-            <div class="w-10 h-10 border-4 border-slate-200 dark:border-slate-700 border-t-blue-500 rounded-full animate-spin"></div>
-            <p class="mt-4 font-medium uppercase text-xs">Searching...</p>
-        </div>
-    `;
+    return `<div class="flex flex-col items-center justify-center py-20 text-slate-400"><div class="w-10 h-10 border-4 border-slate-200 dark:border-slate-700 border-t-blue-500 rounded-full animate-spin"></div></div>`;
 }
 
 function renderCardDetails() {
@@ -447,47 +420,30 @@ function renderCardDetails() {
                 <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4 border border-slate-100 dark:border-slate-700">
                     <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase text-center mb-1">${type} - Guide Price</div>
                     <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-4">${priceDisplay}</div>
-                    <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" ${isAdded ? 'disabled' : ''}
-                        class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20'} transition-all">
+                    <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" ${isAdded ? 'disabled' : ''} class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 text-white shadow-lg'}">
                         ${isAdded ? 'Added to List' : 'Add to Inquiry List'}
                     </button>
-                    <a href="${ebayLink}" target="_blank" class="w-full h-10 mt-3 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
-                        View eBay Sold
-                    </a>
-                </div>
-            `;
+                    <a href="${ebayLink}" target="_blank" class="w-full h-10 mt-3 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400">View eBay Sold</a>
+                </div>`;
         }).join('');
     } else {
-        priceBoxes = `
-            <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 text-center">
-                <div class="text-2xl font-black text-slate-400 mb-4">PRICE TBC</div>
-                <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white mb-3">Add to Inquiry List</button>
-                <a href="${ebayLink}" target="_blank" class="w-full h-10 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
-                    View eBay Sold
-                </a>
-            </div>`;
+        priceBoxes = `<div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 text-center"><div class="text-2xl font-black text-slate-400 mb-4">PRICE TBC</div><button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white mb-3">Add to Inquiry List</button><a href="${ebayLink}" target="_blank" class="w-full h-10 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400">View eBay Sold</a></div>`;
     }
     return `
         <div class="min-h-screen bg-slate-100 dark:bg-slate-900 p-4">
             <div class="max-w-md mx-auto">
-                <button onclick="goBack()" class="flex items-center gap-2 text-slate-600 dark:text-slate-400 mb-4 font-bold">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    Back
-                </button>
+                <button onclick="goBack()" class="flex items-center gap-2 text-slate-600 dark:text-slate-400 mb-4 font-bold"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>Back</button>
                 <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl border border-slate-200 dark:border-slate-700">
                     <img src="${card.images.large}" class="w-full rounded-2xl shadow-lg mb-6 border border-slate-100 dark:border-slate-700" />
                     <h1 class="text-2xl font-black text-center text-slate-900 dark:text-white leading-tight">${card.name}</h1>
                     <p class="text-slate-500 text-center font-bold text-sm mb-6">${card.set.name} • ${displayNum}</p>
                     <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-4 mb-6">
-                        <p class="text-[11px] leading-relaxed text-amber-800 dark:text-amber-200 font-medium text-center">
-                            <b>Please Note:</b> Prices are for guide only. Prices & Stock will be confirmed by <b>East Coast Collectibles by Whatapp</b>.
-                        </p>
+                        <p class="text-[11px] leading-relaxed text-amber-800 dark:text-amber-200 font-medium text-center"><b>Please Note:</b> Prices are for guide only. Prices & Stock will be confirmed by <b>East Coast Collectibles by Whatapp</b>.</p>
                     </div>
                     ${priceBoxes}
                 </div>
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
 function renderInquiryList() {
@@ -502,54 +458,40 @@ function renderInquiryList() {
                 ${items.length === 0 ? '<div class="text-center py-20 text-slate-400 font-bold uppercase tracking-widest text-xs">No cards in list</div>' : 
                 `<div class="space-y-3">
                     ${items.map((item, index) => `
-                        <div onclick="handleCardClick(state.shoppingList[${index}].fullData)" class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm flex gap-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <div onclick="handleCardClick(state.shoppingList[${index}].fullData)" class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm flex gap-4 cursor-pointer">
                             <img src="${item.imageUrl}" class="w-16 h-auto rounded-lg pointer-events-none" />
                             <div class="flex-1 pointer-events-none">
                                 <h3 class="font-black text-slate-900 dark:text-white text-sm">${item.name}</h3>
                                 <p class="text-[11px] text-slate-500 font-bold">${item.set} (${item.num})</p>
                                 <p class="text-blue-600 dark:text-blue-400 font-black text-sm mt-1">${item.price}</p>
                             </div>
-                            <button onclick="handleRemoveItem(event, ${index})" class="text-red-500 self-start p-2 relative z-10"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
+                            <button onclick="handleRemoveItem(event, ${index})" class="text-red-500 self-start p-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
                         </div>
                     `).join('')}
                     <div class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-100 dark:from-slate-900 via-slate-100 dark:via-slate-900 to-transparent">
-                        <button onclick="handleSendWhatsApp()" class="w-full max-w-md mx-auto h-16 bg-green-500 text-white rounded-2xl font-black flex items-center justify-center gap-3 shadow-xl shadow-green-500/20">
-                            Send Inquiry to Dave
-                        </button>
+                        <button onclick="handleSendWhatsApp()" class="w-full max-w-md mx-auto h-16 bg-green-500 text-white rounded-2xl font-black shadow-xl">Send Inquiry to Dave</button>
                     </div>
                 </div>`}
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
 function renderCartBar() {
     const count = state.shoppingList.length;
     if (count === 0 || state.view !== 'search') return '';
     return `
-        <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl z-50 font-black transition-transform hover:scale-105 active:scale-95">
+        <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl z-50 font-black">
             <span>Inquiry List</span>
             <span class="bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-xl">${count}</span>
-        </button>
-    `;
+        </button>`;
 }
 
 function render() {
     const app = document.getElementById('app');
     let content = '';
-    
     document.documentElement.classList.toggle('dark', state.isDark);
-    
     if (state.view === 'search') {
-        content = `
-            ${renderSearchHeader()}
-            ${state.showAd ? `
-                ${renderSocialStories()}
-                ${renderSponsorCard()}
-            ` : ''}
-            ${state.isLoading ? renderLoadingSpinner() : renderCardGrid()}
-            ${renderCartBar()}
-        `;
+        content = `${renderSearchHeader()}${state.showAd ? `${renderSocialStories()}${renderSponsorCard()}` : ''}${state.isLoading ? renderLoadingSpinner() : renderCardGrid()}${renderCartBar()}`;
     } else if (state.view === 'details') {
         content = renderCardDetails();
     } else if (state.view === 'list') {
@@ -572,9 +514,7 @@ document.documentElement.classList.toggle('dark', state.isDark);
 initApp();
 
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js');
-  });
+  window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js'); });
 }
 </script>
 </body>
