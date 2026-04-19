@@ -171,7 +171,6 @@ async function executeSearch() {
     const { searchTerm, selectedSet, selectedRarity } = state;
     if (!searchTerm && !selectedSet && !selectedRarity) return;
 
-    // Fixed: Only push state if we aren't already in a search result view
     if (!state.hasSearched) {
         history.pushState({ view: 'search', hasSearched: true }, '');
     }
@@ -318,8 +317,8 @@ function renderSocialStories() {
     ];
     
     return `
-        <div class="pt-0"> 
-             <div class="block w-full aspect-[4/3] bg-white dark:bg-slate-800 overflow-hidden shadow-md mb-4">
+        <div class="px-4 pt-0"> 
+             <div class="block w-full aspect-[4/3] bg-white dark:bg-slate-800 overflow-hidden shadow-md mb-4 rounded-2xl">
                 <img id="banner-slideshow" src="${APP_CONFIG.bannerImages[state.currentBannerIndex]}" class="w-full h-full object-cover" alt="TCG Featured" />
              </div>
         </div>
@@ -560,11 +559,9 @@ function render() {
 }
 
 window.addEventListener('popstate', (event) => {
-    // If we're on the search screen with results and hit back, reset home
     if (state.view === 'search' && state.hasSearched) {
         resetHome();
     } else {
-        // Normal behavior for other views
         state.view = (event.state && event.state.view) ? event.state.view : 'search';
         state.selectedCard = (event.state && event.state.card) ? event.state.card : null;
         render();
