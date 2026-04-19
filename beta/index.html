@@ -151,16 +151,13 @@ function resetHome() {
     state.selectedCard = null;
     state.showAd = true;
     state.hasSearched = false;
-    // Do not use history.back() here to avoid exiting
     render();
 }
 
 function goBack() {
-    // Only go back in history if we aren't on the base search screen
     if (state.view !== 'search' || state.hasSearched) {
         history.back();
     } else {
-        // If already on home, do nothing or just reset to be safe
         resetHome();
     }
 }
@@ -230,7 +227,7 @@ function handleSendWhatsApp() {
     if (state.shoppingList.length === 0) return;
     let message = "Hi Dave, I'm checking if you have these cards:\n\n";
     state.shoppingList.forEach((item, i) => {
-        message += `*${i + 1}. ${item.name}*\nSet: ${item.set} (${item.num})\nVariant: ${item.type} | Guide: ${item.price}\n\n`;
+        message += `*${i + 1}. ${item.name}*\nSet: ${item.set} (${item.num})\nVariant: ${item.type} | Guide Price: ${item.price}\n\n`;
     });
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
@@ -275,8 +272,10 @@ function renderSearchHeader() {
                     </button>
                     <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">${APP_CONFIG.appTitle}</h1>
                 </div>
-                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-xl">
-                    ${state.isDark ? '☀️' : '🌙'}
+                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <svg class="w-6 h-6 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
                 </button>
             </div>
             <div class="px-4 pb-3">
@@ -359,8 +358,8 @@ function renderInquiryList() {
     return `
         <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-[100] p-4 overflow-y-auto">
             <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-black dark:text-white">Inquiry List</h2>
-                <button onclick="state.view='search'; render();" class="text-3xl font-light">✕</button>
+                <h2 class="text-2xl font-black dark:text-white text-slate-900">Inquiry List</h2>
+                <button onclick="state.view='search'; render();" class="text-3xl font-light dark:text-white text-slate-900">✕</button>
             </div>
             ${items.length === 0 ? '<div class="text-center py-20 text-slate-500 font-bold">Your list is currently empty</div>' : `
                 <div class="space-y-3 pb-32">
@@ -368,7 +367,7 @@ function renderInquiryList() {
                         <div onclick="handleCardClick(state.shoppingList[${i}].fullData)" class="bg-white dark:bg-slate-800 p-4 rounded-2xl flex items-center gap-4 border border-slate-100 dark:border-slate-700 shadow-sm cursor-pointer active:scale-[0.98] transition-transform">
                             <img src="${item.imageUrl}" class="w-14 h-auto rounded" />
                             <div class="flex-1">
-                                <h3 class="font-bold text-sm dark:text-white leading-tight">${item.name}</h3>
+                                <h3 class="font-bold text-sm dark:text-white text-slate-900 leading-tight">${item.name}</h3>
                                 <p class="text-[10px] text-slate-500 font-bold uppercase mt-1">${item.type} • ${item.price}</p>
                                 <p class="text-[10px] text-slate-400">${item.set} (${item.num})</p>
                             </div>
@@ -403,7 +402,7 @@ function renderSponsorCard() {
         <div class="px-4 pb-4">
             <a href="${APP_CONFIG.storeUrl}" class="block bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
                 <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Advertisement</span>
-                <h3 class="font-bold dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
+                <h3 class="font-bold text-slate-900 dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
                 <p class="text-xs text-slate-500 dark:text-slate-400">${APP_CONFIG.adDescription}</p>
             </a>
         </div>
