@@ -33,8 +33,8 @@
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         
         .fixed-dropdown-container {
-            height: 42px; 
-            width: 50%;   
+            height: 42px;
+            width: 50%;
             display: flex;
             align-items: center;
         }
@@ -60,14 +60,37 @@
         #banner-slideshow {
             transition: opacity 0.5s ease-in-out;
         }
+
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="bg-slate-100 dark:bg-slate-900 min-h-screen transition-colors duration-300">
 
 <div id="app"></div>
+<div id="toast" class="toast">Press back again to exit</div>
+
 <script>
 // ==========================================
-// CONFIGURATION AREA
+// CONFIGURATION AREA - MODIFY THESE TO UPDATE THE APP CONTENT
 // ==========================================
 const APP_CONFIG = {
     appTitle: "<span style='font-size: 24px;'>Card Inquiry</span><br><span style='font-size: 18px;'>East Coast Collectibles</span>", 
@@ -76,14 +99,33 @@ const APP_CONFIG = {
     adDescription: "Ps5/Xbox/Switch/Hdmi Ports",
     phoneNumber: "447749893611",
     bannerImages: ["ecc1.png", "ecc2.png", "ecc3.png"],
-    markupPercentage: 1.15,
-    minPriceGbp: 0.20
+    // ==========================================
+    // PRICING CONFIGURATION - MODIFY THESE VALUES TO CHANGE MARKUP RATES
+    // ==========================================
+    pricing: {
+        gbpRate: 0.78,
+        minPriceGbp: 0.20,
+        tier1Threshold: 5.00,
+        tier2Threshold: 50.00,
+        tier1Markup: 1.40,
+        tier2Markup: 1.20,
+        tier3Markup: 1.10,
+    }
+    // ==========================================
+    // MARKUP LOGIC EXPLANATION:
+    // - Under £5: Adds 40% markup (tier1Markup)
+    // - £5 to £50: Adds 20% markup (tier2Markup)
+    // - Over £50: Adds 10% markup (tier3Markup)
+    // 
+    // To change markup percentages:
+    // - 40% = 1.40, 30% = 1.30, 20% = 1.20, 10% = 1.10, etc.
+    // ==========================================
 };
 // ==========================================
 
 const API_BASE = "https://api.pokemontcg.io/v2";
 
-// STATE
+// STATE: The "Brain" of the app
 let state = {
     view: 'search',
     cards: [],
@@ -91,7 +133,6 @@ let state = {
     shoppingList: JSON.parse(localStorage.getItem('tcgInquiryList') || '[]'),
     sets: [],
     rarities: [],
-    gbpRate: 0.78,
     isLoading: false,
     hasSearched: false,
     showAd: true,
@@ -99,33 +140,76 @@ let state = {
     searchTerm: '',
     selectedSet: '',
     selectedRarity: '',
-    currentBannerIndex: 0
+    currentBannerIndex: 0,
+    currentTheme: localStorage.getItem('appTheme') || 'dark',
+    backPressCount: 0
 };
 
-let bannerInterval = null;
+// Available themes
+const themes = {
+    dark: { bg: 'bg-slate-900', card: 'bg-slate-800', text: 'text-white', textMuted: 'text-slate-400', border: 'border-slate-700', accent: 'text-blue-400', button: 'bg-slate-800' },
+    light: { bg: 'bg-slate-100', card: 'bg-white', text: 'text-slate-900', textMuted: 'text-slate-500', border: 'border-slate-200', accent: 'text-blue-600', button: 'bg-slate-100' },
+    ocean: { bg: 'bg-cyan-950', card: 'bg-cyan-900', text: 'text-cyan-50', textMuted: 'text-cyan-300', border: 'border-cyan-700', accent: 'text-teal-400', button: 'bg-cyan-800' },
+    forest: { bg: 'bg-emerald-950', card: 'bg-emerald-900', text: 'text-emerald-50', textMuted: 'text-emerald-300', border: 'border-emerald-700', accent: 'text-green-400', button: 'bg-emerald-800' },
+    sunset: { bg: 'bg-orange-950', card: 'bg-orange-900', text: 'text-orange-50', textMuted: 'text-orange-300', border: 'border-orange-700', accent: 'text-amber-400', button: 'bg-orange-800' },
+    navy: { bg: 'bg-blue-950', card: 'bg-blue-900', text: 'text-blue-50', textMuted: 'text-blue-300', border: 'border-blue-700', accent: 'text-indigo-400', button: 'bg-blue-800' },
+    berry: { bg: 'bg-purple-950', card: 'bg-purple-900', text: 'text-purple-50', textMuted: 'text-purple-300', border: 'border-purple-700', accent: 'text-pink-400', button: 'bg-purple-800' },
+    lavender: { bg: 'bg-violet-950', card: 'bg-violet-900', text: 'text-violet-50', textMuted: 'text-violet-300', border: 'border-violet-700', accent: 'text-fuchsia-400', button: 'bg-violet-800' },
+    charcoal: { bg: 'bg-neutral-950', card: 'bg-neutral-900', text: 'text-neutral-50', textMuted: 'text-neutral-400', border: 'border-neutral-700', accent: 'text-stone-400', button: 'bg-neutral-800' },
+    rose: { bg: 'bg-rose-950', card: 'bg-rose-900', text: 'text-rose-50', textMuted: 'text-rose-300', border: 'border-rose-700', accent: 'text-red-400', button: 'bg-rose-800' }
+};
 
-function startBannerSlideshow() {
-    if (bannerInterval) clearInterval(bannerInterval);
-    bannerInterval = setInterval(() => {
-        state.currentBannerIndex = (state.currentBannerIndex + 1) % APP_CONFIG.bannerImages.length;
-        const bannerImg = document.getElementById('banner-slideshow');
-        if (bannerImg) {
-            bannerImg.style.opacity = '0';
-            setTimeout(() => {
-                bannerImg.src = APP_CONFIG.bannerImages[state.currentBannerIndex];
-                bannerImg.style.opacity = '1';
-            }, 500);
-        }
-    }, 8000);
+const themeOrder = ['dark', 'light', 'ocean', 'forest', 'sunset', 'navy', 'berry', 'lavender', 'charcoal', 'rose'];
+
+// Toast notification function
+function showToast(message, duration = 2000) {
+    const toast = document.getElementById('toast');
+    if (toast) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, duration);
+    }
+}
+
+// ==========================================
+// PRICING FUNCTIONS - TIERED MARKUP LOGIC
+// ==========================================
+function getBaseGbpPrice(usd) {
+    return usd * APP_CONFIG.pricing.gbpRate;
+}
+
+function getMarkupPercentage(gbpPrice) {
+    const config = APP_CONFIG.pricing;
+    if (gbpPrice < config.tier1Threshold) {
+        return "40%";
+    } else if (gbpPrice < config.tier2Threshold) {
+        return "20%";
+    } else {
+        return "10%";
+    }
 }
 
 function formatPrice(usd) {
-    let gbp = usd * state.gbpRate * APP_CONFIG.markupPercentage;
-    if (gbp < APP_CONFIG.minPriceGbp) {
-        gbp = APP_CONFIG.minPriceGbp;
+    const config = APP_CONFIG.pricing;
+    let gbp = usd * config.gbpRate;
+
+    if (gbp < config.tier1Threshold) {
+        gbp = gbp * config.tier1Markup;
+    } else if (gbp < config.tier2Threshold) {
+        gbp = gbp * config.tier2Markup;
+    } else {
+        gbp = gbp * config.tier3Markup;
     }
+
+    if (gbp < config.minPriceGbp) {
+        gbp = config.minPriceGbp;
+    }
+
     return `£${gbp.toFixed(2)}`;
 }
+// ==========================================
 
 function getFullCardCode(card) {
     const number = String(card.number);
@@ -148,17 +232,10 @@ async function initApp() {
         const rateData = await rateRes.json();
         state.sets = setsData.data || [];
         state.rarities = raritiesData.data || [];
-        state.gbpRate = rateData.rates?.GBP || 0.78;
+        APP_CONFIG.pricing.gbpRate = rateData.rates?.GBP || 0.78;
         
-        // Apply saved theme on load
-        document.documentElement.classList.toggle('dark', state.isDark);
-        const metaTheme = document.querySelector('meta[name="theme-color"]');
-        if (metaTheme) {
-            metaTheme.setAttribute('content', state.isDark ? '#0f172a' : '#f1f5f9');
-        }
-        
-        // Push initial state to history
-        history.replaceState({ view: 'search', isHome: true }, '');
+        // Add initial history state so back button can be intercepted
+        history.pushState({ view: 'search' }, '');
         
         render();
         startBannerSlideshow();
@@ -181,7 +258,7 @@ async function executeSearch() {
         const term = searchTerm.trim();
         if (term.includes('/')) {
             const parts = term.split('/');
-            const num = parts[0].replace(/^0+/, ''); 
+            const num = parts[0].replace(/^0+/, '');
             const total = parts[1];
             queryParts.push(`number:${num} AND (set.printedTotal:${total} OR set.total:${total})`);
         } else {
@@ -197,9 +274,6 @@ async function executeSearch() {
         const res = await fetch(url);
         const data = await res.json();
         state.cards = data.data || [];
-        
-        // Push state after search to add to history
-        history.pushState({ view: 'search', hasResults: true }, '');
     } catch (error) {
         console.error('Search failed:', error);
         state.cards = [];
@@ -218,13 +292,17 @@ function resetHome() {
     state.selectedCard = null;
     state.showAd = true;
     state.hasSearched = false;
-    history.pushState({ view: 'search', isHome: true }, '');
+    state.backPressCount = 0;
     render();
 }
 
 function toggleTheme() {
-    state.isDark = !state.isDark;
-    localStorage.setItem('theme', state.isDark ? 'dark' : 'light');
+    const currentIndex = themeOrder.indexOf(state.currentTheme);
+    const nextIndex = (currentIndex + 1) % themeOrder.length;
+    state.currentTheme = themeOrder[nextIndex];
+    localStorage.setItem('appTheme', state.currentTheme);
+    
+    state.isDark = !['light', 'lavender'].includes(state.currentTheme);
     document.documentElement.classList.toggle('dark', state.isDark);
     
     const metaTheme = document.querySelector('meta[name="theme-color"]');
@@ -277,25 +355,15 @@ function handleSendWhatsApp() {
     if (state.shoppingList.length === 0) return;
     let message = "Hi Dave, I'm checking if you have these cards. I understand prices are guides:\n\n";
     state.shoppingList.forEach((item, i) => {
-        message += `*${i + 1}. ${item.name}*\nSet: ${item.set} (${item.num})\nVariant: ${item.type} | Guide: ${item.price === 'TBC' ? 'TBC' : item.price}\nImage: ${item.imageUrl}\n\n`;
+        message += `*${i + 1}. ${item.name}*\nSet: ${item.set} (${item.num})\nVariant: ${item.type} | Guide: ${item.price}\nImage: ${item.imageUrl}\n\n`;
     });
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
 function goBack() {
-    if (state.view === 'details' && state.cards.length > 0) {
-        // Going back from details to search results
-        state.view = 'search';
-        state.selectedCard = null;
-        history.pushState({ view: 'search', hasResults: true }, '');
-        render();
-    } else if (state.view === 'list') {
-        // Going back from list to search
-        state.view = 'search';
-        history.pushState({ view: 'search', hasResults: state.cards.length > 0 }, '');
-        render();
+    if (window.history.length > 1 && state.view !== 'search') {
+        history.back();
     } else {
-        // Default: reset to home
         resetHome();
     }
 }
@@ -307,40 +375,23 @@ function openList() {
     render();
 }
 
-// History listener for browser back button
-window.addEventListener('popstate', (event) => {
-    const eventState = event.state || {};
-    
-    // If currently showing search results, clear them and stay on page
-    if (state.view === 'search' && state.cards.length > 0) {
-        history.pushState({ view: 'search', isHome: true }, '');
-        state.cards = [];
-        state.searchTerm = '';
-        state.selectedSet = '';
-        state.selectedRarity = '';
-        state.selectedCard = null;
-        state.showAd = true;
-        state.hasSearched = false;
-        render();
-        return;
-    }
-    
-    // Handle other views
-    if (eventState.view === 'details' && eventState.card) {
-        state.view = 'details';
-        state.selectedCard = eventState.card;
-    } else if (eventState.view === 'list') {
-        state.view = 'list';
-    } else {
-        state.view = 'search';
-        state.selectedCard = null;
-    }
-    
-    render();
-});
+function startBannerSlideshow() {
+    setInterval(() => {
+        state.currentBannerIndex = (state.currentBannerIndex + 1) % APP_CONFIG.bannerImages.length;
+        const bannerImg = document.getElementById('banner-slideshow');
+        if (bannerImg) {
+            bannerImg.style.opacity = '0';
+            setTimeout(() => {
+                bannerImg.src = APP_CONFIG.bannerImages[state.currentBannerIndex];
+                bannerImg.style.opacity = '1';
+            }, 500);
+        }
+    }, 8000);
+}
 
 // UI COMPONENTS
 function renderSocialStories() {
+    const theme = themes[state.currentTheme];
     const socials = [
         { name: 'TikTok', color: 'bg-black', icon: '📱', url: 'https://www.tiktok.com/@east.coast.collec1' },
         { name: 'Facebook', color: 'bg-blue-600', icon: '👥', url: 'https://www.facebook.com/p/East-Coast-Collectables-61583954579869/' },
@@ -350,7 +401,7 @@ function renderSocialStories() {
     
     return `
         <div class="px-4 pt-4">
-             <div class="block w-full aspect-[4/3] bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700 mb-4">
+             <div class="block w-full aspect-[4/3] ${theme.card} rounded-2xl overflow-hidden shadow-md border ${theme.border} mb-4">
                 <img id="banner-slideshow" src="${APP_CONFIG.bannerImages[state.currentBannerIndex]}" class="w-full h-full object-cover" alt="TCG Featured" />
              </div>
         </div>
@@ -358,13 +409,13 @@ function renderSocialStories() {
             ${socials.map(s => `
                 <a href="${s.url}" target="_blank" class="flex flex-col items-center gap-1">
                     <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 to-green-400">
-                        <div class="bg-white dark:bg-slate-900 w-full h-full rounded-full p-1">
+                        <div class="${theme.card} w-full h-full rounded-full p-1">
                             <div class="${s.color} w-full h-full rounded-full flex items-center justify-center text-xl shadow-inner">
                                 ${s.icon}
                             </div>
                         </div>
                     </div>
-                    <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tighter">${s.name}</span>
+                    <span class="text-[10px] font-bold ${theme.textMuted} uppercase tracking-tighter">${s.name}</span>
                 </a>
             `).join('')}
         </div>
@@ -372,13 +423,14 @@ function renderSocialStories() {
 }
 
 function renderSponsorCard() {
+    const theme = themes[state.currentTheme];
     return `
         <div class="p-4">
-            <a href="${APP_CONFIG.storeUrl}" target="_blank" class="block bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700">
+            <a href="${APP_CONFIG.storeUrl}" target="_blank" class="block ${theme.card} rounded-2xl overflow-hidden shadow-md border ${theme.border}">
                 <div class="p-4">
                     <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Advertisement</span>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${APP_CONFIG.adDescription}</p>
+                    <h3 class="text-lg font-bold ${theme.text} mt-1">${APP_CONFIG.adTitle}</h3>
+                    <p class="text-xs ${theme.textMuted} mt-1">${APP_CONFIG.adDescription}</p>
                 </div>
             </a>
         </div>
@@ -386,44 +438,45 @@ function renderSponsorCard() {
 }
 
 function renderSearchHeader() {
+    const theme = themes[state.currentTheme];
     return `
-        <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700">
+        <header class="sticky top-0 z-50 ${theme.card}/90 backdrop-blur-xl border-b ${theme.border}">
             <div class="flex items-center justify-between px-4 py-3">
                 <div class="flex items-center gap-3">
-                    <button onclick="resetHome()" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all text-slate-600 dark:text-slate-300">
+                    <button onclick="resetHome()" class="p-2 ${theme.button} rounded-xl hover:opacity-80 transition-all ${theme.text}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     </button>
-                    <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">${APP_CONFIG.appTitle}</h1>
+                    <h1 class="text-2xl font-extrabold ${theme.text} tracking-tight">${APP_CONFIG.appTitle}</h1>
                 </div>
-                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                    ${state.isDark 
-                        ? '<svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>'
-                        : '<svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>'
-                    }
+                <button onclick="toggleTheme()" class="p-2 rounded-full ${theme.button} hover:opacity-80 transition-colors" title="Theme: ${state.currentTheme}">
+                    <svg class="w-5 h-5 ${theme.text}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
                 </button>
             </div>
             <div class="px-4 pb-3">
-                <form action="#" onsubmit="event.preventDefault(); executeSearch();" class="relative bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center px-4 h-12">
-                    <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <form action="#" onsubmit="event.preventDefault(); executeSearch();" class="relative ${theme.card} rounded-xl flex items-center px-4 h-12 border ${theme.border}">
+                    <svg class="w-5 h-5 ${theme.textMuted} mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     <input 
                         type="search" 
                         value="${state.searchTerm}"
                         oninput="handleSearchInput(this.value)"
                         placeholder="Type card name or number..."
                         enterkeyhint="search"
-                        class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium"
+                        class="w-full bg-transparent border-none outline-none ${theme.text} placeholder-slate-400 font-medium"
                     />
                 </form>
             </div>
             <div class="flex gap-2 px-4 pb-4">
-                <div class="fixed-dropdown-container bg-white dark:bg-slate-800 rounded-lg px-3 border border-slate-200 dark:border-slate-700">
-                    <select onchange="handleSetChange(this.value)" class="text-sm font-bold text-slate-900 dark:text-white">
+                <div class="fixed-dropdown-container ${theme.card} rounded-lg px-3 border ${theme.border}">
+                    <select onchange="handleSetChange(this.value)" class="text-sm font-bold ${theme.text}">
                         <option value="">Set...</option>
                         ${state.sets.map(s => `<option value="${s.name}" ${state.selectedSet === s.name ? 'selected' : ''}>${s.name}</option>`).join('')}
                     </select>
                 </div>
-                <div class="fixed-dropdown-container bg-white dark:bg-slate-800 rounded-lg px-3 border border-slate-200 dark:border-slate-700">
-                    <select onchange="handleRarityChange(this.value)" class="text-sm font-bold text-slate-900 dark:text-white">
+                <div class="fixed-dropdown-container ${theme.card} rounded-lg px-3 border ${theme.border}">
+                    <select onchange="handleRarityChange(this.value)" class="text-sm font-bold ${theme.text}">
                         <option value="">Rarity...</option>
                         ${state.rarities.map(r => `<option value="${r}" ${state.selectedRarity === r ? 'selected' : ''}>${r}</option>`).join('')}
                     </select>
@@ -434,18 +487,19 @@ function renderSearchHeader() {
 }
 
 function renderCardGrid() {
+    const theme = themes[state.currentTheme];
     if (state.cards.length === 0) {
-        return state.hasSearched ? `<div class="flex flex-col items-center justify-center py-20 text-slate-400"><p class="text-lg font-medium">No cards found</p></div>` : ''; 
+        return state.hasSearched ? `<div class="flex flex-col items-center justify-center py-20 ${theme.textMuted}"><p class="text-lg font-medium">No cards found</p></div>` : ''; 
     }
     return `
         <div class="grid grid-cols-2 gap-4 p-4">
             ${state.cards.map((card, i) => `
-                <button onclick="handleCardClick(state.cards[${i}])" class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 text-left hover:scale-[1.02] transition-transform">
+                <button onclick="handleCardClick(state.cards[${i}])" class="${theme.card} rounded-2xl p-3 shadow-md border ${theme.border} text-left hover:scale-[1.02] transition-transform">
                     <div class="aspect-[1/1.4] bg-slate-100 dark:bg-slate-700 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
                         <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="max-w-[90%] max-h-[90%] object-contain" />
                     </div>
-                    <h3 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">${card.name}</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${card.set.name}</p>
+                    <h3 class="font-bold text-sm ${theme.text} line-clamp-2">${card.name}</h3>
+                    <p class="text-xs ${theme.textMuted} mt-1">${card.set.name}</p>
                 </button>
             `).join('')}
         </div>
@@ -464,6 +518,7 @@ function renderLoadingSpinner() {
 function renderCardDetails() {
     const card = state.selectedCard;
     if (!card) return '';
+    const theme = themes[state.currentTheme];
     const displayNum = getFullCardCode(card);
     const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + displayNum + ' ' + card.set.name + ' sold')}&LH_Sold=1&LH_Complete=1`;
     const prices = card.tcgplayer?.prices || {};
@@ -473,12 +528,15 @@ function renderCardDetails() {
         priceBoxes = Object.entries(prices).map(([type, priceData]) => {
             if (!priceData.market) return '';
             const priceDisplay = formatPrice(priceData.market);
+            const baseGbp = getBaseGbpPrice(priceData.market);
+            const markupPercent = getMarkupPercentage(baseGbp);
             const uid = `${card.id}-${type}`;
             const isAdded = state.shoppingList.some(item => item.uid === uid);
             return `
                 <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4 border border-slate-100 dark:border-slate-700">
                     <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase text-center mb-1">${type} - Guide Price</div>
-                    <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-4">${priceDisplay}</div>
+                    <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-2">${priceDisplay}</div>
+                    <div class="text-xs text-center text-slate-400 dark:text-slate-500 mb-4">Includes ${markupPercent} markup</div>
                     <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" ${isAdded ? 'disabled' : ''}
                         class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20'} transition-all">
                         ${isAdded ? 'Added to List' : 'Add to Inquiry List'}
@@ -500,16 +558,16 @@ function renderCardDetails() {
             </div>`;
     }
     return `
-        <div class="min-h-screen bg-slate-100 dark:bg-slate-900 p-4">
+        <div class="min-h-screen ${theme.bg} p-4">
             <div class="max-w-md mx-auto">
-                <button onclick="goBack()" class="flex items-center gap-2 text-slate-600 dark:text-slate-400 mb-4 font-bold">
+                <button onclick="goBack()" class="flex items-center gap-2 ${theme.textMuted} mb-4 font-bold">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     Back
                 </button>
-                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl border border-slate-200 dark:border-slate-700">
-                    <img src="${card.images.large}" class="w-full rounded-2xl shadow-lg mb-6 border border-slate-100 dark:border-slate-700" />
-                    <h1 class="text-2xl font-black text-center text-slate-900 dark:text-white leading-tight">${card.name}</h1>
-                    <p class="text-slate-500 text-center font-bold text-sm mb-6">${card.set.name} • ${displayNum}</p>
+                <div class="${theme.card} rounded-3xl p-6 shadow-xl border ${theme.border}">
+                    <img src="${card.images.large}" class="w-full rounded-2xl shadow-lg mb-6 border ${theme.border}" />
+                    <h1 class="text-2xl font-black text-center ${theme.text} leading-tight">${card.name}</h1>
+                    <p class="${theme.textMuted} text-center font-bold text-sm mb-6">${card.set.name} • ${displayNum}</p>
                     <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-4 mb-6">
                         <p class="text-[11px] leading-relaxed text-amber-800 dark:text-amber-200 font-medium text-center">
                             <b>Please Note:</b> Prices are for guide only. Prices & Stock will be confirmed by <b>East Coast Collectibles by Whatapp</b>.
@@ -523,22 +581,23 @@ function renderCardDetails() {
 }
 
 function renderInquiryList() {
+    const theme = themes[state.currentTheme];
     const items = state.shoppingList;
     return `
-        <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-50 overflow-y-auto">
+        <div class="fixed inset-0 ${theme.bg} z-50 overflow-y-auto">
             <div class="max-w-md mx-auto p-4 pb-32">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-black text-slate-900 dark:text-white">Inquiry List</h2>
-                    <button onclick="goBack()" class="p-2 bg-white dark:bg-slate-800 rounded-full shadow-md"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                    <h2 class="text-2xl font-black ${theme.text}">Inquiry List</h2>
+                    <button onclick="goBack()" class="p-2 ${theme.card} rounded-full shadow-md"><svg class="w-6 h-6 ${theme.text}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
                 </div>
-                ${items.length === 0 ? '<div class="text-center py-20 text-slate-400 font-bold uppercase tracking-widest text-xs">No cards in list</div>' : 
+                ${items.length === 0 ? `<div class="text-center py-20 ${theme.textMuted} font-bold uppercase tracking-widest text-xs">No cards in list</div>` : 
                 `<div class="space-y-3">
                     ${items.map((item, index) => `
-                        <div onclick="handleCardClick(state.shoppingList[${index}].fullData)" class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm flex gap-4 cursor-pointer hover:border-blue-500 transition-colors">
+                        <div onclick="handleCardClick(state.shoppingList[${index}].fullData)" class="${theme.card} rounded-2xl p-4 border ${theme.border} shadow-sm flex gap-4 cursor-pointer hover:border-blue-500 transition-colors">
                             <img src="${item.imageUrl}" class="w-16 h-auto rounded-lg pointer-events-none" />
                             <div class="flex-1 pointer-events-none">
-                                <h3 class="font-black text-slate-900 dark:text-white text-sm">${item.name}</h3>
-                                <p class="text-[11px] text-slate-500 font-bold">${item.set} (${item.num})</p>
+                                <h3 class="font-black ${theme.text} text-sm">${item.name}</h3>
+                                <p class="text-[11px] ${theme.textMuted} font-bold">${item.set} (${item.num})</p>
                                 <p class="text-blue-600 dark:text-blue-400 font-black text-sm mt-1">${item.price}</p>
                             </div>
                             <button onclick="handleRemoveItem(event, ${index})" class="text-red-500 self-start p-2 relative z-10"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
@@ -589,6 +648,45 @@ function render() {
     }
     app.innerHTML = content;
 }
+
+// History listener to handle phone hardware 'back' buttons
+window.addEventListener('popstate', (event) => {
+    // If on search/home view, prevent exit by pushing state back
+    if (state.view === 'search') {
+        // Push state back so browser can't go back further
+        history.pushState({ view: 'search' }, '');
+        
+        // Show toast message
+        showToast('Press back again to exit', 2000);
+        
+        // Increment back press count
+        state.backPressCount++;
+        
+        // If pressed back twice within 2 seconds, allow exit
+        if (state.backPressCount >= 2) {
+            // Reset counter and allow natural back behavior (will exit)
+            state.backPressCount = 0;
+            // Note: We can't actually force exit, but we can stop preventing it
+        }
+        
+        return;
+    }
+    
+    // Reset back press counter when navigating normally
+    state.backPressCount = 0;
+    
+    // Normal back behavior for other views
+    state.view = (event.state && event.state.view) ? event.state.view : 'search';
+    state.selectedCard = (event.state && event.state.card) ? event.state.card : null;
+    render();
+});
+
+// Reset back press counter after 2 seconds
+setInterval(() => {
+    if (state.backPressCount > 0) {
+        state.backPressCount = 0;
+    }
+}, 2000);
 
 // Run theme check and initialization on load
 document.documentElement.classList.toggle('dark', state.isDark);

@@ -150,13 +150,6 @@ async function initApp() {
         state.rarities = raritiesData.data || [];
         state.gbpRate = rateData.rates?.GBP || 0.78;
         
-        // Apply saved theme on load
-        document.documentElement.classList.toggle('dark', state.isDark);
-        const metaTheme = document.querySelector('meta[name="theme-color"]');
-        if (metaTheme) {
-            metaTheme.setAttribute('content', state.isDark ? '#0f172a' : '#f1f5f9');
-        }
-        
         // Push initial state to history
         history.replaceState({ view: 'search', isHome: true }, '');
         

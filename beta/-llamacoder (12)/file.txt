@@ -1,0 +1,12 @@
+src/
+  ├── config.js
+  ├── api.js
+  ├── state.js
+  ├── components/
+  │   ├── SearchHeader.js
+  │   ├── CardGrid.js
+  │   ├── CardDetails.js
+  │   └── InquiryList.js
+  └── utils/
+      ├── priceFormatter.js
+      └── storage.js
