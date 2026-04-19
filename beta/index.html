@@ -1,153 +1,134 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#0f172a">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icona.jpg">
-    
-    <title>Card Inquiry East Coast Collectibles</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
+<html lang="en" class="dark"> <head>
+    <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes"> <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> <meta name="theme-color" content="#0f172a"> <link rel="manifest" href="manifest.json"> <link rel="apple-touch-icon" href="icona.jpg"> <title>Card Inquiry East Coast Collectibles</title> <script src="https://cdn.tailwindcss.com"></script> <script>
+        tailwind.config = { // Tailwind configuration block
+            darkMode: 'class', // Uses the 'dark' class on the HTML tag to switch modes
             theme: {
-                extend: {}
+                extend: {} // Placeholder for custom theme extensions
             }
         }
     </script>
     <style>
+        /* CSS AREA - Internal styles that go beyond Tailwind */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
         
-        :root {
-            --bg-main: #0f172a;
-            --bg-card: #1e293b;
-            --bg-input: #334155;
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-            --border: #334155;
-            --accent: #3b82f6;
-        }
-
-        .light {
-            --bg-main: #f1f5f9;
-            --bg-card: #ffffff;
-            --bg-input: #e2e8f0;
-            --text-main: #0f172a;
-            --text-dim: #64748b;
-            --border: #cbd5e1;
-            --accent: #2563eb;
-        }
-
-        .emerald {
-            --bg-main: #064e3b;
-            --bg-card: #065f46;
-            --bg-input: #047857;
-            --text-main: #ecfdf5;
-            --text-dim: #a7f3d0;
-            --border: #059669;
-            --accent: #34d399;
-        }
-
-        .rose {
-            --bg-main: #4c0519;
-            --bg-card: #881337;
-            --bg-input: #9f1239;
-            --text-main: #fff1f2;
-            --text-dim: #fecdd3;
-            --border: #be123c;
-            --accent: #fb7185;
-        }
-
-        .amber {
-            --bg-main: #451a03;
-            --bg-card: #78350f;
-            --bg-input: #92400e;
-            --text-main: #fffbeb;
-            --text-dim: #fde68a;
-            --border: #b45309;
-            --accent: #fbbf24;
-        }
-
-        .midnight {
-            --bg-main: #1e1b4b;
-            --bg-card: #312e81;
-            --bg-input: #3730a3;
-            --text-main: #eef2ff;
-            --text-dim: #c7d2fe;
-            --border: #4338ca;
-            --accent: #818cf8;
-        }
+        :root { color-scheme: dark; } /* Tells browser UI to favor dark elements */
 
         body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            transition: all 0.3s ease;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background-color: #0f172a; /* Fallback background color */
         }
 
-        header { background-color: var(--bg-main) !important; border-color: var(--border) !important; }
-        .card-bg { background-color: var(--bg-card) !important; border-color: var(--border) !important; }
-        .input-bg { background-color: var(--bg-input) !important; color: var(--text-main) !important; }
+        .scrollbar-hide::-webkit-scrollbar { display: none; } /* Hides scrollbar on Chrome/Safari */
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; } /* Hides scrollbar on IE/Firefox */
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; } /* Limits text to 2 lines */
         
-        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .fixed-dropdown-container { height: 42px; width: 50%; display: flex; align-items: center; }
-        select { width: 100%; appearance: none; background: transparent; border: none; outline: none; color: inherit; font-weight: bold; }
-        #banner-slideshow { transition: opacity 0.5s ease-in-out; }
+        .fixed-dropdown-container { /* Styling for the Set and Rarity dropdown boxes */
+            height: 42px; 
+            width: 50%;   
+            display: flex;
+            align-items: center;
+        }
+
+        select { /* Resets default browser dropdown appearance */
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            appearance: none;
+            background-color: transparent;
+            border: none;
+            outline: none;
+        }
+
+        .social-container { /* Flexbox for social icon alignment */
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        /* Banner Transition Animation logic */
+        #banner-slideshow {
+            transition: opacity 0.5s ease-in-out;
+        }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="bg-slate-100 dark:bg-slate-900 min-h-screen transition-colors duration-300">
 
-<div id="app"></div>
-
-<script>
+<div id="app"></div> <script>
+// ==========================================
+// CONFIGURATION AREA - MODIFY THESE TO UPDATE THE APP CONTENT
+// ==========================================
 const APP_CONFIG = {
     appTitle: "<span style='font-size: 24px;'>Card Inquiry</span><br><span style='font-size: 18px;'>East Coast Collectibles</span>", 
-    storeUrl: "https://essexconsolerepair.co.uk", 
-    adTitle: "Essex Console Repair",             
-    adDescription: "Ps5/Xbox/Switch/Hdmi Ports", 
-    phoneNumber: "447749893611",                  
-    bannerImages: ["ecc1.png", "ecc2.png", "ecc3.png"], 
-    markupUnder5: 1.40, 
-    markupOver5: 1.10,  
-    minPriceGbp: 0.20                            
+    storeUrl: "https://essexconsolerepair.co.uk", // Link for the ad card
+    adTitle: "Essex Console Repair",               // Heading for the ad card
+    adDescription: "Ps5/Xbox/Switch/Hdmi Ports",   // Body text for the ad card
+    phoneNumber: "447749893611",                   // Recipient for WhatsApp messages
+    bannerImages: ["ecc1.png", "ecc2.png", "ecc3.png"], // Array of images for slideshow
+    markupPercentage: 1.15,                        // Mathematical multiplier for profit (1.15 = 15% markup)
+    minPriceGbp: 0.20                              // Floor price to ensure no card is under 20p
 };
+// ==========================================
 
-const API_BASE = "https://api.pokemontcg.io/v2";
-const THEMES = ['dark', 'light', 'emerald', 'rose', 'amber', 'midnight'];
+const API_BASE = "https://api.pokemontcg.io/v2"; // Pokémon TCG API endpoint
 
+// STATE: The "Brain" of the app. Stores everything currently being viewed or used.
 let state = {
-    view: 'search',
-    cards: [],
-    selectedCard: null,
-    shoppingList: JSON.parse(localStorage.getItem('tcgInquiryList') || '[]'),
-    sets: [],
-    rarities: [],
-    gbpRate: 0.78,
-    isLoading: false,
-    hasSearched: false,
-    showAd: true,
-    currentTheme: localStorage.getItem('appTheme') || 'dark',
-    searchTerm: '',
-    selectedSet: '',
-    selectedRarity: '',
-    currentBannerIndex: 0 
+    view: 'search', // Tracks current screen (search, details, list)
+    cards: [], // Stores search results
+    selectedCard: null, // Stores the card currently being viewed in detail
+    shoppingList: JSON.parse(localStorage.getItem('tcgInquiryList') || '[]'), // Loads list from phone memory
+    sets: [], // List of sets for the dropdown
+    rarities: [], // List of rarities for the dropdown
+    gbpRate: 0.78, // Default currency rate (updated by API later)
+    isLoading: false, // Tracks if a search is in progress
+    hasSearched: false, // Tracks if user has performed a search (to show 'No results')
+    showAd: true, // Shows/Hides banners and ads
+    isDark: localStorage.getItem('theme') === null ? true : localStorage.getItem('theme') === 'dark', // Dark mode state
+    searchTerm: '', // Stores what user is typing
+    selectedSet: '', // Stores set selection
+    selectedRarity: '', // Stores rarity selection
+    currentBannerIndex: 0 // Tracks which image to show in the banner
 };
 
+// Logic to rotate the top banner images
+function startBannerSlideshow() {
+    setInterval(() => {
+        state.currentBannerIndex = (state.currentBannerIndex + 1) % APP_CONFIG.bannerImages.length;
+        const bannerImg = document.getElementById('banner-slideshow');
+        if (bannerImg) {
+            bannerImg.style.opacity = '0'; // Fade out
+            setTimeout(() => {
+                bannerImg.src = APP_CONFIG.bannerImages[state.currentBannerIndex];
+                bannerImg.style.opacity = '1'; // Fade back in
+            }, 500); // Wait for fade to finish
+        }
+    }, 8000); // 8-second cycle
+}
+
+// Converts USD to GBP and applies markup logic
 function formatPrice(usd) {
-    let baseGbp = usd * state.gbpRate;
-    let finalGbp = baseGbp < 5 ? baseGbp * APP_CONFIG.markupUnder5 : baseGbp * APP_CONFIG.markupOver5;
-    if (finalGbp < APP_CONFIG.minPriceGbp) finalGbp = APP_CONFIG.minPriceGbp;
-    return `£${finalGbp.toFixed(2)}`;
+    let gbp = usd * state.gbpRate * APP_CONFIG.markupPercentage; // The calculation
+    if (gbp < APP_CONFIG.minPriceGbp) {
+        gbp = APP_CONFIG.minPriceGbp; // Apply the 20p minimum
+    }
+    return `£${gbp.toFixed(2)}`; // Returns a string with the pound sign
 }
 
+// Formats the card number/total (e.g., 001/100)
 function getFullCardCode(card) {
-    return `${card.number}/${card.set.printedTotal || card.set.total}`;
+    const number = String(card.number);
+    const total = String(card.set.printedTotal || card.set.total);
+    if (!isNaN(number) && !isNaN(total)) {
+        return `${number.padStart(total.length, '0')}/${total}`; // Adds padding to match set format
+    }
+    return `${number}/${total}`;
 }
 
+// Initial setup: Gets sets, rarities, and exchange rates from APIs
 async function initApp() {
     try {
         const [setsRes, raritiesRes, rateRes] = await Promise.all([
@@ -161,99 +142,236 @@ async function initApp() {
         state.sets = setsData.data || [];
         state.rarities = raritiesData.data || [];
         state.gbpRate = rateData.rates?.GBP || 0.78;
-        render();
-        startBannerSlideshow();
-    } catch (error) { console.error('Init failed:', error); }
+        render(); // Draws the app
+        startBannerSlideshow(); // Starts timer
+    } catch (error) {
+        console.error('Failed to initialize:', error);
+    }
 }
 
+// The search engine: builds the query for the Pokémon API
 async function executeSearch() {
-    if (!state.searchTerm && !state.selectedSet && !state.selectedRarity) return;
-    state.showAd = false;
-    state.isLoading = true;
+    const { searchTerm, selectedSet, selectedRarity } = state;
+    if (!searchTerm && !selectedSet && !selectedRarity) return;
+
+    state.showAd = false; // Hide banners to show results
+    state.isLoading = true; // Show spinner
     state.hasSearched = true;
     render();
+
     let queryParts = [];
-    if (state.searchTerm) {
-        const term = state.searchTerm.trim();
-        if (term.includes('/')) {
-            const [num, total] = term.split('/');
-            queryParts.push(`number:${num.replace(/^0+/, '')} AND (set.printedTotal:${total} OR set.total:${total})`);
-        } else { queryParts.push(`name:"${term}*"`); }
+    if (searchTerm) {
+        const term = searchTerm.trim();
+        if (term.includes('/')) { // Handles "1/100" logic
+            const parts = term.split('/');
+            const num = parts[0].replace(/^0+/, ''); 
+            const total = parts[1];
+            queryParts.push(`number:${num} AND (set.printedTotal:${total} OR set.total:${total})`);
+        } else {
+            queryParts.push(`name:"${term}*"`); // General name search
+        }
     }
-    if (state.selectedSet) queryParts.push(`set.name:"${state.selectedSet}"`);
-    if (state.selectedRarity) queryParts.push(`rarity:"${state.selectedRarity}"`);
+    if (selectedSet) queryParts.push(`set.name:"${selectedSet}"`);
+    if (selectedRarity) queryParts.push(`rarity:"${selectedRarity}"`);
+
+    const query = queryParts.join(' AND ');
     try {
-        const res = await fetch(`${API_BASE}/cards?q=${encodeURIComponent(queryParts.join(' AND '))}&orderBy=-set.releaseDate,number&pageSize=96`);
+        const url = `${API_BASE}/cards?q=${encodeURIComponent(query)}&orderBy=-set.releaseDate,number&pageSize=96`;
+        const res = await fetch(url);
         const data = await res.json();
         state.cards = data.data || [];
-    } catch (error) { state.cards = []; } finally {
+    } catch (error) {
+        console.error('Search failed:', error);
+        state.cards = [];
+    } finally {
         state.isLoading = false;
-        render();
+        render(); // Updates the UI with results
     }
 }
 
-function cycleTheme() {
-    const next = THEMES[(THEMES.indexOf(state.currentTheme) + 1) % THEMES.length];
-    state.currentTheme = next;
-    localStorage.setItem('appTheme', next);
+// Resets app to home screen
+function resetHome() {
+    state.view = 'search';
+    state.cards = [];
+    state.searchTerm = '';
+    state.selectedSet = '';
+    state.selectedRarity = '';
+    state.selectedCard = null;
+    state.showAd = true;
+    state.hasSearched = false;
     render();
 }
 
-function startBannerSlideshow() {
-    setInterval(() => {
-        state.currentBannerIndex = (state.currentBannerIndex + 1) % APP_CONFIG.bannerImages.length;
-        const img = document.getElementById('banner-slideshow');
-        if (img) {
-            img.style.opacity = '0';
-            setTimeout(() => {
-                img.src = APP_CONFIG.bannerImages[state.currentBannerIndex];
-                img.style.opacity = '1';
-            }, 500);
-        }
-    }, 8000);
+// Handles switching dark/light mode and saving the choice
+function toggleTheme() {
+    state.isDark = !state.isDark;
+    localStorage.setItem('theme', state.isDark ? 'dark' : 'light');
+    document.documentElement.classList.toggle('dark', state.isDark);
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+        metaTheme.setAttribute('content', state.isDark ? '#0f172a' : '#f1f5f9');
+    }
+    render();
 }
 
+// Input handlers to sync search bar and dropdowns with the 'state'
+function handleSearchInput(value) { state.searchTerm = value; }
+function handleSetChange(value) { state.selectedSet = value; executeSearch(); }
+function handleRarityChange(value) { state.selectedRarity = value; executeSearch(); }
+
+// Handles clicking a card to view details
+function handleCardClick(card) {
+    state.selectedCard = card;
+    state.view = 'details';
+    history.pushState({ view: 'details', card: card }, ''); // Adds to browser history for 'back' button
+    window.scrollTo(0, 0);
+    render();
+}
+
+// Logic to add a card variant to the inquiry list
+function handleAddToList(card, type, price) {
+    const uid = `${card.id}-${type}`; // Unique ID to prevent adding same variant twice
+    if (state.shoppingList.some(item => item.uid === uid)) return;
+    
+    const cardCode = getFullCardCode(card);
+    
+    state.shoppingList.push({
+        uid,
+        name: card.name,
+        set: card.set.name,
+        num: cardCode,
+        type,
+        price,
+        imageUrl: card.images.large,
+        fullData: JSON.parse(JSON.stringify(card))
+    });
+    localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList)); // Save to memory
+    render();
+}
+
+// Removes item from the list
+function handleRemoveItem(e, index) {
+    e.stopPropagation();
+    state.shoppingList.splice(index, 1);
+    localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList)); // Update memory
+    render();
+}
+
+// Formats the list into a WhatsApp string and opens the app
 function handleSendWhatsApp() {
     if (state.shoppingList.length === 0) return;
-    let message = "Hi Dave, I'm checking if you have these cards:\n\n";
+    let message = "Hi Dave, I'm checking if you have these cards. I understand prices are guides:\n\n";
     state.shoppingList.forEach((item, i) => {
-        message += `*${i + 1}. ${item.name}*\nSet: ${item.set} (${item.code})\nVariant: ${item.type} | Guide: ${item.price}\n\n`;
+        message += `*${i + 1}. ${item.name}*\nSet: ${item.set} (${item.num})\nVariant: ${item.type} | Guide: ${item.price === 'TBC' ? 'TBC' : item.price}\nImage: ${item.imageUrl}\n\n`;
     });
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
-// --- RENDER FUNCTIONS ---
+// Handles browser back button or in-app back buttons
+function goBack() {
+    if (window.history.length > 1 && state.view !== 'search') {
+        history.back();
+    } else {
+        resetHome();
+    }
+}
 
-function renderHeader() {
+// Opens the inquiry list page
+function openList() {
+    state.view = 'list';
+    history.pushState({ view: 'list' }, '');
+    window.scrollTo(0, 0);
+    render();
+}
+
+// UI COMPONENT: The banner slideshow and social buttons
+function renderSocialStories() {
+    const socials = [
+        { name: 'TikTok', color: 'bg-black', icon: '📱', url: 'https://www.tiktok.com/@east.coast.collec1' },
+        { name: 'Facebook', color: 'bg-blue-600', icon: '👥', url: 'https://www.facebook.com/p/East-Coast-Collectables-61583954579869/' },
+        { name: 'WhatsApp', color: 'bg-green-500', icon: '💬', url: `https://wa.me/${APP_CONFIG.phoneNumber}` },
+        { name: 'Web', color: 'bg-slate-700', icon: '🌐', url: `https://share.google/U7aWnYjaMe3HzClcR` }
+    ];
+    
     return `
-        <header class="sticky top-0 z-50 border-b backdrop-blur-md">
+        <div class="px-4 pt-4">
+             <div class="block w-full aspect-[4/3] bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700 mb-4">
+                <img id="banner-slideshow" src="${APP_CONFIG.bannerImages[state.currentBannerIndex]}" class="w-full h-full object-cover" alt="TCG Featured" />
+             </div>
+        </div>
+        <div class="px-2 pb-4 flex justify-around items-center">
+            ${socials.map(s => `
+                <a href="${s.url}" target="_blank" class="flex flex-col items-center gap-1">
+                    <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 to-green-400">
+                        <div class="bg-white dark:bg-slate-900 w-full h-full rounded-full p-1">
+                            <div class="${s.color} w-full h-full rounded-full flex items-center justify-center text-xl shadow-inner">
+                                ${s.icon}
+                            </div>
+                        </div>
+                    </div>
+                    <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tighter">${s.name}</span>
+                </a>
+            `).join('')}
+        </div>
+    `;
+}
+
+// UI COMPONENT: The ad card at the top
+function renderSponsorCard() {
+    return `
+        <div class="p-4">
+            <a href="${APP_CONFIG.storeUrl}" target="_blank" class="block bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md border border-slate-100 dark:border-slate-700">
+                <div class="p-4">
+                    <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">Advertisement</span>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${APP_CONFIG.adDescription}</p>
+                </div>
+            </a>
+        </div>
+    `;
+}
+
+// UI COMPONENT: The search bar and dropdown headers
+function renderSearchHeader() {
+    return `
+        <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700">
             <div class="flex items-center justify-between px-4 py-3">
                 <div class="flex items-center gap-3">
-                    <button onclick="location.reload()" class="p-2 input-bg rounded-xl text-slate-600 dark:text-slate-300">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <button onclick="resetHome()" class="p-2 bg-slate-100 dark:bg-slate-800 rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-all text-slate-600 dark:text-slate-300">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     </button>
-                    <h1 class="text-2xl font-extrabold tracking-tight leading-tight">${APP_CONFIG.appTitle}</h1>
+                    <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">${APP_CONFIG.appTitle}</h1>
                 </div>
-                <button onclick="cycleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800">
-                    <svg class="w-7 h-7 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
-                    </svg>
+                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    ${state.isDark 
+                        ? '<svg class="w-5 h-5 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>'
+                        : '<svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>'
+                    }
                 </button>
             </div>
             <div class="px-4 pb-3">
-                <div class="input-bg rounded-xl flex items-center px-4 h-12">
-                    <input type="search" value="${state.searchTerm}" oninput="state.searchTerm=this.value" onkeypress="if(event.key === 'Enter') executeSearch()" placeholder="Card name or number..." class="w-full bg-transparent border-none outline-none font-medium placeholder:opacity-50" />
-                </div>
+                <form action="#" onsubmit="event.preventDefault(); executeSearch();" class="relative bg-slate-100 dark:bg-slate-800 rounded-xl flex items-center px-4 h-12">
+                    <svg class="w-5 h-5 text-slate-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <input 
+                        type="search" 
+                        value="${state.searchTerm}"
+                        oninput="handleSearchInput(this.value)"
+                        placeholder="Type card name or number..."
+                        enterkeyhint="search"
+                        class="w-full bg-transparent border-none outline-none text-slate-900 dark:text-white placeholder-slate-400 font-medium"
+                    />
+                </form>
             </div>
             <div class="flex gap-2 px-4 pb-4">
-                <div class="fixed-dropdown-container input-bg rounded-lg px-3 border border-slate-200 dark:border-slate-700">
-                    <select onchange="state.selectedSet=this.value; executeSearch();">
+                <div class="fixed-dropdown-container bg-white dark:bg-slate-800 rounded-lg px-3 border border-slate-200 dark:border-slate-700">
+                    <select onchange="handleSetChange(this.value)" class="text-sm font-bold text-slate-900 dark:text-white">
                         <option value="">Set...</option>
                         ${state.sets.map(s => `<option value="${s.name}" ${state.selectedSet === s.name ? 'selected' : ''}>${s.name}</option>`).join('')}
                     </select>
                 </div>
-                <div class="fixed-dropdown-container input-bg rounded-lg px-3 border border-slate-200 dark:border-slate-700">
-                    <select onchange="state.selectedRarity=this.value; executeSearch();">
+                <div class="fixed-dropdown-container bg-white dark:bg-slate-800 rounded-lg px-3 border border-slate-200 dark:border-slate-700">
+                    <select onchange="handleRarityChange(this.value)" class="text-sm font-bold text-slate-900 dark:text-white">
                         <option value="">Rarity...</option>
                         ${state.rarities.map(r => `<option value="${r}" ${state.selectedRarity === r ? 'selected' : ''}>${r}</option>`).join('')}
                     </select>
@@ -263,183 +381,186 @@ function renderHeader() {
     `;
 }
 
-function renderMain() {
-    if (state.view === 'details') return renderDetails();
-    if (state.view === 'list') return renderList();
-
-    let content = '';
-    if (state.showAd) {
-        const socials = [
-            { name: 'TikTok', color: 'bg-black', icon: '📱', url: 'https://www.tiktok.com/@east.coast.collec1' },
-            { name: 'Facebook', color: 'bg-blue-600', icon: '👥', url: 'https://www.facebook.com/p/East-Coast-Collectables-61583954579869/' },
-            { name: 'WhatsApp', color: 'bg-green-500', icon: '💬', url: `https://wa.me/${APP_CONFIG.phoneNumber}` },
-            { name: 'Web', color: 'bg-slate-700', icon: '🌐', url: `https://share.google/U7aWnYjaMe3HzClcR` }
-        ];
-        content += `
-            <div class="px-4 pt-4">
-                <div class="card-bg w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md border mb-4">
-                    <img id="banner-slideshow" src="${APP_CONFIG.bannerImages[state.currentBannerIndex]}" class="w-full h-full object-cover" />
-                </div>
-            </div>
-            <div class="px-2 pb-4 flex justify-around items-center">
-                ${socials.map(s => `
-                    <a href="${s.url}" target="_blank" class="flex flex-col items-center gap-1">
-                        <div class="w-16 h-16 rounded-full p-[2px] bg-gradient-to-tr from-blue-500 to-green-400">
-                            <div class="bg-white dark:bg-slate-900 w-full h-full rounded-full p-1">
-                                <div class="${s.color} w-full h-full rounded-full flex items-center justify-center text-xl shadow-inner">${s.icon}</div>
-                            </div>
-                        </div>
-                        <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-tighter">${s.name}</span>
-                    </a>
-                `).join('')}
-            </div>
-            <div class="px-4 pb-4">
-                <a href="${APP_CONFIG.storeUrl}" class="block card-bg p-4 rounded-2xl border shadow-sm">
-                    <span class="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest">Advertisement</span>
-                    <h3 class="font-bold text-slate-900 dark:text-white mt-1">${APP_CONFIG.adTitle}</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400">${APP_CONFIG.adDescription}</p>
-                </a>
-            </div>
-        `;
+// UI COMPONENT: The search results grid
+function renderCardGrid() {
+    if (state.cards.length === 0) {
+        return state.hasSearched ? `<div class="flex flex-col items-center justify-center py-20 text-slate-400"><p class="text-lg font-medium">No cards found</p></div>` : ''; 
     }
-
-    if (state.isLoading) {
-        content += `<div class="text-center py-20 text-slate-400">Searching...</div>`;
-    } else {
-        content += `
-            <div class="grid grid-cols-2 gap-4 p-4 pb-32">
-                ${state.cards.map((card, i) => `
-                    <div onclick="showCard(${i})" class="card-bg rounded-2xl p-3 shadow-md border text-left cursor-pointer">
-                        <div class="aspect-[1/1.4] input-bg rounded-xl mb-2 flex items-center justify-center overflow-hidden">
-                            <img src="${card.images.small}" class="max-w-[90%] max-h-[90%] object-contain" />
-                        </div>
-                        <h3 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">${card.name}</h3>
-                        <p class="text-[10px] text-slate-500 dark:text-slate-400 mt-1 uppercase font-bold tracking-tight">${card.set.name} (${getFullCardCode(card)})</p>
+    return `
+        <div class="grid grid-cols-2 gap-4 p-4">
+            ${state.cards.map((card, i) => `
+                <button onclick="handleCardClick(state.cards[${i}])" class="bg-white dark:bg-slate-800 rounded-2xl p-3 shadow-md border border-slate-100 dark:border-slate-700 text-left hover:scale-[1.02] transition-transform">
+                    <div class="aspect-[1/1.4] bg-slate-100 dark:bg-slate-700 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
+                        <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="max-w-[90%] max-h-[90%] object-contain" />
                     </div>
-                `).join('')}
-            </div>
-        `;
-    }
-    content += renderCartBar();
-    return content;
+                    <h3 class="font-bold text-sm text-slate-900 dark:text-white line-clamp-2">${card.name}</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">${card.set.name}</p>
+                </button>
+            `).join('')}
+        </div>
+    `;
 }
 
-function renderDetails() {
-    const card = state.selectedCard;
-    const code = getFullCardCode(card);
-    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + code + ' ' + card.set.name + ' sold')}&LH_Sold=1&LH_Complete=1`;
-    
+// UI COMPONENT: The "Searching..." indicator
+function renderLoadingSpinner() {
     return `
-        <div class="p-4 max-w-2xl mx-auto">
-            <button onclick="state.view='search'; render();" class="font-bold text-slate-500 mb-4 flex items-center gap-2">← Back</button>
-            <div class="card-bg rounded-3xl p-6 shadow-xl border">
-                <img src="${card.images.large}" class="w-full rounded-2xl mb-6 shadow-2xl" />
-                <h1 class="text-2xl font-black text-center text-slate-900 dark:text-white">${card.name}</h1>
-                <p class="text-center text-slate-500 mb-6 font-medium">${card.set.name} • ${code}</p>
-                <div class="bg-amber-50 dark:bg-amber-900/20 p-4 rounded-xl mb-6 text-[11px] text-amber-800 dark:text-amber-200 text-center leading-tight">
-                    <strong>Note:</strong> Prices shown are automated guides. Stock availability and final condition price confirmed via WhatsApp.
+        <div class="flex flex-col items-center justify-center py-20 text-slate-400">
+            <div class="w-10 h-10 border-4 border-slate-200 dark:border-slate-700 border-t-blue-500 rounded-full animate-spin"></div>
+            <p class="mt-4 font-medium uppercase text-xs">Searching...</p>
+        </div>
+    `;
+}
+
+// UI COMPONENT: The detail view for a specific card
+function renderCardDetails() {
+    const card = state.selectedCard;
+    if (!card) return '';
+    const displayNum = getFullCardCode(card);
+    const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + displayNum + ' ' + card.set.name + ' sold')}&LH_Sold=1&LH_Complete=1`;
+    const prices = card.tcgplayer?.prices || {};
+    let priceBoxes = '';
+    
+    if (Object.keys(prices).length > 0) {
+        priceBoxes = Object.entries(prices).map(([type, priceData]) => {
+            if (!priceData.market) return '';
+            const priceDisplay = formatPrice(priceData.market);
+            const uid = `${card.id}-${type}`;
+            const isAdded = state.shoppingList.some(item => item.uid === uid);
+            return `
+                <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4 border border-slate-100 dark:border-slate-700">
+                    <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase text-center mb-1">${type} - Guide Price</div>
+                    <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-4">${priceDisplay}</div>
+                    <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" ${isAdded ? 'disabled' : ''}
+                        class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20'} transition-all">
+                        ${isAdded ? 'Added to List' : 'Add to Inquiry List'}
+                    </button>
+                    <a href="${ebayLink}" target="_blank" class="w-full h-10 mt-3 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
+                        View eBay Sold
+                    </a>
                 </div>
-                ${Object.entries(card.tcgplayer?.prices || {}).map(([type, data]) => {
-                    if (!data.market) return '';
-                    const price = formatPrice(data.market);
-                    const isAdded = state.shoppingList.some(item => item.uid === `${card.id}-${type}`);
-                    return `
-                        <div class="input-bg rounded-2xl p-5 mb-4 border border-slate-200 dark:border-slate-700">
-                            <div class="text-xs font-bold text-slate-500 uppercase text-center mb-1">${type} Market Guide</div>
-                            <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-4">${price}</div>
-                            <button onclick="addToList('${type}', '${price}')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white shadow-lg mb-3 ${isAdded ? 'opacity-50' : ''}">${isAdded ? 'Added to Inquiry' : 'Add to Inquiry List'}</button>
-                            <a href="${ebayLink}" target="_blank" class="w-full h-12 rounded-xl border-2 border-blue-500 flex items-center justify-center gap-2 text-blue-500 font-bold italic text-sm">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M11.63 4.25c-1.4 0-2.3.61-2.93 1.48L7.33 8.35c-.13.19-.24.37-.32.54H4.5c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-6c0-1.1-.9-2-2-2h-3.32c-.11-.26-.26-.51-.47-.79l-1.63-2.18c-.53-.74-1.39-1.12-2.45-1.12zM12 11c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/></svg>
-                                View Sold Prices on eBay
-                            </a>
-                        </div>
-                    `;
-                }).join('')}
+            `;
+        }).join('');
+    } else {
+        priceBoxes = `
+            <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 text-center">
+                <div class="text-2xl font-black text-slate-400 mb-4">PRICE TBC</div>
+                <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white mb-3">Add to Inquiry List</button>
+                <a href="${ebayLink}" target="_blank" class="w-full h-10 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
+                    View eBay Sold
+                </a>
+            </div>`;
+    }
+    return `
+        <div class="min-h-screen bg-slate-100 dark:bg-slate-900 p-4">
+            <div class="max-w-md mx-auto">
+                <button onclick="goBack()" class="flex items-center gap-2 text-slate-600 dark:text-slate-400 mb-4 font-bold">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    Back
+                </button>
+                <div class="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl border border-slate-200 dark:border-slate-700">
+                    <img src="${card.images.large}" class="w-full rounded-2xl shadow-lg mb-6 border border-slate-100 dark:border-slate-700" />
+                    <h1 class="text-2xl font-black text-center text-slate-900 dark:text-white leading-tight">${card.name}</h1>
+                    <p class="text-slate-500 text-center font-bold text-sm mb-6">${card.set.name} • ${displayNum}</p>
+                    <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-4 mb-6">
+                        <p class="text-[11px] leading-relaxed text-amber-800 dark:text-amber-200 font-medium text-center">
+                            <b>Please Note:</b> Prices are for guide only. Prices & Stock will be confirmed by <b>East Coast Collectibles by Whatapp</b>.
+                        </p>
+                    </div>
+                    ${priceBoxes}
+                </div>
             </div>
         </div>
     `;
 }
 
-function renderList() {
+// UI COMPONENT: The inquiry list view
+function renderInquiryList() {
+    const items = state.shoppingList;
     return `
-        <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-[100] p-4 overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-black text-slate-900 dark:text-white">Inquiry List</h2>
-                <button onclick="state.view='search'; render();" class="text-3xl font-light text-slate-900 dark:text-white">✕</button>
-            </div>
-            ${state.shoppingList.length === 0 ? '<div class="text-center py-20 text-slate-500 font-bold">Your list is currently empty</div>' : `
-                <div class="space-y-3 pb-32">
-                    ${state.shoppingList.map((item, i) => `
-                        <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl flex items-center gap-4 border border-slate-100 dark:border-slate-700 shadow-sm">
-                            <div class="flex-1">
-                                <h3 class="font-bold text-sm text-slate-900 dark:text-white leading-tight">${item.name}</h3>
-                                <p class="text-[10px] text-slate-500 font-bold uppercase mt-1">Variant: ${item.type} • Guide: ${item.price}</p>
-                                <p class="text-[10px] text-slate-400">${item.set} (${item.code})</p>
+        <div class="fixed inset-0 bg-slate-100 dark:bg-slate-900 z-50 overflow-y-auto">
+            <div class="max-w-md mx-auto p-4 pb-32">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-black text-slate-900 dark:text-white">Inquiry List</h2>
+                    <button onclick="goBack()" class="p-2 bg-white dark:bg-slate-800 rounded-full shadow-md"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                </div>
+                ${items.length === 0 ? '<div class="text-center py-20 text-slate-400 font-bold uppercase tracking-widest text-xs">No cards in list</div>' : 
+                `<div class="space-y-3">
+                    ${items.map((item, index) => `
+                        <div onclick="handleCardClick(state.shoppingList[${index}].fullData)" class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-200 dark:border-slate-700 shadow-sm flex gap-4 cursor-pointer hover:border-blue-500 transition-colors">
+                            <img src="${item.imageUrl}" class="w-16 h-auto rounded-lg pointer-events-none" />
+                            <div class="flex-1 pointer-events-none">
+                                <h3 class="font-black text-slate-900 dark:text-white text-sm">${item.name}</h3>
+                                <p class="text-[11px] text-slate-500 font-bold">${item.set} (${item.num})</p>
+                                <p class="text-blue-600 dark:text-blue-400 font-black text-sm mt-1">${item.price}</p>
                             </div>
-                            <button onclick="removeItem(${i})" class="text-red-500 p-2 text-xl">✕</button>
+                            <button onclick="handleRemoveItem(event, ${index})" class="text-red-500 self-start p-2 relative z-10"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
                         </div>
                     `).join('')}
-                </div>
-                <div class="fixed bottom-0 left-0 right-0 p-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-t border-slate-200 dark:border-slate-700 z-[110]">
-                    <button onclick="handleSendWhatsApp()" class="w-full h-16 bg-green-500 text-white rounded-2xl font-black shadow-lg flex items-center justify-center gap-2">
-                        <span>Send to Dave</span>
-                    </button>
-                </div>
-            `}
+                    <div class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-100 dark:from-slate-900 via-slate-100 dark:via-slate-900 to-transparent">
+                        <button onclick="handleSendWhatsApp()" class="w-full max-w-md mx-auto h-16 bg-green-500 text-white rounded-2xl font-black flex items-center justify-center gap-3 shadow-xl shadow-green-500/20">
+                            Send Inquiry to Dave
+                        </button>
+                    </div>
+                </div>`}
+            </div>
         </div>
     `;
 }
 
+// UI COMPONENT: The blue floating bar that appears when items are in the list
 function renderCartBar() {
-    if (state.shoppingList.length === 0 || state.view !== 'search') return '';
+    const count = state.shoppingList.length;
+    if (count === 0 || state.view !== 'search') return '';
     return `
-        <div class="fixed bottom-8 left-0 right-0 flex justify-center z-[80] pointer-events-none">
-            <button onclick="state.view='list'; render()" class="pointer-events-auto w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl font-black active:scale-95 transition-transform">
-                <span>Inquiry List</span>
-                <span class="bg-white text-blue-600 px-3 py-1 rounded-xl text-sm font-black">${state.shoppingList.length}</span>
-            </button>
-        </div>
+        <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl z-50 font-black transition-transform hover:scale-105 active:scale-95">
+            <span>Inquiry List</span>
+            <span class="bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-xl">${count}</span>
+        </button>
     `;
 }
 
-function showCard(index) {
-    state.selectedCard = state.cards[index];
-    state.view = 'details';
-    window.scrollTo(0,0);
-    render();
-}
-
-function addToList(type, price) {
-    const uid = `${state.selectedCard.id}-${type}`;
-    if (state.shoppingList.some(item => item.uid === uid)) return;
-    state.shoppingList.push({
-        uid,
-        name: state.selectedCard.name,
-        set: state.selectedCard.set.name,
-        code: getFullCardCode(state.selectedCard),
-        type,
-        price
-    });
-    localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
-    render();
-}
-
-function removeItem(index) {
-    state.shoppingList.splice(index, 1);
-    localStorage.setItem('tcgInquiryList', JSON.stringify(state.shoppingList));
-    render();
-}
-
+// MAIN RENDER FUNCTION: Decides which view to show and updates the HTML
 function render() {
     const app = document.getElementById('app');
-    document.documentElement.className = state.currentTheme;
-    // Sync dark mode for tailwind
-    const isDarkBackground = ['dark', 'emerald', 'rose', 'amber', 'midnight'].includes(state.currentTheme);
-    document.documentElement.classList.toggle('dark', isDarkBackground);
-    app.innerHTML = renderHeader() + renderMain();
+    let content = '';
+    
+    document.documentElement.classList.toggle('dark', state.isDark); // Keep theme in sync
+    
+    if (state.view === 'search') {
+        content = `
+            ${renderSearchHeader()}
+            ${state.showAd ? `
+                ${renderSocialStories()}
+                ${renderSponsorCard()}
+            ` : ''}
+            ${state.isLoading ? renderLoadingSpinner() : renderCardGrid()}
+            ${renderCartBar()}
+        `;
+    } else if (state.view === 'details') {
+        content = renderCardDetails();
+    } else if (state.view === 'list') {
+        content = renderInquiryList();
+    }
+    app.innerHTML = content; // Inject generated HTML into the app div
 }
 
+// History listener to handle phone hardware 'back' buttons
+window.addEventListener('popstate', (event) => {
+    state.view = (event.state && event.state.view) ? event.state.view : 'search';
+    state.selectedCard = (event.state && event.state.card) ? event.state.card : null;
+    render();
+});
+
+// Run theme check and initialization on load
+document.documentElement.classList.toggle('dark', state.isDark);
 initApp();
+
+// Service worker registration for PWA features
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js');
+  });
+}
 </script>
 </body>
 </html>
