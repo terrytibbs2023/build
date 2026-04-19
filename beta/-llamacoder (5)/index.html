@@ -33,8 +33,8 @@
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
         
         .fixed-dropdown-container {
-            height: 42px;
-            width: 50%;
+            height: 42px; 
+            width: 50%;   
             display: flex;
             align-items: center;
         }
@@ -60,34 +60,11 @@
         #banner-slideshow {
             transition: opacity 0.5s ease-in-out;
         }
-
-        .toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 9999px;
-            font-size: 14px;
-            font-weight: 600;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-        }
-
-        .toast.show {
-            opacity: 1;
-        }
     </style>
 </head>
 <body class="bg-slate-100 dark:bg-slate-900 min-h-screen transition-colors duration-300">
 
 <div id="app"></div>
-<div id="toast" class="toast">Press back again to exit</div>
-
 <script>
 // ==========================================
 // CONFIGURATION AREA - MODIFY THESE TO UPDATE THE APP CONTENT
@@ -103,13 +80,13 @@ const APP_CONFIG = {
     // PRICING CONFIGURATION - MODIFY THESE VALUES TO CHANGE MARKUP RATES
     // ==========================================
     pricing: {
-        gbpRate: 0.78,
-        minPriceGbp: 0.20,
-        tier1Threshold: 5.00,
-        tier2Threshold: 50.00,
-        tier1Markup: 1.40,
-        tier2Markup: 1.20,
-        tier3Markup: 1.10,
+        gbpRate: 0.78,           // USD to GBP conversion rate
+        minPriceGbp: 0.20,       // Minimum price floor (no card under this amount)
+        tier1Threshold: 5.00,    // Tier 1 upper limit (£5) - CHANGE THIS TO MODIFY TIER 1 BOUNDARY
+        tier2Threshold: 50.00,   // Tier 2 upper limit (£50) - CHANGE THIS TO MODIFY TIER 2 BOUNDARY
+        tier1Markup: 1.40,       // 40% markup for cards under £5 - CHANGE 1.40 TO MODIFY PERCENTAGE
+        tier2Markup: 1.20,       // 20% markup for cards £5 to £50 - CHANGE 1.20 TO MODIFY PERCENTAGE
+        tier3Markup: 1.10,       // 10% markup for cards over £50 - CHANGE 1.10 TO MODIFY PERCENTAGE
     }
     // ==========================================
     // MARKUP LOGIC EXPLANATION:
@@ -125,7 +102,7 @@ const APP_CONFIG = {
 
 const API_BASE = "https://api.pokemontcg.io/v2";
 
-// STATE: The "Brain" of the app
+// STATE
 let state = {
     view: 'search',
     cards: [],
@@ -141,8 +118,7 @@ let state = {
     selectedSet: '',
     selectedRarity: '',
     currentBannerIndex: 0,
-    currentTheme: localStorage.getItem('appTheme') || 'dark',
-    backPressCount: 0
+    currentTheme: localStorage.getItem('appTheme') || 'dark'
 };
 
 // Available themes
@@ -160,18 +136,6 @@ const themes = {
 };
 
 const themeOrder = ['dark', 'light', 'ocean', 'forest', 'sunset', 'navy', 'berry', 'lavender', 'charcoal', 'rose'];
-
-// Toast notification function
-function showToast(message, duration = 2000) {
-    const toast = document.getElementById('toast');
-    if (toast) {
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, duration);
-    }
-}
 
 // ==========================================
 // PRICING FUNCTIONS - TIERED MARKUP LOGIC
@@ -193,16 +157,23 @@ function getMarkupPercentage(gbpPrice) {
 
 function formatPrice(usd) {
     const config = APP_CONFIG.pricing;
+    
+    // Convert USD to GBP first
     let gbp = usd * config.gbpRate;
 
+    // Apply tiered markup based on GBP price
     if (gbp < config.tier1Threshold) {
+        // Tier 1: Under £5 - add 40% markup
         gbp = gbp * config.tier1Markup;
     } else if (gbp < config.tier2Threshold) {
+        // Tier 2: £5 to £50 - add 20% markup
         gbp = gbp * config.tier2Markup;
     } else {
+        // Tier 3: Over £50 - add 10% markup
         gbp = gbp * config.tier3Markup;
     }
 
+    // Apply minimum price floor
     if (gbp < config.minPriceGbp) {
         gbp = config.minPriceGbp;
     }
@@ -233,10 +204,6 @@ async function initApp() {
         state.sets = setsData.data || [];
         state.rarities = raritiesData.data || [];
         APP_CONFIG.pricing.gbpRate = rateData.rates?.GBP || 0.78;
-        
-        // Add initial history state so back button can be intercepted
-        history.pushState({ view: 'search' }, '');
-        
         render();
         startBannerSlideshow();
     } catch (error) {
@@ -258,7 +225,7 @@ async function executeSearch() {
         const term = searchTerm.trim();
         if (term.includes('/')) {
             const parts = term.split('/');
-            const num = parts[0].replace(/^0+/, '');
+            const num = parts[0].replace(/^0+/, ''); 
             const total = parts[1];
             queryParts.push(`number:${num} AND (set.printedTotal:${total} OR set.total:${total})`);
         } else {
@@ -292,7 +259,6 @@ function resetHome() {
     state.selectedCard = null;
     state.showAd = true;
     state.hasSearched = false;
-    state.backPressCount = 0;
     render();
 }
 
@@ -302,6 +268,7 @@ function toggleTheme() {
     state.currentTheme = themeOrder[nextIndex];
     localStorage.setItem('appTheme', state.currentTheme);
     
+    // Update dark mode class for backward compatibility
     state.isDark = !['light', 'lavender'].includes(state.currentTheme);
     document.documentElement.classList.toggle('dark', state.isDark);
     
@@ -495,7 +462,7 @@ function renderCardGrid() {
         <div class="grid grid-cols-2 gap-4 p-4">
             ${state.cards.map((card, i) => `
                 <button onclick="handleCardClick(state.cards[${i}])" class="${theme.card} rounded-2xl p-3 shadow-md border ${theme.border} text-left hover:scale-[1.02] transition-transform">
-                    <div class="aspect-[1/1.4] bg-slate-100 dark:bg-slate-700 rounded-xl mb-2 flex items-center justify-center overflow-hidden">
+                    <div class="aspect-[1/1.4] ${theme.card} rounded-xl mb-2 flex items-center justify-center overflow-hidden">
                         <img src="${card.images.small}" alt="${card.name}" loading="lazy" class="max-w-[90%] max-h-[90%] object-contain" />
                     </div>
                     <h3 class="font-bold text-sm ${theme.text} line-clamp-2">${card.name}</h3>
@@ -507,8 +474,9 @@ function renderCardGrid() {
 }
 
 function renderLoadingSpinner() {
+    const theme = themes[state.currentTheme];
     return `
-        <div class="flex flex-col items-center justify-center py-20 text-slate-400">
+        <div class="flex flex-col items-center justify-center py-20 ${theme.textMuted}">
             <div class="w-10 h-10 border-4 border-slate-200 dark:border-slate-700 border-t-blue-500 rounded-full animate-spin"></div>
             <p class="mt-4 font-medium uppercase text-xs">Searching...</p>
         </div>
@@ -516,9 +484,9 @@ function renderLoadingSpinner() {
 }
 
 function renderCardDetails() {
+    const theme = themes[state.currentTheme];
     const card = state.selectedCard;
     if (!card) return '';
-    const theme = themes[state.currentTheme];
     const displayNum = getFullCardCode(card);
     const ebayLink = `https://www.ebay.co.uk/sch/i.html?_from=R40&_nkw=${encodeURIComponent(card.name + ' ' + displayNum + ' ' + card.set.name + ' sold')}&LH_Sold=1&LH_Complete=1`;
     const prices = card.tcgplayer?.prices || {};
@@ -533,34 +501,38 @@ function renderCardDetails() {
             const uid = `${card.id}-${type}`;
             const isAdded = state.shoppingList.some(item => item.uid === uid);
             return `
-                <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4 border border-slate-100 dark:border-slate-700">
-                    <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase text-center mb-1">${type} - Guide Price</div>
-                    <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-2">${priceDisplay}</div>
-                    <div class="text-xs text-center text-slate-400 dark:text-slate-500 mb-4">Includes ${markupPercent} markup</div>
+                <div class="${theme.card} rounded-2xl p-5 mb-4 border ${theme.border}">
+                    <div class="text-xs font-bold ${theme.textMuted} uppercase text-center mb-1">${type} - Guide Price</div>
+                    <div class="text-4xl font-black text-center ${theme.accent} mb-2">${priceDisplay}</div>
+                    <div class="text-xs text-center mb-4 ${theme.textMuted}">Base: £${baseGbp.toFixed(2)} • Markup: ${markupPercent}</div>
                     <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" ${isAdded ? 'disabled' : ''}
                         class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20'} transition-all">
                         ${isAdded ? 'Added to List' : 'Add to Inquiry List'}
                     </button>
-                    <a href="${ebayLink}" target="_blank" class="w-full h-10 mt-3 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
-                        View eBay Sold
+                    <a href="${ebayLink}" target="_blank" class="block mt-3">
+                        <button class="w-full h-10 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                            View eBay Sold
+                        </button>
                     </a>
                 </div>
             `;
         }).join('');
     } else {
         priceBoxes = `
-            <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 text-center">
-                <div class="text-2xl font-black text-slate-400 mb-4">PRICE TBC</div>
+            <div class="${theme.card} rounded-2xl p-5 text-center border ${theme.border}">
+                <div class="text-2xl font-black ${theme.textMuted} mb-4">PRICE TBC</div>
                 <button onclick="handleAddToList(state.selectedCard, 'Standard', 'TBC')" class="w-full h-14 rounded-xl font-bold bg-green-500 text-white mb-3">Add to Inquiry List</button>
-                <a href="${ebayLink}" target="_blank" class="w-full h-10 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 hover:bg-blue-50">
-                    View eBay Sold
+                <a href="${ebayLink}" target="_blank" class="block">
+                    <button class="w-full h-10 rounded-xl font-bold flex items-center justify-center gap-2 border-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                        View eBay Sold
+                    </button>
                 </a>
             </div>`;
     }
     return `
         <div class="min-h-screen ${theme.bg} p-4">
             <div class="max-w-md mx-auto">
-                <button onclick="goBack()" class="flex items-center gap-2 ${theme.textMuted} mb-4 font-bold">
+                <button onclick="goBack()" class="flex items-center gap-2 ${theme.text} mb-4 font-bold">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                     Back
                 </button>
@@ -570,7 +542,7 @@ function renderCardDetails() {
                     <p class="${theme.textMuted} text-center font-bold text-sm mb-6">${card.set.name} • ${displayNum}</p>
                     <div class="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl p-4 mb-6">
                         <p class="text-[11px] leading-relaxed text-amber-800 dark:text-amber-200 font-medium text-center">
-                            <b>Please Note:</b> Prices are for guide only. Prices & Stock will be confirmed by <b>East Coast Collectibles by Whatapp</b>.
+                            <b>Please Note:</b> Prices are for guide only. Prices & Stock will be confirmed by <b>East Coast Collectibles by WhatsApp</b>.
                         </p>
                     </div>
                     ${priceBoxes}
@@ -588,7 +560,7 @@ function renderInquiryList() {
             <div class="max-w-md mx-auto p-4 pb-32">
                 <div class="flex items-center justify-between mb-6">
                     <h2 class="text-2xl font-black ${theme.text}">Inquiry List</h2>
-                    <button onclick="goBack()" class="p-2 ${theme.card} rounded-full shadow-md"><svg class="w-6 h-6 ${theme.text}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                    <button onclick="goBack()" class="p-2 ${theme.card} rounded-full shadow-md ${theme.text}"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
                 </div>
                 ${items.length === 0 ? `<div class="text-center py-20 ${theme.textMuted} font-bold uppercase tracking-widest text-xs">No cards in list</div>` : 
                 `<div class="space-y-3">
@@ -598,7 +570,7 @@ function renderInquiryList() {
                             <div class="flex-1 pointer-events-none">
                                 <h3 class="font-black ${theme.text} text-sm">${item.name}</h3>
                                 <p class="text-[11px] ${theme.textMuted} font-bold">${item.set} (${item.num})</p>
-                                <p class="text-blue-600 dark:text-blue-400 font-black text-sm mt-1">${item.price}</p>
+                                <p class="${theme.accent} font-black text-sm mt-1">${item.price}</p>
                             </div>
                             <button onclick="handleRemoveItem(event, ${index})" class="text-red-500 self-start p-2 relative z-10"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>
                         </div>
@@ -615,12 +587,13 @@ function renderInquiryList() {
 }
 
 function renderCartBar() {
+    const theme = themes[state.currentTheme];
     const count = state.shoppingList.length;
     if (count === 0 || state.view !== 'search') return '';
     return `
         <button onclick="openList()" class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[90%] max-w-md bg-blue-600 text-white h-16 rounded-3xl flex items-center justify-between px-6 shadow-2xl z-50 font-black transition-transform hover:scale-105 active:scale-95">
             <span>Inquiry List</span>
-            <span class="bg-white dark:bg-slate-900 text-blue-600 dark:text-blue-400 px-3 py-1 rounded-xl">${count}</span>
+            <span class="bg-white text-blue-600 px-3 py-1 rounded-xl">${count}</span>
         </button>
     `;
 }
@@ -649,50 +622,15 @@ function render() {
     app.innerHTML = content;
 }
 
-// History listener to handle phone hardware 'back' buttons
 window.addEventListener('popstate', (event) => {
-    // If on search/home view, prevent exit by pushing state back
-    if (state.view === 'search') {
-        // Push state back so browser can't go back further
-        history.pushState({ view: 'search' }, '');
-        
-        // Show toast message
-        showToast('Press back again to exit', 2000);
-        
-        // Increment back press count
-        state.backPressCount++;
-        
-        // If pressed back twice within 2 seconds, allow exit
-        if (state.backPressCount >= 2) {
-            // Reset counter and allow natural back behavior (will exit)
-            state.backPressCount = 0;
-            // Note: We can't actually force exit, but we can stop preventing it
-        }
-        
-        return;
-    }
-    
-    // Reset back press counter when navigating normally
-    state.backPressCount = 0;
-    
-    // Normal back behavior for other views
     state.view = (event.state && event.state.view) ? event.state.view : 'search';
     state.selectedCard = (event.state && event.state.card) ? event.state.card : null;
     render();
 });
 
-// Reset back press counter after 2 seconds
-setInterval(() => {
-    if (state.backPressCount > 0) {
-        state.backPressCount = 0;
-    }
-}, 2000);
-
-// Run theme check and initialization on load
 document.documentElement.classList.toggle('dark', state.isDark);
 initApp();
 
-// Service worker registration for PWA features
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js');

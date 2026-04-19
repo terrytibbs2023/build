@@ -1,0 +1,44 @@
+<!-- Add this to the history event listener section (around line 580) -->
+
+// History listener to handle phone hardware 'back' buttons
+window.addEventListener('popstate', (event) => {
+    // NEW: If on search/home view, push state again and refresh instead of exiting
+    if (state.view === 'search') {
+        // Push a new state to prevent exiting
+        history.pushState({ view: 'search' }, '');
+        // Refresh the page
+        location.reload();
+        return; // Stop further execution
+    }
+    
+    // Original logic for other views
+    state.view = (event.state && event.state.view) ? event.state.view : 'search';
+    state.selectedCard = (event.state && event.state.card) ? event.state.card : null;
+    render();
+});
+
+// Also add this to initApp function (around line 270) to ensure proper history state on load:
+
+async function initApp() {
+    try {
+        const [setsRes, raritiesRes, rateRes] = await Promise.all([
+            fetch(`${API_BASE}/sets?orderBy=-releaseDate`),
+            fetch(`${API_BASE}/rarities`),
+            fetch('https://open.er-api.com/v6/latest/USD')
+        ]);
+        const setsData = await setsRes.json();
+        const raritiesData = await raritiesRes.json();
+        const rateData = await rateRes.json();
+        state.sets = setsData.data || [];
+        state.rarities = raritiesData.data || [];
+        APP_CONFIG.pricing.gbpRate = rateData.rates?.GBP || 0.78;
+        
+        // NEW: Push initial state so back button has something to intercept
+        history.pushState({ view: 'search' }, '');
+        
+        render();
+        startBannerSlideshow();
+    } catch (error) {
+        console.error('Failed to initialize:', error);
+    }
+}
