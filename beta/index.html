@@ -171,7 +171,8 @@ async function executeSearch() {
     const { searchTerm, selectedSet, selectedRarity } = state;
     if (!searchTerm && !selectedSet && !selectedRarity) return;
 
-    if (state.view === 'search' && !state.hasSearched) {
+    // Fixed: Only push state if we aren't already in a search result view
+    if (!state.hasSearched) {
         history.pushState({ view: 'search', hasSearched: true }, '');
     }
 
@@ -559,15 +560,15 @@ function render() {
 }
 
 window.addEventListener('popstate', (event) => {
-    if (event.state && event.state.view === 'search' && event.state.hasSearched) {
-        state.view = 'search';
-    } else if (state.hasSearched && (!event.state || event.state.view === 'search')) {
+    // If we're on the search screen with results and hit back, reset home
+    if (state.view === 'search' && state.hasSearched) {
         resetHome();
     } else {
+        // Normal behavior for other views
         state.view = (event.state && event.state.view) ? event.state.view : 'search';
         state.selectedCard = (event.state && event.state.card) ? event.state.card : null;
+        render();
     }
-    render();
 });
 
 document.documentElement.classList.toggle('dark', state.isDark);
