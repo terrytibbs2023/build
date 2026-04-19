@@ -76,6 +76,7 @@ const APP_CONFIG = {
     adDescription: "Ps5/Xbox/Switch/Hdmi Ports",
     phoneNumber: "447749893611",
     bannerImages: ["ecc1.png", "ecc2.png", "ecc3.png"],
+    markupPercentage: 1.15,
     minPriceGbp: 0.20
 };
 // ==========================================
@@ -119,31 +120,13 @@ function startBannerSlideshow() {
     }, 8000);
 }
 
-// Converts USD to GBP and applies tiered markup logic
+// Converts USD to GBP and applies markup
 function formatPrice(usd) {
-    let baseGbp = usd * state.gbpRate;
-    let finalGbp = 0;
-    let colorClass = '';
-
-    if (baseGbp < 5) {
-        finalGbp = baseGbp * 1.40;
-        colorClass = 'text-blue-600 dark:text-blue-400';
-    } else if (baseGbp >= 5 && baseGbp < 100) {
-        finalGbp = baseGbp * 1.20;
-        colorClass = 'text-emerald-600 dark:text-emerald-400';
-    } else {
-        finalGbp = baseGbp * 1.10;
-        colorClass = 'text-purple-600 dark:text-purple-400';
+    let gbp = usd * state.gbpRate * APP_CONFIG.markupPercentage;
+    if (gbp < APP_CONFIG.minPriceGbp) {
+        gbp = APP_CONFIG.minPriceGbp;
     }
-
-    if (finalGbp < APP_CONFIG.minPriceGbp) {
-        finalGbp = APP_CONFIG.minPriceGbp;
-    }
-
-    return {
-        text: `£${finalGbp.toFixed(2)}`,
-        color: colorClass
-    };
+    return `£${gbp.toFixed(2)}`;
 }
 
 // Formats card number/total (e.g., 001/100)
@@ -169,7 +152,7 @@ function formatVariantType(type) {
     return variantMap[type] || type.charAt(0).toUpperCase() + type.slice(1);
 }
 
-// Initial setup
+// Initial setup: Gets sets, rarities, and exchange rates from APIs
 async function initApp() {
     try {
         const [setsRes, raritiesRes, rateRes] = await Promise.all([
@@ -184,12 +167,14 @@ async function initApp() {
         state.rarities = raritiesData.data || [];
         state.gbpRate = rateData.rates?.GBP || 0.78;
         
+        // Apply saved theme on load
         document.documentElement.classList.toggle('dark', state.isDark);
         const metaTheme = document.querySelector('meta[name="theme-color"]');
         if (metaTheme) {
             metaTheme.setAttribute('content', state.isDark ? '#0f172a' : '#f1f5f9');
         }
         
+        // Push initial state to history
         history.replaceState({ view: 'search', isHome: true }, '');
         
         render();
@@ -199,7 +184,7 @@ async function initApp() {
     }
 }
 
-// Search engine
+// The search engine: builds the query for the Pokémon API
 async function executeSearch() {
     const { searchTerm, selectedSet, selectedRarity } = state;
     if (!searchTerm && !selectedSet && !selectedRarity) return;
@@ -230,6 +215,8 @@ async function executeSearch() {
         const res = await fetch(url);
         const data = await res.json();
         state.cards = data.data || [];
+        
+        // Push state after search
         history.pushState({ view: 'search', hasResults: true }, '');
     } catch (error) {
         console.error('Search failed:', error);
@@ -240,6 +227,7 @@ async function executeSearch() {
     }
 }
 
+// Resets app to home screen
 function resetHome() {
     state.view = 'search';
     state.cards = [];
@@ -253,6 +241,7 @@ function resetHome() {
     render();
 }
 
+// Handles switching dark/light mode
 function toggleTheme() {
     state.isDark = !state.isDark;
     localStorage.setItem('theme', state.isDark ? 'dark' : 'light');
@@ -265,10 +254,12 @@ function toggleTheme() {
     render();
 }
 
+// Input handlers
 function handleSearchInput(value) { state.searchTerm = value; }
 function handleSetChange(value) { state.selectedSet = value; executeSearch(); }
 function handleRarityChange(value) { state.selectedRarity = value; executeSearch(); }
 
+// Handles clicking a card to view details
 function handleCardClick(card) {
     state.selectedCard = card;
     state.view = 'details';
@@ -277,6 +268,7 @@ function handleCardClick(card) {
     render();
 }
 
+// Logic to add a card variant to the inquiry list
 function handleAddToList(card, type, price) {
     const uid = `${card.id}-${type}`;
     if (state.shoppingList.some(item => item.uid === uid)) return;
@@ -297,6 +289,7 @@ function handleAddToList(card, type, price) {
     render();
 }
 
+// Removes item from the list
 function handleRemoveItem(e, index) {
     e.stopPropagation();
     state.shoppingList.splice(index, 1);
@@ -304,6 +297,7 @@ function handleRemoveItem(e, index) {
     render();
 }
 
+// Formats the list into a WhatsApp string
 function handleSendWhatsApp() {
     if (state.shoppingList.length === 0) return;
     let message = "Hi Dave, I'm checking if you have these cards. I understand prices are guides:\n\n";
@@ -313,6 +307,7 @@ function handleSendWhatsApp() {
     window.open(`https://wa.me/${APP_CONFIG.phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 }
 
+// Handles browser back button
 function goBack() {
     if (state.view === 'details' && state.cards.length > 0) {
         state.view = 'search';
@@ -328,6 +323,7 @@ function goBack() {
     }
 }
 
+// Opens the inquiry list page
 function openList() {
     state.view = 'list';
     history.pushState({ view: 'list' }, '');
@@ -335,6 +331,7 @@ function openList() {
     render();
 }
 
+// History listener for browser back button
 window.addEventListener('popstate', (event) => {
     const eventState = event.state || {};
     
@@ -364,6 +361,7 @@ window.addEventListener('popstate', (event) => {
     render();
 });
 
+// UI COMPONENT: Banner slideshow and social buttons
 function renderSocialStories() {
     const socials = [
         { name: 'TikTok', color: 'bg-black', icon: '📱', url: 'https://www.tiktok.com/@east.coast.collec1' },
@@ -395,6 +393,7 @@ function renderSocialStories() {
     `;
 }
 
+// UI COMPONENT: Ad card
 function renderSponsorCard() {
     return `
         <div class="p-4">
@@ -409,6 +408,7 @@ function renderSponsorCard() {
     `;
 }
 
+// UI COMPONENT: Search bar and dropdown headers
 function renderSearchHeader() {
     return `
         <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200 dark:border-slate-700">
@@ -457,6 +457,7 @@ function renderSearchHeader() {
     `;
 }
 
+// UI COMPONENT: Search results grid
 function renderCardGrid() {
     if (state.cards.length === 0) {
         return state.hasSearched ? `<div class="flex flex-col items-center justify-center py-20 text-slate-400"><p class="text-lg font-medium">No cards found</p></div>` : ''; 
@@ -476,6 +477,7 @@ function renderCardGrid() {
     `;
 }
 
+// UI COMPONENT: Loading spinner
 function renderLoadingSpinner() {
     return `
         <div class="flex flex-col items-center justify-center py-20 text-slate-400">
@@ -485,6 +487,7 @@ function renderLoadingSpinner() {
     `;
 }
 
+// UI COMPONENT: Card details view with variant prices
 function renderCardDetails() {
     const card = state.selectedCard;
     if (!card) return '';
@@ -496,17 +499,15 @@ function renderCardDetails() {
     if (Object.keys(prices).length > 0) {
         priceBoxes = Object.entries(prices).map(([type, priceData]) => {
             if (!priceData.market) return '';
-            
-            const priceObj = formatPrice(priceData.market);
+            const priceDisplay = formatPrice(priceData.market);
             const variantLabel = formatVariantType(type);
             const uid = `${card.id}-${type}`;
             const isAdded = state.shoppingList.some(item => item.uid === uid);
-            
             return `
                 <div class="bg-slate-50 dark:bg-slate-700/50 rounded-2xl p-5 mb-4 border border-slate-100 dark:border-slate-700">
                     <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase text-center mb-1">${variantLabel} - Guide Price</div>
-                    <div class="text-4xl font-black text-center ${priceObj.color} mb-4">${priceObj.text}</div>
-                    <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceObj.text}')" ${isAdded ? 'disabled' : ''}
+                    <div class="text-4xl font-black text-center text-blue-600 dark:text-blue-400 mb-4">${priceDisplay}</div>
+                    <button onclick="handleAddToList(state.selectedCard, '${type}', '${priceDisplay}')" ${isAdded ? 'disabled' : ''}
                         class="w-full h-14 rounded-xl font-bold flex items-center justify-center gap-2 ${isAdded ? 'bg-slate-200 dark:bg-slate-600 text-slate-400' : 'bg-green-500 hover:bg-green-600 text-white shadow-lg shadow-green-500/20'} transition-all">
                         ${isAdded ? 'Added to List' : 'Add to Inquiry List'}
                     </button>
@@ -549,6 +550,7 @@ function renderCardDetails() {
     `;
 }
 
+// UI COMPONENT: Inquiry list view
 function renderInquiryList() {
     const items = state.shoppingList;
     return `
@@ -583,6 +585,7 @@ function renderInquiryList() {
     `;
 }
 
+// UI COMPONENT: Floating cart bar
 function renderCartBar() {
     const count = state.shoppingList.length;
     if (count === 0 || state.view !== 'search') return '';
@@ -594,6 +597,7 @@ function renderCartBar() {
     `;
 }
 
+// MAIN RENDER FUNCTION
 function render() {
     const app = document.getElementById('app');
     let content = '';
@@ -618,9 +622,11 @@ function render() {
     app.innerHTML = content;
 }
 
+// Apply theme on load
 document.documentElement.classList.toggle('dark', state.isDark);
 initApp();
 
+// Service worker registration
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js');
