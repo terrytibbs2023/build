@@ -1,54 +1,56 @@
-<!DOCTYPE html> <html lang="en"> <head>
-    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Essex Console Repair | Elite 1-Hour Service</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essex Console Repair | Elite 1-Hour Service</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* GLOBAL STYLES */
-        html { scroll-behavior: smooth; scroll-padding-top: 100px; } 
+        html { scroll-behavior: smooth; scroll-padding-top: 20px; } 
         :root { --primary-glow: #00d4ff; --elite-gold: #FFD700; --dark-bg: #0f0f0f; }
         body { background-color: var(--dark-bg); color: #fff; font-family: 'Roboto', sans-serif; overflow-x: hidden; }
-        h1, h2, h3, .navbar-brand { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        h1, h2, h3 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* NAVIGATION */
-        .navbar { background: rgba(15, 15, 15, 0.98); border-bottom: 2px solid var(--primary-glow); padding: 15px 0; }
         .glow-text { color: var(--primary-glow); text-shadow: 0 0 8px rgba(0, 212, 255, 0.4); }
         .gold-glow { color: var(--elite-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
         
-        /* HERO AREA */
-        .hero { padding: 100px 0 60px; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2000'); background-size: cover; background-position: center; }
+        /* HERO AREA - MOVED UP */
+        .hero { padding: 80px 0 100px; background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2000'); background-size: cover; background-position: center; border-bottom: 1px solid #222; }
         .btn-main { background: var(--primary-glow); color: #000; font-weight: 700; border: none; padding: 14px 35px; border-radius: 4px; text-decoration: none; display: inline-block; transition: 0.3s; }
         .btn-main:hover { background: #fff; box-shadow: 0 0 20px var(--primary-glow); transform: translateY(-2px); }
 
-        /* ELITE BOX STYLING - RIBBON REMOVED */
+        /* ELITE BOX */
         .elite-box { background: linear-gradient(145deg, #151515, #000); border: 2px solid var(--elite-gold); border-radius: 15px; position: relative; }
         .pulse-icon { animation: pulse-gold 2s infinite; font-size: 3.5rem; color: var(--elite-gold); }
         @keyframes pulse-gold { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         
-        /* MISC */
+        /* BLOG PREVIEW CARDS */
+        .blog-preview-card { background: #1a1a1a; border: 1px solid #333; border-radius: 10px; transition: 0.3s; height: 100%; text-decoration: none; color: inherit; display: block; }
+        .blog-preview-card:hover { border-color: var(--primary-glow); transform: translateY(-5px); }
+
         .badge-town { display: inline-block; padding: 5px 12px; margin: 5px; background: #222; border: 1px solid #444; border-radius: 20px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
-
-
-    <header class="hero text-center" style="padding: 100px 0 150px;"> <div class="container">
-        <h1 class="display-1 fw-bold mb-4 border-bottom border-info d-inline-block pb-3" style="font-size: clamp(2.5rem, 8vw, 5rem);">
-            Essex <span class="glow-text">Console</span> Repair
-        </h1> 
-        
-        <p class="lead mb-5 fs-2 mx-auto fw-light" style="max-width: 1000px; letter-spacing: 1px;">
-            PlayStation - Xbox - Nintendo
-        </p>
-        
-        <a href="#prices" class="btn btn-main btn-lg px-5 py-3 fs-4">
-            Most Common Repair Prices
-        </a>
-    </div>
-</header>
+    <header class="hero text-center"> 
+        <div class="container">
+            <h1 class="display-1 fw-bold mb-4 border-bottom border-info d-inline-block pb-3" style="font-size: clamp(2.5rem, 8vw, 5rem);">
+                Essex <span class="glow-text">Console</span> Repair
+            </h1> 
+            <p class="lead mb-5 fs-2 mx-auto fw-light" style="max-width: 1000px; letter-spacing: 1px;">
+                PlayStation • Xbox • Nintendo
+            </p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <a href="#prices" class="btn btn-main btn-lg px-5 py-3 fs-4">Most Common Prices</a>
+                <a href="blog.html" class="btn btn-outline-light btn-lg px-5 py-3 fs-4">Repair Blog</a>
+            </div>
+        </div>
+    </header>
 
     <section class="py-5" id="elite">
         <div class="container">
@@ -65,7 +67,6 @@
                             <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Repaired in roughly 1 hour.</li>
                             <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> <strong>ZERO EXTRA CHARGE.</strong></li>
                         </ul>
-                        <p class="mt-2 text-muted small">Whether it’s a PS5 loud fan, Xbox HDMI, or Joy-Con drift—we fix it while you grab a coffee.</p>
                     </div>
                     <div class="col-lg-3 text-center">
                         <a href="https://wa.me/447935312274" class="btn btn-main w-100 py-3 mb-2" style="background: var(--elite-gold); color: #000;">Book Elite Repair</a>
@@ -78,14 +79,46 @@
 
     <section class="py-5" id="prices">
         <div class="container py-4 text-center">
-            <h2 class="mb-4">Example <span class="glow-text">Prices</span></h2>
-            <p class="fs-5 text-white mx-auto" style="max-width: 900px;">
-                "Our mission is to provide industry-leading repair standards at fair prices. We combine technical expertise with a commitment to reliability, ensuring your hardware performs exactly as it should without the premium price tag."
-            </p>
-            <div class="mt-4">
-                <a href="https://share.google/Bdw1pzQSV9HAx55fm" target="_blank" class="btn btn-outline-info px-4 py-2">
-                    <i class="fab fa-google me-2"></i>Read Our Google Reviews
-                </a>
+            <h2 class="mb-4">Repair <span class="glow-text">Prices</span></h2>
+            <div class="table-responsive mb-4">
+                <table class="table table-dark table-hover border-secondary text-start">
+                    <thead>
+                        <tr class="text-info">
+                            <th>Console</th>
+                            <th>Repair</th>
+                            <th class="text-end">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>PlayStation 5</td><td>HDMI Port Replacement</td><td class="text-end">£65</td></tr>
+                        <tr><td>Xbox Series X</td><td>HDMI Port Replacement</td><td class="text-end">£60</td></tr>
+                        <tr><td>Nintendo Switch</td><td>Charging Port Repair</td><td class="text-end">£50</td></tr>
+                        <tr><td>PS5/Xbox</td><td>Internal Clean & Liquid Metal</td><td class="text-end">£60</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <a href="https://share.google/Bdw1pzQSV9HAx55fm" target="_blank" class="btn btn-outline-info px-4">
+                <i class="fab fa-google me-2"></i>Read Our Google Reviews
+            </a>
+        </div>
+    </section>
+
+    <section class="py-5 bg-dark">
+        <div class="container">
+            <h2 class="text-center mb-5">Latest <span class="glow-text">Insights</span></h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <a href="blog.html" class="blog-preview-card p-4">
+                        <h4 class="text-info">PS5 Maintenance Tips</h4>
+                        <p class="small text-muted mb-0">Learn how to keep your console cool and avoid common overheating issues...</p>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="blog.html" class="blog-preview-card p-4">
+                        <h4 class="text-info">1-Hour Doorstep Repair</h4>
+                        <p class="small text-muted mb-0">See how we manage to fix HDMI ports right at your front door in under 60 mins...</p>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
@@ -95,26 +128,18 @@
             <div class="row g-5">
                 <div class="col-lg-6">
                     <h2 class="mb-4">Service <span class="glow-text">Areas</span></h2>
-                    <p>Free 1-hour doorstep repairs available in:</p>
                     <div class="mb-4">
                         <span class="badge-town">Colchester</span><span class="badge-town">Chelmsford</span>
                         <span class="badge-town">Braintree</span><span class="badge-town">Witham</span>
                         <span class="badge-town">Sudbury</span><span class="badge-town">Clacton</span>
                         <span class="badge-town">Ipswich</span>
                     </div>
-                    <div class="p-3 bg-dark rounded border border-info">
-                        <p class="small mb-0"><i class="fas fa-calendar-check text-info me-2"></i><strong>Elite Slots:</strong> Message now to check today's availability.</p>
-                    </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 text-center">
                     <h2 class="mb-4">Direct <span class="glow-text">Contact</span></h2>
                     <a href="https://wa.me/447935312274" class="btn btn-success w-100 mb-3 py-3 fw-bold"><i class="fab fa-whatsapp me-2"></i>WhatsApp Us</a>
-                    <a href="sms:+447935312274" class="btn btn-info w-100 mb-3 py-3 fw-bold"><i class="fas fa-comment-alt me-2"></i>Text Us</a>
-                    <div class="mt-4 pt-2">
-                        <p class="mb-1 fw-bold"><i class="fas fa-phone-alt me-2 text-primary"></i> 07935 312274</p>
-                        <p class="mb-1"><i class="fas fa-envelope me-2 text-primary"></i> Info@EssexConsoleRepair.co.uk</p>
-                        <p class="small text-muted mt-3">Orchard Business Units, Cockaynes Lane, Colchester, CO7 8BZ</p>
-                    </div>
+                    <p class="mb-1 fw-bold">07935 312274</p>
+                    <p class="small text-muted">Orchard Business Units, Cockaynes Lane, Colchester, CO7 8BZ</p>
                 </div>
             </div>
         </div>
