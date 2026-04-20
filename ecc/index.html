@@ -1,46 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Essex Console Repair | Colchester | Top Quality & Affordable</title>
+<!DOCTYPE html> <html lang="en"> <head>
+    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Essex Console Repair | Elite 1-Hour Service</title>
     
-    <meta name="description" content="Professional game console repairs in Colchester and Essex. Specialist PS5, Xbox, and Nintendo Switch repairs with Free collection & delivery.">
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        /* 4. THEME COLORS: You can change these hex codes to change the entire site's look */
-        :root {
-            --primary-glow: #00d4ff; /* Main Electric Blue */
-            --dark-bg: #0f0f0f;      /* Main Background Black */
-            --card-bg: #1a1a1a;      /* Grey for boxes/cards */
-        }
-
-        body { background-color: var(--dark-bg); color: #fff; font-family: 'Roboto', sans-serif; line-height: 1.6; }
+        /* GLOBAL STYLES */
+        html { scroll-behavior: smooth; scroll-padding-top: 100px; } 
+        :root { --primary-glow: #00d4ff; --elite-gold: #FFD700; --dark-bg: #0f0f0f; }
+        body { background-color: var(--dark-bg); color: #fff; font-family: 'Roboto', sans-serif; overflow-x: hidden; }
         h1, h2, h3, .navbar-brand { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* 5. NAVIGATION STYLE: This controls the top menu bar */
+        /* NAVIGATION */
         .navbar { background: rgba(15, 15, 15, 0.98); border-bottom: 2px solid var(--primary-glow); padding: 15px 0; }
         .glow-text { color: var(--primary-glow); text-shadow: 0 0 8px rgba(0, 212, 255, 0.4); }
+        .gold-glow { color: var(--elite-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
         
-        /* 6. HERO SECTION: The main image at the top. You can swap the 'url' to change the background image */
-        .hero { 
-            padding: 120px 0 80px; 
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2000'); 
-            background-size: cover; 
-            background-position: center;
-        }
-
-        /* 7. BUTTON STYLE: Controls the 'Book a Repair' and 'Submit' buttons */
-        .btn-main { background: var(--primary-glow); color: #000; font-weight: 700; border: none; padding: 14px 35px; border-radius: 4px; transition: 0.3s; }
+        /* HERO AREA */
+        .hero { padding: 100px 0 60px; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2000'); background-size: cover; background-position: center; }
+        .btn-main { background: var(--primary-glow); color: #000; font-weight: 700; border: none; padding: 14px 35px; border-radius: 4px; text-decoration: none; display: inline-block; transition: 0.3s; }
         .btn-main:hover { background: #fff; box-shadow: 0 0 20px var(--primary-glow); transform: translateY(-2px); }
 
-        /* 8. BOX STYLE: Controls the collection and contact boxes */
-        .service-card { background: var(--card-bg); border: 1px solid #333; padding: 40px; border-radius: 10px; height: 100%; transition: 0.4s; }
+        /* ELITE BOX STYLING - RIBBON REMOVED */
+        .elite-box { background: linear-gradient(145deg, #151515, #000); border: 2px solid var(--elite-gold); border-radius: 15px; position: relative; }
+        .pulse-icon { animation: pulse-gold 2s infinite; font-size: 3.5rem; color: var(--elite-gold); }
+        @keyframes pulse-gold { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        
+        /* MISC */
         .badge-town { display: inline-block; padding: 5px 12px; margin: 5px; background: #222; border: 1px solid #444; border-radius: 20px; font-size: 0.9rem; }
     </style>
 </head>
@@ -48,21 +35,14 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container">
-        <a class="navbar-brand fw-bold" href="#">ESSEX<span class="glow-text" style="margin:0; padding:0;">CONSOLE</span>REPAIR</a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
+            <a class="navbar-brand fw-bold" href="#">ESSEX<span class="glow-text">CONSOLE</span>REPAIR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="nav">
                 <ul class="navbar-nav ms-auto align-items-center">
-                    <li class="nav-item"><a class="nav-link px-3" href="#mission">Our Mission</a></li>
-                    <li class="nav-item"><a class="nav-link px-3" href="#collection">Collection</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#elite">Elite Upgrade</a></li>
+                    <li class="nav-item"><a class="nav-link px-3" href="#mission">Mission</a></li>
                     <li class="nav-item"><a class="nav-link px-3" href="#contact">Contact</a></li>
-                    
-                    <li class="nav-item ms-lg-3">
-                        <a href="tel:07935312274" class="btn btn-main"><i class="fas fa-phone-alt me-2"></i>07935 312274</a>
-                    </li>
+                    <li class="nav-item ms-lg-3"><a href="tel:07935312274" class="btn btn-main"><i class="fas fa-phone-alt me-2"></i>07935 312274</a></li>
                 </ul>
             </div>
         </div>
@@ -70,108 +50,76 @@
 
     <header class="hero text-center">
         <div class="container">
-            <h1 class="display-3 fw-bold mb-3">Giving Consoles a <span class="glow-text">Second Chance</span></h1>
-            <p class="lead mb-5 fs-4 mx-auto" style="max-width: 800px;">Affordable, top-quality repairs for PlayStation, Xbox, and Nintendo. Trust the experts to get you back in the game.</p>
-            <a href="tel:07935312274" class="btn btn-main btn-lg">Book Your Repair</a>
+            <h1 class="display-3 fw-bold mb-3 border-bottom border-info d-inline-block pb-2">Expert Console Engineering</h1>
+            <p class="lead mb-4 fs-4">Precision repairs for PlayStation, Xbox, and Nintendo.</p>
+            <a href="#contact" class="btn btn-main btn-lg">Book Your Repair</a>
         </div>
     </header>
 
-
-    
-    <section class="py-5" id="mission">
-    <div class="container py-4 text-center">
-        <h2 class="mb-4">Our <span class="glow-text">Mission</span></h2>
-       
-      <p class="fs-5 text-white mx-auto" style="max-width: 900px;">
-            “At Essex Console Repair, our mission is to provide top-quality game console repairs at an affordable cost...”
-        </p>
-        
-        <div class="text-center mt-4">
-            <a href="https://www.google.com/search?sca_esv=208b7340aaa9f1e9&cs=0&output=search&kgmid=/g/11vqn_shw2&q=Essex+Console+Repair&shem=epsd1&shndl=30&source=sh/x/loc/uni/m1/1&kgs=bd103b0e25ed9830&utm_source=epsd1,sh/x/loc/uni/m1/1#lrd=0x8e2b56f7cf1a0215:0x48688b185c83bae0,1,,,," target="_blank" class="btn btn-outline-info px-4 py-2">
-                <i class="fab fa-google me-2"></i>Read Our Google Reviews
-            </a>
-        </div>
-    </div>
-</section>
-    
-    
-
-    <section class="py-5 bg-black border-top border-bottom border-secondary" id="collection" style="scroll-margin-top: 100px;">
-        <div class="container py-4">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h2 class="mb-4">Free <span class="glow-text">Collection & Delivery</span></h2>
-                    <p class="mb-4">Can’t get to Colchester? We offer free collection and delivery from all local towns.</p>
-                    <div class="mb-4">
-                        <span class="badge-town">Chelmsford</span>
-                        <span class="badge-town">Braintree</span>
-                        <span class="badge-town">Witham</span>
-                        <span class="badge-town">Sudbury</span>
-                        <span class="badge-town">Clacton</span>
-                        <span class="badge-town">Ipswich</span>
+    <section class="py-5" id="elite">
+        <div class="container">
+            <div class="elite-box p-4 p-md-5 shadow-lg">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-2 text-center">
+                        <i class="fas fa-bolt pulse-icon"></i>
                     </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="p-4 bg-dark rounded border border-info shadow-lg">
-                        <h4 class="mb-3 text-info"><i class="fas fa-calendar-check me-2"></i>Appointment Only</h4>
-                        <p class="small mb-0">While we welcome visits, our facility isn’t equipped for walk-ins. To ensure a smooth process, <strong>please contact us prior</strong> to dropping off your items.</p>
+                    <div class="col-lg-7 text-center text-lg-start">
+                        <h2 class="gold-glow mb-3">The Elite Upgrade Has Arrived</h2>
+                        <p class="fs-5 mb-3 text-white">Why wait a week to get back in the game? We’ve changed the game. Introducing <strong>Elite Upgrade Service</strong>—premium doorstep repairs with zero downtime.</p>
+                        <ul class="list-unstyled fs-5 d-inline-block text-start">
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> We come directly to your door.</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Repaired in roughly 1 hour.</li>
+                            <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> <strong>ZERO EXTRA CHARGE.</strong></li>
+                        </ul>
+                        <p class="mt-2 text-muted small">Whether it’s a PS5 loud fan, Xbox HDMI, or Joy-Con drift—we fix it while you grab a coffee.</p>
+                    </div>
+                    <div class="col-lg-3 text-center">
+                        <a href="https://wa.me/447935312274" class="btn btn-main w-100 py-3 mb-2" style="background: var(--elite-gold); color: #000;">Book Elite Repair</a>
+                        <p class="small text-uppercase tracking-wider opacity-75">Fastest in Essex</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-5" id="contact">
-        <div class="container py-5">
+    <section class="py-5" id="mission">
+        <div class="container py-4 text-center">
+            <h2 class="mb-4">Our <span class="glow-text">Mission</span></h2>
+            <p class="fs-5 text-white mx-auto" style="max-width: 900px;">
+                "Our mission is to provide industry-leading repair standards at fair prices. We combine technical expertise with a commitment to reliability, ensuring your hardware performs exactly as it should without the premium price tag."
+            </p>
+            <div class="mt-4">
+                <a href="https://share.google/Bdw1pzQSV9HAx55fm" target="_blank" class="btn btn-outline-info px-4 py-2">
+                    <i class="fab fa-google me-2"></i>Read Our Google Reviews
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-black border-top border-secondary" id="contact">
+        <div class="container py-4">
             <div class="row g-5">
-                <div class="col-md-5">
-                    <h2 class="mb-4">Get In <span class="glow-text">Touch</span></h2>
-                    
-                    <div class="mb-4 d-flex">
-                        <i class="fas fa-map-marker-alt me-3 mt-1 text-primary"></i>
-                        <div>
-                            <p class="mb-0 fw-bold">Address</p>
-                            <p class="text-muted small">Orchard Business Units, Cockaynes Lane<br>Colchester, CO7 8BZ</p>
-                        </div>
+                <div class="col-lg-6">
+                    <h2 class="mb-4">Service <span class="glow-text">Areas</span></h2>
+                    <p>Free 1-hour doorstep repairs available in:</p>
+                    <div class="mb-4">
+                        <span class="badge-town">Colchester</span><span class="badge-town">Chelmsford</span>
+                        <span class="badge-town">Braintree</span><span class="badge-town">Witham</span>
+                        <span class="badge-town">Sudbury</span><span class="badge-town">Clacton</span>
+                        <span class="badge-town">Ipswich</span>
                     </div>
-
-                    <div class="mb-4 d-flex">
-                        <i class="fas fa-phone-alt me-3 mt-1 text-primary"></i>
-                        <div>
-                            <p class="mb-0 fw-bold">Telephone</p>
-                            <a href="tel:07935312274" class="text-white text-decoration-none">07935 312274</a>
-                        </div>
-                    </div>
-
-                    <div class="mb-4 d-flex">
-                        <i class="fas fa-envelope me-3 mt-1 text-primary"></i>
-                        <div>
-                            <p class="mb-0 fw-bold">Email</p>
-                            <a href="mailto:Info@EssexConsoleRepair.co.uk" class="text-white text-decoration-none">Info@EssexConsoleRepair.co.uk</a>
-                        </div>
+                    <div class="p-3 bg-dark rounded border border-info">
+                        <p class="small mb-0"><i class="fas fa-calendar-check text-info me-2"></i><strong>Elite Slots:</strong> Message now to check today's availability.</p>
                     </div>
                 </div>
-
-                <div class="col-md-7">
-                    <div class="p-4 bg-dark rounded border border-secondary">
-                        <h4 class="mb-4">Repair Inquiry Form</h4>
-                        <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <input type="text" name="name" class="form-control bg-dark text-white border-secondary" placeholder="Your Name" required>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <input type="text" name="phone" class="form-control bg-dark text-white border-secondary" placeholder="Phone Number" required>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <input type="text" name="device" class="form-control bg-dark text-white border-secondary" placeholder="Console Model (e.g. PS5)" required>
-                            </div>
-                            <div class="mb-3">
-                                <textarea name="message" class="form-control bg-dark text-white border-secondary" rows="4" placeholder="Briefly describe the issue..." required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-main w-100">Submit Request</button>
-                        </form>
+                <div class="col-lg-6">
+                    <h2 class="mb-4">Direct <span class="glow-text">Contact</span></h2>
+                    <a href="https://wa.me/447935312274" class="btn btn-success w-100 mb-3 py-3 fw-bold"><i class="fab fa-whatsapp me-2"></i>WhatsApp Us</a>
+                    <a href="sms:+447935312274" class="btn btn-info w-100 mb-3 py-3 fw-bold"><i class="fas fa-comment-alt me-2"></i>Text Us</a>
+                    <div class="mt-4 pt-2">
+                        <p class="mb-1 fw-bold"><i class="fas fa-phone-alt me-2 text-primary"></i> 07935 312274</p>
+                        <p class="mb-1"><i class="fas fa-envelope me-2 text-primary"></i> Info@EssexConsoleRepair.co.uk</p>
+                        <p class="small text-muted mt-3">Orchard Business Units, Cockaynes Lane, Colchester, CO7 8BZ</p>
                     </div>
                 </div>
             </div>
@@ -179,7 +127,7 @@
     </section>
 
     <footer class="py-4 text-center border-top border-secondary">
-        <p class="mb-0 text-muted small">&copy; 2026 Essex Console Repair. All rights reserved. Professional repairs in Colchester.</p>
+        <p class="mb-0 text-muted small">&copy; 2026 Essex Console Repair. Expertly Fixed. Locally Delivered.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
