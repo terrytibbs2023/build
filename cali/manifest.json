@@ -1,11 +1,20 @@
 {
-  "name": "Cali Collectibles",
-  "short_name": "Card Enquiry",
-  "start_url": "index.html",
+  "name": "Cali Collectibles Card Inquiry",
+  "short_name": "Cali Cards",
+  "description": "Check TCG card prices and send inquiries to Cali Collectibles via WhatsApp.",
+  "start_url": "./index.html",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#0f172a",
   "theme_color": "#0f172a",
+  "categories": ["shopping", "entertainment"],
   "icons": [
+    {
+      "src": "icona.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "icona.png",
       "sizes": "512x512",
