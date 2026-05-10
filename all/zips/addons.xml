@@ -1417,6 +1417,18 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 			<fanart>resources/fanart.jpg</fanart>
 		</assets>
 	</extension>
+</addon><addon id="script.bingie.settings" name="Bingie Settings" version="1.0.0" provider-name="YourName">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Standalone Bingie Settings Menu</summary>
+        <description lang="en_GB">Launches the Bingie skin settings window as a standalone app.</description>
+        <platform>all</platform>
+    </extension>
 </addon><addon id="script.bingie.toolbox" name="Bingie Toolbox" version="1.0.4" provider-name="matke">
     <requires>
 		<import addon="xbmc.python" version="3.0.0" />
