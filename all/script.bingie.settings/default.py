@@ -15,6 +15,6 @@ if __name__ == '__main__':
     addon = xbmcaddon.Addon()
     path = addon.getAddonInfo('path')
     # This matches the XML file name in resources/skins/default/1080i/
-    ui = BingieSettings('BingieSettings.xml', path, 'default', '720p')
+    ui = BingieSettings('BingieSettings.xml', path, 'default', '1080i')
     ui.doModal()
     del ui

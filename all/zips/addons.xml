@@ -1417,7 +1417,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 			<fanart>resources/fanart.jpg</fanart>
 		</assets>
 	</extension>
-</addon><addon id="script.bingie.settings" name="Bingie Settings" version="1.0.0" provider-name="YourName">
+</addon><addon id="script.bingie.settings" name="Bingie Settings" version="1.0.1" provider-name="YourName">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
     </requires>
