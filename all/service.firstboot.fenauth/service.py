@@ -4,7 +4,6 @@ import xbmcvfs
 import xml.etree.ElementTree as ET
 import time
 import traceback
-xbmc.executebuiltin('UpdateAddonRepos')
 
 LOG_PREFIX = "[FenSetupService] "
 
@@ -29,7 +28,8 @@ def get_setting(root, key):
 
 def fen_settings():
     if not xbmcvfs.exists(SETTINGS_PATH):
-        log("POV settings.xml not found")
+        # Log this as info rather than error during first-run scenarios
+        log("POV settings.xml not found yet", xbmc.LOGINFO)
         return None
     try:
         tree = ET.parse(SETTINGS_PATH)
@@ -61,6 +61,7 @@ def wait_for_kodi_home(timeout=20):
     return False
 
 def wait_for_fen_dialog_close(timeout=60):
+    # This prevents the loop from jumping back up while the user is still typing/authing
     for _ in range(timeout):
         if not xbmc.getCondVisibility("Window.IsActive(yesnodialog)") and \
            not xbmc.getCondVisibility("Window.IsActive(busydialog)") and \
@@ -69,59 +70,66 @@ def wait_for_fen_dialog_close(timeout=60):
         time.sleep(1)
     return False
 
-if __name__ == "__main__":
+def run_service():
     try:
         log("Service start")
 
-        wait_for_kodi_home()
+        # Wait for the UI to be ready before doing anything
+        if not wait_for_kodi_home():
+            log("Kodi home window timed out. Exiting service check.")
+            return
+
+        # Trigger repo update only after home is visible to prevent startup lag
+        xbmc.executebuiltin('UpdateAddonRepos')
         time.sleep(2)
 
         dialog = xbmcgui.Dialog()
 
-        while True:
+        while not xbmc.Monitor().abortRequested():
             trakt = trakt_enabled()
             rd = rd_enabled()
 
-            # If both are enabled, exit the loop and end service
+            # If both are enabled, exit the loop cleanly
             if trakt and rd:
-                log("Both Trakt and Real-Debrid are enabled — exiting service")
+                log("Both Trakt and Real-Debrid are enabled — cleaning up service")
                 break
 
             missing = []
-            if not trakt:
-                missing.append("Trakt")
-            if not rd:
-                missing.append("Real-Debrid")
+            if not trakt: missing.append("Trakt")
+            if not rd: missing.append("Real-Debrid")
 
-            missing_str = ", ".join(missing)
+            missing_str = " & ".join(missing)
 
+            # yesno returns True if user clicks 'Yes'
             yes = dialog.yesno(
                 "Bingie Setup",
-                "You Must Enable These Accounts NOW!:\n\n%s\n\n"
-                "Bingie needs Trakt and Real-Debrid to work.\n"
-                "Open POV My Services to enable them now?" % missing_str
+               "You Must Enable These Accounts NOW!:\n\n%s\n\n"
+                "Bingie requires these to function.\n"
+                "Open POV My Services now?" % missing_str
             )
 
-            log(f"User selected: {'YES' if yes else 'NO'}")
-
             if not yes:
-                # User said NO → loop again
-                log("User declined — showing dialog again")
-                time.sleep(1)
+                log("User declined setup — will re-prompt in 10 seconds")
+                # Wait longer if they said no so it's not spammy
+                time.sleep(10)
                 continue
 
-            # User said YES → open POV My Services
+            # Open POV My Services
             log("Opening POV My Services window")
             xbmc.executebuiltin(MY_SERVICES_TRIGGER)
 
+            # Give the user time to actually do the auth
+            time.sleep(5) 
             wait_for_fen_dialog_close()
-            time.sleep(1)
+            time.sleep(2)
 
-        log("Service end (normal)")
-        raise SystemExit
+        log("Service check completed successfully.")
 
     except Exception as e:
-        log("Exception in service.py", xbmc.LOGERROR)
-        log(repr(e), xbmc.LOGERROR)
+        log("Exception in service.py: %s" % repr(e), xbmc.LOGERROR)
         log(traceback.format_exc(), xbmc.LOGERROR)
+
+if __name__ == "__main__":
+    run_service()
+    # Script ends naturally here. No SystemExit called.
 
