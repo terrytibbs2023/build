@@ -1,0 +1,15 @@
+<settings version="2">
+    <setting id="notify_version">77</setting>
+    <setting id="notify" default="true">false</setting>
+    <setting id="use_cache" default="true">false</setting>
+    <setting id="time_cache">60</setting>
+    <setting id="clear_cache" default="true" />
+    <setting id="full_meta" default="true">false</setting>
+    <setting id="item_meta" default="true">false</setting>
+    <setting id="open.Osettings" default="true" />
+    <setting id="tmdb.api_key" default="true" />
+    <setting id="tmdb.access_token" default="true" />
+    <setting id="root_xml" default="true">file://main.xml</setting>
+    <setting id="message_xml_url" default="true">file://news.xml</setting>
+    <setting id="debug" default="true">false</setting>
+</settings>
