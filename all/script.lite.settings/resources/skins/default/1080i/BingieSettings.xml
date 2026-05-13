@@ -55,25 +55,63 @@
 						<icon>icons/settings/sysinfo.png</icon>
 					</item>
 					<item>
+						<label>Real-Debrid Info</label>
+
+
+<onclick>PlayMedia("plugin://plugin.video.pov/?mode=real_debrid.show_account_info&amp;name=Account+Info&amp;isFolder=false&amp;iconImage=special%3A%2F%2Fhome%2Faddons%2Fplugin.video.pov%2Fresources%2Fskins%2FDefault%2Fmedia%2Frealdebrid.png")</onclick>
+
+
+
+							<icon>icons/settings/system.png</icon>
+					</item>
+				</content>
+			</control>
+			<control type="panel" id="9001">
+				<left>0</left>
+				<right>0</right>
+				<top>470</top>
+				<bottom>0</bottom>
+				<onup>Control.SetFocus(9000,$INFO[Container(9001).Position],absolute)</onup>
+				<ondown>noop</ondown>
+				<include>SettingsPanel</include>
+				<content>
+					<item>
 						<label>$LOCALIZE[14200]</label>
 						<onclick>ActivateWindow(PlayerSettings)</onclick>
 						<icon>icons/settings/player.png</icon>
 					</item>
 					<item>
+						
 						<label>Enable Adult</label>
-						<!-- Merged conditional actions sequentially using Kodi built-in commands -->
-						<onclick condition="System.HasAddon(plugin.video.cumination) + System.HasAddon(plugin.video.videodevil)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
-						<onclick condition="!System.HasAddon(plugin.video.cumination)">RunPlugin(plugin://plugin.video.cumination)</onclick>
-						<onclick condition="!System.HasAddon(plugin.video.videodevil)">RunPlugin(plugin://plugin.video.videodevil)</onclick>
+    
+      
+    <onclick condition="System.HasAddon(plugin.video.cumination)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
+    <onclick condition="!System.HasAddon(plugin.video.cumination)">RunPlugin(plugin://plugin.video.cumination)</onclick>
+      
+    
+    
+  <onclick condition="System.HasAddon(plugin.video.videodevil)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
+    <onclick condition="!System.HasAddon(plugin.video.videodevil)">RunPlugin(plugin://plugin.video.videodevil)</onclick>
+  
+  
 						<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
+						
+						
+						
+						
+						
 						<label>Accounts Setup</label>
-						<onclick>PlayMedia("plugin://plugin.video.pov/?mode=myservices&amp;name=My+Services&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FWQO1410.png")</onclick>
-						<icon>icons/settings/livetv.png</icon>
+						
+					
+						
+						
+						<onclick>PlayMedia("plugin://plugin.video.pov/?mode=myservices&amp;name=My+Services&amp;isFolder=false&amp;iconImage=special%3A%2F%2Fhome%2Faddons%2Fplugin.video.pov%2Fresources%2Fskins%2FDefault%2Fmedia%2Fsettings.png")</onclick>
+							<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
-						<label>$LOCALIZE[14206]</label>
+					<label>$LOCALIZE[14206]</label>
 						<onclick>ActivateWindow(InterfaceSettings)</onclick>
 						<icon>icons/settings/interface.png</icon>
 					</item>
@@ -91,6 +129,7 @@
 						<label>LibreELEC</label>
 						<onclick>RunAddon(service.libreelec.settings)</onclick>
 						<icon>icons/settings/libreelec.png</icon>
+						<visible>System.AddonIsEnabled(service.libreelec.settings)</visible>
 					</item>
 				</content>
 			</control>
@@ -101,4 +140,3 @@
 		<include>BottomBar</include>
 	</controls>
 </window>
-

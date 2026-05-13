@@ -921,12 +921,18 @@
 						<param name="icon" value="icons/submenu/add-ons.png" /> 
 						<param name="label" value="$LOCALIZE[21417]" />
 					</include>
+					
+					
+					
 					<include content="IconButton">
-						<param name="control_id" value="801" />
-						<param name="onclick" value="ActivateWindow(settings)" />
-						<param name="icon" value="icons/settings.png" />
-						<param name="label" value="$LOCALIZE[21417]" />
-					</include>
+    <param name="control_id" value="801" />
+    <param name="onclick" value="RunScript(script.lite.settings)" />
+    <param name="icon" value="icons/settings.png" />
+    <param name="label" value="$LOCALIZE[21417]" />
+</include>
+
+	
+					
 					
 					<include content="IconButton">
 						<param name="control_id" value="803" />
