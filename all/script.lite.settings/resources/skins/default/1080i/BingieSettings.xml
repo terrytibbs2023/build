@@ -60,38 +60,19 @@
 						<icon>icons/settings/player.png</icon>
 					</item>
 					<item>
-						
 						<label>Enable Adult</label>
-    
-      
-    <onclick condition="System.HasAddon(plugin.video.cumination)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
-    <onclick condition="!System.HasAddon(plugin.video.cumination)">RunPlugin(plugin://plugin.video.cumination)</onclick>
-      
-    
-    
-  <onclick condition="System.HasAddon(plugin.video.videodevil)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
-    <onclick condition="!System.HasAddon(plugin.video.videodevil)">RunPlugin(plugin://plugin.video.videodevil)</onclick>
-  
-  
+						<!-- Merged conditional actions sequentially using Kodi built-in commands -->
+						<onclick condition="System.HasAddon(plugin.video.cumination) + System.HasAddon(plugin.video.videodevil)">Skin.ToggleSetting(EnableNextAiredNotifications)</onclick>
+						<onclick condition="!System.HasAddon(plugin.video.cumination)">RunPlugin(plugin://plugin.video.cumination)</onclick>
+						<onclick condition="!System.HasAddon(plugin.video.videodevil)">RunPlugin(plugin://plugin.video.videodevil)</onclick>
 						<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
-						
-						
-						
-						
-						
 						<label>Accounts Setup</label>
-						
-					
-						
-						
 						<onclick>PlayMedia("plugin://plugin.video.pov/?mode=myservices&amp;name=My+Services&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FWQO1410.png")</onclick>
-							<icon>icons/settings/livetv.png</icon>
+						<icon>icons/settings/livetv.png</icon>
 					</item>
 					<item>
-					
-					
 						<label>$LOCALIZE[14206]</label>
 						<onclick>ActivateWindow(InterfaceSettings)</onclick>
 						<icon>icons/settings/interface.png</icon>
@@ -110,7 +91,6 @@
 						<label>LibreELEC</label>
 						<onclick>RunAddon(service.libreelec.settings)</onclick>
 						<icon>icons/settings/libreelec.png</icon>
-						<visible>System.AddonIsEnabled(service.libreelec.settings)</visible>
 					</item>
 				</content>
 			</control>
@@ -121,3 +101,4 @@
 		<include>BottomBar</include>
 	</controls>
 </window>
+
