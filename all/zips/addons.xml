@@ -106,7 +106,7 @@
         <description lang="en_GB">Launches the Bingie skin settings window as a standalone app.</description>
         <platform>all</platform>
     </extension>
-</addon><addon id="script.lite.settings" name="lite Settings" version="1.0.1" provider-name="YourName">
+</addon><addon id="script.lite.settings" name="lite Settings" version="1.0.2" provider-name="YourName">
     <requires>
         <import addon="xbmc.python" version="3.0.0" />
     </requires>
