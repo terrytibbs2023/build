@@ -127,11 +127,11 @@
                         <thumb>media.png</thumb>
                     </item>
                     <item id="3">
-                        <description>Live TV</description>
-                        <label>$LOCALIZE[31088]</label>
-                        <label2>$LOCALIZE[31410]</label2>
-                        <onclick>ActivateWindow(PVRSettings)</onclick>
-                        <icon>special://skin/extras/media/backgrounds/settings_live_tv.jpg</icon>
+                        <description>Lite</description>
+                        <label>Switch 2 Lite</label>
+                        
+                        <onclick>RunScript("script.terrysautoinstall")</onclick>
+                        
                         <thumb>addontvinfo.png</thumb>
                     </item>
                     <item id="4">
