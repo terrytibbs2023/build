@@ -94,8 +94,9 @@
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><addon id="script.bingie.settings" name="Bingie Settings" version="1.0.8" provider-name="YourName">
+</addon><addon id="script.bingie.settings" name="Bingie Settings" version="1.0.10" provider-name="YourName">
     <requires>
+     <import addon="script.terrysautoinstall" />
         <import addon="xbmc.python" version="3.0.0" />
     </requires>
     <extension point="xbmc.python.script" library="default.py">
