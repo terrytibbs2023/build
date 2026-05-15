@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Essex TCG | Tactical Map</title>
+    <title>Essex Pokemon TCG Dealer Map</title>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
@@ -21,38 +21,167 @@
             overflow: hidden;
         }
 
-        .scanline-layer {
+        /* ⭐ POKÉBALL LOADING SCREEN ⭐ */
+        #loader {
             position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            z-index: 1;
-            background-size: 100% 4px, 3px 100%;
-            pointer-events: none;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 5000;
+            animation: loader-fade 1s ease forwards;
+            animation-delay: 2.8s;
         }
 
+        .loader-ball {
+            width: 120px;
+            height: 120px;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            animation: spin 1.2s linear forwards;
+        }
+
+        .loader-top {
+            width: 100%;
+            height: 50%;
+            background: #ef4444;
+            border-bottom: 6px solid #111;
+        }
+
+        .loader-bottom {
+            width: 100%;
+            height: 50%;
+            background: white;
+            border-top: 6px solid #111;
+        }
+
+        .loader-button {
+            width: 28px;
+            height: 28px;
+            background: white;
+            border: 6px solid #111;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            animation: flash 0.6s ease-in-out 1.2s forwards;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes flash {
+            0% { box-shadow: 0 0 0px white; }
+            50% { box-shadow: 0 0 40px white; }
+            100% { box-shadow: 0 0 0px white; }
+        }
+
+        @keyframes loader-fade {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        /* ⭐ MAP LAYER ⭐ */
         #map { 
             height: 100vh; width: 100%; 
             background: transparent !important; 
             z-index: 2;
         }
 
-        .pokedex-ui {
-            position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
-            z-index: 2000; background: #ef4444; color: white;
-            padding: 10px 30px; border: 3px solid #fff;
-            box-shadow: 0 0 20px rgba(0,0,0,0.8); font-weight: 900;
-            text-align: center; min-width: 280px;
+        /* ⭐ HEADER WRAPPER ⭐ */
+        .header-wrapper {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            display: inline-block;
+            z-index: 3000;
+            white-space: nowrap;
         }
 
-        /* SCROLLING TEXT */
+        /* ⭐ HEADER BOX ⭐ */
+        .pokedex-ui {
+            background: #ef4444;
+            color: white;
+            padding: 6px 18px;
+            border: 3px solid #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 12px #ef4444, 0 0 24px rgba(255,0,0,0.6);
+            font-weight: 900;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: max-content;
+            max-width: max-content;
+            white-space: nowrap;
+        }
+
+        /* ⭐ MOBILE FIX ⭐ */
+        @media (max-width: 600px) {
+            .header-wrapper {
+                width: max-content !important;
+                max-width: 95% !important;
+                white-space: nowrap !important;
+            }
+            .pokedex-ui {
+                width: max-content !important;
+                max-width: max-content !important;
+                white-space: nowrap !important;
+            }
+            .scrolling-text {
+                max-width: 55vw !important;
+                overflow: hidden !important;
+            }
+        }
+
+        /* ⭐ HEADER POKÉBALL ICON ⭐ */
+        .header-ball {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #111;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .header-ball::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 50%;
+            background: #ef4444;
+            border-bottom: 2px solid #111;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .header-ball::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px; height: 6px;
+            background: white;
+            border: 2px solid #111;
+            border-radius: 50%;
+        }
+
+        /* ⭐ SCROLLING TEXT ⭐ */
         .scrolling-text {
             overflow: hidden;
             white-space: nowrap;
-            width: 100%;
-            display: block;
+            display: inline-block;
+            width: auto;
+            max-width: 300px;
             font-weight: 900;
-            font-size: 18px;
+            font-size: 16px;
             position: relative;
         }
 
@@ -67,7 +196,7 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* BIGGER POKEBALL MARKERS */
+        /* ⭐ MAP MARKERS ⭐ */
         .pokeball-marker {
             width: 40px;
             height: 40px;
@@ -92,11 +221,25 @@
 
         .pokeball-marker::after {
             content: ''; position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%); width: 10px; height: 10px;
-            background: white; border: 3px solid #111; border-radius: 50%; z-index: 10;
+            transform: translate(-50%, -50%);
+            width: 10px; height: 10px;
+            background: white; border: 3px solid #111; border-radius: 50%;
         }
 
-        /* 🔥 SPINNING ANIMATION ON HOVER 🔥 */
+        /* ⭐ POKÉBALL CATCH SHAKE ⭐ */
+        @keyframes catch-shake {
+            0% { transform: translateX(0) rotate(0deg); }
+            20% { transform: translateX(-6px) rotate(-10deg); }
+            40% { transform: translateX(6px) rotate(10deg); }
+            60% { transform: translateX(-4px) rotate(-6deg); }
+            80% { transform: translateX(4px) rotate(6deg); }
+            100% { transform: translateX(0) rotate(0deg); }
+        }
+
+        .catch-shake {
+            animation: catch-shake 0.6s ease-in-out;
+        }
+
         @keyframes spinball {
             from { transform: rotate(0deg) scale(1.3); }
             to { transform: rotate(360deg) scale(1.3); }
@@ -107,16 +250,22 @@
         }
 
         .town-label {
-            background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.2) !important;
-            padding: 2px 6px !important; border-radius: 4px;
-            color: #fff !important; font-family: 'Orbitron', sans-serif; font-weight: 900; 
-            font-size: 11px; text-transform: uppercase;
-            text-align: center; width: auto !important;
+            background: rgba(0,0,0,0.6) !important;
+            border: 1px solid rgba(255,255,255,0.2) !important;
+            padding: 2px 6px !important;
+            border-radius: 4px;
+            color: #fff !important;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 11px;
+            text-transform: uppercase;
+            text-align: center;
         }
 
         .leaflet-popup-content-wrapper {
             background: #0f172a !important;
-            color: #fff !important; border: 2px solid #ef4444 !important;
+            color: #fff !important;
+            border: 2px solid #ef4444 !important;
             border-radius: 0px 15px 0px 15px !important;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
@@ -129,16 +278,32 @@
             font-weight: bold;
         }
 
-        .shop-link:hover { color: #fff; background: rgba(255,255,255,0.1); padding-left: 5px; }
+        .shop-link:hover { 
+            color: #fff; 
+            background: rgba(255,255,255,0.1); 
+            padding-left: 5px; 
+        }
     </style>
 </head>
 <body>
 
+    <!-- ⭐ POKÉBALL LOADER ⭐ -->
+    <div id="loader">
+        <div class="loader-ball">
+            <div class="loader-top"></div>
+            <div class="loader-bottom"></div>
+            <div class="loader-button"></div>
+        </div>
+    </div>
+
     <div class="scanline-layer"></div>
 
-    <div class="pokedex-ui">
-        <div style="font-size: 9px; opacity: 0.9; letter-spacing: 2px;">Essex-TCG.co.uk</div>
-        <div id="scrolling-text" class="scrolling-text">Loading...</div>
+    <!-- ⭐ HEADER ⭐ -->
+    <div class="header-wrapper">
+        <div class="pokedex-ui">
+            <div class="header-ball"></div>
+            <div id="scrolling-text" class="scrolling-text">Loading...</div>
+        </div>
     </div>
     
     <div id="map"></div>
@@ -146,6 +311,11 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
+        /* Remove loader after animation */
+        setTimeout(() => {
+            document.getElementById("loader").style.display = "none";
+        }, 3500);
+
         /* LOAD TEXT FROM text.xml */
         fetch("text.xml")
             .then(response => response.text())
@@ -186,7 +356,7 @@
             { name: "Southend", coords: [51.5459, 0.7077], shops: [{ name: "ACE Gaming Centre", url: "https://essexconsolerepair.co.uk" }, { name: "The Board Game Hut", url: "https://essexconsolerepair.co.uk" }] },
             { name: "Chelmsford", coords: [51.7356, 0.4677], shops: [{ name: "Nostalgia TCG", url: "https://essexconsolerepair.co.uk" }] },
             { name: "Witham", coords: [51.7995, 0.6395], shops: [{ name: "The Other Games", url: "https://essexconsolerepair.co.uk" }] },
-            { name: "Wickford", coords: [51.6110, 0.5210], shops: [{ name: "Geek Garage", url: "https://essexconsolerepair.co.uk" }] },
+            { name: "Wickford", coords: [51.6110, 0.5210], shops: [{ name: "Cali Collectibles", url: "https://essex-tcg.co.uk/cali/" }] },
             { name: "Saffron Walden", coords: [52.0223, 0.2435], shops: [{ name: "Game On Toymaster", url: "https://essexconsolerepair.co.uk" }] },
             { name: "Braintree", coords: [51.8782, 0.5511], shops: [] },
             { name: "Basildon", coords: [51.5724, 0.4704], shops: [] },
@@ -201,7 +371,6 @@
 
         locations.forEach(loc => {
 
-            /* BIGGER POKEBALL MARKER */
             const marker = L.marker(loc.coords, { 
                 icon: L.divIcon({ 
                     className: 'custom-icon', 
@@ -210,7 +379,17 @@
                 }) 
             }).addTo(map);
 
-            /* INVISIBLE TOOLTIP ANCHOR */
+            /* ⭐ CATCH SHAKE ON CLICK ⭐ */
+            marker.on("click", function () {
+                const ball = this._icon.querySelector(".pokeball-marker");
+                ball.classList.add("catch-shake");
+
+                setTimeout(() => {
+                    ball.classList.remove("catch-shake");
+                    marker.openPopup();
+                }, 600);
+            });
+
             L.circleMarker(loc.coords, {
                 radius: 0,
                 opacity: 0,
