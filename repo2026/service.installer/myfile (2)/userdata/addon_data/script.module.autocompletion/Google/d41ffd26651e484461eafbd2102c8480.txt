@@ -1,1 +1,0 @@
-["how to get away", ["how to get away with a murderer", "how to get away with a murderer netflix", "how to get away from a narcissist"], [], {"google:suggestsubtypes": [[512, 433], [512], [512]], "google:suggesttype": ["QUERY", "QUERY", "QUERY"]}]
