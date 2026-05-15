@@ -67,22 +67,43 @@
             100% { transform: translateX(-100%); }
         }
 
+        /* BIGGER POKEBALL MARKERS */
         .pokeball-marker {
-            width: 24px; height: 24px; background: white; border-radius: 50%;
-            border: 2px solid #111; position: relative; cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            border: 3px solid #111;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
             transition: transform 0.2s;
         }
-        .pokeball-marker:hover { transform: scale(1.3) rotate(20deg); }
+
+        .pokeball-marker:hover {
+            transform: scale(1.3);
+        }
+
         .pokeball-marker::before {
             content: ''; position: absolute; top: 0; left: 0;
             width: 100%; height: 50%; background: #ef4444;
-            border-radius: 12px 12px 0 0; border-bottom: 2px solid #111;
+            border-radius: 20px 20px 0 0; border-bottom: 3px solid #111;
         }
+
         .pokeball-marker::after {
             content: ''; position: absolute; top: 50%; left: 50%;
-            transform: translate(-50%, -50%); width: 6px; height: 6px;
-            background: white; border: 2px solid #111; border-radius: 50%; z-index: 10;
+            transform: translate(-50%, -50%); width: 10px; height: 10px;
+            background: white; border: 3px solid #111; border-radius: 50%; z-index: 10;
+        }
+
+        /* 🔥 SPINNING ANIMATION ON HOVER 🔥 */
+        @keyframes spinball {
+            from { transform: rotate(0deg) scale(1.3); }
+            to { transform: rotate(360deg) scale(1.3); }
+        }
+
+        .custom-icon:hover .pokeball-marker {
+            animation: spinball 0.6s linear infinite;
         }
 
         .town-label {
@@ -99,6 +120,7 @@
             border-radius: 0px 15px 0px 15px !important;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
         }
+
         .leaflet-popup-tip { background: #ef4444 !important; }
         
         .shop-link { 
@@ -106,6 +128,7 @@
             padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
             font-weight: bold;
         }
+
         .shop-link:hover { color: #fff; background: rgba(255,255,255,0.1); padding-left: 5px; }
     </style>
 </head>
@@ -177,12 +200,23 @@
         ];
 
         locations.forEach(loc => {
+
+            /* BIGGER POKEBALL MARKER */
             const marker = L.marker(loc.coords, { 
-                icon: L.divIcon({ className: 'custom-icon', html: "<div class='pokeball-marker'></div>", iconSize: [24, 24] }) 
+                icon: L.divIcon({ 
+                    className: 'custom-icon', 
+                    html: "<div class='pokeball-marker'></div>", 
+                    iconSize: [40, 40] 
+                }) 
             }).addTo(map);
 
-            L.marker(loc.coords, { interactive: false }).addTo(map).bindTooltip(loc.name, {
-                permanent: true, direction: 'bottom', className: 'town-label', offset: [0, 15]
+            /* INVISIBLE TOOLTIP ANCHOR */
+            L.circleMarker(loc.coords, {
+                radius: 0,
+                opacity: 0,
+                fillOpacity: 0
+            }).addTo(map).bindTooltip(loc.name, {
+                permanent: true, direction: 'bottom', className: 'town-label', offset: [0, 20]
             });
 
             let shopHtml = loc.shops.length > 0 
