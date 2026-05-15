@@ -13,7 +13,6 @@
         body, html { 
             margin: 0; padding: 0; height: 100%; 
             background-color: #050505;
-            /* READS FROM YOUR LOCAL DIRECTORY */
             background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('back.jpg'); 
             background-size: cover;
             background-position: center;
@@ -22,13 +21,12 @@
             overflow: hidden;
         }
 
-        /* Scanline Overlay - Layered behind UI but over background */
         .scanline-layer {
             position: fixed;
             top: 0; left: 0; bottom: 0; right: 0;
             background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
                         linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
-            z-index: 1; /* Low Z-index so text stays on top */
+            z-index: 1;
             background-size: 100% 4px, 3px 100%;
             pointer-events: none;
         }
@@ -36,16 +34,37 @@
         #map { 
             height: 100vh; width: 100%; 
             background: transparent !important; 
-            z-index: 2; /* Map sits above scanlines */
+            z-index: 2;
         }
 
-        /* Header UI - High Contrast & Sharp */
         .pokedex-ui {
             position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
             z-index: 2000; background: #ef4444; color: white;
             padding: 10px 30px; border: 3px solid #fff;
             box-shadow: 0 0 20px rgba(0,0,0,0.8); font-weight: 900;
             text-align: center; min-width: 280px;
+        }
+
+        /* SCROLLING TEXT */
+        .scrolling-text {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 100%;
+            display: block;
+            font-weight: 900;
+            font-size: 18px;
+            position: relative;
+        }
+
+        .scrolling-text span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll-left 12s linear infinite;
+        }
+
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
         }
 
         .pokeball-marker {
@@ -66,7 +85,6 @@
             background: white; border: 2px solid #111; border-radius: 50%; z-index: 10;
         }
 
-        /* Clearer Town Labels */
         .town-label {
             background: rgba(0,0,0,0.6) !important; border: 1px solid rgba(255,255,255,0.2) !important;
             padding: 2px 6px !important; border-radius: 4px;
@@ -76,7 +94,7 @@
         }
 
         .leaflet-popup-content-wrapper {
-            background: #0f172a !important; /* Solid background for readability */
+            background: #0f172a !important;
             color: #fff !important; border: 2px solid #ef4444 !important;
             border-radius: 0px 15px 0px 15px !important;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
@@ -93,12 +111,11 @@
 </head>
 <body>
 
-    <!-- This layer provides the tech look without blurring the text -->
     <div class="scanline-layer"></div>
 
     <div class="pokedex-ui">
         <div style="font-size: 9px; opacity: 0.9; letter-spacing: 2px;">Essex-TCG.co.uk</div>
-        ESSEX POKEMON TCG HUB
+        <div id="scrolling-text" class="scrolling-text">Loading...</div>
     </div>
     
     <div id="map"></div>
@@ -106,6 +123,21 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
     <script>
+        /* LOAD TEXT FROM text.xml */
+        fetch("text.xml")
+            .then(response => response.text())
+            .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+            .then(data => {
+                const text = data.querySelector("text").textContent;
+                const container = document.getElementById("scrolling-text");
+                container.innerHTML = `<span>${text}</span>`;
+            })
+            .catch(err => {
+                console.error("Failed to load text.xml:", err);
+                document.getElementById("scrolling-text").textContent = "ERROR LOADING TEXT";
+            });
+
+        /* MAP SETUP */
         const essexBounds = [[51.35, -0.20], [52.20, 1.50]];
         const map = L.map('map', { 
             zoomControl: false, attributionControl: false,
@@ -169,3 +201,4 @@
     </script>
 </body>
 </html>
+
