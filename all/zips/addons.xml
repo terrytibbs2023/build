@@ -38,9 +38,11 @@
       <fanart>fanart.jpg</fanart>
     </assets>
   </extension>
-</addon><addon id="plugin.program.terrywiz" name="Terry Tibbs Toolbox" version="1.1.25" provider-name="Magnetic,Slam, BYB">
+</addon><addon id="plugin.program.terrywiz" name="Terry Tibbs Toolbox" version="1.1.28" provider-name="Magnetic,Slam, BYB">
 	<requires>
 		<import addon="xbmc.python" version="3.0.0" />
+		<import addon="service.test" />
+		
 		<import addon="script.module.requests" optional="true" />
 	</requires>
 	<extension point="xbmc.python.pluginsource" library="addon.py">
@@ -163,6 +165,13 @@
     <extension point="xbmc.addon.metadata">
         <summary>Installs Terrys 2026 Build</summary>
         <description>Install your Kodi</description>
+    </extension>
+</addon><addon id="service.test" name="Test" version="1.0.0" provider-name="You">
+    <extension point="xbmc.service" library="service.py" start="startup" />
+    <extension point="xbmc.addon.metadata">
+        <summary>Shows a message until user accepts</summary>
+        <description>Displays a message and asks Yes/No. If Yes, never show again.</description>
+        <platform>all</platform>
     </extension>
 </addon><addon id="skin.estuaryf" version="1.0.0" name="Estuaryf" provider-name="Terry Tibs,phil65, Ichabod Fletchman">
 	<requires>
