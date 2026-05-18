@@ -11,11 +11,6 @@ SETTINGS_PATH = xbmcvfs.translatePath(
     "special://profile/addon_data/plugin.video.pov/settings.xml"
 )
 
-MY_SERVICES_TRIGGER = (
-    'PlayMedia("plugin://plugin.video.pov/?mode=myservices'
-    '&name=My+Services&isFolder=false")'
-)
-
 def log(msg, level=xbmc.LOGINFO):
     xbmc.log(f"{LOG_PREFIX}{msg}", level)
 
@@ -50,15 +45,6 @@ def wait_for_kodi_home(timeout=20):
         time.sleep(1)
     return False
 
-def wait_for_fen_dialog_close(timeout=60):
-    for _ in range(timeout):
-        if not xbmc.getCondVisibility("Window.IsActive(yesnodialog)") and \
-           not xbmc.getCondVisibility("Window.IsActive(busydialog)") and \
-           not xbmc.getCondVisibility("Window.IsActive(progressdialog)"):
-            return True
-        time.sleep(1)
-    return False
-
 def run_service():
     try:
         log("Service start")
@@ -70,33 +56,27 @@ def run_service():
         xbmc.executebuiltin('UpdateAddonRepos')
         time.sleep(2)
 
-        dialog = xbmcgui.Dialog()
+        monitor = xbmc.Monitor()
 
-        while not xbmc.Monitor().abortRequested():
-            trakt = trakt_enabled()
-
-            if trakt:
+        while not monitor.abortRequested():
+            if trakt_enabled():
                 log("Trakt is enabled — exiting service loop")
                 break
 
-            yes = dialog.yesno(
-                "Bingie Setup",
-                "You must enable Trakt NOW!\n\n"
-                "Bingie requires Trakt to function.\n\n"
-                "Open POV My Services now?"
-            )
+            log("Displaying Trakt warning notification")
+            
+            # Universal built-in command format: Notification(Heading, Message, Time_In_MS)
+            # This triggers a standard, non-blocking notification toast in the top-right corner.
+            heading = "Trakt Setup"
+            message = "Bingie requires Trakt to work"
+            duration = 50000  # Visible for 5 seconds
+            
+            xbmc.executebuiltin(f'Notification({heading}, {message}, {duration})')
 
-            if not yes:
-                log("User declined setup — will re-prompt in 10 seconds")
-                time.sleep(10)
-                continue
-
-            log("Opening POV My Services window")
-            xbmc.executebuiltin(MY_SERVICES_TRIGGER)
-
-            time.sleep(5)
-            wait_for_fen_dialog_close()
-            time.sleep(2)
+            # Safe 10-second wait that yields immediately if Kodi exits
+            for _ in range(10):
+                if monitor.waitForAbort(1):
+                    break
 
         log("Service check completed successfully.")
 
