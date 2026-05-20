@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Essex Console Repair | Elite 1-Hour Service</title>
+    <meta name="description" content="Professional, fast doorstep console repairs in Colchester, Chelmsford, Braintree, and surrounding Essex areas. Specialist fixing for PS5, Xbox Series X, and Nintendo Switch.">
+    <link rel="canonical" href="https://essexconsolerepair.co.uk">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Essex Console Repair | Elite 1-Hour Service">
+    <meta property="og:description" content="Doorstep console repairs with zero downtime. Serving Colchester, Braintree, and Chelmsford.">
+    <meta property="og:url" content="https://essexconsolerepair.co.uk">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Essex Console Repair",
+      "image": "https://essexconsolerepair.co.uk/logo.png", 
+      "telephone": "07935312274",
+      "email": "repair@essexconsolerepair.co.uk",
+      "url": "https://essexconsolerepair.co.uk",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Orchard Business Units, Cockaynes Lane",
+        "addressLocality": "Colchester",
+        "addressRegion": "Essex",
+        "postalCode": "CO7 8BZ",
+        "addressCountry": "GB"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 51.857008,
+        "longitude": 0.992688
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+          ],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "areaServed": [
+        {"@type": "AdministrativeArea", "name": "Colchester"},
+        {"@type": "AdministrativeArea", "name": "Chelmsford"},
+        {"@type": "AdministrativeArea", "name": "Braintree"},
+        {"@type": "AdministrativeArea", "name": "Witham"},
+        {"@type": "AdministrativeArea", "name": "Sudbury"},
+        {"@type": "AdministrativeArea", "name": "Clacton"},
+        {"@type": "AdministrativeArea", "name": "Ipswich"}
+      ],
+      "priceRange": "££",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "48"
+      }
+    }
+    </script>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        html { scroll-behavior: smooth; } 
+        :root { --primary-glow: #00d4ff; --elite-gold: #FFD700; --dark-bg: #0f0f0f; }
+        body { background-color: var(--dark-bg); color: #fff; font-family: 'Roboto', sans-serif; overflow-x: hidden; }
+        h1, h2, h3 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        
+        .glow-text { color: var(--primary-glow); text-shadow: 0 0 8px rgba(0, 212, 255, 0.4); }
+        .gold-glow { color: var(--elite-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+        
+        /* HERO SECTION */
+        .hero { padding: 80px 0; background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2000'); background-size: cover; background-position: center; border-bottom: 1px solid #222; }
+
+        .elite-box { background: linear-gradient(145deg, #151515, #000); border: 2px solid var(--elite-gold); border-radius: 15px; position: relative; overflow: hidden; }
+        .pulse-icon { animation: pulse-gold 2s infinite; font-size: 3.5rem; color: var(--elite-gold); }
+        @keyframes pulse-gold { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        
+        .elite-badge { font-family: 'Orbitron'; font-size: 0.7rem; color: var(--elite-gold); border: 1px solid var(--elite-gold); padding: 5px 10px; border-radius: 4px; letter-spacing: 2px; display: inline-block; }
+
+        /* HERO REVIEWS COMPACT LAYOUT */
+        .hero-review-card { background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(5px); border-left: 2px solid var(--primary-glow); border-top: 1px solid #222; border-right: 1px solid #222; border-bottom: 1px solid #222; padding: 15px; border-radius: 0 8px 8px 0; height: 100%; text-align: left; }
+        .stars { color: var(--elite-gold); font-size: 0.8rem; margin-bottom: 6px; }
+
+        /* STACKED DESIGN PRICING CARDS */
+        .price-card { background: linear-gradient(145deg, #141414 0%, #0b0b0b 100%); border: 1px solid #222; border-radius: 12px; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; height: 100%; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+        .price-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: #333; }
+        
+        /* PlayStation Colors */
+        .brand-ps::before { background: #00439c; }
+        .brand-ps:hover { border-color: #0072ce; box-shadow: 0 10px 30px rgba(0, 114, 206, 0.15); transform: translateY(-5px); }
+        .brand-ps .brand-icon { color: #0072ce; }
+        
+        /* Xbox Colors */
+        .brand-xbox::before { background: #107c10; }
+        .brand-xbox:hover { border-color: #107c10; box-shadow: 0 10px 30px rgba(16, 124, 16, 0.15); transform: translateY(-5px); }
+        .brand-xbox .brand-icon { color: #107c10; }
+
+        /* Nintendo Colors */
+        .brand-nintendo::before { background: #e60012; }
+        .brand-nintendo:hover { border-color: #e60012; box-shadow: 0 10px 30px rgba(230, 0, 18, 0.15); transform: translateY(-5px); }
+        .brand-nintendo .brand-icon { color: #e60012; }
+
+        .price-card-header { padding: 25px 25px 15px 25px; border-bottom: 1px solid #1a1a1a; }
+        .price-card-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; gap: 20px; }
+        
+        .price-item-block { display: flex; flex-direction: column; gap: 8px; }
+        .price-item-title { color: rgba(255, 255, 255, 0.7); font-size: 0.95rem; font-weight: 400; line-height: 1.4; text-align: left; }
+        
+        .price-value-btn { font-family: 'Orbitron', sans-serif; font-weight: 700; color: #fff; background: rgba(255,255,255,0.03); padding: 8px 14px; border-radius: 6px; border: 1px solid #222; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; text-decoration: none; transition: all 0.2s ease-in-out; width: 100%; }
+        .price-value-btn:hover { border-color: var(--primary-glow); color: var(--primary-glow); background: rgba(0, 212, 255, 0.05); }
+
+        .blog-link-panel { background: rgba(255,255,255,0.01); border: 1px dashed #222; border-radius: 8px; padding: 15px; transition: 0.3s; }
+        .blog-link-panel:hover { border-color: var(--primary-glow); background: rgba(0,212,255,0.02); }
+
+        /* RECENT BLOG REPAIRS COMPONENT */
+        .blog-feed-card { background: #111; border: 1px solid #222; border-radius: 8px; padding: 20px; transition: all 0.3s; height: 100%; display: flex; flex-direction: column; text-align: left; }
+        .blog-feed-card:hover { border-color: var(--primary-glow); box-shadow: 0 5px 15px rgba(0, 212, 255, 0.1); }
+        .blog-date-badge { font-family: 'Orbitron'; font-size: 0.7rem; color: var(--primary-glow); opacity: 0.7; margin-bottom: 8px; }
+
+        /* BUTTONS & BADGES */
+        .btn-main { background: var(--primary-glow); color: #000; font-weight: 700; border: none; padding: 14px 35px; border-radius: 4px; text-decoration: none; display: inline-block; transition: 0.3s; }
+        .btn-main:hover { background: var(--primary-glow); box-shadow: 0 0 30px var(--primary-glow), 0 0 10px #fff; transform: translateY(-3px); color: #000; }
+        .badge-town { display: inline-block; padding: 5px 12px; margin: 5px; background: #222; border: 1px solid #444; border-radius: 20px; font-size: 0.9rem; }
+
+        /* CONTACT SECTION */
+        .contact-card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 30px; height: 100%; }
+        .contact-link { color: #fff; text-decoration: none; transition: 0.3s; display: flex; align-items: center; margin-bottom: 15px; font-size: 1.1rem; }
+        .contact-link:hover { color: var(--primary-glow); }
+        .contact-link i { width: 35px; color: var(--primary-glow); font-size: 1.3rem; }
+        .map-container { border-radius: 8px; overflow: hidden; border: 1px solid #333; line-height: 0; }
+    </style>
+</head>
+<body>
+
+    <!-- Unified Hero Section Box Layout -->
+    <header class="hero text-center">  
+        <div class="container">
+            <h1 class="display-1 fw-bold mb-2 border-bottom border-info d-inline-block pb-2" style="font-size: clamp(2.5rem, 8vw, 4.5rem);">
+                Essex <span class="glow-text">Console</span> Repair
+            </h1> 
+            <h2 class="fw-bold mb-5 opacity-75" style="font-size: clamp(1.2rem, 3.5vw, 2rem); letter-spacing: 1px;">
+                PlayStation • Xbox • Nintendo
+            </h2>
+
+            <!-- Elite Upgrade Showcase Block -->
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-10">
+                    <div class="elite-box p-4 p-md-5 shadow-lg text-start">
+                        <div class="row align-items-center g-4">
+                            <div class="col-lg-2 text-center">
+                                <i class="fas fa-bolt pulse-icon"></i>
+                            </div>
+                            <div class="col-lg-7 text-center text-lg-start">
+                                <h2 class="gold-glow h3 mb-3">The Elite Upgrade Has Arrived</h2>
+                                <p class="fs-5 mb-3 text-white">Why wait a week? Introducing <strong>Elite Upgrade Service</strong> premium doorstep repairs with zero downtime.</p>
+                                <ul class="list-unstyled fs-5 d-inline-block text-start mb-0">
+                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> We come directly to your door.</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Repaired in roughly 1 hour.</li>
+                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> <strong>ZERO EXTRA CHARGE.</strong></li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-3 d-flex flex-column align-items-center justify-content-center gap-3">
+                                <div class="elite-badge">5★ GOOGLE RATED</div>
+                                <a href="https://wa.me/447935312274" class="btn btn-main w-100 py-3" style="background: var(--elite-gold); font-size: 0.9rem;">Book Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Reviews Target Container -->
+            <div id="reviews-target" class="row g-3 justify-content-center">
+                <!-- Randomized review cards inject instantly via JavaScript execution -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Pricing Section -->
+    <section class="py-5" id="prices">
+        <div class="container py-4">
+            <h2 class="h4 text-center mb-5 glow-text" style="letter-spacing: 3px;">Standard Service Menu</h2>
+            
+            <div class="row g-4 justify-content-center mb-5">
+                <!-- PlayStation Card -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="price-card brand-ps">
+                        <div class="price-card-header d-flex align-items-center gap-3">
+                            <i class="fab fa-playstation fa-2x brand-icon"></i>
+                            <h3 class="h5 m-0 fw-bold">PlayStation 5</h3>
+                        </div>
+                        <div class="price-card-body">
+                            <div class="price-item-block">
+                                <div class="price-item-title">HDMI Port Replacement</div>
+                                <a href="https://wa.me/447935312274?text=Hi,%20I'm%20looking%20to%20book%20a%20PS5%20HDMI%20Port%20repair." target="_blank" class="price-value-btn">
+                                    <span>£65</span>
+                                    <span class="small opacity-50 fw-normal" style="font-family: 'Roboto'; font-size: 0.75rem;">Book <i class="fab fa-whatsapp ms-1"></i></span>
+                                </a>
+                            </div>
+                            <div class="price-item-block">
+                                <div class="price-item-title">Liquid Metal Thermal Service</div>
+                                <a href="https://wa.me/447935312274?text=Hi,%20I'm%20looking%20to%20book%20a%20PS5%20Liquid%20Metal%20service." target="_blank" class="price-value-btn">
+                                    <span>£60</span>
+                                    <span class="small opacity-50 fw-normal" style="font-family: 'Roboto'; font-size: 0.75rem;">Book <i class="fab fa-whatsapp ms-1"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Xbox Card -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="price-card brand-xbox">
+                        <div class="price-card-header d-flex align-items-center gap-3">
+                            <i class="fab fa-xbox fa-2x brand-icon"></i>
+                            <h3 class="h5 m-0 fw-bold">Xbox Series X</h3>
+                        </div>
+                        <div class="price-card-body">
+                            <div class="price-item-block">
+                                <div class="price-item-title">HDMI Port Replacement</div>
+                                <a href="https://wa.me/447935312274?text=Hi,%20I'm%20looking%20to%20book%20an%20Xbox%20Series%20X%20HDMI%20repair." target="_blank" class="price-value-btn">
+                                    <span>£60</span>
+                                    <span class="small opacity-50 fw-normal" style="font-family: 'Roboto'; font-size: 0.75rem;">Book <i class="fab fa-whatsapp ms-1"></i></span>
+                                </a>
+                            </div>
+                            <div class="price-item-block">
+                                <div class="price-item-title">Deep Clean & Thermal Paste</div>
+                                <a href="https://wa.me/447935312274?text=Hi,%20I'm%20looking%20to%20book%20an%20Xbox%20Series%20X%20Deep%20Clean." target="_blank" class="price-value-btn">
+                                    <span>£60</span>
+                                    <span class="small opacity-50 fw-normal" style="font-family: 'Roboto'; font-size: 0.75rem;">Book <i class="fab fa-whatsapp ms-1"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nintendo Card -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="price-card brand-nintendo">
+                        <div class="price-card-header d-flex align-items-center gap-3">
+                            <i class="fas fa-gamepad fa-2x brand-icon"></i>
+                            <h3 class="h5 m-0 fw-bold">Nintendo Switch</h3>
+                        </div>
+                        <div class="price-card-body">
+                            <div class="price-item-block">
+                                <div class="price-item-title">USB-C Charging Port</div>
+                                <a href="https://wa.me/447935312274?text=Hi,%20I'm%20looking%20to%20book%20a%20Switch%20Charging%20Port%20repair." target="_blank" class="price-value-btn">
+                                    <span>£50</span>
+                                    <span class="small opacity-50 fw-normal" style="font-family: 'Roboto'; font-size: 0.75rem;">Book <i class="fab fa-whatsapp ms-1"></i></span>
+                                </a>
+                            </div>
+                            <div class="price-item-block">
+                                <div class="price-item-title">Joy-Con Stick Drift Fix</div>
+                                <a href="https://wa.me/447935312274?text=Hi,%20I'm%20looking%20to%20book%20a%20Switch%20Joy-Con%20repair." target="_blank" class="price-value-btn">
+                                    <span>Get Quote</span>
+                                    <span class="small opacity-50 fw-normal" style="font-family: 'Roboto'; font-size: 0.75rem;">Chat <i class="fab fa-whatsapp ms-1"></i></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full List Callout -->
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <div class="blog-link-panel">
+                        <a href="https://www.essexconsolerepair.co.uk/blog" class="text-info text-decoration-none fw-bold d-flex align-items-center justify-content-center gap-2">
+                            <span>Don't see your issue listed? View Full Price Details & Repair Blog</span>
+                            <i class="fas fa-arrow-right small"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Automated Past Repair Jobs Feed Section -->
+    <section class="py-5 bg-black border-top border-secondary" id="recent-repairs">
+        <div class="container py-3">
+            <h2 class="h4 text-center mb-2">Recent <span class="glow-text">Workshop Jobs</span></h2>
+            <p class="text-center text-muted small mb-5">Live updates pulled straight from our local diagnostic work repair logs.</p>
+            
+            <div class="row g-4 justify-content-center" id="blog-feed-target">
+                <div class="col-10 text-center py-4">
+                    <div class="spinner-border text-info spinner-border-sm me-2" role="status"></div>
+                    <span class="text-muted small">Loading live repair files...</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Map Section -->
+    <section class="py-5 bg-black border-top border-secondary" id="contact">
+        <div class="container">
+            <h2 class="text-center mb-5">Get In <span class="glow-text">Touch</span></h2>
+            <div class="row g-4">
+                <div class="col-lg-5">
+                    <div class="contact-card">
+                        <h3 class="h5 gold-glow mb-4">Direct Lines</h3>
+                        <a href="https://wa.me/447935312274" class="contact-link"><i class="fab fa-whatsapp"></i> WhatsApp Messenger</a>
+                        <a href="tel:07935312274" class="contact-link"><i class="fas fa-phone"></i> 07935 312274</a>
+                        <a href="mailto:repair@essexconsolerepair.co.uk" class="contact-link"><i class="fas fa-envelope"></i> Email Support</a>
+                        
+                        <div class="mt-4 pt-4 border-top border-secondary">
+                            <h3 class="h6 text-uppercase text-muted mb-3">Service Areas</h3>
+                            <div class="d-flex flex-wrap">
+                                <span class="badge-town">Colchester</span><span class="badge-town">Chelmsford</span>
+                                <span class="badge-town">Braintree</span><span class="badge-town">Witham</span>
+                                <span class="badge-town">Sudbury</span><span class="badge-town">Clacton</span>
+                                <span class="badge-town">Ipswich</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="contact-card">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h3 class="h5 glow-text">Location</h3>
+                            <span class="badge bg-danger text-white p-2" style="font-family: 'Orbitron';">APPOINTMENT ONLY</span>
+                        </div>
+                        <p class="text-white fw-bold small mb-1">Orchard Business Units, Cockaynes Lane, Colchester, CO7 8BZ</p>
+                        <a href="https://www.google.com/maps/dir//Orchard+Business+Units,+Cockaynes+Ln,+Alresford,+Colchester+CO7+8BZ" target="_blank" class="text-info small text-decoration-none d-inline-block mb-3 fw-bold">
+                            <i class="fas fa-directions me-1"></i> Launch SatNav Directions
+                        </a>
+                        
+                        <div class="map-container">
+                            <iframe 
+                                width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade" 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2466.71181286985!2d0.9926880772242171!3d51.85700868516093!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8e2dc428360f5%3A0xb9d13303a78acc4c!2sOrchard%20Business%20Units!5e0!3m2!1sen!2suk!4v1711645000000!5m2!1sen!2suk">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center border-top border-secondary">
+        <p class="mb-0 text-muted small">© 2026 Essex Console Repair. Fixed Fast. Built to Last.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Review Randomization Engine -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const reviewPool = [
+                { text: "Outstanding service. Sorted out my PS5 HDMI interface port in less than an hour straight from his vehicle workspace.", author: "Chris M.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "My Series X was cutting out constantly. Full internal clean and thermal swap out handled perfectly. Dead quiet fan now.", author: "Sarah T.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "Quick booking, clear upfront pricing options, and zero hassle. True professional level diagnostics configuration outside the house.", author: "Dave K.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "Sorted out my Switch line filter issue the same afternoon. Completely transparent pricing and solid communication throughout.", author: "Liam B.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "Top-tier diagnostic setup. Had my console back up and running without sending it away for weeks. Absolute lifesaver.", author: "Rebecca W.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "Excellent service on a tricky motherboard tracing fault. Highly recommend if you want things done properly the first time.", author: "Marcus P.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "Unbelievable turn around. Dropped off a completely dead PS5 with a liquid metal leak, picked it up fixed an hour later.", author: "James L.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "Brilliant mobile setup. Saved me the nightmare of packaging up my Xbox Series X and posting it off. Super clean job.", author: "Daniel K.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "Fixed the drift on my Switch Joy-Cons and swapped out a broken charge port. Fair pricing and genuinely nice guy.", author: "Chloe H.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "Had an overheating error message popping up on my PS5 within minutes of starting games. Full service sorted it completely.", author: "Tom W.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "Very knowledgeable and professional console technician. Identified the short circuit on my motherboard instantly. 10/10.", author: "Alex R.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "Fast, local, and honest. Explained exactly what went wrong with the disc drive and fixed it on the spot. Couldn't ask for more.", author: "Megan S.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "My son's PS5 had a mangled HDMI port. Fixed within an hour perfectly. Life saver for the weekend gaming session!", author: "Gary T.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "Superb fault-finding skills. Fixed a complex power rail issue on my Xbox motherboard that others wouldn't touch.", author: "Simon D.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
+                { text: "Professional, clean workshop environment and fantastic communication. The only place to go for console repairs in Essex.", author: "Harvey B.", link: "https://share.google/Bdw1pzQSV9HAx55fm" }
+            ];
+
+            for (let i = reviewPool.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [reviewPool[i], reviewPool[j]] = [reviewPool[j], reviewPool[i]];
+            }
+
+            const selectedReviews = reviewPool.slice(0, 3);
+            const target = document.getElementById("reviews-target");
+            const escapeHtml = (str) => str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+
+            target.innerHTML = selectedReviews.map(review => `
+                <div class="col-md-4 col-sm-10">
+                    <div class="hero-review-card">
+                        <div class="stars">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="small text-white-50 m-0" style="font-size: 0.85rem;">&ldquo;${escapeHtml(review.text)}&rdquo;</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="fw-bold text-white" style="font-size: 0.75rem;">${escapeHtml(review.author)}</span>
+                            <a href="${review.link}" target="_blank" class="text-info text-decoration-none" style="font-size: 0.7 shadow-sm;">
+                                Google Source <i class="fas fa-external-link-alt ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        });
+    </script>
+
+    <!-- Asynchronous WordPress Blog Feed Engine -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const feedContainer = document.getElementById("blog-feed-target");
+
+            fetch('https://www.essexconsolerepair.co.uk/wp-json/wp/v2/posts?per_page=3&_embed')
+                .then(response => {
+                    if (!response.ok) throw new Error("API Offline");
+                    return response.json();
+                })
+                .then(posts => {
+                    if(posts.length === 0) {
+                        feedContainer.innerHTML = `<p class="small text-muted">No historic repair files found in system paths.</p>`;
+                        return;
+                    }
+
+                    feedContainer.innerHTML = posts.map(post => {
+                        const temporaryDiv = document.createElement('div');
+                        temporaryDiv.innerHTML = post.title.rendered;
+                        const cleanTitle = temporaryDiv.innerText;
+
+                        return `
+                            <div class="col-lg-4 col-md-6">
+                                <div class="blog-feed-card">
+                                    <div class="blog-date-badge"><i class="fas fa-history me-1"></i> LOGGED WORK JOB</div>
+                                    <h3 class="h6 text-white fw-bold mb-3 flex-grow-1" style="line-height: 1.5; letter-spacing: 0.5px;">${cleanTitle}</h3>
+                                    <a href="${post.link}" class="text-info text-decoration-none small fw-bold mt-auto d-inline-flex align-items-center gap-1">
+                                        View Diagnostic Log <i class="fas fa-chevron-right" style="font-size: 0.65rem;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                })
+                .catch(() => {
+                    feedContainer.innerHTML = `
+                        <div class="col-lg-4 col-md-6">
+                            <div class="blog-feed-card">
+                                <div class="blog-date-badge"><i class="fas fa-history me-1"></i> LOGGED WORK JOB</div>
+                                <h3 class="h6 text-white fw-bold mb-3 flex-grow-1">View Recent Workshop Logs & Repairs</h3>
+                                <a href="https://www.essexconsolerepair.co.uk/blog" class="text-info text-decoration-none small fw-bold mt-auto">Open Repair Blog <i class="fas fa-chevron-right ms-1"></i></a>
+                            </div>
+                        </div>
+                    `;
+                });
+        });
+    </script>
+</body>
+</html>
