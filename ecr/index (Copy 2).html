@@ -129,10 +129,6 @@
         .blog-feed-card { background: #111; border: 1px solid #222; border-radius: 8px; padding: 20px; transition: all 0.3s; height: 100%; display: flex; flex-direction: column; text-align: left; }
         .blog-feed-card:hover { border-color: var(--primary-glow); box-shadow: 0 5px 15px rgba(0, 212, 255, 0.1); }
         .blog-date-badge { font-family: 'Orbitron'; font-size: 0.7rem; color: var(--primary-glow); opacity: 0.7; margin-bottom: 8px; }
-        
-        /* BLOG IMAGE STYLING */
-        .blog-feed-img { width: 100%; height: 140px; object-fit: cover; border-radius: 6px; margin-bottom: 12px; border: 1px solid #222; }
-        .hover-glow-link:hover { color: var(--primary-glow) !important; text-decoration: underline !important; }
 
         /* BUTTONS & BADGES */
         .btn-main { background: var(--primary-glow); color: #000; font-weight: 700; border: none; padding: 14px 35px; border-radius: 4px; text-decoration: none; display: inline-block; transition: 0.3s; }
@@ -281,7 +277,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-8 text-center">
                     <div class="blog-link-panel">
-                        <a href="https://essexconsolerepair.blogspot.com" target="_blank" rel="noopener" class="text-info text-decoration-none fw-bold d-flex align-items-center justify-content-center gap-2">
+                        <a href="https://www.essexconsolerepair.co.uk/blog" class="text-info text-decoration-none fw-bold d-flex align-items-center justify-content-center gap-2">
                             <span>Don't see your issue listed? View Full Price Details & Repair Blog</span>
                             <i class="fas fa-arrow-right small"></i>
                         </a>
@@ -410,101 +406,51 @@
         });
     </script>
 
-    <!-- Clean Blogger JSON Feed Engine -->
+    <!-- Asynchronous WordPress Blog Feed Engine -->
     <script>
-        const blogFeedUrl = "https://essexconsolerepair.blogspot.com/feeds/posts/default?alt=json-in-script&max-results=3&callback=displayPosts";
-
-        function displayPosts(data) {
-            const feedContainer = document.getElementById("blog-feed-target");
-            feedContainer.innerHTML = ''; 
-
-            const entries = data.feed.entry;
-
-            if (!entries || entries.length === 0) {
-                feedContainer.innerHTML = `<div class="col-10 text-center text-muted small">No historic repair files found in system paths.</div>`;
-                return;
-            }
-
-            entries.forEach(entry => {
-                const linkObj = entry.link.find(l => l.rel === 'alternate');
-                const url = linkObj ? linkObj.href : '#';
-                
-                const publishedDate = new Date(entry.published.$t).toLocaleDateString('en-GB', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-
-                // Thumbnail / Image extraction
-                let imgUrl = "";
-                if (entry.media$thumbnail) {
-                    imgUrl = entry.media$thumbnail.url.replace('/s72-c/', '/w400/');
-                } else if (entry.content && entry.content.$t) {
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = entry.content.$t;
-                    const firstImg = tempDiv.querySelector('img');
-                    if (firstImg) imgUrl = firstImg.src;
-                }
-
-                // Title configuration
-                let finalTitle = entry.title && entry.title.$t ? entry.title.$t.trim() : "Workshop Update";
-
-                // Strip HTML body markers out safely
-                let finalSnippet = "";
-                if (entry.content && entry.content.$t) {
-                    finalSnippet = entry.content.$t.replace(/<\/?[^>]+(>|$)/g, "").replace(/&nbsp;/g, " ").trim();
-                }
-
-                // Check and clear titles typed into body box inadvertently
-                if (finalSnippet.toLowerCase().startsWith(finalTitle.toLowerCase())) {
-                    finalSnippet = finalSnippet.substring(finalTitle.length).trim();
-                }
-
-                // Cap string limit elegantly
-                if (finalSnippet.length > 100) {
-                    finalSnippet = finalSnippet.substring(0, 100) + "...";
-                }
-
-                // Optional structure: show a placeholder layout if no image was added
-                let imgHTML = imgUrl ? `<img class="blog-feed-img" src="${imgUrl}" alt="${finalTitle}">` : '';
-
-                const postHTML = `
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-feed-card">
-                            <div class="blog-date-badge"><i class="fas fa-history me-1"></i> LOGGED WORK ON ${publishedDate}</div>
-                            ${imgHTML}
-                            <h3 class="h6 mb-2" style="line-height: 1.5; letter-spacing: 0.5px;">
-                                <a href="${url}" target="_blank" rel="noopener" class="text-white text-decoration-none hover-glow-link" style="transition: color 0.2s ease;">
-                                    ${finalTitle}
-                                </a>
-                            </h3>
-                            <p class="text-white-50 small mb-0 flex-grow-1" style="font-size: 0.85rem; line-height: 1.4;">${finalSnippet}</p>
-                        </div>
-                    </div>
-                `;
-                
-                feedContainer.innerHTML += postHTML;
-            });
-        }
-
-        // Initialize script call injection safely
         document.addEventListener("DOMContentLoaded", () => {
-            const script = document.createElement('script');
-            script.src = blogFeedUrl;
-            // Fallback display panel if script blocks or times out completely
-            script.onerror = () => {
-                const feedContainer = document.getElementById("blog-feed-target");
-                feedContainer.innerHTML = `
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-feed-card">
-                            <div class="blog-date-badge"><i class="fas fa-history me-1"></i> REPAIR LOGS</div>
-                            <h3 class="h6 text-white fw-bold mb-3 flex-grow-1">View Recent Workshop Logs & Repairs</h3>
-                            <a href="https://essexconsolerepair.blogspot.com" target="_blank" rel="noopener" class="text-info text-decoration-none small fw-bold mt-auto">Open Repair Blog <i class="fas fa-chevron-right ms-1"></i></a>
+            const feedContainer = document.getElementById("blog-feed-target");
+
+            fetch('https://www.essexconsolerepair.co.uk/wp-json/wp/v2/posts?per_page=3&_embed')
+                .then(response => {
+                    if (!response.ok) throw new Error("API Offline");
+                    return response.json();
+                })
+                .then(posts => {
+                    if(posts.length === 0) {
+                        feedContainer.innerHTML = `<p class="small text-muted">No historic repair files found in system paths.</p>`;
+                        return;
+                    }
+
+                    feedContainer.innerHTML = posts.map(post => {
+                        const temporaryDiv = document.createElement('div');
+                        temporaryDiv.innerHTML = post.title.rendered;
+                        const cleanTitle = temporaryDiv.innerText;
+
+                        return `
+                            <div class="col-lg-4 col-md-6">
+                                <div class="blog-feed-card">
+                                    <div class="blog-date-badge"><i class="fas fa-history me-1"></i> LOGGED WORK JOB</div>
+                                    <h3 class="h6 text-white fw-bold mb-3 flex-grow-1" style="line-height: 1.5; letter-spacing: 0.5px;">${cleanTitle}</h3>
+                                    <a href="${post.link}" class="text-info text-decoration-none small fw-bold mt-auto d-inline-flex align-items-center gap-1">
+                                        View Diagnostic Log <i class="fas fa-chevron-right" style="font-size: 0.65rem;"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                })
+                .catch(() => {
+                    feedContainer.innerHTML = `
+                        <div class="col-lg-4 col-md-6">
+                            <div class="blog-feed-card">
+                                <div class="blog-date-badge"><i class="fas fa-history me-1"></i> LOGGED WORK JOB</div>
+                                <h3 class="h6 text-white fw-bold mb-3 flex-grow-1">View Recent Workshop Logs & Repairs</h3>
+                                <a href="https://www.essexconsolerepair.co.uk/blog" class="text-info text-decoration-none small fw-bold mt-auto">Open Repair Blog <i class="fas fa-chevron-right ms-1"></i></a>
+                            </div>
                         </div>
-                    </div>
-                `;
-            };
-            document.body.appendChild(script);
+                    `;
+                });
         });
     </script>
 </body>
