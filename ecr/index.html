@@ -88,7 +88,9 @@
         .pulse-icon { animation: pulse-gold 2s infinite; font-size: 3.5rem; color: var(--elite-gold); }
         @keyframes pulse-gold { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         
-        .elite-badge { font-family: 'Orbitron'; font-size: 0.7rem; color: var(--elite-gold); border: 1px solid var(--elite-gold); padding: 5px 10px; border-radius: 4px; letter-spacing: 2px; display: inline-block; }
+        /* CLICKABLE GOOGLE RATING BADGE */
+        .elite-badge-link { font-family: 'Orbitron'; font-size: 0.7rem; color: var(--elite-gold); border: 1px solid var(--elite-gold); padding: 5px 10px; border-radius: 4px; letter-spacing: 2px; display: inline-block; text-decoration: none; transition: all 0.2s ease-in-out; background: transparent; }
+        .elite-badge-link:hover { background: rgba(255, 215, 0, 0.1); box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); color: #fff; border-color: #fff; }
 
         /* HERO REVIEWS COMPACT LAYOUT */
         .hero-review-card { background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(5px); border-left: 2px solid var(--primary-glow); border-top: 1px solid #222; border-right: 1px solid #222; border-bottom: 1px solid #222; padding: 15px; border-radius: 0 8px 8px 0; height: 100%; text-align: left; }
@@ -177,17 +179,15 @@
                                 </ul>
                             </div>
                             <div class="col-lg-3 d-flex flex-column align-items-center justify-content-center gap-3">
-                                <div class="elite-badge">5★ GOOGLE RATED</div>
+                                <!-- Clickable Google Review Link Button -->
+                               <a href="https://www.google.com/search?sca_esv=1683bac0e7c4926b&biw=1366&bih=578&sxsrf=ANbL-n5IxKzGiryR2ENJ-Fvr2zuquIX1jA:1779479898476&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOR2Y1ieRaB0kJJ8nOQzCSIEarrzDXG-adk_XJfRQA5XlMNN5XGTSAppXpeNDrLgmfiNDTmUZw2GbFUMjvL-Bascg9HZsds0QBpvaqKj57jRTG6pkQw%3D%3D&q=Essex+Console+Repair+Reviews&sa=X&ved=2ahUKEwj0-O6Z182UAxWTTkEAHSWKKeoQ0bkNegQIKRAF" target="_blank" rel="noopener" class="elite-badge-link text-center w-100 py-2">
+    5★ GOOGLE RATED
+</a>
                                 <a href="https://wa.me/447935312274" class="btn btn-main w-100 py-3" style="background: var(--elite-gold); font-size: 0.9rem;">Book Now</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Dynamic Reviews Target Container -->
-            <div id="reviews-target" class="row g-3 justify-content-center">
-                <!-- Randomized review cards inject instantly via JavaScript execution -->
             </div>
         </div>
     </header>
@@ -195,9 +195,9 @@
     <!-- Pricing Section -->
     <section class="py-5" id="prices">
         <div class="container py-4">
-            <h2 class="h4 text-center mb-5 glow-text" style="letter-spacing: 3px;">Standard Service Menu</h2>
+            <h2 class="h4 text-center mb-5 glow-text" style="letter-spacing: 3px;">Service Menu</h2>
             
-            <div class="row g-4 justify-content-center mb-5">
+            <div class="row g-4 justify-content-center">
                 <!-- PlayStation Card -->
                 <div class="col-lg-4 col-md-6">
                     <div class="price-card brand-ps">
@@ -276,18 +276,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Full List Callout -->
-            <div class="row justify-content-center">
-                <div class="col-md-8 text-center">
-                    <div class="blog-link-panel">
-                        <a href="https://essexconsolerepair.blogspot.com" target="_blank" rel="noopener" class="text-info text-decoration-none fw-bold d-flex align-items-center justify-content-center gap-2">
-                            <span>Don't see your issue listed? View Full Price Details & Repair Blog</span>
-                            <i class="fas fa-arrow-right small"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -360,55 +348,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Review Randomization Engine -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const reviewPool = [
-                { text: "Outstanding service. Sorted out my PS5 HDMI interface port in less than an hour straight from his vehicle workspace.", author: "Chris M.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "My Series X was cutting out constantly. Full internal clean and thermal swap out handled perfectly. Dead quiet fan now.", author: "Sarah T.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "Quick booking, clear upfront pricing options, and zero hassle. True professional level diagnostics configuration outside the house.", author: "Dave K.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "Sorted out my Switch line filter issue the same afternoon. Completely transparent pricing and solid communication throughout.", author: "Liam B.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "Top-tier diagnostic setup. Had my console back up and running without sending it away for weeks. Absolute lifesaver.", author: "Rebecca W.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "Excellent service on a tricky motherboard tracing fault. Highly recommend if you want things done properly the first time.", author: "Marcus P.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "Unbelievable turn around. Dropped off a completely dead PS5 with a liquid metal leak, picked it up fixed an hour later.", author: "James L.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "Brilliant mobile setup. Saved me the nightmare of packaging up my Xbox Series X and posting it off. Super clean job.", author: "Daniel K.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "Fixed the drift on my Switch Joy-Cons and swapped out a broken charge port. Fair pricing and genuinely nice guy.", author: "Chloe H.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "Had an overheating error message popping up on my PS5 within minutes of starting games. Full service sorted it completely.", author: "Tom W.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "Very knowledgeable and professional console technician. Identified the short circuit on my motherboard instantly. 10/10.", author: "Alex R.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "Fast, local, and honest. Explained exactly what went wrong with the disc drive and fixed it on the spot. Couldn't ask for more.", author: "Megan S.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "My son's PS5 had a mangled HDMI port. Fixed within an hour perfectly. Life saver for the weekend gaming session!", author: "Gary T.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "Superb fault-finding skills. Fixed a complex power rail issue on my Xbox motherboard that others wouldn't touch.", author: "Simon D.", link: "https://share.google/Bdw1pzQSV9HAx55fm" },
-                { text: "Professional, clean workshop environment and fantastic communication. The only place to go for console repairs in Essex.", author: "Harvey B.", link: "https://share.google/Bdw1pzQSV9HAx55fm" }
-            ];
-
-            for (let i = reviewPool.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [reviewPool[i], reviewPool[j]] = [reviewPool[j], reviewPool[i]];
-            }
-
-            const selectedReviews = reviewPool.slice(0, 3);
-            const target = document.getElementById("reviews-target");
-            const escapeHtml = (str) => str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-
-            target.innerHTML = selectedReviews.map(review => `
-                <div class="col-md-4 col-sm-10">
-                    <div class="hero-review-card">
-                        <div class="stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="small text-white-50 m-0" style="font-size: 0.85rem;">&ldquo;${escapeHtml(review.text)}&rdquo;</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="fw-bold text-white" style="font-size: 0.75rem;">${escapeHtml(review.author)}</span>
-                            <a href="${review.link}" target="_blank" class="text-info text-decoration-none" style="font-size: 0.7 shadow-sm;">
-                                Google Source <i class="fas fa-external-link-alt ms-1"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        });
-    </script>
 
     <!-- Clean Blogger JSON Feed Engine -->
     <script>
@@ -491,18 +430,18 @@
         document.addEventListener("DOMContentLoaded", () => {
             const script = document.createElement('script');
             script.src = blogFeedUrl;
-            // Fallback display panel if script blocks or times out completely
+            
             script.onerror = () => {
                 const feedContainer = document.getElementById("blog-feed-target");
-                feedContainer.innerHTML = `
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-feed-card">
-                            <div class="blog-date-badge"><i class="fas fa-history me-1"></i> REPAIR LOGS</div>
-                            <h3 class="h6 text-white fw-bold mb-3 flex-grow-1">View Recent Workshop Logs & Repairs</h3>
-                            <a href="https://essexconsolerepair.blogspot.com" target="_blank" rel="noopener" class="text-info text-decoration-none small fw-bold mt-auto">Open Repair Blog <i class="fas fa-chevron-right ms-1"></i></a>
-                        </div>
-                    </div>
-                `;
+                if (feedContainer) {
+                    feedContainer.innerHTML = `
+                        <div class="col-10 text-center py-4">
+                            <p class="text-muted small mb-2">Unable to load live repair logs directly.</p>
+                            <a href="https://essexconsolerepair.blogspot.com" target="_blank" rel="noopener" class="text-info small text-decoration-none fw-bold">
+                                Browse Workshop History Blog <i class="fas fa-external-link-alt ms-1"></i>
+                            </a>
+                        </div>`;
+                }
             };
             document.body.appendChild(script);
         });
