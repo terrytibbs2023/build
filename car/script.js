@@ -1,6 +1,6 @@
 const { jsPDF } = window.jspdf;
 
-// --- MOBILE INTERACTION & NAVIGATION ---
+// --- TAB SELECTION ENGINE ---
 const tabIntake = document.getElementById('tabIntake');
 const tabAfterJob = document.getElementById('tabAfterJob');
 const intakeForm = document.getElementById('repairForm');
@@ -20,7 +20,35 @@ tabAfterJob.addEventListener('click', () => {
     intakeForm.classList.remove('active');
 });
 
-// --- AUTOMATIC INTAKE SYMPTOM INJECTION ---
+// --- FORCE IMMUTABLE UK DATE STRINGS ---
+function getUKDate() {
+    const date = new Date();
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
+// --- SECURE DOWNLOAD CONTROLLER FOR MOBILE BROWSERS ---
+function triggerMobileFriendlyDownload(pdfDoc, filename) {
+    try {
+        // Standard baseline call
+        pdfDoc.save(filename);
+    } catch (e) {
+        // Fallback execution stack for strict mobile sandboxes
+        const blob = pdfDoc.output('blob');
+        const blobUrl = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+    }
+}
+
+// --- SYMPTOM GENERATOR INTAKE SHORTCUTS ---
 const faultTags = document.getElementById('faultTags');
 const issueTextarea = document.getElementById('issue');
 
@@ -34,7 +62,7 @@ if (faultTags) {
     });
 }
 
-// --- PHOTO PROCESSING FOR REPORTING ---
+// --- IMAGE PIPELINE LOGIC ---
 let uploadedImagesBase64 = [];
 const jobPhotosInput = document.getElementById('jobPhotos');
 const photoPreviewContainer = document.getElementById('photoPreviewContainer');
@@ -51,7 +79,6 @@ jobPhotosInput.addEventListener('change', (e) => {
                 const base64String = event.target.result;
                 uploadedImagesBase64.push(base64String);
 
-                // Add phone preview block
                 const img = document.createElement('img');
                 img.src = base64String;
                 photoPreviewContainer.appendChild(img);
@@ -61,7 +88,7 @@ jobPhotosInput.addEventListener('change', (e) => {
     }
 });
 
-// --- GENERATE INTAKE DOCUMENTATION ---
+// --- INTAKE FORM GENERATION ---
 intakeForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const doc = new jsPDF();
@@ -72,7 +99,7 @@ intakeForm.addEventListener('submit', (e) => {
     
     doc.setFontSize(12);
     doc.setFont("helvetica", "normal");
-    doc.text(`Date: ${new Date().toLocaleDateString()}`, 15, 30);
+    doc.text(`Date: ${getUKDate()}`, 15, 30);
     doc.text(`Taken In By: ${document.getElementById('takenInBy').value}`, 15, 40);
     doc.text(`Console: ${document.getElementById('consoleMake').value} - ${document.getElementById('consoleModel').value}`, 15, 50);
     
@@ -83,10 +110,11 @@ intakeForm.addEventListener('submit', (e) => {
     const splitIssue = doc.splitTextToSize(issueTextarea.value, 180);
     doc.text(splitIssue, 15, 75);
     
-    doc.save(`Intake_${document.getElementById('consoleModel').value.replace(/\s+/g, '_')}.pdf`);
+    const cleanModelName = document.getElementById('consoleModel').value.replace(/\s+/g, '_');
+    triggerMobileFriendlyDownload(doc, `Intake_${cleanModelName}.pdf`);
 });
 
-// --- GENERATE AFTER JOB RESOLUTION DOCUMENTATION ---
+// --- AFTER JOB REPORT GENERATION ---
 afterJobForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const doc = new jsPDF();
@@ -101,7 +129,7 @@ afterJobForm.addEventListener('submit', (e) => {
 
     doc.setFontSize(12);
     doc.setFont("helvetica", "normal");
-    doc.text(`Date Completed: ${new Date().toLocaleDateString()}`, 15, 30);
+    doc.text(`Date Completed: ${getUKDate()}`, 15, 30);
     doc.text(`Device: ${make} - ${model}`, 15, 40);
 
     doc.setFont("helvetica", "bold");
@@ -143,5 +171,6 @@ afterJobForm.addEventListener('submit', (e) => {
         });
     }
 
-    doc.save(`Fixed_${model.replace(/\s+/g, '_')}.pdf`);
+    const cleanModelName = model.replace(/\s+/g, '_');
+    triggerMobileFriendlyDownload(doc, `Fixed_${cleanModelName}.pdf`);
 });

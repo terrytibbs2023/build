@@ -13,59 +13,64 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-main);
   margin: 0;
-  padding: 15px;
+  padding: 10px;
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .container {
   width: 100%;
   max-width: 480px;
   background-color: var(--surface-dark);
-  padding: 20px;
+  padding: 16px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
 }
 
 h1 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   text-align: center;
-  margin-top: 0;
+  margin-top: 5px;
   margin-bottom: 20px;
   color: var(--text-main);
 }
 
-/* Premium Mobile Toggle Control */
+/* Fixed Mobile Toggle Control */
 .toggle-switch-container {
   display: flex;
   background-color: #2b2b2b;
-  padding: 4px;
+  padding: 3px;
   border-radius: 30px;
   margin-bottom: 25px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .toggle-btn {
-  flex: 1;
-  padding: 10px 0;
+  flex: 1 1 50%; /* Force equal 50/50 sizing on mobile frames */
+  padding: 12px 5px;
   background: none;
   border: none;
   color: var(--text-muted);
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
+  white-space: nowrap; /* Prevents text breaking into two lines on small phones */
   cursor: pointer;
   border-radius: 25px;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
+  text-align: center;
   -webkit-tap-highlight-color: transparent;
 }
 
 .toggle-btn.active {
   background-color: var(--primary-color);
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 86, 179, 0.4);
+  box-shadow: 0 2px 6px rgba(0, 86, 179, 0.4);
 }
 
-/* Form Structural Elements */
+/* Form Layout Frameworks */
 .form-section {
   display: none;
 }
@@ -75,7 +80,7 @@ h1 {
 }
 
 .form-group {
-  margin-bottom: 18px;
+  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
 }
@@ -83,11 +88,11 @@ h1 {
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 label {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-muted);
   margin-bottom: 6px;
@@ -105,7 +110,7 @@ input[type="text"], select, textarea {
   outline: none;
   box-sizing: border-box;
   width: 100%;
-  transition: border-color 0.2s;
+  -webkit-appearance: none; /* Strips custom default mobile safari styling overrides */
 }
 
 input[type="text"]:focus, select:focus, textarea:focus {
@@ -117,7 +122,6 @@ input[type="text"]:focus, select:focus, textarea:focus {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 4px;
 }
 
 .tag-btn {
@@ -128,11 +132,6 @@ input[type="text"]:focus, select:focus, textarea:focus {
   border-radius: 20px;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.tag-btn:active {
-  background-color: #3a3a3a;
 }
 
 /* Media Uploader UX Elements */
@@ -147,18 +146,13 @@ input[type="text"]:focus, select:focus, textarea:focus {
   font-size: 0.95rem;
   width: 100%;
   text-align: center;
-  transition: background-color 0.2s;
-}
-
-.file-custom-btn:active {
-  background-color: #444444;
 }
 
 .preview-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-top: 12px;
+  gap: 6px;
+  margin-top: 10px;
 }
 
 .preview-grid img {
@@ -181,11 +175,11 @@ input[type="text"]:focus, select:focus, textarea:focus {
   cursor: pointer;
   width: 100%;
   margin-top: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
 }
 
 .submit-btn:active {
-  transform: scale(0.98);
+  transform: scale(0.99);
 }
 
 .success-btn {
