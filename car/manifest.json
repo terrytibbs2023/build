@@ -1,0 +1,17 @@
+{
+  "name": "Essex Console Repair Intake",
+  "short_name": "ECR Intake",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://imagecdn.websitebuilder.prositehosting.co.uk/22/3e/223ef076-9a2d-4062-98c2-25f95c7952d0.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
