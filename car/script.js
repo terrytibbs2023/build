@@ -1,36 +1,62 @@
-const { jsPDF } = window.jspdf;
+window.onload = () => {
+  const { jsPDF } = window.jspdf;
+  
+  // Elements for Form 1 (Intake)
+  const form = document.getElementById("repairForm");
+  const takenInByInput = document.getElementById("takenInBy");
+  const issueTextarea = document.getElementById("issue");
+  const tagContainer = document.getElementById("faultTags");
 
-// --- TAB SELECTION ENGINE (UNCHANGED) ---
-const tabIntake = document.getElementById('tabIntake');
-const tabAfterJob = document.getElementById('tabAfterJob');
-const intakeForm = document.getElementById('repairForm');
-const afterJobForm = document.getElementById('afterJobForm');
+  // Elements for Form 2 (After Job Report)
+  const afterJobForm = document.getElementById("afterJobForm");
+  const jobPhotosInput = document.getElementById("jobPhotos");
+  const photoPreviewContainer = document.getElementById("photoPreviewContainer");
 
-tabIntake.addEventListener('click', () => {
-    tabIntake.classList.add('active');
-    tabAfterJob.classList.remove('active');
-    intakeForm.classList.add('active');
-    afterJobForm.classList.remove('active');
-});
+  // Elements for Mode Switcher Tabs
+  const tabIntake = document.getElementById('tabIntake');
+  const tabAfterJob = document.getElementById('tabAfterJob');
 
-tabAfterJob.addEventListener('click', () => {
-    tabAfterJob.classList.add('active');
-    tabIntake.classList.remove('active');
-    afterJobForm.classList.add('active');
-    intakeForm.classList.remove('active');
-});
+  // --- TAB SELECTION ENGINE ---
+  if (tabIntake && tabAfterJob) {
+    tabIntake.addEventListener('click', () => {
+        tabIntake.classList.add('active');
+        tabAfterJob.classList.remove('active');
+        form.classList.add('active');
+        afterJobForm.classList.remove('active');
+    });
 
-// --- FORCE IMMUTABLE UK DATE STRINGS (UNCHANGED) ---
-function getUKDate() {
-    const date = new Date();
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-}
+    tabAfterJob.addEventListener('click', () => {
+        tabAfterJob.classList.add('active');
+        tabIntake.classList.remove('active');
+        afterJobForm.classList.add('active');
+        form.classList.remove('active');
+    });
+  }
 
-// --- SECURE DOWNLOAD CONTROLLER FOR MOBILE BROWSERS (UNCHANGED) ---
-function triggerMobileFriendlyDownload(pdfDoc, filename) {
+  // Load saved technician name from localStorage if available
+  if (localStorage.getItem("ecr_techName") && takenInByInput) {
+    takenInByInput.value = localStorage.getItem("ecr_techName");
+  }
+
+  // Quick-click tag logic - targets the textarea smoothly
+  if (tagContainer) {
+    tagContainer.addEventListener("click", (e) => {
+      if (e.target.classList.contains("tag-btn")) {
+        const faultText = e.target.getAttribute("data-fault");
+        let currentText = issueTextarea.value.trim();
+        
+        if (currentText === "") {
+          issueTextarea.value = faultText;
+        } else if (!currentText.includes(faultText)) {
+          issueTextarea.value = currentText + ", " + faultText;
+        }
+        issueTextarea.focus();
+      }
+    });
+  }
+
+  // --- MOBILE-SAFE FILE DOWNLOAD ENGINE ---
+  function triggerMobileFriendlyDownload(pdfDoc, filename) {
     try {
         pdfDoc.save(filename);
     } catch (e) {
@@ -44,170 +70,274 @@ function triggerMobileFriendlyDownload(pdfDoc, filename) {
         document.body.removeChild(link);
         URL.revokeObjectURL(blobUrl);
     }
-}
+  }
 
-// --- SYMPTOM GENERATOR INTAKE SHORTCUTS (UNCHANGED) ---
-const faultTags = document.getElementById('faultTags');
-const issueTextarea = document.getElementById('issue');
+  // --- PROTO-IMAGE PIPELINE FOR AFTER JOB ---
+  let uploadedImagesData = [];
+  if (jobPhotosInput) {
+    jobPhotosInput.addEventListener('change', (e) => {
+        photoPreviewContainer.innerHTML = '';
+        uploadedImagesData = [];
+        const files = e.target.files;
 
-if (faultTags) {
-    faultTags.addEventListener('click', (e) => {
-        if (e.target.classList.contains('tag-btn')) {
-            const fault = e.target.getAttribute('data-fault');
-            if (issueTextarea.value.includes(fault)) return;
-            issueTextarea.value += (issueTextarea.value ? ', ' : '') + fault;
+        if (files) {
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const base64String = event.target.result;
+                    const tempImg = new Image();
+                    tempImg.onload = function() {
+                        uploadedImagesData.push({
+                            base64: base64String,
+                            width: tempImg.width,
+                            height: tempImg.height
+                        });
+                        const imgPreview = document.createElement('img');
+                        imgPreview.src = base64String;
+                        photoPreviewContainer.appendChild(imgPreview);
+                    };
+                    tempImg.src = base64String;
+                };
+                reader.readAsDataURL(file);
+            });
         }
     });
-}
+  }
 
-// --- IMAGE PIPELINE LOGIC (UNCHANGED) ---
-// This part handles the photo preview on the screen (the HTML grid)
-let uploadedImagesData = []; // Store base64 AND original dimensions
-const jobPhotosInput = document.getElementById('jobPhotos');
-const photoPreviewContainer = document.getElementById('photoPreviewContainer');
+  // ==========================================
+  // --- 1. YOUR ORIGINAL INTAKE RECEIPT ENGINE ---
+  // ==========================================
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-jobPhotosInput.addEventListener('change', (e) => {
-    photoPreviewContainer.innerHTML = '';
-    uploadedImagesData = [];
-    const files = e.target.files;
+    const takenInBy = takenInByInput.value.trim();
+    const consoleMake = document.getElementById("consoleMake").value;
+    const consoleModel = document.getElementById("consoleModel").value;
+    const issue = issueTextarea.value.trim();
 
-    if (files) {
-        Array.from(files).forEach(file => {
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const base64String = event.target.result;
+    // Save name for next layout
+    localStorage.setItem("ecr_techName", takenInBy);
 
-                // Load image into a temporary JS Image object to get dimensions
-                const tempImg = new Image();
-                tempImg.onload = function() {
-                    uploadedImagesData.push({
-                        base64: base64String,
-                        width: tempImg.width,   // Original Pixel Width
-                        height: tempImg.height  // Original Pixel Height
-                    });
+    // Job Number Engine: ecrDDMMYYHHmm
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = String(now.getFullYear()).slice(-2);
+    const fullYear = now.getFullYear();
+    const hour = String(now.getHours()).padStart(2, '0');
+    const minute = String(now.getMinutes()).padStart(2, '0');
+    const jobNumber = `ecr${day}${month}${year}${hour}${minute}`;
+    const todayStr = `${day}/${month}/${fullYear}`;
 
-                    // Add phone preview block (CSS already handles aspect ratio here)
-                    const imgPreview = document.createElement('img');
-                    imgPreview.src = base64String;
-                    photoPreviewContainer.appendChild(imgPreview);
-                };
-                tempImg.src = base64String;
-            };
-            reader.readAsDataURL(file);
-        });
+    const doc = new jsPDF();
+    const startY = 15; // Top alignment margin
+
+    // Branding Header
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(14);
+    doc.setTextColor(2, 132, 199); // Sky blue brand color
+    doc.text("Essex Console Repair", 10, startY);
+    
+    doc.setFontSize(10);
+    doc.setFont("Helvetica", "normal");
+    doc.setTextColor(80, 80, 80);
+    doc.text("Orchard Business Units, Cockaynes Lane, Colchester, CO7 8BZ", 10, startY + 5);
+    doc.text("Tel: 07935312274 | Web: essexconsolerepair.co.uk", 10, startY + 10);
+
+    // Section Marker
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(9);
+    doc.setTextColor(120, 120, 120);
+    doc.text("CUSTOMER RECEIPT", 155, startY);
+
+    // Metadata Block Divider line
+    doc.setDrawColor(200, 200, 200);
+    doc.setLineWidth(0.5);
+    doc.line(10, startY + 14, 200, startY + 14);
+
+    // Metadata Grid details
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("Helvetica", "bold");
+    doc.text(`Job Number:`, 10, startY + 21);
+    doc.setFont("Helvetica", "normal");
+    doc.text(jobNumber, 38, startY + 21);
+
+    doc.setFont("Helvetica", "bold");
+    doc.text(`Date Intake:`, 110, startY + 21);
+    doc.setFont("Helvetica", "normal");
+    doc.text(todayStr, 138, startY + 21);
+
+    doc.setFont("Helvetica", "bold");
+    doc.text(`Device Details:`, 10, startY + 28);
+    doc.setFont("Helvetica", "normal");
+    doc.text(`${consoleMake} - ${consoleModel}`, 42, startY + 28);
+
+    doc.setFont("Helvetica", "bold");
+    doc.text(`Booked In By:`, 110, startY + 28);
+    doc.setFont("Helvetica", "normal");
+    doc.text(takenInBy, 138, startY + 28);
+
+    // Issue Container Block
+    doc.setFont("Helvetica", "bold");
+    doc.text("Reported Diagnostics / Faults Summary:", 10, startY + 38);
+    
+    doc.setDrawColor(220, 225, 230);
+    doc.setFillColor(248, 250, 252);
+    doc.rect(10, startY + 41, 190, 45, "FD");
+    
+    doc.setFont("Helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(30, 41, 59);
+    doc.text(issue, 13, startY + 47, { maxWidth: 184 });
+
+    // Instantly download the file safely on desktop + mobile web containers
+    triggerMobileFriendlyDownload(doc, `Repair_Job_${jobNumber}.pdf`);
+
+    // Dynamic UI Success Notification Pop
+    let feedbackArea = document.getElementById("pdfPreviewContainer");
+    if (!feedbackArea) {
+      feedbackArea = document.createElement("div");
+      feedbackArea.id = "pdfPreviewContainer";
+      feedbackArea.style.marginTop = "20px";
+      feedbackArea.style.textAlign = "center";
+      form.parentNode.appendChild(feedbackArea);
     }
-});
 
-// --- INTAKE FORM GENERATION (UNCHANGED) ---
-intakeForm.addEventListener('submit', (e) => {
+    feedbackArea.innerHTML = `
+      <div style="background-color: #10b981; color: white; padding: 12px; border-radius: 8px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        ✅ Job Generated & Downloaded: ${jobNumber}
+      </div>
+    `;
+    setTimeout(() => {
+      feedbackArea.innerHTML = "";
+    }, 4000);
+
+    // Reset layout form options
+    issueTextarea.value = "";
+    document.getElementById("consoleMake").value = "";
+    document.getElementById("consoleModel").value = "";
+  });
+
+
+  // ==========================================
+  // --- 2. AFTER JOB COMPLETION RECEIPT ENGINE ---
+  // ==========================================
+  afterJobForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const doc = new jsPDF();
-    
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(20);
-    doc.text("Essex Console Repair - Booking Intake", 15, 20);
-    
-    doc.setFontSize(12);
-    doc.setFont("helvetica", "normal");
-    doc.text(`Date: ${getUKDate()}`, 15, 30);
-    doc.text(`Taken In By: ${document.getElementById('takenInBy').value}`, 15, 40);
-    doc.text(`Console: ${document.getElementById('consoleMake').value} - ${document.getElementById('consoleModel').value}`, 15, 50);
-    
-    doc.setFont("helvetica", "bold");
-    doc.text("Reported Issues:", 15, 65);
-    doc.setFont("helvetica", "normal");
-    
-    const splitIssue = doc.splitTextToSize(issueTextarea.value, 180);
-    doc.text(splitIssue, 15, 75);
-    
-    const cleanModelName = document.getElementById('consoleModel').value.replace(/\s+/g, '_');
-    triggerMobileFriendlyDownload(doc, `Intake_${cleanModelName}.pdf`);
-});
-
-// --- AFTER JOB REPORT GENERATION (UPDATED FOR ASPECT RATIO) ---
-afterJobForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const doc = new jsPDF();
+    const startY = 15;
 
     const make = document.getElementById('jobConsoleMake').value;
     const model = document.getElementById('jobConsoleModel').value;
     const notes = document.getElementById('repairNotes').value;
 
-    doc.setFont("helvetica", "bold");
-    doc.setFontSize(20);
-    doc.text("Essex Console Repair - Job Completion Report", 15, 20);
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const fullYear = now.getFullYear();
+    const todayStr = `${day}/${month}/${fullYear}`;
 
-    doc.setFontSize(12);
-    doc.setFont("helvetica", "normal");
-    doc.text(`Date Completed: ${getUKDate()}`, 15, 30);
-    doc.text(`Device: ${make} - ${model}`, 15, 40);
-
-    doc.setFont("helvetica", "bold");
-    doc.text("Technical Repair Notes:", 15, 55);
-    doc.setFont("helvetica", "normal");
+    // Maintain matching brand styles
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(14);
+    doc.setTextColor(2, 132, 199); // Sky blue brand color
+    doc.text("Essex Console Repair", 10, startY);
     
-    const splitNotes = doc.splitTextToSize(notes, 180);
-    doc.text(splitNotes, 15, 65);
+    doc.setFontSize(10);
+    doc.setFont("Helvetica", "normal");
+    doc.setTextColor(80, 80, 80);
+    doc.text("Orchard Business Units, Cockaynes Lane, Colchester, CO7 8BZ", 10, startY + 5);
+    doc.text("Tel: 07935312274 | Web: essexconsolerepair.co.uk", 10, startY + 10);
 
-    // Initial Y position for images (adjust based on note length)
-    let currentY = 65 + (splitNotes.length * 7) + 10; 
+    doc.setFont("Helvetica", "bold");
+    doc.setFontSize(9);
+    doc.setTextColor(120, 120, 120);
+    doc.text("JOB COMPLETION REPORT", 145, startY);
 
-    // Target width for photos (mm) in the PDF grid
+    doc.setDrawColor(200, 200, 200);
+    doc.setLineWidth(0.5);
+    doc.line(10, startY + 14, 200, startY + 14);
+
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.setFont("Helvetica", "bold");
+    doc.text(`Date Completed:`, 10, startY + 21);
+    doc.setFont("Helvetica", "normal");
+    doc.text(todayStr, 42, startY + 21);
+
+    doc.setFont("Helvetica", "bold");
+    doc.text(`Device Details:`, 10, startY + 28);
+    doc.setFont("Helvetica", "normal");
+    doc.text(`${make} - ${model}`, 42, startY + 28);
+
+    doc.setFont("Helvetica", "bold");
+    doc.text("Technical Repair Notes & Work Carried Out:", 10, startY + 38);
+
+    const splitNotes = doc.splitTextToSize(notes, 184);
+    
+    // Draw fluid size container box dynamically behind text to match layout specs
+    const calculatedBoxHeight = Math.max(45, (splitNotes.length * 6) + 10);
+    doc.setDrawColor(220, 225, 230);
+    doc.setFillColor(248, 250, 252);
+    doc.rect(10, startY + 41, 190, calculatedBoxHeight, "FD");
+
+    doc.setFont("Helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(30, 41, 59);
+    doc.text(splitNotes, 13, startY + 47);
+
+    let currentY = startY + 41 + calculatedBoxHeight + 12;
     const targetWidthMM = 80;
 
     if (uploadedImagesData.length > 0) {
-        doc.setFont("helvetica", "bold");
-        doc.text("Job Documentation Photos:", 15, currentY);
-        currentY += 10;
+        doc.setFont("Helvetica", "bold");
+        doc.setFontSize(11);
+        doc.setTextColor(0, 0, 0);
+        doc.text("Job Documentation Photos:", 10, currentY);
+        currentY += 6;
 
-        let xOffset = 15;
-        let maxRowHeight = 0; // Keep track of the tallest image in the current row
+        let xOffset = 10;
+        let maxRowHeight = 0;
 
         uploadedImagesData.forEach((imageData) => {
-            // --- ASPECT RATIO CALCULATION ---
-            // Calculate the height needed to maintain the original aspect ratio
             const aspectRatio = imageData.width / imageData.height;
             const dynamicHeightMM = targetWidthMM / aspectRatio;
 
-            // Update maxRowHeight if this image is the tallest in the row so far
             if (dynamicHeightMM > maxRowHeight) {
                 maxRowHeight = dynamicHeightMM;
             }
 
-            // --- PAGE/ROW FLOW LOGIC ---
-            // 1. Row Overflow Check: If this image exceeds the right page margin (195mm baseline), start a new row
-            if (xOffset + targetWidthMM > 195) {
-                xOffset = 15; // Reset X to the left margin
-                currentY += maxRowHeight + 10; // Move Y down by the tallest image height + padding
-                maxRowHeight = 0; // Reset maxRowHeight for the new row
-
-                // Recalculate dynamicHeightMM again as maxRowHeight was reset
-                const freshAspectRatio = imageData.width / imageData.height;
-                maxRowHeight = targetWidthMM / freshAspectRatio;
+            if (xOffset + targetWidthMM > 200) {
+                xOffset = 10;
+                currentY += maxRowHeight + 8;
+                maxRowHeight = dynamicHeightMM;
             }
 
-            // 2. Page Overflow Check: If this image exceeds the bottom page margin (280mm baseline), add a new page
-            // We use currentY + dynamicHeightMM to be precise
             if (currentY + dynamicHeightMM > 280) {
                 doc.addPage();
-                currentY = 20; // Reset Y near the top of the new page
-                xOffset = 15; // Reset X to the left margin
+                currentY = 20;
+                xOffset = 10;
             }
 
-            // --- IMAGE INSERTION ---
             try {
-                // Use JPEG format by default, fallback later if needed
                 doc.addImage(imageData.base64, 'JPEG', xOffset, currentY, targetWidthMM, dynamicHeightMM);
             } catch (err) {
-                // Fallback for PNG/Other formats if JPEG conversion failed
                 doc.addImage(imageData.base64, 'PNG', xOffset, currentY, targetWidthMM, dynamicHeightMM);
             }
 
-            // --- UPDATE POSITION FOR NEXT IMAGE ---
-            xOffset += targetWidthMM + 10; // Move X right by the image width + padding
+            xOffset += targetWidthMM + 8; 
         });
     }
 
     const cleanModelName = model.replace(/\s+/g, '_');
     triggerMobileFriendlyDownload(doc, `Fixed_${cleanModelName}.pdf`);
-});
+
+    // Reset After Job forms options cleanly after completion
+    document.getElementById("repairNotes").value = "";
+    document.getElementById("jobConsoleMake").value = "";
+    document.getElementById("jobConsoleModel").value = "";
+    photoPreviewContainer.innerHTML = "";
+    uploadedImagesData = [];
+  });
+};
