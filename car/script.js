@@ -191,7 +191,7 @@ window.onload = () => {
     doc.setTextColor(30, 41, 59);
     doc.text(issue, 13, startY + 47, { maxWidth: 184 });
 
-    // Instantly download the file safely on desktop + mobile web containers
+    // Instantly download the file safely using your exact original filename format
     triggerMobileFriendlyDownload(doc, `Repair_Job_${jobNumber}.pdf`);
 
     // Dynamic UI Success Notification Pop
@@ -225,12 +225,28 @@ window.onload = () => {
   // ==========================================
   afterJobForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const doc = new jsPDF();
-    const startY = 15;
 
     const make = document.getElementById('jobConsoleMake').value;
     const model = document.getElementById('jobConsoleModel').value;
     const notes = document.getElementById('repairNotes').value;
+
+    // Prompt user to customize the report's filename
+    let userFileName = prompt("Enter a filename for the Completion PDF:", `Fixed_${model.replace(/\s+/g, '_')}`);
+    
+    // Fallback default if user hits cancel or clears the prompt field
+    if (!userFileName || userFileName.trim() === "") {
+        userFileName = `Fixed_${model.replace(/\s+/g, '_')}`;
+    } else {
+        userFileName = userFileName.trim().replace(/\s+/g, '_');
+    }
+    
+    // Ensure the filename extension is explicitly .pdf
+    if (!userFileName.toLowerCase().endsWith(".pdf")) {
+        userFileName += ".pdf";
+    }
+
+    const doc = new jsPDF();
+    const startY = 15;
 
     const now = new Date();
     const day = String(now.getDate()).padStart(2, '0');
@@ -241,7 +257,7 @@ window.onload = () => {
     // Maintain matching brand styles
     doc.setFont("Helvetica", "bold");
     doc.setFontSize(14);
-    doc.setTextColor(2, 132, 199); // Sky blue brand color
+    doc.setTextColor(2, 132, 199); 
     doc.text("Essex Console Repair", 10, startY);
     
     doc.setFontSize(10);
@@ -276,7 +292,6 @@ window.onload = () => {
 
     const splitNotes = doc.splitTextToSize(notes, 184);
     
-    // Draw fluid size container box dynamically behind text to match layout specs
     const calculatedBoxHeight = Math.max(45, (splitNotes.length * 6) + 10);
     doc.setDrawColor(220, 225, 230);
     doc.setFillColor(248, 250, 252);
@@ -330,8 +345,7 @@ window.onload = () => {
         });
     }
 
-    const cleanModelName = model.replace(/\s+/g, '_');
-    triggerMobileFriendlyDownload(doc, `Fixed_${cleanModelName}.pdf`);
+    triggerMobileFriendlyDownload(doc, userFileName);
 
     // Reset After Job forms options cleanly after completion
     document.getElementById("repairNotes").value = "";
