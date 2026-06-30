@@ -1,267 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Your Repair | Essex Console Repair</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+/* Existing root and global styles stay the same */
 
-    <style>
-        :root { 
-            --primary-glow: #00d4ff; 
-            --dark-bg: #0f0f0f; 
-            --card-bg: #141414;
-        }
-        body { 
-            background-color: var(--dark-bg); 
-            color: #fff; 
-            font-family: 'Roboto', sans-serif; 
-            padding: 30px 0;
-        }
-        h1, h2, label { 
-            font-family: 'Orbitron', sans-serif; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-        }
-        .glow-text { 
-            color: var(--primary-glow); 
-            text-shadow: 0 0 8px rgba(0, 212, 255, 0.4); 
-        }
-        .booking-card {
-            background: linear-gradient(145deg, #141414 0%, #0b0b0b 100%);
-            border: 1px solid #222;
-            border-top: 3px solid var(--primary-glow);
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
-        }
-        .form-control, .form-select {
-            background-color: #1a1a1a;
-            border: 1px solid #333;
-            color: #fff;
-            padding: 12px;
-        }
-        .form-control:focus, .form-select:focus {
-            background-color: #222;
-            border-color: var(--primary-glow);
-            color: #fff;
-            box-shadow: 0 0 8px rgba(0, 212, 255, 0.25);
-        }
-        .form-label {
-            font-size: 0.85rem;
-            color: #ccc; /* Lightened up from #aaa */
-            margin-bottom: 8px;
-        }
-        .text-light-muted {
-            color: #b3b3b3 !important; /* Brighter fallback for Bootstrap text-muted */
-        }
-        .btn-submit {
-            background: var(--primary-glow);
-            color: #000;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            border: none;
-            padding: 15px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-        }
-        .btn-submit:hover {
-            background: #00b0d4;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-            transform: translateY(-2px);
-            color: #000;
-        }
-        .success-icon {
-            font-size: 4rem;
-            color: #25D366;
-            text-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
-        }
-    </style>
-</head>
-<body>
+:root { 
+    --primary-glow: #00d4ff; 
+    --dark-bg: #0f0f0f; 
+    --card-bg: #141414;
+}
+body { 
+    background-color: var(--dark-bg); 
+    color: #fff; 
+    font-family: 'Roboto', sans-serif; 
+    padding: 30px 0;
+}
+h1, h2, label { 
+    font-family: 'Orbitron', sans-serif; 
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+}
+.glow-text { 
+    color: var(--primary-glow); 
+    text-shadow: 0 0 8px rgba(0, 212, 255, 0.4); 
+}
+.booking-card {
+    background: linear-gradient(145deg, #141414 0%, #0b0b0b 100%);
+    border: 1px solid #222;
+    border-top: 3px solid var(--primary-glow);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+.form-control, .form-select {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 12px;
+}
+.form-control:focus, .form-select:focus {
+    background-color: #222;
+    border-color: var(--primary-glow);
+    color: #fff;
+    box-shadow: 0 0 8px rgba(0, 212, 255, 0.25);
+}
+.form-label {
+    font-size: 0.85rem;
+    color: #ccc; 
+    margin-bottom: 8px;
+}
+.text-light-muted {
+    color: #b3b3b3 !important; 
+}
+.btn-submit {
+    background: var(--primary-glow);
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    border: none;
+    padding: 15px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+.btn-submit:hover {
+    background: #00b0d4;
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+    transform: translateY(-2px);
+    color: #000;
+}
+.success-icon {
+    font-size: 4rem;
+    color: #25D366;
+    text-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
+}
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-7 col-md-9">
-            
-            <!-- Header Title: Set to white-space nowrap to keep on one line -->
-            <div class="text-center mb-4">
-                <h1 class="h2 fw-bold m-0 text-nowrap">Essex <span class="glow-text">Console</span> Repair</h1>
-                <p class="text-light-muted small mt-1">Doorstep Service Booking Details</p>
-            </div>
-
-            <!-- Booking Form Card Component -->
-            <div class="booking-card" id="formContainer">
-                <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
-                    
-                    <div class="mb-3">
-                        <label for="custName" class="form-label">Your Name</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-dark border-secondary text-light-muted"><i class="fas fa-user"></i></span>
-                            <input type="text" class="form-control" id="custName" required placeholder="e.g. John Smith">
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="custPhone" class="form-label">Contact Phone Number</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-dark border-secondary text-light-muted"><i class="fas fa-phone"></i></span>
-                            <input type="tel" class="form-control" id="custPhone" required placeholder="e.g. 07123 456789">
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="custAddress" class="form-label">Full Doorstep Address & Postcode</label>
-                        <div class="input-group">
-                            <span class="input-group-text bg-dark border-secondary text-light-muted"><i class="fas fa-map-marker-alt"></i></span>
-                            <textarea class="form-control" id="custAddress" rows="2" required placeholder="Street address, Town, and Postcode"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="consoleType" class="form-label">Select Console</label>
-                        <select class="form-select" id="consoleType" required onchange="toggleIssueBox()">
-                            <option value="" disabled selected>Choose Hardware...</option>
-                            <option value="PlayStation 5">PlayStation 5</option>
-                            <option value="Xbox Series X">Xbox Series X</option>
-                            <option value="Nintendo Switch">Nintendo Switch</option>
-                            <option value="Other / Not Listed">Other Console</option>
-                        </select>
-                    </div>
-
-                    <!-- Simplified Direct Text Input for Issues -->
-                    <div class="mb-3 d-none" id="customIssueContainer">
-                        <label for="customIssueText" class="form-label">What's going wrong?</label>
-                        <textarea class="form-control" id="customIssueText" rows="3" placeholder="Tell us a bit more about the issue (e.g., HDMI port broken, overheating, won't turn on)..."></textarea>
-                    </div>
-
-                    <div class="row g-3 mb-4">
-                        <div class="col-6">
-                            <label for="repairDate" class="form-label">Preferred Date</label>
-                            <input type="date" class="form-control" id="repairDate" required>
-                        </div>
-
-                        <div class="col-6">
-                            <label for="repairTime" class="form-label">Preferred Time Window</label>
-                            <select class="form-select" id="repairTime" required>
-                                <option value="" disabled selected>Choose Slot...</option>
-                                <option value="Early Morning (08:00 - 10:00)">Early Morning (8am - 10am)</option>
-                                <option value="Morning (10:00 - 12:00)">Morning (10am - 12pm)</option>
-                                <option value="Midday (12:00 - 14:00)">Midday (12pm - 2pm)</option>
-                                <option value="Afternoon (14:00 - 16:00)">Afternoon (2pm - 4pm)</option>
-                                <option value="Late Afternoon (16:00 - 18:00)">Late Afternoon (4pm - 6pm)</option>
-                                <option value="Evening (18:00 - 20:00)">Evening (6pm - 8pm)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button type="submit" id="submitBtn" class="btn btn-submit w-100 d-flex align-items-center justify-content-center gap-2">
-                        <i class="fas fa-wrench"></i> Confirm Repair Booking
-                    </button>
-
-                </form>
-            </div>
-
-            <!-- Sleek Thank You Component State (Hidden Initially) -->
-            <div class="booking-card text-center d-none" id="thankYouContainer">
-                <div class="mb-4">
-                    <i class="fas fa-check-circle success-icon"></i>
-                </div>
-                <h2 class="h3 fw-bold mb-3">Booking Received!</h2>
-                <p class="text-light-muted">Thank you for booking with us. Your doorstep repair slot has been safely locked into our schedule system.</p>
-                <hr class="border-secondary my-4">
-                <p class="small text-info m-0">Our technician will review your fault details and see you on your requested date.</p>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<script>
-    const SUPABASE_URL = "https://fujfaeibxjlhpledjbky.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_LxitdT1qAn2FtJwf-EY_Ng_gvmjSY4V";
-
-    function toggleIssueBox() {
-        const consoleSelect = document.getElementById("consoleType");
-        const customBox = document.getElementById("customIssueContainer");
-        const customInput = document.getElementById("customIssueText");
-        
-        if (consoleSelect.value) {
-            customBox.classList.remove("d-none");
-            customInput.required = true;
-        } else {
-            customBox.classList.add("d-none");
-            customInput.required = false;
-        }
+/* ==========================================================================
+   NEW MOBILE RESPONSIVE TWEAKS
+   ========================================================================== */
+@media (max-width: 576px) {
+    body {
+        padding: 15px 0; /* Less dead space at top/bottom of screen */
     }
-
-    async function handleBookingSubmit(event) {
-        event.preventDefault();
-        
-        const submitBtn = document.getElementById("submitBtn");
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Securing Your Slot...';
-
-        const consoleModel = document.getElementById("consoleType").value;
-        const fault = document.getElementById("customIssueText").value.trim();
-
-        // Convert HTML date (YYYY-MM-DD) into standard UK format (DD/MM/YYYY)
-        const rawDate = document.getElementById("repairDate").value; 
-        let ukFormattedDate = rawDate;
-        if (rawDate) {
-            const [year, month, day] = rawDate.split("-");
-            ukFormattedDate = `${day}/${month}/${year}`;
-        }
-
-        const bookingData = {
-            name: document.getElementById("custName").value.trim(),
-            phone: document.getElementById("custPhone").value.trim(),
-            address: document.getElementById("custAddress").value.trim(),
-            console: consoleModel,
-            issue: fault,
-            job_date: ukFormattedDate, 
-            time_slot: document.getElementById("repairTime").value
-        };
-
-        try {
-            const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings`, {
-                method: "POST",
-                headers: {
-                    "apikey": SUPABASE_KEY,
-                    "Authorization": `Bearer ${SUPABASE_KEY}`,
-                    "Content-Type": "application/json",
-                    "Prefer": "return=minimal"
-                },
-                body: JSON.stringify(bookingData)
-            });
-
-            if (response.ok) {
-                document.getElementById("formContainer").classList.add("d-none");
-                document.getElementById("thankYouContainer").classList.remove("d-none");
-            } else {
-                throw new Error("Server rejected request");
-            }
-
-        } catch (err) {
-            alert("Connection error occurred. Please try again.");
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fas fa-wrench"></i> Confirm Repair Booking';
-            console.error(err);
-        }
+    h1.h2 {
+        font-size: 1.4rem !important; /* Shrinks the text size down slightly so it fits on one line */
     }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const dateInput = document.getElementById("repairDate");
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.min = today;
-    });
-</script>
-
-</body>
-</html>
+    .booking-card {
+        padding: 20px 15px; /* Shrinks inner card padding so the form fields have more room */
+    }
+    /* Changes time and date selectors to stack vertically instead of cramping side-by-side */
+    .booking-card .row.g-3 > div {
+        width: 100%; 
+    }
+}
