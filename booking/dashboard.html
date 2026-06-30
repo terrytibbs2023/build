@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Daily Job Board | Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0f0f0f; color: #fff; font-family: 'Roboto', sans-serif; padding: 30px; }
+        h1 { font-family: 'Orbitron', sans-serif; color: #00d4ff; text-transform: uppercase; }
+        .time-bucket { background: #141414; border: 1px solid #222; border-radius: 8px; padding: 20px; min-height: 300px; }
+        .bucket-header { font-family: 'Orbitron', sans-serif; border-bottom: 2px solid #00d4ff; padding-bottom: 8px; margin-bottom: 15px; }
+        .job-card { background: #1a1a1a; border-left: 4px solid #00d4ff; padding: 15px; margin-bottom: 12px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .btn-maps { background-color: #222; color: #00d4ff; border: 1px solid #00d4ff; font-size: 0.8rem; padding: 4px 8px; text-decoration: none; border-radius: 4px; display: inline-block; margin-top: 8px;}
+        .btn-maps:hover { background-color: #00d4ff; color: #000; }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Daily Job Board</h1>
+        <input type="date" id="datePicker" class="form-control bg-dark text-white border-secondary" style="width: 220px;" onchange="loadDailySchedule()">
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="time-bucket">
+                <div class="bucket-header">🌅 Morning Slot</div>
+                <div id="container-Morning"></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="time-bucket">
+                <div class="bucket-header">☀️ Midday Slot</div>
+                <div id="container-Midday"></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="time-bucket">
+                <div class="bucket-header">🌆 Afternoon Slot</div>
+                <div id="container-Afternoon"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const SUPABASE_URL = "https://fujfaeibxjlhpledjbky.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_LxitdT1qAn2FtJwf-EY_Ng_gvmjSY4V";
+
+    // Enforce basic admin access checkpoint directly inside frontend 
+    // (Keeps casual web browsers out of your customer data pool)
+    const accessPassword = prompt("Enter Dashboard PIN:");
+    if (accessPassword !== "1234") { 
+        alert("Unauthorized access."); 
+        document.body.innerHTML = "<h1>Access Denied</h1>";
+    }
+
+    document.getElementById('datePicker').value = new Date().toISOString().split('T')[0];
+
+    async function loadDailySchedule() {
+        const selectedDate = document.getElementById('datePicker').value;
+        
+        // Reset buckets
+        ['Morning', 'Midday', 'Afternoon'].forEach(slot => {
+            document.getElementById(`container-${slot}`).innerHTML = '<em class="text-muted small">No jobs booked</em>';
+        });
+
+        try {
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings?job_date=eq.${selectedDate}`, {
+                method: "GET",
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": `Bearer ${SUPABASE_KEY}`
+                }
+            });
+            const jobs = await response.json();
+
+            const counter = { Morning: 0, Midday: 0, Afternoon: 0 };
+
+            jobs.forEach(job => {
+                const container = document.getElementById(`container-${job.time_slot}`);
+                if (container) {
+                    if (counter[job.time_slot] === 0) container.innerHTML = ''; // wipe the 'No jobs' placeholder
+                    
+                    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(job.address)}`;
+                    
+                    const cardHtml = `
+                        <div class="job-card">
+                            <strong>${job.name}</strong> (${job.phone})<br>
+                            <span class="text-info font-monospace small">🎮 ${job.console} — ${job.issue}</span><br>
+                            <div class="mt-1 text-muted small">📍 ${job.address}</div>
+                            <a href="${mapsUrl}" target="_blank" class="btn-maps"><i class="fas fa-map-marker-alt"></i> Navigate</a>
+                        </div>
+                    `;
+                    container.innerHTML += cardHtml;
+                    counter[job.time_slot]++;
+                }
+            });
+        } catch (err) {
+            console.error("Error connecting to data node:", err);
+        }
+    }
+
+    // Initial load run
+    if(accessPassword === "1234") loadDailySchedule();
+</script>
+</body>
+</html>
