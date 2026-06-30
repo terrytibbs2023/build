@@ -53,8 +53,11 @@
         }
         .form-label {
             font-size: 0.85rem;
-            color: #aaa;
+            color: #ccc; /* Lightened up from #aaa */
             margin-bottom: 8px;
+        }
+        .text-light-muted {
+            color: #b3b3b3 !important; /* Brighter fallback for Bootstrap text-muted */
         }
         .btn-submit {
             background: var(--primary-glow);
@@ -87,9 +90,10 @@
     <div class="row justify-content-center">
         <div class="col-lg-7 col-md-9">
             
+            <!-- Header Title: Set to white-space nowrap to keep on one line -->
             <div class="text-center mb-4">
-                <h1 class="h2 fw-bold m-0">Essex <span class="glow-text">Console</span> Repair</h1>
-                <p class="text-muted small mt-1">Doorstep Service Booking Details</p>
+                <h1 class="h2 fw-bold m-0 text-nowrap">Essex <span class="glow-text">Console</span> Repair</h1>
+                <p class="text-light-muted small mt-1">Doorstep Service Booking Details</p>
             </div>
 
             <!-- Booking Form Card Component -->
@@ -99,7 +103,7 @@
                     <div class="mb-3">
                         <label for="custName" class="form-label">Your Name</label>
                         <div class="input-group">
-                            <span class="input-group-text bg-dark border-secondary text-muted"><i class="fas fa-user"></i></span>
+                            <span class="input-group-text bg-dark border-secondary text-light-muted"><i class="fas fa-user"></i></span>
                             <input type="text" class="form-control" id="custName" required placeholder="e.g. John Smith">
                         </div>
                     </div>
@@ -107,7 +111,7 @@
                     <div class="mb-3">
                         <label for="custPhone" class="form-label">Contact Phone Number</label>
                         <div class="input-group">
-                            <span class="input-group-text bg-dark border-secondary text-muted"><i class="fas fa-phone"></i></span>
+                            <span class="input-group-text bg-dark border-secondary text-light-muted"><i class="fas fa-phone"></i></span>
                             <input type="tel" class="form-control" id="custPhone" required placeholder="e.g. 07123 456789">
                         </div>
                     </div>
@@ -115,34 +119,26 @@
                     <div class="mb-3">
                         <label for="custAddress" class="form-label">Full Doorstep Address & Postcode</label>
                         <div class="input-group">
-                            <span class="input-group-text bg-dark border-secondary text-muted"><i class="fas fa-map-marker-alt"></i></span>
+                            <span class="input-group-text bg-dark border-secondary text-light-muted"><i class="fas fa-map-marker-alt"></i></span>
                             <textarea class="form-control" id="custAddress" rows="2" required placeholder="Street address, Town, and Postcode"></textarea>
                         </div>
                     </div>
 
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-6">
-                            <label for="consoleType" class="form-label">Select Console</label>
-                            <select class="form-select" id="consoleType" required onchange="updateIssuesDropdown()">
-                                <option value="" disabled selected>Choose Hardware...</option>
-                                <option value="PlayStation 5">PlayStation 5</option>
-                                <option value="Xbox Series X">Xbox Series X</option>
-                                <option value="Nintendo Switch">Nintendo Switch</option>
-                                <option value="Other / Not Listed">Other Console</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="consoleIssue" class="form-label">Select Primary Issue</label>
-                            <select class="form-select" id="consoleIssue" required disabled>
-                                <option value="" disabled selected>Select console first...</option>
-                            </select>
-                        </div>
+                    <div class="mb-3">
+                        <label for="consoleType" class="form-label">Select Console</label>
+                        <select class="form-select" id="consoleType" required onchange="toggleIssueBox()">
+                            <option value="" disabled selected>Choose Hardware...</option>
+                            <option value="PlayStation 5">PlayStation 5</option>
+                            <option value="Xbox Series X">Xbox Series X</option>
+                            <option value="Nintendo Switch">Nintendo Switch</option>
+                            <option value="Other / Not Listed">Other Console</option>
+                        </select>
                     </div>
 
+                    <!-- Simplified Direct Text Input for Issues -->
                     <div class="mb-3 d-none" id="customIssueContainer">
-                        <label for="customIssueText" class="form-label">Describe the fault details</label>
-                        <input type="text" class="form-control" id="customIssueText" placeholder="Please describe what happens...">
+                        <label for="customIssueText" class="form-label">What's going wrong?</label>
+                        <textarea class="form-control" id="customIssueText" rows="3" placeholder="Tell us a bit more about the issue (e.g., HDMI port broken, overheating, won't turn on)..."></textarea>
                     </div>
 
                     <div class="row g-3 mb-4">
@@ -178,7 +174,7 @@
                     <i class="fas fa-check-circle success-icon"></i>
                 </div>
                 <h2 class="h3 fw-bold mb-3">Booking Received!</h2>
-                <p class="text-muted">Thank you for booking with us. Your doorstep repair slot has been safely locked into our schedule system.</p>
+                <p class="text-light-muted">Thank you for booking with us. Your doorstep repair slot has been safely locked into our schedule system.</p>
                 <hr class="border-secondary my-4">
                 <p class="small text-info m-0">Our technician will review your fault details and see you on your requested date.</p>
             </div>
@@ -191,67 +187,18 @@
     const SUPABASE_URL = "https://fujfaeibxjlhpledjbky.supabase.co";
     const SUPABASE_KEY = "sb_publishable_LxitdT1qAn2FtJwf-EY_Ng_gvmjSY4V";
 
-    const issueDatabase = {
-        "PlayStation 5": [
-            "HDMI Port Replacement (£65)",
-            "Liquid Metal Overheating Service (£45)",
-            "Disc Drive / Optical Laser Alignment",
-            "Power Supply Failure / No Power",
-            "Other Structural/Board Level Fault"
-        ],
-        "Xbox Series X": [
-            "HDMI Port Replacement (£65)",
-            "Premium Deep Clean & Thermal Optimization (£35)",
-            "Boot Loop / SSD Drive Corruption Errors",
-            "Power Delivery Issue",
-            "Other Hardware Fault"
-        ],
-        "Nintendo Switch": [
-            "USB-C Power Port Micro-Soldering (£55)",
-            "Joy-Con Drift Fix (£20)",
-            "Shattered Screen / Digitizer Replacement",
-            "Battery Replacement Service",
-            "Other Charging/Docking Failure"
-        ],
-        "Other / Not Listed": [
-            "Custom Diagnostic Request",
-            "Older Generation Console Repair"
-        ]
-    };
-
-    function updateIssuesDropdown() {
+    function toggleIssueBox() {
         const consoleSelect = document.getElementById("consoleType");
-        const issueSelect = document.getElementById("consoleIssue");
-        const selectedConsole = consoleSelect.value;
+        const customBox = document.getElementById("customIssueContainer");
+        const customInput = document.getElementById("customIssueText");
         
-        issueSelect.innerHTML = '<option value="" disabled selected>Choose specific issue...</option>';
-        issueSelect.disabled = false;
-
-        if (issueDatabase[selectedConsole]) {
-            issueDatabase[selectedConsole].forEach(issue => {
-                const opt = document.createElement("option");
-                opt.value = issue;
-                opt.textContent = issue;
-                issueSelect.appendChild(opt);
-            });
-            
-            const fallbackOpt = document.createElement("option");
-            fallbackOpt.value = "Something else (Describe below)";
-            fallbackOpt.textContent = "Something else (Describe below)";
-            issueSelect.appendChild(fallbackOpt);
+        if (consoleSelect.value) {
+            customBox.classList.remove("d-none");
+            customInput.required = true;
+        } else {
+            customBox.classList.add("d-none");
+            customInput.required = false;
         }
-
-        issueSelect.onchange = function() {
-            const customBox = document.getElementById("customIssueContainer");
-            const customInput = document.getElementById("customIssueText");
-            if (this.value === "Something else (Describe below)" || selectedConsole === "Other / Not Listed") {
-                customBox.classList.remove("d-none");
-                customInput.required = true;
-            } else {
-                customBox.classList.add("d-none");
-                customInput.required = false;
-            }
-        };
     }
 
     async function handleBookingSubmit(event) {
@@ -262,11 +209,7 @@
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Securing Your Slot...';
 
         const consoleModel = document.getElementById("consoleType").value;
-        let fault = document.getElementById("consoleIssue").value;
-        
-        if (fault === "Something else (Describe below)" || consoleModel === "Other / Not Listed") {
-            fault = "Custom issue: " + document.getElementById("customIssueText").value.trim();
-        }
+        const fault = document.getElementById("customIssueText").value.trim();
 
         // Convert HTML date (YYYY-MM-DD) into standard UK format (DD/MM/YYYY)
         const rawDate = document.getElementById("repairDate").value; 
@@ -282,7 +225,7 @@
             address: document.getElementById("custAddress").value.trim(),
             console: consoleModel,
             issue: fault,
-            job_date: ukFormattedDate, // Now processing text formatting as DD/MM/YYYY
+            job_date: ukFormattedDate, 
             time_slot: document.getElementById("repairTime").value
         };
 
