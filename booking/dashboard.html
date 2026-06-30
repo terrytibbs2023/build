@@ -180,6 +180,9 @@
 </head>
 <body>
 
+<!-- Audio element for browser session new job alerts -->
+<audio id="notificationSound" src="https://assets.mixkit.co/active_storage/sfx/2869/2869-500.wav" preload="auto"></audio>
+
 <div class="container px-3">
     
     <!-- Top Bar Control Panel Header -->
@@ -244,6 +247,9 @@
     const SUPABASE_URL = "https://fujfaeibxjlhpledjbky.supabase.co";
     const SUPABASE_KEY = "sb_publishable_LxitdT1qAn2FtJwf-EY_Ng_gvmjSY4V";
     let bootstrapModalInstance = null;
+    
+    // Memory state container for auto-counting records
+    let lastJobCount = null;
 
     async function fetchBookings() {
         const container = document.getElementById("bookingsContainer");
@@ -259,6 +265,15 @@
 
             if (!response.ok) throw new Error("Network configuration block error");
             const bookings = await response.json();
+
+            // Check if database size expanded since last verification loop
+            if (lastJobCount !== null && bookings.length > lastJobCount) {
+                const sound = document.getElementById("notificationSound");
+                if (sound) {
+                    sound.play().catch(e => console.log("Audio playback waiting for manual screen touch interaction."));
+                }
+            }
+            lastJobCount = bookings.length;
 
             if (bookings.length === 0) {
                 container.innerHTML = `<div class="col-12 text-center text-muted py-5"><i class="fas fa-calendar-times fa-2x mb-2"></i><br>No active booking slots.</div>`;
@@ -449,6 +464,7 @@
             });
 
             if (response.ok) {
+                if (lastJobCount > 0) lastJobCount--;
                 const card = document.getElementById(cardId);
                 if (card) card.remove();
             } else {
@@ -469,7 +485,22 @@
         );
     }
 
-    document.addEventListener("DOMContentLoaded", fetchBookings);
+    // Set initial configuration parameters on frame instantiation
+    document.addEventListener("DOMContentLoaded", () => {
+        fetchBookings();
+        
+        // Auto-refresh engine loop configured to scan database context every 30 seconds
+        setInterval(fetchBookings, 30000); 
+    });
+
+    // PWA Service Worker Hook Integration Setup
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(reg => console.log('Service Worker safely locked in backend:', reg.scope))
+                .catch(err => console.error('Service worker installation failure:', err));
+        });
+    }
 </script>
 
 </body>
