@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Book Your Repair | Essex Console Repair</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -18,29 +18,28 @@
         
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body { 
             background-color: var(--dark-bg); 
             color: #fff; 
             font-family: 'Roboto', sans-serif; 
-            padding: 40px 15px;
-            overflow-x: hidden; /* Prevents broken horizontal scrolling entirely */
+            padding: 30px 15px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Fluid Title Sizing - Keeps it on one line cleanly on all devices */
+        /* Fixed text sizing: Stops mobile browsers from guessing the size and causing jumps */
         .main-title {
             font-family: 'Orbitron', sans-serif; 
             text-transform: uppercase; 
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             font-weight: 700;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: nowrap;
-            white-space: nowrap;
-            font-size: calc(1.35rem + 1vw); /* Dynamically sizes perfectly between screens */
-            margin: 0;
+            font-size: 1.65rem; 
+            text-align: center;
+            line-height: 1.2;
         }
 
         h2, label { 
@@ -52,7 +51,10 @@
         .glow-text { 
             color: var(--primary-glow); 
             text-shadow: 0 0 8px rgba(0, 212, 255, 0.4); 
-            margin: 0 6px; /* Perfect spacing between words */
+        }
+
+        .text-light-muted {
+            color: #b3b3b3 !important; 
         }
 
         .booking-card {
@@ -60,11 +62,11 @@
             border: 1px solid #222;
             border-top: 3px solid var(--primary-glow);
             border-radius: 12px;
-            padding: 30px;
+            padding: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             width: 100%;
-            max-width: 650px; /* Locks look on desktop laptops */
-            margin: 0 auto;  /* Centers layout perfectly */
+            max-width: 580px; 
+            margin: 0 auto;
         }
 
         .form-control, .form-select {
@@ -72,7 +74,8 @@
             border: 1px solid #333;
             color: #fff;
             padding: 12px;
-            font-size: 1rem;
+            font-size: 16px; /* Prevents iOS from zooming in automatically on focus */
+            border-radius: 6px;
         }
 
         .form-control:focus, .form-select:focus {
@@ -83,43 +86,25 @@
         }
 
         .form-label {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #ccc; 
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
-        .text-light-muted {
-            color: #b3b3b3 !important; 
+        /* Smooth, non-jumping expander for the issue block */
+        .issue-container {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out, opacity 0.25s ease-out, margin 0.35s ease-out;
+        }
+        
+        .issue-container.show {
+            max-height: 160px;
+            opacity: 1;
+            margin-bottom: 1rem !important;
         }
 
-        .btn-submit {
-            background: var(--primary-glow);
-            color: #000;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            border: none;
-            padding: 15px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .btn-submit:hover {
-            background: #00b0d4;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-            transform: translateY(-2px);
-            color: #000;
-        }
-
-        .success-icon {
-            font-size: 4rem;
-            color: #25D366;
-            text-shadow: 0 0 15px rgba(37, 211, 102, 0.3);
-        }
-
-        /* Adaptive responsiveness structure */
         .datetime-row {
             display: flex;
             gap: 15px;
@@ -128,20 +113,53 @@
             flex: 1;
         }
 
-        /* Mobile Adjustments */
+        .btn-submit {
+            background: var(--primary-glow);
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background: #00b0d4;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .success-icon {
+            font-size: 3.5rem;
+            color: #25D366;
+        }
+
+        /* Strict laptop/desktop optimization overrides */
+        @media (min-width: 768px) {
+            .main-title {
+                font-size: 2.2rem;
+            }
+            body {
+                padding: 60px 0;
+            }
+        }
+
+        /* Strict mobile configurations to eliminate shifting */
         @media (max-width: 576px) {
             body {
-                padding: 20px 10px;
+                padding: 15px 10px;
             }
             .booking-card {
                 padding: 20px 15px;
             }
             .datetime-row {
-                flex-direction: column; /* Stack inputs cleanly on mobile */
-                gap: 0;
+                flex-direction: column;
+                gap: 15px;
             }
-            .datetime-row > div {
-                margin-bottom: 15px;
+            .main-title {
+                font-size: 1.45rem;
             }
         }
     </style>
@@ -152,7 +170,7 @@
     
     <div class="text-center mb-4">
         <h1 class="main-title">Essex <span class="glow-text">Console</span> Repair</h1>
-        <p class="text-light-muted small mt-2">Doorstep Service Booking Details</p>
+        <p class="text-light-muted small mt-1">Doorstep Service Booking Details</p>
     </div>
 
     <div class="booking-card" id="formContainer">
@@ -193,9 +211,9 @@
                 </select>
             </div>
 
-            <div class="mb-3 d-none" id="customIssueContainer">
+            <div class="issue-container" id="customIssueContainer">
                 <label for="customIssueText" class="form-label">What's going wrong?</label>
-                <textarea class="form-control" id="customIssueText" rows="3" placeholder="Tell us a bit more about the issue (e.g., HDMI port broken, overheating, won't turn on)..."></textarea>
+                <textarea class="form-control" id="customIssueText" rows="2" placeholder="Tell us a bit more about the issue..."></textarea>
             </div>
 
             <div class="datetime-row mb-4">
@@ -225,12 +243,12 @@
     </div>
 
     <div class="booking-card text-center d-none" id="thankYouContainer">
-        <div class="mb-4">
+        <div class="mb-3">
             <i class="fas fa-check-circle success-icon"></i>
         </div>
-        <h2 class="h3 fw-bold mb-3">Booking Received!</h2>
-        <p class="text-light-muted">Thank you for booking with us. Your doorstep repair slot has been safely locked into our schedule system.</p>
-        <hr class="border-secondary my-4">
+        <h2 class="h4 fw-bold mb-2">Booking Received!</h2>
+        <p class="text-light-muted small">Thank you for booking with us. Your doorstep repair slot has been safely locked into our schedule system.</p>
+        <hr class="border-secondary my-3">
         <p class="small text-info m-0">Our technician will review your fault details and see you on your requested date.</p>
     </div>
 
@@ -246,10 +264,10 @@
         const customInput = document.getElementById("customIssueText");
         
         if (consoleSelect.value) {
-            customBox.classList.remove("d-none");
+            customBox.classList.add("show");
             customInput.required = true;
         } else {
-            customBox.classList.add("d-none");
+            customBox.classList.remove("show");
             customInput.required = false;
         }
     }
@@ -296,6 +314,7 @@
             if (response.ok) {
                 document.getElementById("formContainer").classList.add("d-none");
                 document.getElementById("thankYouContainer").classList.remove("d-none");
+                window.scrollTo(0,0);
             } else {
                 throw new Error("Server rejected request");
             }
