@@ -173,7 +173,6 @@
 </div>
 
 <script>
-    // Object mapping your common service items directly from your main landing menu
     const issueDatabase = {
         "PlayStation 5": [
             "HDMI Port Replacement (£65)",
@@ -202,7 +201,6 @@
         ]
     };
 
-    // Dynamically populates the second dropdown based on what console they pick
     function updateIssuesDropdown() {
         const consoleSelect = document.getElementById("consoleType");
         const issueSelect = document.getElementById("consoleIssue");
@@ -219,14 +217,12 @@
                 issueSelect.appendChild(opt);
             });
             
-            // Add a permanent catch-all alternative choice
             const fallbackOpt = document.createElement("option");
             fallbackOpt.value = "Something else (Describe below)";
             fallbackOpt.textContent = "Something else (Describe below)";
             issueSelect.appendChild(fallbackOpt);
         }
 
-        // Toggle custom text field logic
         issueSelect.onchange = function() {
             const customBox = document.getElementById("customIssueContainer");
             const customInput = document.getElementById("customIssueText");
@@ -240,11 +236,9 @@
         };
     }
 
-    // Constructs the cleanly structured string text blocks and pushes straight out to WhatsApp API
     function sendToWhatsApp(event) {
         event.preventDefault();
 
-        // Get value states
         const name = document.getElementById("custName").value.trim();
         const phone = document.getElementById("custPhone").value.trim();
         const address = document.getElementById("custAddress").value.trim();
@@ -255,17 +249,47 @@
             fault = "Custom issue: " + document.getElementById("customIssueText").value.trim();
         }
 
-        // Format dates beautifully
         const rawDate = document.getElementById("repairDate").value;
         const formattedDate = new Date(rawDate).toLocaleDateString('en-GB', {
             weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'
         });
         const timeSlot = document.getElementById("repairTime").value;
 
-        // Your Company Phone Number in exact global country code string context
+        // --- LINK GENERATION ENGINE ---
+        
+        // 1. Google Maps Navigation Link (Universal query structure)
+        const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+
+        // 2. Google Calendar Event Creator Link
+        let startHour = "09:00";
+        let endHour = "12:00";
+        if (timeSlot.includes("Midday")) {
+            startHour = "12:00";
+            endHour = "15:00";
+        } else if (timeSlot.includes("Late Afternoon")) {
+            startHour = "15:00";
+            endHour = "18:00";
+        }
+
+        // Format times natively into Google API structure: YYYYMMDDTHHMMSS
+        const dateClean = rawDate.replace(/-/g, "");
+        const gCalStart = `${dateClean}T${startHour.replace(":", "")}00`;
+        const gCalEnd = `${dateClean}T${endHour.replace(":", "")}00`;
+
+        const calTitle = `🛠️ Repair: ${consoleModel} - ${name}`;
+        const calDetails = `Customer: ${name}\nPhone: ${phone}\nIssue: ${fault}\nAddress: ${address}`;
+
+        const googleCalendarLink = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
+            `&text=${encodeURIComponent(calTitle)}` +
+            `&dates=${gCalStart}/${gCalEnd}` +
+            `&details=${encodeURIComponent(calDetails)}` +
+            `&location=${encodeURIComponent(address)}` +
+            `&ctz=Europe/London`;
+
+        // ------------------------------
+
         const businessWhatsAppNumber = "447935312274"; 
 
-        // Generate cleanly lined structured dashboard readout for your WhatsApp screen
         const messageText = 
             `🛠️ *NEW BOOKING REQUEST* 🛠️\n\n` +
             `👤 *Customer:* ${name}\n` +
@@ -275,18 +299,16 @@
             `⚠️ *Issue:* ${fault}\n\n` +
             `📅 *Preferred Date:* ${formattedDate}\n` +
             `⏰ *Time Slot:* ${timeSlot}\n\n` +
+            `🗺️ *Open in Maps:* ${mapsLink}\n\n` +
+            `📅 *Add to Calendar:* ${googleCalendarLink}\n\n` +
             `_Sent via Quick-Booker link_`;
 
-        // Encode spaces and emojis correctly for web URLs
         const encodedUrlText = encodeURIComponent(messageText);
-        
-        // Launch standard API protocol target
         const finalWhatsAppUrl = `https://api.whatsapp.com/send?phone=${businessWhatsAppNumber}&text=${encodedUrlText}`;
         
         window.open(finalWhatsAppUrl, '_blank');
     }
 
-    // Set today's date as the minimum selectable date on the calendar interface
     document.addEventListener("DOMContentLoaded", () => {
         const dateInput = document.getElementById("repairDate");
         const today = new Date().toISOString().split('T')[0];
