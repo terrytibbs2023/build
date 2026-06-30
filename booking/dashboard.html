@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repair Admin Workspace | Essex Console Repair</title>
     
+    <!-- Bootstrap & Premium Cyberpunk Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -38,10 +39,20 @@
             align-items: flex-start !important;
             gap: 15px;
         }
+        .dashboard-header h1 {
+            white-space: nowrap;
+            font-size: 1.25rem; /* Dynamic sizing to guarantee single line fit on tiny viewports */
+        }
+        .text-muted {
+            color: #b0b5b8 !important; /* Lightened subheadings/system status lines */
+        }
         @media (min-width: 576px) {
             .dashboard-header {
                 flex-direction: row;
                 align-items: center !important;
+            }
+            .dashboard-header h1 {
+                font-size: 1.5rem;
             }
         }
 
@@ -92,21 +103,22 @@
         }
         .text-bright {
             color: #ffffff !important;
-            word-break: break-word; /* Prevents long text stretching on tiny displays */
+            word-break: break-word; 
         }
         .text-label {
-            color: #999999;
+            color: #d1d5db; /* Lightened from old dark gray to high-visibility gray */
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            font-weight: 500;
         }
         
-        /* Action Utility Buttons (Optimized for Mobile Tapping) */
+        /* Action Utility Buttons */
         .btn-action {
             font-family: 'Orbitron', sans-serif;
             font-size: 0.8rem;
             font-weight: 700;
-            padding: 12px; /* Taller touch target */
+            padding: 12px; 
             border-radius: 8px;
             transition: all 0.2s;
             text-transform: uppercase;
@@ -116,15 +128,14 @@
             gap: 6px;
         }
         
-        /* Responsive Button Containers */
         .action-group {
             display: flex;
-            flex-direction: column; /* Stacked by default on phone screen layouts */
+            flex-direction: column; 
             gap: 8px;
         }
         @media (min-width: 400px) {
             .action-group {
-                flex-direction: row; /* Side-by-side once viewport can manage it */
+                flex-direction: row; 
             }
         }
 
@@ -145,7 +156,7 @@
             color: var(--primary-glow);
             background: transparent;
             font-family: 'Orbitron', sans-serif;
-            width: 100%; /* Full width on mobile top bar */
+            width: 100%; 
         }
         @media (min-width: 576px) {
             .btn-refresh { width: auto; }
@@ -163,7 +174,7 @@
             background-color: #1a1a1a;
             border: 1px solid #444;
             color: #fff;
-            padding: 12px; /* Chunky inputs on phone */
+            padding: 12px; 
         }
     </style>
 </head>
@@ -171,9 +182,10 @@
 
 <div class="container px-3">
     
+    <!-- Top Bar Control Panel Header -->
     <div class="d-flex dashboard-header justify-content-between mb-4 mt-2">
         <div>
-            <h1 class="h4 fw-bold m-0">Essex <span class="glow-text">Console</span> Repair</h1>
+            <h1 class="fw-bold m-0">Essex <span class="glow-text">Console</span> Repair</h1>
             <p class="text-muted small m-0">Secure Jobs & Bookings Ledger</p>
         </div>
         <button onclick="fetchBookings()" class="btn btn-refresh btn-sm px-4 py-2">
@@ -181,6 +193,7 @@
         </button>
     </div>
 
+    <!-- Live Grid Feed Layout Output -->
     <div class="row g-3" id="bookingsContainer">
         <div class="col-12 text-center py-5 text-muted">
             <i class="fas fa-spinner fa-spin fa-2x mb-3 text-info"></i><br>
@@ -189,8 +202,10 @@
     </div>
 </div>
 
+<!-- RESCHEDULE MODAL POPUP -->
 <div class="modal fade" id="rescheduleModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered"> <div class="modal-content">
+  <div class="modal-dialog modal-dialog-centered"> 
+    <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title text-warning"><i class="fas fa-clock-rotate-left me-2"></i>Adjust Window</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -222,6 +237,7 @@
   </div>
 </div>
 
+<!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
@@ -334,9 +350,10 @@
                         
                         <div class="detail-row mb-3">
                             <i class="fas fa-map-pin text-info"></i>
-                            <div class="text-bright"><span class="text-label d-block">Doorstep Address:</span>${escapeHTML(job.address)}</div>
+                            <div class="text-bright"><span class="text-label d-block">Address:</span>${escapeHTML(job.address)}</div>
                         </div>
 
+                        <!-- Communications & Routing Controls -->
                         <div class="action-group gap-2 mt-auto pt-3 border-top border-secondary" style="border-top-style: dashed !important; opacity: 0.95;">
                             <a href="https://wa.me/${formattedPhoneForApi}?text=${messageText}" target="_blank" class="btn btn-action btn-whatsapp flex-grow-1 text-decoration-none">
                                 <i class="fab fa-whatsapp"></i> WhatsApp
@@ -346,6 +363,7 @@
                             </a>
                         </div>
 
+                        <!-- Back-Office System Administration Suite -->
                         <div class="action-group gap-2 mt-2">
                             <button onclick="openRescheduleModal('${escapeHTML(job.name)}', '${escapeHTML(baseDbPhone)}', '${inputFormatDate}', '${escapeHTML(job.time_slot)}', '${generatedCardId}')" class="btn btn-action btn-resched flex-grow-1">
                                 <i class="fas fa-calendar-day"></i> Reschedule
