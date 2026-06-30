@@ -73,12 +73,6 @@
             transform: translateY(-2px);
             color: #fff;
         }
-        /* Dynamic dependent options styling hint */
-        .issue-hint {
-            font-size: 0.8rem;
-            color: var(--primary-glow);
-            opacity: 0.8;
-        }
     </style>
 </head>
 <body>
@@ -255,12 +249,10 @@
         });
         const timeSlot = document.getElementById("repairTime").value;
 
-        // --- LINK GENERATION ENGINE ---
-        
-        // 1. Google Maps Navigation Link (Universal query structure)
+        // 1. Google Maps URL Formulation
         const mapsLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 
-        // 2. Google Calendar Event Creator Link
+        // 2. Google Calendar Time Parsing Strategy
         let startHour = "09:00";
         let endHour = "12:00";
         if (timeSlot.includes("Midday")) {
@@ -271,25 +263,21 @@
             endHour = "18:00";
         }
 
-        // Format times natively into Google API structure: YYYYMMDDTHHMMSS
         const dateClean = rawDate.replace(/-/g, "");
         const gCalStart = `${dateClean}T${startHour.replace(":", "")}00`;
         const gCalEnd = `${dateClean}T${endHour.replace(":", "")}00`;
+        const calTitle = `🛠️ ${consoleModel} - ${name}`;
 
-        const calTitle = `🛠️ Repair: ${consoleModel} - ${name}`;
-        const calDetails = `Customer: ${name}\nPhone: ${phone}\nIssue: ${fault}\nAddress: ${address}`;
-
+        // Stripped-down version keeps character footprint strictly low inside WhatsApp interface
         const googleCalendarLink = `https://calendar.google.com/calendar/render?action=TEMPLATE` +
             `&text=${encodeURIComponent(calTitle)}` +
             `&dates=${gCalStart}/${gCalEnd}` +
-            `&details=${encodeURIComponent(calDetails)}` +
             `&location=${encodeURIComponent(address)}` +
             `&ctz=Europe/London`;
 
-        // ------------------------------
-
         const businessWhatsAppNumber = "447935312274"; 
 
+        // Balanced and structured layout prevents text from melting into the raw URLs
         const messageText = 
             `🛠️ *NEW BOOKING REQUEST* 🛠️\n\n` +
             `👤 *Customer:* ${name}\n` +
@@ -299,8 +287,8 @@
             `⚠️ *Issue:* ${fault}\n\n` +
             `📅 *Preferred Date:* ${formattedDate}\n` +
             `⏰ *Time Slot:* ${timeSlot}\n\n` +
-            `🗺️ *Open in Maps:* ${mapsLink}\n\n` +
-            `📅 *Add to Calendar:* ${googleCalendarLink}\n\n` +
+            `🗺️ *MAP DIRECTION LINK:* \n${mapsLink}\n\n` +
+            `📅 *ADD TO CALENDAR LINK:* \n${googleCalendarLink}\n\n` +
             `_Sent via Quick-Booker link_`;
 
         const encodedUrlText = encodeURIComponent(messageText);
