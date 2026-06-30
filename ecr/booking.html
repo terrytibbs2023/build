@@ -83,7 +83,7 @@
             
             <div class="text-center mb-4">
                 <h1 class="h2 fw-bold m-0">Essex <span class="glow-text">Console</span> Repair</h1>
-                <p class="text-muted small mt-1">Doorstep Service Booking Details</p>
+                <p class="text-muted small mt-1">Service Booking Details</p>
             </div>
 
             <div class="booking-card">
@@ -106,7 +106,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="custAddress" class="form-label">Full Doorstep Address & Postcode</label>
+                        <label for="custAddress" class="form-label">Full Address & Postcode</label>
                         <div class="input-group">
                             <span class="input-group-text bg-dark border-secondary text-muted"><i class="fas fa-map-marker-alt"></i></span>
                             <textarea class="form-control" id="custAddress" rows="2" required placeholder="Street address, Town, and Postcode"></textarea>
@@ -119,7 +119,7 @@
                             <select class="form-select" id="consoleType" required onchange="updateIssuesDropdown()">
                                 <option value="" disabled selected>Choose Hardware...</option>
                                 <option value="PlayStation 5">PlayStation 5</option>
-                                <option value="Xbox Series X">Xbox Series X</option>
+                                <option value="Xbox Series S or X">Xbox Series X</option>
                                 <option value="Nintendo Switch">Nintendo Switch</option>
                                 <option value="Other / Not Listed">Other Console</option>
                             </select>
@@ -148,9 +148,12 @@
                             <label for="repairTime" class="form-label">Preferred Time Window</label>
                             <select class="form-select" id="repairTime" required>
                                 <option value="" disabled selected>Choose Slot...</option>
-                                <option value="Morning (09:00 - 12:00)">Morning (9am - 12pm)</option>
-                                <option value="Midday (12:00 - 15:00)">Midday (12pm - 3pm)</option>
-                                <option value="Late Afternoon (15:00 - 18:00)">Afternoon (3pm - 6pm)</option>
+                                 <option value="Early Morning (08:00 - 10:00)">Early Morning (8am - 10pm)</option>
+                                <option value="Morning (10:00 - 12:00)">Morning (10am - 12pm)</option>
+                                <option value="Midday (12:00 - 14:00)">Midday (12pm - 2pm)</option>
+                                <option value="Afternoon (14:00 - 16:00)">Afternoon (2pm - 4pm)</option>
+                                <option value="Late Afternoon (16:00 - 18:00)">Late Afternoon (4pm - 6pm)</option>
+                                <option value="Evening (18:00 - 20:00)">Evening (6pm - 8pm)</option>
                             </select>
                         </div>
                     </div>
