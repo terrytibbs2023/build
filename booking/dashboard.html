@@ -3,134 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repair Admin Dashboard | Essex Console Repair</title>
+    <title>Repair Admin Workspace | Essex Console Repair</title>
     
-    <!-- Bootstrap & Google Fonts -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root { 
             --primary-glow: #00d4ff; 
-            --dark-bg: #0f0f0f; 
-            --card-bg: #141414;
+            --dark-bg: #0a0a0a; 
+            --card-bg: #121212;
+            --border-color: #333;
         }
         body { 
             background-color: var(--dark-bg); 
-            color: #fff; 
+            color: #ffffff; 
             font-family: 'Roboto', sans-serif; 
-            padding: 30px 0;
+            padding: 20px 0;
         }
-        h1, h2, th { 
+        h1, h2, h3, .job-date, .modal-title { 
             font-family: 'Orbitron', sans-serif; 
             text-transform: uppercase; 
             letter-spacing: 1px; 
         }
         .glow-text { 
             color: var(--primary-glow); 
-            text-shadow: 0 0 8px rgba(0, 212, 255, 0.4); 
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.4); 
         }
-        .dashboard-card {
-            background: linear-gradient(145deg, #141414 0%, #0b0b0b 100%);
-            border: 1px solid #222;
-            border-top: 3px solid var(--primary-glow);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        /* Grid Dashboard Cards */
+        .job-card {
+            background: linear-gradient(145deg, #161616 0%, #0d0d0d 100%);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-glow);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease, border-color 0.2s ease;
         }
-        .table {
-            color: #fff;
-            vertical-align: middle;
+        .job-card:hover {
+            transform: translateY(-3px);
+            border-color: #444;
         }
-        .table th {
-            border-bottom: 2px solid #333;
+        .job-date {
+            font-size: 1.1rem;
             color: var(--primary-glow);
-            font-size: 0.85rem;
         }
-        .table td {
-            border-bottom: 1px solid #222;
-            padding: 15px 10px;
-            background-color: transparent !important;
-            color: #fff !important;
-        }
-        .badge-slot {
-            background-color: #222;
-            border: 1px solid #444;
-            color: #ddd;
-            font-weight: normal;
+        .time-badge {
+            background: rgba(0, 212, 255, 0.15);
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            color: var(--primary-glow);
             font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .client-name {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .detail-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+        .detail-row i {
+            margin-top: 4px;
+            width: 18px;
+            text-align: center;
+        }
+        .text-bright {
+            color: #ffffff !important;
+        }
+        .text-label {
+            color: #bbbbbb;
+        }
+        /* Action Utility Buttons */
+        .btn-action {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 10px 12px;
+            border-radius: 5px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+        .btn-whatsapp {
+            background: transparent;
+            border: 1px solid #25D366;
+            color: #25D366;
+        }
+        .btn-whatsapp:hover {
+            background: #25D366;
+            color: #000;
+            box-shadow: 0 0 10px rgba(37, 211, 102, 0.4);
+        }
+        .btn-map {
+            background: transparent;
+            border: 1px solid var(--primary-glow);
+            color: var(--primary-glow);
+        }
+        .btn-map:hover {
+            background: var(--primary-glow);
+            color: #000;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+        }
+        .btn-resched {
+            background: transparent;
+            border: 1px solid #ffaa00;
+            color: #ffaa00;
+        }
+        .btn-resched:hover {
+            background: #ffaa00;
+            color: #000;
+        }
+        .btn-delete {
+            background: transparent;
+            border: 1px solid #ff3333;
+            color: #ff3333;
+        }
+        .btn-delete:hover {
+            background: #ff3333;
+            color: #ffffff;
         }
         .btn-refresh {
             border: 1px solid var(--primary-glow);
             color: var(--primary-glow);
             background: transparent;
             font-family: 'Orbitron', sans-serif;
-            transition: all 0.3s;
         }
         .btn-refresh:hover {
             background: var(--primary-glow);
             color: #000;
             box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
         }
+        /* Dark Theme Modal Adjustments */
+        .modal-content {
+            background-color: #121212;
+            border: 1px solid var(--border-color);
+            color: #fff;
+        }
+        .modal-header {
+            border-bottom: 1px solid var(--border-color);
+        }
+        .modal-footer {
+            border-top: 1px solid var(--border-color);
+        }
+        .form-control, .form-select {
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            color: #fff;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: #222;
+            color: #fff;
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+        }
     </style>
 </head>
 <body>
 
-<div class="container-fluid px-4">
-    <div class="row">
-        <div class="col-12">
-            
-            <!-- Dashboard Header -->
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div>
-                    <h1 class="h3 fw-bold m-0">Essex <span class="glow-text">Console</span> Repair</h1>
-                    <p class="text-muted small m-0">Secure Jobs & Bookings Ledger</p>
-                </div>
-                <button onclick="fetchBookings()" class="btn btn-refresh btn-sm px-3 py-2">
-                    <i class="fas fa-sync-alt me-1"></i> Refresh List
-                </button>
-            </div>
+<div class="container px-4">
+    
+    <div class="d-flex justify-content-between align-items-center mb-5 mt-3">
+        <div>
+            <h1 class="h3 fw-bold m-0">Essex <span class="glow-text">Console</span> Repair</h1>
+            <p class="text-muted small m-0">Secure Jobs & Bookings Ledger</p>
+        </div>
+        <button onclick="fetchBookings()" class="btn btn-refresh btn-sm px-3 py-2">
+            <i class="fas fa-sync-alt me-1"></i> Sync Live Slots
+        </button>
+    </div>
 
-            <!-- Main Data Card -->
-            <div class="dashboard-card">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Date Scheduled</th>
-                                <th>Time Window</th>
-                                <th>Client Details</th>
-                                <th>Hardware</th>
-                                <th>Logged Issue</th>
-                                <th>Address</th>
-                            </tr>
-                        </thead>
-                        <tbody id="bookingsTableBody">
-                            <tr>
-                                <td colspan="6" class="text-center py-5 text-muted">
-                                    <i class="fas fa-spinner fa-spin fa-2x mb-2 text-info"></i><br>
-                                    Loading active system bookings...
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
+    <div class="row g-4" id="bookingsContainer">
+        <div class="col-12 text-center py-5 text-muted">
+            <i class="fas fa-spinner fa-spin fa-2x mb-3 text-info"></i><br>
+            Synchronizing scheduling stream engine...
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="rescheduleModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-warning"><i class="fas fa-clock-rotate-left me-2"></i>Adjust Booking Window</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="editClientName">
+        <input type="hidden" id="editClientPhone">
+        <input type="hidden" id="editCardId">
+        <div class="mb-3">
+            <label class="form-label text-label small fw-bold">Select New Date</label>
+            <input type="date" id="editJobDate" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label class="form-label text-label small fw-bold">Select New Time Window</label>
+            <select id="editTimeSlot" class="form-select">
+                <option value="Early Morning (08:00 - 10:00)">Early Morning (08:00 - 10:00)</option>
+                <option value="Mid Morning (10:00 - 12:00)">Mid Morning (10:00 - 12:00)</option>
+                <option value="Early Afternoon (12:00 - 14:00)">Early Afternoon (12:00 - 14:00)</option>
+                <option value="Mid Afternoon (14:00 - 16:00)">Mid Afternoon (14:00 - 16:00)</option>
+                <option value="Late Afternoon (16:00 - 18:00)">Late Afternoon (16:00 - 18:00)</option>
+            </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" onclick="saveReschedule()" class="btn btn-refresh btn-sm">Update Schedule Slot</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     const SUPABASE_URL = "https://fujfaeibxjlhpledjbky.supabase.co";
     const SUPABASE_KEY = "sb_publishable_LxitdT1qAn2FtJwf-EY_Ng_gvmjSY4V";
+    let bootstrapModalInstance = null;
 
     async function fetchBookings() {
-        const tableBody = document.getElementById("bookingsTableBody");
+        const container = document.getElementById("bookingsContainer");
         
         try {
-            // Fetch records from Supabase
             const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings?select=*`, {
                 method: "GET",
                 headers: {
@@ -139,21 +240,22 @@
                 }
             });
 
-            if (!response.ok) throw new Error("Database network reject response");
+            if (!response.ok) throw new Error("Network configuration block error");
             const bookings = await response.json();
 
             if (bookings.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-muted py-4">No active booking slots filled yet.</td></tr>`;
+                container.innerHTML = `<div class="col-12 text-center text-muted py-5"><i class="fas fa-calendar-times fa-2x mb-2"></i><br>No active booking slots filled yet.</div>`;
                 return;
             }
 
-            // BULLETPROOF SORT ENGINE: Chronologically processes database layouts (YYYY-MM-DD) and string values (DD/MM/YYYY)
+            // Chronological Sort Engine
             bookings.sort((a, b) => {
                 const cleanDate = (dateStr) => {
                     if (!dateStr) return new Date(0);
-                    if (dateStr.includes('-')) return new Date(dateStr); 
-                    if (dateStr.includes('/')) { 
-                        const [d, m, y] = dateStr.split('/');
+                    const s = String(dateStr);
+                    if (s.includes('-')) return new Date(s); 
+                    if (s.includes('/')) { 
+                        const [d, m, y] = s.split('/');
                         return new Date(`${y}-${m}-${d}`);
                     }
                     return new Date(0);
@@ -161,50 +263,197 @@
                 return cleanDate(a.job_date) - cleanDate(b.job_date);
             });
 
-            tableBody.innerHTML = "";
+            container.innerHTML = "";
 
-            // Build dynamic display rows
-            bookings.forEach(job => {
-                let displayDate = job.job_date || "No Date Specified";
+            bookings.forEach((job, index) => {
+                let displayDate = job.job_date ? String(job.job_date) : "TBD";
+                let inputFormatDate = ""; 
                 
-                // Safely convert YYYY-MM-DD from database structure into clean UK visual layout (DD/MM/YYYY)
-                if (job.job_date && job.job_date.includes('-')) {
-                    const [y, m, d] = job.job_date.split('-');
+                if (job.job_date && String(job.job_date).includes('-')) {
+                    const [y, m, d] = String(job.job_date).split('-');
                     displayDate = `${d}/${m}/${y}`;
+                    inputFormatDate = `${y}-${m}-${d}`;
+                } else if (job.job_date && String(job.job_date).includes('/')) {
+                    const [d, m, y] = String(job.job_date).split('/');
+                    inputFormatDate = `${y}-${m}-${d}`;
                 }
 
-                const row = document.createElement("tr");
+                let hardwareIcon = "fa-gamepad";
+                if (String(job.console).includes("PlayStation")) hardwareIcon = "fa-brands fa-playstation text-primary";
+                if (String(job.console).includes("Xbox")) hardwareIcon = "fa-brands fa-xbox text-success";
+                if (String(job.console).includes("Nintendo")) hardwareIcon = "fa-solid fa-gamepad text-danger";
+
+                let rawPhone = String(job.phone || '').trim().replace(/\s+/g, '');
+                const baseDbPhone = rawPhone; // Keep reference of phone format before visual 0 patch
                 
-                row.innerHTML = `
-                    <td class="fw-bold text-info">${escapeHTML(displayDate)}</td>
-                    <td><span class="badge badge-slot">${escapeHTML(job.time_slot)}</span></td>
-                    <td>
-                        <div class="fw-bold">${escapeHTML(job.name)}</div>
-                        <div class="small text-muted"><i class="fas fa-phone alt small me-1"></i>${escapeHTML(job.phone)}</div>
-                    </td>
-                    <td><span class="text-uppercase small fw-bold">${escapeHTML(job.console)}</span></td>
-                    <td class="small text-wrap" style="max-width: 200px;">${escapeHTML(job.issue)}</td>
-                    <td class="small text-muted">${escapeHTML(job.address)}</td>
+                if (rawPhone.length === 10 && (rawPhone.startsWith('7') || rawPhone.startsWith('1') || rawPhone.startsWith('2'))) {
+                    rawPhone = '0' + rawPhone;
+                }
+
+                let formattedPhoneForApi = rawPhone;
+                if (formattedPhoneForApi.startsWith('0')) {
+                    formattedPhoneForApi = '44' + formattedPhoneForApi.substring(1);
+                }
+
+                const messageText = encodeURIComponent(`Hi ${job.name}, this is Essex Console Repair regarding your booking request for the ${job.console}.`);
+                const mapAddress = encodeURIComponent(job.address || '');
+                
+                // Create a dynamic card ID using the loop index since table layout drops IDs
+                const generatedCardId = `job-card-${index}`;
+
+                const cardColumn = document.createElement("div");
+                cardColumn.className = "col-12 col-md-6 col-lg-4";
+                cardColumn.id = generatedCardId;
+                
+                cardColumn.innerHTML = `
+                    <div class="job-card">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="job-date"><i class="far fa-calendar-alt me-1"></i> ${escapeHTML(displayDate)}</span>
+                            <span class="time-badge"><i class="far fa-clock me-1"></i> ${escapeHTML(job.time_slot)}</span>
+                        </div>
+                        
+                        <div class="client-name mb-3">
+                            <i class="fas fa-user-circle text-label me-1"></i> ${escapeHTML(job.name)}
+                        </div>
+                        
+                        <hr class="border-secondary my-2" style="opacity:0.25;">
+                        
+                        <div class="detail-row">
+                            <i class="${hardwareIcon}"></i>
+                            <div class="text-bright"><strong>${escapeHTML(job.console)}</strong></div>
+                        </div>
+                        
+                        <div class="detail-row mb-2">
+                            <i class="fas fa-tools text-warning"></i>
+                            <div class="text-bright"><span class="text-label small d-block">Fault Logged:</span>${escapeHTML(job.issue)}</div>
+                        </div>
+
+                        <div class="detail-row mb-2">
+                            <i class="fas fa-phone-alt text-success"></i>
+                            <div class="text-bright"><span class="text-label small d-block">Contact Number:</span>${escapeHTML(rawPhone)}</div>
+                        </div>
+                        
+                        <div class="detail-row mb-3">
+                            <i class="fas fa-map-pin text-info"></i>
+                            <div class="text-bright"><span class="text-label small d-block">Doorstep Address:</span>${escapeHTML(job.address)}</div>
+                        </div>
+
+                        <div class="d-flex gap-2 mt-3 pt-2 border-top border-secondary" style="border-top-style: dashed !important; opacity: 0.95;">
+                            <a href="https://wa.me/${formattedPhoneForApi}?text=${messageText}" target="_blank" class="btn btn-action btn-whatsapp flex-grow-1 text-center text-decoration-none">
+                                <i class="fab fa-whatsapp me-1"></i> WhatsApp
+                            </a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=${mapAddress}" target="_blank" class="btn btn-action btn-map flex-grow-1 text-center text-decoration-none">
+                                <i class="fas fa-map-marked-alt me-1"></i> Map Location
+                            </a>
+                        </div>
+
+                        <div class="d-flex gap-2 mt-2">
+                            <button onclick="openRescheduleModal('${escapeHTML(job.name)}', '${escapeHTML(baseDbPhone)}', '${inputFormatDate}', '${escapeHTML(job.time_slot)}', '${generatedCardId}')" class="btn btn-action btn-resched flex-grow-1">
+                                <i class="fas fa-calendar-day me-1"></i> Reschedule
+                            </button>
+                            <button onclick="deleteJob('${escapeHTML(job.name)}', '${escapeHTML(baseDbPhone)}', '${generatedCardId}')" class="btn btn-action btn-delete flex-grow-1">
+                                <i class="fas fa-trash-alt me-1"></i> Delete Job
+                            </button>
+                        </div>
+                    </div>
                 `;
                 
-                tableBody.appendChild(row);
+                container.appendChild(cardColumn);
             });
 
         } catch (err) {
-            console.error("Dashboard Sync Error: ", err);
-            tableBody.innerHTML = `<tr><td colspan="6" class="text-center text-danger py-4"><i class="fas fa-exclamation-triangle me-2"></i> Failed to synchronize database ledger. Check connection status or server logs.</td></tr>`;
+            console.error(err);
+            container.innerHTML = `<div class="col-12 text-center text-danger py-5"><i class="fas fa-exclamation-triangle fa-2x mb-2"></i><br>Failed to synchronize database ledger. Check backend logs.</div>`;
         }
     }
 
-    // Protection layout helper to isolate string output safety 
-    function escapeHTML(str) {
-        if (!str) return '';
+    function openRescheduleModal(clientName, clientPhone, dateVal, timeVal, cardId) {
+        document.getElementById("editClientName").value = clientName;
+        document.getElementById("editClientPhone").value = clientPhone;
+        document.getElementById("editCardId").value = cardId;
+        document.getElementById("editJobDate").value = dateVal;
+        document.getElementById("editTimeSlot").value = timeVal;
+        
+        if(!bootstrapModalInstance) {
+            bootstrapModalInstance = new bootstrap.Modal(document.getElementById('rescheduleModal'));
+        }
+        bootstrapModalInstance.show();
+    }
+
+    async function saveReschedule() {
+        const name = document.getElementById("editClientName").value;
+        const phone = document.getElementById("editClientPhone").value;
+        const newDate = document.getElementById("editJobDate").value;
+        const newTime = document.getElementById("editTimeSlot").value;
+
+        if(!newDate || !newTime) {
+            alert("Please input valid parameters into both scheduling slots.");
+            return;
+        }
+
+        try {
+            // Using composite filtering (name AND phone) to update the record safely
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings?name=eq.${encodeURIComponent(name)}&phone=eq.${encodeURIComponent(phone)}`, {
+                method: "PATCH",
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": `Bearer ${SUPABASE_KEY}`,
+                    "Content-Type": "application/json",
+                    "Prefer": "return=representation"
+                },
+                body: JSON.stringify({
+                    job_date: newDate,
+                    time_slot: newTime
+                })
+            });
+
+            if (response.ok) {
+                bootstrapModalInstance.hide();
+                fetchBookings(); 
+            } else {
+                const errorData = await response.json();
+                alert(`Database Rejected Update:\nReason: ${errorData.message || response.statusText}`);
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Network connection error. Check your console logs.");
+        }
+    }
+
+    async function deleteJob(name, phone, cardId) {
+        if (!confirm(`Are you absolutely sure you want to permanently delete the booking row for ${name}?`)) return;
+
+        try {
+            // Using composite filtering (name AND phone) to drop the target row safely
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings?name=eq.${encodeURIComponent(name)}&phone=eq.${encodeURIComponent(phone)}`, {
+                method: "DELETE",
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": `Bearer ${SUPABASE_KEY}`
+                }
+            });
+
+            if (response.ok) {
+                const card = document.getElementById(cardId);
+                if (card) card.remove();
+            } else {
+                const errorData = await response.json();
+                alert(`Database Rejected Delete:\nReason: ${errorData.message || response.statusText}`);
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Could not complete removal action.");
+        }
+    }
+
+    function escapeHTML(val) {
+        if (val === null || val === undefined) return '';
+        const str = String(val);
         return str.replace(/[&<>'"]/g, 
-            tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            tag => ({ '&': '&', '<': '<', '>': '>', "'": "'", '"': '"' }[tag] || tag)
         );
     }
 
-    // Fire automatically on initial window load sequence
     document.addEventListener("DOMContentLoaded", fetchBookings);
 </script>
 
