@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Repair | Essex Console Repair</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root { 
+            --primary-glow: #00d4ff; 
+            --dark-bg: #0f0f0f; 
+            --card-bg: #141414;
+        }
+        body { 
+            background-color: var(--dark-bg); 
+            color: #fff; 
+            font-family: 'Roboto', sans-serif; 
+            padding: 30px 0;
+        }
+        h1, h2, label { 
+            font-family: 'Orbitron', sans-serif; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+        }
+        .glow-text { 
+            color: var(--primary-glow); 
+            text-shadow: 0 0 8px rgba(0, 212, 255, 0.4); 
+        }
+        .booking-card {
+            background: linear-gradient(145deg, #141414 0%, #0b0b0b 100%);
+            border: 1px solid #222;
+            border-top: 3px solid var(--primary-glow);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        .form-control, .form-select {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            color: #fff;
+            padding: 12px;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: #222;
+            border-color: var(--primary-glow);
+            color: #fff;
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.25);
+        }
+        .form-label {
+            font-size: 0.85rem;
+            color: #aaa;
+            margin-bottom: 8px;
+        }
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .btn-whatsapp:hover {
+            background: #20ba5a;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+            transform: translateY(-2px);
+            color: #fff;
+        }
+        /* Dynamic dependent options styling hint */
+        .issue-hint {
+            font-size: 0.8rem;
+            color: var(--primary-glow);
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+            
+            <div class="text-center mb-4">
+                <h1 class="h2 fw-bold m-0">Essex <span class="glow-text">Console</span> Repair</h1>
+                <p class="text-muted small mt-1">Doorstep Service Booking Details</p>
+            </div>
+
+            <div class="booking-card">
+                <form id="bookingForm" onsubmit="sendToWhatsApp(event)">
+                    
+                    <div class="mb-3">
+                        <label for="custName" class="form-label">Your Name</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-dark border-secondary text-muted"><i class="fas fa-user"></i></span>
+                            <input type="text" class="form-control" id="custName" required placeholder="e.g. John Smith">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="custPhone" class="form-label">Contact Phone Number</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-dark border-secondary text-muted"><i class="fas fa-phone"></i></span>
+                            <input type="tel" class="form-control" id="custPhone" required placeholder="e.g. 07123 456789">
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="custAddress" class="form-label">Full Doorstep Address & Postcode</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-dark border-secondary text-muted"><i class="fas fa-map-marker-alt"></i></span>
+                            <textarea class="form-control" id="custAddress" rows="2" required placeholder="Street address, Town, and Postcode"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="consoleType" class="form-label">Select Console</label>
+                            <select class="form-select" id="consoleType" required onchange="updateIssuesDropdown()">
+                                <option value="" disabled selected>Choose Hardware...</option>
+                                <option value="PlayStation 5">PlayStation 5</option>
+                                <option value="Xbox Series X">Xbox Series X</option>
+                                <option value="Nintendo Switch">Nintendo Switch</option>
+                                <option value="Other / Not Listed">Other Console</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="consoleIssue" class="form-label">Select Primary Issue</label>
+                            <select class="form-select" id="consoleIssue" required disabled>
+                                <option value="" disabled selected>Select console first...</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 d-none" id="customIssueContainer">
+                        <label for="customIssueText" class="form-label">Describe the fault details</label>
+                        <input type="text" class="form-control" id="customIssueText" placeholder="Please describe what happens...">
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <label for="repairDate" class="form-label">Preferred Date</label>
+                            <input type="date" class="form-control" id="repairDate" required>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="repairTime" class="form-label">Preferred Time Window</label>
+                            <select class="form-select" id="repairTime" required>
+                                <option value="" disabled selected>Choose Slot...</option>
+                                <option value="Morning (09:00 - 12:00)">Morning (9am - 12pm)</option>
+                                <option value="Midday (12:00 - 15:00)">Midday (12pm - 3pm)</option>
+                                <option value="Late Afternoon (15:00 - 18:00)">Afternoon (3pm - 6pm)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-whatsapp w-100 d-flex align-items-center justify-content-center gap-2">
+                        <i class="fab fa-whatsapp fa-lg"></i> Send Booking via WhatsApp
+                    </button>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // Object mapping your common service items directly from your main landing menu
+    const issueDatabase = {
+        "PlayStation 5": [
+            "HDMI Port Replacement (£65)",
+            "Liquid Metal Overheating Service (£45)",
+            "Disc Drive / Optical Laser Alignment",
+            "Power Supply Failure / No Power",
+            "Other Structural/Board Level Fault"
+        ],
+        "Xbox Series X": [
+            "HDMI Port Replacement (£65)",
+            "Premium Deep Clean & Thermal Optimization (£35)",
+            "Boot Loop / SSD Drive Corruption Errors",
+            "Power Delivery Issue",
+            "Other Hardware Fault"
+        ],
+        "Nintendo Switch": [
+            "USB-C Power Port Micro-Soldering (£55)",
+            "Joy-Con Drift Fix (£20)",
+            "Shattered Screen / Digitizer Replacement",
+            "Battery Replacement Service",
+            "Other Charging/Docking Failure"
+        ],
+        "Other / Not Listed": [
+            "Custom Diagnostic Request",
+            "Older Generation Console Repair"
+        ]
+    };
+
+    // Dynamically populates the second dropdown based on what console they pick
+    function updateIssuesDropdown() {
+        const consoleSelect = document.getElementById("consoleType");
+        const issueSelect = document.getElementById("consoleIssue");
+        const selectedConsole = consoleSelect.value;
+        
+        issueSelect.innerHTML = '<option value="" disabled selected>Choose specific issue...</option>';
+        issueSelect.disabled = false;
+
+        if (issueDatabase[selectedConsole]) {
+            issueDatabase[selectedConsole].forEach(issue => {
+                const opt = document.createElement("option");
+                opt.value = issue;
+                opt.textContent = issue;
+                issueSelect.appendChild(opt);
+            });
+            
+            // Add a permanent catch-all alternative choice
+            const fallbackOpt = document.createElement("option");
+            fallbackOpt.value = "Something else (Describe below)";
+            fallbackOpt.textContent = "Something else (Describe below)";
+            issueSelect.appendChild(fallbackOpt);
+        }
+
+        // Toggle custom text field logic
+        issueSelect.onchange = function() {
+            const customBox = document.getElementById("customIssueContainer");
+            const customInput = document.getElementById("customIssueText");
+            if (this.value === "Something else (Describe below)" || selectedConsole === "Other / Not Listed") {
+                customBox.classList.remove("d-none");
+                customInput.required = true;
+            } else {
+                customBox.classList.add("d-none");
+                customInput.required = false;
+            }
+        };
+    }
+
+    // Constructs the cleanly structured string text blocks and pushes straight out to WhatsApp API
+    function sendToWhatsApp(event) {
+        event.preventDefault();
+
+        // Get value states
+        const name = document.getElementById("custName").value.trim();
+        const phone = document.getElementById("custPhone").value.trim();
+        const address = document.getElementById("custAddress").value.trim();
+        const consoleModel = document.getElementById("consoleType").value;
+        let fault = document.getElementById("consoleIssue").value;
+        
+        if (fault === "Something else (Describe below)" || consoleModel === "Other / Not Listed") {
+            fault = "Custom issue: " + document.getElementById("customIssueText").value.trim();
+        }
+
+        // Format dates beautifully
+        const rawDate = document.getElementById("repairDate").value;
+        const formattedDate = new Date(rawDate).toLocaleDateString('en-GB', {
+            weekday: 'short', year: 'numeric', month: 'short', day: 'numeric'
+        });
+        const timeSlot = document.getElementById("repairTime").value;
+
+        // Your Company Phone Number in exact global country code string context
+        const businessWhatsAppNumber = "447935312274"; 
+
+        // Generate cleanly lined structured dashboard readout for your WhatsApp screen
+        const messageText = 
+            `🛠️ *NEW BOOKING REQUEST* 🛠️\n\n` +
+            `👤 *Customer:* ${name}\n` +
+            `📞 *Phone:* ${phone}\n` +
+            `📍 *Address:* ${address}\n\n` +
+            `🎮 *Console:* ${consoleModel}\n` +
+            `⚠️ *Issue:* ${fault}\n\n` +
+            `📅 *Preferred Date:* ${formattedDate}\n` +
+            `⏰ *Time Slot:* ${timeSlot}\n\n` +
+            `_Sent via Quick-Booker link_`;
+
+        // Encode spaces and emojis correctly for web URLs
+        const encodedUrlText = encodeURIComponent(messageText);
+        
+        // Launch standard API protocol target
+        const finalWhatsAppUrl = `https://api.whatsapp.com/send?phone=${businessWhatsAppNumber}&text=${encodedUrlText}`;
+        
+        window.open(finalWhatsAppUrl, '_blank');
+    }
+
+    // Set today's date as the minimum selectable date on the calendar interface
+    document.addEventListener("DOMContentLoaded", () => {
+        const dateInput = document.getElementById("repairDate");
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.min = today;
+    });
+</script>
+
+</body>
+</html>
