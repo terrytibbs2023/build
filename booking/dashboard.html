@@ -14,13 +14,13 @@
             --primary-glow: #00d4ff; 
             --dark-bg: #0a0a0a; 
             --card-bg: #121212;
-            --border-color: #333;
+            --border-color: #262626;
         }
         body { 
             background-color: var(--dark-bg); 
             color: #ffffff; 
             font-family: 'Roboto', sans-serif; 
-            padding: 20px 0;
+            padding: 15px 0;
         }
         h1, h2, h3, .job-date, .modal-title { 
             font-family: 'Orbitron', sans-serif; 
@@ -31,155 +31,157 @@
             color: var(--primary-glow); 
             text-shadow: 0 0 10px rgba(0, 212, 255, 0.4); 
         }
+        
+        /* Mobile-First Layout Tweaks */
+        .dashboard-header {
+            flex-direction: column;
+            align-items: flex-start !important;
+            gap: 15px;
+        }
+        @media (min-width: 576px) {
+            .dashboard-header {
+                flex-direction: row;
+                align-items: center !important;
+            }
+        }
+
         /* Grid Dashboard Cards */
         .job-card {
-            background: linear-gradient(145deg, #161616 0%, #0d0d0d 100%);
+            background: linear-gradient(145deg, #141414 0%, #0d0d0d 100%);
             border: 1px solid var(--border-color);
             border-left: 4px solid var(--primary-glow);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
-        .job-card:hover {
-            transform: translateY(-3px);
-            border-color: #444;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         .job-date {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: var(--primary-glow);
         }
         .time-badge {
-            background: rgba(0, 212, 255, 0.15);
-            border: 1px solid rgba(0, 212, 255, 0.4);
+            background: rgba(0, 212, 255, 0.12);
+            border: 1px solid rgba(0, 212, 255, 0.3);
             color: var(--primary-glow);
-            font-size: 0.8rem;
-            padding: 4px 10px;
-            border-radius: 4px;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 6px;
             font-weight: 500;
+            text-align: right;
+            max-width: 60%;
         }
         .client-name {
-            font-size: 1.25rem;
+            font-size: 1.15rem;
             font-weight: 700;
             color: #ffffff;
         }
         .detail-row {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
-            margin-bottom: 10px;
-            font-size: 1rem;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
         }
         .detail-row i {
-            margin-top: 4px;
-            width: 18px;
+            margin-top: 3px;
+            width: 20px;
+            font-size: 1rem;
             text-align: center;
         }
         .text-bright {
             color: #ffffff !important;
+            word-break: break-word; /* Prevents long text stretching on tiny displays */
         }
         .text-label {
-            color: #bbbbbb;
+            color: #999999;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        /* Action Utility Buttons */
+        
+        /* Action Utility Buttons (Optimized for Mobile Tapping) */
         .btn-action {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            padding: 10px 12px;
-            border-radius: 5px;
+            padding: 12px; /* Taller touch target */
+            border-radius: 8px;
             transition: all 0.2s;
             text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
-        .btn-whatsapp {
-            background: transparent;
-            border: 1px solid #25D366;
-            color: #25D366;
+        
+        /* Responsive Button Containers */
+        .action-group {
+            display: flex;
+            flex-direction: column; /* Stacked by default on phone screen layouts */
+            gap: 8px;
         }
-        .btn-whatsapp:hover {
-            background: #25D366;
-            color: #000;
-            box-shadow: 0 0 10px rgba(37, 211, 102, 0.4);
+        @media (min-width: 400px) {
+            .action-group {
+                flex-direction: row; /* Side-by-side once viewport can manage it */
+            }
         }
-        .btn-map {
-            background: transparent;
-            border: 1px solid var(--primary-glow);
-            color: var(--primary-glow);
-        }
-        .btn-map:hover {
-            background: var(--primary-glow);
-            color: #000;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
-        }
-        .btn-resched {
-            background: transparent;
-            border: 1px solid #ffaa00;
-            color: #ffaa00;
-        }
-        .btn-resched:hover {
-            background: #ffaa00;
-            color: #000;
-        }
-        .btn-delete {
-            background: transparent;
-            border: 1px solid #ff3333;
-            color: #ff3333;
-        }
-        .btn-delete:hover {
-            background: #ff3333;
-            color: #ffffff;
-        }
+
+        .btn-whatsapp { background: transparent; border: 1px solid #25D366; color: #25D366; }
+        .btn-whatsapp:hover { background: #25D366; color: #000; }
+        
+        .btn-map { background: transparent; border: 1px solid var(--primary-glow); color: var(--primary-glow); }
+        .btn-map:hover { background: var(--primary-glow); color: #000; }
+        
+        .btn-resched { background: transparent; border: 1px solid #ffaa00; color: #ffaa00; }
+        .btn-resched:hover { background: #ffaa00; color: #000; }
+        
+        .btn-delete { background: transparent; border: 1px solid #ff3333; color: #ff3333; }
+        .btn-delete:hover { background: #ff3333; color: #ffffff; }
+        
         .btn-refresh {
             border: 1px solid var(--primary-glow);
             color: var(--primary-glow);
             background: transparent;
             font-family: 'Orbitron', sans-serif;
+            width: 100%; /* Full width on mobile top bar */
         }
-        .btn-refresh:hover {
-            background: var(--primary-glow);
-            color: #000;
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        @media (min-width: 576px) {
+            .btn-refresh { width: auto; }
         }
+
         /* Dark Theme Modal Adjustments */
         .modal-content {
             background-color: #121212;
-            border: 1px solid var(--border-color);
+            border: 1px solid #333;
             color: #fff;
         }
-        .modal-header {
-            border-bottom: 1px solid var(--border-color);
-        }
-        .modal-footer {
-            border-top: 1px solid var(--border-color);
-        }
+        .modal-header { border-bottom: 1px solid #222; }
+        .modal-footer { border-top: 1px solid #222; }
         .form-control, .form-select {
             background-color: #1a1a1a;
             border: 1px solid #444;
             color: #fff;
-        }
-        .form-control:focus, .form-select:focus {
-            background-color: #222;
-            color: #fff;
-            border-color: var(--primary-glow);
-            box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+            padding: 12px; /* Chunky inputs on phone */
         }
     </style>
 </head>
 <body>
 
-<div class="container px-4">
+<div class="container px-3">
     
-    <div class="d-flex justify-content-between align-items-center mb-5 mt-3">
+    <div class="d-flex dashboard-header justify-content-between mb-4 mt-2">
         <div>
-            <h1 class="h3 fw-bold m-0">Essex <span class="glow-text">Console</span> Repair</h1>
+            <h1 class="h4 fw-bold m-0">Essex <span class="glow-text">Console</span> Repair</h1>
             <p class="text-muted small m-0">Secure Jobs & Bookings Ledger</p>
         </div>
-        <button onclick="fetchBookings()" class="btn btn-refresh btn-sm px-3 py-2">
+        <button onclick="fetchBookings()" class="btn btn-refresh btn-sm px-4 py-2">
             <i class="fas fa-sync-alt me-1"></i> Sync Live Slots
         </button>
     </div>
 
-    <div class="row g-4" id="bookingsContainer">
+    <div class="row g-3" id="bookingsContainer">
         <div class="col-12 text-center py-5 text-muted">
             <i class="fas fa-spinner fa-spin fa-2x mb-3 text-info"></i><br>
             Synchronizing scheduling stream engine...
@@ -188,10 +190,9 @@
 </div>
 
 <div class="modal fade" id="rescheduleModal" tabindex="-1" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  <div class="modal-dialog modal-dialog-centered"> <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-warning"><i class="fas fa-clock-rotate-left me-2"></i>Adjust Booking Window</h5>
+        <h5 class="modal-title text-warning"><i class="fas fa-clock-rotate-left me-2"></i>Adjust Window</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -214,8 +215,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
-        <button type="button" onclick="saveReschedule()" class="btn btn-refresh btn-sm">Update Schedule Slot</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" onclick="saveReschedule()" class="btn btn-refresh">Update Schedule</button>
       </div>
     </div>
   </div>
@@ -244,11 +245,11 @@
             const bookings = await response.json();
 
             if (bookings.length === 0) {
-                container.innerHTML = `<div class="col-12 text-center text-muted py-5"><i class="fas fa-calendar-times fa-2x mb-2"></i><br>No active booking slots filled yet.</div>`;
+                container.innerHTML = `<div class="col-12 text-center text-muted py-5"><i class="fas fa-calendar-times fa-2x mb-2"></i><br>No active booking slots.</div>`;
                 return;
             }
 
-            // Chronological Sort Engine
+            // Chronological Sort
             bookings.sort((a, b) => {
                 const cleanDate = (dateStr) => {
                     if (!dateStr) return new Date(0);
@@ -284,7 +285,7 @@
                 if (String(job.console).includes("Nintendo")) hardwareIcon = "fa-solid fa-gamepad text-danger";
 
                 let rawPhone = String(job.phone || '').trim().replace(/\s+/g, '');
-                const baseDbPhone = rawPhone; // Keep reference of phone format before visual 0 patch
+                const baseDbPhone = rawPhone; 
                 
                 if (rawPhone.length === 10 && (rawPhone.startsWith('7') || rawPhone.startsWith('1') || rawPhone.startsWith('2'))) {
                     rawPhone = '0' + rawPhone;
@@ -297,8 +298,6 @@
 
                 const messageText = encodeURIComponent(`Hi ${job.name}, this is Essex Console Repair regarding your booking request for the ${job.console}.`);
                 const mapAddress = encodeURIComponent(job.address || '');
-                
-                // Create a dynamic card ID using the loop index since table layout drops IDs
                 const generatedCardId = `job-card-${index}`;
 
                 const cardColumn = document.createElement("div");
@@ -309,14 +308,14 @@
                     <div class="job-card">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <span class="job-date"><i class="far fa-calendar-alt me-1"></i> ${escapeHTML(displayDate)}</span>
-                            <span class="time-badge"><i class="far fa-clock me-1"></i> ${escapeHTML(job.time_slot)}</span>
+                            <span class="time-badge text-truncate"><i class="far fa-clock me-1"></i> ${escapeHTML(job.time_slot)}</span>
                         </div>
                         
                         <div class="client-name mb-3">
-                            <i class="fas fa-user-circle text-label me-1"></i> ${escapeHTML(job.name)}
+                            <i class="fas fa-user-circle text-muted me-1"></i> ${escapeHTML(job.name)}
                         </div>
                         
-                        <hr class="border-secondary my-2" style="opacity:0.25;">
+                        <hr class="border-secondary my-2" style="opacity:0.15;">
                         
                         <div class="detail-row">
                             <i class="${hardwareIcon}"></i>
@@ -325,34 +324,34 @@
                         
                         <div class="detail-row mb-2">
                             <i class="fas fa-tools text-warning"></i>
-                            <div class="text-bright"><span class="text-label small d-block">Fault Logged:</span>${escapeHTML(job.issue)}</div>
+                            <div class="text-bright"><span class="text-label d-block">Fault Logged:</span>${escapeHTML(job.issue)}</div>
                         </div>
 
                         <div class="detail-row mb-2">
                             <i class="fas fa-phone-alt text-success"></i>
-                            <div class="text-bright"><span class="text-label small d-block">Contact Number:</span>${escapeHTML(rawPhone)}</div>
+                            <div class="text-bright"><span class="text-label d-block">Contact Number:</span>${escapeHTML(rawPhone)}</div>
                         </div>
                         
                         <div class="detail-row mb-3">
                             <i class="fas fa-map-pin text-info"></i>
-                            <div class="text-bright"><span class="text-label small d-block">Doorstep Address:</span>${escapeHTML(job.address)}</div>
+                            <div class="text-bright"><span class="text-label d-block">Doorstep Address:</span>${escapeHTML(job.address)}</div>
                         </div>
 
-                        <div class="d-flex gap-2 mt-3 pt-2 border-top border-secondary" style="border-top-style: dashed !important; opacity: 0.95;">
-                            <a href="https://wa.me/${formattedPhoneForApi}?text=${messageText}" target="_blank" class="btn btn-action btn-whatsapp flex-grow-1 text-center text-decoration-none">
-                                <i class="fab fa-whatsapp me-1"></i> WhatsApp
+                        <div class="action-group gap-2 mt-auto pt-3 border-top border-secondary" style="border-top-style: dashed !important; opacity: 0.95;">
+                            <a href="https://wa.me/${formattedPhoneForApi}?text=${messageText}" target="_blank" class="btn btn-action btn-whatsapp flex-grow-1 text-decoration-none">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
                             </a>
-                            <a href="https://www.google.com/maps/search/?api=1&query=${mapAddress}" target="_blank" class="btn btn-action btn-map flex-grow-1 text-center text-decoration-none">
-                                <i class="fas fa-map-marked-alt me-1"></i> Map Location
+                            <a href="https://www.google.com/maps/search/?api=1&query=${mapAddress}" target="_blank" class="btn btn-action btn-map flex-grow-1 text-decoration-none">
+                                <i class="fas fa-map-marked-alt"></i> Map
                             </a>
                         </div>
 
-                        <div class="d-flex gap-2 mt-2">
+                        <div class="action-group gap-2 mt-2">
                             <button onclick="openRescheduleModal('${escapeHTML(job.name)}', '${escapeHTML(baseDbPhone)}', '${inputFormatDate}', '${escapeHTML(job.time_slot)}', '${generatedCardId}')" class="btn btn-action btn-resched flex-grow-1">
-                                <i class="fas fa-calendar-day me-1"></i> Reschedule
+                                <i class="fas fa-calendar-day"></i> Reschedule
                             </button>
                             <button onclick="deleteJob('${escapeHTML(job.name)}', '${escapeHTML(baseDbPhone)}', '${generatedCardId}')" class="btn btn-action btn-delete flex-grow-1">
-                                <i class="fas fa-trash-alt me-1"></i> Delete Job
+                                <i class="fas fa-trash-alt"></i> Delete
                             </button>
                         </div>
                     </div>
@@ -363,7 +362,7 @@
 
         } catch (err) {
             console.error(err);
-            container.innerHTML = `<div class="col-12 text-center text-danger py-5"><i class="fas fa-exclamation-triangle fa-2x mb-2"></i><br>Failed to synchronize database ledger. Check backend logs.</div>`;
+            container.innerHTML = `<div class="col-12 text-center text-danger py-5"><i class="fas fa-exclamation-triangle fa-2x mb-2"></i><br>Failed to sync database.</div>`;
         }
     }
 
@@ -387,12 +386,11 @@
         const newTime = document.getElementById("editTimeSlot").value;
 
         if(!newDate || !newTime) {
-            alert("Please input valid parameters into both scheduling slots.");
+            alert("Please input valid parameters.");
             return;
         }
 
         try {
-            // Using composite filtering (name AND phone) to update the record safely
             const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings?name=eq.${encodeURIComponent(name)}&phone=eq.${encodeURIComponent(phone)}`, {
                 method: "PATCH",
                 headers: {
@@ -412,19 +410,18 @@
                 fetchBookings(); 
             } else {
                 const errorData = await response.json();
-                alert(`Database Rejected Update:\nReason: ${errorData.message || response.statusText}`);
+                alert(`Error: ${errorData.message || response.statusText}`);
             }
         } catch (err) {
             console.error(err);
-            alert("Network connection error. Check your console logs.");
+            alert("Network link offline.");
         }
     }
 
     async function deleteJob(name, phone, cardId) {
-        if (!confirm(`Are you absolutely sure you want to permanently delete the booking row for ${name}?`)) return;
+        if (!confirm(`Permanently delete the booking for ${name}?`)) return;
 
         try {
-            // Using composite filtering (name AND phone) to drop the target row safely
             const response = await fetch(`${SUPABASE_URL}/rest/v1/bookings?name=eq.${encodeURIComponent(name)}&phone=eq.${encodeURIComponent(phone)}`, {
                 method: "DELETE",
                 headers: {
@@ -438,11 +435,11 @@
                 if (card) card.remove();
             } else {
                 const errorData = await response.json();
-                alert(`Database Rejected Delete:\nReason: ${errorData.message || response.statusText}`);
+                alert(`Error: ${errorData.message || response.statusText}`);
             }
         } catch (err) {
             console.error(err);
-            alert("Could not complete removal action.");
+            alert("Action rejected.");
         }
     }
 
