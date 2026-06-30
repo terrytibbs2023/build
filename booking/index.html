@@ -92,6 +92,7 @@
                 <p class="text-muted small mt-1">Doorstep Service Booking Details</p>
             </div>
 
+            <!-- Booking Form Card Component -->
             <div class="booking-card" id="formContainer">
                 <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
                     
@@ -154,9 +155,12 @@
                             <label for="repairTime" class="form-label">Preferred Time Window</label>
                             <select class="form-select" id="repairTime" required>
                                 <option value="" disabled selected>Choose Slot...</option>
-                                <option value="Morning">Morning (9am - 12pm)</option>
-                                <option value="Midday">Midday (12pm - 3pm)</option>
-                                <option value="Afternoon">Afternoon (3pm - 6pm)</option>
+                                <option value="Early Morning (08:00 - 10:00)">Early Morning (8am - 10am)</option>
+                                <option value="Morning (10:00 - 12:00)">Morning (10am - 12pm)</option>
+                                <option value="Midday (12:00 - 14:00)">Midday (12pm - 2pm)</option>
+                                <option value="Afternoon (14:00 - 16:00)">Afternoon (2pm - 4pm)</option>
+                                <option value="Late Afternoon (16:00 - 18:00)">Late Afternoon (4pm - 6pm)</option>
+                                <option value="Evening (18:00 - 20:00)">Evening (6pm - 8pm)</option>
                             </select>
                         </div>
                     </div>
@@ -168,6 +172,7 @@
                 </form>
             </div>
 
+            <!-- Sleek Thank You Component State (Hidden Initially) -->
             <div class="booking-card text-center d-none" id="thankYouContainer">
                 <div class="mb-4">
                     <i class="fas fa-check-circle success-icon"></i>
@@ -183,11 +188,8 @@
 </div>
 
 <script>
-    // Paste your exact connection details here
-       const SUPABASE_URL = "https://fujfaeibxjlhpledjbky.supabase.co";
+    const SUPABASE_URL = "https://fujfaeibxjlhpledjbky.supabase.co";
     const SUPABASE_KEY = "sb_publishable_LxitdT1qAn2FtJwf-EY_Ng_gvmjSY4V";
-    
-
 
     const issueDatabase = {
         "PlayStation 5": [
@@ -255,7 +257,6 @@
     async function handleBookingSubmit(event) {
         event.preventDefault();
         
-        // Visual indicator that things are saving
         const submitBtn = document.getElementById("submitBtn");
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Securing Your Slot...';
@@ -267,13 +268,21 @@
             fault = "Custom issue: " + document.getElementById("customIssueText").value.trim();
         }
 
+        // Convert HTML date (YYYY-MM-DD) into standard UK format (DD/MM/YYYY)
+        const rawDate = document.getElementById("repairDate").value; 
+        let ukFormattedDate = rawDate;
+        if (rawDate) {
+            const [year, month, day] = rawDate.split("-");
+            ukFormattedDate = `${day}/${month}/${year}`;
+        }
+
         const bookingData = {
             name: document.getElementById("custName").value.trim(),
             phone: document.getElementById("custPhone").value.trim(),
             address: document.getElementById("custAddress").value.trim(),
             console: consoleModel,
             issue: fault,
-            job_date: document.getElementById("repairDate").value,
+            job_date: ukFormattedDate, // Now processing text formatting as DD/MM/YYYY
             time_slot: document.getElementById("repairTime").value
         };
 
@@ -290,7 +299,6 @@
             });
 
             if (response.ok) {
-                // Success State Transition
                 document.getElementById("formContainer").classList.add("d-none");
                 document.getElementById("thankYouContainer").classList.remove("d-none");
             } else {
