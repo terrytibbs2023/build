@@ -1,5 +1,5 @@
 // A simple version identifier to force cache updates if needed
-const CACHE_NAME = 'essex-repair-v1';
+const CACHE_NAME = 'essex-repair-v2';
 
 // 1. Install event: Cache essential assets if you want offline support
 self.addEventListener('install', (event) => {
