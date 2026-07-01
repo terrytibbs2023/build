@@ -1,9 +1,9 @@
 {
   "name": "Essex Console Repair Admin",
-  "short_name": "ECR Admin",
+  "short_name": "Jobs In",
   "start_url": "index.html",
   "display": "standalone",
-  "background_color": "#0a0a0a",
+ "background_color": "#f8f9fa",
   "theme_color": "#00d4ff",
   "icons": [
     { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
