@@ -250,8 +250,6 @@
     const SUPABASE_URL = "https://fujfaeibxjlhpledjbky.supabase.co";
     const SUPABASE_KEY = "sb_publishable_LxitdT1qAn2FtJwf-EY_Ng_gvmjSY4V";
     let bootstrapModalInstance = null;
-    
-    // Memory state container for auto-counting records
     let lastJobCount = null;
 
     async function fetchBookings() {
@@ -269,11 +267,10 @@
             if (!response.ok) throw new Error("Network configuration block error");
             const bookings = await response.json();
 
-            // Check if database size expanded since last verification loop
             if (lastJobCount !== null && bookings.length > lastJobCount) {
                 const sound = document.getElementById("notificationSound");
                 if (sound) {
-                    sound.play().catch(e => console.log("Audio playback waiting for manual screen touch interaction."));
+                    sound.play().catch(e => console.log("Audio playback waiting for interaction."));
                 }
             }
             lastJobCount = bookings.length;
@@ -371,7 +368,6 @@
                             <div class="text-bright"><span class="text-label d-block">Address:</span>${escapeHTML(job.address)}</div>
                         </div>
 
-                        <!-- Communications & Routing Controls -->
                         <div class="action-group gap-2 mt-auto pt-3 border-top border-secondary" style="border-top-style: dashed !important; opacity: 0.95;">
                             <a href="https://wa.me/${formattedPhoneForApi}?text=${messageText}" target="_blank" class="btn btn-action btn-whatsapp flex-grow-1 text-decoration-none">
                                 <i class="fab fa-whatsapp"></i> WhatsApp
@@ -381,17 +377,25 @@
                             </a>
                         </div>
 
-                        <!-- Back-Office System Administration Suite -->
                         <div class="action-group gap-2 mt-2">
-                            <button onclick="openRescheduleModal('${escapeHTML(job.name)}', '${escapeHTML(baseDbPhone)}', '${inputFormatDate}', '${escapeHTML(job.time_slot)}', '${generatedCardId}')" class="btn btn-action btn-resched flex-grow-1">
+                            <button class="btn btn-action btn-resched flex-grow-1 btn-trigger-resched">
                                 <i class="fas fa-calendar-day"></i> Reschedule
                             </button>
-                            <button onclick="deleteJob('${escapeHTML(job.name)}', '${escapeHTML(baseDbPhone)}', '${generatedCardId}')" class="btn btn-action btn-delete flex-grow-1">
+                            <button class="btn btn-action btn-delete flex-grow-1 btn-trigger-delete">
                                 <i class="fas fa-trash-alt"></i> Delete
                             </button>
                         </div>
                     </div>
                 `;
+
+                // Safe Event Listeners that completely avoid any quote-breaking syntax errors
+                cardColumn.querySelector('.btn-trigger-resched').addEventListener('click', () => {
+                    openRescheduleModal(job.name, baseDbPhone, inputFormatDate, job.time_slot, generatedCardId);
+                });
+
+                cardColumn.querySelector('.btn-trigger-delete').addEventListener('click', () => {
+                    deleteJob(job.name, baseDbPhone, generatedCardId);
+                });
                 
                 container.appendChild(cardColumn);
             });
@@ -488,19 +492,15 @@
         );
     }
 
-    // Set initial configuration parameters on frame instantiation
     document.addEventListener("DOMContentLoaded", () => {
         fetchBookings();
-        
-        // Auto-refresh engine loop configured to scan database context every 30 seconds
         setInterval(fetchBookings, 30000); 
     });
 
-    // PWA Service Worker Hook Integration Setup
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker.register('service-worker.js')
-                .then(reg => console.log('Service Worker safely locked in backend:', reg.scope))
+                .then(reg => console.log('Service Worker connected:', reg.scope))
                 .catch(err => console.error('Service worker installation failure:', err));
         });
     }
