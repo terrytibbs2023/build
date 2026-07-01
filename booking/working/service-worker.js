@@ -52,10 +52,3 @@ self.addEventListener('notificationclick', function(event) {
         })
     );
 });
-
-// 3. Essential Fetch Listener for PWA Installation
-// This empty listener satisfies the browser's requirement that a PWA must have 
-// offline capabilities to trigger the native "Install App" prompt.
-self.addEventListener('fetch', function(event) {
-    // Currently acting as a pass-through. You can expand this later to cache files for true offline mode.
-});
