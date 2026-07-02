@@ -31,7 +31,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Fixed text sizing: Stops mobile browsers from guessing the size and causing jumps */
         .main-title {
             font-family: 'Orbitron', sans-serif; 
             text-transform: uppercase; 
@@ -74,7 +73,7 @@
             border: 1px solid #333;
             color: #fff;
             padding: 12px;
-            font-size: 16px; /* Prevents iOS from zooming in automatically on focus */
+            font-size: 16px;
             border-radius: 6px;
         }
 
@@ -91,7 +90,6 @@
             margin-bottom: 6px;
         }
 
-        /* Smooth, non-jumping expander for the issue block */
         .issue-container {
             max-height: 0;
             opacity: 0;
@@ -136,31 +134,16 @@
             color: #25D366;
         }
 
-        /* Strict laptop/desktop optimization overrides */
         @media (min-width: 768px) {
-            .main-title {
-                font-size: 2.2rem;
-            }
-            body {
-                padding: 60px 0;
-            }
+            .main-title { font-size: 2.2rem; }
+            body { padding: 60px 0; }
         }
 
-        /* Strict mobile configurations to eliminate shifting */
         @media (max-width: 576px) {
-            body {
-                padding: 15px 10px;
-            }
-            .booking-card {
-                padding: 20px 15px;
-            }
-            .datetime-row {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .main-title {
-                font-size: 1.45rem;
-            }
+            body { padding: 15px 10px; }
+            .booking-card { padding: 20px 15px; }
+            .datetime-row { flex-direction: column; gap: 15px; }
+            .main-title { font-size: 1.45rem; }
         }
     </style>
 </head>
@@ -205,7 +188,8 @@
                 <select class="form-select" id="consoleType" required onchange="toggleIssueBox()">
                     <option value="" disabled selected>Choose Hardware...</option>
                     <option value="PlayStation 5">PlayStation 5</option>
-                    <option value="Xbox Series X">Xbox Series S/X</option>
+                    <option value="Xbox Series S">Xbox Series S</option>
+                     <option value="Xbox Series X">Xbox Series X</option>
                     <option value="Nintendo Switch">Nintendo Switch</option>
                 </select>
             </div>
@@ -221,15 +205,9 @@
                     <input type="date" class="form-control" id="repairDate" required>
                 </div>
                 <div>
-                    <label for="repairTime" class="form-label">Preferred Time Window</label>
+                    <label for="repairTime" class="form-label">Preferred Time Slot</label>
                     <select class="form-select" id="repairTime" required>
                         <option value="" disabled selected>Choose Slot...</option>
-                        <option value="Early Morning (08:00 - 10:00)">Early Morning (8am - 10am)</option>
-                        <option value="Morning (10:00 - 12:00)">Morning (10am - 12pm)</option>
-                        <option value="Midday (12:00 - 14:00)">Midday (12pm - 2pm)</option>
-                        <option value="Afternoon (14:00 - 16:00)">Afternoon (2pm - 4pm)</option>
-                        <option value="Late Afternoon (16:00 - 18:00)">Late Afternoon (4pm - 6pm)</option>
-                        <option value="Evening (18:00 - 20:00)">Evening (6pm - 8pm)</option>
                     </select>
                 </div>
             </div>
@@ -273,28 +251,17 @@
 
     async function handleBookingSubmit(event) {
         event.preventDefault();
-        
         const submitBtn = document.getElementById("submitBtn");
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Securing Your Slot...';
-
-        const consoleModel = document.getElementById("consoleType").value;
-        const fault = document.getElementById("customIssueText").value.trim();
-
-        const rawDate = document.getElementById("repairDate").value; 
-        let ukFormattedDate = rawDate;
-        if (rawDate) {
-            const [year, month, day] = rawDate.split("-");
-            ukFormattedDate = `${day}/${month}/${year}`;
-        }
 
         const bookingData = {
             name: document.getElementById("custName").value.trim(),
             phone: document.getElementById("custPhone").value.trim(),
             address: document.getElementById("custAddress").value.trim(),
-            console: consoleModel,
-            issue: fault,
-            job_date: ukFormattedDate, 
+            console: document.getElementById("consoleType").value,
+            issue: document.getElementById("customIssueText").value.trim(),
+            job_date: document.getElementById("repairDate").value,
             time_slot: document.getElementById("repairTime").value
         };
 
@@ -317,19 +284,31 @@
             } else {
                 throw new Error("Server rejected request");
             }
-
         } catch (err) {
             alert("Connection error occurred. Please try again.");
             submitBtn.disabled = false;
             submitBtn.innerHTML = '<i class="fas fa-wrench"></i> Confirm Repair Booking';
-            console.error(err);
         }
     }
 
     document.addEventListener("DOMContentLoaded", () => {
         const dateInput = document.getElementById("repairDate");
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.min = today;
+        dateInput.min = new Date().toISOString().split('T')[0];
+
+        const select = document.getElementById("repairTime");
+        for (let hour = 8; hour < 20; hour++) {
+            for (let minute = 0; minute < 60; minute += 15) {
+                const timeString = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                const option = document.createElement("option");
+                option.value = timeString;
+                option.textContent = timeString;
+                select.appendChild(option);
+            }
+        }
+        const lastOption = document.createElement("option");
+        lastOption.value = "20:00";
+        lastOption.textContent = "20:00";
+        select.appendChild(lastOption);
     });
 </script>
 
