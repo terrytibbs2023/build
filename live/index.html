@@ -6,23 +6,45 @@
     <title>Essex Console Repair | Fast Professional Service</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root { --cyan: #00d4ff; --gold: #FFD700; --dark: #0f0f0f; }
         body { background-color: var(--dark); color: #ffffff; font-family: 'Roboto', sans-serif; line-height: 1.6; }
-        h1, h2, h3 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
+        h1, h2, h3 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; font-weight: 800; }
 
-        .hero { padding: 40px 15px; text-align: center; }
-        .main-title { font-size: clamp(2rem, 10vw, 3.5rem); line-height: 1.1; margin-bottom: 20px; }
+        .hero { padding: 50px 15px; text-align: center; }
         
-        .cta-btn { display: block; width: 100%; padding: 18px; background: var(--cyan); color: black; font-weight: bold; text-transform: uppercase; text-decoration: none; border-radius: 8px; margin-top: 20px; }
+        /* Bolder, Larger Title */
+        .main-title { 
+            font-size: clamp(2.5rem, 12vw, 5rem); 
+            line-height: 0.95; 
+            margin-bottom: 25px;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+            letter-spacing: -1px;
+        }
+        
+        .cta-btn { 
+            display: block; 
+            width: 100%; 
+            padding: 20px; 
+            background: var(--cyan); 
+            color: black; 
+            font-weight: 900; 
+            font-family: 'Orbitron';
+            text-transform: uppercase; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            margin-top: 20px;
+            font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
         
         .card-custom { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
         .blog-img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
         
-        .contact-link { display: flex; align-items: center; color: white; text-decoration: none; padding: 10px 0; border-bottom: 1px solid #222; }
+        .contact-link { display: flex; align-items: center; color: white; text-decoration: none; padding: 12px 0; border-bottom: 1px solid #222; font-size: 1.1rem; }
         .contact-link i { font-size: 1.5rem; color: var(--cyan); margin-right: 15px; width: 30px; }
         
         .text-cyan { color: var(--cyan); }
@@ -32,8 +54,8 @@
 <body>
 
     <header class="hero">
-        <h1 class="main-title">Essex <span class="text-cyan">Console</span> Repair</h1>
-        <p class="text-white-50">Fast, professional, and reliable. We come to you.</p>
+        <h1 class="main-title">ESSEX <br><span class="text-cyan">CONSOLE</span> <br>REPAIR</h1>
+        <p class="text-white-50 fs-5">Fast, professional, and reliable. We come to you.</p>
         <a href="https://wa.me/447935312274" class="cta-btn">Book Your Repair Now</a>
     </header>
 
