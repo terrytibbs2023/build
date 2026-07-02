@@ -76,7 +76,11 @@
         html { scroll-behavior: smooth; } 
         :root { --primary-glow: #00d4ff; --elite-gold: #FFD700; --dark-bg: #0f0f0f; }
         body { background-color: var(--dark-bg); color: #fff; font-family: 'Roboto', sans-serif; overflow-x: hidden; }
+        
         h1, h2, h3, h4 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Force single line ONLY for Hero headers */
+        .hero h1, .hero h2, .hero h3 { white-space: nowrap; }
         
         .glow-text { color: var(--primary-glow); text-shadow: 0 0 8px rgba(0, 212, 255, 0.4); }
         .gold-glow { color: var(--elite-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
@@ -88,54 +92,22 @@
         .pulse-icon { animation: pulse-gold 2s infinite; font-size: 3.5rem; color: var(--elite-gold); }
         @keyframes pulse-gold { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
         
-        /* CLICKABLE GOOGLE RATING BADGE */
         .elite-badge-link { font-family: 'Orbitron'; font-size: 0.7rem; color: var(--elite-gold); border: 1px solid var(--elite-gold); padding: 5px 10px; border-radius: 4px; letter-spacing: 2px; display: inline-block; text-decoration: none; transition: all 0.2s ease-in-out; background: transparent; }
         .elite-badge-link:hover { background: rgba(255, 215, 0, 0.1); box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); color: #fff; border-color: #fff; }
 
-        /* HERO REVIEWS COMPACT LAYOUT */
-        .hero-review-card { background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(5px); border-left: 2px solid var(--primary-glow); border-top: 1px solid #222; border-right: 1px solid #222; border-bottom: 1px solid #222; padding: 15px; border-radius: 0 8px 8px 0; height: 100%; text-align: left; }
-        .stars { color: var(--elite-gold); font-size: 0.8rem; margin-bottom: 6px; }
-
-        /* STACKED DESIGN PRICING CARDS */
         .price-card { background: linear-gradient(145deg, #141414 0%, #0b0b0b 100%); border: 1px solid #222; border-radius: 12px; transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease; height: 100%; display: flex; flex-direction: column; position: relative; overflow: hidden; }
         .price-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: #333; }
-        
-        /* PlayStation Colors */
-        .brand-ps::before { background: #00439c; }
-        .brand-ps:hover { border-color: #0072ce; box-shadow: 0 10px 30px rgba(0, 114, 206, 0.15); transform: translateY(-5px); }
-        .brand-ps .brand-icon { color: #0072ce; }
-        
-        /* Xbox Colors */
-        .brand-xbox::before { background: #107c10; }
-        .brand-xbox:hover { border-color: #107c10; box-shadow: 0 10px 30px rgba(16, 124, 16, 0.15); transform: translateY(-5px); }
-        .brand-xbox .brand-icon { color: #107c10; }
 
-        /* Nintendo Colors */
-        .brand-nintendo::before { background: #e60012; }
-        .brand-nintendo:hover { border-color: #e60012; box-shadow: 0 10px 30px rgba(230, 0, 18, 0.15); transform: translateY(-5px); }
-        .brand-nintendo .brand-icon { color: #e60012; }
-
-        .price-card-header { padding: 25px 25px 15px 25px; border-bottom: 1px solid #1a1a1a; }
-        .price-card-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; gap: 20px; }
-
-        .blog-link-panel { background: rgba(255,255,255,0.01); border: 1px dashed #222; border-radius: 8px; padding: 15px; transition: 0.3s; }
-        .blog-link-panel:hover { border-color: var(--primary-glow); background: rgba(0,212,255,0.02); }
-
-        /* RECENT BLOG REPAIRS COMPONENT */
         .blog-feed-card { background: #111; border: 1px solid #222; border-radius: 8px; padding: 20px; transition: all 0.3s; height: 100%; display: flex; flex-direction: column; text-align: left; }
         .blog-feed-card:hover { border-color: var(--primary-glow); box-shadow: 0 5px 15px rgba(0, 212, 255, 0.1); }
         .blog-date-badge { font-family: 'Orbitron'; font-size: 0.7rem; color: var(--primary-glow); opacity: 0.7; margin-bottom: 8px; }
-        
-        /* BLOG IMAGE STYLING */
         .blog-feed-img { width: 100%; height: 140px; object-fit: cover; border-radius: 6px; margin-bottom: 12px; border: 1px solid #222; }
         .hover-glow-link:hover { color: var(--primary-glow) !important; text-decoration: underline !important; }
 
-        /* BUTTONS & BADGES */
         .btn-main { background: var(--primary-glow); color: #000; font-weight: 700; border: none; padding: 14px 35px; border-radius: 4px; text-decoration: none; display: inline-block; transition: 0.3s; }
         .btn-main:hover { background: var(--primary-glow); box-shadow: 0 0 30px var(--primary-glow), 0 0 10px #fff; transform: translateY(-3px); color: #000; }
         .badge-town { display: inline-block; padding: 5px 12px; margin: 5px; background: #222; border: 1px solid #444; border-radius: 20px; font-size: 0.9rem; }
 
-        /* CONTACT SECTION */
         .contact-card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 30px; height: 100%; }
         .contact-link { color: #fff; text-decoration: none; transition: 0.3s; display: flex; align-items: center; margin-bottom: 15px; font-size: 1.1rem; }
         .contact-link:hover { color: var(--primary-glow); }
@@ -145,18 +117,28 @@
 </head>
 <body>
 
-    <!-- Unified Hero Section Box Layout -->
-    <header class="hero text-center">  
+    <header class="hero text-center py-5">
         <div class="container">
-            <h1 class="display-1 fw-bold mb-2 border-bottom border-info d-inline-block pb-2" style="font-size: clamp(2.5rem, 8vw, 4.5rem);">
+            <h1 class="display-1 fw-bold mb-3 border-bottom border-info d-inline-block pb-2" style="font-size: clamp(2.5rem, 8vw, 4.5rem);">
                 Essex <span class="glow-text">Console</span> Repair
-            </h1> 
-            <h2 class="fw-bold mb-5 opacity-75" style="font-size: clamp(1.2rem, 3.5vw, 2rem); letter-spacing: 1px;">
+            </h1>
+
+            <h2 class="fw-bold mb-4" style="font-size: clamp(1.2rem, 3.5vw, 2rem); letter-spacing: 1px;">
                 PlayStation • Xbox • Nintendo
             </h2>
 
-            <!-- Elite Upgrade Showcase Block -->
-            <div class="row justify-content-center mb-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <p class="lead opacity-75">
+                        At Essex Console Repair, our mission is to provide top-quality game console repairs at an affordable cost. 
+                        We believe in the value of gaming and strive to ensure every console gets a second chance. 
+                        Our commitment to excellence and affordability means our customers can trust us to deliver 
+                        reliable service without breaking the bank.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-5">
                 <div class="col-lg-10">
                     <div class="elite-box p-4 p-md-5 shadow-lg text-start">
                         <div class="row align-items-center g-4">
@@ -173,8 +155,7 @@
                                 </ul>
                             </div>
                             <div class="col-lg-3 d-flex flex-column align-items-center justify-content-center gap-3">
-                                <!-- Clickable Google Review Link Button -->
-                               <a href="https://www.google.com/search?sca_esv=1683bac0e7c4926b&biw=1366&bih=578&sxsrf=ANbL-n5IxKzGiryR2ENJ-Fvr2zuquIX1jA:1779479898476&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOR2Y1ieRaB0kJJ8nOQzCSIEarrzDXG-adk_XJfRQA5XlMNN5XGTSAppXpeNDrLgmfiNDTmUZw2GbFUMjvL-Bascg9HZsds0QBpvaqKj57jRTG6pkQw%3D%3D&q=Essex+Console+Repair+Reviews&sa=X&ved=2ahUKEwj0-O6Z182UAxWTTkEAHSWKKeoQ0bkNegQIKRAF" target="_blank" rel="noopener" class="elite-badge-link text-center w-100 py-2">
+                               <a href="https://www.google.com/search?q=Essex+Console+Repair+Reviews" target="_blank" rel="noopener" class="elite-badge-link text-center w-100 py-2">
                                     5★ GOOGLE RATED
                                 </a>
                                 <a href="https://wa.me/447935312274" class="btn btn-main w-100 py-3" style="background: var(--elite-gold); font-size: 0.9rem;">Book Now</a>
@@ -186,175 +167,6 @@
         </div>
     </header>
 
-    <!-- Pricing Section -->
-    <section class="py-5" id="prices">
-        <div class="container py-4">
-            <h2 class="h4 text-center mb-5 glow-text" style="letter-spacing: 3px;">Service Menu</h2>
-            
-            <div class="row g-4 justify-content-center">
-                <!-- PlayStation Card -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="price-card brand-ps">
-                        <div class="price-card-header d-flex align-items-center gap-3">
-                            <i class="fab fa-playstation fa-2x brand-icon"></i>
-                            <h3 class="h5 m-0 fw-bold">PlayStation 5</h3>
-                        </div>
-                        <div class="price-card-body d-flex flex-column justify-content-between">
-                            <!-- Price List Stack -->
-                            <div class="d-flex flex-column gap-3">
-                                
-                                <!-- Item 1 -->
-                                <a href="ps5nod.html" class="text-decoration-none">
-    <div class="price-row p-3 border border-secondary border-opacity-25 rounded bg-black bg-opacity-20">
-        <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
-            <h4 class="h6 m-0 fw-bold text-white">No Display</h4>
-            <span class="badge bg-dark border border-info text-info font-monospace fs-6"></span>
-        </div>
-    </div>
-</a>
-                                
-                                
-                                
-                                
-                               
-                                <!-- Item 2 -->
-                           <a href="ps5nod.html" class="text-decoration-none">
-    <div class="price-row p-3 border border-secondary border-opacity-25 rounded bg-black bg-opacity-20">
-        <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
-            <h4 class="h6 m-0 fw-bold text-white">No Display</h4>
-            <span class="badge bg-dark border border-info text-info font-monospace fs-6"></span>
-        </div>
-    </div>
-</a>
-
-                                <!-- Item 3 -->
-                                <div class="price-row p-3 border border-secondary border-opacity-25 rounded bg-black bg-opacity-20">
-                                    <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
-                                        <h4 class="h6 m-0 fw-bold text-white">Other Structural Repairs</h4>
-                                        <span class="badge bg-dark border border-secondary text-white-50 font-monospace fs-6">Quote</span>
-                                    </div>
-                                    <p class="small text-white-50 m-0">Disk drive optical laser alignment, power supply failures, or board-level diagnostics. Contact us with your specific fault symptoms.</p>
-                                </div>
-
-                            </div>
-
-                            <!-- Integrated Action Button -->
-                            <div class="mt-4 pt-2">
-                                <a href="https://wa.me/447935312274?text=Hi,%20I'm%20looking%20to%20book%20a%20PS5%20repair." target="_blank" class="btn btn-outline-info w-100 d-flex justify-content-between align-items-center py-2 px-3">
-                                    <span>Book PlayStation Repair</span>
-                                    <small class="text-uppercase font-monospace" style="font-size: 0.75rem;">WhatsApp <i class="fab fa-whatsapp ms-1"></i></small>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Xbox Card -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="price-card brand-xbox">
-                        <div class="price-card-header d-flex align-items-center gap-3">
-                            <i class="fab fa-xbox fa-2x brand-icon"></i>
-                            <h3 class="h5 m-0 fw-bold">Xbox Series X</h3>
-                        </div>
-                        <div class="price-card-body d-flex flex-column justify-content-between">
-                            <!-- Price List Stack -->
-                            <div class="d-flex flex-column gap-3">
-                                
-                                <!-- Item 1 -->
-                                <div class="price-row p-3 border border-secondary border-opacity-25 rounded bg-black bg-opacity-20">
-                                    <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
-                                        <h4 class="h6 m-0 fw-bold text-white">HDMI Port Replacement</h4>
-                                        <span class="badge bg-dark border border-success text-success font-monospace fs-6">£65</span>
-                                    </div>
-                                    <p class="small text-white-50 m-0">Precision replacement of the display interface port. Includes full structural chassis cleanup and high-grade premium thermal paste replacement.</p>
-                                </div>
-
-                                <!-- Item 2 -->
-                                <div class="price-row p-3 border border-secondary border-opacity-25 rounded bg-black bg-opacity-20">
-                                    <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
-                                        <h4 class="h6 m-0 fw-bold text-white">Premium Deep Clean</h4>
-                                        <span class="badge bg-dark border border-secondary text-white-50 font-monospace fs-6">£35</span>
-                                    </div>
-                                    <p class="small text-white-50 m-0">Complete teardown to remove accumulated household dust and pet dander. Silent fan optimization and thermal pad replacements.</p>
-                                </div>
-
-                                <!-- Item 3 -->
-                                <div class="price-row p-3 border border-secondary border-opacity-25 rounded bg-black bg-opacity-20">
-                                    <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
-                                        <h4 class="h6 m-0 fw-bold text-white">Error Code Diagnostics</h4>
-                                        <span class="badge bg-dark border border-secondary text-white-50 font-monospace fs-6">Quote</span>
-                                    </div>
-                                    <p class="small text-white-50 m-0">Troubleshooting for stubborn software boot loops, SSD drive corruption updates, power issues, or green screen of death errors.</p>
-                                </div>
-
-                            </div>
-
-                            <!-- Integrated Action Button -->
-                            <div class="mt-4 pt-2">
-                                <a href="https://wa.me/447935312274?text=Hi,%20I'm%20looking%20to%20book%20an%20Xbox%20repair." target="_blank" class="btn btn-outline-success w-100 d-flex justify-content-between align-items-center py-2 px-3">
-                                    <span>Book Xbox Repair</span>
-                                    <small class="text-uppercase font-monospace" style="font-size: 0.75rem;">WhatsApp <i class="fab fa-whatsapp ms-1"></i></small>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Nintendo Card -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="price-card brand-nintendo">
-                        <div class="price-card-header d-flex align-items-center gap-3">
-                            <i class="fas fa-gamepad fa-2x brand-icon"></i>
-                            <h3 class="h5 m-0 fw-bold">Nintendo Switch</h3>
-                        </div>
-                        <div class="price-card-body d-flex flex-column justify-content-between">
-                            <!-- Price List Stack -->
-                            <div class="d-flex flex-column gap-3">
-                                
-                                <!-- Item 1 -->
-                                <div class="price-row p-3 border border-secondary border-opacity-25 rounded bg-black bg-opacity-20">
-                                    <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
-                                        <h4 class="h6 m-0 fw-bold text-white">USB-C Power Port</h4>
-                                        <span class="badge bg-dark border border-danger text-danger font-monospace fs-6">£55</span>
-                                    </div>
-                                    <p class="small text-white-50 m-0">Solves charging failures, loose ports, or failure to display on your TV dock. Soldered directly with microscopic component precision.</p>
-                                </div>
-
-                                <!-- Item 2 -->
-                                <div class="price-row p-3 border border-secondary border-opacity-25 rounded bg-black bg-opacity-20">
-                                    <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
-                                        <h4 class="h6 m-0 fw-bold text-white">Joy-Con Drift Fix</h4>
-                                        <span class="badge bg-dark border border-secondary text-white-50 font-monospace fs-6">£20</span>
-                                    </div>
-                                    <p class="small text-white-50 m-0">Replacement of worn-out internal joystick tracking assemblies with updated, long-lasting premium components.</p>
-                                </div>
-
-                                <!-- Item 3 -->
-                                <div class="price-row p-3 border border-secondary border-opacity-25 rounded bg-black bg-opacity-20">
-                                    <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
-                                        <h4 class="h6 m-0 fw-bold text-white">Screen & Battery</h4>
-                                        <span class="badge bg-dark border border-secondary text-white-50 font-monospace fs-6">Quote</span>
-                                    </div>
-                                    <p class="small text-white-50 m-0">Replacement of shattered digitizers, LCD panels, or dead batteries that will no longer hold a standard gameplay charge.</p>
-                                </div>
-
-                            </div>
-
-                            <!-- Integrated Action Button -->
-                            <div class="mt-4 pt-2">
-                                <a href="https://wa.me/447935312274?text=Hi,%20I'm%20looking%20to%20book%20a%20Switch%20repair." target="_blank" class="btn btn-outline-danger w-100 d-flex justify-content-between align-items-center py-2 px-3">
-                                    <span>Book Switch Repair</span>
-                                    <small class="text-uppercase font-monospace" style="font-size: 0.75rem;">WhatsApp <i class="fab fa-whatsapp ms-1"></i></small>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Automated Past Repair Jobs Feed Section -->
     <section class="py-5 bg-black border-top border-secondary" id="recent-repairs">
         <div class="container py-3">
             <h2 class="h4 text-center mb-2">Recent <span class="glow-text">Blogs</span></h2>
@@ -368,7 +180,6 @@
         </div>
     </section>
 
-    <!-- Contact & Map Section -->
     <section class="py-5 bg-black border-top border-secondary" id="contact">
         <div class="container">
             <h2 class="text-center mb-5">Get In <span class="glow-text">Touch</span></h2>
@@ -381,7 +192,7 @@
                         <a href="mailto:repair@essexconsolerepair.co.uk" class="contact-link"><i class="fas fa-envelope"></i> Email Support</a>
                         
                         <div class="mt-4 pt-4 border-top border-secondary">
-                            <h3 class="h6 text-uppercase  mb-3">Service Areas</h3>
+                            <h3 class="h6 text-uppercase mb-3">Service Areas</h3>
                             <div class="d-flex flex-wrap">
                                 <span class="badge-town">Colchester</span><span class="badge-town">Chelmsford</span>
                                 <span class="badge-town">Braintree</span><span class="badge-town">Witham</span>
@@ -416,14 +227,12 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="py-4 text-center border-top border-secondary">
         <p class="mb-0 text-muted small">© 2026 Essex Console Repair. We Aim To Be The Best, The Fastest & The Best Priced Console Repair Sevice In Essex.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Clean Blogger JSON Feed Engine -->
     <script>
         const blogFeedUrl = "https://essexconsolerepair.blogspot.com/feeds/posts/default?alt=json-in-script&max-results=3&callback=displayPosts";
 
@@ -448,7 +257,6 @@
                     day: 'numeric'
                 });
 
-                // Thumbnail / Image extraction
                 let imgUrl = "";
                 if (entry.media$thumbnail) {
                     imgUrl = entry.media$thumbnail.url.replace('/s72-c/', '/w400/');
@@ -459,26 +267,20 @@
                     if (firstImg) imgUrl = firstImg.src;
                 }
 
-                // Title configuration
                 let finalTitle = entry.title && entry.title.$t ? entry.title.$t.trim() : "Workshop Update";
-
-                // Strip HTML body markers out safely
                 let finalSnippet = "";
                 if (entry.content && entry.content.$t) {
-                    finalSnippet = entry.content.$t.replace(/<\/?[^>]+(>|$)/g, "").replace(/&nbsp;/g, " ").trim();
+                    finalSnippet = entry.content.$t.replace(/<\/?[^>]+(>|$)/g, "").replace(/ /g, " ").trim();
                 }
 
-                // Check and clear titles typed into body box inadvertently
                 if (finalSnippet.toLowerCase().startsWith(finalTitle.toLowerCase())) {
                     finalSnippet = finalSnippet.substring(finalTitle.length).trim();
                 }
 
-                // Cap string limit elegantly
                 if (finalSnippet.length > 100) {
                     finalSnippet = finalSnippet.substring(0, 100) + "...";
                 }
 
-                // Optional structure: show a placeholder layout if no image was added
                 let imgHTML = imgUrl ? `<img class="blog-feed-img" src="${imgUrl}" alt="${finalTitle}">` : '';
 
                 const postHTML = `
@@ -500,7 +302,6 @@
             });
         }
 
-        // Initialize script call injection safely
         document.addEventListener("DOMContentLoaded", () => {
             const script = document.createElement('script');
             script.src = blogFeedUrl;
