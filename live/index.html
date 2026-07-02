@@ -3,268 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Essex Console Repair | Sony Ps5 Microsoft Xbox Fast Repair</title>
-    <meta name="description" content="Professional, fast doorstep console repairs in Colchester, Chelmsford, Braintree, and surrounding Essex areas. Specialist fixing for PS5, Xbox Series X, and Nintendo Switch.">
-    <link rel="canonical" href="https://essexconsolerepair.co.uk">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Essex Console Repair | Elite 1-Hour Service">
-    <meta property="og:description" content="Doorstep console repairs with zero downtime. Serving Colchester, Braintree, and Chelmsford.">
-    <meta property="og:url" content="https://essexconsolerepair.co.uk">
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Essex Console Repair",
-      "image": "https://essexconsolerepair.co.uk/logo.png", 
-      "telephone": "07935312274",
-      "email": "repair@essexconsolerepair.co.uk",
-      "url": "https://essexconsolerepair.co.uk",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Orchard Business Units, Cockaynes Lane",
-        "addressLocality": "Colchester",
-        "addressRegion": "Essex",
-        "postalCode": "CO7 8BZ",
-        "addressCountry": "GB"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 51.857008,
-        "longitude": 0.992688
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "09:00",
-          "closes": "18:00"
-        }
-      ],
-      "areaServed": [
-        {"@type": "AdministrativeArea", "name": "Colchester"},
-        {"@type": "AdministrativeArea", "name": "Chelmsford"},
-        {"@type": "AdministrativeArea", "name": "Braintree"},
-        {"@type": "AdministrativeArea", "name": "Witham"},
-        {"@type": "AdministrativeArea", "name": "Sudbury"},
-        {"@type": "AdministrativeArea", "name": "Clacton"},
-        {"@type": "AdministrativeArea", "name": "Ipswich"}
-      ],
-      "priceRange": "££",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "48"
-      }
-    }
-    </script>
+    <title>Essex Console Repair | Fast Professional Service</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        html { scroll-behavior: smooth; } 
-        :root { --primary-glow: #00d4ff; --elite-gold: #FFD700; --dark-bg: #0f0f0f; }
-        body { background-color: var(--dark-bg); color: #fff; font-family: 'Roboto', sans-serif; overflow-x: hidden; }
-        h1, h2, h3, h4 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        :root { --cyan: #00d4ff; --gold: #FFD700; --dark: #0f0f0f; }
+        body { background-color: var(--dark); color: #ffffff; font-family: 'Roboto', sans-serif; line-height: 1.6; }
+        h1, h2, h3 { font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
 
-        /* Responsive Header Logic */
-        .hero h1, .hero h2 { white-space: normal; }
-        @media (min-width: 992px) {
-            .hero h1, .hero h2 { white-space: nowrap; }
-        }
-
-        /* Prevent content overflow */
-        p, .blog-feed-card, .blog-feed-card h3 { word-wrap: break-word; overflow-wrap: break-word; }
+        .hero { padding: 40px 15px; text-align: center; }
+        .main-title { font-size: clamp(2rem, 10vw, 3.5rem); line-height: 1.1; margin-bottom: 20px; }
         
-        .glow-text { color: var(--primary-glow); text-shadow: 0 0 8px rgba(0, 212, 255, 0.4); }
-        .gold-glow { color: var(--elite-gold); text-shadow: 0 0 10px rgba(255, 215, 0, 0.4); }
+        .cta-btn { display: block; width: 100%; padding: 18px; background: var(--cyan); color: black; font-weight: bold; text-transform: uppercase; text-decoration: none; border-radius: 8px; margin-top: 20px; }
         
-        .hero { padding: 80px 0; background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=2000'); background-size: cover; background-position: center; border-bottom: 1px solid #222; }
-        .elite-box { background: linear-gradient(145deg, #151515, #000); border: 2px solid var(--elite-gold); border-radius: 15px; position: relative; overflow: hidden; }
-        .pulse-icon { animation: pulse-gold 2s infinite; font-size: 3.5rem; color: var(--elite-gold); }
-        @keyframes pulse-gold { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .card-custom { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 20px; margin-bottom: 15px; }
+        .blog-img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
         
-        .elite-badge-link { font-family: 'Orbitron'; font-size: 0.7rem; color: var(--elite-gold); border: 1px solid var(--elite-gold); padding: 5px 10px; border-radius: 4px; letter-spacing: 2px; display: inline-block; text-decoration: none; transition: all 0.2s ease-in-out; background: transparent; }
-        .elite-badge-link:hover { background: rgba(255, 215, 0, 0.1); box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); color: #fff; border-color: #fff; }
-
-        .blog-feed-card { background: #111; border: 1px solid #222; border-radius: 8px; padding: 20px; transition: all 0.3s; height: 100%; display: flex; flex-direction: column; text-align: left; }
-        .blog-feed-card:hover { border-color: var(--primary-glow); box-shadow: 0 5px 15px rgba(0, 212, 255, 0.1); }
-        .blog-date-badge { font-family: 'Orbitron'; font-size: 0.7rem; color: var(--primary-glow); opacity: 0.7; margin-bottom: 8px; }
-        .blog-feed-img { width: 100%; height: 140px; object-fit: cover; border-radius: 6px; margin-bottom: 12px; border: 1px solid #222; }
-        .hover-glow-link:hover { color: var(--primary-glow) !important; text-decoration: underline !important; }
-
-        .btn-main { background: var(--primary-glow); color: #000; font-weight: 700; border: none; padding: 14px 35px; border-radius: 4px; text-decoration: none; display: inline-block; transition: 0.3s; }
-        .btn-main:hover { background: var(--primary-glow); box-shadow: 0 0 30px var(--primary-glow), 0 0 10px #fff; transform: translateY(-3px); color: #000; }
-        .badge-town { display: inline-block; padding: 5px 12px; margin: 5px; background: #222; border: 1px solid #444; border-radius: 20px; font-size: 0.9rem; }
-
-        .contact-card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 30px; height: 100%; }
-        .contact-link { color: #fff; text-decoration: none; transition: 0.3s; display: flex; align-items: center; margin-bottom: 15px; font-size: 1.1rem; }
-        .contact-link:hover { color: var(--primary-glow); }
-        .contact-link i { width: 35px; color: var(--primary-glow); font-size: 1.3rem; }
-        .map-container { border-radius: 8px; overflow: hidden; border: 1px solid #333; line-height: 0; }
+        .contact-link { display: flex; align-items: center; color: white; text-decoration: none; padding: 10px 0; border-bottom: 1px solid #222; }
+        .contact-link i { font-size: 1.5rem; color: var(--cyan); margin-right: 15px; width: 30px; }
+        
+        .text-cyan { color: var(--cyan); }
+        .text-gold { color: var(--gold); }
     </style>
 </head>
 <body>
 
-    <header class="hero text-center py-5">
-        <div class="container">
-            <h1 class="display-1 fw-bold mb-3 border-bottom border-info d-inline-block pb-2" style="font-size: clamp(2rem, 8vw, 4.5rem);">
-                Essex <span class="glow-text">Console</span> Repair
-            </h1>
-
-            <h2 class="fw-bold mb-4" style="font-size: clamp(1rem, 3.5vw, 2rem); letter-spacing: 1px;">
-                PlayStation • Xbox • Nintendo
-            </h2>
-
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <p class="lead opacity-75">
-                        At Essex Console Repair, our mission is to provide top-quality game console repairs at an affordable cost. 
-                        We believe in the value of gaming and strive to ensure every console gets a second chance. 
-                        Our commitment to excellence and affordability means our customers can trust us to deliver 
-                        reliable service without breaking the bank.
-                    </p>
-                </div>
-            </div>
-
-            <div class="row justify-content-center mt-5">
-                <div class="col-lg-10">
-                    <div class="elite-box p-4 p-md-5 shadow-lg text-start">
-                        <div class="row align-items-center g-4">
-                            <div class="col-lg-2 text-center">
-                                <i class="fas fa-bolt pulse-icon"></i>
-                            </div>
-                            <div class="col-lg-7 text-center text-lg-start">
-                                <h2 class="gold-glow h3 mb-3">The Elite Upgrade Has Arrived</h2>
-                                <p class="fs-5 mb-3 text-white">Why wait a week? Introducing <strong>Elite Upgrade Service</strong> premium doorstep repairs with zero downtime.</p>
-                                <ul class="list-unstyled fs-5 d-inline-block text-start mb-0">
-                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> We come directly to your door.</li>
-                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> Repaired in roughly 1 hour.</li>
-                                    <li class="mb-2"><i class="fas fa-check-circle text-success me-2"></i> <strong>ZERO EXTRA CHARGE.</strong></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-3 d-flex flex-column align-items-center justify-content-center gap-3">
-                               <a href="https://www.google.com/search?q=Essex+Console+Repair+Reviews" target="_blank" rel="noopener" class="elite-badge-link text-center w-100 py-2">
-                                    5★ GOOGLE RATED
-                                </a>
-                                <a href="https://wa.me/447935312274" class="btn btn-main w-100 py-3" style="background: var(--elite-gold); font-size: 0.9rem;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <header class="hero">
+        <h1 class="main-title">Essex <span class="text-cyan">Console</span> Repair</h1>
+        <p class="text-white-50">Fast, professional, and reliable. We come to you.</p>
+        <a href="https://wa.me/447935312274" class="cta-btn">Book Your Repair Now</a>
     </header>
 
-    <section class="py-5 bg-black border-top border-secondary" id="recent-repairs">
-        <div class="container py-3">
-            <h2 class="h4 text-center mb-2">Recent <span class="glow-text">Blogs</span></h2>
-         
-            <div class="row g-4 justify-content-center" id="blog-feed-target">
-                <div class="col-10 text-center py-4">
-                    <div class="spinner-border text-info spinner-border-sm me-2" role="status"></div>
-                    <span class="text-muted small">Loading live repair files...</span>
+    <main class="container px-3">
+        <!-- Elite Box -->
+        <section class="mb-4">
+            <div class="card-custom" style="border: 1px solid var(--gold);">
+                <h3 class="text-gold h6"><i class="fas fa-bolt me-2"></i> Elite Upgrade</h3>
+                <p class="small mb-0">Premium doorstep repairs with zero downtime. Repaired in under an hour.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="mb-4">
+            <h2 class="h5 mb-3 text-cyan">Get In Touch</h2>
+            <div class="card-custom">
+                <a href="https://wa.me/447935312274" class="contact-link"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="tel:07935312274" class="contact-link"><i class="fas fa-phone"></i> 07935 312274</a>
+                <a href="mailto:repair@essexconsolerepair.co.uk" class="contact-link"><i class="fas fa-envelope"></i> Email Support</a>
+                <div class="mt-3">
+                    <p class="text-gold small mb-1">APPOINTMENT ONLY</p>
+                    <p class="small mb-0">Orchard Business Units, Cockaynes Lane, Colchester, CO7 8BZ</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="py-5 bg-black border-top border-secondary" id="contact">
-        <div class="container">
-            <h2 class="text-center mb-5">Get In <span class="glow-text">Touch</span></h2>
-            <div class="row g-4">
-                <div class="col-lg-5">
-                    <div class="contact-card">
-                        <h3 class="h5 gold-glow mb-4">Direct Lines</h3>
-                        <a href="https://wa.me/447935312274" class="contact-link"><i class="fab fa-whatsapp"></i> WhatsApp Messenger</a>
-                        <a href="tel:07935312274" class="contact-link"><i class="fas fa-phone"></i> 07935 312274</a>
-                        <a href="mailto:repair@essexconsolerepair.co.uk" class="contact-link"><i class="fas fa-envelope"></i> Email Support</a>
-                        
-                        <div class="mt-4 pt-4 border-top border-secondary">
-                            <h3 class="h6 text-uppercase mb-3">Service Areas</h3>
-                            <div class="d-flex flex-wrap">
-                                <span class="badge-town">Colchester</span><span class="badge-town">Chelmsford</span>
-                                <span class="badge-town">Braintree</span><span class="badge-town">Witham</span>
-                                <span class="badge-town">Sudbury</span><span class="badge-town">Clacton</span>
-                                <span class="badge-town">Ipswich</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-7">
-                    <div class="contact-card">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-                            <h3 class="h5 glow-text">Location</h3>
-                            <span class="badge bg-danger text-white p-2" style="font-family: 'Orbitron';">APPOINTMENT ONLY</span>
-                        </div>
-                        <p class="text-white fw-bold small mb-1">Orchard Business Units, Cockaynes Lane, Colchester, CO7 8BZ</p>
-                        <a href="#" target="_blank" class="text-info small text-decoration-none d-inline-block mb-3 fw-bold">
-                            <i class="fas fa-directions me-1"></i> Launch SatNav Directions
-                        </a>
-                        <div class="map-container">
-                            <iframe width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2459.78!2d0.99!3d51.85!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDUxJzI1LjMiTiAwwrA1OSczMy42IkU!5e0!3m2!1sen!2suk!4v1700000000000"></iframe>
-                        </div>
-                    </div>
-                </div>
+        <!-- Blog Feed -->
+        <section>
+            <h2 class="h5 mb-3 text-cyan">Latest Updates</h2>
+            <div id="blog-feed-target">
+                <p class="text-muted">Loading...</p>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <footer class="py-4 text-center border-top border-secondary">
-        <p class="mb-0 text-muted small">© 2026 Essex Console Repair. We Aim To Be The Best, The Fastest & The Best Priced Console Repair Service In Essex.</p>
+    <footer class="text-center py-5 mt-4 text-white-50 small">
+        © 2026 Essex Console Repair
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        const blogFeedUrl = "https://essexconsolerepair.blogspot.com/feeds/posts/default?alt=json-in-script&max-results=3&callback=displayPosts";
-
         function displayPosts(data) {
-            const feedContainer = document.getElementById("blog-feed-target");
-            feedContainer.innerHTML = ''; 
-            const entries = data.feed.entry;
-            if (!entries || entries.length === 0) {
-                feedContainer.innerHTML = `<div class="col-10 text-center text-muted small">No historic repair files found.</div>`;
-                return;
-            }
-            entries.forEach(entry => {
-                const linkObj = entry.link.find(l => l.rel === 'alternate');
-                const url = linkObj ? linkObj.href : '#';
-                const publishedDate = new Date(entry.published.$t).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
-                let imgUrl = "";
-                if (entry.media$thumbnail) { imgUrl = entry.media$thumbnail.url.replace('/s72-c/', '/w400/'); } 
-                else if (entry.content && entry.content.$t) {
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = entry.content.$t;
-                    const firstImg = tempDiv.querySelector('img');
-                    if (firstImg) imgUrl = firstImg.src;
-                }
-                let finalTitle = entry.title && entry.title.$t ? entry.title.$t.trim() : "Workshop Update";
-                let finalSnippet = entry.content && entry.content.$t ? entry.content.$t.replace(/<\/?[^>]+(>|$)/g, "").replace(/ /g, " ").trim() : "";
-                if (finalSnippet.toLowerCase().startsWith(finalTitle.toLowerCase())) finalSnippet = finalSnippet.substring(finalTitle.length).trim();
-                if (finalSnippet.length > 100) finalSnippet = finalSnippet.substring(0, 100) + "...";
-                let imgHTML = imgUrl ? `<img class="blog-feed-img" src="${imgUrl}" alt="${finalTitle}">` : '';
-                feedContainer.innerHTML += `
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-feed-card">
-                            <div class="blog-date-badge"><i class="fas fa-history me-1"></i> ${publishedDate}</div>
-                            ${imgHTML}
-                            <h3 class="h6 mb-2"><a href="${url}" target="_blank" rel="noopener" class="text-white text-decoration-none hover-glow-link">${finalTitle}</a></h3>
-                            <p class="text-white-50 small mb-0 flex-grow-1">${finalSnippet}</p>
-                        </div>
+            const container = document.getElementById("blog-feed-target");
+            container.innerHTML = '';
+            data.feed.entry.forEach(entry => {
+                const title = entry.title.$t;
+                const link = entry.link.find(l => l.rel === 'alternate').href;
+                const img = entry.media$thumbnail ? entry.media$thumbnail.url.replace('/s72-c/', '/w600/') : '';
+                container.innerHTML += `
+                    <div class="card-custom">
+                        ${img ? `<img src="${img}" class="blog-img" alt="${title}">` : ''}
+                        <h3 class="h6 mb-0"><a href="${link}" class="text-white text-decoration-none">${title}</a></h3>
                     </div>`;
             });
         }
-        document.addEventListener("DOMContentLoaded", () => {
-            const script = document.createElement('script');
-            script.src = blogFeedUrl;
-            document.body.appendChild(script);
-        });
     </script>
+    <script src="https://essexconsolerepair.blogspot.com/feeds/posts/default?alt=json-in-script&max-results=3&callback=displayPosts"></script>
 </body>
 </html>
