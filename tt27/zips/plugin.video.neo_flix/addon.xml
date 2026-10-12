@@ -1,0 +1,21 @@
+<addon id="plugin.video.neo_flix" name="Neo Flix" version="3.2.45" provider-name="">
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+		<import addon="script.module.resolveurl"/>
+		<import addon="script.module.requests" />
+    </requires>
+	 <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en"></summary>
+	<description lang="en_GB">No Streams Are Stored Locally-All Are Available Freely On The Internet-A Mixture Of Free And Debrid Links</description>
+    <platform>all</platform>
+    <language>en</language>
+    <license>GPL-2.0-or-later</license>
+	<assets>
+		<icon>icon.png</icon>
+		<fanart>fanart.jpg</fanart>
+  </assets>
+  </extension>
+</addon>

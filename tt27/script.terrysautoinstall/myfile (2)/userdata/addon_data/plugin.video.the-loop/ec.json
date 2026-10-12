@@ -1,0 +1,13 @@
+{
+    "eplayer": {
+        "resolver": "internal",
+        "i1": "NFRFBy9RFnpRGDU=",
+        "i2": "YQUVTWQIXGMDWWlKYA==",
+        "i3": "YQITTWAOXGUGQ3ZDZg==",
+        "i4": "P5!cV9rT2wXz",
+        "method": "ffmpeg",
+        "mapper": "ya",
+        "ua": "Mozilla/5.0+(Macintosh;+Intel+Mac+OS+X+10_15_7)+AppleWebKit/537.36+(KHTML,+like+Gecko)+Chrome/126.0.0.0+Safari/537.36"
+    },
+    "updated": 1770285317
+}

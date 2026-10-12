@@ -1,0 +1,402 @@
+# game.libretro.beetle-psx language file
+# Addon Name: game.libretro.beetle-psx
+# Addon id: game.libretro.beetle-psx
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.beetle-psx\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2019-08-24 22:21i\n"
+"PO-Revision-Date: 2025-04-28 16:15+0000\n"
+"Last-Translator: Feruk <feruk.v@gmail.com>\n"
+"Language-Team: Russian <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-beetle-psx/ru_ru/>\n"
+"Language: ru_ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.11.1\n"
+
+msgctxt "Addon Summary"
+msgid "Sony - PlayStation (Beetle PSX)"
+msgstr "Sony - PlayStation (Beetle PSX)"
+
+msgctxt "Addon Description"
+msgid "Beetle PSX is the PlayStation module of Beetle, a port of Madnafen."
+msgstr "Beetle PSX — это модуль Playstation для Kodi | Форк PSX модуля Beetle для эмулятора Mednafen."
+
+msgctxt "#30001"
+msgid "Internal GPU Resolution"
+msgstr "Внутреннее разрешение GPU"
+
+msgctxt "#30002"
+msgid "Dithering Pattern"
+msgstr "Паттерн дизеринга"
+
+msgctxt "#30003"
+msgid "Frame Duping (Speedup)"
+msgstr "Дублирование кадра (спидхак)"
+
+msgctxt "#30004"
+msgid "Display Internal FPS"
+msgstr "Отобразить внутренний FPS"
+
+msgctxt "#30005"
+msgid "Analog Self-Calibration"
+msgstr "Аналоговая автокалибровка"
+
+msgctxt "#30007"
+msgid "DualShock Analog Mode Combo"
+msgstr ""
+
+msgctxt "#30008"
+msgid "DualShock Analog Mode Combo Hold Delay"
+msgstr ""
+
+msgctxt "#30009"
+msgid "Port 1: Multitap Enable"
+msgstr "Порт 1: мультитап устройство включено"
+
+msgctxt "#30010"
+msgid "Port 2: Multitap Enable"
+msgstr "Порт 2: мультитап устройство включено"
+
+msgctxt "#30011"
+msgid "Gun Input Mode"
+msgstr "Режим ввода: оружие"
+
+msgctxt "#30012"
+msgid "Gun Cursor"
+msgstr "Прицел ружья"
+
+msgctxt "#30013"
+msgid "Port 1: Gun Crosshair Color"
+msgstr "Порт 1: цвет перекрестия прицела"
+
+msgctxt "#30014"
+msgid "Port 2: Gun Crosshair Color"
+msgstr "Порт 2: цвет перекрестия прицела"
+
+msgctxt "#30015"
+msgid "Mouse Sensitivity"
+msgstr "Чувствительность мыши"
+
+msgctxt "#30016"
+msgid "neGcon Twist Response"
+msgstr "Отклик на вращение контроллера neGcon"
+
+msgctxt "#30017"
+msgid "neGcon Twist Deadzone"
+msgstr "Мёртвая зона вращений для контроллера neGcon"
+
+msgctxt "#30018"
+msgid "Memory Card 0 Method (Restart Required)"
+msgstr "Метод использования Memory Card 0 (требуется перезагрузка)"
+
+msgctxt "#30019"
+msgid "Enable Memory Card 1 (Restart Required)"
+msgstr "Включить Memory Card 1 (требуется перезагрузка)"
+
+msgctxt "#30020"
+msgid "Shared Memory Cards (Restart Required)"
+msgstr "Режим общих Memory Cards (требуется перезагрузка)"
+
+msgctxt "#30021"
+msgid "Memory Card Left Index"
+msgstr "Левый индекс Memory Card"
+
+msgctxt "#30022"
+msgid "Memory Card Right Index"
+msgstr "Правый индекс Memory Card"
+
+msgctxt "#30023"
+msgid "PGXP Operation Mode"
+msgstr "Режим работы PGXP"
+
+msgctxt "#30024"
+msgid "PGXP 2D Geometry Tolerance"
+msgstr "Геометрические допуски для PGXP 2D"
+
+msgctxt "#30025"
+msgid "PGXP Primitive Culling"
+msgstr "PGXP куллинг примитивов"
+
+msgctxt "#30026"
+msgid "Line-to-Quad Hack"
+msgstr "Хак Line-to-Quad"
+
+msgctxt "#30027"
+msgid "Widescreen Mode Hack"
+msgstr "Хак \"Широкоэкранный режим\""
+
+msgctxt "#30028"
+msgid "Widescreen Mode Hack Aspect Ratio"
+msgstr "Соотношение сторон для хака \"Широкоэкранный режим\""
+
+msgctxt "#30029"
+msgid "CPU Frequency Scaling (Overclock)"
+msgstr "CPU тактовая частота (разгон)"
+
+msgctxt "#30030"
+msgid "GTE Overclock"
+msgstr "GTE разгон"
+
+msgctxt "#30031"
+msgid "Skip BIOS"
+msgstr "Пропустить BIOS"
+
+msgctxt "#30032"
+msgid "Override BIOS (Restart Required)"
+msgstr "Переопределить BIOS (требуется перезагрузка)"
+
+msgctxt "#30033"
+msgid "CPU Dynarec"
+msgstr "CPU Dynarec"
+
+msgctxt "#30034"
+msgid "Dynarec Code Invalidation"
+msgstr "Dynarec: инвалидация кода"
+
+msgctxt "#30035"
+msgid "Dynarec DMA/GPU/MDEC/Timer Event Cycles"
+msgstr ""
+
+msgctxt "#30036"
+msgid "Dynarec SPU Samples"
+msgstr ""
+
+msgctxt "#30037"
+msgid "Core-Reported FPS Timing"
+msgstr "Тайминг FPS на основе данных ядра"
+
+msgctxt "#30038"
+msgid "PAL (European) Video Timing Override"
+msgstr "Изменение тайминга видео на PAL (Европа)"
+
+msgctxt "#30039"
+msgid "Crop Overscan"
+msgstr "Обрезка вылетов развёртки"
+
+msgctxt "#30040"
+msgid "Additional Cropping"
+msgstr "Дополнительная обрезка"
+
+msgctxt "#30041"
+msgid "Offset Cropped Image"
+msgstr "Смещение обрезанного изображения"
+
+msgctxt "#30042"
+msgid "GPU Rasterizer Overclock"
+msgstr "Разгон растеризатора ГП"
+
+msgctxt "#30043"
+msgid "Core Aspect Ratio"
+msgstr "Базовое соотношение сторон"
+
+msgctxt "#30044"
+msgid "Initial Scan Line - NTSC"
+msgstr "Начальная строка развёртки — NTSC"
+
+msgctxt "#30045"
+msgid "Last Scan Line - NTSC"
+msgstr "Последняя строка развёртки — NTSC"
+
+msgctxt "#30046"
+msgid "Initial Scan Line - PAL"
+msgstr "Начальная строка развёртки — PAL"
+
+msgctxt "#30047"
+msgid "Last Scan Line - PAL"
+msgstr "Последняя строка развёртки — PAL"
+
+msgctxt "#30048"
+msgid "CD Access Method (Restart Required)"
+msgstr "Способ доступа к CD (требуется перезагрузка)"
+
+msgctxt "#30049"
+msgid "CD Loading Speed"
+msgstr "Скорость загрузки CD"
+
+msgctxt "#30050"
+msgid "DualShock Analog Mode Toggle"
+msgstr ""
+
+msgctxt "#30051"
+msgid "Display OSD Messages"
+msgstr ""
+
+msgctxt "#30052"
+msgid "Deinterlace Method"
+msgstr ""
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Настройки"
+
+#~ msgctxt "#30006"
+#~ msgid "Enable DualShock Analog Mode Toggle"
+#~ msgstr "Включить переключатель аналогового режима контроллера DualShock"
+
+#~ msgctxt "#30007"
+#~ msgid "Port 1: Multitap Enable"
+#~ msgstr "Порт 1: мультитап устройство включено"
+
+#~ msgctxt "#30008"
+#~ msgid "Port 2: Multitap Enable"
+#~ msgstr "Порт 2: мультитап устройство включено"
+
+#~ msgctxt "#30009"
+#~ msgid "Gun Input Mode"
+#~ msgstr "Режим ввода: оружие"
+
+#~ msgctxt "#30010"
+#~ msgid "Gun Cursor"
+#~ msgstr "Прицел ружья"
+
+#~ msgctxt "#30011"
+#~ msgid "Port 1: Gun Crosshair Color"
+#~ msgstr "Порт 1: цвет перекрестия прицела"
+
+#~ msgctxt "#30012"
+#~ msgid "Port 2: Gun Crosshair Color"
+#~ msgstr "Порт 2: цвет перекрестия прицела"
+
+#~ msgctxt "#30013"
+#~ msgid "Mouse Sensitivity"
+#~ msgstr "Чувствительность мыши"
+
+#~ msgctxt "#30014"
+#~ msgid "neGcon Twist Response"
+#~ msgstr "Отклик на вращение контроллера neGcon"
+
+#~ msgctxt "#30015"
+#~ msgid "neGcon Twist Deadzone"
+#~ msgstr "Мёртвая зона вращений для контроллера neGcon"
+
+#~ msgctxt "#30016"
+#~ msgid "Memory Card 0 Method (Restart Required)"
+#~ msgstr "Метод использования Memory Card 0 (требуется перезагрузка)"
+
+#~ msgctxt "#30017"
+#~ msgid "Enable Memory Card 1 (Restart Required)"
+#~ msgstr "Включить Memory Card 1 (требуется перезагрузка)"
+
+#~ msgctxt "#30018"
+#~ msgid "Shared Memory Cards (Restart Required)"
+#~ msgstr "Режим общих Memory Cards (требуется перезагрузка)"
+
+#~ msgctxt "#30019"
+#~ msgid "Memory Card Left Index"
+#~ msgstr "Левый индекс Memory Card"
+
+#~ msgctxt "#30020"
+#~ msgid "Memory Card Right Index"
+#~ msgstr "Правый индекс Memory Card"
+
+#~ msgctxt "#30021"
+#~ msgid "PGXP Operation Mode"
+#~ msgstr "Режим работы PGXP"
+
+#~ msgctxt "#30022"
+#~ msgid "PGXP 2D Geometry Tolerance"
+#~ msgstr "Геометрические допуски для PGXP 2D"
+
+#~ msgctxt "#30023"
+#~ msgid "PGXP Primitive Culling"
+#~ msgstr "PGXP куллинг примитивов"
+
+#~ msgctxt "#30024"
+#~ msgid "Line-to-Quad Hack"
+#~ msgstr "Хак Line-to-Quad"
+
+#~ msgctxt "#30025"
+#~ msgid "Widescreen Mode Hack"
+#~ msgstr "Хак \"Широкоэкранный режим\""
+
+#~ msgctxt "#30026"
+#~ msgid "Widescreen Mode Hack Aspect Ratio"
+#~ msgstr "Соотношение сторон для хака \"Широкоэкранный режим\""
+
+#~ msgctxt "#30027"
+#~ msgid "CPU Frequency Scaling (Overclock)"
+#~ msgstr "CPU тактовая частота (разгон)"
+
+#~ msgctxt "#30028"
+#~ msgid "GTE Overclock"
+#~ msgstr "GTE разгон"
+
+#~ msgctxt "#30029"
+#~ msgid "Skip BIOS"
+#~ msgstr "Пропустить BIOS"
+
+#~ msgctxt "#30030"
+#~ msgid "Override BIOS (Restart Required)"
+#~ msgstr "Переопределить BIOS (требуется перезагрузка)"
+
+#~ msgctxt "#30031"
+#~ msgid "CPU Dynarec"
+#~ msgstr "CPU Dynarec"
+
+#~ msgctxt "#30032"
+#~ msgid "Dynarec Code Invalidation"
+#~ msgstr "Dynarec: инвалидация кода"
+
+#~ msgctxt "#30037"
+#~ msgid "Crop Overscan"
+#~ msgstr "Обрезка вылетов развёртки"
+
+#~ msgctxt "#30033"
+#~ msgid "Dynarec DMA/GPU Event Cycles"
+#~ msgstr "Dynarec: циклы события DMA/GPU"
+
+#~ msgctxt "#30034"
+#~ msgid "Core-Reported FPS Timing"
+#~ msgstr "Тайминг FPS на основе данных ядра"
+
+#~ msgctxt "#30035"
+#~ msgid "PAL (European) Video Timing Override"
+#~ msgstr "Изменение тайминга видео на PAL (Европа)"
+
+#~ msgctxt "#30036"
+#~ msgid "Crop Overscan"
+#~ msgstr "Обрезка вылетов развёртки"
+
+#~ msgctxt "#30037"
+#~ msgid "Additional Cropping"
+#~ msgstr "Дополнительная обрезка"
+
+#~ msgctxt "#30038"
+#~ msgid "Offset Cropped Image"
+#~ msgstr "Смещение обрезанного изображения"
+
+#~ msgctxt "#30039"
+#~ msgid "GPU Rasterizer Overclock"
+#~ msgstr "Разгон растеризатора ГП"
+
+#~ msgctxt "#30040"
+#~ msgid "Core Aspect Ratio"
+#~ msgstr "Базовое соотношение сторон"
+
+#~ msgctxt "#30041"
+#~ msgid "Initial Scan Line - NTSC"
+#~ msgstr "Начальная строка развёртки — NTSC"
+
+#~ msgctxt "#30042"
+#~ msgid "Last Scan Line - NTSC"
+#~ msgstr "Последняя строка развёртки — NTSC"
+
+#~ msgctxt "#30043"
+#~ msgid "Initial Scan Line - PAL"
+#~ msgstr "Начальная строка развёртки — PAL"
+
+#~ msgctxt "#30044"
+#~ msgid "Last Scan Line - PAL"
+#~ msgstr "Последняя строка развёртки — PAL"
+
+#~ msgctxt "#30045"
+#~ msgid "CD Access Method (Restart Required)"
+#~ msgstr "Способ доступа к CD (требуется перезагрузка)"
+
+#~ msgctxt "#30046"
+#~ msgid "CD Loading Speed"
+#~ msgstr "Скорость загрузки CD"

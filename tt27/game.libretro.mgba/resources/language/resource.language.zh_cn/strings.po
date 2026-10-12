@@ -1,0 +1,98 @@
+# game.libretro.mgba language file
+# Addon Name: game.libretro.mgba
+# Addon id: game.libretro.mgba
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.mgba\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2017-02-04 09:56i\n"
+"PO-Revision-Date: 2024-12-27 21:56+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Chinese (China) <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-mgba/zh_cn/>\n"
+"Language: zh_cn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.9.2\n"
+
+msgctxt "Addon Summary"
+msgid "Nintendo - Game Boy Advance (mGBA)"
+msgstr ""
+
+msgctxt "Addon Description"
+msgid "mGBA aims to be faster and more accurate than many existing Game Boy Advance emulators, as well as adding features that other emulators lack."
+msgstr "mGBA 的目标是比许多现有的 Game Boy Advance 模拟器更快、更准确，并添加其他模拟器缺乏的功能。"
+
+msgctxt "#30001"
+msgid "Game Boy Model (Restart)"
+msgstr "Game Boy 型号（重新启动）"
+
+msgctxt "#30002"
+msgid "Use BIOS File if Found (Restart)"
+msgstr "如有则使用 BIOS 文件（重新启动）"
+
+msgctxt "#30003"
+msgid "Skip BIOS Intro (Restart)"
+msgstr "跳过 BIOS 简介（重新启动）"
+
+msgctxt "#30004"
+msgid "Default Game Boy Palette"
+msgstr "默认 Game Boy 调色板"
+
+msgctxt "#30005"
+msgid "Hardware Preset Game Boy Palettes (Restart)"
+msgstr "硬件预设 Game Boy 调色板（重新启动）"
+
+msgctxt "#30006"
+msgid "Use Super Game Boy Borders (Restart)"
+msgstr "使用超级 Game Boy 边框（重新启动）"
+
+msgctxt "#30007"
+msgid "Color Correction"
+msgstr "颜色校正"
+
+msgctxt "#30008"
+msgid "Interframe Blending"
+msgstr "帧间混合"
+
+msgctxt "#30009"
+msgid "Audio Filter"
+msgstr "音频滤波器"
+
+msgctxt "#30010"
+msgid "Audio Filter Level"
+msgstr "音频滤波器电平"
+
+msgctxt "#30011"
+msgid "Allow Opposing Directional Input"
+msgstr "允许相反方向输入"
+
+msgctxt "#30012"
+msgid "Solar Sensor Level"
+msgstr "太阳能传感器水平"
+
+msgctxt "#30013"
+msgid "Game Boy Player Rumble (Restart)"
+msgstr "Game Boy 玩家隆隆声（重新启动）"
+
+msgctxt "#30014"
+msgid "Idle Loop Removal"
+msgstr "空闲循环删除"
+
+msgctxt "#30015"
+msgid "Frameskip"
+msgstr "帧跳过"
+
+msgctxt "#30016"
+msgid "Frameskip Threshold (%)"
+msgstr "帧跳过阈值（%）"
+
+msgctxt "#30017"
+msgid "Frameskip Interval"
+msgstr "跳帧间隔"
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "设置"

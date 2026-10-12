@@ -1,0 +1,162 @@
+# game.libretro.bsnes language file
+# Addon Name: game.libretro.bsnes
+# Addon id: game.libretro.bsnes
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.bsnes\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2021-08-26 22:01i\n"
+"PO-Revision-Date: 2024-12-27 21:46+0000\n"
+"Last-Translator: José Antonio Alvarado <jalvarado0.eses@gmail.com>\n"
+"Language-Team: Spanish (Spain) <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-bsnes/es_es/>\n"
+"Language: es_es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.9.2\n"
+
+msgctxt "Addon Summary"
+msgid "Nintendo - SNES / SFC (bsnes)"
+msgstr "Nintendo - SNES / SFC (bsnes)"
+
+msgctxt "Addon Description"
+msgid "bsnes is a multi-platform Super Nintendo (Super Famicom) emulator from Near / Byuu that focuses on performance, features, and ease of use."
+msgstr "bsnes es un emulador multiplataforma de Super Nintendo (Super Famicom) de Near / Byuu que se centra en el rendimiento, funcionalidades y facilidad de uso."
+
+msgctxt "Addon Disclaimer"
+msgid "In loving memory of Near / Byuu"
+msgstr "En cariñoso recuerdo de Near / Byuu"
+
+msgctxt "#30001"
+msgid "Preferred Aspect Ratio"
+msgstr "Relación de Aspecto Preferida"
+
+msgctxt "#30003"
+msgid "Blur Emulation"
+msgstr "Emulación de Difuminado"
+
+msgctxt "#30004"
+msgid "PPU (Video) - Fast Mode"
+msgstr "PPU (Vídeo) - Modo Rápido"
+
+msgctxt "#30005"
+msgid "PPU (Video) - Deinterlace"
+msgstr "PPU (Vídeo) - Desentralazar"
+
+msgctxt "#30006"
+msgid "PPU (Video) - No Sprite Limit"
+msgstr "PPU (Vídeo) - Sin Límite de Sprites"
+
+msgctxt "#30007"
+msgid "PPU (Video) - No VRAM Blocking"
+msgstr "PPU (Vídeo) - Sin Bloquear VRAM"
+
+msgctxt "#30008"
+msgid "DSP (Audio) - Fast Mode"
+msgstr "DSP (Audio) - Modo Rápido"
+
+msgctxt "#30009"
+msgid "DSP (Audio) - Cubic Interpolation"
+msgstr "DSP (Audio) - Interpolación Cúbica"
+
+msgctxt "#30010"
+msgid "DSP (Audio) - Echo Shadow RAM"
+msgstr "DSP (Audio) - Eco de RAM Shadow"
+
+msgctxt "#30011"
+msgid "HD Mode 7 - Scale"
+msgstr "Modo 7 HD - Escalar"
+
+msgctxt "#30012"
+msgid "HD Mode 7 - Perspective Correction"
+msgstr "Modo 7 HD - Correción de Perspectiva"
+
+msgctxt "#30013"
+msgid "HD Mode 7 - Supersampling"
+msgstr "Modo 7 HD - Supersampleado"
+
+msgctxt "#30014"
+msgid "HD Mode 7 - HD->SD Mosaic"
+msgstr "Modo 7 HD - Mosaico HD->SD"
+
+msgctxt "#30015"
+msgid "Internal Run-Ahead"
+msgstr "Avance Interno"
+
+msgctxt "#30016"
+msgid "Coprocessors - Fast Mode"
+msgstr "Coprocesadores - Modo Rápido"
+
+msgctxt "#30017"
+msgid "Coprocessors - Prefer HLE"
+msgstr "Coprocesadores - Preferir HLE"
+
+msgctxt "#30018"
+msgid "Hotfixes"
+msgstr "Parches"
+
+msgctxt "#30019"
+msgid "Entropy (randomization)"
+msgstr "Entropía (aleatorización)"
+
+msgctxt "#30020"
+msgid "CPU Fast Math"
+msgstr "CPU Matemáticas Rápidas"
+
+msgctxt "#30021"
+msgid "Overclocking - CPU"
+msgstr "Overclocking - CPU"
+
+msgctxt "#30022"
+msgid "Overclocking - SA-1 Coprocessor"
+msgstr "Overclocking - Coprocesador SA-1"
+
+msgctxt "#30023"
+msgid "Overclocking - SuperFX Coprocessor"
+msgstr "Overclocking - Coprocesador SuperFX"
+
+msgctxt "#30024"
+msgid "Preferred Super Game Boy BIOS (Restart Required)"
+msgstr "BIOS Preferida de Super Game Boy (Reinicio Requerido)"
+
+msgctxt "#30025"
+msgid "Hide SGB Border"
+msgstr "Ocultar Borde SGB"
+
+msgctxt "#30026"
+msgid "Touchscreen Light Gun"
+msgstr "Pistola de luz en Pantalla táctil"
+
+msgctxt "#30027"
+msgid "Super Scope Reverse Trigger Buttons"
+msgstr "Super Scope Botones del Gatillo Inverso"
+
+msgctxt "#30028"
+msgid "Filter"
+msgstr "Filtro"
+
+msgctxt "#30029"
+msgid "Color Adjustment - Luminance"
+msgstr "Ajuste de Color - Luminancia"
+
+msgctxt "#30030"
+msgid "Color Adjustment - Saturation"
+msgstr "Ajuste de Color - Saturación"
+
+msgctxt "#30031"
+msgid "Color Adjustment - Gamma"
+msgstr "Ajuste de Color - Gama"
+
+msgctxt "#30032"
+msgid "Crop Vertical Overscan"
+msgstr "Cortar Sobredimensionamiento Vertical"
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Ajustes"
+
+#~ msgctxt "#30002"
+#~ msgid "Crop Overscan"
+#~ msgstr "Recortar Overscan"

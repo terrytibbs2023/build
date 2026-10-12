@@ -1,0 +1,458 @@
+# game.libretro.beetle-psx language file
+# Addon Name: game.libretro.beetle-psx
+# Addon id: game.libretro.beetle-psx
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.beetle-psx\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2019-08-24 22:21i\n"
+"PO-Revision-Date: 2025-04-23 15:25+0000\n"
+"Last-Translator: Alfonso Cachero <alfonso.cachero@gmail.com>\n"
+"Language-Team: Spanish (Spain) <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-beetle-psx/es_es/>\n"
+"Language: es_es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11\n"
+
+msgctxt "Addon Summary"
+msgid "Sony - PlayStation (Beetle PSX)"
+msgstr "Sony - PlayStation (Beetle PSX)"
+
+msgctxt "Addon Description"
+msgid "Beetle PSX is the PlayStation module of Beetle, a port of Madnafen."
+msgstr "Beetle PSX es el módulo para PlayStation de Beetle, una adaptación de Mednafen."
+
+msgctxt "#30001"
+msgid "Internal GPU Resolution"
+msgstr "Resolución GPU Interna"
+
+msgctxt "#30002"
+msgid "Dithering Pattern"
+msgstr "Patrón de Difuminado"
+
+msgctxt "#30003"
+msgid "Frame Duping (Speedup)"
+msgstr "Duplicación de Fotogramas (aceleración)"
+
+msgctxt "#30004"
+msgid "Display Internal FPS"
+msgstr "Mostrar FPS Internos"
+
+msgctxt "#30005"
+msgid "Analog Self-Calibration"
+msgstr "Autocalibración Analógica"
+
+msgctxt "#30007"
+msgid "DualShock Analog Mode Combo"
+msgstr "Combo de Modo Analógico DualShock"
+
+msgctxt "#30008"
+msgid "DualShock Analog Mode Combo Hold Delay"
+msgstr "Retardo de Retención del Combo del Modo Analógico DualShock"
+
+msgctxt "#30009"
+msgid "Port 1: Multitap Enable"
+msgstr "Puerto 1: Activar Multitap"
+
+msgctxt "#30010"
+msgid "Port 2: Multitap Enable"
+msgstr "Puerto 2: Activar Multitap"
+
+msgctxt "#30011"
+msgid "Gun Input Mode"
+msgstr "Modo Entrada Pistola"
+
+msgctxt "#30012"
+msgid "Gun Cursor"
+msgstr "Cursor de Pistola"
+
+msgctxt "#30013"
+msgid "Port 1: Gun Crosshair Color"
+msgstr "Puerto 1: Color del Punto de Mira de la Pistola"
+
+msgctxt "#30014"
+msgid "Port 2: Gun Crosshair Color"
+msgstr "Puerto 2: Color del Punto de Mira de la Pistola"
+
+msgctxt "#30015"
+msgid "Mouse Sensitivity"
+msgstr "Sensibilidad del Ratón"
+
+msgctxt "#30016"
+msgid "neGcon Twist Response"
+msgstr "Respuesta de Giro neGcon"
+
+msgctxt "#30017"
+msgid "neGcon Twist Deadzone"
+msgstr "Zona Muerta Giro neGcon"
+
+msgctxt "#30018"
+msgid "Memory Card 0 Method (Restart Required)"
+msgstr "Método de la Tarjeta de Memoria 0 (Reinicio Requerido)"
+
+msgctxt "#30019"
+msgid "Enable Memory Card 1 (Restart Required)"
+msgstr "Activar Tarjeta de Memoria 1 (Reinicio Requerido)"
+
+msgctxt "#30020"
+msgid "Shared Memory Cards (Restart Required)"
+msgstr "Tarjetas de Memoria Compartida (Reinicio Requerido)"
+
+msgctxt "#30021"
+msgid "Memory Card Left Index"
+msgstr "Índice Izquierdo de la Tarjeta de Memoria"
+
+msgctxt "#30022"
+msgid "Memory Card Right Index"
+msgstr "Índice Derecho de la Tarjeta de Memoria"
+
+msgctxt "#30023"
+msgid "PGXP Operation Mode"
+msgstr "Modo de Funcionamiento PGXP"
+
+msgctxt "#30024"
+msgid "PGXP 2D Geometry Tolerance"
+msgstr "Tolerancia de Geometría PGXP 2D"
+
+msgctxt "#30025"
+msgid "PGXP Primitive Culling"
+msgstr "Eliminación Selectiva de Primitivos PGXP"
+
+msgctxt "#30026"
+msgid "Line-to-Quad Hack"
+msgstr "Hack de Línea a Cuadrado"
+
+msgctxt "#30027"
+msgid "Widescreen Mode Hack"
+msgstr "Hack del Modo Panorámico"
+
+msgctxt "#30028"
+msgid "Widescreen Mode Hack Aspect Ratio"
+msgstr "Hack de Relación de Aspecto del Modo Panorámico"
+
+msgctxt "#30029"
+msgid "CPU Frequency Scaling (Overclock)"
+msgstr "Escalado de Frecuencia de la CPU (Overclock)"
+
+msgctxt "#30030"
+msgid "GTE Overclock"
+msgstr "Overclock GTE"
+
+msgctxt "#30031"
+msgid "Skip BIOS"
+msgstr "Saltar BIOS"
+
+msgctxt "#30032"
+msgid "Override BIOS (Restart Required)"
+msgstr "Anular BIOS (Reinicio Requerido)"
+
+msgctxt "#30033"
+msgid "CPU Dynarec"
+msgstr "CPU Dynarec"
+
+msgctxt "#30034"
+msgid "Dynarec Code Invalidation"
+msgstr "Invalidación de Código Dynarec"
+
+msgctxt "#30035"
+msgid "Dynarec DMA/GPU/MDEC/Timer Event Cycles"
+msgstr "Ciclos de eventos DMA/GPU/MDEC/Temporizador de Dynarec"
+
+msgctxt "#30036"
+msgid "Dynarec SPU Samples"
+msgstr "Muestras SPU Dynarec"
+
+msgctxt "#30037"
+msgid "Core-Reported FPS Timing"
+msgstr "Tiempos FPS informados por el Núcleo"
+
+msgctxt "#30038"
+msgid "PAL (European) Video Timing Override"
+msgstr "Anulación de Sincronización de Vídeo PAL (europeo)"
+
+msgctxt "#30039"
+msgid "Crop Overscan"
+msgstr "Recortar Overscan"
+
+msgctxt "#30040"
+msgid "Additional Cropping"
+msgstr "Recorte Adicional"
+
+msgctxt "#30041"
+msgid "Offset Cropped Image"
+msgstr "Imagen Recortada con Desplazamiento"
+
+msgctxt "#30042"
+msgid "GPU Rasterizer Overclock"
+msgstr "Overclock Rasterizador de GPU"
+
+msgctxt "#30043"
+msgid "Core Aspect Ratio"
+msgstr "Relación de Aspecto del Núcleo"
+
+msgctxt "#30044"
+msgid "Initial Scan Line - NTSC"
+msgstr "Línea de Exploración Inicial - NTSC"
+
+msgctxt "#30045"
+msgid "Last Scan Line - NTSC"
+msgstr "Línea de Exploración Final - NTSC"
+
+msgctxt "#30046"
+msgid "Initial Scan Line - PAL"
+msgstr "Línea de Exploración Inicial - PAL"
+
+msgctxt "#30047"
+msgid "Last Scan Line - PAL"
+msgstr "Línea de Exploración Final - PAL"
+
+msgctxt "#30048"
+msgid "CD Access Method (Restart Required)"
+msgstr "Método de Acceso a CD (Reinicio Requerido)"
+
+msgctxt "#30049"
+msgid "CD Loading Speed"
+msgstr "Velocidad de Carga del CD"
+
+msgctxt "#30050"
+msgid "DualShock Analog Mode Toggle"
+msgstr "Interruptor de Modo Analógico de DualShock"
+
+msgctxt "#30051"
+msgid "Display OSD Messages"
+msgstr "Mostrar Mensajes OSD"
+
+msgctxt "#30052"
+msgid "Deinterlace Method"
+msgstr "Método de Desentrelazado"
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Ajustes"
+
+#~ msgctxt "#30006"
+#~ msgid "Enable DualShock Analog Mode Toggle"
+#~ msgstr "Activar Conmutador de Modo Analógico DualShock"
+
+#~ msgctxt "#30007"
+#~ msgid "Port 1: Multitap Enable"
+#~ msgstr "Puerto 1: Activar Multitap"
+
+#~ msgctxt "#30008"
+#~ msgid "Port 2: Multitap Enable"
+#~ msgstr "Puerto 2: Activar Multitap"
+
+#~ msgctxt "#30009"
+#~ msgid "Gun Input Mode"
+#~ msgstr "Modo Entrada Pistola"
+
+#~ msgctxt "#30010"
+#~ msgid "Gun Cursor"
+#~ msgstr "Señalizador Pistola"
+
+#~ msgctxt "#30011"
+#~ msgid "Port 1: Gun Crosshair Color"
+#~ msgstr "Puerto 1: Color Punto de Mira Pistola"
+
+#~ msgctxt "#30012"
+#~ msgid "Port 2: Gun Crosshair Color"
+#~ msgstr "Puerto 2: Color Punto de Mira Pistola"
+
+#~ msgctxt "#30013"
+#~ msgid "Mouse Sensitivity"
+#~ msgstr "Sensibilidad del Ratón"
+
+#~ msgctxt "#30014"
+#~ msgid "neGcon Twist Response"
+#~ msgstr "Respuesta Giro NeGcon"
+
+#~ msgctxt "#30015"
+#~ msgid "neGcon Twist Deadzone"
+#~ msgstr "Zona Muerta Giro NeGcon"
+
+#~ msgctxt "#30016"
+#~ msgid "Memory Card 0 Method (Restart Required)"
+#~ msgstr "Formato Tarjeta de Memoria 0 (requiere reinicio)"
+
+#~ msgctxt "#30017"
+#~ msgid "Enable Memory Card 1 (Restart Required)"
+#~ msgstr "Activar Tarjeta de Memoria 1 (requiere reinicio)"
+
+#~ msgctxt "#30018"
+#~ msgid "Shared Memory Cards (Restart Required)"
+#~ msgstr "Tarjetas de Memoria Compartidas (requiere reinicio)"
+
+#~ msgctxt "#30019"
+#~ msgid "Memory Card Left Index"
+#~ msgstr "Índice Izquierdo Tarjeta de Memoria"
+
+#~ msgctxt "#30020"
+#~ msgid "Memory Card Right Index"
+#~ msgstr "Índice Derecho Tarjeta de Memoria"
+
+#~ msgctxt "#30021"
+#~ msgid "PGXP Operation Mode"
+#~ msgstr "Modo Funcionamiento PGXP"
+
+#~ msgctxt "#30022"
+#~ msgid "PGXP 2D Geometry Tolerance"
+#~ msgstr "Tolerancia Geometría 2D PGXP"
+
+#~ msgctxt "#30023"
+#~ msgid "PGXP Primitive Culling"
+#~ msgstr "PGXP Eliminación Primitivas"
+
+#~ msgctxt "#30024"
+#~ msgid "Line-to-Quad Hack"
+#~ msgstr "Hack Línea a Cuadrángulo"
+
+#~ msgctxt "#30025"
+#~ msgid "Widescreen Mode Hack"
+#~ msgstr "Hack Modo Pantalla Panorámica"
+
+#~ msgctxt "#30026"
+#~ msgid "Widescreen Mode Hack Aspect Ratio"
+#~ msgstr "Hack Relación Aspecto en Modo Panorámico"
+
+#~ msgctxt "#30027"
+#~ msgid "CPU Frequency Scaling (Overclock)"
+#~ msgstr "Escalado de Frecuencia CPU (overclock)"
+
+#~ msgctxt "#30028"
+#~ msgid "GTE Overclock"
+#~ msgstr "GTE Overclock"
+
+#~ msgctxt "#30029"
+#~ msgid "Skip BIOS"
+#~ msgstr "Omitir BIOS"
+
+#~ msgctxt "#30030"
+#~ msgid "Override BIOS (Restart Required)"
+#~ msgstr "Anular BIOS (requiere reinicio)"
+
+#~ msgctxt "#30031"
+#~ msgid "CPU Dynarec"
+#~ msgstr "CPU Dynarec"
+
+#~ msgctxt "#30032"
+#~ msgid "Dynarec Code Invalidation"
+#~ msgstr "Invalidación Código Dynarec"
+
+#~ msgctxt "#30033"
+#~ msgid "Dynarec DMA/GPU/MDEC/Timer Event Cycles"
+#~ msgstr "Ciclos de Eventos Dynarec DMA/GPU/MDEC/Timer"
+
+#~ msgctxt "#30034"
+#~ msgid "Dynarec SPU Samples"
+#~ msgstr "Muestras de Dynarec SPU"
+
+#~ msgctxt "#30035"
+#~ msgid "Core-Reported FPS Timing"
+#~ msgstr "FPS Cronometrados en el Núcleo"
+
+#~ msgctxt "#30036"
+#~ msgid "PAL (European) Video Timing Override"
+#~ msgstr "Anulación Sincronización de Vídeo PAL (Europa)"
+
+#~ msgctxt "#30037"
+#~ msgid "Crop Overscan"
+#~ msgstr "Recortar Overscan"
+
+#~ msgctxt "#30038"
+#~ msgid "Additional Cropping"
+#~ msgstr "Recortes Adicionales"
+
+#~ msgctxt "#30039"
+#~ msgid "Offset Cropped Image"
+#~ msgstr "Imagen Recortada con Desplazamiento"
+
+#~ msgctxt "#30040"
+#~ msgid "GPU Rasterizer Overclock"
+#~ msgstr "Overclock del Rasterizado de la GPU"
+
+#~ msgctxt "#30041"
+#~ msgid "Core Aspect Ratio"
+#~ msgstr "Relación de Aspecto del Núcleo"
+
+#~ msgctxt "#30042"
+#~ msgid "Initial Scan Line - NTSC"
+#~ msgstr "Primera Línea de Exploración - NTSC"
+
+#~ msgctxt "#30043"
+#~ msgid "Last Scan Line - NTSC"
+#~ msgstr "Última Línea de Exploración - NTSC"
+
+#~ msgctxt "#30044"
+#~ msgid "Initial Scan Line - PAL"
+#~ msgstr "Primera Línea de Exploración - PAL"
+
+#~ msgctxt "#30045"
+#~ msgid "Last Scan Line - PAL"
+#~ msgstr "Última Línea de Exploración - PAL"
+
+#~ msgctxt "#30046"
+#~ msgid "CD Access Method (Restart Required)"
+#~ msgstr "Método de Acceso al CD (requiere reinicio)"
+
+#~ msgctxt "#30047"
+#~ msgid "CD Loading Speed"
+#~ msgstr "Velocidad de Carga de CD"
+
+#~ msgctxt "#30033"
+#~ msgid "Dynarec DMA/GPU Event Cycles"
+#~ msgstr "Ciclos de Eventos Dynarec DMA/GPU"
+
+#~ msgctxt "#30034"
+#~ msgid "Core-Reported FPS Timing"
+#~ msgstr "Tiempo FPS Notificado por el Núcleo"
+
+#~ msgctxt "#30035"
+#~ msgid "PAL (European) Video Timing Override"
+#~ msgstr "Anulación Sincronización Vídeo PAL (Europea)"
+
+#~ msgctxt "#30036"
+#~ msgid "Crop Overscan"
+#~ msgstr "Recortar Overscan"
+
+#~ msgctxt "#30037"
+#~ msgid "Additional Cropping"
+#~ msgstr "Recorte Adicional"
+
+#~ msgctxt "#30038"
+#~ msgid "Offset Cropped Image"
+#~ msgstr "Desplazamiento Imagen Recortada"
+
+#~ msgctxt "#30039"
+#~ msgid "GPU Rasterizer Overclock"
+#~ msgstr "Overclock Rasterizador GPU"
+
+#~ msgctxt "#30040"
+#~ msgid "Core Aspect Ratio"
+#~ msgstr "Relación Aspecto del Núcleo"
+
+#~ msgctxt "#30041"
+#~ msgid "Initial Scan Line - NTSC"
+#~ msgstr "Línea de Exploración Inicial - NTSC"
+
+#~ msgctxt "#30042"
+#~ msgid "Last Scan Line - NTSC"
+#~ msgstr "Línea de Exploración Final - NTSC"
+
+#~ msgctxt "#30043"
+#~ msgid "Initial Scan Line - PAL"
+#~ msgstr "Primera Línea de Exploración - PAL"
+
+#~ msgctxt "#30044"
+#~ msgid "Last Scan Line - PAL"
+#~ msgstr "Última Línea de Exploración - PAL"
+
+#~ msgctxt "#30045"
+#~ msgid "CD Access Method (Restart Required)"
+#~ msgstr "Método Acceso CD (requiere reinicio)"
+
+#~ msgctxt "#30046"
+#~ msgid "CD Loading Speed"
+#~ msgstr "Velocidad Carga CD"

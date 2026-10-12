@@ -1,0 +1,198 @@
+# game.libretro.mgba language file
+# Addon Name: game.libretro.mgba
+# Addon id: game.libretro.mgba
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.mgba\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2017-02-04 09:56i\n"
+"PO-Revision-Date: 2024-12-27 21:56+0000\n"
+"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"Language-Team: Spanish (Mexico) <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-mgba/es_mx/>\n"
+"Language: es_mx\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.9.2\n"
+
+msgctxt "Addon Summary"
+msgid "Nintendo - Game Boy Advance (mGBA)"
+msgstr ""
+
+msgctxt "Addon Description"
+msgid "mGBA aims to be faster and more accurate than many existing Game Boy Advance emulators, as well as adding features that other emulators lack."
+msgstr "mGBA intenta ser más rápido y más preciso que muchos otros emuladores de Game Boy existentes, además de añadir características que otros emuladores no tienen."
+
+msgctxt "#30001"
+msgid "Game Boy Model (Restart)"
+msgstr "Modelo de Game Boy (reiniciar)"
+
+msgctxt "#30002"
+msgid "Use BIOS File if Found (Restart)"
+msgstr "Utilizar archivo de BIOS si se encuentra (reiniciar)"
+
+msgctxt "#30003"
+msgid "Skip BIOS Intro (Restart)"
+msgstr "Saltar intro de BIOS (reiniciar)"
+
+msgctxt "#30004"
+msgid "Default Game Boy Palette"
+msgstr "Paleta de Game Boy predeterminada"
+
+msgctxt "#30005"
+msgid "Hardware Preset Game Boy Palettes (Restart)"
+msgstr ""
+
+msgctxt "#30006"
+msgid "Use Super Game Boy Borders (Restart)"
+msgstr ""
+
+msgctxt "#30007"
+msgid "Color Correction"
+msgstr "Corrección de color"
+
+msgctxt "#30008"
+msgid "Interframe Blending"
+msgstr "Mezcla entre cuadros"
+
+msgctxt "#30009"
+msgid "Audio Filter"
+msgstr ""
+
+msgctxt "#30010"
+msgid "Audio Filter Level"
+msgstr ""
+
+msgctxt "#30011"
+msgid "Allow Opposing Directional Input"
+msgstr ""
+
+msgctxt "#30012"
+msgid "Solar Sensor Level"
+msgstr "Nivel de sensor solar"
+
+msgctxt "#30013"
+msgid "Game Boy Player Rumble (Restart)"
+msgstr ""
+
+msgctxt "#30014"
+msgid "Idle Loop Removal"
+msgstr ""
+
+msgctxt "#30015"
+msgid "Frameskip"
+msgstr "Saltar cuadros"
+
+msgctxt "#30016"
+msgid "Frameskip Threshold (%)"
+msgstr "Umbral de salto de cuadros (%)"
+
+msgctxt "#30017"
+msgid "Frameskip Interval"
+msgstr ""
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Ajustes"
+
+#~ msgctxt "#30005"
+#~ msgid "Use Super Game Boy Borders (Restart)"
+#~ msgstr "Utilizar Super Game Boy Borders (reiniciar)"
+
+#~ msgctxt "#30006"
+#~ msgid "Color Correction"
+#~ msgstr "Corrección de color"
+
+#~ msgctxt "#30007"
+#~ msgid "Interframe Blending"
+#~ msgstr "Fusión intercuadros"
+
+#~ msgctxt "#30008"
+#~ msgid "Audio Filter"
+#~ msgstr "Filtro de audio"
+
+#~ msgctxt "#30009"
+#~ msgid "Audio Filter Level"
+#~ msgstr "Nivel de filtro de audio"
+
+#~ msgctxt "#30010"
+#~ msgid "Allow Opposing Directional Input"
+#~ msgstr "Permitir entrada direccional opuesta"
+
+#~ msgctxt "#30011"
+#~ msgid "Solar Sensor Level"
+#~ msgstr "Nivel de sensor solar"
+
+#~ msgctxt "#30012"
+#~ msgid "Game Boy Player Rumble (Restart)"
+#~ msgstr "Game Boy Player Rumble (reiniciar)"
+
+#~ msgctxt "#30013"
+#~ msgid "Idle Loop Removal"
+#~ msgstr "Eliminador de bucle de inactividad"
+
+#~ msgctxt "#30014"
+#~ msgid "Frameskip"
+#~ msgstr "Saltar cuadros"
+
+#~ msgctxt "#30015"
+#~ msgid "Frameskip Threshold (%)"
+#~ msgstr "Umbral de salto de cuadros (%)"
+
+#~ msgctxt "#30016"
+#~ msgid "Frameskip Interval"
+#~ msgstr "Intervalo de salto de cuadros"
+
+#~ msgctxt "#30001"
+#~ msgid "Solar Sensor Level"
+#~ msgstr "Nivel de sensor solar"
+
+#~ msgctxt "#30002"
+#~ msgid "Allow Opposing Directional Input"
+#~ msgstr "Permitir entrada direccional opuesta"
+
+#~ msgctxt "#30003"
+#~ msgid "Game Boy Model (requires restart)"
+#~ msgstr "Modelo de Game Boy (requiere reiniciar)"
+
+#~ msgctxt "#30004"
+#~ msgid "Use BIOS File if Found (requires restart)"
+#~ msgstr "Utilizar archivo de BIOS si se encuentra (requiere reiniciar)"
+
+#~ msgctxt "#30005"
+#~ msgid "Skip BIOS Intro (requires restart)"
+#~ msgstr "Saltar Intro del BIOS (requiere reiniciar)"
+
+#~ msgctxt "#30006"
+#~ msgid "Use Super Game Boy Borders (requires restart)"
+#~ msgstr "Utilizar Bordes del Super Game Boy (requiere reiniciar)"
+
+#~ msgctxt "#30007"
+#~ msgid "Idle Loop Removal"
+#~ msgstr "Remoción de bucle en reposo"
+
+#~ msgctxt "#30008"
+#~ msgid "Frameskip"
+#~ msgstr "Saltar cuadros"
+
+#~ msgctxt "#30009"
+#~ msgid "Frameskip Threshold (%)"
+#~ msgstr "Porcentaje (%) de salto de cuadros"
+
+#~ msgctxt "#30010"
+#~ msgid "Frameskip Interval"
+#~ msgstr "Intervalo de salto de cuadros"
+
+#~ msgctxt "#30011"
+#~ msgid "Color Correction"
+#~ msgstr "Corrección de color"
+
+#~ msgctxt "#30012"
+#~ msgid "Interframe Blending"
+#~ msgstr "Mezcla entre cuadros"
+
+#~ msgctxt "#30013"
+#~ msgid "Enable Game Boy Player Rumble (requires restart)"
+#~ msgstr "Activar Game Boy Player Rumble (requiere reiniciar)"

@@ -1,0 +1,406 @@
+# game.libretro.mupen64plus-nx language file
+# Addon Name: game.libretro.mupen64plus-nx
+# Addon id: game.libretro.mupen64plus-nx
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.mupen64plus-nx\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2017-02-04 09:56i\n"
+"PO-Revision-Date: 2025-04-22 22:51+0000\n"
+"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
+"Language-Team: Swedish <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-mupen64plus-nx/sv_se/>\n"
+"Language: sv_se\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11\n"
+
+msgctxt "Addon Summary"
+msgid "Nintendo - Nintendo 64 (Mupen64Plus-Next)"
+msgstr "Nintendo - Nintendo 64 (Mupen64Plus-Next)"
+
+msgctxt "Addon Description"
+msgid "Mupen64 is an N64 emulator desgined to be multi-OS. It uses a plugin system and is highly compatible."
+msgstr "Mupen64 är en N64-emulator som är utformad för att vara multi-OS. Den använder ett system med tillägg och är mycket kompatibel."
+
+msgctxt "#30001"
+msgid "RDP Plugin"
+msgstr "RDP-tillägg"
+
+msgctxt "#30002"
+msgid "4:3 Resolution"
+msgstr "4:3 Upplösning"
+
+msgctxt "#30003"
+msgid "Wide Resolution"
+msgstr "Bred upplösning"
+
+msgctxt "#30004"
+msgid "Aspect Ratio"
+msgstr "Bildförhållande"
+
+msgctxt "#30005"
+msgid "Native Resolution Factor"
+msgstr "Inbyggd upplösningsfaktor"
+
+msgctxt "#30006"
+msgid "Threaded Renderer"
+msgstr "Trådad rendering"
+
+msgctxt "#30007"
+msgid "Bilinear filtering mode"
+msgstr "Bilinjärt filtreringsläge"
+
+msgctxt "#30008"
+msgid "Hybrid Filter"
+msgstr "Hybridfilter"
+
+msgctxt "#30009"
+msgid "Dithering"
+msgstr "Dithering"
+
+#, fuzzy
+msgctxt "#30010"
+msgid "Dithering Quantization"
+msgstr "Dithering Kvantisering"
+
+#, fuzzy
+msgctxt "#30011"
+msgid "Image Dithering Mode"
+msgstr "Dithering-läge för bild"
+
+msgctxt "#30012"
+msgid "MSAA level"
+msgstr "MSAA-nivå"
+
+msgctxt "#30013"
+msgid "FXAA"
+msgstr "FXAA"
+
+msgctxt "#30014"
+msgid "LOD Emulation"
+msgstr "LOD-emulering"
+
+#, fuzzy
+msgctxt "#30015"
+msgid "Framebuffer Emulation"
+msgstr "Emulering av framebuffert"
+
+#, fuzzy
+msgctxt "#30016"
+msgid "Copy auxiliary buffers to RDRAM"
+msgstr "Kopiera hjälpbuffertar till RDRAM"
+
+msgctxt "#30017"
+msgid "Color buffer to RDRAM"
+msgstr "Färgbuffert till RDRAM"
+
+msgctxt "#30018"
+msgid "Depth buffer to RDRAM"
+msgstr "Djupbuffert till RDRAM"
+
+msgctxt "#30019"
+msgid "Background Mode"
+msgstr "Bakgrundsläge"
+
+#, fuzzy
+msgctxt "#30020"
+msgid "Hardware per-pixel lighting"
+msgstr "Hårdvara för per-pixel-belysning"
+
+#, fuzzy
+msgctxt "#30021"
+msgid "Continuous texrect coords"
+msgstr "Kontinuerliga texrect-koordinater"
+
+#, fuzzy
+msgctxt "#30022"
+msgid "Enable inaccurate texture coordinates"
+msgstr "Aktivera felaktiga texturkoordinater"
+
+#, fuzzy
+msgctxt "#30023"
+msgid "Enable native-res boundaries for texture coordinates"
+msgstr "Aktivera native-res-gränser för texturkoordinater"
+
+#, fuzzy
+msgctxt "#30024"
+msgid "Native res. 2D texrects"
+msgstr "Ursprunglig res. 2D-texter"
+
+#, fuzzy
+msgctxt "#30025"
+msgid "Less accurate blending mode"
+msgstr "Mindre exakt blandningsläge"
+
+#, fuzzy
+msgctxt "#30026"
+msgid "GPU shader depth write"
+msgstr "Skrivning av GPU-shaderdjup"
+
+msgctxt "#30027"
+msgid "N64 Depth Compare"
+msgstr "N64 djupjämförelse"
+
+#, fuzzy
+msgctxt "#30028"
+msgid "Cache GPU Shaders"
+msgstr "Cache GPU-shaders"
+
+#, fuzzy
+msgctxt "#30029"
+msgid "Cache Textures"
+msgstr "Cache-texturer"
+
+msgctxt "#30030"
+msgid "Overscan"
+msgstr "Överskanning"
+
+#, fuzzy
+msgctxt "#30031"
+msgid "Overscan Offset (Top)"
+msgstr "Offset för överskanning (topp)"
+
+#, fuzzy
+msgctxt "#30032"
+msgid "Overscan Offset (Left)"
+msgstr "Offset för överskanning (vänster)"
+
+#, fuzzy
+msgctxt "#30033"
+msgid "Overscan Offset (Right)"
+msgstr "Offset för överskanning (höger)"
+
+#, fuzzy
+msgctxt "#30034"
+msgid "Overscan Offset (Bottom)"
+msgstr "Offset för överskanning (botten)"
+
+#, fuzzy
+msgctxt "#30035"
+msgid "Max High-Res VRAM Limit"
+msgstr "Max VRAM-gräns för högupplösta bilder"
+
+#, fuzzy
+msgctxt "#30036"
+msgid "Max texture cache size"
+msgstr "Maximal storlek på texturcache"
+
+msgctxt "#30037"
+msgid "Texture filter"
+msgstr "Texturfilter"
+
+msgctxt "#30038"
+msgid "Texture Enhancement"
+msgstr "Förbättring av textur"
+
+#, fuzzy
+msgctxt "#30039"
+msgid "Don't filter background textures"
+msgstr "Filtrera inte bakgrundstexturer"
+
+#, fuzzy
+msgctxt "#30040"
+msgid "Use High-Res textures"
+msgstr "Använd högupplösta texturer"
+
+#, fuzzy
+msgctxt "#30041"
+msgid "Use High-Res Texture Cache Compression"
+msgstr "Använd komprimering av texturcache för högupplösta bilder"
+
+#, fuzzy
+msgctxt "#30042"
+msgid "Use High-Res Full Alpha Channel"
+msgstr "Använd full alfakanal i högupplöst format"
+
+#, fuzzy
+msgctxt "#30043"
+msgid "Use enhanced Texture Storage"
+msgstr "Använd förbättrad texturlagring"
+
+#, fuzzy
+msgctxt "#30044"
+msgid "Use alternative method for High-Res Checksums"
+msgstr "Använd alternativ metod för High-Res Checksums"
+
+#, fuzzy
+msgctxt "#30045"
+msgid "Use enhanced Hi-Res Storage"
+msgstr "Använd förbättrad Hi-Res-lagring"
+
+msgctxt "#30046"
+msgid "INI Behaviour"
+msgstr "INI-beteende"
+
+msgctxt "#30047"
+msgid "CPU Core"
+msgstr "CPU-kärna"
+
+msgctxt "#30048"
+msgid "RSP Plugin"
+msgstr "RSP-insticksmodul"
+
+#, fuzzy
+msgctxt "#30049"
+msgid "Frame Duplication"
+msgstr "Duplicering av ramar"
+
+msgctxt "#30050"
+msgid "Framerate"
+msgstr "Bildfrekvens"
+
+#, fuzzy
+msgctxt "#30051"
+msgid "VI Refresh (Overclock)"
+msgstr "VI Uppdatering (överklockning)"
+
+msgctxt "#30052"
+msgid "Disable Expansion Pak"
+msgstr "Inaktivera Expansion Pak"
+
+#, fuzzy
+msgctxt "#30053"
+msgid "Ignore emulated TLB Exceptions"
+msgstr "Ignorera emulerade TLB-undantag"
+
+#, fuzzy
+msgctxt "#30054"
+msgid "Count Per Op"
+msgstr "Antal per operation"
+
+#, fuzzy
+msgctxt "#30055"
+msgid "Count Per Op Divider (Overclock)"
+msgstr "Räkning per op-delare (överklockning)"
+
+msgctxt "#30056"
+msgid "Analog Deadzone (percent)"
+msgstr "Analog dödzon (procent)"
+
+msgctxt "#30057"
+msgid "Analog Sensitivity (percent)"
+msgstr "Analog känslighet (procent)"
+
+msgctxt "#30058"
+msgid "Right C Button"
+msgstr "Höger C-knapp"
+
+msgctxt "#30059"
+msgid "Left C Button"
+msgstr "Vänster C-knapp"
+
+msgctxt "#30060"
+msgid "Down C Button"
+msgstr "Ner C-knappen"
+
+msgctxt "#30061"
+msgid "Up C Button"
+msgstr "Upp C-knapp"
+
+#, fuzzy
+msgctxt "#30062"
+msgid "Independent C-button Controls"
+msgstr "Oberoende kontroller med C-knapp"
+
+#, fuzzy
+msgctxt "#30063"
+msgid "Player 1 Pak"
+msgstr "Spelare 1 Pak"
+
+#, fuzzy
+msgctxt "#30064"
+msgid "Player 2 Pak"
+msgstr "Spelare 2 Pak"
+
+#, fuzzy
+msgctxt "#30065"
+msgid "Player 3 Pak"
+msgstr "Spelare 3 Pak"
+
+#, fuzzy
+msgctxt "#30066"
+msgid "Player 4 Pak"
+msgstr "Spelare 4 Pak"
+
+msgctxt "#30067"
+msgid "Enable color buffer copy from RDRAM"
+msgstr ""
+
+msgctxt "#30068"
+msgid "(ParaLLEl-RDP) Synchronous RDP"
+msgstr ""
+
+msgctxt "#30069"
+msgid "(ParaLLEl-RDP) Crop overscan"
+msgstr ""
+
+msgctxt "#30070"
+msgid "(ParaLLEl-RDP) VI Divot filter"
+msgstr ""
+
+msgctxt "#30071"
+msgid "(ParaLLEl-RDP) VI Gamma dither"
+msgstr ""
+
+msgctxt "#30072"
+msgid "(ParaLLEl-RDP) VI anti-aliasing"
+msgstr ""
+
+msgctxt "#30073"
+msgid "(ParaLLEl-RDP) VI bilinear"
+msgstr ""
+
+msgctxt "#30074"
+msgid "(ParaLLEl-RDP) VI dither filter"
+msgstr ""
+
+msgctxt "#30075"
+msgid "(ParaLLEl-RDP) Upscaling factor (restart)"
+msgstr ""
+
+msgctxt "#30076"
+msgid "(ParaLLEl-RDP) SSAA framebuffer effects (restart)"
+msgstr ""
+
+msgctxt "#30077"
+msgid "(ParaLLEl-RDP) Dither SSAA framebuffer effects (restart)"
+msgstr ""
+
+msgctxt "#30078"
+msgid "(ParaLLEl-RDP) Downsampling factor"
+msgstr ""
+
+msgctxt "#30079"
+msgid "(ParaLLEl-RDP) Native texture LOD"
+msgstr ""
+
+msgctxt "#30080"
+msgid "(ParaLLEl-RDP) Native resolution TEX_RECT"
+msgstr ""
+
+msgctxt "#30081"
+msgid "(ParaLLEl-RDP) Deinterlacing method"
+msgstr ""
+
+msgctxt "#30082"
+msgid "VI Overlay"
+msgstr ""
+
+msgctxt "#30083"
+msgid "Thread sync level"
+msgstr ""
+
+msgctxt "#30084"
+msgid "Multi-threading"
+msgstr ""
+
+msgctxt "#30085"
+msgid "Hide overscan"
+msgstr ""
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Inställningar"

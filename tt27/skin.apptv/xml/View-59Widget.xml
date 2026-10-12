@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<includes>
+	<include name="CategoryLabel">
+		<definition>
+			<control type="label" id="$PARAM[list_id]2">
+				<left>0</left>
+				<top>5</top>
+				<width>689</width>
+				<height>50</height>
+				<font>apptv20</font>
+				<align>left</align>
+				<label>$PARAM[label] $INFO[Container($PARAM[list_id]).NumItems,(,)]</label>
+				<visible>Container($PARAM[parent_id]).IsUpdating | Integer.IsGreater(Container($PARAM[parent_id]).NumItems,1) | Container($PARAM[list_id]).IsUpdating | 
+						Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
+			</control>
+		</definition>
+	</include>
+	<include name="WidgetListPoster">
+		<param name="content_path"></param>
+		<param name="widget_header"></param>
+		<param name="list_id"></param>
+		<param name="parent_id"></param>
+		<param name="list_visible"></param>
+		<definition>
+			<include content="CategoryLabel">
+				<param name="label" value="$PARAM[widget_header]"/>
+				<param name="list_id" value="$PARAM[list_id]"/>
+			</include>
+			<control type="panel" id="$PARAM[list_id]">
+				<left>0</left>
+				<top>55</top>
+				<width>1750</width>
+				<height>350</height>
+				<scrolltime tween="cubic" easing="out">200</scrolltime>
+				<orientation>horizontal</orientation>
+				<onleft>9000</onleft>
+				<onright>9000</onright>
+				<onup>Control.Move($PARAM[parent_id],-1)</onup>
+				<ondown>Control.Move($PARAM[parent_id],1)</ondown>
+				<onback>SetFocus($PARAM[parent_id])</onback>
+				<oninfo>Action(Info)</oninfo>
+				<visible>Container($PARAM[parent_id]).IsUpdating | Integer.IsGreater(Container($PARAM[parent_id]).NumItems,1) | Container($PARAM[list_id]).IsUpdating | 
+						Integer.IsGreater(Container($PARAM[list_id]).NumItems,0)</visible>
+				<itemlayout width="250">
+					<control type="image">
+						<left>38</left>
+						<top>8</top>
+						<width>174</width>
+						<height>268</height>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<texture diffuse="mask-rect.png" background="true">$VAR[IconPoster]</texture>
+					</control>
+				</itemlayout>
+				<focusedlayout width="250">
+					<control type="image">
+						<left>38</left>
+						<top>8</top>
+						<width>174</width>
+						<height>268</height>
+						<aspectratio scalediffuse="false">stretch</aspectratio>
+						<texture diffuse="mask-rect.png" background="true">$VAR[IconPoster]</texture>
+						<animation effect="zoom" start="100" end="106" center="auto" time="200" tween="back" easing="out" reversible="false">focus</animation>
+					</control>
+					<control type="textbox">
+						<left>0</left>
+						<top>278</top>
+						<height>64</height>
+						<width>250</width>
+						<font>apptv18</font>
+						<align>center</align>
+						<aligny>top</aligny>
+						<label>$INFO[ListItem.Label]</label>
+						<animation effect="fade" time="100" delay="100">Focus</animation>
+						<visible>Control.HasFocus($PARAM[list_id])</visible>
+					</control>
+				</focusedlayout>
+				<content target="$PARAM[widget_target]">$PARAM[content_path]</content>
+				<content>
+					<item id="$PARAM[list_id]5">
+						<label>No Content</label>
+						<icon>DefaultIconError.png</icon>
+						<visible>[Container(59).ListItem(0).IsParentFolder + ![String.IsEmpty(Container(59).ListItem(1).FolderPath)]] | 
+								[![Container(59).ListItem(0).IsParentFolder] + ![String.IsEmpty(Container(59).ListItem(0).FolderPath)]]</visible>
+					</item>
+				</content>
+			</control>
+		</definition>
+	</include>
+	<include name="WidgetView">
+		<control type="fixedlist" id="59">
+			<viewtype label="31973">list</viewtype>
+			<left>-10</left>
+			<top>-10</top>
+			<width>1</width>
+			<height>1</height>
+			<onleft>9000</onleft>
+			<onright>9000</onright>
+			<onfocus>SetFocus(5900)</onfocus>
+			<onfocus>SetFocus(5900)</onfocus>
+			<onback>SetFocus(59)</onback>
+			<itemlayout/>
+			<focusedlayout/>
+		</control>
+		<control type="group">
+			<visible>Control.IsVisible(59)</visible>
+			<control type="image"><!-- Classification Rating (quick way) -->
+				<left>50</left>
+				<top>150</top>
+				<width>48</width>
+				<height>48</height>
+				<aligny>bottom</aligny>
+				<texture>$VAR[MPAARatingIcons]</texture>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="image">
+				<left>110</left>
+				<top>150</top>
+				<width>174</width>
+				<height>268</height>
+				<aspectratio scalediffuse="false">stretch</aspectratio>
+				<texture diffuse="mask-rect.png" background="true">$VAR[IconPoster]</texture>
+				<aspectratio scalediffuse="true" align="right" aligny="top">keep</aspectratio>
+			</control>
+			<control type="image">
+				<left>114</left>
+				<top>430</top>
+				<width>165</width>
+				<height>33</height>
+				<texture>$VAR[MediaRating]</texture>
+				<aspectratio>keep</aspectratio>
+			</control>
+			<control type="image">
+				<left>320</left>
+				<top>150</top>
+				<width>194</width>
+				<height>75</height>
+				<texture>$VAR[ListViewVideoLogo]</texture>
+				<aligny>bottom</aligny>
+				<aspectratio align="left">keep</aspectratio>
+			</control>
+			<control type="textbox">
+				<left>320</left>
+				<top>240</top>
+				<width>950</width>
+				<height>318</height>
+				<font>apptv16</font>
+				<label>$VAR[VideoPlot]</label>
+				<align>justify</align>
+				<aligny>top</aligny>
+				<visible>!Container.Scrolling</visible>
+			</control>
+		</control>
+		<control type="group">
+			<left>75</left>
+			<top>620</top>
+			<height>250</height>
+			<width>1890</width>
+			<visible>Control.IsVisible(59)</visible>
+			<include content="WidgetListPoster">
+				<param name="content_path" value="$VAR[WidgetViewList]"/>
+				<param name="widget_header" value="$VAR[WidgetViewHeading]"/>
+				<param name="widget_target" value="Videos"/>
+				<param name="list_id" value="5900"/>
+				<param name="parent_id" value="59"/>
+			</include>
+		</control>
+		<include content="page-offscreen-horizontal">
+			<param name="indicator1left" value="20"/>
+			<param name="indicator1top" value="784"/>
+			<param name="indicator2left" value="1852"/>
+			<param name="indicator2top" value="784"/>
+			<param name="indicatorsize" value="32"/>
+			<param name="indicatorcontainer" value="5900"/>
+		</include>
+	</include>
+</includes>	

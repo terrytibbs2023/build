@@ -1,0 +1,162 @@
+# game.libretro.picodrive language file
+# Addon Name: game.libretro.picodrive
+# Addon id: game.libretro.picodrive
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.picodrive\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2017-02-04 09:56i\n"
+"PO-Revision-Date: 2025-05-28 04:01+0000\n"
+"Last-Translator: wabisabi926 <liwenliang926@163.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-picodrive/zh_Hans/>\n"
+"Language: zh_cn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
+
+msgctxt "Addon Summary"
+msgid "Sega - MS/GG/MD/CD/32X (PicoDrive)"
+msgstr "世嘉 - MS/GG/MD/CD/32X (PicoDrive)"
+
+msgctxt "Addon Description"
+msgid "PicoDrive is yet another Sega Game Gear / Master System / Mega Drive / Mega CD / 32X emulator heavily optimized for ARM."
+msgstr "PicoDrive 是另一款针对 ARM 进行了大量优化的 Sega Game Gear / Master System / Mega Drive / Mega CD / 32X 模拟器。"
+
+msgctxt "Addon Disclaimer"
+msgid "Authors: Dave (aka fdave, FinalBurn author) and notaz"
+msgstr "作者：Dave（又名 fdave，FinalBurn 作者）和 notaz"
+
+msgctxt "#30001"
+msgid "System Region"
+msgstr "系统区域"
+
+msgctxt "#30002"
+msgid "Master System Type"
+msgstr "主系统类型"
+
+msgctxt "#30003"
+msgid "Master System ROM Mapping"
+msgstr "主系统 ROM 映射"
+
+msgctxt "#30004"
+msgid "Sega CD RAM Cart"
+msgstr "世嘉 CD RAM Cart"
+
+msgctxt "#30005"
+msgid "Core-Provided Aspect Ratio"
+msgstr "核心提供的纵横比"
+
+msgctxt "#30006"
+msgid "LCD Ghosting Filter"
+msgstr "LCD 重影滤波器"
+
+msgctxt "#30007"
+msgid "Video Renderer"
+msgstr "视频渲染器"
+
+msgctxt "#30008"
+msgid "Audio Sample Rate (Hz)"
+msgstr "音频采样率（Hz）"
+
+msgctxt "#30009"
+msgid "FM filtering"
+msgstr "调频滤波"
+
+msgctxt "#30010"
+msgid "Master System FM Sound Unit"
+msgstr "主系统 FM 声音单元"
+
+msgctxt "#30011"
+msgid "Mega Drive FM DAC noise"
+msgstr "世嘉 Drive FM DAC 噪声"
+
+msgctxt "#30012"
+msgid "Audio Filter"
+msgstr "音频滤波器"
+
+msgctxt "#30013"
+msgid "Low-Pass Filter %"
+msgstr "低通滤波器 %"
+
+msgctxt "#30014"
+msgid "Input Device 1"
+msgstr "输入设备1"
+
+msgctxt "#30015"
+msgid "Input Device 2"
+msgstr "输入设备2"
+
+msgctxt "#30016"
+msgid "Dynamic Recompilers"
+msgstr "动态重编译器"
+
+msgctxt "#30017"
+msgid "Frameskip"
+msgstr "帧跳过"
+
+msgctxt "#30018"
+msgid "Frameskip Threshold (%)"
+msgstr "帧跳过阈值（%）"
+
+msgctxt "#30019"
+msgid "No Sprite Limit"
+msgstr "无 Sprite 限制"
+
+msgctxt "#30020"
+msgid "68K Overclock"
+msgstr "68K 超频"
+
+msgctxt "#30021"
+msgid "Master System Palette in TMS modes"
+msgstr "TMS 模式下的主系统调色板"
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "设置"
+
+#~ msgctxt "#30009"
+#~ msgid "Master System FM Sound Unit"
+#~ msgstr "主系统 FM 声音单元"
+
+#~ msgctxt "#30010"
+#~ msgid "Mega Drive FM DAC noise"
+#~ msgstr "世嘉 Drive FM DAC 噪声"
+
+#~ msgctxt "#30011"
+#~ msgid "Audio Filter"
+#~ msgstr "音频滤波器"
+
+#~ msgctxt "#30012"
+#~ msgid "Low-Pass Filter %"
+#~ msgstr "低通滤波器 %"
+
+#~ msgctxt "#30013"
+#~ msgid "Input Device 1"
+#~ msgstr "输入设备1"
+
+#~ msgctxt "#30014"
+#~ msgid "Input Device 2"
+#~ msgstr "输入设备2"
+
+#~ msgctxt "#30015"
+#~ msgid "Dynamic Recompilers"
+#~ msgstr "动态重编译器"
+
+#~ msgctxt "#30016"
+#~ msgid "Frameskip"
+#~ msgstr "帧跳过"
+
+#~ msgctxt "#30017"
+#~ msgid "Frameskip Threshold (%)"
+#~ msgstr "帧跳过阈值（%）"
+
+#~ msgctxt "#30018"
+#~ msgid "No Sprite Limit"
+#~ msgstr "无 Sprite 限制"
+
+#~ msgctxt "#30019"
+#~ msgid "68K Overclock"
+#~ msgstr "68K 超频"

@@ -1,0 +1,114 @@
+# game.libretro.picodrive language file
+# Addon Name: game.libretro.picodrive
+# Addon id: game.libretro.picodrive
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.picodrive\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2017-02-04 09:56i\n"
+"PO-Revision-Date: 2024-12-27 22:04+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Romanian <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-picodrive/ro_ro/>\n"
+"Language: ro_ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2;\n"
+"X-Generator: Weblate 5.9.2\n"
+
+msgctxt "Addon Summary"
+msgid "Sega - MS/GG/MD/CD/32X (PicoDrive)"
+msgstr ""
+
+msgctxt "Addon Description"
+msgid "PicoDrive is yet another Sega Game Gear / Master System / Mega Drive / Mega CD / 32X emulator heavily optimized for ARM."
+msgstr ""
+
+msgctxt "Addon Disclaimer"
+msgid "Authors: Dave (aka fdave, FinalBurn author) and notaz"
+msgstr ""
+
+msgctxt "#30001"
+msgid "System Region"
+msgstr ""
+
+msgctxt "#30002"
+msgid "Master System Type"
+msgstr ""
+
+msgctxt "#30003"
+msgid "Master System ROM Mapping"
+msgstr ""
+
+msgctxt "#30004"
+msgid "Sega CD RAM Cart"
+msgstr ""
+
+msgctxt "#30005"
+msgid "Core-Provided Aspect Ratio"
+msgstr ""
+
+msgctxt "#30006"
+msgid "LCD Ghosting Filter"
+msgstr ""
+
+msgctxt "#30007"
+msgid "Video Renderer"
+msgstr ""
+
+msgctxt "#30008"
+msgid "Audio Sample Rate (Hz)"
+msgstr ""
+
+msgctxt "#30009"
+msgid "FM filtering"
+msgstr ""
+
+msgctxt "#30010"
+msgid "Master System FM Sound Unit"
+msgstr ""
+
+msgctxt "#30011"
+msgid "Mega Drive FM DAC noise"
+msgstr ""
+
+msgctxt "#30012"
+msgid "Audio Filter"
+msgstr ""
+
+msgctxt "#30013"
+msgid "Low-Pass Filter %"
+msgstr ""
+
+msgctxt "#30014"
+msgid "Input Device 1"
+msgstr ""
+
+msgctxt "#30015"
+msgid "Input Device 2"
+msgstr ""
+
+msgctxt "#30016"
+msgid "Dynamic Recompilers"
+msgstr ""
+
+msgctxt "#30017"
+msgid "Frameskip"
+msgstr ""
+
+msgctxt "#30018"
+msgid "Frameskip Threshold (%)"
+msgstr ""
+
+msgctxt "#30019"
+msgid "No Sprite Limit"
+msgstr ""
+
+msgctxt "#30020"
+msgid "68K Overclock"
+msgstr ""
+
+msgctxt "#30021"
+msgid "Master System Palette in TMS modes"
+msgstr ""

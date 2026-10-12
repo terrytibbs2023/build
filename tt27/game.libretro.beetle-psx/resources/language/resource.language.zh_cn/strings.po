@@ -1,0 +1,594 @@
+# game.libretro.beetle-psx language file
+# Addon Name: game.libretro.beetle-psx
+# Addon id: game.libretro.beetle-psx
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.beetle-psx\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2019-08-24 22:21i\n"
+"PO-Revision-Date: 2025-05-29 16:37+0000\n"
+"Last-Translator: wabisabi926 <liwenliang926@163.com>\n"
+"Language-Team: Chinese (Simplified Han script) <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-beetle-psx/zh_Hans/>\n"
+"Language: zh_cn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11.4\n"
+
+msgctxt "Addon Summary"
+msgid "Sony - PlayStation (Beetle PSX)"
+msgstr "Sony - PlayStation (Beetle PSX)"
+
+msgctxt "Addon Description"
+msgid "Beetle PSX is the PlayStation module of Beetle, a port of Madnafen."
+msgstr "Beetle PSX 是 PlayStation 的 Beetle 模块，是 Madnafen 的移植。"
+
+msgctxt "#30001"
+msgid "Internal GPU Resolution"
+msgstr "内部 GPU 分辨率"
+
+msgctxt "#30002"
+msgid "Dithering Pattern"
+msgstr "抖动模式"
+
+msgctxt "#30003"
+msgid "Frame Duping (Speedup)"
+msgstr "帧复制（加速）"
+
+msgctxt "#30004"
+msgid "Display Internal FPS"
+msgstr "显示内部 FPS"
+
+msgctxt "#30005"
+msgid "Analog Self-Calibration"
+msgstr "模拟自校准"
+
+msgctxt "#30007"
+msgid "DualShock Analog Mode Combo"
+msgstr "DualShock 模拟模式组合"
+
+msgctxt "#30008"
+msgid "DualShock Analog Mode Combo Hold Delay"
+msgstr "DualShock 模拟模式组合保持延迟"
+
+msgctxt "#30009"
+msgid "Port 1: Multitap Enable"
+msgstr "端口1：多插启用"
+
+msgctxt "#30010"
+msgid "Port 2: Multitap Enable"
+msgstr "端口2：多插启用"
+
+msgctxt "#30011"
+msgid "Gun Input Mode"
+msgstr "枪输入模式"
+
+msgctxt "#30012"
+msgid "Gun Cursor"
+msgstr "枪光标"
+
+msgctxt "#30013"
+msgid "Port 1: Gun Crosshair Color"
+msgstr "端口1：枪准星颜色"
+
+msgctxt "#30014"
+msgid "Port 2: Gun Crosshair Color"
+msgstr "端口2：枪准星颜色"
+
+msgctxt "#30015"
+msgid "Mouse Sensitivity"
+msgstr "鼠标灵敏度"
+
+msgctxt "#30016"
+msgid "neGcon Twist Response"
+msgstr "neGcon 扭转响应"
+
+msgctxt "#30017"
+msgid "neGcon Twist Deadzone"
+msgstr "neGcon 扭转死区"
+
+msgctxt "#30018"
+msgid "Memory Card 0 Method (Restart Required)"
+msgstr "存储卡0方法（需要重新启动）"
+
+msgctxt "#30019"
+msgid "Enable Memory Card 1 (Restart Required)"
+msgstr "启用存储卡1（需要重新启动）"
+
+msgctxt "#30020"
+msgid "Shared Memory Cards (Restart Required)"
+msgstr "共享存储卡（需要重新启动）"
+
+msgctxt "#30021"
+msgid "Memory Card Left Index"
+msgstr "存储卡左索引"
+
+msgctxt "#30022"
+msgid "Memory Card Right Index"
+msgstr "存储卡右索引"
+
+msgctxt "#30023"
+msgid "PGXP Operation Mode"
+msgstr "PGXP 操作模式"
+
+msgctxt "#30024"
+msgid "PGXP 2D Geometry Tolerance"
+msgstr "PGXP 2D 几何公差"
+
+msgctxt "#30025"
+msgid "PGXP Primitive Culling"
+msgstr "PGXP 基元剔除"
+
+msgctxt "#30026"
+msgid "Line-to-Quad Hack"
+msgstr "Line-to-Quad Hack"
+
+msgctxt "#30027"
+msgid "Widescreen Mode Hack"
+msgstr "宽屏模式 Hack"
+
+msgctxt "#30028"
+msgid "Widescreen Mode Hack Aspect Ratio"
+msgstr "宽屏模式 Hack 纵横比"
+
+msgctxt "#30029"
+msgid "CPU Frequency Scaling (Overclock)"
+msgstr "CPU频率缩放（超频）"
+
+msgctxt "#30030"
+msgid "GTE Overclock"
+msgstr "GTE 超频"
+
+msgctxt "#30031"
+msgid "Skip BIOS"
+msgstr "跳过 BIOS"
+
+msgctxt "#30032"
+msgid "Override BIOS (Restart Required)"
+msgstr "覆盖 BIOS（需要重新启动）"
+
+msgctxt "#30033"
+msgid "CPU Dynarec"
+msgstr "CPU 动态记录"
+
+msgctxt "#30034"
+msgid "Dynarec Code Invalidation"
+msgstr "Dynarec 代码失效"
+
+msgctxt "#30035"
+msgid "Dynarec DMA/GPU/MDEC/Timer Event Cycles"
+msgstr "Dynarec DMA/GPU/MDEC/定时器事件周期"
+
+msgctxt "#30036"
+msgid "Dynarec SPU Samples"
+msgstr "Dynarec SPU 样本"
+
+msgctxt "#30037"
+msgid "Core-Reported FPS Timing"
+msgstr "核心报告 FPS 时间"
+
+msgctxt "#30038"
+msgid "PAL (European) Video Timing Override"
+msgstr "PAL（欧洲）视频定时覆盖"
+
+msgctxt "#30039"
+msgid "Crop Overscan"
+msgstr "过扫剪裁"
+
+msgctxt "#30040"
+msgid "Additional Cropping"
+msgstr "附加裁剪"
+
+msgctxt "#30041"
+msgid "Offset Cropped Image"
+msgstr "偏移裁剪图像"
+
+msgctxt "#30042"
+msgid "GPU Rasterizer Overclock"
+msgstr "GPU 光栅超频"
+
+msgctxt "#30043"
+msgid "Core Aspect Ratio"
+msgstr "内核高宽比"
+
+msgctxt "#30044"
+msgid "Initial Scan Line - NTSC"
+msgstr "初始扫描线 - NTSC"
+
+msgctxt "#30045"
+msgid "Last Scan Line - NTSC"
+msgstr "结束扫描线 - NTSC"
+
+msgctxt "#30046"
+msgid "Initial Scan Line - PAL"
+msgstr "初始扫描线 - PAL"
+
+msgctxt "#30047"
+msgid "Last Scan Line - PAL"
+msgstr "最末扫描线 - PAL"
+
+msgctxt "#30048"
+msgid "CD Access Method (Restart Required)"
+msgstr "CD 访问方法（需要重新启动）"
+
+msgctxt "#30049"
+msgid "CD Loading Speed"
+msgstr "CD 读取速度"
+
+msgctxt "#30050"
+msgid "DualShock Analog Mode Toggle"
+msgstr "DualShock 模拟模式切换"
+
+msgctxt "#30051"
+msgid "Display OSD Messages"
+msgstr "显示 OSD 信息"
+
+msgctxt "#30052"
+msgid "Deinterlace Method"
+msgstr "去隔行扫描法"
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "设置"
+
+#~ msgctxt "#30006"
+#~ msgid "Enable DualShock Analog Mode Toggle"
+#~ msgstr "启用 DualShock 模拟模式切换"
+
+#~ msgctxt "#30007"
+#~ msgid "Port 1: Multitap Enable"
+#~ msgstr "端口1：多插启用"
+
+#~ msgctxt "#30008"
+#~ msgid "Port 2: Multitap Enable"
+#~ msgstr "端口2：多插启用"
+
+#~ msgctxt "#30009"
+#~ msgid "Gun Input Mode"
+#~ msgstr "枪输入模式"
+
+#~ msgctxt "#30010"
+#~ msgid "Gun Cursor"
+#~ msgstr "枪光标"
+
+#~ msgctxt "#30011"
+#~ msgid "Port 1: Gun Crosshair Color"
+#~ msgstr "端口1：枪准星颜色"
+
+#~ msgctxt "#30012"
+#~ msgid "Port 2: Gun Crosshair Color"
+#~ msgstr "端口2：枪准星颜色"
+
+#~ msgctxt "#30013"
+#~ msgid "Mouse Sensitivity"
+#~ msgstr "鼠标灵敏度"
+
+#~ msgctxt "#30014"
+#~ msgid "neGcon Twist Response"
+#~ msgstr "neGcon 扭转响应"
+
+#~ msgctxt "#30015"
+#~ msgid "neGcon Twist Deadzone"
+#~ msgstr "neGcon 扭转死区"
+
+#~ msgctxt "#30016"
+#~ msgid "Memory Card 0 Method (Restart Required)"
+#~ msgstr "存储卡0方法（需要重新启动）"
+
+#~ msgctxt "#30017"
+#~ msgid "Enable Memory Card 1 (Restart Required)"
+#~ msgstr "启用存储卡1（需要重新启动）"
+
+#~ msgctxt "#30018"
+#~ msgid "Shared Memory Cards (Restart Required)"
+#~ msgstr "共享存储卡（需要重新启动）"
+
+#~ msgctxt "#30019"
+#~ msgid "Memory Card Left Index"
+#~ msgstr "存储卡左索引"
+
+#~ msgctxt "#30020"
+#~ msgid "Memory Card Right Index"
+#~ msgstr "存储卡右索引"
+
+#~ msgctxt "#30021"
+#~ msgid "PGXP Operation Mode"
+#~ msgstr "PGXP 操作模式"
+
+#~ msgctxt "#30022"
+#~ msgid "PGXP 2D Geometry Tolerance"
+#~ msgstr "PGXP 2D 几何公差"
+
+#~ msgctxt "#30023"
+#~ msgid "PGXP Primitive Culling"
+#~ msgstr "PGXP 基元剔除"
+
+#~ msgctxt "#30024"
+#~ msgid "Line-to-Quad Hack"
+#~ msgstr "Line-to-Quad Hack"
+
+#~ msgctxt "#30025"
+#~ msgid "Widescreen Mode Hack"
+#~ msgstr "宽屏模式 Hack"
+
+#~ msgctxt "#30026"
+#~ msgid "Widescreen Mode Hack Aspect Ratio"
+#~ msgstr "宽屏模式 Hack 纵横比"
+
+#~ msgctxt "#30027"
+#~ msgid "CPU Frequency Scaling (Overclock)"
+#~ msgstr "CPU频率缩放（超频）"
+
+#~ msgctxt "#30028"
+#~ msgid "GTE Overclock"
+#~ msgstr "GTE 超频"
+
+#~ msgctxt "#30029"
+#~ msgid "Skip BIOS"
+#~ msgstr "跳过 BIOS"
+
+#~ msgctxt "#30030"
+#~ msgid "Override BIOS (Restart Required)"
+#~ msgstr "覆盖 BIOS（需要重新启动）"
+
+#~ msgctxt "#30031"
+#~ msgid "CPU Dynarec"
+#~ msgstr "CPU 动态记录"
+
+#~ msgctxt "#30032"
+#~ msgid "Dynarec Code Invalidation"
+#~ msgstr "Dynarec 代码失效"
+
+#~ msgctxt "#30033"
+#~ msgid "Dynarec DMA/GPU/MDEC/Timer Event Cycles"
+#~ msgstr "Dynarec DMA/GPU/MDEC/定时器事件周期"
+
+#~ msgctxt "#30034"
+#~ msgid "Dynarec SPU Samples"
+#~ msgstr "Dynarec SPU 样本"
+
+#~ msgctxt "#30035"
+#~ msgid "Core-Reported FPS Timing"
+#~ msgstr "核心报告 FPS 时间"
+
+#~ msgctxt "#30036"
+#~ msgid "PAL (European) Video Timing Override"
+#~ msgstr "PAL（欧洲）视频定时覆盖"
+
+#~ msgctxt "#30037"
+#~ msgid "Crop Overscan"
+#~ msgstr "过扫剪裁"
+
+#~ msgctxt "#30038"
+#~ msgid "Additional Cropping"
+#~ msgstr "附加裁剪"
+
+#~ msgctxt "#30039"
+#~ msgid "Offset Cropped Image"
+#~ msgstr "偏移裁剪图像"
+
+#~ msgctxt "#30040"
+#~ msgid "GPU Rasterizer Overclock"
+#~ msgstr "GPU 光栅超频"
+
+#~ msgctxt "#30041"
+#~ msgid "Core Aspect Ratio"
+#~ msgstr "核心纵横比"
+
+#~ msgctxt "#30042"
+#~ msgid "Initial Scan Line - NTSC"
+#~ msgstr "初始扫描线 - NTSC"
+
+#~ msgctxt "#30043"
+#~ msgid "Last Scan Line - NTSC"
+#~ msgstr "最末扫描线 - NTSC"
+
+#~ msgctxt "#30044"
+#~ msgid "Initial Scan Line - PAL"
+#~ msgstr "初始扫描线 - PAL"
+
+#~ msgctxt "#30045"
+#~ msgid "Last Scan Line - PAL"
+#~ msgstr "最末扫描线 - PAL"
+
+#~ msgctxt "#30046"
+#~ msgid "CD Access Method (Restart Required)"
+#~ msgstr "CD 访问方法（需要重新启动）"
+
+#~ msgctxt "#30047"
+#~ msgid "CD Loading Speed"
+#~ msgstr "CD 读取速度"
+
+#~ msgctxt "#30033"
+#~ msgid "Dynarec DMA/GPU Event Cycles"
+#~ msgstr "动态记录 DMA/GPU 事件周期"
+
+#~ msgctxt "#30034"
+#~ msgid "Core-Reported FPS Timing"
+#~ msgstr "内核报告 FPS 定时"
+
+#~ msgctxt "#30035"
+#~ msgid "PAL (European) Video Timing Override"
+#~ msgstr "PAL（欧洲）视频定时覆盖"
+
+#~ msgctxt "#30036"
+#~ msgid "Crop Overscan"
+#~ msgstr "过扫剪裁"
+
+#~ msgctxt "#30037"
+#~ msgid "Additional Cropping"
+#~ msgstr "附加剪裁"
+
+#~ msgctxt "#30038"
+#~ msgid "Offset Cropped Image"
+#~ msgstr "偏移裁剪图像"
+
+#~ msgctxt "#30039"
+#~ msgid "GPU Rasterizer Overclock"
+#~ msgstr "GPU 光栅化超频"
+
+#~ msgctxt "#30040"
+#~ msgid "Core Aspect Ratio"
+#~ msgstr "内核高宽比"
+
+#~ msgctxt "#30041"
+#~ msgid "Initial Scan Line - NTSC"
+#~ msgstr "初始扫描线 - NTSC"
+
+#~ msgctxt "#30042"
+#~ msgid "Last Scan Line - NTSC"
+#~ msgstr "最末扫描线 - NTSC"
+
+#~ msgctxt "#30043"
+#~ msgid "Initial Scan Line - PAL"
+#~ msgstr "初始扫描线 - PAL"
+
+#~ msgctxt "#30044"
+#~ msgid "Last Scan Line - PAL"
+#~ msgstr "最末扫描线 - PAL"
+
+#~ msgctxt "#30045"
+#~ msgid "CD Access Method (Restart Required)"
+#~ msgstr "CD 访问方法（需要重新启动）"
+
+#~ msgctxt "#30046"
+#~ msgid "CD Loading Speed"
+#~ msgstr "CD 读取速度"
+
+#~ msgctxt "#30011"
+#~ msgid "Mouse Sensitivity"
+#~ msgstr "鼠标灵敏度"
+
+#~ msgctxt "#30012"
+#~ msgid "NegCon Twist Response"
+#~ msgstr "NegCon Twist 响应"
+
+#~ msgctxt "#30013"
+#~ msgid "NegCon Twist Deadzone"
+#~ msgstr "NegCon Twist 死角"
+
+#~ msgctxt "#30014"
+#~ msgid "Memory Card 0 Method (Restart)"
+#~ msgstr "存储卡0方法（重新启动）"
+
+#~ msgctxt "#30015"
+#~ msgid "Enable Memory Card 1 (Restart)"
+#~ msgstr "启用存储卡1（重新启动）"
+
+#~ msgctxt "#30016"
+#~ msgid "Shared Memory Cards (Restart)"
+#~ msgstr "共享存储卡（重新启动）"
+
+#~ msgctxt "#30017"
+#~ msgid "Memory Card Left Index"
+#~ msgstr "存储卡左索引"
+
+#~ msgctxt "#30018"
+#~ msgid "Memory Card Right Index"
+#~ msgstr "存储卡右索引"
+
+#~ msgctxt "#30019"
+#~ msgid "PGXP Operation Mode"
+#~ msgstr "PGXP 操作模式"
+
+#~ msgctxt "#30020"
+#~ msgid "PGXP 2D Geometry Tolerance"
+#~ msgstr "PGXP 二维几何公差"
+
+#~ msgctxt "#30021"
+#~ msgid "PGXP Primitive Culling"
+#~ msgstr "PGXP 原始剔除"
+
+#~ msgctxt "#30022"
+#~ msgid "Line-to-Quad Hack"
+#~ msgstr "Line-to-Quad Hack"
+
+#~ msgctxt "#30023"
+#~ msgid "Widescreen Mode Hack"
+#~ msgstr "宽屏模式 Hack"
+
+#~ msgctxt "#30024"
+#~ msgid "Widescreen Mode Hack Aspect Ratio"
+#~ msgstr "宽屏模式 Hack 纵横比"
+
+#~ msgctxt "#30025"
+#~ msgid "CPU Frequency Scaling (Overclock)"
+#~ msgstr "CPU频率缩放（超频）"
+
+#~ msgctxt "#30026"
+#~ msgid "GTE Overclock"
+#~ msgstr "GTE 超频"
+
+#~ msgctxt "#30027"
+#~ msgid "Skip BIOS"
+#~ msgstr "跳过 BIOS"
+
+#~ msgctxt "#30028"
+#~ msgid "Override BIOS (Restart)"
+#~ msgstr "覆盖 BIOS（重新启动）"
+
+#~ msgctxt "#30029"
+#~ msgid "CPU Dynarec"
+#~ msgstr "CPU 动态记录"
+
+#~ msgctxt "#30030"
+#~ msgid "Dynarec Code Invalidation"
+#~ msgstr "动态记录代码失效"
+
+#~ msgctxt "#30031"
+#~ msgid "Dynarec DMA/GPU Event Cycles"
+#~ msgstr "动态记录 DMA/GPU 事件周期"
+
+#~ msgctxt "#30032"
+#~ msgid "Core-Reported FPS Timing"
+#~ msgstr "内核报告 FPS 定时"
+
+#~ msgctxt "#30033"
+#~ msgid "PAL (European) Video Timing Override"
+#~ msgstr "PAL（欧洲）视频定时覆盖"
+
+#~ msgctxt "#30034"
+#~ msgid "Crop Overscan"
+#~ msgstr "剪裁过扫描"
+
+#~ msgctxt "#30035"
+#~ msgid "Additional Cropping"
+#~ msgstr "附加剪裁"
+
+#~ msgctxt "#30036"
+#~ msgid "Offset Cropped Image"
+#~ msgstr "偏移裁剪图像"
+
+#~ msgctxt "#30037"
+#~ msgid "GPU Rasterizer Overclock"
+#~ msgstr "GPU 光栅化超频"
+
+#~ msgctxt "#30038"
+#~ msgid "Core Aspect Ratio"
+#~ msgstr "内核高宽比"
+
+#~ msgctxt "#30039"
+#~ msgid "Initial Scanline - NTSC"
+#~ msgstr "初始扫描线 - NTSC"
+
+#~ msgctxt "#30040"
+#~ msgid "Last Scanline - NTSC"
+#~ msgstr "最末扫描线 - NTSC"
+
+#~ msgctxt "#30041"
+#~ msgid "Initial Scanline - PAL"
+#~ msgstr "初始扫描线 - PAL"
+
+#~ msgctxt "#30042"
+#~ msgid "Last Scanline - PAL"
+#~ msgstr "最末扫描线 - PAL"
+
+#~ msgctxt "#30043"
+#~ msgid "CD Access Method (Restart)"
+#~ msgstr "CD 访问方法（重新启动）"
+
+#~ msgctxt "#30044"
+#~ msgid "CD Loading Speed"
+#~ msgstr "CD 读取速度"

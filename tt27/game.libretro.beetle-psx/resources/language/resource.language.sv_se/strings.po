@@ -1,0 +1,234 @@
+# game.libretro.beetle-psx language file
+# Addon Name: game.libretro.beetle-psx
+# Addon id: game.libretro.beetle-psx
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.beetle-psx\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2019-08-24 22:21i\n"
+"PO-Revision-Date: 2025-04-20 20:03+0000\n"
+"Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
+"Language-Team: Swedish <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-beetle-psx/sv_se/>\n"
+"Language: sv_se\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.11\n"
+
+msgctxt "Addon Summary"
+msgid "Sony - PlayStation (Beetle PSX)"
+msgstr "Sony - PlayStation (Beetle PSX)"
+
+msgctxt "Addon Description"
+msgid "Beetle PSX is the PlayStation module of Beetle, a port of Madnafen."
+msgstr "Beetle PSX är PlayStation-modulen av Beetle, en portning av Madnafen."
+
+msgctxt "#30001"
+msgid "Internal GPU Resolution"
+msgstr "Intern GPU-upplösning"
+
+msgctxt "#30002"
+msgid "Dithering Pattern"
+msgstr "Dithering-mönster"
+
+msgctxt "#30003"
+msgid "Frame Duping (Speedup)"
+msgstr "Duplicering av bildrutor (Speedup)"
+
+msgctxt "#30004"
+msgid "Display Internal FPS"
+msgstr "Visa intern bildfrekvens"
+
+msgctxt "#30005"
+msgid "Analog Self-Calibration"
+msgstr "Analog självkalibrering"
+
+msgctxt "#30007"
+msgid "DualShock Analog Mode Combo"
+msgstr "DualShock Analog lägeskombination"
+
+msgctxt "#30008"
+msgid "DualShock Analog Mode Combo Hold Delay"
+msgstr "Hållfördröjning för DualShock Analog lägeskombination"
+
+msgctxt "#30009"
+msgid "Port 1: Multitap Enable"
+msgstr "Port 1: Multitap aktivera"
+
+msgctxt "#30010"
+msgid "Port 2: Multitap Enable"
+msgstr "Port 2: Multitap aktivera"
+
+msgctxt "#30011"
+msgid "Gun Input Mode"
+msgstr "Läge för ljuspistolinmatning"
+
+msgctxt "#30012"
+msgid "Gun Cursor"
+msgstr "Pistolmarkör"
+
+msgctxt "#30013"
+msgid "Port 1: Gun Crosshair Color"
+msgstr "Port 1: Färg för pistolhårkors"
+
+msgctxt "#30014"
+msgid "Port 2: Gun Crosshair Color"
+msgstr "Port 2: Färg för pistolhårkors"
+
+msgctxt "#30015"
+msgid "Mouse Sensitivity"
+msgstr "Muskänslighet"
+
+msgctxt "#30016"
+msgid "neGcon Twist Response"
+msgstr "neGcon Twist-respons"
+
+msgctxt "#30017"
+msgid "neGcon Twist Deadzone"
+msgstr "neGcon Twist-dödzon"
+
+msgctxt "#30018"
+msgid "Memory Card 0 Method (Restart Required)"
+msgstr "Metod för Minneskort 0 (omstart krävs)"
+
+msgctxt "#30019"
+msgid "Enable Memory Card 1 (Restart Required)"
+msgstr "Aktivera Minneskort 1 (kräver omstart)"
+
+msgctxt "#30020"
+msgid "Shared Memory Cards (Restart Required)"
+msgstr "Delade minneskort (omstart krävs)"
+
+msgctxt "#30021"
+msgid "Memory Card Left Index"
+msgstr "Vänsterindex för minneskort"
+
+msgctxt "#30022"
+msgid "Memory Card Right Index"
+msgstr "Högerindex för minneskort"
+
+msgctxt "#30023"
+msgid "PGXP Operation Mode"
+msgstr "PGXP-operationsläge"
+
+msgctxt "#30024"
+msgid "PGXP 2D Geometry Tolerance"
+msgstr "PGXP 2D geometritolerans"
+
+msgctxt "#30025"
+msgid "PGXP Primitive Culling"
+msgstr "PGXP Primitiv gallring"
+
+msgctxt "#30026"
+msgid "Line-to-Quad Hack"
+msgstr "Line-to-Quad Hack"
+
+msgctxt "#30027"
+msgid "Widescreen Mode Hack"
+msgstr "Hack för bredbildsläge"
+
+msgctxt "#30028"
+msgid "Widescreen Mode Hack Aspect Ratio"
+msgstr "Bildförhållande för bredbildshack"
+
+msgctxt "#30029"
+msgid "CPU Frequency Scaling (Overclock)"
+msgstr "CPU-frekvensskalning (överklocka)"
+
+msgctxt "#30030"
+msgid "GTE Overclock"
+msgstr "GTE-överklocka"
+
+msgctxt "#30031"
+msgid "Skip BIOS"
+msgstr "Hoppa över BIOS"
+
+msgctxt "#30032"
+msgid "Override BIOS (Restart Required)"
+msgstr "Åsidosätt BIOS (omstart krävs)"
+
+msgctxt "#30033"
+msgid "CPU Dynarec"
+msgstr "CPU Dynarec"
+
+msgctxt "#30034"
+msgid "Dynarec Code Invalidation"
+msgstr "Dynarec Code Invalidation"
+
+msgctxt "#30035"
+msgid "Dynarec DMA/GPU/MDEC/Timer Event Cycles"
+msgstr "Dynarec DMA/GPU/MDEC/Timer för händelsecykler"
+
+msgctxt "#30036"
+msgid "Dynarec SPU Samples"
+msgstr "Dynarec SPU-samplingar"
+
+msgctxt "#30037"
+msgid "Core-Reported FPS Timing"
+msgstr "Kärnrapporterad bildfrekvenstiming"
+
+msgctxt "#30038"
+msgid "PAL (European) Video Timing Override"
+msgstr "Åsidosätt PAL-videotiming (Europeisk)"
+
+msgctxt "#30039"
+msgid "Crop Overscan"
+msgstr "Beskär överskanning"
+
+msgctxt "#30040"
+msgid "Additional Cropping"
+msgstr "Ytterligare beskäring"
+
+msgctxt "#30041"
+msgid "Offset Cropped Image"
+msgstr "Förskjutning för beskärd bild"
+
+msgctxt "#30042"
+msgid "GPU Rasterizer Overclock"
+msgstr "Överklockning för GPU-rasterisering"
+
+msgctxt "#30043"
+msgid "Core Aspect Ratio"
+msgstr "Kärnans bildförhållande"
+
+msgctxt "#30044"
+msgid "Initial Scan Line - NTSC"
+msgstr "Initial skanlinje - NTSC"
+
+msgctxt "#30045"
+msgid "Last Scan Line - NTSC"
+msgstr "Sista skanlinje - NTSC"
+
+msgctxt "#30046"
+msgid "Initial Scan Line - PAL"
+msgstr "Initial skanlinje - PAL"
+
+msgctxt "#30047"
+msgid "Last Scan Line - PAL"
+msgstr "Sista skanlinje - PAL"
+
+msgctxt "#30048"
+msgid "CD Access Method (Restart Required)"
+msgstr "CD-åtkomstmetod (omstart krävs)"
+
+msgctxt "#30049"
+msgid "CD Loading Speed"
+msgstr "CD-inläsningshastighet"
+
+msgctxt "#30050"
+msgid "DualShock Analog Mode Toggle"
+msgstr "Lägesväxling för DualShock Analog"
+
+msgctxt "#30051"
+msgid "Display OSD Messages"
+msgstr "Visa skärmmeddelanden"
+
+msgctxt "#30052"
+msgid "Deinterlace Method"
+msgstr "Metod för deinterlace"
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Inställningar"

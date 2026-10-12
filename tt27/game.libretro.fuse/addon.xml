@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="game.libretro.fuse"
+		name="Sinclair - ZX Spectrum (Fuse)"
+		version="1.6.0.41"
+		provider-name="Team Fuse">
+	<requires>
+		<import addon="game.libretro" version="1.0.0"/>
+		<import addon="game.controller.atari.2600" version="1.0.0"/>
+	</requires>
+	<extension point="kodi.gameclient"
+			library_windows="game.libretro.fuse.dll">
+		<platforms>spectrum</platforms>
+		<extensions>tzx|tap|z80|rzx|scl|trd|dsk|dck|sna|szx|zip</extensions>
+		<supports_vfs>true</supports_vfs>
+		<supports_standalone>true</supports_standalone>
+		<requires_opengl>false</requires_opengl>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<license>GPLv3</license>
+		<platform>windows-x86_64</platform>
+		<source>https://github.com/kodi-game/game.libretro.fuse</source>
+		<assets>
+			<icon>resources/icon.png</icon>
+			<fanart>resources/fanart.jpg</fanart>
+		</assets>
+		<summary lang="da_DK">Sinclair - ZX Spectrum (Fuse)</summary>
+		<summary lang="en_GB">Sinclair - ZX Spectrum (Fuse)</summary>
+		<summary lang="es_ES">Sinclair - ZX Spectrum (Fuse)</summary>
+		<summary lang="zh_CN">Sinclair - ZX Spectrum (Fuse)</summary>
+		<description lang="da_DK">Fuse (den gratis Unix Spectrum-emulator) var oprindeligt en ZX Spectrum-emulator til Unix. Det er siden blevet overført til Mac OS X, Windows, Wii, AmigaOS og MorphOS.</description>
+		<description lang="de_DE">Fuse (der freie Unix-Spectrum-Emulator) war ursprünglich ein ZX-Spectrum-Emulator für Unix. Seitdem wurde er auf Mac OS X, Windows, die Wii, AmigaOS und MorphOS portiert.</description>
+		<description lang="en_GB">Fuse (the Free Unix Spectrum Emulator) was originally a ZX Spectrum emulator for Unix. It has since been ported to Mac OS X, Windows, the Wii, AmigaOS and MorphOS.</description>
+		<description lang="es_ES">Fuse (el emulador gratuito de Spectrum para Unix) era originalmente un emulador de ZX Spectrum para Unix. Desde entonces ha sido adaptado a Mac OS X, Windows, Wii, AmigaOS y MorphOS.</description>
+		<description lang="zh_CN">Fuse（自由的 Unix Spectrum 模拟器）最初是用于 Unix 的 ZX Spectrum 模拟器。它已经被移植到 Mac OS X、Windows、Wii、AmigaOS 和 MorphOS。</description>
+	</extension>
+</addon>

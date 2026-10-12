@@ -1,0 +1,154 @@
+# game.libretro.mgba language file
+# Addon Name: game.libretro.mgba
+# Addon id: game.libretro.mgba
+# Addon Provider: libretro
+msgid ""
+msgstr ""
+"Project-Id-Version: game.libretro.mgba\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"POT-Creation-Date: 2017-02-04 09:56i\n"
+"PO-Revision-Date: 2024-12-27 21:56+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Danish <https://kodi.weblate.cloud/projects/kodi-add-ons-game/game-libretro-mgba/da_dk/>\n"
+"Language: da_dk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.9.2\n"
+
+msgctxt "Addon Summary"
+msgid "Nintendo - Game Boy Advance (mGBA)"
+msgstr ""
+
+msgctxt "Addon Description"
+msgid "mGBA aims to be faster and more accurate than many existing Game Boy Advance emulators, as well as adding features that other emulators lack."
+msgstr "mGBA sigter mod at være hurtigere og mere præcis end mange eksisterende Game Boy Advance-emulatorer, samt tilføje funktioner, som andre emulatorer mangler."
+
+msgctxt "#30001"
+msgid "Game Boy Model (Restart)"
+msgstr "Game Boy-model (genstart)"
+
+msgctxt "#30002"
+msgid "Use BIOS File if Found (Restart)"
+msgstr "Brug BIOS-fil, hvis den findes (genstart)"
+
+msgctxt "#30003"
+msgid "Skip BIOS Intro (Restart)"
+msgstr "Spring BIOS-intro over (genstart)"
+
+msgctxt "#30004"
+msgid "Default Game Boy Palette"
+msgstr "Standard Game Boy-palette"
+
+msgctxt "#30005"
+msgid "Hardware Preset Game Boy Palettes (Restart)"
+msgstr "Hardware forudindstillede paletter til Game Boy (genstart)"
+
+msgctxt "#30006"
+msgid "Use Super Game Boy Borders (Restart)"
+msgstr "Brug Super Game Boy-kanter (genstart)"
+
+msgctxt "#30007"
+msgid "Color Correction"
+msgstr "Farvekorrektion"
+
+msgctxt "#30008"
+msgid "Interframe Blending"
+msgstr "Interframe-blanding"
+
+msgctxt "#30009"
+msgid "Audio Filter"
+msgstr "Lydfilter"
+
+msgctxt "#30010"
+msgid "Audio Filter Level"
+msgstr "Niveau for lydfilter"
+
+msgctxt "#30011"
+msgid "Allow Opposing Directional Input"
+msgstr "Tillad input for modsat retning"
+
+msgctxt "#30012"
+msgid "Solar Sensor Level"
+msgstr "Niveau for solsensor"
+
+msgctxt "#30013"
+msgid "Game Boy Player Rumble (Restart)"
+msgstr "Rumble for Game Boy-spiller (genstart)"
+
+msgctxt "#30014"
+msgid "Idle Loop Removal"
+msgstr "Fjernelse af loop ved inaktivitet"
+
+msgctxt "#30015"
+msgid "Frameskip"
+msgstr "Spring frame over"
+
+msgctxt "#30016"
+msgid "Frameskip Threshold (%)"
+msgstr "Tærskel når der springes en frame over (%)"
+
+msgctxt "#30017"
+msgid "Frameskip Interval"
+msgstr "Interval når der springes en frame over"
+
+#~ msgctxt "#30000"
+#~ msgid "Settings"
+#~ msgstr "Indstillinger"
+
+#~ msgctxt "#30005"
+#~ msgid "Use Super Game Boy Borders (Restart)"
+#~ msgstr "Brug Super Game Boy-kanter (genstart)"
+
+#~ msgctxt "#30006"
+#~ msgid "Color Correction"
+#~ msgstr "Farvekorrektion"
+
+#~ msgctxt "#30007"
+#~ msgid "Interframe Blending"
+#~ msgstr "Interframe-blanding"
+
+#~ msgctxt "#30008"
+#~ msgid "Audio Filter"
+#~ msgstr "Lydfilter"
+
+#~ msgctxt "#30009"
+#~ msgid "Audio Filter Level"
+#~ msgstr "Niveau for lydfilter"
+
+#~ msgctxt "#30010"
+#~ msgid "Allow Opposing Directional Input"
+#~ msgstr "Tillad input for modsat retning"
+
+#~ msgctxt "#30011"
+#~ msgid "Solar Sensor Level"
+#~ msgstr "Niveau for solsensor"
+
+#~ msgctxt "#30012"
+#~ msgid "Game Boy Player Rumble (Restart)"
+#~ msgstr "Rumble for Game Boy-spiller (genstart)"
+
+#~ msgctxt "#30013"
+#~ msgid "Idle Loop Removal"
+#~ msgstr "Fjernelse af loop ved inaktivitet"
+
+#~ msgctxt "#30014"
+#~ msgid "Frameskip"
+#~ msgstr "Spring frame over"
+
+#~ msgctxt "#30015"
+#~ msgid "Frameskip Threshold (%)"
+#~ msgstr "Tærskel når der springes en frame over (%)"
+
+#~ msgctxt "#30016"
+#~ msgid "Frameskip Interval"
+#~ msgstr "Interval når der springes en frame over"
+
+#~ msgctxt "#30008"
+#~ msgid "Frameskip"
+#~ msgstr "Spring frame over"
+
+#~ msgctxt "#30009"
+#~ msgid "Frameskip Threshold (%)"
+#~ msgstr "Tærskel når der springes en frame over (%)"
