@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.bingie.settings" name="Bingie Settings" version="1.0.12" provider-name="YourName">
+<addon id="script.bingie.settings" name="Bingie Settings" version="1.0.14" provider-name="YourName">
     <requires>
      <import addon="repository.redwizard"/>
-     <import addon="script.terrysautoinstall"/>
+    
         <import addon="xbmc.python" version="3.0.0"/>
     </requires>
     <extension point="xbmc.python.script" library="default.py">
