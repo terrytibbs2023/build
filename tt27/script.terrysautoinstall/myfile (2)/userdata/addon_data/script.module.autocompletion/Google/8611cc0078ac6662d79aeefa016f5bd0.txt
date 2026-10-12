@@ -1,1 +1,0 @@
-["vampires suck", ["vampires suck", "vampires suck movie", "vampires suck 2", "vampires suck netflix", "vampires suck budget"], [], {"google:suggestsubtypes": [[512, 433], [512], [512], [512], [512]], "google:suggesttype": ["QUERY", "QUERY", "QUERY", "QUERY", "QUERY"]}]
