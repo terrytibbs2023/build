@@ -3070,6 +3070,43 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 		<description lang="en" />
 		<genre />
 	</extension>
+</addon><addon id="repository.redwizard" name="[COLOR red]The Red Repo[/COLOR]" version="1.2.2" provider-name="[COLOR red]The Red Wizard[/COLOR]">
+	<extension point="xbmc.addon.repository" name="The Red Repo">
+		<dir>
+			<info compressed="false">https://repo.redwizard.xyz/redwizardrepo/main/addons.xml</info>
+			<checksum>https://repo.redwizard.xyz/redwizardrepo/main/addons.xml.md5</checksum>
+			<datadir zip="true">https://repo.redwizard.xyz/redwizardrepo/main/</datadir>
+		</dir>
+		<dir minversion="20.9.0" maxversion="21.8.9">
+			<info compressed="false">https://repo.redwizard.xyz/redwizardrepo/21omega/addons.xml</info>
+			<checksum>https://repo.redwizard.xyz/redwizardrepo/21omega/addons.xml.md5</checksum>
+			<datadir zip="true">https://repo.redwizard.xyz/redwizardrepo/21omega/</datadir>
+		</dir>
+		<dir minversion="21.9.0" maxversion="22.8.9">
+			<info compressed="false">https://repo.redwizard.xyz/redwizardrepo/22piers/addons.xml</info>
+			<checksum>https://repo.redwizard.xyz/redwizardrepo/22piers/addons.xml.md5</checksum>
+			<datadir zip="true">https://repo.redwizard.xyz/redwizardrepo/22piers/</datadir>
+		</dir>
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+		</dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">The Red Wizard Builds and Add-ons</summary>
+		<description lang="en_GB">The Red Repo for The Red Wizard builds and add-ons</description>
+		<disclaimer lang="en_GB">The author of this add-on does not host any content and has no affiliation with the content providers</disclaimer>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE Version 3</license>
+		<forum>https://t.me/+XiuBf9KvPfw2MzVk</forum>
+		<website>https://www.redwizard.xyz/</website>
+		<source>https://github.com/The-Red-Wizard/TheRedWizard</source>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
 </addon><addon id="repository.thecrew" name="[COLOR orchid]THE CREW REPO[/COLOR]" provider-name="The Crew" version="0.3.8">
 	<extension point="xbmc.addon.repository" name="The Crew">
 			<dir minversion="18.9.9">
@@ -3256,6 +3293,20 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 			<fanart>resources/fanart.jpg</fanart>
 		</assets>
 	</extension>
+</addon><addon id="script.bingie.settings" name="Bingie Settings" version="1.0.12" provider-name="YourName">
+    <requires>
+     <import addon="repository.redwizard" />
+     <import addon="script.terrysautoinstall" />
+        <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+    <extension point="xbmc.python.script" library="default.py">
+        <provides>executable</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en_GB">Standalone Bingie Settings Menu</summary>
+        <description lang="en_GB">Launches the Bingie skin settings window as a standalone app.</description>
+        <platform>all</platform>
+    </extension>
 </addon><addon id="script.bingie.toolbox" name="Bingie Toolbox" version="1.0.0" provider-name="matke">
     <requires>
 		<import addon="xbmc.python" version="3.0.0" />
