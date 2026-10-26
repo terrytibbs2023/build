@@ -1,1 +1,0 @@
-["gf2", ["gf2", "gf2 flight status", "gf284", "gf282", "gf285", "gf281", "gf274", "gf249", "gf277", "gf2 tier list"], [], {"google:suggestsubtypes": [[512], [512], [512], [512], [512], [512], [512], [512], [512], [512]], "google:suggesttype": ["QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY"]}]

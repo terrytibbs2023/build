@@ -1,1 +1,0 @@
-["DaddyLive V2", ["daddylive v2 not working", "daddylive v2 password", "daddylive v2 github"], [], {"google:suggestsubtypes": [[512], [22, 30], [22, 30]], "google:suggesttype": ["QUERY", "QUERY", "QUERY"]}]

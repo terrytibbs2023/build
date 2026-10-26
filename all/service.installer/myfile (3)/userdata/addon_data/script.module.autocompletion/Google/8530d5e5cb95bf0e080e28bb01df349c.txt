@@ -1,1 +1,0 @@
-["nov2", ["nov 24", "nov 2024", "nov2", "nov 2024 calendar", "nov 21", "nov 23", "nov 28", "nov 24 calendar", "nov25", "nov 22"], [], {"google:suggestsubtypes": [[512, 10], [512, 10], [512], [512, 10], [512, 10], [512, 10], [512, 10], [512, 10], [512], [512, 10]], "google:suggesttype": ["QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY", "QUERY"]}]
