@@ -1,4 +1,4 @@
-<addon id="service.fix27" name="2027 Fix" version="2.0.29" provider-name="Terry Tibbs">
+<addon id="service.fix27" name="2027 Fix" version="2.0.39" provider-name="Terry Tibbs">
     <extension point="xbmc.service" library="service.py"/>
     <extension point="xbmc.addon.metadata">
         <summary>Installs Terrys 2026 Build</summary>
