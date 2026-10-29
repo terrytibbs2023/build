@@ -126,14 +126,17 @@
                         <icon>special://skin/extras/media/backgrounds/settings_media_settings.jpg</icon>
                         <thumb>media.png</thumb>
                     </item>
-                    <item id="3">
-                        <description>Lite</description>
-                        <label>Switch 2 Lite</label>
-                        
-                        <onclick>RunScript("script.terrysautoinstall")</onclick>
-                        
-                        <thumb>addontvinfo.png</thumb>
+                   
+                       <item id="13">
+                        <description>Games</description>
+                        <label>$LOCALIZE[15016]</label>
+                        <label2>$LOCALIZE[31403]</label2>
+                        <onclick>ActivateWindow(GameSettings)</onclick>
+                        <icon>special://skin/extras/media/backgrounds/settings_games.jpg</icon>
+                        <thumb>games.png</thumb>
                     </item>
+                   
+                 
                     <item id="4">
                         <description>Player</description>
                         <label>$LOCALIZE[14201]</label>
@@ -174,24 +177,24 @@
                         <thumb>settings.png</thumb>
                     </item>
        <item>           	
-					<label>Accounts Setup</label>
+					<label>Trakt Setup</label>
 						
 					
 						
 						
-						<onclick>PlayMedia("plugin://plugin.video.pov/?mode=myservices&amp;name=My+Services&amp;isFolder=false&amp;iconImage=https%3A%2F%2Fi.imgur.com%2FWQO1410.png")</onclick>
+						<onclick>RunPlugin(plugin://plugin.video.redlight/?mode=trakt.trakt_authenticate)</onclick>
 							<icon>icons/settings/livetv.png</icon>
                     </item>
-                  
-					
-                    <item id="13">
-                        <description>Games</description>
-                        <label>$LOCALIZE[15016]</label>
-                        <label2>$LOCALIZE[31403]</label2>
-                        <onclick>ActivateWindow(GameSettings)</onclick>
-                        <icon>special://skin/extras/media/backgrounds/settings_games.jpg</icon>
-                        <thumb>games.png</thumb>
+                    <item id="3">
+                        <description>TorBox</description>
+                        <label>Torbox Setup </label>
+                        
+                        <onclick>RunPlugin(plugin://plugin.video.redlight/?mode=torbox.authenticate)</onclick>
+                        
+                        <thumb>addontvinfo.png</thumb>
                     </item>
+					
+              
                     <item id="14">
                         <description>File Manager</description>
                         <label>$LOCALIZE[7]</label>

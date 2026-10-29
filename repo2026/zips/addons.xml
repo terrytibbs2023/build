@@ -3293,7 +3293,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 			<fanart>resources/fanart.jpg</fanart>
 		</assets>
 	</extension>
-</addon><addon id="script.bingie.settings" name="Bingie Settings" version="1.0.12" provider-name="YourName">
+</addon><addon id="script.bingie.settings" name="Bingie Settings" version="1.0.14" provider-name="YourName">
     <requires>
      <import addon="repository.redwizard" />
      <import addon="script.terrysautoinstall" />
